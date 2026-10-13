@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Innsikt | Marked og salg",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "released": "2026-10-13",
     "reviewed": "2026-10-13",
     "classification": "Åpent arbeidsgrunnlag – ingen interne data",
@@ -238,6 +238,13 @@
       "url": "https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md",
       "date": "2026-10-13",
       "type": "offentlig produkt-/markedsdokumentasjon"
+    },
+    "cowork": {
+      "title": "Snowflake CoWork (tidligere Snowflake Intelligence)",
+      "publisher": "Snowflake Documentation",
+      "url": "https://docs.snowflake.com/en/user-guide/snowflake-cortex/snowflake-cowork",
+      "date": "2026-10-13",
+      "type": "offisiell produktdokumentasjon"
     }
   },
   "plays": [
@@ -723,7 +730,8 @@
       "source": "pbicopilot",
       "signal": "Dashboards, semantiske modeller, selvbetjening eller Copilot.",
       "talk": "Hvilke beslutninger skal støttes, og har dere felles definisjoner?",
-      "caution": "Copilot forutsetter korrekte modeller, kapasitet og rettigheter."
+      "caution": "Copilot forutsetter korrekte modeller, kapasitet og rettigheter.",
+      "logo": "powerbi"
     },
     {
       "name": "Qlik / Talend",
@@ -936,11 +944,11 @@
     },
     {
       "id": "B-12",
-      "title": "Hente offisielle ikoner for Power BI og Fivetran",
+      "title": "Hente offisielt Fivetran-merkeikon",
       "area": "Design",
       "priority": "middels",
       "status": "åpen",
-      "why": "Bruk produktlogoer bare med godkjent kilde og bruksrett."
+      "why": "Power BI er nå inkludert. Fivetran må fortsatt få en verifisert kilde og bruksrett."
     }
   ],
   "stats": {
@@ -1287,15 +1295,15 @@
     },
     {
       "id": "cortexagents",
-      "name": "Snowflake Intelligence og Cortex Agents",
+      "name": "Snowflake CoWork / Cortex Agents",
       "platform": "Snowflake",
       "group": "Forretningen spør egne data",
-      "description": "Agentbasert inngang til strukturert og ustrukturert data med naturlig språk og semantisk kontekst.",
+      "description": "CoWork (tidligere Snowflake Intelligence) er den samtalebaserte brukerflaten; Cortex Agents kan hente informasjon fra strukturert og ustrukturert data og bruke semantiske modeller.",
       "signal": "Ledere vil spørre egne data uten nye rapportbestillinger.",
       "question": "Hvilke spørsmål og nøkkeltall må systemet svare på pålitelig?",
       "limits": "Datakvalitet, semantikk, rettigheter og evaluering er avgjørende.",
       "status": "Dokumentert",
-      "source": "cortexagents",
+      "source": "cowork",
       "logo": "snowflake"
     },
     {
@@ -1335,7 +1343,7 @@
       "limits": "Enkelte funksjoner i preview; kapasitetskrav gjelder.",
       "status": "Funksjonsavhengig",
       "source": "pbicopilot",
-      "logo": "fabric"
+      "logo": "powerbi"
     }
   ],
   "marketEvents": [
@@ -1495,6 +1503,11 @@
       "slug": "copilot",
       "origin": "https://github.com/FabricTools/fabric-icons",
       "usage": "Microsofts regler for bruk av produktikoner gjelder."
+    },
+    {
+      "slug": "powerbi",
+      "origin": "https://github.com/FabricTools/fabric-icons",
+      "usage": "Microsofts bruksregler for produktikoner."
     }
   ]
 }
