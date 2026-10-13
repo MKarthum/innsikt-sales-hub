@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('../docs/data/content.json',import.meta.url),'utf8'));
+const fail=(s)=>{console.error('FEIL:',s);process.exitCode=1};
+const unique=(items,label)=>{const xs=items.map(x=>x.id);if(new Set(xs).size!==xs.length)fail(`Dupliserte id-er i ${label}`)};
+for(const [key,val] of Object.entries({plays:d.plays,trends:d.trends,backlog:d.backlog})){
+ if(!Array.isArray(val)||!val.length)fail(`${key} må inneholde poster`);
+ unique(val,key);
+}
+if(!/^\d+\.\d+\.\d+$/.test(d.meta.version))fail('Versjon er ugyldig');
+if(!/^\d{4}-\d{2}-\d{2}$/.test(d.meta.reviewed))fail('Mangler kontrolldato');
+for(const [id,s] of Object.entries(d.sources)){
+ if(!/^https:\/\//.test(s.url))fail(`Kilde ${id} trenger HTTPS`);
+ if(!s.date||!s.publisher||!s.title)fail(`Kilde ${id} er ufullstendig`);
+}
+for(const entry of [...d.plays,...d.trends]){
+ if(!entry.sources?.length)fail(`${entry.id} mangler kilde`);
+ for(const id of entry.sources)if(!d.sources[id])fail(`${entry.id} peker til ukjent kilde ${id}`);
+}
+for(const p of d.plays){if(!p.questions?.length||!p.signals?.length||!p.next||!p.not)fail(`Salgsinngang ${p.id} er ufullstendig`)}
+for(const t of d.tech)if(!d.sources[t.source])fail(`Teknologi ${t.name} peker til ukjent kilde`);
+for(const s of d.scenarios)if(!d.plays.some(p=>p.id===s.play))fail(`Scenario peker til ukjent play: ${s.play}`);
+for(const x of d.stats.ki)if(typeof x.value!=='number'||x.value<0||x.value>100)fail(`Ugyldig prosent: ${x.year}`);
+for(const fn of ['docs/index.html','docs/assets/site.css','docs/assets/site.js'])if(!fs.existsSync(fn))fail(`Mangler fil: ${fn}`);
+if(!process.exitCode)console.log('PASS – datamodell, referanser, statiske filer og kildegrunnlag OK');

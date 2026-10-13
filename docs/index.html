@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" content="Marked, salgsinnganger og praktisk kundedialog for fagområdet Innsikt." />
+  <title>Innsikt · Marked og salg</title>
+  <link rel="stylesheet" href="./assets/site.css" />
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  
+</head>
+<body>
+  <a class="skip-link" href="#main">Hopp til innhold</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#oversikt" aria-label="Innsikt – til oversikten">
+        <span class="brand-mark"><span class="brand-bars"><i></i><i></i><i></i></span></span>
+        <span><strong>INNSIKT</strong><small>MARKED & SALG</small></span>
+      </a>
+      <div class="sidebar-label">ARBEIDSFLATE</div>
+      <nav class="nav" id="nav-main" aria-label="Hovedmeny">
+        <a href="#oversikt" data-page="oversikt"><span data-icon="layout-dashboard"></span> Oversikt</a>
+        <a href="#marked" data-page="marked"><span data-icon="trending-up"></span> Marked og trender</a>
+        <a href="#muligheter" data-page="muligheter"><span data-icon="target"></span> Salgsinnganger</a>
+        <a href="#kundedialog" data-page="kundedialog"><span data-icon="messages"></span> Kundedialog</a>
+      </nav>
+      <div class="sidebar-label mid">OPPSLAG</div>
+      <nav class="nav" id="nav-secondary" aria-label="Oppslag">
+        <a href="#kompetanse" data-page="kompetanse"><span data-icon="layers"></span> Kompetanse</a>
+        <a href="#teknologi" data-page="teknologi"><span data-icon="network"></span> Teknologi og leverandører</a>
+        <a href="#kilder" data-page="kilder"><span data-icon="book-open"></span> Kilder</a>
+        <a href="#utvikling" data-page="utvikling"><span data-icon="git-pull-request"></span> Videreutvikling <span id="backlog-count" class="counter"></span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="workmode"><span class="pulse"></span><span>Åpent arbeidsgrunnlag</span></div>
+        <p>Dette er en prototype basert på offentlig informasjon. Ingen kundedata eller interne notater.</p>
+        <div class="sidebar-version">Versjon <span id="version-label">—</span></div>
+      </div>
+    </aside>
+    <div class="main-column">
+      <header class="topbar">
+        <button type="button" id="menu-toggle" class="icon-button mobile-menu" aria-label="Åpne meny" aria-expanded="false"><span data-icon="menu"></span></button>
+        <div class="breadcrumb"><span class="breadcrumb-project">Innsikt</span><span class="sep">/</span><span id="crumb">Oversikt</span></div>
+        <div class="top-actions">
+          <button type="button" class="utility-button" id="search-button"><span data-icon="search"></span><span class="topbar-text">Søk</span><kbd>⌘ K</kbd></button>
+          <button type="button" class="utility-button" id="present-button"><span data-icon="presentation"></span><span class="topbar-text">Presenter</span></button>
+          <button type="button" class="primary-small" id="feedback-button"><span data-icon="message-circle"></span><span>Gi innspill</span></button>
+        </div>
+      </header>
+      <main id="main" tabindex="-1" aria-live="polite"></main>
+      <footer class="footer"><span>Innsikt · Marked og salg</span><span id="footer-status"></span><span>Kun offentlig kildegrunnlag · <a href="#kilder">Se kilder</a></span></footer>
+    </div>
+  </div>
+  <div id="overlay-root"></div>
+  <script src="./assets/site.js" defer></script>
+</body>
+</html>

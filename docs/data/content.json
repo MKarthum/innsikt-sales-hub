@@ -1,0 +1,564 @@
+{
+  "meta": {
+    "title": "Innsikt | Marked og salg",
+    "version": "0.1.0",
+    "released": "2026-10-13",
+    "reviewed": "2026-10-13",
+    "classification": "Åpent arbeidsgrunnlag – ingen interne data",
+    "disclaimer": "Arbeidsversjon på offentlig kildegrunnlag. Salgsinnganger er forslag som skal valideres, ikke dokumenterte kundetilbud."
+  },
+  "sources": {
+    "ssb": {
+      "title": "SSB – Bruken av KI i næringslivet akselererer",
+      "publisher": "Statistisk sentralbyrå",
+      "date": "2026-09-25",
+      "url": "https://www.ssb.no/teknologi-og-innovasjon/informasjons-og-kommunikasjonsteknologi-ikt/statistikk/bruk-av-ikt-i-naeringslivet/artikler/bruken-av-ki-i-naeringslivet-akselererer",
+      "type": "offentlig statistikk"
+    },
+    "webstep1": {
+      "title": "Innsikt og datadrevet forretning",
+      "publisher": "Webstep",
+      "date": "2026-10-13",
+      "url": "https://webstep.no/innsikt-og-datadrevet-forretning/",
+      "type": "offentlig tjenestebeskrivelse"
+    },
+    "webstep2": {
+      "title": "Data, innsikt og avansert analyse",
+      "publisher": "Webstep",
+      "date": "2026-10-13",
+      "url": "https://webstep.no/data-innsikt-og-avansert-analyse/",
+      "type": "offentlig tjenestebeskrivelse"
+    },
+    "digdir": {
+      "title": "KI-klare data – veiledningsmøte",
+      "publisher": "Digitaliseringsdirektoratet",
+      "date": "2026-10-07",
+      "url": "https://www.digdir.no/kunstig-intelligens/ki-norge-veiledningsmote/8382",
+      "type": "offentlig veiledning"
+    },
+    "fabric": {
+      "title": "What is Microsoft Fabric?",
+      "publisher": "Microsoft Learn",
+      "date": "2026-10-13",
+      "url": "https://learn.microsoft.com/en-us/fabric/get-started/microsoft-fabric-overview",
+      "type": "leverandørdokumentasjon"
+    },
+    "databricks": {
+      "title": "What is Databricks?",
+      "publisher": "Databricks",
+      "date": "2026-09-08",
+      "url": "https://docs.databricks.com/gcp/en/introduction",
+      "type": "leverandørdokumentasjon"
+    },
+    "lakehouse": {
+      "title": "What is a data lakehouse?",
+      "publisher": "Databricks",
+      "date": "2026-07-28",
+      "url": "https://docs.databricks.com/aws/en/lakehouse/",
+      "type": "leverandørdokumentasjon"
+    },
+    "privacy": {
+      "title": "Hva skal du si om bruk av KI?",
+      "publisher": "Datatilsynet",
+      "date": "2026-10-13",
+      "url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2022/hva-skal-du-si-om-bruk-av-ki/",
+      "type": "offentlig veiledning"
+    },
+    "snowflake": {
+      "title": "Snowflake key concepts and architecture",
+      "publisher": "Snowflake Documentation",
+      "date": "2026-10-13",
+      "url": "https://docs.snowflake.com/en/user-guide/intro-key-concepts",
+      "type": "leverandørdokumentasjon"
+    }
+  },
+  "plays": [
+    {
+      "id": "rapportering",
+      "number": "01",
+      "name": "Fra manuell rapportering til beslutningsstøtte",
+      "category": "Analyse og BI",
+      "short": "Når rapporter krever Excel, manuell innsats og stadige avklaringer.",
+      "hook": "«Vi bruker mye tid på å samle rapporter i Excel.»",
+      "signals": [
+        "Rapporter bygges manuelt hver måned",
+        "Ulike avdelinger har forskjellige tall",
+        "Beslutningstakere får informasjon for sent",
+        "Ønske om bedre Power BI eller selvbetjent analyse"
+      ],
+      "why": "Rapportering er ofte et symptom på problemer i datatilgang, definisjoner eller arbeidsflyt – ikke bare et behov for flere dashboards.",
+      "questions": [
+        "Hvilke beslutninger påvirkes av at tallene kommer sent?",
+        "Hvor mye tid bruker dere på å hente inn og kontrollere data?",
+        "Hvem har ansvar for definisjonene av nøkkeltall?",
+        "Hvor mange systemer og avdelinger inngår i rapporteringen?",
+        "Hva har dere allerede forsøkt å forbedre?"
+      ],
+      "roles": [
+        "CFO / økonomi",
+        "Leder for analyse",
+        "Forretningsledere"
+      ],
+      "competence": [
+        "BI og visualisering",
+        "Datamodellering",
+        "Data engineering",
+        "Analyse og rådgivning"
+      ],
+      "qualify": [
+        "Tydelig eier av rapporteringsproblemet",
+        "Konsekvens for tid, kvalitet eller beslutninger",
+        "Planlagt endring, budsjett eller ressursmangel"
+      ],
+      "next": "Foreslå en avgrenset fagdialog om dagens rapportflyt, datagrunnlag og hvilke beslutninger rapporteringen skal støtte.",
+      "not": "Ikke konkluder med at kunden trenger Power BI, eller lov real-time uten å kjenne datakildene.",
+      "sources": [
+        "webstep1",
+        "webstep2"
+      ]
+    },
+    {
+      "id": "modernisering",
+      "number": "02",
+      "name": "Modernisering av dataplattform",
+      "category": "Dataplattform",
+      "short": "Når datavarehus, integrasjoner eller eksisterende arkitektur begrenser utviklingen.",
+      "hook": "«Vi vurderer Fabric / Snowflake / Databricks.»",
+      "signals": [
+        "Migrerings- eller moderniseringsprogram",
+        "Høye drifts- eller vedlikeholdskostnader",
+        "Gamle ETL-jobber og manuelle integrasjoner",
+        "Plattform valgt, men mangler gjennomføringsevne"
+      ],
+      "why": "Valg av plattform er starten på et gjennomføringsløp. Arkitektur, datamigrering, modellering, kvalitet og kompetanse avgjør resultatet.",
+      "questions": [
+        "Hva er den konkrete grunnen til at dere vurderer endring nå?",
+        "Hva fungerer ikke med eksisterende løsning?",
+        "Er teknologivalget tatt, eller er alternativer fortsatt åpne?",
+        "Hvilke avhengigheter og datakilder skal flyttes?",
+        "Har dere team og kompetanse til å gjennomføre?"
+      ],
+      "roles": [
+        "CIO / IT-ledelse",
+        "Data- og analyseleder",
+        "Arkitekt"
+      ],
+      "competence": [
+        "Dataarkitektur",
+        "Data engineering",
+        "Sky og dataplattform",
+        "Migrering og modellering"
+      ],
+      "qualify": [
+        "Modernisering er prioritert eller finansiert",
+        "Konkrete utfordringer med dagens løsning",
+        "Kapasitets- eller kompetansegap"
+      ],
+      "next": "Koble inn en fagperson for å forstå målarkitektur, migreringsomfang og mulige leveranseformer.",
+      "not": "Ikke selg plattformnavnet før vi kjenner kundens behov og føringer.",
+      "sources": [
+        "webstep2",
+        "fabric",
+        "databricks"
+      ]
+    },
+    {
+      "id": "ki-data",
+      "number": "03",
+      "name": "Fra KI-pilot til virksomhetsverdi",
+      "category": "KI og data",
+      "short": "Når kunden tester KI, men mangler datatilgang, robusthet eller tydelig gevinst.",
+      "hook": "«Vi har prøvd Copilot og noen KI-piloter, men kommer ikke videre.»",
+      "signals": [
+        "Mange eksperimenter – få produksjonssatte løsninger",
+        "Ønske om KI på interne data",
+        "Uklar effekt eller ansvar for KI-satsingen",
+        "Bekymring for tilgang, personvern eller datakvalitet"
+      ],
+      "why": "KI-bruk skaper ofte behov for datatilrettelegging, integrasjoner, evaluering, sikkerhet og drift – ikke bare modellkompetanse.",
+      "questions": [
+        "Hvilken arbeidsprosess eller beslutning skal forbedres?",
+        "Hva har dere testet, og hva har fungert eller stoppet?",
+        "Hvilke interne data må løsningen bruke?",
+        "Hvordan måler dere nytte, kvalitet og risiko?",
+        "Hvem skal eie løsningen etter piloten?"
+      ],
+      "roles": [
+        "Leder for digitalisering / KI",
+        "CIO / teknologiledelse",
+        "Forretningsområde"
+      ],
+      "competence": [
+        "Data engineering",
+        "KI og data science",
+        "Arkitektur og integrasjon",
+        "Datakvalitet og styring"
+      ],
+      "qualify": [
+        "Konkret bruksområde og ansvarlig",
+        "Tilgjengelige data eller avklart databehov",
+        "Plan for gevinst, investering eller pilot"
+      ],
+      "next": "Foreslå en kort avklaringssamtale om brukstilfelle, datagrunnlag, effektmål og realiserbarhet.",
+      "not": "Ikke anta at alle KI-prosjekter er et Innsikt-oppdrag. Involver relevante KI-/utviklingsmiljøer etter behov.",
+      "sources": [
+        "ssb",
+        "digdir",
+        "privacy",
+        "webstep1"
+      ]
+    },
+    {
+      "id": "datakvalitet",
+      "number": "04",
+      "name": "Datakvalitet og felles definisjoner",
+      "category": "Styring og kvalitet",
+      "short": "Når virksomheten ikke stoler på tallene eller vet hvem som eier dataene.",
+      "hook": "«Økonomi og salg har forskjellige versjoner av sannheten.»",
+      "signals": [
+        "Motstridende nøkkeltall",
+        "Uklart eierskap til datakilder",
+        "Problemer med rettigheter og tilgang",
+        "Kvalitetsfeil oppdages sent"
+      ],
+      "why": "Uten felles definisjoner, eierskap og kvalitet kan både rapportering og KI gi feil beslutningsgrunnlag.",
+      "questions": [
+        "Hvilke tall eller begreper er det uenighet om?",
+        "Hva er konsekvensen av feil eller ufullstendige data?",
+        "Hvem beslutter definisjonene og eier dataene?",
+        "Hvordan oppdager og korrigerer dere kvalitetsproblemer?",
+        "Pågår det endringer der dette blir mer kritisk?"
+      ],
+      "roles": [
+        "Data- og analyseleder",
+        "CFO / økonomi",
+        "CIO / sikkerhet"
+      ],
+      "competence": [
+        "Datamodellering",
+        "Data governance",
+        "Dataarkitektur",
+        "Kvalitetssikring"
+      ],
+      "qualify": [
+        "Problemet gir dokumentert friksjon",
+        "Det finnes en eier eller sponsor",
+        "Aktuelle initiativer påvirkes"
+      ],
+      "next": "Koble inn riktig fagkompetanse for å kartlegge datadefinisjoner, eierskap og teknisk datakjede.",
+      "not": "Ikke reduser styring til verktøyvalg; organisering og ansvar kan være like viktig.",
+      "sources": [
+        "webstep1",
+        "webstep2",
+        "digdir"
+      ]
+    },
+    {
+      "id": "kapasitet",
+      "number": "05",
+      "name": "Økt leveranseevne i data- og analyseteam",
+      "category": "Kompetanse og kapasitet",
+      "short": "Når kunden har en plan og en plattform, men ikke nok folk eller spesialisert erfaring.",
+      "hook": "«Vi har backloggen klar, men mangler kapasitet.»",
+      "signals": [
+        "Planlagte prosjekter står stille",
+        "Nøkkelpersoner er overbelastet",
+        "Behov for arkitekt, data engineer eller BI-spesialist",
+        "Midlertidig økning i prosjektporteføljen"
+      ],
+      "why": "Mange oppdrag starter som konkret behov for spesialistkompetanse. Da må salg forstå oppgaven og organiseringen, ikke bare sende en tilfeldig CV.",
+      "questions": [
+        "Hva er det teamet ikke får levert i dag?",
+        "Hvilke oppgaver eller kompetanseprofiler mangler?",
+        "Hvor lenge forventer dere behovet?",
+        "Hvordan er teamet organisert og hvem prioriterer?",
+        "Hva kjennetegner en god leveranse hos dere?"
+      ],
+      "roles": [
+        "Leder for data og analyse",
+        "IT-leder",
+        "Leveranseleder / teamleder"
+      ],
+      "competence": [
+        "Konsulent i kundeteam",
+        "Spesialister",
+        "Tverrfaglige team",
+        "Rådgivning"
+      ],
+      "qualify": [
+        "Definert leveranse eller oppgave",
+        "Konkret kompetansebehov",
+        "Tidspunkt og beslutningsmyndighet"
+      ],
+      "next": "Få på plass en konkret oppdragsbeskrivelse og involver ansvarlig for kompetanse og bemanning.",
+      "not": "Ikke lov tilgjengelighet eller navngitte profiler uten avklaring.",
+      "sources": [
+        "webstep2"
+      ]
+    }
+  ],
+  "trends": [
+    {
+      "id": "adoption",
+      "title": "KI går fra særinteresse til bred bruk",
+      "intro": "I 2026 bruker 48 % av norske foretak med minst ti sysselsatte KI, mot 30 % i 2025.",
+      "meaning": "Mange kunder har begynt å teste eller bruke KI. Neste samtale bør handle om anvendelse, datagrunnlag og gevinst – ikke om de har hørt om KI.",
+      "question": "Hva har dere tatt i bruk, og hva ønsker dere å få mer ut av?",
+      "sources": [
+        "ssb"
+      ],
+      "evidence": "statistikk",
+      "checked": "2026-10-13"
+    },
+    {
+      "id": "sector",
+      "title": "Forskjellig modenhet mellom bransjer",
+      "intro": "SSB måler i 2026 29 % KI-bruk i transport og lagring, 51 % i industri-/forsyningsnæringer og 90 % i informasjon og kommunikasjon.",
+      "meaning": "Bransje og virksomhetsstørrelse påvirker hvilke spørsmål som er relevante. Et generelt KI-budskap treffer ikke alle likt.",
+      "question": "Hvor langt er dere kommet sammenlignet med egne ambisjoner?",
+      "sources": [
+        "ssb"
+      ],
+      "evidence": "statistikk",
+      "checked": "2026-10-13"
+    },
+    {
+      "id": "datareadiness",
+      "title": "KI øker betydningen av datagrunnlaget",
+      "intro": "Digdir løftet i oktober 2026 fram KI-klare data som grunnlag for trygg og effektiv bruk av KI.",
+      "meaning": "Kvalitet, tilgang, dokumentasjon og dataforvaltning kan være innganger til konkret arbeid selv om dialogen begynner med KI.",
+      "question": "Hvilke data må være tilgjengelige og pålitelige for at dette skal virke?",
+      "sources": [
+        "digdir"
+      ],
+      "evidence": "myndighetsveiledning",
+      "checked": "2026-10-13"
+    },
+    {
+      "id": "platform",
+      "title": "Moderne plattformer samler flere dataoppgaver",
+      "intro": "Microsoft Fabric og Databricks beskriver plattformer som dekker data engineering, analyse og KI på tvers av arbeidsoppgaver.",
+      "meaning": "Plattformvalg skaper behov for integrasjon, arkitektur, modellering og endring. Leverandørpåstander må ikke forveksles med dokumentert kundeverdi.",
+      "question": "Hva ønsker dere å forbedre med ny eller eksisterende plattform?",
+      "sources": [
+        "fabric",
+        "databricks"
+      ],
+      "evidence": "leverandørdokumentasjon",
+      "checked": "2026-10-13"
+    }
+  ],
+  "tech": [
+    {
+      "name": "Microsoft Fabric",
+      "kind": "Plattform",
+      "signal": "Kunden bruker Power BI, Azure eller vurderer en mer samlet analyseplattform.",
+      "talk": "Spør hva som skal samles og forbedres, og om organiseringen og datagrunnlaget er klart.",
+      "source": "fabric",
+      "caution": "Ingen automatisk anbefaling om migrering."
+    },
+    {
+      "name": "Databricks",
+      "kind": "Plattform",
+      "signal": "Kunden diskuterer lakehouse, storskala data engineering, maskinlæring eller dataplattform.",
+      "talk": "Spør hva som er utfordringen med dataflyten, kost, ytelse eller videreutvikling.",
+      "source": "databricks",
+      "caution": "Overlapp med andre plattformer – unngå teknologifasit."
+    },
+    {
+      "name": "Snowflake",
+      "kind": "Plattform",
+      "signal": "Kunden har Snowflake, vurderer migrering eller ønsker å utvikle dataplattformen.",
+      "talk": "Spør hva de faktisk skal levere med plattformen og hvilken kompetanse de trenger.",
+      "source": "snowflake",
+      "caution": "Partnerordninger og konkrete ytelser er ikke verifisert i denne åpne versjonen."
+    },
+    {
+      "name": "Power BI og BI",
+      "kind": "Rapportering og analyse",
+      "signal": "Kunden etterspør dashboards, felles nøkkeltall og enklere innsikt.",
+      "talk": "Start med beslutningene og hvem som bruker informasjonen.",
+      "source": "webstep1",
+      "caution": "Dashboards løser ikke alene datakvalitet eller eierskap."
+    },
+    {
+      "name": "Datavarehus og integrasjon",
+      "kind": "Grunnlag",
+      "signal": "Flere systemer, tung ETL, lange oppdateringstider eller datasiloe.",
+      "talk": "Spør hvor mye tid som går med til å samle, bearbeide og kontrollere data.",
+      "source": "webstep1",
+      "caution": "Eksisterende løsninger kan fortsatt være riktige."
+    }
+  ],
+  "scenarios": [
+    {
+      "title": "«Vi har innført Fabric, men rapportene tar fortsatt for lang tid.»",
+      "role": "IT-leder",
+      "play": "modernisering",
+      "context": "Et mellomstort selskap har byttet plattform, men får ikke forventet effekt.",
+      "good": [
+        "Hva er det som tar tid – innlasting, modellering eller selve rapportarbeidet?",
+        "Hvor viktig er dette for virksomheten, og hvilke frister har dere?",
+        "Hva har dere forsøkt så langt, og hvem har ansvar for forbedringen?"
+      ],
+      "avoid": "«Dere må bygge en ny lakehouse-arkitektur.»",
+      "next": "Avklar en teknisk/faglig samtale, ikke en bestemt løsning."
+    },
+    {
+      "title": "«Vi må få noe konkret ut av KI-satsingen vår.»",
+      "role": "Digitaliseringsleder",
+      "play": "ki-data",
+      "context": "Det finnes flere piloter, men ingen tydelig plan for utrulling.",
+      "good": [
+        "Hvilke arbeidsprosesser ønsker dere å forbedre?",
+        "Hva har pilotene lært dere om data, kvalitet og risiko?",
+        "Hvem skal eie og drifte løsningene når de er i bruk?"
+      ],
+      "avoid": "«Vi kan bygge en KI-agent som løser dette.»",
+      "next": "Kartlegg ett bruksområde, forventet effekt og databehov."
+    },
+    {
+      "title": "«Vi vurderer å ansette flere på data.»",
+      "role": "Data- og analyseleder",
+      "play": "kapasitet",
+      "context": "Behovet kan være varig, prosjektbasert eller knyttet til kompetanse som er vanskelig å få tak i.",
+      "good": [
+        "Hvilke leveranser blir forsinket i dag?",
+        "Trenger dere varig kapasitet eller spesialisert hjelp i en periode?",
+        "Hvilke ferdigheter mangler i det eksisterende teamet?"
+      ],
+      "avoid": "«Vi sender dere noen CV-er.»",
+      "next": "Undersøk om innleie, spesialiststøtte eller team passer best."
+    }
+  ],
+  "backlog": [
+    {
+      "id": "B-01",
+      "title": "Erstatte illustrerte scenarioer med godkjente kundecaser",
+      "area": "Kundecaser",
+      "status": "åpen",
+      "priority": "høy",
+      "why": "Nåværende scenarioer er pedagogiske eksempler, ikke dokumenterte Webstep-leveranser."
+    },
+    {
+      "id": "B-02",
+      "title": "Validere prioriterte salgsinnganger med fagmiljø og salg",
+      "area": "Salg",
+      "status": "åpen",
+      "priority": "høy",
+      "why": "Førstegangsprioritering er kvalitativ og må testes mot faktiske oppdrag."
+    },
+    {
+      "id": "B-03",
+      "title": "Bekrefte partnerordninger og kontaktpunkter",
+      "area": "Partnere",
+      "status": "åpen",
+      "priority": "høy",
+      "why": "Interne partnerskapsordninger skal først kvalitetssikres etter flytting til Webstep."
+    },
+    {
+      "id": "B-04",
+      "title": "Velge intern publisering og tilgang etter flytting",
+      "area": "Teknisk",
+      "status": "senere",
+      "priority": "middels",
+      "why": "Første utgave skal ikke avhenge av Websteps GitHub-innstillinger."
+    },
+    {
+      "id": "B-05",
+      "title": "Teste førsteversjonen med selgere",
+      "area": "Brukerinnsikt",
+      "status": "åpen",
+      "priority": "høy",
+      "why": "Se om spørsmål og innganger fungerer uten en fagekspert i rommet."
+    },
+    {
+      "id": "B-06",
+      "title": "Legge inn planlagt faglig gjennomgang av volatile fakta",
+      "area": "Research",
+      "status": "åpen",
+      "priority": "middels",
+      "why": "Markedstall og leverandørinformasjon kan raskt bli utdaterte."
+    }
+  ],
+  "stats": {
+    "ki": [
+      {
+        "year": "2023",
+        "value": 9
+      },
+      {
+        "year": "2024",
+        "value": 21
+      },
+      {
+        "year": "2025",
+        "value": 30
+      },
+      {
+        "year": "2026",
+        "value": 48
+      }
+    ],
+    "segments": [
+      {
+        "label": "Transport og lagring",
+        "value": 29
+      },
+      {
+        "label": "Industri m.m.",
+        "value": 51
+      },
+      {
+        "label": "Informasjon og kommunikasjon",
+        "value": 90
+      }
+    ],
+    "source": "ssb"
+  },
+  "competences": [
+    {
+      "label": "Data og plattform",
+      "description": "Arkitektur, integrasjoner, datavarehus, datamodellering og data engineering."
+    },
+    {
+      "label": "Analyse og BI",
+      "description": "Rapportering, visualisering, innsikt og avansert analyse."
+    },
+    {
+      "label": "Kvalitet og styring",
+      "description": "Datakvalitet, tilgang, dokumentasjon og eierskap."
+    },
+    {
+      "label": "KI og anvendelse",
+      "description": "KI-relevante brukstilfeller, datatilrettelegging og tverrfaglige leveranser."
+    }
+  ],
+  "audiences": [
+    {
+      "label": "CFO / økonomi",
+      "interest": "Styring, troverdige tall, effektiv rapportering",
+      "entry": "rapportering"
+    },
+    {
+      "label": "CIO / IT-leder",
+      "interest": "Modernisering, integrasjoner, risiko og kapasitet",
+      "entry": "modernisering"
+    },
+    {
+      "label": "Data- og analyseleder",
+      "interest": "Strategi, datagrunnlag, teamets leveranseevne",
+      "entry": "kapasitet"
+    },
+    {
+      "label": "Drifts-/forretningsleder",
+      "interest": "Prosesseffektivisering, beslutningsstøtte, oppfølging",
+      "entry": "ki-data"
+    },
+    {
+      "label": "Digitaliserings-/KI-leder",
+      "interest": "Faktisk anvendelse, datatilgang og gevinst",
+      "entry": "ki-data"
+    }
+  ]
+}
