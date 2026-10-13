@@ -32,3 +32,17 @@ for(const b of d.businessSignals||[]){
  for(const id of b.sources||[])if(!d.sources[id])fail('Ukjent kilde '+id+' i '+b.id);
 }
 for(const t of d.tech)if(t.logo && !fs.existsSync('docs/assets/brands/'+t.logo+'.svg'))fail('Mangler merkeikon for '+t.name);
+
+for(const [key,items] of Object.entries({aiProducts:d.aiProducts,marketEvents:d.marketEvents,marketSignals:d.marketSignals})){
+ if(!Array.isArray(items)||!items.length)fail('Mangler '+key);
+ unique(items||[],key);
+ for(const item of items||[]){
+  const sources=item.sources||(item.source?[item.source]:[]);
+  if(!sources.length)fail('Kilder mangler: '+item.id);
+  for(const id of sources)if(!d.sources[id])fail('Ukjent kilde: '+id);
+ }
+}
+for(const a of d.aiProducts||[])if(a.logo && !fs.existsSync('docs/assets/brands/'+a.logo+'.svg'))fail('Mangler KI-ikon '+a.logo);
+for(const t of d.tech)if(t.logo && !fs.existsSync('docs/assets/brands/'+t.logo+'.svg'))fail('Mangler ikon '+t.logo);
+if(d.aiProducts.some(a=>!a.group||!a.signal||!a.question))fail('KI-produkt mangler salgsforklaring');
+if(d.marketSignals.some(x=>!x.ask||!x.listen))fail('Markedstrend mangler kundespørsmål');

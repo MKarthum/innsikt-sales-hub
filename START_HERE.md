@@ -24,6 +24,9 @@ Alt kuratert faginnhold ligger foreløpig i `docs/data/content.json`:
 - `trends`: markedstall, fakta, kildehenvisninger, og egen kommersiell tolkning.
 - `plays`: salgsinnganger, signaler, spørsmål, roller, kompetanse og neste steg.
 - `scenarios`: **tydelig fiktive** øvelser for førstelinjedialog.
+- `aiProducts`: produktspesifikke KI-tilbud med salgsinngang og forbehold.
+- `marketEvents`, `marketSignals`: hendelser, markedsperspektiver og relevante spørsmål.
+- `logoAssets`: kilde og bruksregler for produktikoner.
 - `tech`: plattformforklaringer, salgssignaler og avgrensninger.
 - `competences`, `audiences`: kategorier og målgrupper.
 - `sources`: kildebibliotek med stabile lenker.

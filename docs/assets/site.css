@@ -47,3 +47,33 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 .source-card a svg{width:13px;height:13px}
 @media(max-width:1100px){.business-grid.compact{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.business-grid,.business-grid.compact,.business-detail-grid{grid-template-columns:1fr}.business-flow{gap:7px}.business-flow svg{transform:rotate(90deg)}.business-card{min-height:0}}
+
+/* v0.3.0 – teknologi, KI og markedsbevegelser */
+.sidebar{overflow-y:auto}
+.tech-item{grid-template-columns:minmax(190px,245px) minmax(0,1fr)}
+.insight-strip{border:1px solid #cde8de;border-radius:16px;background:#eef8f4;padding:22px 25px;display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:21px}
+.insight-strip h3{margin:0;font-size:17px;color:#194f47}
+.insight-strip p{margin:7px 0 0;color:#4c766d;font-size:13px;line-height:1.55}
+.insight-strip .btn{white-space:nowrap}
+.ai-duo,.ai-grid,.market-insight-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.ai-card{background:#fff;border:1px solid var(--border);border-radius:17px;padding:22px;display:flex;flex-direction:column;gap:13px;min-width:0}
+.ai-card header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px}
+.ai-card h3{font:800 16px/1.3 'Manrope',sans-serif;margin:3px 0 0}
+.ai-card>p{font-size:13px;color:#58737b;line-height:1.7;margin:0}
+.ai-card .small-label{color:#198775}
+.ai-card .badge{font-size:9px}
+.ai-sales{background:#f4f9f8;border-radius:10px;padding:14px}
+.ai-sales strong{font-size:11px;color:#245e53}
+.ai-sales p{font-size:12px;line-height:1.65;color:#526b6c;margin:5px 0 12px}
+.ai-sales p:last-child{margin-bottom:0}
+.ai-footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px}
+.ai-footer .text-source{margin:0}
+.event-list{display:grid;gap:14px}
+.event-card{display:grid;grid-template-columns:120px minmax(0,1fr);gap:22px;border:1px solid var(--border);background:white;border-radius:17px;padding:25px}
+.event-date{font:800 12px 'Manrope',sans-serif;color:#187f6d;padding-top:3px}
+.event-card h3{font:800 18px/1.3 'Manrope',sans-serif;margin:0 0 12px}
+.event-card p{font-size:13px;color:#5d7580;line-height:1.7;margin:0 0 11px}
+.market-no{font:800 11px 'Manrope',sans-serif;color:#159680;margin-bottom:12px}
+.market-listen{font-size:12px;line-height:1.65;color:#456672;margin-bottom:15px}
+@media(max-width:1050px){.ai-grid,.market-insight-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.insight-strip{display:block}.insight-strip .btn{margin-top:15px}.ai-duo,.event-card,.tech-item{grid-template-columns:1fr}.event-card{gap:6px;padding:19px}}

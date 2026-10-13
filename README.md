@@ -1,6 +1,6 @@
 # Innsikt – marked og salg
 
-En lett, datadrevet salgsportal for fagområdet Innsikt, utviklet på offentlig kildegrunnlag. **Dette er en arbeidsversjon (v0.2.0), ikke godkjent internt salgsmateriell.**
+En lett, datadrevet salgsportal for fagområdet Innsikt, utviklet på offentlig kildegrunnlag. **Dette er en arbeidsversjon (v0.3.0), ikke godkjent internt salgsmateriell.**
 
 ## Mål
 
@@ -35,6 +35,7 @@ Bruk Pages fra `main` og mappen `/docs`. VIKTIG: En nettside på personlig GitHu
 ## Det som virker nå
 
 - Oversikt med offentlig norsk KI-statistikk, trender og kilder.
+- Teknologikart med 12 områder, åtte KI-funksjoner og dokumenterte oppkjøp og markedstrender.
 - Åtte salgsinnganger med kundesignaler, spørsmål, kompetanse og neste steg.
 - Egen inngang for seks forretningsområder, med problem → mulige databehov → leveranse → neste steg.
 - Filtrering, globalt søk (også i forretningssignalene), enkel kvalifiseringssjekkliste og samtaleøvelser.
@@ -61,4 +62,4 @@ Se `OPEN_DATA_POLICY.md` og lenkene i `docs/data/content.json`. Hypoteser er ikk
 Oppdater først kanoniske data, kjør `node scripts/check.mjs`, og test visningen på desktop og mobil. Hold både innhold og arbeidshistorikk sporbar. Dokumenter beslutninger i repoet, ikke bare i en chat.
 ## Produktlogoer
 
-Merkeikonene for Snowflake og Databricks er hentet fra Simple Icons (CC0-samling; merkene tilhører sine respektive rettighetshavere). Se [deres disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md). Ikonene brukes kun for å identifisere leverandørprodukter, ikke som støtte eller godkjenning. Øvrige teknologier har nøytrale initialer inntil egnet ikon med bruksrett er bekreftet.
+Logoer for Snowflake, Databricks, dbt, Airbyte, BigQuery, Qlik, Informatica og Airflow er fra Simple Icons. Fabric og Copilot kommer fra Microsofts ikonressurser/FabricTools og følger Microsofts vilkår. Se [deres disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md). Ikonene brukes kun for å identifisere leverandørprodukter, ikke som støtte eller godkjenning. Øvrige teknologier har nøytrale initialer inntil offisielt ikon og bruksrett er verifisert. Se `logoAssets` i datamodellen.
