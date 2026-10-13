@@ -1,0 +1,240 @@
+{
+  "ssb": {
+    "title": "SSB – Bruken av KI i næringslivet akselererer",
+    "publisher": "Statistisk sentralbyrå",
+    "date": "2026-09-25",
+    "url": "https://www.ssb.no/teknologi-og-innovasjon/informasjons-og-kommunikasjonsteknologi-ikt/statistikk/bruk-av-ikt-i-naeringslivet/artikler/bruken-av-ki-i-naeringslivet-akselererer",
+    "type": "offentlig statistikk"
+  },
+  "webstep1": {
+    "title": "Innsikt og datadrevet forretning",
+    "publisher": "Webstep",
+    "date": "2026-10-13",
+    "url": "https://webstep.no/innsikt-og-datadrevet-forretning/",
+    "type": "offentlig tjenestebeskrivelse"
+  },
+  "webstep2": {
+    "title": "Data, innsikt og avansert analyse",
+    "publisher": "Webstep",
+    "date": "2026-10-13",
+    "url": "https://webstep.no/data-innsikt-og-avansert-analyse/",
+    "type": "offentlig tjenestebeskrivelse"
+  },
+  "digdir": {
+    "title": "KI-klare data – veiledningsmøte",
+    "publisher": "Digitaliseringsdirektoratet",
+    "date": "2026-10-07",
+    "url": "https://www.digdir.no/kunstig-intelligens/ki-norge-veiledningsmote/8382",
+    "type": "offentlig veiledning"
+  },
+  "fabric": {
+    "title": "What is Microsoft Fabric?",
+    "publisher": "Microsoft Learn",
+    "date": "2026-10-13",
+    "url": "https://learn.microsoft.com/en-us/fabric/get-started/microsoft-fabric-overview",
+    "type": "leverandørdokumentasjon"
+  },
+  "databricks": {
+    "title": "What is Databricks?",
+    "publisher": "Databricks",
+    "date": "2026-09-08",
+    "url": "https://docs.databricks.com/gcp/en/introduction",
+    "type": "leverandørdokumentasjon"
+  },
+  "lakehouse": {
+    "title": "What is a data lakehouse?",
+    "publisher": "Databricks",
+    "date": "2026-07-28",
+    "url": "https://docs.databricks.com/aws/en/lakehouse/",
+    "type": "leverandørdokumentasjon"
+  },
+  "privacy": {
+    "title": "Sandkassesiden – KI og personvern",
+    "publisher": "Datatilsynet",
+    "date": "2026-10-13",
+    "url": "https://www.datatilsynet.no/regelverk-og-verktoy/sandkasse-for-kunstig-intelligens/",
+    "type": "offentlig veiledning (kontrollert lenke)"
+  },
+  "snowflake": {
+    "title": "Snowflake key concepts and architecture",
+    "publisher": "Snowflake Documentation",
+    "date": "2026-10-13",
+    "url": "https://docs.snowflake.com/en/user-guide/intro-key-concepts",
+    "type": "leverandørdokumentasjon"
+  },
+  "simpleicons": {
+    "title": "Simple Icons – brandikoner og bruksvilkår",
+    "publisher": "Simple Icons",
+    "date": "2026-10-13",
+    "url": "https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md",
+    "type": "ikonreferanse"
+  },
+  "merger": {
+    "title": "Fivetran + dbt Labs fullfører sammenslåing",
+    "publisher": "Fivetran",
+    "url": "https://www.fivetran.com/press/fivetran-dbt-labs-complete-merger-to-create-the-data-infrastructure-for-trusted-ai-agents",
+    "date": "2026-06-01",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "dbtv2": {
+    "title": "dbt v2.0 er lansert",
+    "publisher": "dbt Labs",
+    "url": "https://docs.getdbt.com/blog/dbt-v2-is-ga",
+    "date": "2026-09-16",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "dbtoss": {
+    "title": "Forskjellen på dbt og dbt OSS",
+    "publisher": "dbt Labs",
+    "url": "https://docs.getdbt.com/blog/comparing-dbt-and-dbt-oss",
+    "date": "2026-09-16",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "dbtagent": {
+    "title": "dbt Developer Agent (preview)",
+    "publisher": "dbt Labs",
+    "url": "https://www.getdbt.com/blog/what-s-shipped-in-dbt-may-2026",
+    "date": "2026-05-20",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "dbtsemantic": {
+    "title": "Modernizing the Semantic Layer Spec",
+    "publisher": "dbt Labs",
+    "url": "https://docs.getdbt.com/blog/modernizing-the-semantic-layer-spec",
+    "date": "2026-01-21",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "coco": {
+    "title": "Overview of Snowflake CoCo",
+    "publisher": "Snowflake Documentation",
+    "url": "https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "cortexagents": {
+    "title": "Cortex Agents anbefales fremfor Cortex Analyst",
+    "publisher": "Snowflake Documentation",
+    "url": "https://docs.snowflake.com/en/release-notes/2026/other/2026-08-28-cortex-analyst-transition-cortex-agents",
+    "date": "2026-08-28",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "genie": {
+    "title": "Genie-produktfamilien",
+    "publisher": "Databricks",
+    "url": "https://docs.databricks.com/aws/en/genie/",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "geniecode": {
+    "title": "Genie Code",
+    "publisher": "Databricks",
+    "url": "https://docs.databricks.com/aws/en/genie-code",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "genieone": {
+    "title": "Chat in Genie One",
+    "publisher": "Databricks",
+    "url": "https://docs.databricks.com/gcp/en/genie-one/chat",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "fabriccopilot": {
+    "title": "Copilot i Microsoft Fabric",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/copilot-fabric-overview",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "fabricagent": {
+    "title": "Create a Fabric data agent",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/data-science/how-to-create-data-agent",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "pbicopilot": {
+    "title": "Copilot for Power BI",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/power-bi/create-reports/copilot-introduction",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "informaticaDeal": {
+    "title": "Salesforce fullfører oppkjøpet av Informatica",
+    "publisher": "Salesforce",
+    "url": "https://investor.salesforce.com/news/news-details/2025/Salesforce-Completes-Acquisition-of-Informatica/default.aspx",
+    "date": "2025-11-18",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "qlikDeal": {
+    "title": "Qlik fullfører oppkjøpet av Talend",
+    "publisher": "Qlik",
+    "url": "https://www.qlik.com/us/news/company/press-room/press-releases/qlik-acquires-talend",
+    "date": "2023-05-16",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "airbyte": {
+    "title": "Airbyte – offisiell produktinformasjon",
+    "publisher": "Airbyte",
+    "url": "https://airbyte.com/",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "bigquery": {
+    "title": "Google BigQuery – oversikt",
+    "publisher": "Google Cloud",
+    "url": "https://cloud.google.com/bigquery",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "qlik": {
+    "title": "Qlik – dataintegrasjon og analyse",
+    "publisher": "Qlik",
+    "url": "https://www.qlik.com/",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "informatica": {
+    "title": "Informatica – datastyring og kvalitet",
+    "publisher": "Informatica",
+    "url": "https://www.informatica.com/",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "fivetran": {
+    "title": "Fivetran – dataintegrasjon",
+    "publisher": "Fivetran",
+    "url": "https://www.fivetran.com/",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "airflow": {
+    "title": "Apache Airflow – dokumentasjon",
+    "publisher": "Apache Software Foundation",
+    "url": "https://airflow.apache.org/",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "msicons": {
+    "title": "Microsoft Fabric – offisielle ikoner og vilkår",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
+    "date": "2025-07-03",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "simpleicon": {
+    "title": "Simple Icons – logoer og varemerkevilkår",
+    "publisher": "Simple Icons",
+    "url": "https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md",
+    "date": "2026-10-13",
+    "type": "offentlig produkt-/markedsdokumentasjon"
+  },
+  "cowork": {
+    "title": "Snowflake CoWork (tidligere Snowflake Intelligence)",
+    "publisher": "Snowflake Documentation",
+    "url": "https://docs.snowflake.com/en/user-guide/snowflake-cortex/snowflake-cowork",
+    "date": "2026-10-13",
+    "type": "offisiell produktdokumentasjon"
+  }
+}

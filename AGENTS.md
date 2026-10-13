@@ -1,48 +1,30 @@
 # Arbeidsregler for KI-agenter
 
-Les `START_HERE.md` først.
+Start alltid med `START_HERE.md`. Les siste `main`, og bruk repoet – aldri gammel samtalehistorikk – som implementasjonsautoritet.
 
-## Formål og mottaker
+## Grunnprinsipper
 
-- Primærmottaker: selgere i førstelinjen som ikke nødvendigvis kjenner dataplattformer.
-- Sekundærmottaker: fagansvarlig som bruker nettsiden for kvalitetssikring, videreutvikling og opplæring.
-- Start med kundens problem, kjøpsutløsere og gode spørsmål – ikke teknologien.
-- Bruk nøktern norsk og norske regler for store forbokstaver.
+1. **Én kanonisk dataeier per domene.** `docs/data/site.json`, `pages.json`, `sources.json`, `market.json`, `sales.json`, `technologies.json` og `backlog.json` er autoritative. Ikke lag parallelle JSON-kopier.
+2. **Alt innhold utenfor layouten.** HTML/JS/CSS skal være visningslag. Overskrifter, sidebudskap, kvalifiseringsinnhold, presentasjon, produktnavn og markedsfakta skal hentes fra datafilene.
+3. **Ingen hardkodede fakta.** Ikke skriv SSB-tall, produktpåstander eller historiske hendelser i HTML/JS. Felles data skal brukes i alle visninger.
+4. **Nøktern og kildebasert fagtekst.** Skill dokumenterte fakta, leverandørpåstander, hypotese og salgsmessig tolkning. Ikke framstill scenarioer som ekte oppdrag.
+5. **Klart førstelinjeperspektiv.** Fra kundens problem → spørsmål → mulig databehov → passende kompetanse → oppfølging. Ikke foreslå teknologi før behovet er forstått.
+6. **Beskytt åpenhetsgrensen.** `OPEN_DATA_POLICY.md` gjelder uavhengig av repoets synlighet. Ingen interne kundedata, arbeidsavtaler, pipeline, priser, personopplysninger eller tokens.
+7. **Design én gang.** Bruk delte CSS-komponenter. Ikke dupliser HTML-kort, legg på CSS-overstyringer eller innfør nytt rammeverk uten behov.
+8. **Portabel løsning.** Statisk GitHub Pages, relative ressursstier, ingen ekstern backend eller skjult tracking. Skal kunne overtas av Claude Code/Gemini og flyttes til Webstep.
+9. **Tilgjengelighet.** Kontroller mobil, skjermbredder, tastatur, ikoner, kontrast og lenker. Brandlogoer må ha kilde/bruksvilkår.
+10. **Releasekontrakt.** Øk `site.json.version`, samsvarende CSS/JS-assetversjon, én atomisk flerfilrelease og alle kontroller grønne før publisering.
+11. **Faglig vedlikehold.** Vis gjeldende status, ikke implementasjonslogg i brukerrettet tekst. Registrer forbedringer i backlog og dokumenter kontrolltid ved volatile forhold.
 
-## Faglig kvalitet
+## Kontroller
 
-- Skill eksplisitt mellom statistiske fakta, leverandørpåstander, redaksjonell vurdering og hypotese.
-- Ethvert tall skal ha kilde, tidsangivelse, relevant populasjon og riktig enhet.
-- Ikke påstå eller antyd at SSBs KI-bruksstatistikk måler konsulentetterspørsel eller oppnådde gevinster.
-- Ikke konstruer Webstep-kundecaser, partnerfordeler, referanser eller tilgjengelighet.
-- Innhold som bruker enkeltleverandører skal være plattformnøytralt og vise overlapp der relevant.
-- Gi en klar vei fra observasjon til kvalifiseringsspørsmål og neste steg.
-- Kilder for eksterne fakta i `sources`; salgsinnganger peker til relevante source-IDs.
+```sh
+node --check docs/assets/site.js
+node scripts/check.mjs
+```
 
-## Datasikkerhet
+I tillegg: inspiser endret skjerm visuelt og sjekk faktisk kilde/lenke. En grønn CI erstatter ikke manuell vurdering.
 
-`OPEN_DATA_POLICY.md` gjelder selv om repoet er privat. Ikke lagre kundelister, personopplysninger, interne salgsnotater, ikke-offentlige avtaler eller partnerdata i denne utgaven. Ikke legg til ekstern autentisering, innsamling av persondata eller skjulte trackere.
+## Før flytting til Webstep
 
-## Implementering
-
-- Hold visningskode lett og flyttbar. Ingen eksterne backend-avhengigheter.
-- Foretrekk enkle statiske løsninger. Ikke introduser rammeverk uten dokumentert behov.
-- Rediger felles komponent ett sted. Ikke legg lag på lag av CSS-overstyringer.
-- Bruk relative stier for GitHub Pages-prosjektnettsteder.
-- Behold tastaturnavigasjon, kontrast, responsive visninger, redusert bevegelse og semantisk HTML.
-- Datanøkkel `id` skal være unik og stabil. Ved navneendring skal lenker med ID fortsatt virke.
-- Unngå at synlig innhold blir en kronologisk logg over endringer; bruk oppdatert versjon og en egen backlog.
-
-## Innspill og forbedringsløkke
-
-- «Gi innspill» lagrer lokalt i nettleseren. Ikke fremstill det som en synkronisert eller permanent løsning.
-- Oppdater `backlog` ved vesentlige funn. Når en backlogpost fullføres, merk den lukket med grunnlag, ikke slett all sporbarhet.
-- Før flytting: sørg for enkel overføring til en organisasjonseid GitHub-organisasjon og kontrollert intern drift.
-
-## Før publisering
-
-1. `node --check docs/assets/site.js`
-2. `node scripts/check.mjs`
-3. Server nettsiden lokalt og test: oversikt, markedsgraf, filter, salgsinngang, søk, scenario, innspill, eksport, mobil og presentasjon.
-4. Kontroller nytt innhold opp mot `OPEN_DATA_POLICY.md`.
-5. Oppdater `meta.version`, `released` og eventuelle `checked`-datoer når de faktisk er kontrollert.
+Innholdet skal fortsatt kunne være offentlig. Interne data vurderes først etter godkjent enterprise-publisering med tilgangskontroll. GitHub Issues brukes ikke som CRM.

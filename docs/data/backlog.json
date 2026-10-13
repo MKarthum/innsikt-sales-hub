@@ -1,0 +1,98 @@
+[
+  {
+    "id": "B-01",
+    "title": "Erstatte illustrerte scenarioer med godkjente kundecaser",
+    "area": "Kundecaser",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Nåværende scenarioer er pedagogiske eksempler, ikke dokumenterte Webstep-leveranser."
+  },
+  {
+    "id": "B-02",
+    "title": "Validere prioriterte salgsinnganger med fagmiljø og salg",
+    "area": "Salg",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Førstegangsprioritering er kvalitativ og må testes mot faktiske oppdrag."
+  },
+  {
+    "id": "B-03",
+    "title": "Bekrefte partnerordninger og kontaktpunkter",
+    "area": "Partnere",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Interne partnerskapsordninger skal først kvalitetssikres etter flytting til Webstep."
+  },
+  {
+    "id": "B-04",
+    "title": "Velge intern publisering og tilgang etter flytting",
+    "area": "Teknisk",
+    "status": "senere",
+    "priority": "middels",
+    "why": "Første utgave skal ikke avhenge av Websteps GitHub-innstillinger."
+  },
+  {
+    "id": "B-05",
+    "title": "Teste førsteversjonen med selgere",
+    "area": "Brukerinnsikt",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Se om spørsmål og innganger fungerer uten en fagekspert i rommet."
+  },
+  {
+    "id": "B-06",
+    "title": "Legge inn planlagt faglig gjennomgang av volatile fakta",
+    "area": "Research",
+    "status": "åpen",
+    "priority": "middels",
+    "why": "Markedstall og leverandørinformasjon kan raskt bli utdaterte."
+  },
+  {
+    "id": "B-07",
+    "title": "Kartlegge faktiske, godkjente referanser mot forretningsbehov",
+    "area": "Forretning",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Nye forretningsinnganger er pedagogiske forslag, ikke dokumenterte kundecaser."
+  },
+  {
+    "id": "B-08",
+    "title": "Teste forretningsdialoger med salg og forretningsrådgivere",
+    "area": "Brukerinnsikt",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Kontrollere at symptom, spørsmål og mulig oppdrag forstås uten datafaglig bakgrunn."
+  },
+  {
+    "id": "B-09",
+    "title": "Følge opp produktlogoer og bruksvilkår",
+    "area": "Design",
+    "status": "pågår",
+    "priority": "middels",
+    "why": "Utvidet med lokalt lagrede ikoner fra åpne kildearkiver; flere produktlogoer avventer verifiserte originalfiler."
+  },
+  {
+    "id": "B-10",
+    "title": "Utvikle et mer systematisk verktøy for kildekontroll",
+    "area": "Research",
+    "status": "åpen",
+    "priority": "middels",
+    "why": "Tidligere Datatilsynet-lenke var utdatert, og alle eksterne lenker må kunne revalideres."
+  },
+  {
+    "id": "B-11",
+    "title": "Teste markedskart og plattform-KI med faktiske kundecaser",
+    "area": "KI og salg",
+    "priority": "høy",
+    "status": "åpen",
+    "why": "Muligheter er forskningsbaserte salgshypoteser. Verdi, kostnad og reell kompetanse må valideres."
+  },
+  {
+    "id": "B-12",
+    "title": "Hente offisielt Fivetran-merkeikon",
+    "area": "Design",
+    "priority": "middels",
+    "status": "åpen",
+    "why": "Power BI er nå inkludert. Fivetran må fortsatt få en verifisert kilde og bruksrett."
+  }
+]

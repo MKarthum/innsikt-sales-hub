@@ -1,6 +1,6 @@
 # Åpen datagrense
 
-Dette er et utviklingsrepo på en privat konto med **innhold som skal tåle offentlig innsyn**. Privat repo gir ikke automatisk privat GitHub Pages.
+Dette er et utviklingsrepo på en personlig konto med **innhold som skal tåle offentlig innsyn**, og repoet er per 13. oktober 2026 offentlig. Privat repo gir ikke automatisk privat GitHub Pages.
 
 ## Kan lagres
 
@@ -20,7 +20,7 @@ Dette er et utviklingsrepo på en privat konto med **innhold som skal tåle offe
 
 ## Publiseringskontroll
 
-Behandle alt innhold som potensielt offentlig. Kontroller kildegrunnlag og lisens før publisering. `scripts/check.mjs` er et supplement, ikke en erstatning for manuell gjennomgang.
+Behandle alt innhold som potensielt offentlig. Kontroller kildegrunnlag og lisens før publisering. Automatiske kontroller er et supplement, ikke en erstatning for manuell gjennomgang.
 
 ## Flytting til Webstep
 

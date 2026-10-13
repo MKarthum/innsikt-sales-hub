@@ -1,0 +1,151 @@
+{
+  "site": {
+    "title": "Innsikt | Marked og salg",
+    "classification": "Åpent arbeidsgrunnlag – ingen interne data",
+    "disclaimer": "Arbeidsversjon på offentlig kildegrunnlag. Salgsinnganger er forslag som skal valideres, ikke dokumenterte kundetilbud."
+  },
+  "navigation": {
+    "oversikt": "Oversikt",
+    "marked": "Marked og trender",
+    "forretning": "Forretningsbehov",
+    "muligheter": "Salgsinnganger",
+    "kundedialog": "Kundedialog",
+    "kompetanse": "Kompetanse",
+    "teknologi": "Teknologikart",
+    "ai": "KI i plattformene",
+    "bransje": "Marked og oppkjøp",
+    "kilder": "Kilder",
+    "utvikling": "Videreutvikling"
+  },
+  "headers": {
+    "FORRETNINGSBEHOV": {
+      "eyebrow": "FORRETNINGSBEHOV",
+      "title": "Lytt etter problemer – ikke teknologinavn",
+      "intro": "Start der kunden er: økonomi, salg, drift, kundeservice, HR eller ledelse. Eksemplene er generiske og skal kvalifiseres, ikke presenteres som dokumenterte kundeoppdrag."
+    },
+    "MARKED OG DRIVERE": {
+      "eyebrow": "MARKED OG DRIVERE",
+      "title": "Hvorfor investerer kunder nå?",
+      "intro": "Bruk markedskunnskap til å stille bedre spørsmål – ikke til å konkludere om kundenes behov før vi har snakket med dem."
+    },
+    "SALGSINNGANGER": {
+      "eyebrow": "SALGSINNGANGER",
+      "title": "Gjenkjenn behovene før kunden ber om en CV",
+      "intro": "Situasjoner fra både forretning og teknologi som kan gi behov for ekstern kompetanse. Bruk spørsmålene til å forstå behovet, ikke til å presse frem en bestemt løsning."
+    },
+    "KUNDEDIALOG": {
+      "eyebrow": "KUNDEDIALOG",
+      "title": "Tren på å oppdage det som ligger bak",
+      "intro": "Selgeren trenger ikke være teknisk ekspert. Målet er å forstå hvorfor kunden trenger hjelp, og hva som er et relevant neste steg."
+    },
+    "KOMPETANSE": {
+      "eyebrow": "KOMPETANSE",
+      "title": "Hva kan Webstep bidra med?",
+      "intro": "Faglig bredde uttrykt som kunderelevante kompetanseområder. Beskrivelsene er basert på Websteps offentlige tjenestesider, ikke en oppdatert intern kapasitetsoversikt."
+    },
+    "TEKNOLOGIKART": {
+      "eyebrow": "TEKNOLOGIKART",
+      "title": "Hva kundene nevner – og hva som ligger bak",
+      "intro": "Fra plattformer og integrasjoner til transformasjon, BI og datastyring. Dette er samtalestøtte, ikke produktanbefaling."
+    },
+    "INNEBYGD KI": {
+      "eyebrow": "INNEBYGD KI",
+      "title": "KI i dataplattformene",
+      "intro": "To ulike behov: KI som hjelper utviklere og analytikere, og KI som lar forretningen stille spørsmål direkte til virksomhetsdata."
+    },
+    "MARKED OG OPPKJØP": {
+      "eyebrow": "MARKED OG OPPKJØP",
+      "title": "Hva bør selgerne ha på radaren?",
+      "intro": "Dokumenterte oppkjøp, produktutvikling og mulige konsekvenser for kundedialogen. Ikke forveksle leverandørnyheter med dokumentert konsulentetterspørsel."
+    },
+    "KILDER OG METODE": {
+      "eyebrow": "KILDER OG METODE",
+      "title": "Hva bygger vi kunnskapen på?",
+      "intro": "Kildene er sporbare. Tall, leverandørpåstander, Websteps egne tjenestebeskrivelser og våre salgsfortolkninger holdes tydelig fra hverandre."
+    },
+    "VIDEREUTVIKLING": {
+      "eyebrow": "VIDEREUTVIKLING",
+      "title": "Bygg videre på det vi lærer",
+      "intro": "Denne oversikten gjør uavklarte punkter og forbedringsbehov synlige. Den følger med repoet og kan overtas av Claude Code eller Gemini etter flytting."
+    }
+  },
+  "home": {
+    "eyebrow": "ET PRAKTISK VERKTØY FOR BEDRE KUNDEDIALOGER",
+    "titleLine1": "Se mulighetene.",
+    "titleLine2": "Still bedre spørsmål.",
+    "intro": "Forstå hvorfor virksomheter investerer i data, analyse og KI – og hvordan vi gjør kundens utfordringer om til relevante samtaler og oppdrag.",
+    "statsTitle": "Markedet i korte trekk",
+    "statsIntro": "Dokumenterte indikatorer fra norsk næringsliv",
+    "statsFirst": "Bruker KI",
+    "statsDelta": "Endring fra året før",
+    "statsRange": "Store bransjeforskjeller",
+    "statsPopulation": "Norske foretak med minst ti sysselsatte, ekskl. finans",
+    "actionTitle": "Hva skal du gjøre?",
+    "actionIntro": "Ta utgangspunkt i situasjonen du står i"
+  },
+  "qualification": {
+    "items": [
+      "Et konkret problem eller en ønsket forbedring",
+      "Konsekvens eller verdi for virksomheten",
+      "Eier, sponsor eller relevant kontakt",
+      "Plan, tidspunkt eller pågående initiativ",
+      "Manglende kapasitet eller kompetanse",
+      "Avklart neste samtale eller oppfølging"
+    ],
+    "good": "Godt belyst – oppsummer behovet og avtal neste steg.",
+    "partial": "Flere dimensjoner er belyst. Finn ut hva som fortsatt mangler.",
+    "start": "Bruk spørsmålene som støtte. Det er ingen formell score eller salgsgaranti."
+  },
+  "slides": [
+    {
+      "title": "Hovedbudskap",
+      "body": "Hjelp kunden å beskrive problemet før vi foreslår teknologi."
+    },
+    {
+      "title": "Markedet beveger seg",
+      "body": "Andelen norske foretak som bruker KI øker. Bruk er ikke det samme som dokumentert effekt.",
+      "dynamic": "ki-share"
+    },
+    {
+      "title": "Hva utløser et konsulentbehov?",
+      "body": "Modernisering, data som ikke fungerer, nye initiativer, kapasitetsmangel og krav til kvalitet."
+    },
+    {
+      "title": "Fra forretningsproblem til mulig oppdrag",
+      "body": "Økonomi, salg, drift og kundeservice har datarelaterte behov – selv når ingen nevner teknologi."
+    },
+    {
+      "title": "KI i plattformene",
+      "body": "CoCo, Genie Code og Fabric Copilot hjelper utviklere; dataagenter og Genie One lar forretningen spørre egne data."
+    },
+    {
+      "title": "Konsolidering",
+      "body": "Fivetran og dbt Labs er slått sammen, Salesforce har kjøpt Informatica, og Qlik eier Talend."
+    },
+    {
+      "title": "Kundedialogen",
+      "body": "Forstå problemet, konsekvensen, eieren, tidspunktet og hva kunden mangler."
+    },
+    {
+      "title": "Websteps bidrag",
+      "body": "Kompetanse innen data, analyse, arkitektur, engineering og styring – tilpasset behovet."
+    },
+    {
+      "title": "Neste steg",
+      "body": "Avtal et faglig oppfølgingsmøte når det finnes et konkret behov. Ikke lov løsning eller kapasitet for tidlig."
+    }
+  ],
+  "copy": {
+    "marketIndustriesTitle": "Store forskjeller mellom bransjer",
+    "marketTrendsTitle": "Fire utviklingstrekk salg bør kjenne til",
+    "homeBusinessTitle": "Hva sier kundene i forretningen?",
+    "homePlaysTitle": "Salgsinnganger fra både forretning og IT",
+    "homeTechnologyTitle": "Teknologier og KI i endring",
+    "dialogueCasesTitle": "Øv på samtaler med både forretning og IT",
+    "dialogueQualifyTitle": "Kvalifiser en mulig kundemulighet",
+    "competenceAudiencesTitle": "Hvem møter vi?",
+    "marketDealsTitle": "Oppkjøp og konsolidering",
+    "marketSignalsTitle": "Seks forhold å ha i bakhodet",
+    "devBacklogTitle": "Prioritert forbedringsoversikt"
+  }
+}

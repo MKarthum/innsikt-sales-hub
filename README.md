@@ -1,65 +1,57 @@
 # Innsikt – marked og salg
 
-En lett, datadrevet salgsportal for fagområdet Innsikt, utviklet på offentlig kildegrunnlag. **Dette er en arbeidsversjon (v0.3.0), ikke godkjent internt salgsmateriell.**
+Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.4.0 – ikke godkjent som offisielt internt salgsmateriell.**
 
-## Mål
+[Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
 
-En selger skal kunne oppdage relevante databehov, stille gode spørsmål, kvalifisere en mulighet og forstå når en fagekspert bør kobles inn – uten å bli spesialist selv.
+## Formål
+
+Hjelpe førstelinjeselgere med å forstå markedet, gjenkjenne behov hos forretning og IT, stille spørsmål og involvere riktig fagkompetanse. Fagansvarlig skal kunne se faktiske visninger og forbedre løsning og innhold iterativt.
 
 ## Kjør lokalt
-
-Ingen installasjon eller byggsteg er nødvendig.
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Åpne `http://localhost:8000/docs/`.
+Åpne `http://localhost:8000/docs/`. Ingen bygg- eller backend-avhengigheter.
 
-## GitHub Pages
+## Filansvar
 
-Bruk Pages fra `main` og mappen `/docs`. VIKTIG: En nettside på personlig GitHub Pages er normalt **offentlig selv om repositoryet er privat**. Denne utgaven er konstruert uten interne opplysninger. Kontroller innholdet før hver publisering. Privat Pages krever organisasjonseid prosjekt under GitHub Enterprise Cloud.
+| Fil | Autoritativt ansvar |
+|---|---|
+| `docs/data/site.json` | Versjon og publiseringsmetadata |
+| `docs/data/pages.json` | Sidetitler, tekster, presentasjon og kvalifiseringscopy |
+| `docs/data/sources.json` | Felles kildebibliotek |
+| `docs/data/market.json` | Statistikk, markedsutvikling, oppkjøp |
+| `docs/data/sales.json` | Salgsinnganger, forretningsbehov, samtaleøvelser og kompetanse |
+| `docs/data/technologies.json` | Produktinformasjon, KI-funksjoner, logoattributter |
+| `docs/data/backlog.json` | Forbedringsoversikt |
+| `docs/assets/site.js` | Generiske visninger og interaksjoner – ingen egen faglig faktaautoritet |
+| `docs/assets/site.css` | Design og responsive komponenter |
+| `docs/index.html` | Strukturelt skall og navigasjon |
+| `scripts/check-*.mjs` | Kontroller for innhold, integritet, stil og release |
 
-## Struktur
+**Hovedregel:** Én kanonisk kilde per felt. HTML/JS bestemmer visning og henter faginnhold fra JSON. Ingen nye hardkodede sidetekster, statistikk eller kundepåstander i visningslaget.
 
-- `docs/index.html` – nettsidens strukturelle skall.
-- `docs/assets/site.css` – design og responsiv layout.
-- `docs/assets/site.js` – generiske visninger, søk, interaksjoner.
-- `docs/data/content.json` – **kanonisk kilde** for salgsinnganger, trender, leverandører, kilder, scenarioer, backlog og publiseringsmetadata.
-- `START_HERE.md` – startpunkt for videre utvikling med KI-agenter.
-- `AGENTS.md` – arbeidsregler for agenter.
-- `OPEN_DATA_POLICY.md` – datagrense før flytting til Webstep.
-- `scripts/check.mjs` – datakontroll.
-- `.github/workflows/check.yml` – kontroller ved push/PR.
+## Bruk og begrensninger
 
-## Det som virker nå
+- Teknologikart og innebygd KI, salgsinnganger og samtaler, marked og kilder.
+- Pedagogiske scenarioer er fiktive; intern leveranseevne og partnerordninger er ikke kvalitetssikret.
+- Tilbakemeldinger lagres kun i nettleseren; eksporter dem for å bevare dem.
+- Produktlogoer har separat rettighets-/kildeinformasjon i `technologies.json.logoAssets`; merkevarer tilhører eierne.
+- Pages fra `main` og `/docs` er offentlig tilgjengelig. Et privat personlig repo betyr ikke privat Pages.
+- Ikke legg inn kundenavn, intern pipeline, lisenser, tilbud, personopplysninger eller andre ikke-offentlige opplysninger.
 
-- Oversikt med offentlig norsk KI-statistikk, trender og kilder.
-- Teknologikart med 12 områder, åtte KI-funksjoner og dokumenterte oppkjøp og markedstrender.
-- Åtte salgsinnganger med kundesignaler, spørsmål, kompetanse og neste steg.
-- Egen inngang for seks forretningsområder, med problem → mulige databehov → leveranse → neste steg.
-- Filtrering, globalt søk (også i forretningssignalene), enkel kvalifiseringssjekkliste og samtaleøvelser.
-- Enkel presentasjonsmodus, utskrift og kopiering av samtaleguide.
-- Backlog og en enkel «Gi innspill»-funksjon.
+## Publisering
 
-**Viktig om innspill:** Innspill lagres bare i nettleserens lokale lagring. Bruk eksportfunksjonen under «Videreutvikling» for å bevare innspillene. De synkroniseres **ikke** til repo, andre enheter eller Webstep. Ikke skriv kundespesifikk informasjon i denne åpne arbeidsversjonen.
+```sh
+node --check docs/assets/site.js
+node scripts/check.mjs
+```
 
-## Flytte til Webstep
+CI kjører de samme kontrollene. Bump `docs/data/site.json.version` og CSS/JS-referanser i `docs/index.html` per publisert versjon. Relevante filer oppdateres **atomisk**. Følg `START_HERE.md` og `AGENTS.md`.
 
-1. Avklar organisasjonens sikkerhetspolicy, kilde-/kodeeierskap og publisering.
-2. Gjør overføringsreview for sensitiv informasjon, rettigheter og innhold.
-3. Flytt/importer repoets historie til et **organisasjonseid prosjekt-repo**. Overfør ikke automatisk private nettlesernotater.
-4. Aktiver Pages (eller annen godkjent hosting) med privat tilgang før innhold med intern klassifisering legges inn.
-5. Bekreft faktisk tilgang fra en bruker i salg som bare skal ha lesetilgang.
-6. Sett opp kontaktpersoner, godkjente referanser, partnerprogrammer og tilbakemeldingsflyt i godkjente interne systemer.
+## Overføring til Webstep
 
-## Kilde- og innholdspolitikk
-
-Se `OPEN_DATA_POLICY.md` og lenkene i `docs/data/content.json`. Hypoteser er ikke fakta. Pedagogiske kundescenarioer er oppdiktede. Websteps offentlige tjenester brukes som referanse, ikke som garanti for bemanning eller omfang.
-
-## Bidra
-
-Oppdater først kanoniske data, kjør `node scripts/check.mjs`, og test visningen på desktop og mobil. Hold både innhold og arbeidshistorikk sporbar. Dokumenter beslutninger i repoet, ikke bare i en chat.
-## Produktlogoer
-
-Logoer for Snowflake, Databricks, dbt, Airbyte, BigQuery, Qlik, Informatica og Airflow er fra Simple Icons. Fabric, Power BI og Copilot kommer fra Microsofts ikonressurser/FabricTools og følger Microsofts vilkår. Se [deres disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md). Ikonene brukes kun for å identifisere leverandørprodukter, ikke som støtte eller godkjenning. Øvrige teknologier har nøytrale initialer inntil offisielt ikon og bruksrett er verifisert. Se `logoAssets` i datamodellen.
+Kontroller sikkerhet og rettigheter, overfør repoets kode og åpne innhold til godkjent enterprise-repo, og publiser først bak dokumentert tilgangskontroll. Deretter kan interne referanser og kontaktpunkter eventuelt kvalitetssikres og legges inn.

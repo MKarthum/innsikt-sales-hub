@@ -1,0 +1,273 @@
+{
+  "tech": [
+    {
+      "name": "Microsoft Fabric",
+      "kind": "Dataplattform",
+      "source": "fabric",
+      "signal": "Power BI, Azure, samlet lagring og analyse.",
+      "talk": "Hva skal forbedres: tilgang, rapportering eller utvikling?",
+      "caution": "Vurder lisensiering, kapasitet og kostnad.",
+      "logo": "fabric"
+    },
+    {
+      "name": "Databricks",
+      "kind": "Dataplattform",
+      "source": "databricks",
+      "signal": "Lakehouse, data engineering, ML eller Unity Catalog.",
+      "talk": "Hva er de viktigste data- og analyseproduktene?",
+      "caution": "Kostnad og styring varierer etter arbeidslast.",
+      "logo": "databricks"
+    },
+    {
+      "name": "Snowflake",
+      "kind": "Dataplattform",
+      "source": "snowflake",
+      "signal": "Datavarehus, modernisering, datadeling eller KI på virksomhetsdata.",
+      "talk": "Hva skal de få mer verdi fra, og hva begrenser dem?",
+      "caution": "Ikke anta at migrering er nødvendig.",
+      "logo": "snowflake"
+    },
+    {
+      "name": "Google BigQuery",
+      "kind": "Dataplattform",
+      "source": "bigquery",
+      "signal": "Google Cloud, SQL-analyse eller datavarehus i sky.",
+      "talk": "Hva er datakildene, kostnadene og analysebehovet?",
+      "caution": "Sammenlign eksisterende kompetanse og drift.",
+      "logo": "bigquery"
+    },
+    {
+      "name": "dbt",
+      "kind": "Transformasjon og semantikk",
+      "source": "dbtv2",
+      "signal": "SQL-transformasjoner, tester, dokumentasjon, lineage eller felles KPI-er.",
+      "talk": "Hvordan sikrer de konsistente data fra kilde til rapport og KI?",
+      "caution": "Skill mellom dbt v2, dbt OSS og kommersielle tjenester.",
+      "logo": "dbt"
+    },
+    {
+      "name": "Fivetran",
+      "kind": "Integrasjon og orkestrering",
+      "source": "merger",
+      "signal": "Automatiserte dataflyter fra ERP, CRM og SaaS-kilder.",
+      "talk": "Hvilke data må flyttes og hvor går det mest tid?",
+      "caution": "Fivetran og dbt Labs fullførte sammenslåing i juni 2026."
+    },
+    {
+      "name": "Airbyte",
+      "kind": "Integrasjon og orkestrering",
+      "source": "airbyte",
+      "signal": "Åpne connectorer og dataintegrasjoner.",
+      "talk": "Hvilke forbindelser må vedlikeholdes, og av hvem?",
+      "caution": "Egen drift og kvalitet må vurderes.",
+      "logo": "airbyte"
+    },
+    {
+      "name": "Apache Airflow",
+      "kind": "Integrasjon og orkestrering",
+      "source": "airflow",
+      "signal": "Orkestrering, tidsstyring og avhengigheter i datajobber.",
+      "talk": "Hva skjer når en jobb feiler, og hvem følger opp?",
+      "caution": "Orkestrering er ikke det samme som dataintegrasjon.",
+      "logo": "airflow"
+    },
+    {
+      "name": "Power BI",
+      "kind": "Analyse og BI",
+      "source": "pbicopilot",
+      "signal": "Dashboards, semantiske modeller, selvbetjening eller Copilot.",
+      "talk": "Hvilke beslutninger skal støttes, og har dere felles definisjoner?",
+      "caution": "Copilot forutsetter korrekte modeller, kapasitet og rettigheter.",
+      "logo": "powerbi"
+    },
+    {
+      "name": "Qlik / Talend",
+      "kind": "Analyse og BI",
+      "source": "qlikDeal",
+      "signal": "Qlik-analyse, Talend-integrasjon eller modernisering.",
+      "talk": "Hva fungerer godt, og hva er tungt å vedlikeholde?",
+      "caution": "Qlik overtok Talend i 2023; et oppkjøp betyr ikke automatisk migrering.",
+      "logo": "qlik"
+    },
+    {
+      "name": "Informatica",
+      "kind": "Datastyring og kvalitet",
+      "source": "informaticaDeal",
+      "signal": "Datakvalitet, MDM, metadata og governance.",
+      "talk": "Hvem eier data og kontrollen over definisjonene?",
+      "caution": "Salesforce overtok Informatica i 2025.",
+      "logo": "informatica"
+    },
+    {
+      "name": "Datavarehus og integrasjoner",
+      "kind": "Grunnleggende dataarbeid",
+      "source": "webstep1",
+      "signal": "SQL, ETL, eldre systemer og periodiske kvalitetsfeil.",
+      "talk": "Hva fungerer ikke, og hva kan videreutvikles uten plattformbytte?",
+      "caution": "Eksisterende løsning kan fortsatt være best."
+    }
+  ],
+  "aiProducts": [
+    {
+      "id": "coco",
+      "name": "Snowflake CoCo (Cortex Code)",
+      "platform": "Snowflake",
+      "group": "Utviklerassistanse",
+      "description": "Agent for SQL, Python, data engineering, ML og administrasjon i Snowsight, desktop og CLI.",
+      "signal": "Ønske om raskere utvikling og mindre manuelt dataarbeid.",
+      "question": "Hva bremser datateamet i dag?",
+      "limits": "Krever riktig rolle, oppfølging og kostnadsstyring.",
+      "status": "Dokumentert",
+      "source": "coco",
+      "logo": "snowflake"
+    },
+    {
+      "id": "geniecode",
+      "name": "Databricks Genie Code",
+      "platform": "Databricks",
+      "group": "Utviklerassistanse",
+      "description": "KI som skriver og kjører kode, lager pipelines, bygger AI/BI-innhold og hjelper med feilretting.",
+      "signal": "Høyt utviklingspress på Databricks.",
+      "question": "Hvilke leveranser sinkes av manuell utvikling?",
+      "limits": "Datatilgang, kontroll og forbrukskostnad må vurderes.",
+      "status": "Dokumentert",
+      "source": "geniecode",
+      "logo": "databricks"
+    },
+    {
+      "id": "dbtdev",
+      "name": "dbt Developer Agent",
+      "platform": "dbt",
+      "group": "Utviklerassistanse",
+      "description": "Prosjektbevisst KI-assistent for dbt-modeller, lineage, testing og dokumentasjon.",
+      "signal": "Stort modellvolum, teknisk gjeld eller oppgradering til v2.",
+      "question": "Hvor mye tid går med til å teste og vedlikeholde transformasjonene?",
+      "limits": "Omtalt som preview i leverandørmateriale; tilgjengelighet må sjekkes.",
+      "status": "Preview omtalt",
+      "source": "dbtagent",
+      "logo": "dbt"
+    },
+    {
+      "id": "fabriccopilot",
+      "name": "Copilot i Microsoft Fabric",
+      "platform": "Microsoft Fabric",
+      "group": "Utviklerassistanse",
+      "description": "Hjelper med ulike analyse- og dataoppgaver i Fabric-arbeidsflater.",
+      "signal": "Kunden ønsker raskere leveranser i Fabric-teamet.",
+      "question": "Hva vil dere automatisere, og hvordan verifiseres resultatet?",
+      "limits": "Rettigheter, SKU og funksjonstilgjengelighet varierer.",
+      "status": "Funksjonsavhengig",
+      "source": "fabriccopilot",
+      "logo": "fabric"
+    },
+    {
+      "id": "cortexagents",
+      "name": "Snowflake CoWork / Cortex Agents",
+      "platform": "Snowflake",
+      "group": "Forretningen spør egne data",
+      "description": "CoWork (tidligere Snowflake Intelligence) er den samtalebaserte brukerflaten; Cortex Agents kan hente informasjon fra strukturert og ustrukturert data og bruke semantiske modeller.",
+      "signal": "Ledere vil spørre egne data uten nye rapportbestillinger.",
+      "question": "Hvilke spørsmål og nøkkeltall må systemet svare på pålitelig?",
+      "limits": "Datakvalitet, semantikk, rettigheter og evaluering er avgjørende.",
+      "status": "Dokumentert",
+      "source": "cowork",
+      "logo": "snowflake"
+    },
+    {
+      "id": "genieone",
+      "name": "Databricks Genie One og Genie Agents",
+      "platform": "Databricks",
+      "group": "Forretningen spør egne data",
+      "description": "Naturlig språk mot data, dashboards og domenespesifikke agenter basert på godkjente målinger.",
+      "signal": "Behov for selvbetjening i økonomi, salg eller drift.",
+      "question": "Hvem definerer fasit og godkjenner svarene?",
+      "limits": "Svar påvirkes av katalogtilganger, semantikk og datakvalitet.",
+      "status": "Dokumentert",
+      "source": "genie",
+      "logo": "databricks"
+    },
+    {
+      "id": "fabricagent",
+      "name": "Microsoft Fabric data agents",
+      "platform": "Microsoft Fabric",
+      "group": "Forretningen spør egne data",
+      "description": "Dataagenter som svarer på naturlige spørsmål mot lakehouses, warehouses og semantiske modeller.",
+      "signal": "Forretningen vil bruke Fabric-data mer direkte.",
+      "question": "Hvilke fagbegreper må agenten kjenne, og hvem eier dem?",
+      "limits": "Sjekk datakildestøtte, rettigheter, status og kapasitet.",
+      "status": "Funksjonsavhengig",
+      "source": "fabricagent",
+      "logo": "fabric"
+    },
+    {
+      "id": "powerbicopilot",
+      "name": "Copilot i Power BI",
+      "platform": "Power BI",
+      "group": "Forretningen spør egne data",
+      "description": "KI-assistanse for rapporter, oppsummeringer og analyse i Power BI.",
+      "signal": "Ønske om bedre utnyttelse av eksisterende BI-investering.",
+      "question": "Er rapporter og semantiske modeller klare for KI-spørsmål?",
+      "limits": "Enkelte funksjoner i preview; kapasitetskrav gjelder.",
+      "status": "Funksjonsavhengig",
+      "source": "pbicopilot",
+      "logo": "powerbi"
+    }
+  ],
+  "logoAssets": [
+    {
+      "slug": "snowflake",
+      "origin": "https://github.com/simple-icons/simple-icons",
+      "usage": "Varemerke tilhører respektive eier."
+    },
+    {
+      "slug": "databricks",
+      "origin": "https://github.com/simple-icons/simple-icons",
+      "usage": "Varemerke tilhører respektive eier."
+    },
+    {
+      "slug": "dbt",
+      "origin": "https://github.com/simple-icons/simple-icons/tree/14.15.0",
+      "usage": "Simple Icons kilde; varemerker hos respektive eiere."
+    },
+    {
+      "slug": "airbyte",
+      "origin": "https://github.com/simple-icons/simple-icons/tree/14.15.0",
+      "usage": "Simple Icons kilde; varemerker hos respektive eiere."
+    },
+    {
+      "slug": "bigquery",
+      "origin": "https://github.com/simple-icons/simple-icons/tree/14.15.0",
+      "usage": "Simple Icons kilde; varemerker hos respektive eiere."
+    },
+    {
+      "slug": "qlik",
+      "origin": "https://github.com/simple-icons/simple-icons/tree/14.15.0",
+      "usage": "Simple Icons kilde; varemerker hos respektive eiere."
+    },
+    {
+      "slug": "informatica",
+      "origin": "https://github.com/simple-icons/simple-icons/tree/14.15.0",
+      "usage": "Simple Icons kilde; varemerker hos respektive eiere."
+    },
+    {
+      "slug": "airflow",
+      "origin": "https://github.com/simple-icons/simple-icons/tree/14.15.0",
+      "usage": "Simple Icons kilde; varemerker hos respektive eiere."
+    },
+    {
+      "slug": "fabric",
+      "origin": "https://github.com/FabricTools/fabric-icons",
+      "usage": "Microsofts regler for bruk av produktikoner gjelder."
+    },
+    {
+      "slug": "copilot",
+      "origin": "https://github.com/FabricTools/fabric-icons",
+      "usage": "Microsofts regler for bruk av produktikoner gjelder."
+    },
+    {
+      "slug": "powerbi",
+      "origin": "https://github.com/FabricTools/fabric-icons",
+      "usage": "Microsofts bruksregler for produktikoner."
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "ki": [
+      {
+        "year": "2023",
+        "value": 9
+      },
+      {
+        "year": "2024",
+        "value": 21
+      },
+      {
+        "year": "2025",
+        "value": 30
+      },
+      {
+        "year": "2026",
+        "value": 48
+      }
+    ],
+    "segments": [
+      {
+        "label": "Transport og lagring",
+        "value": 29
+      },
+      {
+        "label": "Industri m.m.",
+        "value": 51
+      },
+      {
+        "label": "Informasjon og kommunikasjon",
+        "value": 90
+      }
+    ],
+    "source": "ssb"
+  },
+  "trends": [
+    {
+      "id": "adoption",
+      "title": "KI går fra særinteresse til bred bruk",
+      "intro": "I 2026 bruker 48 % av norske foretak med minst ti sysselsatte KI, mot 30 % i 2025.",
+      "meaning": "Mange kunder har begynt å teste eller bruke KI. Neste samtale bør handle om anvendelse, datagrunnlag og gevinst – ikke om de har hørt om KI.",
+      "question": "Hva har dere tatt i bruk, og hva ønsker dere å få mer ut av?",
+      "sources": [
+        "ssb"
+      ],
+      "evidence": "statistikk",
+      "checked": "2026-10-13"
+    },
+    {
+      "id": "sector",
+      "title": "Forskjellig modenhet mellom bransjer",
+      "intro": "SSB måler i 2026 29 % KI-bruk i transport og lagring, 51 % i industri-/forsyningsnæringer og 90 % i informasjon og kommunikasjon.",
+      "meaning": "Bransje og virksomhetsstørrelse påvirker hvilke spørsmål som er relevante. Et generelt KI-budskap treffer ikke alle likt.",
+      "question": "Hvor langt er dere kommet sammenlignet med egne ambisjoner?",
+      "sources": [
+        "ssb"
+      ],
+      "evidence": "statistikk",
+      "checked": "2026-10-13"
+    },
+    {
+      "id": "datareadiness",
+      "title": "KI øker betydningen av datagrunnlaget",
+      "intro": "Digdir løftet i oktober 2026 fram KI-klare data som grunnlag for trygg og effektiv bruk av KI.",
+      "meaning": "Kvalitet, tilgang, dokumentasjon og dataforvaltning kan være innganger til konkret arbeid selv om dialogen begynner med KI.",
+      "question": "Hvilke data må være tilgjengelige og pålitelige for at dette skal virke?",
+      "sources": [
+        "digdir"
+      ],
+      "evidence": "myndighetsveiledning",
+      "checked": "2026-10-13"
+    },
+    {
+      "id": "platform",
+      "title": "Moderne plattformer samler flere dataoppgaver",
+      "intro": "Microsoft Fabric og Databricks beskriver plattformer som dekker data engineering, analyse og KI på tvers av arbeidsoppgaver.",
+      "meaning": "Plattformvalg skaper behov for integrasjon, arkitektur, modellering og endring. Leverandørpåstander må ikke forveksles med dokumentert kundeverdi.",
+      "question": "Hva ønsker dere å forbedre med ny eller eksisterende plattform?",
+      "sources": [
+        "fabric",
+        "databricks"
+      ],
+      "evidence": "leverandørdokumentasjon",
+      "checked": "2026-10-13"
+    }
+  ],
+  "marketEvents": [
+    {
+      "id": "fivetran-dbt",
+      "date": "2026-06-01",
+      "title": "Fivetran og dbt Labs blir ett selskap",
+      "fact": "Dataintegrasjon og transformasjon samles i én leverandørgruppe.",
+      "why": "Kunden kan ønske færre verktøy, men må vurdere pris, avtaler og åpenhet.",
+      "ask": "Hvordan henger deres dataflyt, modellering og leverandøravtaler sammen?",
+      "sources": [
+        "merger",
+        "dbtv2"
+      ]
+    },
+    {
+      "id": "salesforce-informatica",
+      "date": "2025-11-18",
+      "title": "Salesforce overtar Informatica",
+      "fact": "Metadata, kvalitet, MDM og integrasjoner kobles tettere mot CRM og KI-agenter.",
+      "why": "Leverandørstrategi og roadmap kan påvirke store datamiljøer.",
+      "ask": "Hva betyr eierskiftet for deres data- og CRM-strategi?",
+      "sources": [
+        "informaticaDeal"
+      ]
+    },
+    {
+      "id": "qlik-talend",
+      "date": "2023-05-16",
+      "title": "Qlik overtar Talend",
+      "fact": "Analyse, dataintegrasjon og kvalitet samles i en bredere portefølje.",
+      "why": "Konsolidering er et langsiktig markedstrekk, ikke bare KI-hype.",
+      "ask": "Hvilke systemer og lisenser overlapper i dag?",
+      "sources": [
+        "qlikDeal"
+      ]
+    }
+  ],
+  "marketSignals": [
+    {
+      "id": "embeddedai",
+      "title": "KI bygges inn i dataplattformene",
+      "angle": "Utviklerassistenter og dataagenter fungerer med plattformens data, kontekst og rettigheter.",
+      "listen": "Kunden vil utvikle raskere eller gjøre data tilgjengelige for flere.",
+      "ask": "Er målgruppen utviklere eller forretningsbrukere, og hvordan skal gevinsten måles?",
+      "sources": [
+        "coco",
+        "genie",
+        "fabriccopilot"
+      ]
+    },
+    {
+      "id": "semantic",
+      "title": "Semantisk lag og felles nøkkeltall blir viktigere",
+      "angle": "KI og rapporter må dele definisjoner av omsetning, marginer og kunder.",
+      "listen": "Ulike avdelinger eller agenter gir ulike svar.",
+      "ask": "Hvem godkjenner definisjoner, og hvor forvaltes de?",
+      "sources": [
+        "dbtsemantic",
+        "cortexagents"
+      ]
+    },
+    {
+      "id": "consolidation",
+      "title": "Konsolidering av verktøy og leverandører",
+      "angle": "Oppkjøp og utvidede produktpakker kan gi enklere drift og økt binding.",
+      "listen": "Kunden vurderer modernisering, kontrakter eller verktøyrasjonalisering.",
+      "ask": "Hva er kritisk, hva overlapper, og hva skal være leverandøruavhengig?",
+      "sources": [
+        "merger",
+        "informaticaDeal",
+        "qlikDeal"
+      ]
+    },
+    {
+      "id": "cost",
+      "title": "FinOps, KI-forbruk og gevinst",
+      "angle": "Beregning, lagring og KI-funksjoner prises på ulike måter.",
+      "listen": "Kostnadene øker mens gevinstene er uklare.",
+      "ask": "Hva er total kostnad per brukstilfelle og hvordan følges den opp?",
+      "sources": [
+        "geniecode",
+        "fabriccopilot"
+      ]
+    },
+    {
+      "id": "governance",
+      "title": "Tillit, kvalitet og tilgangsstyring",
+      "angle": "Selvbetjent KI øker behov for dataeierskap, datalinje og testing av svar.",
+      "listen": "Forretningen ønsker frie spørsmål, mens IT er bekymret for kontroll.",
+      "ask": "Hvordan tester dere at svaret er riktig og tillatt?",
+      "sources": [
+        "cortexagents",
+        "genie",
+        "fabricagent"
+      ]
+    },
+    {
+      "id": "openness",
+      "title": "Åpenhet og portabilitet under press",
+      "angle": "Plattformer dekker flere deler av datakjeden, men åpne standarder og integrasjoner kan redusere låsing.",
+      "listen": "Kunden vil kombinere miljøer eller bevare valgfrihet.",
+      "ask": "Hva må kunne flyttes eller gjenbrukes ved plattformbytte?",
+      "sources": [
+        "dbtoss",
+        "merger"
+      ]
+    }
+  ]
+}

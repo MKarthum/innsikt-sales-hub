@@ -1,54 +1,59 @@
 # Start her – Innsikt
 
-Dette er inngangen for mennesker, ChatGPT, Claude Code og Gemini som skal utvikle Innsikt-portalen videre.
+Arbeidsinstruks for mennesker, ChatGPT, Claude Code og Gemini. **Hent alltid siste `main` først.**
 
-## Rehydreringsrekkefølge
+## Rehydrering
 
-1. Hent siste `main`. Repoet er autoritativ tilstand; tidligere samtaler gir bare kontekst.
-2. Les `START_HERE.md`, `AGENTS.md` og `OPEN_DATA_POLICY.md`.
-3. Les `README.md` for struktur og mål.
-4. Les `docs/data/content.json` for siste versjon, kilder, salgsinnganger og backlog.
-5. Åpne `docs/` i lokal webserver og inspiser relevant side før du foreslår større endringer.
-6. Kjør `node scripts/check.mjs` etter endringer.
-7. Kontroller på desktop og mobil. Dokumenter hva som faktisk ble endret, og noter videre arbeid i `backlog`.
+1. Les `START_HERE.md`, `AGENTS.md` og `OPEN_DATA_POLICY.md`.
+2. Les `README.md` og `docs/data/site.json` (versjon og publiseringsdato).
+3. Les de relevante kanoniske datafilene nedenfor.
+4. Inspiser aktuell side og sjekk om tilsvarende innhold allerede finnes før du lager nye data.
+5. Kjør alle kontroller og test både mobil og desktop før publisering.
 
-## Produktmålet
-
-Hjelpe selgere å oppdage og kvalifisere data-, analyse- og KI-relaterte kundebehov uten å måtte være tekniske eksperter. Kombiner helhetlig markedskunnskap med praktisk samtalestøtte. Siden må også støtte fagansvarliges iterative forbedringsarbeid.
+Tidligere samtaler er kun spor til mulige behov. **Repoets gjeldende `main` er autoritativ.**
 
 ## Kanoniske dataeiere
 
-Alt kuratert faginnhold ligger foreløpig i `docs/data/content.json`:
+- `site.json`: versjon, publiseringsdato og siste faglige gjennomgang.
+- `pages.json`: sidetitler, overskrifter, generelt sidebudskap, kvalifiseringsspørsmål og presentasjon.
+- `sources.json`: felles kilderegister. ID-er refereres av alle domenefiler.
+- `market.json`: SSB-statistikk, trender, oppkjøp og markedssignaler.
+- `sales.json`: salgsinnganger, forretningsbehov, scenarioer, målgrupper og kompetanseområder.
+- `technologies.json`: teknologier, innebygde KI-funksjoner, merkeikoner og produktbeskrivelser.
+- `backlog.json`: synlige forbedringspunkter og status. Ingen personopplysninger.
 
-- `businessSignals`: forretningsutfordringer, symptomer, spørsmål, mulige Innsiktsleveranser og neste steg.
-- `trends`: markedstall, fakta, kildehenvisninger, og egen kommersiell tolkning.
-- `plays`: salgsinnganger, signaler, spørsmål, roller, kompetanse og neste steg.
-- `scenarios`: **tydelig fiktive** øvelser for førstelinjedialog.
-- `aiProducts`: produktspesifikke KI-tilbud med salgsinngang og forbehold.
-- `marketEvents`, `marketSignals`: hendelser, markedsperspektiver og relevante spørsmål.
-- `logoAssets`: kilde og bruksregler for produktikoner.
-- `tech`: plattformforklaringer, salgssignaler og avgrensninger.
-- `competences`, `audiences`: kategorier og målgrupper.
-- `sources`: kildebibliotek med stabile lenker.
-- `backlog`: konkret forbedringsliste med status og prioritet.
-- `meta`: versjon og sist verifisert dato.
+Én opplysning skal ha én dataeier. Koble via ID-er; ikke kopier navn, påstander, tall eller lenker inn i en annen datafil. HTML/CSS/JS er kun struktur, visning og interaksjon. **Ingen nye eller endrede faglige fakta eller sidebudskap skal hardkodes i visningskode.**
 
-Visningslaget skal **ikke** være alternativ autoritet for domenedata. Flytt faglig innhold ut av CSS/HTML/JS dersom det begynner å bli hardkodet i visningskode (se teknisk gjeld i dokumentet).
+## Produktets formål
 
-## Første oppgaver
+Gi selgere innsikt i markedsutviklingen, hjelp til å oppdage forretnings- og IT-behov, og konkrete spørsmål fra problem til mulig oppdrag. Nettsiden er i tillegg fagansvarliges arbeidsflate for direkte vurdering og iterativ forbedring.
 
-1. Test med noen selgere: finner de relevante innganger, og fungerer spørsmålene?
-2. Innhent godkjente offentlige kundecaser (helst Webstep-caser som allerede er publisert).
-3. Valider salgsinnganger mot faktisk fagkompetanse og etterspørsel.
-4. Verifiser partnerordninger når Webstep-repoet er etablert.
-5. Avklar publisering i Webstep Enterprise eller annen godkjent løsning.
+## Innholds- og designkontrakt
 
-## Viktig ved overgang til Webstep
+- Offentlig tekst skal være tidløs, presis og forståelig uten forkunnskap om repoet.
+- Skille fakta, leverandørpåstander, faglige vurderinger og hypoteser.
+- Siter kilden og kontrollér lenker ved tidsfølsomme påstander; kildepubliseringsdato er ikke lik kontrolldato.
+- Ikke bruk falske kundecaser eller lov kompetanse, kapasitet eller partnerfordeler.
+- Forside og navigasjon skal være skannbare; detaljer finnes ett klikk ned.
+- Gjenbruk samme komponent og CSS-regel. Ikke legg på nye versjonsvise override-lag.
+- Logoer og annet media krever dokumentert kilde, rettighetsgrunnlag og lokal lagring.
+- Nye kilder og kategorier lagres hos riktig dataeier. Ikke bruk JSON-kopier per side.
+- Synlig forbedringsliste i `backlog.json`; oppdater den ved vesentlige funn.
+- Tilbakemeldinger lagres **bare lokalt i nettleseren**, ikke på GitHub. Eksport er brukerens ansvar.
 
-Dette repoet er **åpent innhold i et privat repo**, ikke et lager for intern bedriftsinformasjon. Selv om repositoryet er privat kan en personlig Pages-side bli offentlig. Først etter godkjent intern tilgangsstyring kan eventuelle interne data vurderes, og da under Websteps egne retningslinjer.
+## Før publisering
 
-## Eksempel på startinstruks for ny KI-assistent
+Kjør i repoets rot:
 
-> Arbeid videre i `MKarthum/innsikt-sales-hub`. Hent siste `main`, les `START_HERE.md`, `AGENTS.md` og `OPEN_DATA_POLICY.md`. Siste repo er autoritativt, ikke tidligere chat. Kontroller siden visuelt og kjør tester før endring publiseres. Ikke legg inn ikke-offentlig Webstep-informasjon.
+```sh
+node --check docs/assets/site.js
+node scripts/check.mjs
+```
 
-**Obs:** Repoets eksakte navn må oppdateres dersom du velger et annet navn ved opprettelse.
+Skriptet kjører offentlig-innhold, dataintegritet, innholdsstil og releasekontroll separat. GitHub Actions kjører de samme kontrollene ved push/PR. Test også søk, filtrering, kort, detaljsider, presentasjonsmodus, feedback, mobil og desktop.
+
+Ved hver publisert endring: oppdater `docs/data/site.json.version` og dato. CSS/JS-referansene i `docs/index.html` skal bruke samme versjon. Samle flerfilendringer i én atomisk commit/PR, ikke publiser mellomtrinn som krever hverandre.
+
+## Åpne data og flytting
+
+Denne personlige Pages-utgaven kan ses offentlig. Bruk kun informasjon som tåler det, uavhengig av repository-visibility. Les `OPEN_DATA_POLICY.md`. Etter godkjent flytting til Webstep kan riktig tilgangsstyring og interne data vurderes.
