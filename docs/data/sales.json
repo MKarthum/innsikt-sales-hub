@@ -365,7 +365,8 @@
       ],
       "avoid": "Å foreslå et nytt dashboard uten å forstå datagrunnlaget.",
       "next": "Foreslå å se på én rapporteringsprosess med økonomi og en analysefagperson.",
-      "play": "rapportering"
+      "play": "rapportering",
+      "id": "scenario-01"
     },
     {
       "title": "«Vi vet ikke hvilke kundetyper som er lønnsomme.»",
@@ -378,7 +379,8 @@
       ],
       "avoid": "Å love en prediksjonsmodell før lønnsomhet er definert.",
       "next": "Avtal et avgrenset møte om én analyse som kan støtte kommersiell prioritering.",
-      "play": "kundevekst"
+      "play": "kundevekst",
+      "id": "scenario-02"
     },
     {
       "title": "«Vi ser flaskehalsene når det allerede er for sent.»",
@@ -391,7 +393,8 @@
       ],
       "avoid": "Å selge sanntidsdashboards før vi vet hvilke tiltak kunden kan gjøre.",
       "next": "Undersøk datatilgangen rundt én kritisk prosess og knytt den til et målbart effektmål.",
-      "play": "driftsinnsikt"
+      "play": "driftsinnsikt",
+      "id": "scenario-03"
     },
     {
       "title": "«Vi behandler tusenvis av saker, men lærer lite av dem.»",
@@ -404,7 +407,8 @@
       ],
       "avoid": "Å love en KI-assistent som automatisk leser alle kundesaker.",
       "next": "Foreslå en avgrenset analyse av sakstyper og effekt, med personvern som premiss.",
-      "play": "kundeopplevelse"
+      "play": "kundeopplevelse",
+      "id": "scenario-04"
     },
     {
       "title": "«Vi har innført Fabric, men rapportene tar fortsatt for lang tid.»",
@@ -417,7 +421,8 @@
         "Hva har dere forsøkt så langt, og hvem har ansvar for forbedringen?"
       ],
       "avoid": "«Dere må bygge en ny lakehouse-arkitektur.»",
-      "next": "Avklar en teknisk/faglig samtale, ikke en bestemt løsning."
+      "next": "Avklar en teknisk/faglig samtale, ikke en bestemt løsning.",
+      "id": "scenario-05"
     },
     {
       "title": "«Vi må få noe konkret ut av KI-satsingen vår.»",
@@ -430,7 +435,8 @@
         "Hvem skal eie og drifte løsningene når de er i bruk?"
       ],
       "avoid": "«Vi kan bygge en KI-agent som løser dette.»",
-      "next": "Kartlegg ett bruksområde, forventet effekt og databehov."
+      "next": "Kartlegg ett bruksområde, forventet effekt og databehov.",
+      "id": "scenario-06"
     },
     {
       "title": "«Vi vurderer å ansette flere på data.»",
@@ -443,7 +449,8 @@
         "Hvilke ferdigheter mangler i det eksisterende teamet?"
       ],
       "avoid": "«Vi sender dere noen CV-er.»",
-      "next": "Undersøk om innleie, spesialiststøtte eller team passer best."
+      "next": "Undersøk om innleie, spesialiststøtte eller team passer best.",
+      "id": "scenario-07"
     }
   ],
   "competences": [
