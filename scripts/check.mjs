@@ -22,3 +22,13 @@ for(const s of d.scenarios)if(!d.plays.some(p=>p.id===s.play))fail(`Scenario pek
 for(const x of d.stats.ki)if(typeof x.value!=='number'||x.value<0||x.value>100)fail(`Ugyldig prosent: ${x.year}`);
 for(const fn of ['docs/index.html','docs/assets/site.css','docs/assets/site.js'])if(!fs.existsSync(fn))fail(`Mangler fil: ${fn}`);
 if(!process.exitCode)console.log('PASS – datamodell, referanser, statiske filer og kildegrunnlag OK');
+
+if(!Array.isArray(d.businessSignals)||d.businessSignals.length<4)fail('Mangler forretningssignaler');
+unique(d.businessSignals||[],'businessSignals');
+for(const b of d.businessSignals||[]){
+ for(const field of ['area','role','headline','says','dataNeed','next'])if(!b[field])fail('Manglende '+field+' i business '+b.id);
+ for(const field of ['listen','ask','opportunities','plays','sources'])if(!Array.isArray(b[field])||!b[field].length)fail('Manglende '+field+' i business '+b.id);
+ for(const id of b.plays||[])if(!d.plays.some(p=>p.id===id))fail('Ukjent salgsinngang '+id+' i '+b.id);
+ for(const id of b.sources||[])if(!d.sources[id])fail('Ukjent kilde '+id+' i '+b.id);
+}
+for(const t of d.tech)if(t.logo && !fs.existsSync('docs/assets/brands/'+t.logo+'.svg'))fail('Mangler merkeikon for '+t.name);

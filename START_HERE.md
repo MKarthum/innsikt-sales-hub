@@ -20,6 +20,7 @@ Hjelpe selgere å oppdage og kvalifisere data-, analyse- og KI-relaterte kundebe
 
 Alt kuratert faginnhold ligger foreløpig i `docs/data/content.json`:
 
+- `businessSignals`: forretningsutfordringer, symptomer, spørsmål, mulige Innsiktsleveranser og neste steg.
 - `trends`: markedstall, fakta, kildehenvisninger, og egen kommersiell tolkning.
 - `plays`: salgsinnganger, signaler, spørsmål, roller, kompetanse og neste steg.
 - `scenarios`: **tydelig fiktive** øvelser for førstelinjedialog.

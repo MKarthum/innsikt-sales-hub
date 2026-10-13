@@ -18,3 +18,32 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 @media(max-width:820px){.sidebar{position:fixed;left:0;top:0;width:255px;transform:translateX(-101%);transition:transform .2s;box-shadow:15px 0 30px #061e2c20}.sidebar.open{transform:translateX(0)}.main-column{width:100%}.mobile-menu{display:flex}.topbar{height:65px;gap:12px}.breadcrumb{margin-right:auto}.topbar .utility-button kbd,.topbar-text{display:none}#main{padding:24px 20px 55px}.footer{padding:18px 20px}.hero{padding:30px}.stats-grid,.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.topbar{padding:0 14px;gap:6px}.top-actions{gap:5px}.primary-small{padding:0 9px}.utility-button{padding:0 10px}.hero{min-height:0;padding:29px 23px}.hero h1{font-size:30px}.hero p{font-size:13px}.stats-grid,.action-grid,.grid-2,.grid-equal,.grid-3,.play-grid,.two-metrics,.qualify-grid{grid-template-columns:1fr}.metric{padding:17px 21px}.metric .num{font-size:31px}.section-heading{align-items:flex-start}.stat-banner{display:block}.stat-banner .btn{margin-top:13px}.tech-item{grid-template-columns:1fr;gap:12px}.trend-card{grid-template-columns:1fr;gap:9px}.trend-index{width:38px;height:38px;font-size:14px}.table-row{grid-template-columns:45px 1fr;gap:9px}.table-row .badge{grid-column:2;justify-self:start}.hbar .hlabel{width:115px}.hbar .hlabel{font-size:10px}.modal{padding:17px}.present-frame{padding:27px;min-height:330px}.present-frame h2{font-size:29px}.present-frame p{font-size:14px}.topbar .primary-small{width:36px;min-width:36px;padding:0}.topbar .primary-small span:first-child{display:inline-flex}.topbar .primary-small span:last-child{display:none}.footer{display:block}.footer span{display:block;margin:7px 0}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Forretningsinnganger (v0.2) – kort med problem, ikke teknologi. */
+.business-flow{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:15px 18px;background:#edf6f3;border:1px solid #d4e9e0;border-radius:14px;margin:20px 0 24px;font-size:12px;font-weight:750;color:#255e57}
+.business-flow svg{width:14px;height:14px;color:#4a9c87}
+.business-flow span{padding:4px 0}
+.business-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.business-grid.compact{grid-template-columns:repeat(3,minmax(0,1fr))}
+.business-card{background:white;border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;min-height:220px;transition:box-shadow .16s,border-color .16s,transform .16s}
+.business-card:hover{border-color:#83bfb0;box-shadow:var(--shadow);transform:translateY(-2px)}
+.business-card-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.business-arrow{color:#438b79}.business-arrow svg{width:17px;height:17px}
+.business-card h3{font:800 17px/1.35 'Manrope',sans-serif;letter-spacing:-.02em;margin:0}
+.business-quote{color:#55727b;font-size:13px;line-height:1.6;margin:0}
+.business-card .fineprint{margin-top:auto}
+.business-cta{font-weight:800;color:var(--teal);font-size:12px;display:inline-flex;align-items:center;gap:7px}
+.business-cta svg{width:14px;height:14px}
+.business-detail-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(250px,1fr);gap:16px}
+.section-subtitle{margin-top:26px!important}
+.related-plays{display:grid;gap:9px}
+.related-plays a{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border);padding:12px;border-radius:9px;font-size:12px;color:#225e57}
+.related-plays a svg{width:15px;height:15px}
+.brand-header{display:flex;align-items:center;gap:13px}
+.brand-icon{width:49px;height:49px;display:grid;place-items:center;border:1px solid #dce8e5;border-radius:12px;background:#fff;flex-shrink:0}
+.brand-icon img{width:31px;height:31px;object-fit:contain}
+.brand-icon .brand-initials{font-size:12px;font-weight:850;color:#296a70;letter-spacing:-.04em}
+.source-card a{display:inline-flex;align-items:center;gap:6px}
+.source-card a svg{width:13px;height:13px}
+@media(max-width:1100px){.business-grid.compact{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.business-grid,.business-grid.compact,.business-detail-grid{grid-template-columns:1fr}.business-flow{gap:7px}.business-flow svg{transform:rotate(90deg)}.business-card{min-height:0}}
