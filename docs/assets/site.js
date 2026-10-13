@@ -114,8 +114,8 @@ function industry(){
  const events=D.marketEvents.map(e=>'<article class="event-card"><div class="event-date">'+esc(e.date)+'</div><div><h3>'+esc(e.title)+'</h3><p><strong>Hendelse:</strong> '+esc(e.fact)+'</p><p><strong>Mulig konsekvens:</strong> '+esc(e.why)+'</p><div class="hint"><strong>Spør:</strong> '+esc(e.ask)+'</div>'+sourceLinks(e.sources,D)+'</div></article>').join('');
  const signals=D.marketSignals.map((s,i)=>'<article class="panel market-insight-card"><div class="market-no">'+String(i+1).padStart(2,'0')+'</div><h3>'+esc(s.title)+'</h3><p>'+esc(s.angle)+'</p><div class="market-listen"><strong>Lytt etter:</strong> '+esc(s.listen)+'</div><div class="hint"><strong>Spør:</strong> '+esc(s.ask)+'</div>'+sourceLinks(s.sources,D)+'</article>').join('');
  return headerCopy('MARKED OG OPPKJØP')
- +'<section class="subsection"><div class="section-heading"><div><h2>${esc(D.pages.copy.marketDealsTitle)}</h2><p>Hva som har skjedd – og spørsmål det kan utløse</p></div></div><div class="event-list">'+events+'</div></section>'
- +'<section class="subsection"><div class="section-heading"><div><h2>${esc(D.pages.copy.marketSignalsTitle)}</h2><p>Fra semantikk og styring til kostnad og plattformlåsing</p></div></div><div class="market-insight-grid">'+signals+'</div></section>'
+ +'<section class="subsection"><div class="section-heading"><div><h2>'+esc(D.pages.copy.marketDealsTitle)+'</h2><p>Hva som har skjedd – og spørsmål det kan utløse</p></div></div><div class="event-list">'+events+'</div></section>'
+ +'<section class="subsection"><div class="section-heading"><div><h2>'+esc(D.pages.copy.marketSignalsTitle)+'</h2><p>Fra semantikk og styring til kostnad og plattformlåsing</p></div></div><div class="market-insight-grid">'+signals+'</div></section>'
  +'<section class="subsection"><div class="note-card"><b>Ikke overtolk oppkjøp</b>At en leverandør kjøper en annen, betyr ikke at kunden må bytte verktøy. Spør om overlapp, avtaler, kompetanse og roadmap først.</div></section>';
 }
 
