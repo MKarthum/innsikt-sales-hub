@@ -25,3 +25,6 @@ Behandle alt innhold som potensielt offentlig. Kontroller kildegrunnlag og lisen
 ## Flytting til Webstep
 
 Etter flytting kan interne data bare legges til etter godkjent klassifisering, tilgangsstyring og sikkerhetsvurdering. Historikken i dette repoet skal forbli fri for sensitive opplysninger; å slette en fil fra siste commit fjerner ikke historikken.
+## Gjenbrukbare maler og arkitekturskisser
+
+Maler og generiske skisser er kun pedagogiske startpunkter. De skal ikke lagre kundedata i denne åpne nettsiden. Virkelige kundeopplysninger skal håndteres i godkjente interne systemer etter en eventuell overføring.

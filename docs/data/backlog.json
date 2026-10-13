@@ -94,5 +94,21 @@
     "priority": "middels",
     "status": "åpen",
     "why": "Power BI er nå inkludert. Fivetran må fortsatt få en verifisert kilde og bruksrett."
+  },
+  {
+    "id": "B-13",
+    "title": "Teste grunnkurset på selgere uten datafaglig bakgrunn",
+    "area": "Brukervennlighet",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Menneskelig test er nødvendig selv om teksten er gjennomgått."
+  },
+  {
+    "id": "B-14",
+    "title": "Knytte maler til faktisk Webstep-salgsprosess etter overføring",
+    "area": "Arbeidsflyt",
+    "status": "åpen",
+    "priority": "middels",
+    "why": "Foreløpig åpne maler uten kundeopplysninger eller CRM-integrasjon."
   }
 ]

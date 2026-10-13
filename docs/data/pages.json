@@ -6,14 +6,17 @@
   },
   "navigation": {
     "oversikt": "Oversikt",
-    "marked": "Marked og trender",
+    "guide": "Start her",
     "forretning": "Forretningsbehov",
     "muligheter": "Salgsinnganger",
     "kundedialog": "Kundedialog",
+    "marked": "Marked og trender",
     "kompetanse": "Kompetanse",
+    "arkitektur": "Data og KI i praksis",
     "teknologi": "Teknologikart",
     "ai": "KI i plattformene",
     "bransje": "Marked og oppkjøp",
+    "verktoy": "Verktøykasse",
     "kilder": "Kilder",
     "utvikling": "Videreutvikling"
   },
@@ -67,6 +70,21 @@
       "eyebrow": "VIDEREUTVIKLING",
       "title": "Bygg videre på det vi lærer",
       "intro": "Denne oversikten gjør uavklarte punkter og forbedringsbehov synlige. Den følger med repoet og kan overtas av Claude Code eller Gemini etter flytting."
+    },
+    "GRUNNKUNNSKAP": {
+      "eyebrow": "START HER · CA. 8 MINUTTER",
+      "title": "Data og innsikt – uten teknologispråk",
+      "intro": "En introduksjon du kan lese én gang og komme tilbake til. Du trenger ikke kjenne verktøyene for å føre en god kundesamtale."
+    },
+    "ARKITEKTUR": {
+      "eyebrow": "ARKITEKTUR I PRAKSIS",
+      "title": "Slik henger data, analyse og KI sammen",
+      "intro": "Fire enkle skisser fra kildesystemer til beslutninger og KI. De viser prinsipper, ikke en fasit for kundens arkitektur."
+    },
+    "VERKTØYKASSE": {
+      "eyebrow": "GJENBRUKBARE UTGANGSPUNKTER",
+      "title": "Maler for kundedialoger og oppfølging",
+      "intro": "Kopier en struktur for første møte, kvalifisering eller overlevering. Foreløpig er dette åpne eksempler, ikke Websteps godkjente arbeidsdokumenter."
     }
   },
   "home": {
@@ -81,7 +99,12 @@
     "statsRange": "Store bransjeforskjeller",
     "statsPopulation": "Norske foretak med minst ti sysselsatte, ekskl. finans",
     "actionTitle": "Hva skal du gjøre?",
-    "actionIntro": "Ta utgangspunkt i situasjonen du står i"
+    "actionIntro": "Ta utgangspunkt i situasjonen du står i",
+    "startTitle": "Helt ny innen data og analyse?",
+    "startIntro": "Bruk åtte minutter på hva en dataplattform gjør, hvor KI passer inn og hvilke begreper du trenger å kjenne.",
+    "startAction": "Ta introduksjonen",
+    "advancedTitle": "Erfaren eller på vei til kundemøte?",
+    "advancedIntro": "Gå rett til arkitekturskissene, samtaleguidene eller verktøykassen."
   },
   "qualification": {
     "items": [
@@ -96,46 +119,6 @@
     "partial": "Flere dimensjoner er belyst. Finn ut hva som fortsatt mangler.",
     "start": "Bruk spørsmålene som støtte. Det er ingen formell score eller salgsgaranti."
   },
-  "slides": [
-    {
-      "title": "Hovedbudskap",
-      "body": "Hjelp kunden å beskrive problemet før vi foreslår teknologi."
-    },
-    {
-      "title": "Markedet beveger seg",
-      "body": "Andelen norske foretak som bruker KI øker. Bruk er ikke det samme som dokumentert effekt.",
-      "dynamic": "ki-share"
-    },
-    {
-      "title": "Hva utløser et konsulentbehov?",
-      "body": "Modernisering, data som ikke fungerer, nye initiativer, kapasitetsmangel og krav til kvalitet."
-    },
-    {
-      "title": "Fra forretningsproblem til mulig oppdrag",
-      "body": "Økonomi, salg, drift og kundeservice har datarelaterte behov – selv når ingen nevner teknologi."
-    },
-    {
-      "title": "KI i plattformene",
-      "body": "CoCo, Genie Code og Fabric Copilot hjelper utviklere; dataagenter og Genie One lar forretningen spørre egne data."
-    },
-    {
-      "title": "Konsolidering",
-      "body": "Oppkjøp og større produktporteføljer gir nye spørsmål om avtaler, kompetanse og systemvalg.",
-      "dynamic": "market-events"
-    },
-    {
-      "title": "Kundedialogen",
-      "body": "Forstå problemet, konsekvensen, eieren, tidspunktet og hva kunden mangler."
-    },
-    {
-      "title": "Websteps bidrag",
-      "body": "Kompetanse innen data, analyse, arkitektur, engineering og styring – tilpasset behovet."
-    },
-    {
-      "title": "Neste steg",
-      "body": "Avtal et faglig oppfølgingsmøte når det finnes et konkret behov. Ikke lov løsning eller kapasitet for tidlig."
-    }
-  ],
   "copy": {
     "marketIndustriesTitle": "Store forskjeller mellom bransjer",
     "marketTrendsTitle": "Fire utviklingstrekk salg bør kjenne til",
@@ -147,6 +130,187 @@
     "competenceAudiencesTitle": "Hvem møter vi?",
     "marketDealsTitle": "Oppkjøp og konsolidering",
     "marketSignalsTitle": "Seks forhold å ha i bakhodet",
-    "devBacklogTitle": "Prioritert forbedringsoversikt"
+    "devBacklogTitle": "Prioritert forbedringsoversikt",
+    "sourcesDateNote": "Publiseringsdato vises når den er kjent. Kontrollert-dato betyr at kildelenken er prøvd, ikke at alle påstander er verifisert.",
+    "orientationTitle": "Finn ditt nivå",
+    "orientationIntro": "Du behøver ikke lese alt. Introduksjonen er for nye, mens malene og arkitekturskissene kan brukes ved behov."
+  },
+  "presentationDecks": {
+    "intro": {
+      "label": "Introduksjon · 10 min",
+      "slides": [
+        {
+          "type": "intro",
+          "title": "Innsikt starter med kunden",
+          "body": "Hjelp virksomheter å gjøre data nyttige for beslutninger.",
+          "note": "Start med problemet, ikke produktnavn."
+        },
+        {
+          "type": "diagram",
+          "title": "Slik blir data til innsikt",
+          "diagram": "bi",
+          "note": "Bruk månedsrapportering som eksempel."
+        },
+        {
+          "type": "metric",
+          "title": "KI-bruken øker",
+          "body": "Bruk betyr ikke dokumentert gevinst.",
+          "note": "Spør hva kunden ønsker å oppnå.",
+          "sources": [
+            "ssb"
+          ]
+        },
+        {
+          "type": "case",
+          "title": "Økonomi: ulike tall",
+          "business": "okonomi",
+          "note": "Be salen foreslå oppfølgingsspørsmål."
+        },
+        {
+          "type": "diagram",
+          "title": "KI må forstå egne data",
+          "diagram": "ai-on-data",
+          "note": "Forklar semantikk og kontroll."
+        },
+        {
+          "type": "takeaway",
+          "title": "Tre ting salg skal gjøre",
+          "bullets": [
+            "Forstå problemet og konsekvensen.",
+            "Finn ansvarlig og tidspunkt.",
+            "Avtal riktig faglig neste steg."
+          ],
+          "note": "Oppsummer kort."
+        }
+      ]
+    },
+    "sales": {
+      "label": "Salgsworkshop · 30 min",
+      "slides": [
+        {
+          "type": "intro",
+          "title": "Fra problem til mulighet",
+          "body": "Vi selger kompetanse, ikke en ferdig boks.",
+          "note": "Gjør hensikten tydelig."
+        },
+        {
+          "type": "metric",
+          "title": "Markedet beveger seg",
+          "body": "Bruk KI-tall som inngang, ikke salgsprediksjon.",
+          "sources": [
+            "ssb"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Dataarbeid i praksis",
+          "diagram": "bi"
+        },
+        {
+          "type": "case",
+          "title": "Økonomi",
+          "business": "okonomi"
+        },
+        {
+          "type": "case",
+          "title": "Salg og marked",
+          "business": "salg"
+        },
+        {
+          "type": "case",
+          "title": "Drift",
+          "business": "drift"
+        },
+        {
+          "type": "diagram",
+          "title": "KI på kontrollerte data",
+          "diagram": "ai-on-data"
+        },
+        {
+          "type": "diagram",
+          "title": "KI i utviklingsløpet",
+          "diagram": "ai-in-development"
+        },
+        {
+          "type": "bullets",
+          "title": "Kvalifiser muligheten",
+          "bullets": [
+            "Hva vil kunden oppnå?",
+            "Hvorfor er det viktig og hvem eier det?",
+            "Hva mangler av kompetanse eller kapasitet?"
+          ]
+        },
+        {
+          "type": "takeaway",
+          "title": "Ta dette med til neste kundemøte",
+          "bullets": [
+            "Velg en relevant salgsinngang.",
+            "Bruk samtalemalen.",
+            "Involver fagmiljøet på riktig tidspunkt."
+          ]
+        }
+      ]
+    },
+    "technical": {
+      "label": "Data og KI · 20 min",
+      "slides": [
+        {
+          "type": "intro",
+          "title": "Teknologien er et middel",
+          "body": "Plattformene overlapper. Kundens mål og datakvalitet kommer først."
+        },
+        {
+          "type": "diagram",
+          "title": "Grunnarkitektur",
+          "diagram": "bi"
+        },
+        {
+          "type": "diagram",
+          "title": "KI på egne data",
+          "diagram": "ai-on-data"
+        },
+        {
+          "type": "diagram",
+          "title": "KI som utviklerhjelp",
+          "diagram": "ai-in-development"
+        },
+        {
+          "type": "diagram",
+          "title": "KI på dokumenter",
+          "diagram": "rag"
+        },
+        {
+          "type": "bullets",
+          "title": "Hva kan gå galt?",
+          "bullets": [
+            "Ulike definisjoner gir ulike svar.",
+            "Svake data gir feil grunnlag.",
+            "Mangelfull tilgang og kontroll øker risikoen."
+          ],
+          "sources": [
+            "fabricagent",
+            "agent-foundation"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Konsolidering",
+          "dynamic": "market-events",
+          "bullets": [
+            "Oppkjøp skaper muligheter og risiko.",
+            "Vurder overlapp, binding og økonomi."
+          ]
+        },
+        {
+          "type": "takeaway",
+          "title": "Et godt kundespørsmål",
+          "bullets": [
+            "Hvilken beslutning eller prosess vil dere forbedre?",
+            "Hva kan dere stole på av data og definisjoner?",
+            "Hva trenger dere kompetanse til?"
+          ]
+        }
+      ]
+    }
   }
 }

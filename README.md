@@ -1,12 +1,19 @@
 # Innsikt – marked og salg
 
-Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.4.1 – ikke godkjent som offisielt internt salgsmateriell.**
+Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.5.0 – ikke godkjent som offisielt internt salgsmateriell.**
 
 [Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
 
 ## Formål
 
 Hjelpe førstelinjeselgere med å forstå markedet, gjenkjenne behov hos forretning og IT, stille spørsmål og involvere riktig fagkompetanse. Fagansvarlig skal kunne se faktiske visninger og forbedre løsning og innhold iterativt.
+
+## Læring og støtte for ulike nivåer
+
+- **Start her:** et kort grunnkurs med eksempler og ordforklaringer.
+- **Data og KI i praksis:** fire generiske arkitekturskisser om rapportering, KI på strukturerte data, KI-assistert utvikling og dokumentbasert KI.
+- **Verktøykasse:** fire kopierbare maler for kundedialog, mulighetskvalifisering, KI-vurdering og overlevering. Ingen person- eller kundedata lagres av malene.
+- **Presenter:** tre gjennomarbeidede løp for introduksjon, salgsworkshop og dataplattform/KI. Med presentatørnotater og kildehenvisninger.
 
 ## Kjør lokalt
 
@@ -27,6 +34,8 @@ python3 -m http.server 8000
 | `docs/data/sales.json` | Salgsinnganger, forretningsbehov, samtaleøvelser og kompetanse |
 | `docs/data/technologies.json` | Produktinformasjon, KI-funksjoner, logoattributter |
 | `docs/data/backlog.json` | Forbedringsoversikt |
+| `docs/data/learning.json` | Grunnkurs, begreper, arkitekturskisser, risiko og maler |
+| `docs/assets/learning.js` | Generisk visning for grunnkurs, arkitektur og verktøykasse |
 | `docs/assets/site.js` | Generiske visninger og interaksjoner – ingen egen faglig faktaautoritet |
 | `docs/assets/site.css` | Design og responsive komponenter |
 | `docs/index.html` | Strukturelt skall og navigasjon |
@@ -47,6 +56,7 @@ python3 -m http.server 8000
 
 ```sh
 node --check docs/assets/site.js
+node --check docs/assets/learning.js
 node scripts/check.mjs
 ```
 

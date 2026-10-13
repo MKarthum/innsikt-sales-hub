@@ -1,0 +1,432 @@
+{
+  "beginner": {
+    "readingTime": "Ca. 8 minutter",
+    "storyTitle": "Hvorfor gir CRM og økonomisystemet ulike salgstall?",
+    "story": "CRM følger salgsmuligheter, mens økonomisystemet følger fakturaer og inntekter. Tallene beskriver ikke nødvendigvis det samme. Godt dataarbeid handler om å sette dem i sammenheng, bli enige om definisjonene og gjøre resultatet nyttig.",
+    "chapters": [
+      {
+        "title": "1. Hva er data og innsikt?",
+        "text": "Data er registreringer av det som skjer – for eksempel ordre og kundesaker. Innsikt oppstår når tallene settes i sammenheng og gir grunnlag for en bedre beslutning. Rapporten er et middel, ikke målet."
+      },
+      {
+        "title": "2. Hva gjør et datateam?",
+        "text": "Datateamet kobler systemer sammen, rydder data, lager felles definisjoner og gjør informasjon tilgjengelig for rapportering, analyse og KI. Mye av verdien ligger i det som skjer før et dashboard vises."
+      },
+      {
+        "title": "3. Hva er en dataplattform?",
+        "text": "Et oppsett for å samle, behandle, styre og bruke data. Det erstatter ikke nødvendigvis kundens eksisterende CRM- eller økonomisystem. Fabric, Databricks og Snowflake dekker deler av denne verdikjeden."
+      },
+      {
+        "title": "4. Hva endrer KI?",
+        "text": "KI kan hjelpe utviklere med å lage dataløsninger raskere. KI kan også la forretningen stille spørsmål direkte mot egne data. Begge deler krever kvalitetssikring. Et fint svar er ikke nødvendigvis riktig."
+      },
+      {
+        "title": "5. Hva skal salg gjøre?",
+        "text": "Finn ut hva kunden ønsker å forbedre, hvorfor det er viktig, hvem som eier behovet og om det finnes planer om å gjøre noe. Du trenger ikke velge teknologien selv."
+      }
+    ],
+    "questions": [
+      "Hva bruker dere unødvendig mye tid på?",
+      "Hvilke beslutninger mangler dere et godt grunnlag for?",
+      "Hvem påvirkes, og hva har dere allerede prøvd?"
+    ]
+  },
+  "glossary": [
+    {
+      "term": "CRM",
+      "meaning": "System som følger kunder, salgsmuligheter og aktiviteter.",
+      "example": "Kundeoversikt og pipeline."
+    },
+    {
+      "term": "ERP",
+      "meaning": "System for økonomi, innkjøp, logistikk og andre kjerneprosesser.",
+      "example": "Faktura, ordre og lager."
+    },
+    {
+      "term": "Dataplattform",
+      "meaning": "Løsninger som samler, behandler, styrer og tilgjengeliggjør data.",
+      "example": "Felles datagrunnlag på tvers av systemer."
+    },
+    {
+      "term": "Datavarehus / lakehouse",
+      "meaning": "Måter å organisere store datamengder for analyse og deling.",
+      "example": "Historiske salgstall som flere team bruker."
+    },
+    {
+      "term": "Integrasjon / pipeline",
+      "meaning": "Automatisk innhenting og flytting av data.",
+      "example": "Ordre fra ERP overføres til analyseplattform."
+    },
+    {
+      "term": "Datamodell",
+      "meaning": "Beskrivelse av hvordan ulike data henger sammen.",
+      "example": "Kunder, ordrer, produkter og datoer."
+    },
+    {
+      "term": "Semantisk modell",
+      "meaning": "Felles begreper og beregninger som gir lik betydning i rapporter og KI.",
+      "example": "Alle bruker samme definisjon av omsetning."
+    },
+    {
+      "term": "Datakvalitet",
+      "meaning": "Om dataene er riktige, oppdaterte og fullstendige nok til bruken.",
+      "example": "En ordre telles ikke dobbelt."
+    },
+    {
+      "term": "Datastyring / governance",
+      "meaning": "Ansvar, rettigheter og regler for å bruke data.",
+      "example": "Hvem kan se lønnsopplysninger?"
+    },
+    {
+      "term": "BI",
+      "meaning": "Rapporter og analyse som gjør data nyttige for beslutninger.",
+      "example": "Dashboard for salgsledelsen."
+    },
+    {
+      "term": "SQL",
+      "meaning": "Språk for å hente, kombinere og analysere strukturerte data.",
+      "example": "Hent ordre per måned."
+    },
+    {
+      "term": "dbt",
+      "meaning": "Verktøy for å bygge, teste og dokumentere datamodeller.",
+      "example": "Beregne marginer på samme måte flere steder."
+    },
+    {
+      "term": "LLM / språkmodell",
+      "meaning": "KI som genererer og analyserer språk, men også kan svare feil.",
+      "example": "Assistent som forklarer rapporter."
+    },
+    {
+      "term": "RAG",
+      "meaning": "KI som henter relevante dokumentutdrag før den svarer.",
+      "example": "Svar fra oppdaterte rutinedokumenter."
+    },
+    {
+      "term": "KI-agent",
+      "meaning": "KI som bruker data eller verktøy for å løse flere trinn i en oppgave.",
+      "example": "Agent som finner tall og forklarer et avvik."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "bi",
+      "title": "Et vanlig oppsett for rapportering",
+      "description": "Data fra ulike systemer blir samlet og får felles betydning før de brukes.",
+      "steps": [
+        {
+          "title": "Kildesystemer",
+          "detail": "CRM · ERP · andre systemer"
+        },
+        {
+          "title": "Integrasjon",
+          "detail": "Hente og oppdatere"
+        },
+        {
+          "title": "Dataplattform",
+          "detail": "Lagre og bearbeide"
+        },
+        {
+          "title": "Felles begreper",
+          "detail": "KPI-er og kvalitet"
+        },
+        {
+          "title": "Analyse og BI",
+          "detail": "Rapporter og beslutninger"
+        }
+      ],
+      "outcome": "Én felles definisjon av salg og margin – selv når informasjonen kommer fra flere systemer.",
+      "caution": "Noen plattformer dekker flere trinn. Dette er en prinsippskisse, ikke en fast teknologioppskrift.",
+      "questions": [
+        "Hvor oppstår ulike tall i dag?",
+        "Hvem eier definisjonene?"
+      ],
+      "sources": [
+        "webstep1",
+        "fabric",
+        "dbtv2"
+      ]
+    },
+    {
+      "id": "ai-on-data",
+      "title": "KI som svarer på spørsmål om virksomheten",
+      "description": "Felles data og begreper lar en KI-assistent hente frem relevante tall med passende tilgang.",
+      "steps": [
+        {
+          "title": "Virksomhetsdata",
+          "detail": "Ordre · kunder · økonomi"
+        },
+        {
+          "title": "Kvalitet og modeller",
+          "detail": "Avstemming og struktur"
+        },
+        {
+          "title": "Begreper og tilgang",
+          "detail": "Felles KPI-er og roller"
+        },
+        {
+          "title": "KI-assistent",
+          "detail": "Genie · Cortex · Fabric"
+        },
+        {
+          "title": "Etterprøvbart svar",
+          "detail": "Kontroll og evaluering"
+        }
+      ],
+      "outcome": "En leder kan spørre «Hvordan utviklet marginene seg?» og få et svar fra kvalitetssikrede kilder.",
+      "caution": "Gode data reduserer risiko, men garanterer ikke korrekte KI-svar. Evaluering, sikkerhet og menneskelig kontroll er fortsatt nødvendig.",
+      "questions": [
+        "Hvilke spørsmål må kunne besvares korrekt?",
+        "Hvem er ansvarlig for fasit og tilgang?"
+      ],
+      "sources": [
+        "fabricagent",
+        "agent-foundation",
+        "genie"
+      ]
+    },
+    {
+      "id": "ai-in-development",
+      "title": "KI hjelper datateamet å levere raskere",
+      "description": "KI kan skrive utkast til SQL, pipelines og tester. Fagfolk kontrollerer og drifter resultatet.",
+      "steps": [
+        {
+          "title": "Behov og mål",
+          "detail": "Forretning + utviklere"
+        },
+        {
+          "title": "KI-assistert arbeid",
+          "detail": "CoCo · Genie Code · Copilot"
+        },
+        {
+          "title": "Kontroll",
+          "detail": "Tester og kodegjennomgang"
+        },
+        {
+          "title": "Leveranse og drift",
+          "detail": "Overvåking og forbedring"
+        }
+      ],
+      "outcome": "Mindre manuelt arbeid kan gi mer tid til kvalitet, forretningsforståelse og forbedringer.",
+      "caution": "Generert kode er ikke automatisk sikker, riktig eller vedlikeholdbar.",
+      "questions": [
+        "Hvilke utviklingsoppgaver stjeler tid?",
+        "Hvordan kvalitetssikres KI-genererte forslag?"
+      ],
+      "sources": [
+        "coco",
+        "geniecode",
+        "fabriccopilot"
+      ]
+    },
+    {
+      "id": "rag",
+      "title": "KI på dokumenter og fritekst",
+      "description": "Ikke all KI krever tabeller. Også dokumenter og kundesaker kan brukes når kildene er relevante og oppdaterte.",
+      "steps": [
+        {
+          "title": "Dokumenter",
+          "detail": "Rutiner og saker"
+        },
+        {
+          "title": "Tilrettelegging",
+          "detail": "Rydding og indeksering"
+        },
+        {
+          "title": "Søk",
+          "detail": "Finn relevant kilde"
+        },
+        {
+          "title": "Språkmodell",
+          "detail": "Svar med kontekst"
+        },
+        {
+          "title": "Kontroll",
+          "detail": "Kilde og tilgang"
+        }
+      ],
+      "outcome": "Kundeservice kan finne svar i et gyldig rutinedokument og se hvor informasjonen kommer fra.",
+      "caution": "Gamle eller motstridende dokumenter kan gi feil svar. Kildestyring og evaluering er viktig selv uten tabellstruktur.",
+      "questions": [
+        "Hvilke dokumenter skal være fasit?",
+        "Hvordan sikrer dere oppdatering og tilgang?"
+      ],
+      "sources": [
+        "agent-foundation",
+        "privacy"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "title": "Ulike definisjoner",
+      "example": "«Omsetning» betyr fakturert beløp ett sted og ordresum et annet.",
+      "action": "Felles begreper, dataeier og tester mot fasit."
+    },
+    {
+      "title": "Manglende historikk",
+      "example": "Rabatter og returer mangler. Marginene ser bedre ut enn de er.",
+      "action": "Avstemming, kvalitetsregler og avgrensning av datagrunnlaget."
+    },
+    {
+      "title": "Feil tilgang",
+      "example": "En bruker får informasjon fra data vedkommende ikke skulle sett.",
+      "action": "Rollebasert tilgang og sikkerhetstesting."
+    },
+    {
+      "title": "Overbevisende feil",
+      "example": "KI formulerer en plausibel forklaring som tallene ikke støtter.",
+      "action": "Kildehenvisninger, evaluering og menneskelig vurdering."
+    }
+  ],
+  "templates": [
+    {
+      "id": "first",
+      "title": "Første kundesamtale",
+      "audience": "Salg",
+      "purpose": "Forstå problemet før løsning og teknologi.",
+      "sections": [
+        {
+          "title": "Situasjon",
+          "questions": [
+            "Hva ønsker dere å få bedre til?",
+            "Hva skjer i dag når det ikke fungerer?"
+          ]
+        },
+        {
+          "title": "Konsekvens",
+          "questions": [
+            "Hvem påvirkes?",
+            "Hva koster dette i tid, kvalitet eller penger?"
+          ]
+        },
+        {
+          "title": "Status",
+          "questions": [
+            "Hva har dere forsøkt?",
+            "Hvilke systemer og team er involvert?"
+          ]
+        },
+        {
+          "title": "Neste steg",
+          "questions": [
+            "Hvem eier behovet?",
+            "Hvem bør delta i en faglig oppfølging?"
+          ]
+        }
+      ],
+      "caution": "Ikke legg kundedata inn på den åpne nettsiden."
+    },
+    {
+      "id": "qualify",
+      "title": "Kvalifisere en mulighet",
+      "audience": "Salg og fagansvarlig",
+      "purpose": "Skille et tema fra et konkret kompetansebehov.",
+      "sections": [
+        {
+          "title": "Verdi",
+          "questions": [
+            "Hvilket resultat vil kunden oppnå?",
+            "Hvordan kan det måles?"
+          ]
+        },
+        {
+          "title": "Planer",
+          "questions": [
+            "Finnes det budsjett, initiativ eller tidsramme?",
+            "Hvilken kompetanse og kapasitet mangler?"
+          ]
+        },
+        {
+          "title": "Ansvar",
+          "questions": [
+            "Hvem eier og beslutter?",
+            "Hva hindrer fremdrift?"
+          ]
+        },
+        {
+          "title": "Oppfølging",
+          "questions": [
+            "Hvilket spørsmål må fagmiljøet svare på?",
+            "Hva ble avtalt om neste møte?"
+          ]
+        }
+      ],
+      "caution": "Dette er en samtalemal, ikke en CRM-erstatning."
+    },
+    {
+      "id": "ai",
+      "title": "Vurdere KI på egne data",
+      "audience": "Salg + analyse-/KI-kompetanse",
+      "purpose": "Finne ut om et KI-brukstilfelle er relevant og håndterbart.",
+      "sections": [
+        {
+          "title": "Nytte",
+          "questions": [
+            "Hvilke konkrete spørsmål skal KI svare på?",
+            "Hva er konsekvensen av et feil svar?"
+          ]
+        },
+        {
+          "title": "Datagrunnlag",
+          "questions": [
+            "Hvilke kilder trengs?",
+            "Har dere felles definisjoner og dataeier?"
+          ]
+        },
+        {
+          "title": "Kontroll",
+          "questions": [
+            "Hvem skal ha tilgang?",
+            "Hvordan vil dere teste svar mot fasit?"
+          ]
+        },
+        {
+          "title": "Forvaltning",
+          "questions": [
+            "Hva koster løsningen i bruk?",
+            "Hvem følger opp kvalitet og effekt?"
+          ]
+        }
+      ],
+      "caution": "En utfylt mal er ingen sikkerhets- eller produksjonsgodkjenning."
+    },
+    {
+      "id": "handoff",
+      "title": "Overlevering til fagmiljøet",
+      "audience": "Salg → Innsikt",
+      "purpose": "Gi fagfolk et presist utgangspunkt.",
+      "sections": [
+        {
+          "title": "Kundens egne ord",
+          "questions": [
+            "Hva er problemet slik kunden beskrev det?",
+            "Hvor viktig er det?"
+          ]
+        },
+        {
+          "title": "Rammer",
+          "questions": [
+            "Hvilke systemer, data og team er nevnt?",
+            "Hva er fortsatt ukjent?"
+          ]
+        },
+        {
+          "title": "Mulighet",
+          "questions": [
+            "Hva er dokumentert behov og hva er hypotese?",
+            "Hvem eier saken?"
+          ]
+        },
+        {
+          "title": "Neste møte",
+          "questions": [
+            "Hvem deltar?",
+            "Hva ønsker kunden konkret svar på?"
+          ]
+        }
+      ],
+      "caution": "Bruk godkjent intern kanal når opplysningene er reelle og identifiserbare."
+    }
+  ]
+}

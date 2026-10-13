@@ -21,6 +21,7 @@ Tidligere samtaler er kun spor til mulige behov. **Repoets gjeldende `main` er a
 - `sales.json`: salgsinnganger, forretningsbehov, scenarioer, målgrupper og kompetanseområder.
 - `technologies.json`: teknologier, innebygde KI-funksjoner, merkeikoner og produktbeskrivelser.
 - `backlog.json`: synlige forbedringspunkter og status. Ingen personopplysninger.
+- `learning.json`: introduksjon, ordbok, generiske arkitekturskisser, risiko og maler. Disse skal ikke hardkodes i JS.
 
 Én opplysning skal ha én dataeier. Koble via ID-er; ikke kopier navn, påstander, tall eller lenker inn i en annen datafil. HTML/CSS/JS er kun struktur, visning og interaksjon. **Ingen nye eller endrede faglige fakta eller sidebudskap skal hardkodes i visningskode.**
 
@@ -47,10 +48,11 @@ Kjør i repoets rot:
 
 ```sh
 node --check docs/assets/site.js
+node --check docs/assets/learning.js
 node scripts/check.mjs
 ```
 
-Skriptet kjører offentlig-innhold, dataintegritet, innholdsstil og releasekontroll separat. GitHub Actions kjører de samme kontrollene ved push/PR. Test også søk, filtrering, kort, detaljsider, presentasjonsmodus, feedback, mobil og desktop.
+Skriptet kjører offentlig-innhold, dataintegritet, innholdsstil og releasekontroll separat. GitHub Actions kjører de samme kontrollene ved push/PR. Test også startkurset, arkitekturlenker, kopiering av maler, alle tre presentasjonsløp med notater, søk, filtrering, detaljsider, feedback, mobil og desktop.
 
 Ved hver publisert endring: oppdater `docs/data/site.json.version` og dato. CSS/JS-referansene i `docs/index.html` skal bruke samme versjon. Samle flerfilendringer i én atomisk commit/PR, ikke publiser mellomtrinn som krever hverandre.
 
