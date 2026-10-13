@@ -51,3 +51,5 @@ for(const n of pagesNeeded)if(!html.includes('data-page="'+n+'"'))fail('HTML man
 if(!html.includes('site.js?v='+site.version)||!html.includes('learning.js?v='+site.version)||!html.includes('site.css?v='+site.version))fail('Manglende felles assetversjon');
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log('PASS – '+pagesNeeded.length+' sider, '+learning.diagrams.length+' arkitekturer, '+learning.templates.length+' maler, '+Object.keys(sources).length+' kilder og '+Object.keys(pages.presentationDecks).length+' presentasjonsløp validert');
+
+if(!/prosentpoeng/i.test(pages.home?.statsDelta||''))fail('KI-endring må forklares med ordet prosentpoeng, ikke forkortelsen pp');

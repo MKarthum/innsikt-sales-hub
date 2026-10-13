@@ -1,6 +1,6 @@
 # Innsikt – marked og salg
 
-Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.5.1 – ikke godkjent som offisielt internt salgsmateriell.**
+Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.5.2 – ikke godkjent som offisielt internt salgsmateriell.**
 
 [Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
 
