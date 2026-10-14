@@ -49,7 +49,16 @@ for(const file of ['docs/index.html','docs/assets/site.js','docs/assets/learning
 const html=fs.readFileSync('docs/index.html','utf8');
 for(const n of pagesNeeded)if(!html.includes('data-page="'+n+'"'))fail('HTML mangler menypunkt '+n);
 if(!html.includes('site.js?v='+site.version)||!html.includes('learning.js?v='+site.version)||!html.includes('site.css?v='+site.version))fail('Manglende felles assetversjon');
+if(!Array.isArray(pages.home.homeSignals)||pages.home.homeSignals.length!==3)fail('Forsiden må ha tre distinkte innganger: datagrunnlag, analyse og KI');
+else{
+ const signals=pages.home.homeSignals;
+ if(new Set(signals.map(x=>x.id)).size!==3)fail('Forsiden inneholder dupliserte innganger');
+ for(const sig of signals)refs(sig.sources,'Forsidekort '+sig.id);
+ const kinds=new Set(signals.map(x=>x.type));
+ for(const kind of ['foundation','eu-analytics','norway-ai'])if(!kinds.has(kind))fail('Mangler inngangstype '+kind);
+}
+if(!market.stats.euAnalytics||!sources[market.stats.euAnalytics.source])fail('Dataanalyse-statistikk mangler kilde');
+if(!pages.marketIntro?.dataStory?.length)fail('Markedssiden mangler beskrivelse av datagrunnlag');
+
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log('PASS – '+pagesNeeded.length+' sider, '+learning.diagrams.length+' arkitekturer, '+learning.templates.length+' maler, '+Object.keys(sources).length+' kilder og '+Object.keys(pages.presentationDecks).length+' presentasjonsløp validert');
-
-if(!/prosentpoeng/i.test(pages.home?.statsDelta||''))fail('KI-endring må forklares med ordet prosentpoeng, ikke forkortelsen pp');

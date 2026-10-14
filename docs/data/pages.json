@@ -91,20 +91,59 @@
     "eyebrow": "ET PRAKTISK VERKTØY FOR BEDRE KUNDEDIALOGER",
     "titleLine1": "Se mulighetene.",
     "titleLine2": "Still bedre spørsmål.",
-    "intro": "Forstå hvorfor virksomheter investerer i data, analyse og KI – og hvordan vi gjør kundens utfordringer om til relevante samtaler og oppdrag.",
-    "statsTitle": "Markedet i korte trekk",
-    "statsIntro": "Dokumenterte indikatorer fra norsk næringsliv",
-    "statsFirst": "Bruker KI",
-    "statsDelta": "Prosentpoeng fra året før",
-    "statsRange": "Store bransjeforskjeller",
-    "statsPopulation": "Norske foretak med minst ti sysselsatte, ekskl. finans",
+    "intro": "Bedre beslutninger starter med data som henger sammen og er til å stole på. Innsikt hjelper kundene med dataplattformer, analyse og rapportering – og med KI der det gir verdi.",
+    "statsTitle": "Tre innganger til data og innsikt",
+    "statsIntro": "Fra pålitelig datagrunnlag til analyse og KI. Tre forskjellige behov som ofte henger sammen.",
     "actionTitle": "Hva skal du gjøre?",
     "actionIntro": "Ta utgangspunkt i situasjonen du står i",
     "startTitle": "Helt ny innen data og analyse?",
     "startIntro": "Bruk åtte minutter på hva en dataplattform gjør, hvor KI passer inn og hvilke begreper du trenger å kjenne.",
     "startAction": "Ta introduksjonen",
     "advancedTitle": "Erfaren eller på vei til kundemøte?",
-    "advancedIntro": "Gå rett til arkitekturskissene, samtaleguidene eller verktøykassen."
+    "advancedIntro": "Gå rett til arkitekturskissene, samtaleguidene eller verktøykassen.",
+    "statsCaveat": "Tallene kommer fra ulike undersøkelser, land og år og kan ikke sammenlignes direkte.",
+    "homeSignals": [
+      {
+        "id": "foundation",
+        "type": "foundation",
+        "icon": "layers",
+        "eyebrow": "Datagrunnlag og plattform",
+        "value": "Felles tall",
+        "title": "Data som henger sammen",
+        "description": "Når CRM, økonomi og andre systemer gir ulike tall, kan kunden trenge integrasjon, datakvalitet og felles definisjoner.",
+        "route": "arkitektur",
+        "routeLabel": "Slik henger data sammen",
+        "sources": [
+          "webstep1"
+        ]
+      },
+      {
+        "id": "analytics",
+        "type": "eu-analytics",
+        "icon": "bar-chart",
+        "eyebrow": "Analyse og beslutningsstøtte",
+        "title": "Foretak gjør dataanalyse selv",
+        "description": "Foretak med minst ti sysselsatte. Måler intern dataanalyse, ikke etterspørsel etter konsulenter.",
+        "route": "forretning",
+        "routeLabel": "Se forretningsbehov",
+        "sources": [
+          "eurostatAnalytics"
+        ]
+      },
+      {
+        "id": "ai",
+        "type": "norway-ai",
+        "icon": "sparkles",
+        "eyebrow": "KI som ny pådriver",
+        "title": "Foretak bruker KI",
+        "description": "Foretak med minst ti sysselsatte, ekskl. finans. Bruk er ikke dokumentert gevinst.",
+        "route": "ai",
+        "routeLabel": "Se KI i plattformene",
+        "sources": [
+          "ssb"
+        ]
+      }
+    ]
   },
   "qualification": {
     "items": [
@@ -312,5 +351,43 @@
         }
       ]
     }
+  },
+  "marketIntro": {
+    "dataTitle": "Analyse og dataplattform – verdien før teknologien",
+    "dataLead": "Virksomheter trenger pålitelige data, felles styring og gode analyser enten de satser på KI eller ikke. Dataplattformen skal gjøre informasjon tilgjengelig og gjenbrukbar.",
+    "analyticsTitle": "Dataanalyse i europeiske foretak",
+    "analyticsDetail": "EU-foretak med minst ti sysselsatte. Analyse utført av egne ansatte. Ikke direkte sammenlignbart med de norske KI-tallene.",
+    "aiTitle": "KI-bruken øker i Norge",
+    "aiDetail": "Foretak med minst ti sysselsatte, ekskl. finans. Bruk er ikke det samme som dokumentert gevinst.",
+    "sectorsTitle": "Ulik KI-bruk mellom næringer",
+    "sectorIntro": "Tilleggsinformasjon fra SSB – ikke et mål på konsulentbehov.",
+    "dataStory": [
+      {
+        "id": "connect",
+        "title": "Koble sammen",
+        "body": "Data fra kunder, økonomi og drift ligger ofte i ulike systemer. Integrasjon gjør informasjonen tilgjengelig på tvers.",
+        "sourceIds": [
+          "webstep1",
+          "googleIntegration"
+        ]
+      },
+      {
+        "id": "trust",
+        "title": "Få kontroll på tallene",
+        "body": "Felles definisjoner, kvalitet og ansvar bidrar til pålitelig rapportering og bedre beslutninger.",
+        "sourceIds": [
+          "webstep1"
+        ]
+      },
+      {
+        "id": "use",
+        "title": "Bruke innsikten",
+        "body": "BI, analyse, prognoser og KI bygger videre på datagrunnlaget, med ulike muligheter og risikoer.",
+        "sourceIds": [
+          "webstep1",
+          "eurostatAnalytics"
+        ]
+      }
+    ]
   }
 }

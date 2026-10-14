@@ -256,5 +256,19 @@
     "url": "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents",
     "type": "leverandørdokumentasjon",
     "checked": "2026-10-13"
+  },
+  "eurostatAnalytics": {
+    "title": "Digital economy and society statistics – enterprises: data analytics, 2025",
+    "publisher": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Digital_economy_and_society_statistics_-_enterprises",
+    "type": "offentlig EU-statistikk",
+    "checked": "2026-10-14"
+  },
+  "googleIntegration": {
+    "title": "What is Data Integration?",
+    "publisher": "Google Cloud",
+    "url": "https://cloud.google.com/learn/what-is-data-integration",
+    "type": "leverandørforklaring av dataintegrasjon",
+    "checked": "2026-10-14"
   }
 }

@@ -32,57 +32,67 @@
         "value": 90
       }
     ],
-    "source": "ssb"
+    "source": "ssb",
+    "euAnalytics": {
+      "year": "2025",
+      "value": 33.02,
+      "source": "eurostatAnalytics",
+      "region": "EU"
+    }
   },
   "trends": [
     {
-      "id": "adoption",
-      "title": "KI går fra særinteresse til bred bruk",
-      "intro": "I 2026 bruker 48 % av norske foretak med minst ti sysselsatte KI, mot 30 % i 2025.",
-      "meaning": "Mange kunder har begynt å teste eller bruke KI. Neste samtale bør handle om anvendelse, datagrunnlag og gevinst – ikke om de har hørt om KI.",
-      "question": "Hva har dere tatt i bruk, og hva ønsker dere å få mer ut av?",
+      "id": "integration",
+      "title": "Datagrunnlaget må fungere på tvers av systemer",
+      "intro": "Webstep beskriver spredte data, manuell rapportering og ulike nøkkeltall som typiske utfordringer.",
+      "meaning": "Behovet kan være integrasjon, datamodellering, kvalitet og felles begreper – også uten KI-prosjekter.",
+      "question": "Hvilke tall eller data sliter dere med å få til å henge sammen?",
       "sources": [
-        "ssb"
+        "webstep1",
+        "googleIntegration"
       ],
-      "evidence": "statistikk",
-      "checked": "2026-10-13"
+      "evidence": "tjenestebeskrivelse",
+      "checked": "2026-10-14"
     },
     {
-      "id": "sector",
-      "title": "Forskjellig modenhet mellom bransjer",
-      "intro": "SSB måler i 2026 29 % KI-bruk i transport og lagring, 51 % i industri-/forsyningsnæringer og 90 % i informasjon og kommunikasjon.",
-      "meaning": "Bransje og virksomhetsstørrelse påvirker hvilke spørsmål som er relevante. Et generelt KI-budskap treffer ikke alle likt.",
-      "question": "Hvor langt er dere kommet sammenlignet med egne ambisjoner?",
+      "id": "analytics",
+      "title": "Analyse skal gi bedre beslutninger",
+      "intro": "Eurostat undersøker hvor mange EU-foretak som analyserer data med egne ansatte, og hvilke kilder de bruker.",
+      "meaning": "Analysestatistikk sier ikke hvor gode beslutningene blir. Finn ut hva kunden ønsker å forstå, måle eller planlegge bedre.",
+      "question": "Hvilke beslutninger ville blitt bedre med riktigere eller raskere innsikt?",
       "sources": [
-        "ssb"
+        "eurostatAnalytics",
+        "webstep1"
       ],
       "evidence": "statistikk",
-      "checked": "2026-10-13"
-    },
-    {
-      "id": "datareadiness",
-      "title": "KI øker betydningen av datagrunnlaget",
-      "intro": "Digdir løftet i oktober 2026 fram KI-klare data som grunnlag for trygg og effektiv bruk av KI.",
-      "meaning": "Kvalitet, tilgang, dokumentasjon og dataforvaltning kan være innganger til konkret arbeid selv om dialogen begynner med KI.",
-      "question": "Hvilke data må være tilgjengelige og pålitelige for at dette skal virke?",
-      "sources": [
-        "digdir"
-      ],
-      "evidence": "myndighetsveiledning",
-      "checked": "2026-10-13"
+      "checked": "2026-10-14"
     },
     {
       "id": "platform",
-      "title": "Moderne plattformer samler flere dataoppgaver",
-      "intro": "Microsoft Fabric og Databricks beskriver plattformer som dekker data engineering, analyse og KI på tvers av arbeidsoppgaver.",
-      "meaning": "Plattformvalg skaper behov for integrasjon, arkitektur, modellering og endring. Leverandørpåstander må ikke forveksles med dokumentert kundeverdi.",
-      "question": "Hva ønsker dere å forbedre med ny eller eksisterende plattform?",
+      "title": "Dataplattformen skal gjøre data gjenbrukbare",
+      "intro": "Dataplattformer kan samle lagring, integrasjon, modellering, analyse og styring, men løser oppgavene forskjellig.",
+      "meaning": "Modernisering er interessant dersom den gir bedre dataflyt, kvalitet, kostnadskontroll eller leveranseevne.",
+      "question": "Hva fungerer dårlig i dataflyten i dag, og hva ville en forbedring gitt dere?",
       "sources": [
         "fabric",
-        "databricks"
+        "databricks",
+        "webstep1"
       ],
       "evidence": "leverandørdokumentasjon",
-      "checked": "2026-10-13"
+      "checked": "2026-10-14"
+    },
+    {
+      "id": "adoption",
+      "title": "KI gir nye bruksområder – og synliggjør gamle dataproblemer",
+      "intro": "SSB viser økende KI-bruk i norsk næringsliv. Utviklingen over tid vises i grafen over.",
+      "meaning": "KI kan øke behovet for tilgjengelige, pålitelige data og gode sikkerhetskontroller. Men ikke alle databehov handler om KI.",
+      "question": "Hva ønsker dere å gjøre med KI, og hvilke data må det bygge på?",
+      "sources": [
+        "ssb",
+        "digdir"
+      ],
+      "evidence": "statistikk",
+      "checked": "2026-10-14"
     }
   ],
   "marketEvents": [
