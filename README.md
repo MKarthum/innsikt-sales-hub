@@ -86,6 +86,10 @@ node scripts/check.mjs
 
 CI kjører de samme kontrollene. Bump `docs/data/site.json.version` og CSS/JS-referanser i `docs/index.html` per publisert versjon. Relevante filer oppdateres **atomisk**. Følg `START_HERE.md` og `AGENTS.md`.
 
+## Automatiserte nettlesertester
+
+Testavhengigheten Playwright er **kun for CI og utviklere** – den lastes ikke av nettsidens brukere. `npm ci`, deretter `npx playwright install --with-deps chromium` i et miljø med nødvendige systembiblioteker. Start `python3 -m http.server 8769` fra repoets rot og kjør `npm run check:browser`. GitHub Actions kjører dette automatisk ved push og PR, for 390 px mobil og 1440 px desktop.
+
 ## Overføring til Webstep
 
 Kontroller sikkerhet og rettigheter, overfør repoets kode og åpne innhold til godkjent enterprise-repo, og publiser først bak dokumentert tilgangskontroll. Deretter kan interne referanser og kontaktpunkter eventuelt kvalitetssikres og legges inn.

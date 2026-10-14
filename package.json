@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "innsikt-sales-hub-checks",
+  "version": "0.9.0",
+  "description": "Testverktøy for statisk Innsikt-portal. Ingen runtime-avhengigheter.",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "check:browser": "node scripts/check-browser.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.0"
+  }
+}
