@@ -21,6 +21,8 @@ Tidligere samtaler er kun spor til mulige behov. **Repoets gjeldende `main` er a
 - `sales.json`: salgsinnganger, forretningsbehov, scenarioer, målgrupper og kompetanseområder.
 - `technologies.json`: teknologier, innebygde KI-funksjoner, merkeikoner og produktbeskrivelser.
 - `backlog.json`: synlige forbedringspunkter og status. Ingen personopplysninger.
+- `prompts.json`: promptmaler og kanoniske felles promptregler.
+- `horizon.json`: fordypningens egne hypoteser og spørsmål; referanser til begreper/diagrammer fra andre eiere.
 - `learning.json`: introduksjon, ordbok, generiske arkitekturskisser, risiko og maler. Disse skal ikke hardkodes i JS.
 
 **Bindende kontrakt: `CONTENT_CONTRACT.md`.** Én semantisk opplysning har én dataeier, også når den omskrives, forkortes eller brukes flere steder. Kort-/langvariant skal eies av samme stabile ID. Koble via ID-er; ikke kopier faktapåstander og definisjoner. HTML/CSS/JS er kun struktur, visning og interaksjon. **Ingen nye eller endrede faglige fakta eller sidebudskap skal hardkodes i visningskode.**
@@ -47,6 +49,7 @@ Gi selgere innsikt i markedsutviklingen, hjelp til å oppdage forretnings- og IT
 Kjør i repoets rot:
 
 ```sh
+node --check docs/assets/content.js
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
 node --check docs/assets/prompts.js
@@ -70,6 +73,8 @@ Faglig sparring skal først og fremst gjøre salgsbudskapet, eksemplene og promp
 Se `INTERNAL_MIGRATION.md` før vurdering av HubSpot, Google Drive, konsulentprofiler eller annet internt innhold. Det offentlige GitHub-repoet, inkludert commit-historikken, må aldri tilføres private data.
 
 
-## Større refaktorering planlagt
+## Referansebasert innholdsmodell (arbeidsgren v0.9.0)
 
-Skillet mellom JSON og visningskode er **ikke tilstrekkelig** til å oppfylle hele den semantiske én-kilde-regelen. Se `CONTENT_CONTRACT.md` og `REFACTOR_AUDIT.md`. Bruk `REFACTOR_NEXT_CHAT.md` som start for et separat, grundig refaktoreringsoppdrag. Ikke beskriv refaktoreringen som allerede fullført.
+`docs/assets/content.js` løser `$content`-referanser ved lasting av offentlige JSON-filer. For eksempel viser `{"$content":"glossary:dataplattform","variant":"normal"}` den kanoniske ordlisteforklaringen. Prompter kan komponeres fra `promptParts` og `prompts.rules`, slik at kopiert resultat forblir selvstendig uten kopiert vedlikehold. `CONTENT_CONTRACT.md` er bindende.
+
+`REFACTOR_AUDIT.md` er historisk før-kartlegging; `REFACTOR_PLAN.md` beskriver arbeidet og `REFACTOR_REVIEW.md` beskriver faktisk implementering, bevis og restanser. Ikke hev at all eldre fagtekst er semantisk normalisert, eller at mobil/desktop er visuelt verifisert uten faktisk nettlesertest. Publiser først etter godkjent PR og relevante nettleserkontroller.

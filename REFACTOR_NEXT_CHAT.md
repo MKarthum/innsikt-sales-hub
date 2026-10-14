@@ -1,4 +1,6 @@
-# Oppdrag for ny chat – Innsikt: helhetlig refaktorering av innhold og visning
+# Arkiv: opprinnelig refaktoreringsoppdrag
+
+**Gjennomføring startet 14.10.2026.** Dette er historisk kravgrunnlag, ikke instrukser om å utføre hele refaktoreringen på nytt. Ved gjenopptak: hent siste `main`, undersøk aktiv PR og les `REFACTOR_REVIEW.md` og `CONTENT_CONTRACT.md`.
 
 Du skal arbeide selvstendig i GitHub-repoet **MKarthum/innsikt-sales-hub**. Oppdraget er å gjøre innholdsarkitekturen like robust og konsistent som brukerens Japan-prosjekt, **uten å miste dagens nettside, funksjonalitet eller faglig innhold**. Ikke bare foreslå en plan: undersøk, planlegg kort, gjennomfør og test refaktoreringen.
 

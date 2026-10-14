@@ -1,68 +1,41 @@
-# Innholdskontrakt – én autoritativ kilde (v1, 14.10.2026)
+# Innholdskontrakt – én autoritativ kilde (v2, 14.10.2026)
 
-Dette dokumentet er en **bindende arkitektur- og redaksjonell regel** for Innsikt, også ved videreutvikling i Claude Code, Gemini eller andre KI-verktøy. Leses sammen med `START_HERE.md`, `AGENTS.md` og `OPEN_DATA_POLICY.md`.
+Gjelder alle endringer i Innsikt. Les sammen med `START_HERE.md`, `AGENTS.md`, `OPEN_DATA_POLICY.md` og `REFACTOR_REVIEW.md`. Versjon 0.9.0 innfører en **delvis implementert, maskinelt kontrollert** referansemodell. Kontrakten gjelder også eldre innhold som ennå ikke er fullt normalisert.
 
-## 1. Absolutt krav: ingen uavhengige kopier av samme innhold
+## Autoritet og visningsvalg
 
-- Et **semantisk innholdselement** (begrepsdefinisjon, faktapåstand, hendelse, statistikk, produktstatus, beskrivelse, kilde, leveransepåstand eller veiledning) skal ha **én kanonisk eier**, uavhengig av hvor mange steder det vises.
-- «Samme» gjelder **betydning**, ikke bare identisk ordlyd. Omskrivning og forkorting i en annen JSON-fil eller JavaScript er ikke en løsning.
-- Innhold kan ha **kort, normal og utdypet tekstvariant** når de faktisk har ulike formål. Disse variantene skal være under **samme ID og dataeier**, ikke to frikoblede elementer.
-- En visning velger **hvilke ID-er og hvilke varianter** den trenger. Sidene eier sammensetning, rekkefølge, navigasjon og sideunike spørsmål – ikke egne faktaversjoner.
-- Fakta (f.eks. prosentandel, produktstatus, dato eller oppkjøp) lagres én gang som typede felt med kilde. Alle tekstlige gjengivelser bruker den samme autoritative posten.
-- Eksempler og spørsmål som bare gir mening på én side, kan være sideeide. De skal likevel **referere** til kanoniske begreper/fakta og aldri duplisere eller påstå en alternativ versjon av dem.
-- Navn i navigasjon, menykort og linker kan naturligvis forekomme flere steder som referanser til samme ID. Det er ikke duplisering av faglig innhold.
+- Ett semantisk innholdselement har én dataeier og stabil ID. Det gjelder også når teksten er omskrevet eller kortet ned.
+- Et objekt kan ha `variants.short`, `variants.normal` og `variants.long`, under **samme ID og eier**. Opprett bare varianter med et faktisk formål.
+- En side, et lysbilde eller en prompt velger ID og variant, ikke en tekstkopi. Eksisterende sidetilpassede spørsmål, titler og pedagogiske eksempler kan fortsatt være sideeide dersom de ikke gjengir en annen dataeiers faktapåstand.
+- `pages.json` eier rekkefølge, komposisjon, sidetitler og unike presentasjonsnotater. `horizon.json` eier original analyse og hypoteser, ikke nye kopier av ordliste, produktegenskaper eller markedsfakta.
+- Alt i dette offentlige repoet og Git-historikken er offentlig; `visibility: "not-presented"` hindrer bare visning, ikke innsyn. Ikke lagre noe konfidensielt der.
 
-## 2. Innhold og layout er separate lag
+## Referanser som faktisk er implementert
 
-- `docs/data/*.json`: innhold og autoritative metadata, organisert etter **eieransvar**, ikke etter antall visninger.
-- `docs/index.html`, `docs/assets/*.js`, `docs/assets/site.css`: struktur, interaksjon og presentasjon. Ingen selvstendige faglige fakta, definisjoner eller salgsbudskap.
-- Ikke opprett en ny kopi bare fordi en ny side, lysbildemodus, en prompt eller et kort trenger samme informasjon.
-- **Ingen database eller tungt CMS er nødvendig per nå.** Et lite, validert referansesystem med ID-er mellom JSON-filer er førstevalg. Foreslå større tekniske endringer bare ved dokumentert behov.
+En referanse er et JSON-objekt: `{ "$content": "glossary:dataplattform", "variant": "normal" }`.
 
-## 3. Et innholdselement kan være skjult eller gjenbrukt
+`docs/assets/content.js` løser referanser ved oppstart og returnerer ordinære tekstfelt til visningskomponentene. Den feiler eksplisitt ved manglende eier/ID/variant, duplisert ID og ugyldige referansefelt. Registrerte samlinger er `glossary` (`learning.json.glossary`), `risk` (`learning.json.risks`), `guidance` (`sales.json.sharedGuidance`), `market-guidance` (`market.json.metricGuidance`), `ai-overview` (`technologies.json.aiOverview`) og `prompt-rule` (`prompts.json.rules`). Utvid registeret og kontrakttestene sammen ved nye referansetyper; ikke innfør parallelle lookups.
 
-- Det er lov å lagre et åpent innholdselement som foreløpig ikke vises (for eksempel en kandidat til senere fordypning).
-- Publiseringsstatus og bruk i en bestemt visning må være **eksplisitt**, ikke en utilsiktet følge av at noe finnes i en fil.
-- Et element kan brukes på forsiden, i ordlisten, i fordypning, i søk, i presentasjoner og i salgs-prompter.
-- En side skal ikke kopiere innholdet; den peker til det med ID og ønsket visningsvariant.
-- **Viktig:** «Ikke vist på nettsiden» er **ikke** privat. Alle JSON-filer og gamle Git-committer i det personlige offentlige repoet må tåle full offentlig innsyn.
+Kopierbare prompter kan lagre `promptParts` med veksling mellom strengtekst og `$content`-referanser. Resolveren setter sammen delene **uten ekstra tegn** til ett selvstendig promptfelt før visning, redigering og kopiering. En prompt har enten `prompt` eller `promptParts`, aldri begge. Felles regler eies av `prompts.json.rules`.
 
-## 4. Kunnskapsstatus og kildegrunnlag
+Fordi dette fortsatt er et gradvis normalisert prosjekt, brukes eksisterende domenefelter (`source`, `sources`, `sourceIds`, `meaning`, `description` osv.) der de allerede er kanoniske. Ikke introduser en ny `sourceIds`-kopi bare for å standardisere navnet på et felt.
 
-Skille alltid mellom:
-1. **Dokumentert forhold**: hva som kan underbygges, og hvilken dato/versjon det gjelder.
-2. **Leverandørpåstand eller veikart**: hva leverandøren faktisk hevder, med produktmodenhet (for eksempel preview vs. generell tilgjengelighet).
-3. **Faglig vurdering/hypotese**: mulig utviklingsretning, med usikkerhet, alternativer og hva som kunne motbevist den.
-4. **Åpent spørsmål**: hva vi ennå ikke vet.
+## Kilder, datoer og kunnskapsstatus
 
-For tidsfølsomme opplysninger skal eieren angi relevante `sourceIds`, `reviewed` eller `checked`, og ved behov `published`, `asOf`, `maturity` og usikkerhet. En leverandørkilde bekrefter leverandørens beskrivelse, ikke uavhengig kundeverdi.
+Bruk `evidence` for `documented` (dokumentert fakta), `vendor` (leverandørens beskrivelser/veikart), `assessment` eller `hypothesis` (egen vurdering/hypotese), og `open-question` (ikke avklart). Knytt tidsfølsomt innhold til `reviewed`, og fakta/leverandørinformasjon til faktisk kildereferanse. `sources.json.checked` er siste kontroll av kildelenken, mens `sources.json.published` er kildens publiseringsdato; ingen av dem erstatter innholdets `reviewed` eller produktets `status`/preview-angivelse.
 
-**Lakehouse-analogien:** Lakehouse kombinerer sider ved data lake og warehouse. At plattformer, ontologi/kunnskapsgrafer og KI-kontekst kan få mer overlapp, er en plausibel hypotese – **ikke et dokumentert historisk parallellforløp med bestemt sluttresultat**.
+En leverandørkilde dokumenterer hva leverandøren beskriver, ikke kundens realiserte gevinst. Beskriv «Company Brain» som uformell markedsterminologi, ikke standardarkitektur. Konvergens mellom dataplattform og kunnskapsgraf er en mulighet, ikke et bevist utfall.
 
-**Company Brain:** uformell markedsbetegnelse, ikke én standardisert arkitektur eller nødvendigvis en kunnskapsgraf. Ikke anta at all KI må ha strukturerte tabeller, egen graf eller datavarehus; dokumentbasert søk og RAG kan ha et annet utgangspunkt.
+## Automatisk verifikasjon og begrensninger
 
-## 5. Gjeldende domeneeiere og midlertidige begrensninger
+Kjør `node scripts/check.mjs` ved enhver endring. Kontroller omfatter referanser, ID-er, kildefelter, skjult innhold, promptkomposisjon, lange **eksakte** tekstduplikater, 76 genererte visninger og metamorfisk spredning av én begrepsendring til Start her, fordypning, Presenter og søk. Test også i nettleser med mobil og desktop før publisering.
 
-- `site.json`: versjon og publiseringsmetadata.
-- `sources.json`: kilderegister.
-- `learning.json`: ordliste, generiske skisser og grunnforklaringer.
-- `technologies.json`: leverandører, produktfunksjoner, logoer og statuser.
-- `market.json`: dokumenterte markedsdata, hendelser og markedsvurderinger.
-- `sales.json`: salgsinnganger, kundesignaler og salgsmetodikk.
-- `prompts.json`: arbeidsinstruksjoner for salg og kvalitetskrav.
-- `horizon.json`: **fordypningens originale analyse, hypoteser, tverrfaglige spørsmål og referanser**. Skal ikke bli en parallell ordbok eller en ny produktdatabase.
-- `pages.json`: sidenes komposisjon, sideunike tekst og presentasjonsdisposisjoner – ikke faktaautoriteter.
-- `backlog.json`: planlagte forbedringer og redaksjonelle behov.
+Eksakttest garanterer ikke at to ulikt formulerte tekster har samme semantikk. Ikke alle eldre felt er referansebaserte, en del generiske UI-etiketter ligger fortsatt i JavaScript, og den manuelt kuraterte søkeindeksen kan kreve oppdatering ved nye typer innhold. Se `REFACTOR_REVIEW.md`. Dette er kjente restanser, ikke grunnlag for å hevde fullstendig semantisk normalisering.
 
-**Status 14.10.2026:** Reglene er nå strengere enn dagens implementering. Flere eldre felter, slides og hardkodede JS-tekster bryter fremdeles den langsiktige innholdskontrakten. Dette er **kjent teknisk gjeld**, dokumentert i `REFACTOR_AUDIT.md`. Ikke beskriv alt som ferdig refaktorert.
+## Endringsrekkefølge
 
-## 6. Endringsprosedyre
-
-1. Finn kanonisk innholdselement eller opprett ett nytt med stabil ID, eier og kilder.
-2. Finn alle visninger og avhengigheter gjennom ID-/referansesøk.
-3. Oppdater innholdselementet **én gang**; bruk variant ved behov, ikke kopierte tekster.
-4. Verifiser at kort, detaljsider, søk og presentasjon nå er konsistente.
-5. Kjør datavalidering, referanseintegritet, innholdstest og utvalgt visuell kontroll.
-6. Oppdater versjon og faglig kontrolldato; publiser atomisk.
-
-Den neste store refaktoreringen skal lage automatiske kontroller som tester denne kontrakten, ikke bare beskriver den.
+1. Finn eller opprett kanonisk eier/ID og dokumenter kilder og status.
+2. Finn alle forbrukere av ID-en og sørg for eksplisitte referanser/varianter.
+3. Kjør alle kontroller og test virkning på aktuelle sider, søk, Presenter og kopierbare prompter.
+4. Gjennomgå offentlighet, mobil, desktop, CSS, lenker og kildegrunnlag før atomisk publisering.
+5. Oppdater `site.json` og alle JS/CSS-versjoner ved samlet release. Ingen database, CMS eller ny frontend-stakk uten dokumentert behov.

@@ -1,6 +1,6 @@
 # Innsikt – marked og salg
 
-Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.8.0 – ikke godkjent som offisielt internt salgsmateriell.**
+Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsgren v0.9.0 – ikke godkjent som offisielt internt salgsmateriell. Produksjon på `main` er uendret frem til sammenslåing.**
 
 [Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
 
@@ -12,7 +12,7 @@ Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent doku
 
 Et nytt offentlig promptbibliotek med 14 redigerbare, kopierbare instrukser i fem kategorier: forstå kunden, forberede møte, finne kompetanse, lage salgsmateriell og følge opp. Alle inneholder kontekst, ønsket utdata, usikkerhet/kildekrav og menneskelig kontroll. Enkelte maler er merket for anonymisert bruk før intern flytting. **Ingen CRM- eller Drive-tilkobling finnes i denne versjonen.**
 
-- Prompter eies av `docs/data/prompts.json`. UI i `docs/assets/prompts.js`.
+- Prompter eies av `docs/data/prompts.json`. Felles kildeinstruksjoner eies av `prompts.rules` og settes sammen med `promptParts`. UI i `docs/assets/prompts.js`.
 - Tekst i redigeringsfeltet forblir i brukerens nettleser mens siden er åpen; den lagres ikke og sendes ikke av portalen.
 - Salg kopierer selv til en KI-tjeneste godkjent for de faktiske opplysningene.
 - Se `INTERNAL_MIGRATION.md` for videre utvikling mot Webstep-konto med riktige rettigheter.
@@ -22,7 +22,7 @@ Et nytt offentlig promptbibliotek med 14 redigerbare, kopierbare instrukser i fe
 - Ny valgfri side **I grenselandet mellom data og KI** (`#horisont`), med tydelig skille mellom fakta, leverandørpåstander og hypoteser.
 - Definisjoner av kunnskapsgraf, ontologi, Company Brain, dataprodukt og datasuverenitet eies av kanonisk ordliste i `learning.json`. Fordypningen i `horizon.json` refererer til dem med ID.
 - **Bindende innholdskontrakt:** `CONTENT_CONTRACT.md`. Én dataeier per semantisk innholdselement, selv om det er kort/langt eller vises null, én eller mange ganger.
-- Større refaktorering er **planlagt, ikke fullført**. Se `REFACTOR_AUDIT.md` og `REFACTOR_NEXT_CHAT.md`.
+- **Refaktorering v0.9.0:** `docs/assets/content.js` løser referanser mellom autoritative JSON-eiere; Presenter, søk, fordypning og promptbibliotek benytter felles innhold der det er normalisert. Se `CONTENT_CONTRACT.md` og `REFACTOR_REVIEW.md` for dekning og restanser.
 
 ## Formål
 
@@ -48,20 +48,21 @@ python3 -m http.server 8000
 | Fil | Autoritativt ansvar |
 |---|---|
 | `docs/data/site.json` | Versjon og publiseringsmetadata |
-| `docs/data/pages.json` | Sidetitler, tekster, presentasjon og kvalifiseringscopy |
+| `docs/data/pages.json` | Sideunike titler, komposisjon, presentasjonsnotater og kvalifisering; felles fagtekst refereres |
 | `docs/data/sources.json` | Felles kildebibliotek |
 | `docs/data/market.json` | Statistikk, markedsutvikling, oppkjøp |
 | `docs/data/sales.json` | Salgsinnganger, forretningsbehov, samtaleøvelser og kompetanse |
 | `docs/data/technologies.json` | Produktinformasjon, KI-funksjoner, logoattributter |
 | `docs/data/backlog.json` | Forbedringsoversikt |
 | `docs/data/learning.json` | Grunnkurs, begreper, arkitekturskisser, risiko og maler |
+| `docs/assets/content.js` | Referanseløser for stabile innholds-ID-er og komponerte prompter |
 | `docs/assets/learning.js` | Generisk visning for grunnkurs, arkitektur og verktøykasse |
 | `docs/assets/site.js` | Generiske visninger og interaksjoner – ingen egen faglig faktaautoritet |
 | `docs/assets/site.css` | Design og responsive komponenter |
 | `docs/index.html` | Strukturelt skall og navigasjon |
-| `scripts/check-*.mjs` | Kontroller for innhold, integritet, stil og release |
+| `scripts/check-*.mjs` | Kontroller for innhold, integritet, stil, referanser, endringspropagering og release |
 
-**Hovedregel:** Én kanonisk kilde per felt. HTML/JS bestemmer visning og henter faginnhold fra JSON. Ingen nye hardkodede sidetekster, statistikk eller kundepåstander i visningslaget.
+**Hovedregel:** Én autoritativ kilde per semantisk innholdselement. Referanser (`$content`) kan velge `short`, `normal` og `long` hos samme ID. HTML/JS bestemmer visning og henter faginnhold fra JSON. Ikke innfør nye hardkodede fakta eller budskap. V0.9.0 er en dokumentert delnormalisering, ikke en garanti mot alle semantiske duplikater.
 
 ## Bruk og begrensninger
 
@@ -75,6 +76,7 @@ python3 -m http.server 8000
 ## Publisering
 
 ```sh
+node --check docs/assets/content.js
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
 node --check docs/assets/prompts.js
