@@ -312,5 +312,110 @@
     "url": "https://docs.glean.com/connectors/connectors-power-glean",
     "type": "leverandørdokumentasjon",
     "checked": "2026-10-14"
+  },
+  "webstep-sectors": {
+    "title": "Webstep – bransjer og kompetanse",
+    "publisher": "Webstep",
+    "url": "https://webstep.no/bli-en-av-oss/",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "webstep-q2-2026": {
+    "title": "Webstep – Q2 2026 (offentlig børsmelding og lenker til rapport)",
+    "publisher": "Webstep ASA",
+    "url": "https://webstep.no/investor/calendar-and-press-release/",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "iata-ground": {
+    "title": "IATA – digitalisering av bakketjenester",
+    "publisher": "IATA",
+    "url": "https://www.iata.org/en/pressroom/2026-releases/2026-05-19-01/",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "iata-future": {
+    "title": "IATA – Ground Ops of the Future",
+    "publisher": "IATA",
+    "url": "https://www.iata.org/en/programs/ops-infra/ground-operations/ground-ops-of-the-future",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "nve-grid": {
+    "title": "NVE – nettplanlegging",
+    "publisher": "NVE",
+    "url": "https://www.nve.no/energi/energisystem/nett/nettplanlegging/",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "jrc-energy": {
+    "title": "EU JRC – digitalisering av energisystemet",
+    "publisher": "EU Joint Research Centre",
+    "url": "https://joint-research-centre.ec.europa.eu/scientific-activities/energy-digitalisation_en",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "iea-methane": {
+    "title": "IEA – Global Methane Tracker 2025",
+    "publisher": "IEA",
+    "url": "https://www.iea.org/reports/global-methane-tracker-2025/key-findings",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "fin-ros": {
+    "title": "Finanstilsynet – ROS-analyse 2026",
+    "publisher": "Finanstilsynet",
+    "url": "https://www.finanstilsynet.no/publikasjoner-og-analyser/risiko--og-sarbarhetsanalyse/risiko--og-sarbarhetsanalyse-2026/risiko--og-sarbarhetsanalyse-2026/",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "fin-aml": {
+    "title": "Finanstilsynet – risikobasert transaksjonsovervåking",
+    "publisher": "Finanstilsynet",
+    "url": "https://www.finanstilsynet.no/nyhetsarkiv/nyheter/2025/temarapport--handtering-av-risiko-for-terrorfinansiering-i-et-utvalg-banker",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "nhs-flow": {
+    "title": "NHS England – analyse av etterspørsel og kapasitet",
+    "publisher": "NHS England",
+    "url": "https://www.england.nhs.uk/ourwork/demand-and-capacity/service-level-demand-and-capacity-planning/models/",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "nhs-discharge": {
+    "title": "NHS England – registrering av utskrivningsklar dato",
+    "publisher": "NHS England",
+    "url": "https://www.england.nhs.uk/long-read/discharge-ready-date-drd-guidance-and-scenarios/",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "oecd-fraud": {
+    "title": "OECD – dataanalyse og kontroll av offentlige ytelser",
+    "publisher": "OECD",
+    "url": "https://www.oecd.org/en/publications/countering-fraud-in-social-benefit-programmes_71df2657-en.html",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "jrc-industry": {
+    "title": "EU JRC – energieffektivisering i industrien",
+    "publisher": "EU Joint Research Centre",
+    "url": "https://joint-research-centre.ec.europa.eu/scientific-activities-z/energy-efficiency/industry_en",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "gs1-model": {
+    "title": "GS1 – global produktdatamodell",
+    "publisher": "GS1",
+    "url": "https://www.gs1.org/standards/gs1-global-data-model",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
+  },
+  "seafood-lice": {
+    "title": "Norges sjømatråd – lakselus og oppdrett",
+    "publisher": "Norges sjømatråd",
+    "url": "https://www.norwegianseafoodcouncil.com/aquaculture/salmon/salmon-lice/",
+    "type": "Bransjekilde",
+    "checked": "2026-10-14"
   }
 }

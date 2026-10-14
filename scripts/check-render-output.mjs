@@ -29,6 +29,8 @@ const setup=[
 ' }))add(name,fn);',
 " D.plays.forEach(x=>add('muligheter/'+x.id,()=>playDetail(x)));",
 " D.businessSignals.forEach(x=>add('forretning/'+x.id,()=>businessDetail(x)));",
+" D.industrySectors.forEach(x=>add('forretning/sektor-'+x.id,()=>industrySectorPage(x)));",
+" D.industryUseCases.forEach(x=>add('forretning/case-'+x.id,()=>industryCasePage(x)));",
 " D.learning.diagrams.forEach(x=>add('arkitektur/'+x.id,()=>architecture(x.id)));",
 " D.learning.templates.forEach(x=>add('verktoy/'+x.id,()=>toolkit(x.id)));",
 " D.prompts.items.forEach(x=>add('prompter/'+x.id,()=>prompts(x.id)));",
@@ -64,6 +66,16 @@ let entries;
 try {entries=vm.runInContext('__renderAll()',sandbox,{timeout:8000});}
 catch(error) {console.error('Klarte ikke generere sidevisninger:',error);process.exit(1);}
 const errors=[];
+const caseHtml=new Map(entries.filter(x=>x.name.startsWith('forretning/case-')).map(x=>[x.name,x.html]));
+for(const item of sales.industryUseCases){
+ const html=caseHtml.get('forretning/case-'+item.id);
+ if(!html||!html.includes(item.title)||!html.includes(item.pilot)||!html.includes(item.dataHypothesis))errors.push('Manglende kanonisk caseinnhold: '+item.id);
+}
+for(const sector of sales.industrySectors){
+ const html=entries.find(x=>x.name==='forretning/sektor-'+sector.id)?.html;
+ if(!html||!html.includes(sector.openingQuestion)||!html.includes(sector.practice))errors.push('Manglende sektorvisning: '+sector.id);
+}
+
 for(const {name,html} of entries){
  if(typeof html!=='string'||html.length<30){errors.push(name+': manglende HTML');continue;}
  const unresolved=html.match(/\$\{[^{}\r\n]{1,160}\}/g);

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont'];
-const details=['forretning/okonomi','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
+const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const problems=[];
 try {
@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.1',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.2',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -41,6 +41,15 @@ try {
   await page.waitForTimeout(80);
   const copied=await page.evaluate(()=>navigator.clipboard.readText());
   assert.equal(copied,original,'prompt kopieres i sin helhet');
+  await page.evaluate(()=>{location.hash='#forretning'});
+  await page.locator('.sector-card').first().waitFor();
+  assert.equal(await page.locator('.sector-card').count(),9,label+': bransjeoversikt');
+  await page.evaluate(()=>{location.hash='#forretning/sektor-transport'});
+  await page.locator('.industry-case-card').first().waitFor();
+  assert.equal(await page.locator('.industry-case-card').count(),4,label+': transport-caser');
+  await page.locator('.industry-case-card').first().click();
+  await page.locator('.business-detail-grid').waitFor();
+  assert.ok((await page.locator('.business-detail-grid').innerText()).includes('avgrensede') || (await page.locator('.business-detail-grid').innerText()).length>100, label+': detaljvisning');
   await page.locator('#search-button').click();
   await page.locator('#search-input').fill('dataplattform');
   assert.ok(await page.locator('.result-item').count()>0,'søk på begrep');

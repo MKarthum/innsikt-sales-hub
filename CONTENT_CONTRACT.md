@@ -39,3 +39,11 @@ Eksakttest garanterer ikke at to ulikt formulerte tekster har samme semantikk. I
 3. Kjør alle kontroller og test virkning på aktuelle sider, søk, Presenter og kopierbare prompter.
 4. Gjennomgå offentlighet, mobil, desktop, CSS, lenker og kildegrunnlag før atomisk publisering.
 5. Oppdater `site.json` og alle JS/CSS-versjoner ved samlet release. Ingen database, CMS eller ny frontend-stakk uten dokumentert behov.
+
+## Bransje og verdikjedecaser – autoritet v0.9.2
+
+- \`sales.json.industrySectors\` eier én beskrivelse og kildekontekst per sektor-ID.
+- \`sales.json.industryUseCases\` eier ett samlet case per case-ID med sektor- og \`playIds\`-koblinger. Ikke kopier caseinnhold som separate generiske \`businessSignals\` eller \`plays\`.
+- \`sales.json.industryJourney\` eier delte metodiske trinn. \`pages.json.industryUi\` eier kun etiketter og sidekomposisjon; Presenter peker til case-ID. Søk/HTML viser samme autoritative objekt.
+- \`sources.json\` eier kildeinformasjon; \`sourceIds\` på sektor beskriver bransjepraksis, ikke dokumentert effekt av hvert hypotetiske case. Faglig innhold er \`assessment\` med \`reviewed\` dato. Ingen sammenblanding av publisering/kildekontroll og faglig validering.
+- Se \`INDUSTRY_BUSINESS_DIALOGUE.md\` for prinsipper og test av faktisk forretningsverdi. \`scripts/check-render-output.mjs\` skal dekke hver sektor og hvert case, også ved ny kobling til Presenter.

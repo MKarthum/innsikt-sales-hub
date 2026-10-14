@@ -846,5 +846,1161 @@
       "ssb"
     ],
     "visibility": "presented"
+  },
+  "industrySectors": [
+    {
+      "id": "nett",
+      "name": "Kraft og nett",
+      "scope": "Kapasitet, investeringer og leveringssikkerhet",
+      "functions": "Nettutvikling, nettdrift, kundetilknytning",
+      "practice": "JRC beskriver datamodeller og KI i nettplanlegging. NVE beskriver krav til langsiktige nettutredninger.",
+      "openingQuestion": "Hvor er det størst gap mellom ønsket kapasitet og kapasiteten dere faktisk kan tilby?",
+      "sourceIds": [
+        "webstep-sectors",
+        "nve-grid",
+        "jrc-energy"
+      ],
+      "coverage": "kjerne",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offshore",
+      "name": "Olje, gass og offshore",
+      "scope": "Oppetid, driftssikkerhet, energibruk og utslipp",
+      "functions": "Produksjon, HSE, vedlikehold og forsyning",
+      "practice": "IEA dokumenterer hvordan målinger og satellittdata brukes til å avdekke og følge opp metanutslipp.",
+      "openingQuestion": "Hvilke uplanlagte hendelser gir størst tap av produksjon eller kapasitet?",
+      "sourceIds": [
+        "webstep-sectors",
+        "iea-methane"
+      ],
+      "coverage": "kjerne",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "finans",
+      "name": "Bank, finans og forsikring",
+      "scope": "Svindel, etterlevelse, kundereiser og lønnsomhet",
+      "functions": "Risiko, compliance, produkt og skade",
+      "practice": "Finanstilsynet omtaler feil, datadekning og presisjon i elektronisk transaksjonsovervåking.",
+      "openingQuestion": "Hvor balanserer dere dårligst mellom kundeopplevelse, kontrollkostnad og risiko?",
+      "sourceIds": [
+        "webstep-sectors",
+        "fin-ros",
+        "fin-aml"
+      ],
+      "coverage": "kjerne",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "helse",
+      "name": "Helse og omsorg",
+      "scope": "Pasientforløp, kapasitet, venting og kvalitet",
+      "functions": "Klinikk, sykehusdrift, kommunal helse og planlegging",
+      "practice": "NHS England tilbyr kapasitetsmodeller og bruker utskrivningsdata for å kartlegge forsinkelser.",
+      "openingQuestion": "Hvor i pasientforløpet oppstår køen som påvirker både pasienter og ansatte?",
+      "sourceIds": [
+        "webstep-sectors",
+        "nhs-flow",
+        "nhs-discharge"
+      ],
+      "coverage": "kjerne",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offentlig",
+      "name": "Offentlig sektor",
+      "scope": "Riktige tjenester, effektiv saksbehandling og ressursbruk",
+      "functions": "Tjenesteeier, direktør, tilsyn og saksbehandling",
+      "practice": "OECD beskriver datadrevet kontroll av offentlige ytelser; rettssikkerhet og etterprøvbarhet er sentralt.",
+      "openingQuestion": "Hvilket innbyggerproblem kan forbedres uten at kvalitet eller rettssikkerhet svekkes?",
+      "sourceIds": [
+        "webstep-sectors",
+        "oecd-fraud"
+      ],
+      "coverage": "kjerne",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "industri",
+      "name": "Industri og produksjon",
+      "scope": "Gjennomstrømming, kvalitet, vedlikehold og energikostnad",
+      "functions": "Fabrikksjef, produksjon, kvalitet og vedlikehold",
+      "practice": "EU JRC undersøker teknologi og data for energieffektivisering i energiintensiv industri.",
+      "openingQuestion": "Hvilket produksjonstap er størst når dere bryter det ned i årsaker?",
+      "sourceIds": [
+        "webstep-sectors",
+        "jrc-industry"
+      ],
+      "coverage": "kjerne",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "transport",
+      "name": "Transport, luftfart og logistikk",
+      "scope": "Punktlighet, bakketid, bagasje og terminalflyt",
+      "functions": "Operativ drift, ruteplan, terminal og kunde",
+      "practice": "IATA beskriver behovet for deling av bagasjedata, standardiserte hendelsestider og digital bakkedrift.",
+      "openingQuestion": "Hva er den viktigste årsaken til at dagens driftsplan ikke holder?",
+      "sourceIds": [
+        "webstep-q2-2026",
+        "iata-ground",
+        "iata-future"
+      ],
+      "coverage": "tillegg",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "handel",
+      "name": "Handel og retail",
+      "scope": "Varetilgjengelighet, lagerbinding, svinn og margin",
+      "functions": "Kategori, vareforsyning, butikkdrift og e-handel",
+      "practice": "GS1s produktdatamodell viser betydningen av felles produktinformasjon mellom kanaler.",
+      "openingQuestion": "Hvor taper dere mest: utsolgt vare, overflødig lager eller sviktende margin?",
+      "sourceIds": [
+        "gs1-model"
+      ],
+      "coverage": "tillegg",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "havbruk",
+      "name": "Havbruk og sjømat",
+      "scope": "Fiskehelse, biologisk risiko, fôring og logistikk",
+      "functions": "Produksjon, fiskehelse, slakteri og logistikk",
+      "practice": "Norges sjømatråd omtaler krav til telling og rapportering av lus og teknologiske tiltak mot lus.",
+      "openingQuestion": "Hvilke biologiske avvik oppdager dere først når kostnaden allerede er høy?",
+      "sourceIds": [
+        "seafood-lice"
+      ],
+      "coverage": "tillegg",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    }
+  ],
+  "industryUseCases": [
+    {
+      "id": "nett-investering",
+      "sectorId": "nett",
+      "title": "Plassering og størrelse på transformatorer",
+      "owner": "Nettutviklingssjef",
+      "symptom": "Flere investeringsønsker enn tilgjengelig kapital",
+      "goal": "Mer kapasitet per investert krone",
+      "questions": [
+        "Hvor er nettkapasiteten mest begrenset?",
+        "Hvordan sammenligner dere utbyggingsalternativer og fremtidig last?"
+      ],
+      "metrics": [
+        "tilknytningskapasitet",
+        "investeringskostnad"
+      ],
+      "dataHypothesis": "Nett-topologi, lastprognoser, tilknytningsønsker, kostnad",
+      "pilot": "Sammenligne scenarioer for ett nettområde",
+      "expand": "Modellbasert beslutningsgrunnlag for nettplanlegging",
+      "caution": "Nettberegninger må kvalitetssikres av elkraftmiljø",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "nett-fleks",
+      "sectorId": "nett",
+      "title": "Redusere lokale effekttopper",
+      "owner": "Driftsleder nettselskap",
+      "symptom": "Topper skaper overbelastning og kostnader",
+      "goal": "Utnytte eksisterende nett bedre",
+      "questions": [
+        "Når oppstår toppene?",
+        "Hvilke fleksibilitetstiltak er mulig før investering?"
+      ],
+      "metrics": [
+        "maksbelastning",
+        "overlasttimer"
+      ],
+      "dataHypothesis": "Måledata, vær, kundeprofil, nettbegrensninger",
+      "pilot": "Forklare historiske topper og prøve korttidsprognose",
+      "expand": "Fleksibilitets- og laststyringsstøtte",
+      "caution": "Forsyningssikkerhet krever operativ fagkontroll",
+      "playIds": [
+        "driftsinnsikt",
+        "modernisering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "nett-tilstand",
+      "sectorId": "nett",
+      "title": "Målrette nettvedlikehold mot feilrisiko",
+      "owner": "Vedlikeholdssjef",
+      "symptom": "Feil oppdages for sent og gir utfall",
+      "goal": "Redusere avbrudd og utrykning",
+      "questions": [
+        "Hvilke komponenter svikter uventet?",
+        "Er feil- og inspeksjonsdata sammenlignbare?"
+      ],
+      "metrics": [
+        "avbruddsminutter",
+        "feilrate"
+      ],
+      "dataHypothesis": "Tilstand, feil, inspeksjon, vær",
+      "pilot": "Studere én utstyrsgruppe og historiske feil",
+      "expand": "Risikobasert vedlikeholdsplan",
+      "caution": "Ingen erstatning for pålagte kontroller",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "nett-tilknytning",
+      "sectorId": "nett",
+      "title": "Raskere avklaring av nettilknytning",
+      "owner": "Kundetilknytningsleder",
+      "symptom": "Søkere venter og må levere informasjon flere ganger",
+      "goal": "Kortere og mer forutsigbar prosess",
+      "questions": [
+        "Hva skaper ventetid mellom fagledd?",
+        "Hvilken status kan kundene få uten manuelle oppslag?"
+      ],
+      "metrics": [
+        "ledetid",
+        "omarbeid"
+      ],
+      "dataHypothesis": "Søknad, nettstatus, dokumentasjon og saksflyt",
+      "pilot": "Kartlegg ventetid for én søknadstype",
+      "expand": "Sporbar status- og beslutningsstøtte",
+      "caution": "Lovkrav og tekniske vilkår avgjøres faglig",
+      "playIds": [
+        "rapportering",
+        "modernisering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offshore-nedetid",
+      "sectorId": "offshore",
+      "title": "Færre uplanlagte produksjonsstopp",
+      "owner": "Drifts- og vedlikeholdssjef",
+      "symptom": "Feilretting og mobilisering stjeler produksjonstid",
+      "goal": "Høyere oppetid uten økt risiko",
+      "questions": [
+        "Hvilket utstyr gir størst konsekvens ved feil?",
+        "Hva slags forvarsler finnes før avbrudd?"
+      ],
+      "metrics": [
+        "uplanlagt nedetid",
+        "feilkostnad"
+      ],
+      "dataHypothesis": "Vedlikeholdsordre, sensorikk, prosess og feil",
+      "pilot": "Analysere risiko for én utstyrstype",
+      "expand": "Tilstandsbasert arbeidsordreplan",
+      "caution": "Sikkerhetskritiske beslutninger krever fagansvarlig",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offshore-energi",
+      "sectorId": "offshore",
+      "title": "Energioptimalisering i prosessanlegg",
+      "owner": "Produksjonsdirektør",
+      "symptom": "Energibruk varierer uventet med belastning",
+      "goal": "Lavere kostnad per produsert enhet",
+      "questions": [
+        "Hvilke driftsmodi krever mest energi?",
+        "Hva kan operatøren realistisk endre?"
+      ],
+      "metrics": [
+        "energi per enhet",
+        "driftskostnad"
+      ],
+      "dataHypothesis": "Prosesshistorikk, energimåling og produksjon",
+      "pilot": "Etabler basislinje for én prosess",
+      "expand": "Løpende energi- og avviksanalyse",
+      "caution": "Tiltak må være forenlige med HSE-krav",
+      "playIds": [
+        "driftsinnsikt",
+        "rapportering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offshore-metan",
+      "sectorId": "offshore",
+      "title": "Finne og følge opp metanutslipp",
+      "owner": "Miljø- og HSE-leder",
+      "symptom": "Måledata og tiltak logges på ulike steder",
+      "goal": "Mer etterprøvbar reduksjon av lekkasjer",
+      "questions": [
+        "Hvordan går et lekkasjefunn fra måling til lukking?",
+        "Hva er usikkerheten i utslippstallene?"
+      ],
+      "metrics": [
+        "tid til lukking",
+        "måledekning"
+      ],
+      "dataHypothesis": "Sensorer, inspeksjon, hendelser og satellittdata der relevant",
+      "pilot": "Samle funn og tiltak for ett anlegg",
+      "expand": "Prioriteringsstøtte og sporbar rapportering",
+      "caution": "Satellittdekning og måleusikkerhet varierer",
+      "playIds": [
+        "datakvalitet",
+        "rapportering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offshore-logistikk",
+      "sectorId": "offshore",
+      "title": "Riktigere deler og bemanning offshore",
+      "owner": "Logistikkleder",
+      "symptom": "Hasteforsendelser og mangel på reservedeler",
+      "goal": "Færre utsettelser og mindre unødig lager",
+      "questions": [
+        "Hva utløser hastebestillingene?",
+        "Kan ordre kobles til planlagt vedlikehold?"
+      ],
+      "metrics": [
+        "hastefrakt",
+        "forsinket arbeid"
+      ],
+      "dataHypothesis": "Ordre, lager, vedlikeholdsplan og vær",
+      "pilot": "Studere én gruppe kritiske reservedeler",
+      "expand": "Samordnet vedlikeholds- og forsyningsplan",
+      "caution": "Transport og sikkerhet setter rammene",
+      "playIds": [
+        "driftsinnsikt",
+        "modernisering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "finans-aml",
+      "sectorId": "finans",
+      "title": "Treffsikker transaksjonsovervåking",
+      "owner": "Etterlevelsesansvarlig",
+      "symptom": "For mange alarmer eller risiko for manglende transaksjoner",
+      "goal": "Bedre kontroll med mindre unødig manuelt arbeid",
+      "questions": [
+        "Hvilke regler gir mange falske treff?",
+        "Hvordan beviser dere datadekning?"
+      ],
+      "metrics": [
+        "treffpresisjon",
+        "behandlingstid"
+      ],
+      "dataHypothesis": "Transaksjoner, kundedata, regelmotor og alarmutfall",
+      "pilot": "Kvalitetssikre én regelgruppe og datadekning",
+      "expand": "Kontinuerlig kontroll og modelloppfølging",
+      "caution": "Krav til risikostyring og menneskelig kontroll",
+      "playIds": [
+        "datakvalitet",
+        "driftsinnsikt"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "finans-svindel",
+      "sectorId": "finans",
+      "title": "Stanser vi svindel uten å stoppe kundene?",
+      "owner": "Risiko- og betalingsleder",
+      "symptom": "Svindeltap og unødige avviste betalinger",
+      "goal": "Mindre tap og lavere kundefriksjon",
+      "questions": [
+        "Hvilke svindelmønstre gir høyest tap?",
+        "Hvor mange legitime betalinger stoppes?"
+      ],
+      "metrics": [
+        "tap",
+        "falske positiver"
+      ],
+      "dataHypothesis": "Betalingshendelser, svindelutfall og risikosignaler",
+      "pilot": "Teste én kategori historisk med manuell evaluering",
+      "expand": "Beslutningsstøtte i betalingsflyten",
+      "caution": "Personvern, skjevhet og beslutningsansvar",
+      "playIds": [
+        "driftsinnsikt",
+        "kundevekst"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "finans-skade",
+      "sectorId": "finans",
+      "title": "Raskere behandling av forsikringsskader",
+      "owner": "Skadeleder",
+      "symptom": "Saker blir liggende mellom dokumentkontroll og vurdering",
+      "goal": "Kortere ledetid og riktig saksbehandling",
+      "questions": [
+        "Hvor i prosessen venter saken?",
+        "Hva krever menneskelig skjønn?"
+      ],
+      "metrics": [
+        "saksbehandlingstid",
+        "klageandel"
+      ],
+      "dataHypothesis": "Skademelding, dokumenter, status og utfall",
+      "pilot": "Kartlegge én skadetype og ventetid",
+      "expand": "Automatisert dokumentstøtte med kvalitetskontroll",
+      "caution": "Ingen automatisk avgjørelse av krevende vedtak",
+      "playIds": [
+        "driftsinnsikt",
+        "modernisering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "finans-margin",
+      "sectorId": "finans",
+      "title": "Forstå lønnsomhet på kunde- og produktnivå",
+      "owner": "Produktdirektør / CFO",
+      "symptom": "Ulike systemer gir ulike bidragsmarginer",
+      "goal": "Bedre prising og porteføljestyring",
+      "questions": [
+        "Hvilke kostnader er vanskelige å allokere?",
+        "Hvordan skiller dere volum og lønnsomhet?"
+      ],
+      "metrics": [
+        "dekningsbidrag",
+        "kundefrafall"
+      ],
+      "dataHypothesis": "Produkt, aktivitet, kostnad og risiko",
+      "pilot": "Avstemme tall for én produktgruppe",
+      "expand": "Løpende porteføljeanalyse",
+      "caution": "Regulering og rettferdighet må ivaretas",
+      "playIds": [
+        "kundevekst",
+        "rapportering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "helse-flyt",
+      "sectorId": "helse",
+      "title": "Kortere venting mellom akuttmottak og sengepost",
+      "owner": "Klinikkleder",
+      "symptom": "Pasienter venter til tross for kapasitet andre steder",
+      "goal": "Tryggere og mer forutsigbar pasientflyt",
+      "questions": [
+        "Hvor oppstår køen i pasientforløpet?",
+        "Hvilke aktiviteter er kliniske versus logistiske?"
+      ],
+      "metrics": [
+        "ventetid",
+        "beleggsgrad"
+      ],
+      "dataHypothesis": "Ankomster, sengebehov, utskrivning og bemanning",
+      "pilot": "Kartlegge forløp time for time i én enhet",
+      "expand": "Prognoser og koordinert kapasitet",
+      "caution": "Helsepersonell har alltid klinisk beslutningsansvar",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "helse-utskrivning",
+      "sectorId": "helse",
+      "title": "Færre forsinkelser ved utskrivning",
+      "owner": "Avdelingsleder og samhandlingsleder",
+      "symptom": "Utskrivningsklare pasienter venter på koordinering",
+      "goal": "Redusere unødvendig liggetid trygt",
+      "questions": [
+        "Hvilke praktiske hindre er vanligst?",
+        "Registreres utsettelsesårsakene likt?"
+      ],
+      "metrics": [
+        "forsinkelsesdøgn",
+        "reinnleggelser"
+      ],
+      "dataHypothesis": "Klarstatus, koordinering, oppgaver og kapasitet",
+      "pilot": "Beskrive én pasientgruppe og årsakene til venting",
+      "expand": "Samhandlingsstøtte på tvers av tjenester",
+      "caution": "Pasientsikkerhet og personvern foran kapasitet",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "helse-venteliste",
+      "sectorId": "helse",
+      "title": "Bedre utnyttelse av planlagt behandlingskapasitet",
+      "owner": "Kapasitetsleder",
+      "symptom": "Lange ventelister samtidig med avbestilte timer",
+      "goal": "Rettidig og rettferdig tilgang",
+      "questions": [
+        "Hvilke timer går ubrukt?",
+        "Hvilke pasientgrupper krever medisinsk prioritet?"
+      ],
+      "metrics": [
+        "ventetid",
+        "ledig kapasitet"
+      ],
+      "dataHypothesis": "Henvisninger, timebok, kapasitet og oppmøte",
+      "pilot": "Analysere én poliklinikks variasjoner",
+      "expand": "Kapasitetsplanlegging under medisinsk prioritering",
+      "caution": "Ikke automatisk klinisk prioritering",
+      "playIds": [
+        "driftsinnsikt",
+        "rapportering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "helse-turnus",
+      "sectorId": "helse",
+      "title": "Bemanning etter faktisk omsorgsbehov",
+      "owner": "Kommunal tjenesteleder",
+      "symptom": "Overtid og hastevikarer ved ujevn belastning",
+      "goal": "Stabil tjeneste med forsvarlig ressursbruk",
+      "questions": [
+        "Hvilke vakter har størst behovsvariasjon?",
+        "Hvilken fagkompetanse er knapp?"
+      ],
+      "metrics": [
+        "overtid",
+        "kontinuitet"
+      ],
+      "dataHypothesis": "Turnus, tjenestebehov, fravær og kvalitet",
+      "pilot": "Test prognose mot historiske vaktplaner",
+      "expand": "Løpende ressursplanlegging",
+      "caution": "Arbeidsmiljø og tjenestekvalitet skal ikke svekkes",
+      "playIds": [
+        "driftsinnsikt",
+        "rapportering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offentlig-sak",
+      "sectorId": "offentlig",
+      "title": "Raskere behandling av innbyggersaker",
+      "owner": "Tjenesteeier",
+      "symptom": "Søknader stopper mellom dokumentkontroll og vedtak",
+      "goal": "Kortere ledetid med riktig kvalitet",
+      "questions": [
+        "Hvor oppstår omarbeid?",
+        "Hvilken status kan innbygger få tidligere?"
+      ],
+      "metrics": [
+        "ledetid",
+        "klageandel"
+      ],
+      "dataHypothesis": "Saksflyt, dokumenttyper, avvik og beslutningshistorikk",
+      "pilot": "Mål ventetid i én sakstype",
+      "expand": "Støtte for dokumenter og styring",
+      "caution": "Hjemmel, innsyn og klageadgang må ivaretas",
+      "playIds": [
+        "driftsinnsikt",
+        "modernisering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offentlig-tilsyn",
+      "sectorId": "offentlig",
+      "title": "Tilsyn der risikoen er størst",
+      "owner": "Tilsynsdirektør",
+      "symptom": "Lik ressursbruk til saker med ulik alvorlighetsgrad",
+      "goal": "Større effekt av tilsynsressursene",
+      "questions": [
+        "Hvordan begrunnes tilsynsutvalget?",
+        "Hvilke funn følger av tidligere tilsyn?"
+      ],
+      "metrics": [
+        "funn per tilsyn",
+        "risikodekning"
+      ],
+      "dataHypothesis": "Tilsyn, klager, registerdata og funn",
+      "pilot": "Lag en forklarbar risikomatrise",
+      "expand": "Risikobasert planlegging med faglig godkjenning",
+      "caution": "Lik behandling og skjev datadekning må vurderes",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offentlig-feil",
+      "sectorId": "offentlig",
+      "title": "Tidligere oppdagelse av feilutbetalinger",
+      "owner": "Kontroll- og ytelsesleder",
+      "symptom": "Feil oppdages lenge etter vedtak",
+      "goal": "Riktigere utbetaling og mindre etterkontroll",
+      "questions": [
+        "Hvilke feil oppstår oftest?",
+        "Hvordan dokumenteres faktiske feil og årsaker?"
+      ],
+      "metrics": [
+        "feilrettingstid",
+        "omgjøring"
+      ],
+      "dataHypothesis": "Vedtak, endringer, regelgrunnlag og kontroller",
+      "pilot": "Kartlegg én feiltype med juridisk kontroll",
+      "expand": "Forklarbar kontrollstøtte",
+      "caution": "Lovhjemmel, personvern og rettssikkerhet er avgjørende",
+      "playIds": [
+        "datakvalitet",
+        "driftsinnsikt"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "offentlig-effekt",
+      "sectorId": "offentlig",
+      "title": "Måle om en offentlig tjeneste faktisk virker",
+      "owner": "Kommunedirektør / tjenesteeier",
+      "symptom": "Aktiviteter måles mer enn innbyggerresultater",
+      "goal": "Bedre prioritering og måloppnåelse",
+      "questions": [
+        "Hvilken effekt betyr mest for innbyggeren?",
+        "Hvordan skiller dere tiltakets effekt fra annen utvikling?"
+      ],
+      "metrics": [
+        "resultatindikator",
+        "ressurs per effekt"
+      ],
+      "dataHypothesis": "Tjenestedata, økonomi, brukerinnsikt og resultater",
+      "pilot": "Definer ett effektmål og en basislinje",
+      "expand": "Evaluering og tjenestestyring",
+      "caution": "Korrelasjon er ikke dokumentert årsakssammenheng",
+      "playIds": [
+        "rapportering",
+        "driftsinnsikt"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "industri-stopp",
+      "sectorId": "industri",
+      "title": "Fjerne de dyreste produksjonsstoppene",
+      "owner": "Fabrikksjef",
+      "symptom": "Småstopp skjuler det reelle produksjonstapet",
+      "goal": "Mer stabil produksjon og kortere gjennomløp",
+      "questions": [
+        "Hvilken stoppkategori koster mest?",
+        "Er stoppkoder sammenlignbare mellom skift?"
+      ],
+      "metrics": [
+        "OEE",
+        "stoppminutter"
+      ],
+      "dataHypothesis": "Maskinhendelser, skift, ordre og kvalitet",
+      "pilot": "Analysere årsaker på én linje",
+      "expand": "Kontinuerlig forbedring på tvers av linjer",
+      "caution": "OEE må ikke drives på bekostning av sikkerhet",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "industri-kvalitet",
+      "sectorId": "industri",
+      "title": "Redusere kassasjon og omarbeid",
+      "owner": "Kvalitetssjef",
+      "symptom": "Feil finnes først ved sluttkontroll",
+      "goal": "Høyere førstegangsutbytte",
+      "questions": [
+        "Hvilke feil er dyrest?",
+        "Kan feil knyttes til råvare og prosesstrinn?"
+      ],
+      "metrics": [
+        "kassasjon",
+        "førstegangsutbytte"
+      ],
+      "dataHypothesis": "Batch, råvare, prosess og kvalitetsmålinger",
+      "pilot": "Spore én feiltype gjennom produksjonen",
+      "expand": "Tidlige avviksvarsler",
+      "caution": "Lovpålagte kontroller kan ikke sløyfes",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "industri-service",
+      "sectorId": "industri",
+      "title": "Vedlikehold når det faktisk trengs",
+      "owner": "Vedlikeholdssjef",
+      "symptom": "Fast vedlikeholdsintervall treffer ikke feilbildet",
+      "goal": "Færre kostbare avbrudd",
+      "questions": [
+        "Hvilke maskiner er kritiske?",
+        "Kan tilstandsdata kobles til arbeidsordre?"
+      ],
+      "metrics": [
+        "MTTR",
+        "feilfrekvens"
+      ],
+      "dataHypothesis": "Tilstand, vedlikehold og reservedeler",
+      "pilot": "Test én maskintype mot historiske feil",
+      "expand": "Risikobasert vedlikeholdsprogram",
+      "caution": "Leverandørkrav og sikkerhet må følges",
+      "playIds": [
+        "driftsinnsikt",
+        "modernisering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "industri-energi",
+      "sectorId": "industri",
+      "title": "Lavere energiforbruk per produsert enhet",
+      "owner": "Produksjons- og energileder",
+      "symptom": "Energibruk øker uten samsvar med produksjon",
+      "goal": "Lavere enhetskostnad og utslipp",
+      "questions": [
+        "Kan forbruket måles per linje?",
+        "Hvor oppstår tomgangsforbruket?"
+      ],
+      "metrics": [
+        "kWh per enhet",
+        "energikostnad"
+      ],
+      "dataHypothesis": "Strømmålere, produktmiks, skift og produksjon",
+      "pilot": "Finne basislinje og avvik på én linje",
+      "expand": "Operativ energioptimalisering",
+      "caution": "Kvalitet og arbeidsmiljø må ivaretas",
+      "playIds": [
+        "driftsinnsikt",
+        "rapportering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "transport-turnaround",
+      "sectorId": "transport",
+      "title": "Kortere gate- og bakketid for fly",
+      "owner": "Operativ leder",
+      "symptom": "Små forsinkelser i catering, renhold og lasting summeres",
+      "goal": "Høyere avgangspresisjon",
+      "questions": [
+        "Hva skaper variasjon i turnaround?",
+        "Registrerer alle aktørene start- og sluttid likt?"
+      ],
+      "metrics": [
+        "turnaround-minutter",
+        "avgangspresisjon"
+      ],
+      "dataHypothesis": "Operasjonshendelser, gate, bemanning, renhold, tanking",
+      "pilot": "Mål et konkret bakkeforløp på én flytype",
+      "expand": "Felles situasjonsbilde og prognoser",
+      "caution": "Alle sikkerhetsprosedyrer går foran tidsgevinst",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "transport-bagasje",
+      "sectorId": "transport",
+      "title": "Færre bagasjer på avveie",
+      "owner": "Bagasjedriftsleder",
+      "symptom": "Sporbarhet forsvinner i overlevering mellom aktører",
+      "goal": "Høyere leveringspresisjon og færre klager",
+      "questions": [
+        "Hvor brytes sporingskjeden?",
+        "Vet dere hvor siste sikre skanning skjedde?"
+      ],
+      "metrics": [
+        "feilsendt bagasje",
+        "sporbarhetsgrad"
+      ],
+      "dataHypothesis": "Skanning, ruting, reiseplan og overleveringer",
+      "pilot": "Kartlegg databrudd i én terminal",
+      "expand": "Tverraktør-sporing og avviksstyring",
+      "caution": "Datadeling og personvern må avklares",
+      "playIds": [
+        "datakvalitet",
+        "modernisering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "transport-catering",
+      "sectorId": "transport",
+      "title": "Riktig catering til hver flygning",
+      "owner": "Catering- og kommersiell leder",
+      "symptom": "Mat kastes på enkelte fly mens andre går tomme",
+      "goal": "Mindre svinn, bedre service og lavere vekt",
+      "questions": [
+        "Hvordan varierer etterspørselen per rute?",
+        "Registreres returvarer og faktisk forbruk?"
+      ],
+      "metrics": [
+        "svinn per avgang",
+        "utsolgtandel"
+      ],
+      "dataHypothesis": "Avgang, passasjerer, salg, bestillinger og returvarer",
+      "pilot": "Test prognose mot forbruk på én rute",
+      "expand": "Datastøttet påfyllingsplan",
+      "caution": "Allergier og mattrygghet har forrang",
+      "playIds": [
+        "driftsinnsikt",
+        "kundevekst"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "transport-terminal",
+      "sectorId": "transport",
+      "title": "Riktig terminalbemanning ved trafikktopper",
+      "owner": "Terminal- eller logistikkleder",
+      "symptom": "Køer oppstår samtidig som kapasitet finnes andre steder",
+      "goal": "Kortere venting og mindre overtid",
+      "questions": [
+        "Når bygger køen seg opp?",
+        "Hvor raskt kan bemanningen flyttes?"
+      ],
+      "metrics": [
+        "ventetid",
+        "overtid"
+      ],
+      "dataHypothesis": "Volum, kø, bemanning og operasjonsplan",
+      "pilot": "Kartlegg én flaskehals per time",
+      "expand": "Prognose og operativ kapasitetsstyring",
+      "caution": "Arbeidsavtaler og sikkerhet setter grensene",
+      "playIds": [
+        "driftsinnsikt",
+        "rapportering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "handel-lager",
+      "sectorId": "handel",
+      "title": "Færre utsolgte varer og lavere lagerbinding",
+      "owner": "Vareforsyningsdirektør",
+      "symptom": "Høyt totalvarelager samtidig som nøkkelvarer mangler",
+      "goal": "Bedre tilgjengelighet med mindre kapital bundet",
+      "questions": [
+        "Hvilke varer går tomme i høysesong?",
+        "Hvor unøyaktig er prognosen og leveringstiden?"
+      ],
+      "metrics": [
+        "utsolgtandel",
+        "lagerdager"
+      ],
+      "dataHypothesis": "Kasse, lager, leveringstid, sesong og kampanjer",
+      "pilot": "Test etterfylling i én varekategori",
+      "expand": "Planlegging per butikk og lager",
+      "caution": "Holdbarhet og kampanjer må modelleres særskilt",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "handel-pris",
+      "sectorId": "handel",
+      "title": "Kampanjer som gir faktisk fortjeneste",
+      "owner": "Kategoridirektør",
+      "symptom": "Volum øker uten tilsvarende marginforbedring",
+      "goal": "Bedre avkastning på kampanjebudsjettet",
+      "questions": [
+        "Hva hadde dere solgt uten kampanjen?",
+        "Hva er kannibalisering mellom varer?"
+      ],
+      "metrics": [
+        "margin",
+        "inkrementelt salg"
+      ],
+      "dataHypothesis": "Pris, kampanje, volum, kostpris og sesong",
+      "pilot": "Evaluer én kampanje mot sammenlignbar basis",
+      "expand": "Løpende prioritering av kampanjer",
+      "caution": "Bruk metode for å skille årsak og samvariasjon",
+      "playIds": [
+        "kundevekst",
+        "rapportering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "handel-svinn",
+      "sectorId": "handel",
+      "title": "Færre varer som kasseres",
+      "owner": "Butikk- og bærekraftsansvarlig",
+      "symptom": "Varer utløper uten å bli solgt",
+      "goal": "Lavere matsvinn og ukurans",
+      "questions": [
+        "Når oppstår svinnet?",
+        "Kan batch og holdbarhet kobles til beholdning?"
+      ],
+      "metrics": [
+        "svinnprosent",
+        "ukurans"
+      ],
+      "dataHypothesis": "Batch, holdbarhet, lager, vær og salg",
+      "pilot": "Undersøk én varegruppe med høy kassasjon",
+      "expand": "Bedre bestillings- og nedprisingsstøtte",
+      "caution": "Matsikkerhet er ufravikelig",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "handel-omnikanal",
+      "sectorId": "handel",
+      "title": "Samme varestatus i nettbutikk og butikk",
+      "owner": "E-handelsdirektør",
+      "symptom": "Nettet selger varer som ikke er tilgjengelige",
+      "goal": "Færre kansellerte ordre",
+      "questions": [
+        "Hvor er varestatus mest upålitelig?",
+        "Hvem eier produkt- og lagerdata på tvers?"
+      ],
+      "metrics": [
+        "kanselleringsrate",
+        "datakvalitet"
+      ],
+      "dataHypothesis": "Produktmaster, ordre, lager og kanal",
+      "pilot": "Følg én kundereise og finn dataavvik",
+      "expand": "Samlet vare- og produktinformasjon",
+      "caution": "Rettigheter, eierskap og oppdateringsfrekvens",
+      "playIds": [
+        "datakvalitet",
+        "kundevekst"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "havbruk-lus",
+      "sectorId": "havbruk",
+      "title": "Riktigere timing av tiltak mot lakselus",
+      "owner": "Fiskehelse- og produksjonsleder",
+      "symptom": "Lusenivået utløser akutte tiltak",
+      "goal": "Bedre velferd og mer forutsigbar planlegging",
+      "questions": [
+        "Hvilke signaler kommer før høye lusetall?",
+        "Hvordan veies behandling opp mot stress og dødelighet?"
+      ],
+      "metrics": [
+        "lusenivå",
+        "behandlingshyppighet"
+      ],
+      "dataHypothesis": "Lusetelling, temperatur, miljø og behandlingshistorikk",
+      "pilot": "Teste varslingssignaler på én lokalitet",
+      "expand": "Beslutningsstøtte for tiltaksplan",
+      "caution": "Veterinæransvar og dyrevelferd styrer valget",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "havbruk-foring",
+      "sectorId": "havbruk",
+      "title": "Bedre fôrfaktor uten svekket fiskevelferd",
+      "owner": "Produksjonsleder",
+      "symptom": "Fôrforbruk øker raskere enn tilveksten",
+      "goal": "Bedre biologisk og økonomisk ressursbruk",
+      "questions": [
+        "Hvor presist anslås biomassen?",
+        "Hvilke miljøfaktorer påvirker appetitt?"
+      ],
+      "metrics": [
+        "fôrfaktor",
+        "vekstavvik"
+      ],
+      "dataHypothesis": "Fôring, biomasse, vannmiljø og kameradata",
+      "pilot": "Analyser fôrrespons i ett merdanlegg",
+      "expand": "Fagstøttet fôrplanlegging",
+      "caution": "Biologiske grenser foran kostnadsoptimalisering",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "havbruk-dodelighet",
+      "sectorId": "havbruk",
+      "title": "Oppdage helseavvik før tapet blir stort",
+      "owner": "Fiskehelsesjef",
+      "symptom": "Biologisk risiko blir kjent for sent",
+      "goal": "Mindre dødelighet og bedre velferd",
+      "questions": [
+        "Hva kjennetegner tidlige tegn?",
+        "Er helsehendelser kodet konsistent?"
+      ],
+      "metrics": [
+        "dødelighet",
+        "tid til oppdagelse"
+      ],
+      "dataHypothesis": "Fiskehelse, miljø, hendelser og vekst",
+      "pilot": "Analysere én hendelsestype retrospektivt",
+      "expand": "Varslings- og læringssløyfe",
+      "caution": "Krever diagnostisk og veterinærfaglig validering",
+      "playIds": [
+        "driftsinnsikt",
+        "datakvalitet"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "havbruk-slakt",
+      "sectorId": "havbruk",
+      "title": "Mer presis slakte- og transportplan",
+      "owner": "Verdikjedeleder",
+      "symptom": "Volum og kvalitet varierer når transport er planlagt",
+      "goal": "Mindre venting og kvalitetsavvik",
+      "questions": [
+        "Hvor avviker planlagt og faktisk biomasse?",
+        "Hvilke ledd har knappest kapasitet?"
+      ],
+      "metrics": [
+        "planavvik",
+        "gjennomløpstid"
+      ],
+      "dataHypothesis": "Biomasse, slakteplan, transport og kvalitet",
+      "pilot": "Gjennomgå én planleggingsuke mot faktiske volum",
+      "expand": "Koordinert plan mellom sjø, slakt og kunde",
+      "caution": "Biosikkerhet og fiskevelferd er absolutte krav",
+      "playIds": [
+        "driftsinnsikt",
+        "modernisering"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    }
+  ],
+  "industryJourney": {
+    "id": "business-to-delivery",
+    "steps": [
+      {
+        "id": "problem",
+        "title": "1. Avklar forretningsproblemet",
+        "text": "Finn prosessen, beslutningen og konsekvensen – og hvem som eier dem."
+      },
+      {
+        "id": "baseline",
+        "title": "2. Etabler dagens nivå",
+        "text": "Enes om mål, relevante KPI-er og tilgjengelige data. Skill symptomer fra årsaker."
+      },
+      {
+        "id": "pilot",
+        "title": "3. Test avgrenset forbedring",
+        "text": "Undersøk én konkret prosess sammen med forretning og fagmiljø, med før-/ettermåling der det er mulig."
+      },
+      {
+        "id": "scale",
+        "title": "4. Forankre og videreutvikle",
+        "text": "Ved dokumentert verdi: integrer analyse, datagrunnlag og arbeidsflyt i ordinær drift med tydelig ansvar."
+      }
+    ],
+    "qualification": "Kvalifiser alltid eier, problem, ønsket effekt, tidshorisont og hvem som skal handle på innsikten.",
+    "maturityCaution": "Internasjonal praksis er et grunnlag for bedre spørsmål, ikke bevis på at en norsk kunde ligger etter.",
+    "sourceIds": [
+      "webstep1",
+      "webstep2"
+    ],
+    "evidence": "assessment",
+    "reviewed": "2026-10-14",
+    "visibility": "presented"
   }
 }
