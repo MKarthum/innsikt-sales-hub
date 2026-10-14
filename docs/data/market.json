@@ -32,13 +32,7 @@
         "value": 90
       }
     ],
-    "source": "ssb",
-    "euAnalytics": {
-      "year": "2025",
-      "value": 33.02,
-      "source": "eurostatAnalytics",
-      "region": "EU"
-    }
+    "source": "ssb"
   },
   "trends": [
     {
@@ -56,15 +50,15 @@
     },
     {
       "id": "analytics",
-      "title": "Analyse skal gi bedre beslutninger",
-      "intro": "Eurostat undersøker hvor mange EU-foretak som analyserer data med egne ansatte, og hvilke kilder de bruker.",
-      "meaning": "Analysestatistikk sier ikke hvor gode beslutningene blir. Finn ut hva kunden ønsker å forstå, måle eller planlegge bedre.",
-      "question": "Hvilke beslutninger ville blitt bedre med riktigere eller raskere innsikt?",
+      "title": "Analyse handler om beslutninger, ikke utbredelse",
+      "intro": "BI og analyse kan gjøre eksisterende informasjon mer tilgjengelig og gi bedre grunnlag for å prioritere, styre og lære.",
+      "meaning": "Snakk om hva kunden trenger å forstå: lønnsomhet, kapasitetsbehov, avvik, kundebehov eller prognoser. Derfra kan dere undersøke datagrunnlaget.",
+      "question": "Hvilken beslutning ville blitt bedre med riktigere eller raskere innsikt?",
       "sources": [
-        "eurostatAnalytics",
-        "webstep1"
+        "webstep1",
+        "webstep2"
       ],
-      "evidence": "statistikk",
+      "evidence": "tjenestebeskrivelse",
       "checked": "2026-10-14"
     },
     {

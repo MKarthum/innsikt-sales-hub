@@ -21,6 +21,7 @@ Start alltid med `START_HERE.md`. Les siste `main`, og bruk repoet – aldri gam
 ```sh
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
+node --check docs/assets/prompts.js
 node scripts/check.mjs
 ```
 
@@ -33,3 +34,12 @@ Innholdet skal fortsatt kunne være offentlig. Interne data vurderes først ette
 ## Ulike brukernivåer
 
 «Start her» gir grunnleggende introduksjon som kun leses ved behov. Det er ikke en obligatorisk velkomstskjerm. Erfarne brukere skal raskt finne arkitektur, teknologier, salgsinnganger og kopierbare maler. Arkitekturskisser og praktiske maler eies av `learning.json`. Nye presentasjonsløp eies av `pages.json` og skal være datadrevne.
+
+
+## Promptbibliotek
+
+- `prompts.json` er autoritativ kilde. Alle maler har rolle/oppgave, anvendelse, generiske inputfelt, forventet resultat, kontrollpunkter og kildedisiplin.
+- Ikke legg inn kundenavn/ansatte/CRM-innhold/Drive-innhold, konfidensielle partneropplysninger eller ekte intern kapasitet i det offentlige repoet.
+- Ikke hev at KI-agenten har kobling til HubSpot, Drive eller CV-/bemanningssystem. En integrasjon skal bare omtales som mulig etter godkjent intern flytting.
+- In-browser redigering er lokal; den skal ikke lagre eller sende innhold, og er ikke et sikkert sted for kundedata.
+- Dataeier bevares ved flytting; tilgangs- og datakoblingslaget bygges separat. Se `INTERNAL_MIGRATION.md`.

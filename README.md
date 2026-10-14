@@ -1,8 +1,21 @@
 # Innsikt – marked og salg
 
-Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.6.0 – ikke godkjent som offisielt internt salgsmateriell.**
+Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.7.0 – ikke godkjent som offisielt internt salgsmateriell.**
 
 [Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
+
+## Et enklere hovedbudskap
+
+**Datagrunnlag og plattform → analyse og beslutninger → KI og nye arbeidsmåter.** Dette er tre mulige kundebehov, ikke tre like statistikkort. Den sterke KI-veksten har egen, kildebelagt plass. Et generelt EU-tall for dataanalyse er bevisst fjernet – det ga lite salgsinnsikt.
+
+## Prompter for salg
+
+Et nytt offentlig promptbibliotek med 14 redigerbare, kopierbare instrukser i fem kategorier: forstå kunden, forberede møte, finne kompetanse, lage salgsmateriell og følge opp. Alle inneholder kontekst, ønsket utdata, usikkerhet/kildekrav og menneskelig kontroll. Enkelte maler er merket for anonymisert bruk før intern flytting. **Ingen CRM- eller Drive-tilkobling finnes i denne versjonen.**
+
+- Prompter eies av `docs/data/prompts.json`. UI i `docs/assets/prompts.js`.
+- Tekst i redigeringsfeltet forblir i brukerens nettleser mens siden er åpen; den lagres ikke og sendes ikke av portalen.
+- Salg kopierer selv til en KI-tjeneste godkjent for de faktiske opplysningene.
+- Se `INTERNAL_MIGRATION.md` for videre utvikling mot Webstep-konto med riktige rettigheter.
 
 ## Formål
 
@@ -57,6 +70,7 @@ python3 -m http.server 8000
 ```sh
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
+node --check docs/assets/prompts.js
 node scripts/check.mjs
 ```
 

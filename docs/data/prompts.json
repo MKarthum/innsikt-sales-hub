@@ -1,0 +1,371 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "reviewed": "2026-10-14",
+    "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
+  },
+  "page": {
+    "eyebrow": "PRAKTISK KI FOR SALG",
+    "title": "La KI gjøre forarbeidet – ikke vurderingene for deg",
+    "intro": "Her er ferdigskrevne instruksjoner for konkrete salgsoppgaver. Velg en, les hva du bør ha klart, rediger teksten og kopier til et KI-verktøy som er godkjent for informasjonen du bruker.",
+    "publicWarning": "Denne siden er offentlig. Ingen HubSpot-, Drive-, CRM- eller konsulentdata hentes automatisk. Ikke lim inn interne opplysninger, kundelister, persondata eller fortrolige dokumenter i et KI-verktøy uten nødvendig godkjenning.",
+    "usageTitle": "Slik bruker du biblioteket",
+    "usageSteps": [
+      "Velg en oppgave og les hvilke opplysninger du trenger.",
+      "Kopier eller juster teksten. Bytt ut feltene i [KLAMMER].",
+      "Kjør prompten i et KI-verktøy som er godkjent for informasjonen.",
+      "Kontroller fakta, kilder og forslag før du bruker resultatet."
+    ],
+    "internalTitle": "Når portalen flyttes internt",
+    "internalBody": "Da kan vi bygge på med virksomhetsgodkjente datakilder og arbeidsflyter: kundeinformasjon fra CRM/HubSpot, dokumenter fra Google Drive og kompetanseprofiler som brukeren har tilgang til. Slike koblinger må følge identitet, rettigheter og sikkerhetskrav; ingen tokens eller CRM-data skal legges i en offentlig statisk nettside.",
+    "editorHelp": "Rediger prompten her før kopiering. Endringene sendes ingen steder og lagres ikke av portalen.",
+    "reviewTitle": "Kontroller før du bruker resultatet",
+    "copyLabel": "Kopier prompt",
+    "resetLabel": "Tilbakestill tekst",
+    "allLabel": "Alle",
+    "featuredTitle": "Et godt sted å begynne",
+    "featuredIntro": "Disse tre dekker de vanligste stegene fra kundekunnskap til faglig neste steg."
+  },
+  "categories": [
+    "Forstå kunden",
+    "Forbered møte",
+    "Finn kompetanse",
+    "Lag salgsmateriell",
+    "Følg opp"
+  ],
+  "sourceIds": [
+    "openaiPrompting",
+    "microsoftSalesPrompts",
+    "microsoftSalesAgent"
+  ],
+  "items": [
+    {
+      "id": "account-research",
+      "category": "Forstå kunden",
+      "title": "Kundebrief før første kontakt",
+      "summary": "Gjør offentlige fakta om selskapet til gode spørsmål, ikke en generisk selskapsprofil.",
+      "when": "Når du skal bli kjent med en ny mulig kunde.",
+      "audience": "Kundeansvarlig · 10–15 min",
+      "sourceMode": "public",
+      "placeholders": [
+        "KUNDENAVN",
+        "BRANSJE",
+        "MØTEFORMÅL"
+      ],
+      "before": [
+        "Bruk riktig organisasjon og avklar land/virksomhet.",
+        "Ikke lim inn CRM-opplysninger her."
+      ],
+      "prompt": "Du er en analytisk researchassistent for en konsulentselger i data, analyse og KI.\nOppgave: Lag en kort, kildebasert brief om [KUNDENAVN], i [BRANSJE], før et møte med formål [MØTEFORMÅL].\nBruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.\nUndersøk virksomhetens forretningsmodell, inntekts-/kostnadsdrivere, rapporterte prioriteringer, vesentlige offentlige nyheter og digitaliseringssignal. Oppgi hva som er kjent og hva som bare er en mulig implikasjon.\nSvar i fem seksjoner:\n1. Hva selskapet gjør og hvordan det skaper verdi (maks 120 ord).\n2. Tre dokumenterte hendelser eller prioriteringer (dato og kilde).\n3. Tre mulige utfordringer der data, dataplattform, BI eller KI KAN være relevant (merk som hypoteser).\n4. Seks konkrete spørsmål til et første møte, med ett om forretningsmål.\n5. Hva vi må avklare før vi foreslår kompetanse.\nHvis du ikke kan slå opp ferske kilder, si fra og be om offentlige lenker. Ikke fyll hull med antagelser.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres.",
+        "Vurder om hypotesene kan knyttes til faktiske forretningsutfordringer."
+      ],
+      "priority": 1
+    },
+    {
+      "id": "meeting-prep",
+      "category": "Forbered møte",
+      "title": "Møtebrief på én side",
+      "summary": "Skap en konkret møteplan med agenda, vinkling og spørsmål.",
+      "when": "Når møtet er booket, men du ikke kjenner alle detaljene.",
+      "audience": "Alle selgere · 10 min",
+      "sourceMode": "public",
+      "placeholders": [
+        "KUNDE",
+        "ROLLE",
+        "MØTELENGDE",
+        "MÅL"
+      ],
+      "before": [
+        "Avklar hvem du skal møte og formålet.",
+        "Hold interne møtenotater utenfor offentlig KI-miljø."
+      ],
+      "prompt": "Vær min kritiske møteforbereder for en samtale om data, analyse og KI.\nKunde: [KUNDE]. Rolle hos kunden: [ROLLE]. Tid: [MØTELENGDE]. Hensikt: [MÅL].\nBruk bare informasjonen i denne prompten og åpne, verifiserbare kilder hvis de er tilgjengelige.\nLag en briefing på maks én side med:\n- foreslått agenda med minutter;\n- tre mulige forretningsproblem å utforske (som hypoteser, ikke fakta);\n- fem prioriterte åpne spørsmål, med naturlige oppfølgingsspørsmål;\n- hva jeg bør lytte etter om datakvalitet, integrasjon, BI, KI og kompetansemangel;\n- typiske fallgruver ved å gå for tidlig inn i teknologi;\n- forslag til avslutning som avklarer neste steg.\nBruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.\nSkriv på naturlig norsk for en selger som ikke er dataarkitekt.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "industry-discovery",
+      "category": "Forstå kunden",
+      "title": "Finn kjøpssignaler i en bransje",
+      "summary": "Fra bransjeutfordringer til hypoteser og innsiktsmuligheter.",
+      "when": "Når du jobber med et marked eller segment.",
+      "audience": "Salg / marked",
+      "sourceMode": "public",
+      "placeholders": [
+        "BRANSJE",
+        "KUNDETYPE"
+      ],
+      "before": [
+        "Velg en tydelig bransje og kundetype."
+      ],
+      "prompt": "Du er rådgiver for et konsulentselskap som leverer kompetanse innen dataplattform, datakvalitet, BI, analyse og KI.\nLag et salgsorientert men nøkternt kart over mulige behov i [BRANSJE] for [KUNDETYPE].\nBruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.\nPresenter 5 konkrete forretningssituasjoner som kan oppstå. For hver: hva en leder kan si, mulig konsekvens, hvilke data som typisk trengs, mulige typer Innsikt-kompetanse, to åpne spørsmål og hvem som sannsynligvis eier problemet.\nTa med minst to situasjoner uten KI. Ikke anta at alle trenger modernisering. Ranger etter hvor lett en selger kan verifisere behovet, ikke etter teknologisk nyhetsverdi.\nAvslutt med tre falske positive signaler – situasjoner der en data-/KI-leveranse kanskje ikke er riktig neste steg.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "discovery",
+      "category": "Forbered møte",
+      "title": "Bygg en behovssamtale",
+      "summary": "Lag spørsmål som beveger samtalen fra symptom til konsekvens og beslutning.",
+      "when": "Når kunden har sagt noe interessant, men problemet er uklart.",
+      "audience": "Salg / rådgiver",
+      "sourceMode": "public",
+      "placeholders": [
+        "KUNDENS_UTSAGN",
+        "BRANSJE"
+      ],
+      "before": [
+        "Bruk generiske utsagn, ikke fortrolige sitater fra identifiserbare kunder."
+      ],
+      "prompt": "Hjelp meg å forberede en behovssamtale.\nKunden har uttrykt dette problemet i anonymisert form: [KUNDENS_UTSAGN]. Bransje: [BRANSJE].\nJeg selger konsulentkompetanse innen dataplattform, BI, analyse og KI, ikke et bestemt produkt.\nSvar med:\nA. Tre mulige underliggende årsaker, tydelig merket hypoteser.\nB. En naturlig samtaletrapp med 8 spørsmål: problem → konsekvens → dagens løsning → data → eier → ønsket endring → tid → neste steg.\nC. Hvilke signaler som tyder på behov for data engineering, analyse, styring eller KI.\nD. Når vi bør trekke inn fagspesialist, og hva vedkommende må vite.\nE. To eksempler på hvordan jeg kan oppsummere uten å love en løsning.\nIkke fyll inn kundespesifikke fakta jeg ikke har gitt.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "consultant-match",
+      "category": "Finn kompetanse",
+      "title": "Finn riktig konsulentprofil",
+      "summary": "Oversett oppdragets problem til roller og vurderingskriterier, uten å finne på ledig kapasitet.",
+      "when": "Når du må avklare hvem som kan hjelpe kunden.",
+      "audience": "Salg / bemanning",
+      "sourceMode": "approved-internal",
+      "placeholders": [
+        "BEHOVSBESKRIVELSE",
+        "KOMPETANSEPROFILER"
+      ],
+      "before": [
+        "Bruk bare anonymiserte eller offentlig godkjente profiler i nåværende versjon.",
+        "Kvalitet, egnethet og faktisk kapasitet må bekreftes av ansvarlig internt."
+      ],
+      "prompt": "Du er en faglig bemanningsrådgiver for dataplattform, analyse og KI.\nBehov (anonymisert): [BEHOVSBESKRIVELSE]\nTilgjengelige anonymiserte/godkjente kompetansebeskrivelser: [KOMPETANSEPROFILER]\nHvis profilene ikke er gitt, IKKE finn på kandidater. Foreslå i stedet hvilke roller og kompetanser som bør undersøkes.\nLag:\n1. En oppsummering av forretningsproblemet, ønsket leveranse og manglende opplysninger.\n2. Must-have og nice-to-have-kompetanse (begrunn hver).\n3. Relevant rollemiks: f.eks. data engineer, analytiker/BI, dataarkitekt, KI-spesialist – bare hvis behovet tilsier det.\n4. En etterprøvbar vurderingsmatrise hvis godkjente profiler faktisk er oppgitt, med evidens og usikkerhet.\n5. Tre avklaringsspørsmål til fagmiljø og kunde.\nIkke påstå at noen er tilgjengelige, sertifisert, klarert eller har levert et kundecase uten kilde. Ikke inkluder personopplysninger eller interne CV-er i en ikke-godkjent KI-tjeneste.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres.",
+        "Verifiser kompetanse og kapasitet med fag-/bemanningsansvarlig."
+      ],
+      "priority": 1
+    },
+    {
+      "id": "opportunity-map",
+      "category": "Finn kompetanse",
+      "title": "Fra kundebehov til mulig Innsiktsleveranse",
+      "summary": "Lag en nøktern kvalifisering og et konkret neste steg.",
+      "when": "Når du har et signal, men ingen definert mulighet.",
+      "audience": "Salg / fagleder",
+      "sourceMode": "public",
+      "placeholders": [
+        "SYMTOM",
+        "ØNSKET_FORBEDRING",
+        "TIDSVINDU"
+      ],
+      "before": [
+        "Bruk anonymisert beskrivelse av situasjonen."
+      ],
+      "prompt": "Vurder om følgende anonymiserte situasjon kan være et relevant konsulentoppdrag:\nSymptom: [SYMTOM]. Ønsket forbedring: [ØNSKET_FORBEDRING]. Tidsvindu: [TIDSVINDU].\nDu er erfaren, skeptisk faglig rådgiver innen dataplattform, dataintegrasjon, datakvalitet, analyse, BI og KI.\nGi en strukturert vurdering med:\n- Verdien kunden ønsker, og hva som ikke er avklart.\n- 2–3 plausible leveransehypoteser (f.eks. kartlegging, datakvalitetsforbedring, analysemodell, avgrenset KI-utprøving) og deres forutsetninger.\n- Hvem hos kunden som bør delta.\n- Et mulig lite første steg med tydelig leveranse og beslutningspunkt.\n- Fire signaler som taler MOT at vi bør gå videre nå.\n- Et kort forslag til intern overlevering uten kundespesifikke detaljer.\nIkke foreslå plattform, pris eller teknologi før problemet og dagens oppsett er forstått.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "poc-design",
+      "category": "Finn kompetanse",
+      "title": "Skisser en liten, verdidrevet pilot",
+      "summary": "Gjør en idé testbar før kunden investerer stort.",
+      "when": "Når kunden ønsker å prøve noe med analyse eller KI.",
+      "audience": "Salg / fagspesialist",
+      "sourceMode": "public",
+      "placeholders": [
+        "BRUKSTILFELLE",
+        "FORRETNINGSVERDI",
+        "DATAKILDER"
+      ],
+      "before": [
+        "Ikke gi modellen ekte kundedata eller tilgangsinformasjon."
+      ],
+      "prompt": "Du skal hjelpe meg å skissere en kort konsept-/pilotfase, ikke et bindende tilbud.\nBrukstilfelle: [BRUKSTILFELLE]. Ønsket forretningsverdi: [FORRETNINGSVERDI]. Mulige datakilder (beskriv kun på generelt nivå): [DATAKILDER].\nLag en anbefaling som inneholder: avgrenset problem, hypoteser, antakelser om datatilgang, konkrete kvalitets- og effektmål, risiko (personvern, sikkerhet, datakvalitet, KI-feil og kostnad), nødvendig kompetanse, milepæler, stoppkriterier og forventet beslutning etter piloten.\nSkille tydelig mellom demo, pilot og produksjon. Ikke skriv at tiltaket er gjennomførbart før relevante fagfolk har bekreftet forutsetningene.\nLag til slutt en 60-sekunders forklaring for ikke-teknisk leder.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "meeting-agenda",
+      "category": "Forbered møte",
+      "title": "Planlegg en data- og innsiktsworkshop",
+      "summary": "Praktisk opplegg med ansvar, spørsmål og ønsket utbytte.",
+      "when": "Når det er behov for en felles kartlegging.",
+      "audience": "Salg / fagansvarlig",
+      "sourceMode": "public",
+      "placeholders": [
+        "TEMA",
+        "VARIGHET",
+        "DELTAKERE"
+      ],
+      "before": [
+        "Avklar om workshopen skal kartlegge behov eller ta tekniske beslutninger."
+      ],
+      "prompt": "Lag et praktisk workshop-opplegg om [TEMA] med [DELTAKERE] over [VARIGHET].\nFormålet er å forstå forretningsbehov, datagrunnlag og mulige tiltak – ikke å selge et bestemt verktøy.\nTa med: mål og forventet beslutning, kort forarbeid, agenda med tidsblokker, to oppgaver som får frem brukerbehov, konkrete spørsmål om kvalitet/tilgang/eierskap, forslag til oppsummering og hvordan vi avgrenser ett realistisk neste steg.\nBruk et språk som økonomi, drift og IT forstår. Forklar fagbegreper kort. Marker antakelser.\nLever en agenda som kan sendes i invitasjonen og et eget fasilitatornotat.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "deck-outline",
+      "category": "Lag salgsmateriell",
+      "title": "Fra behov til presentasjonsutkast",
+      "summary": "Lag en kort, kundetilpasset historie med dokumenterte påstander.",
+      "when": "Når du trenger et utkast til slides eller muntlig fremstilling.",
+      "audience": "Salg / rådgiver",
+      "sourceMode": "public",
+      "placeholders": [
+        "MÅLGRUPPE",
+        "PROBLEM",
+        "MØTEFORMÅL",
+        "ANTALL_LYSBILDER"
+      ],
+      "before": [
+        "Bruk kun offentlig godkjente kundereferanser og fakta.",
+        "Ikke la KI lage udokumenterte suksesshistorier eller tall."
+      ],
+      "prompt": "Du er redaktør for en kort konsulentpresentasjon, ikke reklameskribent.\nMålgruppe: [MÅLGRUPPE]. Problem som skal belyses: [PROBLEM]. Møtets formål: [MØTEFORMÅL]. Maks slides: [ANTALL_LYSBILDER].\nForeslå en fortelling: kundens utfordring → hvorfor det betyr noe → typiske databehov → mulige tilnærminger → spørsmål vi vil avklare → neste steg.\nLever en tabell med lysbildetittel (budskap, ikke emneord), én konkret visualiseringsidé, maks tre poenger, kildekrav og presentatørnotat.\nBruk arkitekturskisser ved behov, men forklar dem for ikke-tekniske mottakere.\nBruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.\nIkke finn på kundeeksempler, referanser, partnere, tall, leveransekapasitet eller løfter. Hvis fakta mangler, skriv [MÅ UNDERSØKES].\nAvslutt med en liste over hva som må verifiseres før presentasjonen kan sendes.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres.",
+        "Gjør presentasjonsutkastet tilpasset deltakerne; ikke generisk salgspitch."
+      ],
+      "priority": 1
+    },
+    {
+      "id": "exec-summary",
+      "category": "Lag salgsmateriell",
+      "title": "Én side til en beslutningstaker",
+      "summary": "Oversett teknisk kompleksitet til mål og mulige effekter.",
+      "when": "Når du trenger et forståelig notat til ledergruppen.",
+      "audience": "Salg / fagansvarlig",
+      "sourceMode": "public",
+      "placeholders": [
+        "FORRETNINGSUTFORDRING",
+        "MULIG_TILTAK"
+      ],
+      "before": [
+        "Bruk anonymisert utfordring og uforpliktende tiltak."
+      ],
+      "prompt": "Skriv et klart notat på maks 300 ord til en leder uten datateknisk bakgrunn.\nSituasjonen er [FORRETNINGSUTFORDRING]. Mulig tilnærming er [MULIG_TILTAK].\nStruktur: hvorfor dette er viktig for virksomheten; hvordan data og analyse kan bidra; hvilke forutsetninger og usikkerheter som finnes; hva en liten avklaring kan gi; hvilket beslutningspunkt som følger.\nIngen produktnavn med mindre det er nødvendig for forståelsen.\nVær konkret og nøktern, uten overdreven KI-retorikk, påstander om gevinst eller oppdiktede referansecaser.\nLag i tillegg tre spørsmål ledelsen bør stille før de velger tiltak.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "followup",
+      "category": "Følg opp",
+      "title": "Oppfølgingsmail etter kundemøte",
+      "summary": "Kort, konkret og uten å love mer enn det som ble avtalt.",
+      "when": "Når møtet er over og neste steg skal oppsummeres.",
+      "audience": "Salg",
+      "sourceMode": "approved-internal",
+      "placeholders": [
+        "GODKJENT_OPPSUMMERING",
+        "NESTE_STEG",
+        "MOTTAKERROLLE"
+      ],
+      "before": [
+        "Bruk bare anonymiserte/godkjente møtenotater i nåværende offentlige løsning.",
+        "Verifiser alle avtaler og datoer."
+      ],
+      "prompt": "Skriv en varm, presis og kort e-post til [MOTTAKERROLLE] etter et kundemøte.\nGodkjent/anonymisert møteoppsummering: [GODKJENT_OPPSUMMERING]\nAvtalt neste steg: [NESTE_STEG]\nKrav: Skill det kunden faktisk bekreftet fra temaer som bare ble diskutert. Gjengi ikke løsninger eller leveranseforpliktelser som ikke er avtalt. Skriv på naturlig norsk, uten salgsfloskler.\nLever emnefelt og e-post på 120–180 ord med konkrete punkter der det hjelper. Oppgi til slutt tre fakta jeg må kontrollere mot møtenotatene før jeg sender.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres.",
+        "Sjekk mottakere, avtalte tiltak og datoer."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "objection-coach",
+      "category": "Følg opp",
+      "title": "Øv på innvendinger fra kunde",
+      "summary": "Forbered balanserte svar, ikke aggressive motargumenter.",
+      "when": "Når kunden stiller spørsmål om pris, modenhet, KI eller egen kapasitet.",
+      "audience": "Salg",
+      "sourceMode": "public",
+      "placeholders": [
+        "INNVENDING",
+        "KUNDEKONTEKST"
+      ],
+      "before": [
+        "Beskriv innvendingen uten identifiserbare forhold."
+      ],
+      "prompt": "Spill rollen som en erfaren, skeptisk beslutningstaker hos en kunde.\nInnvending: [INNVENDING]. Generisk kontekst: [KUNDEKONTEKST].\nHjelp meg å forstå hva innvendingen kan bety. Lag:\n- 3 alternative tolkninger av kundens bekymring;\n- 5 oppklarende spørsmål som ikke virker defensive;\n- 2 nøkterne svarforslag som er åpne om usikkerhet;\n- ett scenario der kunden faktisk har rett og vi ikke bør presse på;\n- en anbefaling om relevant fagperson og naturlig neste steg.\nFokus: konsulentkompetanse innen data, analyse og KI. Ikke lov konkrete resultater, priser, partnerrabatter eller umiddelbar kapasitet.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "partner-intake",
+      "category": "Følg opp",
+      "title": "Avklar mulig partnerdialog",
+      "summary": "Oppdag når Snowflake, Databricks eller Fabric kan være relevant uten å anta fordeler.",
+      "when": "Når en plattform dukker opp i kundedialogen.",
+      "audience": "Salg / partnerkontakt",
+      "sourceMode": "approved-internal",
+      "placeholders": [
+        "KUNDEBEHOV",
+        "PLATTFORM",
+        "STATUS"
+      ],
+      "before": [
+        "Ikke legg avtaler, pipeline eller interne partnervilkår inn i offentlig KI.",
+        "Registrering og partnerprosesser må bekreftes internt."
+      ],
+      "prompt": "Lag et nøytralt grunnlag for en mulig dialog med relevant teknologipartner.\nAnonymisert kundebehov: [KUNDEBEHOV]. Plattform nevnt: [PLATTFORM]. Status: [STATUS].\nBeskriv: hva behovet gjelder, hvilke fakta som må bekreftes om plattform og kundens planer, hvilke kompetansebehov som kan være aktuelle, hvilken rolle samarbeid med en partner potensielt kan ha, og hvilke spørsmål salg må stille internt FØR registrering eller kontakt.\nIkke hev at vi har bestemte avtaler, rabatter, referanser, partnernivå, kapasitet eller rett til registrering. Oppfordre til å følge godkjent intern partnerprosess.\nGi et utkast til en kort intern forespørsel uten kundenavn eller konfidensielle detaljer.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    },
+    {
+      "id": "critical-review",
+      "category": "Forstå kunden",
+      "title": "Utfordre et salgsresonnement",
+      "summary": "Red-team forslag før vi begynner å love noe.",
+      "when": "Når en anbefaling føles for enkel eller for KI-preget.",
+      "audience": "Salg / fagleder",
+      "sourceMode": "public",
+      "placeholders": [
+        "HYPOTESE",
+        "GRUNNLAG"
+      ],
+      "before": [
+        "Bruk anonymisert eller offentlig kjent grunnlag."
+      ],
+      "prompt": "Vær en kritisk fag- og salgsreviewer.\nHypotese: [HYPOTESE]. Oppgitt, offentlig eller anonymisert grunnlag: [GRUNNLAG].\nSe etter ubegrunnede antagelser om teknologi, KI-behov, markedet og vår leveranseevne.\nSvar med:\n1. Hva som er faktagrunnlag og hva som er antatt.\n2. Tre plausible alternative forklaringer på kundeproblemet.\n3. De tre viktigste hullene vi bør undersøke.\n4. En enklere leveranse som kan være bedre enn den foreslåtte.\n5. To spørsmål som kan avkrefte hypotesen.\n6. En forbedret, kort anbefaling uten udokumenterte løfter.\nHvis grunnlaget er utilstrekkelig, si det tydelig og ikke forsøk å «redde» hypotesen.",
+      "review": [
+        "Sjekk kildene og datoene selv.",
+        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+      ],
+      "priority": 2
+    }
+  ]
+}

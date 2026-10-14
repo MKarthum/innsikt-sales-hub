@@ -6,7 +6,7 @@ if(js.includes('./data/content.json')||fs.existsSync('docs/data/content.json'))e
 if(/const slidesBase\s*=/.test(js))errors.push('Presentasjon er hardkodet i JS');
 if(/\b(?:48 %|30 % i 2025 mot 48 %|29–90 %)\b/.test(js))errors.push('Markedsstatistikk er hardkodet i JS');
 if(/hdr\('[A-ZÆØÅ][^']*','/.test(js))errors.push('Sidens overskrifter er hardkodet i JS');
-for(const [kind,ref] of [['CSS','site.css'],['JS','site.js']]){
+for(const [kind,ref] of [['CSS','site.css'],['JS','site.js'],['Prompt JS','prompts.js'],['Learning JS','learning.js']]){
  const escaped=ref.replace('.','\\.');
  const m=html.match(new RegExp('assets/'+escaped+'\\?v=([0-9.]+)'));
  if(!m||m[1]!==site.version)errors.push(kind+'-versjon samsvarer ikke med '+site.version);

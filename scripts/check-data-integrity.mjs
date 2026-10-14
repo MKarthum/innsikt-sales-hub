@@ -7,7 +7,7 @@ const refSource=(id,from)=>{if(!sources[id])fail(from+' peker på ukjent kilde '
 const refs=(a,from)=>{if(!Array.isArray(a)||!a.length)fail(from+' mangler kilde');else a.forEach(id=>refSource(id,from))};
 if(!/^\d+\.\d+\.\d+$/.test(site.version||''))fail('Ugyldig site-versjon');
 if(!date(site.released)||!date(site.reviewed))fail('Mangler dato for utgave eller faglig gjennomgang');
-const pagesNeeded=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling'];
+const pagesNeeded=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter'];
 for(const p of pagesNeeded)if(!str(pages.navigation?.[p]))fail('Mangler navigasjon '+p);
 for(const [key,value] of Object.entries(pages.headers||{}))for(const field of ['eyebrow','title','intro'])if(!str(value[field]))fail('Ufullstendig header '+key+'.'+field);
 if(Object.keys(pages.headers||{}).length<13)fail('Grunnkurs/arkitektur/verktøy mangler sidetitler');
@@ -49,16 +49,31 @@ for(const file of ['docs/index.html','docs/assets/site.js','docs/assets/learning
 const html=fs.readFileSync('docs/index.html','utf8');
 for(const n of pagesNeeded)if(!html.includes('data-page="'+n+'"'))fail('HTML mangler menypunkt '+n);
 if(!html.includes('site.js?v='+site.version)||!html.includes('learning.js?v='+site.version)||!html.includes('site.css?v='+site.version))fail('Manglende felles assetversjon');
-if(!Array.isArray(pages.home.homeSignals)||pages.home.homeSignals.length!==3)fail('Forsiden må ha tre distinkte innganger: datagrunnlag, analyse og KI');
-else{
- const signals=pages.home.homeSignals;
- if(new Set(signals.map(x=>x.id)).size!==3)fail('Forsiden inneholder dupliserte innganger');
- for(const sig of signals)refs(sig.sources,'Forsidekort '+sig.id);
- const kinds=new Set(signals.map(x=>x.type));
- for(const kind of ['foundation','eu-analytics','norway-ai'])if(!kinds.has(kind))fail('Mangler inngangstype '+kind);
+if(!Array.isArray(pages.home.pillars)||pages.home.pillars.length!==3)fail('Forsiden må ha tre verdibudskap');
+else {
+ const types=new Set(pages.home.pillars.map(x=>x.id));
+ for(const n of ['platform','insight','ai'])if(!types.has(n))fail('Mangler hovedbudskap: '+n);
+ for(const x of pages.home.pillars){if(!str(x.title)||!str(x.summary)||!str(x.question)||!str(x.example)||!str(x.link))fail('Ufullstendig hovedbudskap '+x.id);refs(x.sourceIds,x.title);}
 }
-if(!market.stats.euAnalytics||!sources[market.stats.euAnalytics.source])fail('Dataanalyse-statistikk mangler kilde');
-if(!pages.marketIntro?.dataStory?.length)fail('Markedssiden mangler beskrivelse av datagrunnlag');
-
+if(market.stats.euAnalytics)fail('Utdatert EU-analysetall skal ikke stå i markedstall');
+if(!pages.marketIntro?.dataStory?.length)fail('Markedssiden mangler datagrunnlagshistorie');
+const prompts=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8'));
+if(!str(pages.navigation.prompter))fail('Promptnavigasjon mangler');
+if(!prompts?.page||!Array.isArray(prompts.categories)||prompts.categories.length<4)fail('Manglende promptbibliotek og kategorier');
+ids(prompts.items,'Promptmaler');
+for(const t of prompts.items){
+ if(!prompts.categories.includes(t.category))fail('Ukjent promptkategori '+t.id);
+ if(!str(t.title)||!str(t.summary)||!str(t.prompt)||t.prompt.length<300)fail('Prompt mangler innhold: '+t.id);
+ if(!['public','approved-internal'].includes(t.sourceMode))fail('Ugyldig datatilgang '+t.id);
+ if(!Array.isArray(t.placeholders)||!Array.isArray(t.before)||!Array.isArray(t.review)||!t.review.length)fail('Prompt mangler bruksveiledning '+t.id);
+ for(const field of t.placeholders)if(!t.prompt.includes('['+field+']'))fail('Ubrukt promptfelt '+field+' i '+t.id);
+ const used=[...t.prompt.matchAll(/\[([A-ZÆØÅ][A-ZÆØÅ0-9_]+)\]/g)].map(x=>x[1]);
+ for(const field of used)if(!t.placeholders.includes(field)&&field!=='MÅ UNDERSØKES')fail('Ukjent promptfelt '+field+' i '+t.id);
+}
+if(prompts.items.length<12)fail('For få promptmaler');
+refs(prompts.sourceIds,'Promptveiledning');
+if(!fs.existsSync('docs/assets/prompts.js'))fail('Promptvisning mangler');
+const pageHtml=fs.readFileSync('docs/index.html','utf8');
+if(!pageHtml.includes('prompts.js?v='+site.version))fail('Promptvisning har feil asset-versjon');
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log('PASS – '+pagesNeeded.length+' sider, '+learning.diagrams.length+' arkitekturer, '+learning.templates.length+' maler, '+Object.keys(sources).length+' kilder og '+Object.keys(pages.presentationDecks).length+' presentasjonsløp validert');

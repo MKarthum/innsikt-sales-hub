@@ -257,18 +257,32 @@
     "type": "leverandørdokumentasjon",
     "checked": "2026-10-13"
   },
-  "eurostatAnalytics": {
-    "title": "Digital economy and society statistics – enterprises: data analytics, 2025",
-    "publisher": "Eurostat",
-    "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Digital_economy_and_society_statistics_-_enterprises",
-    "type": "offentlig EU-statistikk",
-    "checked": "2026-10-14"
-  },
   "googleIntegration": {
     "title": "What is Data Integration?",
     "publisher": "Google Cloud",
     "url": "https://cloud.google.com/learn/what-is-data-integration",
     "type": "leverandørforklaring av dataintegrasjon",
+    "checked": "2026-10-14"
+  },
+  "openaiPrompting": {
+    "title": "Prompt engineering best practices for ChatGPT",
+    "publisher": "OpenAI Help Center",
+    "url": "https://help.openai.com/en/articles/10032626",
+    "type": "offisiell veiledning",
+    "checked": "2026-10-14"
+  },
+  "microsoftSalesPrompts": {
+    "title": "Work smarter with Copilot prompts for sales professionals",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/training/modules/work-smarter-copilot-sales/",
+    "type": "offisiell opplæring",
+    "checked": "2026-10-14"
+  },
+  "microsoftSalesAgent": {
+    "title": "Overview of Sales agent in Microsoft 365 Copilot",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/microsoft-sales-copilot/sales-chat-overview",
+    "type": "offisiell produktveiledning",
     "checked": "2026-10-14"
   }
 }

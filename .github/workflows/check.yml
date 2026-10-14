@@ -18,5 +18,6 @@ jobs:
         run: |
           node --check docs/assets/site.js
           node --check docs/assets/learning.js
+          node --check docs/assets/prompts.js
       - name: Publiceringskontroller
         run: node scripts/check.mjs

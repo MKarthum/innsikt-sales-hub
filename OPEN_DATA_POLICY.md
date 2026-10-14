@@ -28,3 +28,8 @@ Etter flytting kan interne data bare legges til etter godkjent klassifisering, t
 ## Gjenbrukbare maler og arkitekturskisser
 
 Maler og generiske skisser er kun pedagogiske startpunkter. De skal ikke lagre kundedata i denne åpne nettsiden. Virkelige kundeopplysninger skal håndteres i godkjente interne systemer etter en eventuell overføring.
+
+
+## Generiske KI-prompter
+
+Promptbiblioteket er offentlig og gir bare kopierbare instruksjoner, ikke tilgang til systemer eller data. Ingen hemmelige nøkler, direkte CRM-forespørsler eller sensitive eksempler skal inn i versjonsstyringen. Redigering i nettleseren lagres ikke og sendes ikke av portalen. Brukeren må selv velge en godkjent KI-tjeneste og passe på hvilke opplysninger som limes inn.

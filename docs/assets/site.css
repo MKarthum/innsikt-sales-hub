@@ -186,3 +186,74 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 .sector-details .hbar .hlabel{max-width:140px}
 @media(max-width:1020px){.data-story-grid{grid-template-columns:1fr}.market-metrics{grid-template-columns:1fr}}
 @media(max-width:620px){.home-signal .num{font-size:30px}.home-signal .corner{top:18px}.data-story-intro{padding:19px}.market-big-number{font-size:48px}}
+
+
+/* Fortelling i tre spor – datagrunnlag, analyse, KI. */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:18px 0 12px}
+.pillar-card{background:#fff;border:1px solid #dbe9e7;border-radius:17px;padding:23px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pillar-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pillar-number{font:800 13px 'Manrope',sans-serif;color:#17876f}
+.pillar-kicker{font-size:10px;font-weight:850;color:#427d71;letter-spacing:.07em}
+.pillar-card h3{font-size:19px;line-height:1.3;letter-spacing:-.02em;margin:2px 0 0}
+.pillar-card>p{font-size:13px;line-height:1.65;color:#526e74;margin:0}
+.pillar-example{border-left:3px solid #b9dcd2;padding:7px 0 7px 12px;font-size:12px;line-height:1.7;color:#3b6364}
+.pillar-question{font-size:12px;line-height:1.55;color:#23584f;background:#eef8f4;border-radius:10px;padding:12px}
+.pillar-question strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.pillar-card .pillar-footer{margin-top:auto;display:flex;flex-direction:column;gap:11px}
+.pillar-footer>a{display:inline-flex;align-items:center;gap:7px;font-weight:850;font-size:12px;color:#0e8268}
+.pillar-footer svg{width:14px;height:14px}
+.pillar-footer .text-source{font-size:10px}
+.ki-growth-strip{background:#edf8f5;border:1px solid #d4e6df;border-radius:13px;padding:19px 21px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:16px}
+.ki-growth-strip h3{font-size:15px;margin:0 0 7px}
+.ki-growth-strip p{font-size:12px;color:#52726c;line-height:1.65;margin:0}
+.ki-growth-strip .growth-values{display:flex;gap:10px;align-items:center;white-space:nowrap;font-weight:800}
+.ki-growth-strip .growth-values span{font-size:13px;color:#507773}
+.ki-growth-strip .growth-values strong{font:800 28px 'Manrope',sans-serif;color:#0a7967;letter-spacing:-.03em}
+.ki-growth-strip .text-source{font-size:10px;margin-top:9px}
+.prompt-intro{background:linear-gradient(120deg,#f0f8f5,#f6fafb);border:1px solid #d4e7e2;border-radius:15px;padding:22px 25px}
+.prompt-intro-top{display:flex;justify-content:space-between;gap:15px}
+.prompt-intro h2{font-size:19px;margin:0 0 11px}
+.prompt-intro ol{padding-left:22px;margin:0;color:#45666e;font-size:13px;line-height:1.85}
+.prompt-guide-mark{display:grid;place-items:center;border-radius:13px;background:#dff2eb;width:56px;height:56px;flex:0 0 56px;color:#137563}
+.prompt-guide-mark svg{width:25px;height:25px}
+.prompt-safety{display:flex;gap:13px;align-items:flex-start;border:1px solid #e5dabe;background:#fffaf0;border-radius:12px;padding:13px 16px;margin:15px 0}
+.prompt-safety p{font-size:12px;line-height:1.7;color:#6c6045;margin:0}
+.prompt-safety-icon{color:#8b702d;flex-shrink:0}.prompt-safety svg{width:17px;height:17px}
+.prompt-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.prompt-card{display:flex;flex-direction:column;gap:11px;background:#fff;border:1px solid #dce7e7;border-radius:15px;padding:20px;transition:border-color .15s,box-shadow .15s;min-width:0}
+.prompt-card:hover,.prompt-card:focus-visible{border-color:#58ad9e;box-shadow:0 6px 24px rgba(13,79,71,.075)}
+.prompt-top{display:flex;align-items:center;justify-content:space-between;gap:9px}
+.prompt-chip{display:inline-flex;background:#e8f6f0;color:#1c7460;border-radius:7px;font-size:10px;font-weight:850;padding:5px 8px}
+.prompt-rank{font-size:10px;color:#7d8585}
+.prompt-card h3{font:800 16px/1.3 'Manrope',sans-serif;margin:0}
+.prompt-card>p{color:#58747a;font-size:12px;line-height:1.65;margin:0 0 12px}
+.prompt-card-foot{border-top:1px solid #e5eeee;padding-top:13px;margin-top:auto;display:flex;justify-content:space-between;gap:12px;align-items:center;color:#667f81;font-size:10px}
+.prompt-card-foot strong{color:#117762;font-size:11px;white-space:nowrap}
+.prompt-next-stage{border:1px solid #d7e5e5;background:#f5faf9;border-radius:14px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.prompt-next-stage h3{font-size:16px;margin:0 0 8px}
+.prompt-next-stage p{font-size:12px;line-height:1.7;margin:0;color:#59747b}
+.prompt-private-icon{width:51px;height:51px;display:grid;place-items:center;background:#e4f2f0;color:#317768;border-radius:12px;flex-shrink:0}
+.prompt-private-icon svg{width:21px;height:21px}
+.prompt-detail-head{margin-bottom:15px}
+.prompt-detail-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(230px,1fr);gap:17px}
+.prompt-main-panel{background:#fff;border:1px solid #d9e8e6;border-radius:15px;padding:20px;min-width:0}
+.prompt-edit-head{display:flex;align-items:start;justify-content:space-between;gap:13px}
+.prompt-edit-head h2{font-size:17px;margin:0 0 7px}
+.prompt-edit-head p{font-size:12px;color:#667a80;line-height:1.6}
+.prompt-editor{display:block;width:100%;max-width:100%;min-height:410px;border:1px solid #cbdedb;border-radius:12px;padding:17px;font-size:13px;line-height:1.75;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#28424d;resize:vertical;background:#fbfdfd}
+.prompt-editor:focus{outline:2px solid #6cc8b1;outline-offset:2px}
+.prompt-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:13px 0}
+.prompt-safety-inline{border-top:1px solid #e4e9e5;padding-top:12px;font-size:11px;line-height:1.65;color:#897344;display:flex;align-items:start;gap:8px}
+.prompt-safety-inline svg{width:16px;height:16px;flex-shrink:0}
+.prompt-side-panel{display:grid;gap:14px;align-content:start}
+.prompt-side-panel h3{font-size:14px;margin:0 0 9px}
+.prompt-side-panel h3:not(:first-child){margin-top:20px}
+.prompt-side-panel p,.prompt-side-panel li{font-size:12px;color:#53737a;line-height:1.7}
+.prompt-side-panel ul{padding-left:19px;margin:0}
+.prompt-placeholder-list{display:flex;gap:6px;flex-wrap:wrap}
+.prompt-placeholder-list code{font-size:10px;background:#edf5f3;padding:6px;border-radius:5px;color:#285a4c;overflow-wrap:anywhere}
+.home-prompts-card{margin:20px 0;background:#f0f8f5;border:1px solid #d3e5dc;border-radius:15px;padding:21px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.home-prompts-card h3{font-size:18px;margin:0 0 7px}
+.home-prompts-card p{font-size:13px;line-height:1.6;color:#4f6e74;margin:0}
+@media(max-width:1080px){.pillar-grid,.prompt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.prompt-detail-layout{grid-template-columns:minmax(0,1.4fr) minmax(215px,1fr)}}
+@media(max-width:760px){.pillar-grid,.prompt-grid,.prompt-detail-layout{grid-template-columns:1fr}.ki-growth-strip,.home-prompts-card{flex-direction:column;align-items:stretch}.ki-growth-strip .growth-values{justify-content:flex-start}.prompt-editor{min-height:350px}.prompt-intro{padding:17px}.prompt-guide-mark{display:none}.prompt-detail-head{margin-bottom:12px}.prompt-side-panel{grid-template-columns:1fr}.pillar-card{padding:19px}}

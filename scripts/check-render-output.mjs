@@ -3,9 +3,9 @@ import vm from 'node:vm';
 
 const read=(path)=>fs.readFileSync(path,'utf8');
 const json=(name)=>JSON.parse(read('docs/data/'+name+'.json'));
-const [meta,pages,sources,market,sales,technologies,backlog,learning]=
-  ['site','pages','sources','market','sales','technologies','backlog','learning'].map(json);
-const fixture={meta,pages,sources,...market,...sales,...technologies,backlog,learning};
+const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts]=
+  ['site','pages','sources','market','sales','technologies','backlog','learning','prompts'].map(json);
+const fixture={meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts};
 
 const source=read('docs/assets/site.js');
 const ending=/\binit\(\);\s*\}\)\(\);\s*$/;
@@ -23,12 +23,13 @@ const setup=[
 '   oversikt:overview,guide,forretning:business,muligheter:plays,kundedialog:dialogue,',
 '   marked:market,kompetanse:competence,arkitektur:()=>architecture(),',
 '   teknologi:technology,ai:aiProducts,bransje:industry,',
-'   verktoy:()=>toolkit(),kilder:sources,utvikling:dev',
+'   verktoy:()=>toolkit(),prompter:()=>prompts(),kilder:sources,utvikling:dev',
 ' }))add(name,fn);',
 " D.plays.forEach(x=>add('muligheter/'+x.id,()=>playDetail(x)));",
 " D.businessSignals.forEach(x=>add('forretning/'+x.id,()=>businessDetail(x)));",
 " D.learning.diagrams.forEach(x=>add('arkitektur/'+x.id,()=>architecture(x.id)));",
 " D.learning.templates.forEach(x=>add('verktoy/'+x.id,()=>toolkit(x.id)));",
+" D.prompts.items.forEach(x=>add('prompter/'+x.id,()=>prompts(x.id)));",
 ' const slideBody={innerHTML:""};',
 ' globalThis.document={',
 "   getElementById:(id)=>id==='slide-body'?slideBody:{textContent:'',disabled:false},",
@@ -54,6 +55,7 @@ const sandbox={
 };
 vm.createContext(sandbox);
 vm.runInContext(read('docs/assets/learning.js'),sandbox,{timeout:3000,filename:'learning.js'});
+vm.runInContext(read('docs/assets/prompts.js'),sandbox,{timeout:3000,filename:'prompts.js'});
 vm.runInContext(instrumented,sandbox,{timeout:3000,filename:'site.js'});
 let entries;
 try {entries=vm.runInContext('__renderAll()',sandbox,{timeout:8000});}

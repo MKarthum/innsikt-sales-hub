@@ -49,13 +49,21 @@ Kjør i repoets rot:
 ```sh
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
+node --check docs/assets/prompts.js
 node scripts/check.mjs
 ```
 
-Skriptet kjører offentlig-innhold, dataintegritet, innholdsstil og releasekontroll separat. GitHub Actions kjører de samme kontrollene ved push/PR. Test også startkurset, arkitekturlenker, kopiering av maler, alle tre presentasjonsløp med notater, søk, filtrering, detaljsider, feedback, mobil og desktop.
+Skriptet kjører offentlig-innhold, dataintegritet, innholdsstil og releasekontroll separat. GitHub Actions kjører de samme kontrollene ved push/PR. Test også filtrering, søk, redigering, kopiering og tilbakestilling av prompter, startkurset, arkitekturlenker, kopiering av maler, alle tre presentasjonsløp med notater, søk, filtrering, detaljsider, feedback, mobil og desktop.
 
 Ved hver publisert endring: oppdater `docs/data/site.json.version` og dato. CSS/JS-referansene i `docs/index.html` skal bruke samme versjon. Samle flerfilendringer i én atomisk commit/PR, ikke publiser mellomtrinn som krever hverandre.
 
 ## Åpne data og flytting
 
 Denne personlige Pages-utgaven kan ses offentlig. Bruk kun informasjon som tåler det, uavhengig av repository-visibility. Les `OPEN_DATA_POLICY.md`. Etter godkjent flytting til Webstep kan riktig tilgangsstyring og interne data vurderes.
+
+
+## Innholdsprioritet og framtidig bruk
+
+Faglig sparring skal først og fremst gjøre salgsbudskapet, eksemplene og promptene bedre. Ikke opprett tekniske løsninger fordi det er mulig. Forsidens tre spor er datagrunnlag/plattform, analyse/beslutninger og KI. KI-statistikk skal understøtte fortellingen; tilfeldige eller usammenlignbare tall skal ikke gis hovedplass.
+
+Se `INTERNAL_MIGRATION.md` før vurdering av HubSpot, Google Drive, konsulentprofiler eller annet internt innhold. Det offentlige GitHub-repoet, inkludert commit-historikken, må aldri tilføres private data.

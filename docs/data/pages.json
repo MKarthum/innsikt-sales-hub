@@ -18,7 +18,8 @@
     "bransje": "Marked og oppkjøp",
     "verktoy": "Verktøykasse",
     "kilder": "Kilder",
-    "utvikling": "Videreutvikling"
+    "utvikling": "Videreutvikling",
+    "prompter": "Prompter for salg"
   },
   "headers": {
     "FORRETNINGSBEHOV": {
@@ -85,15 +86,20 @@
       "eyebrow": "GJENBRUKBARE UTGANGSPUNKTER",
       "title": "Maler for kundedialoger og oppfølging",
       "intro": "Kopier en struktur for første møte, kvalifisering eller overlevering. Foreløpig er dette åpne eksempler, ikke Websteps godkjente arbeidsdokumenter."
+    },
+    "PROMPTBIBLIOTEK": {
+      "eyebrow": "KI SOM ARBEIDSVERKTØY FOR SALG",
+      "title": "Gode prompter til faktiske salgsoppgaver",
+      "intro": "Velg en oppgave, tilpass en ferdig instruksjon og kopier den til KI-verktøyet dere har lov til å bruke. Prompten gjør ikke jobben av seg selv: vurder kilder, kvalitet og kundens situasjon."
     }
   },
   "home": {
     "eyebrow": "ET PRAKTISK VERKTØY FOR BEDRE KUNDEDIALOGER",
     "titleLine1": "Se mulighetene.",
     "titleLine2": "Still bedre spørsmål.",
-    "intro": "Bedre beslutninger starter med data som henger sammen og er til å stole på. Innsikt hjelper kundene med dataplattformer, analyse og rapportering – og med KI der det gir verdi.",
-    "statsTitle": "Tre innganger til data og innsikt",
-    "statsIntro": "Fra pålitelig datagrunnlag til analyse og KI. Tre forskjellige behov som ofte henger sammen.",
+    "intro": "Hjelp kundene å få data til å henge sammen, bruke informasjonen til bedre beslutninger og ta i bruk KI når det gir nytte. Det starter med forretningsproblemet – ikke med produktnavnet.",
+    "statsTitle": "Tre måter Innsikt skaper verdi",
+    "statsIntro": "Fra et pålitelig datagrunnlag til bedre styring og nye KI-muligheter. Velg sporet som passer kundens situasjon.",
     "actionTitle": "Hva skal du gjøre?",
     "actionIntro": "Ta utgangspunkt i situasjonen du står i",
     "startTitle": "Helt ny innen data og analyse?",
@@ -101,46 +107,56 @@
     "startAction": "Ta introduksjonen",
     "advancedTitle": "Erfaren eller på vei til kundemøte?",
     "advancedIntro": "Gå rett til arkitekturskissene, samtaleguidene eller verktøykassen.",
-    "statsCaveat": "Tallene kommer fra ulike undersøkelser, land og år og kan ikke sammenlignes direkte.",
-    "homeSignals": [
+    "pillarTitle": "Slik henger de sammen",
+    "pillarIntro": "En god dataplattform kan gjøre analyse enklere og KI mer nyttig. Men rapportering og datakvalitet har stor verdi også uten KI.",
+    "kiEvidenceTitle": "KI er en tydelig pådriver",
+    "kiEvidenceBody": "Andelen norske foretak som oppgir KI-bruk har økt betydelig. Det kan øke behovet for datatilgang og kvalitet, men bruk betyr ikke dokumentert effekt eller et sikkert konsulentbehov.",
+    "promptTitle": "Bruk KI til å forberede en bedre kundedialog",
+    "promptBody": "Ferdigskrevne, redigerbare prompter for kundekartlegging, møter, kompetansebehov og presentasjoner. Foreløpig kun med åpne eller generiske data.",
+    "promptCta": "Åpne promptbiblioteket",
+    "pillars": [
       {
-        "id": "foundation",
-        "type": "foundation",
-        "icon": "layers",
-        "eyebrow": "Datagrunnlag og plattform",
-        "value": "Felles tall",
-        "title": "Data som henger sammen",
-        "description": "Når CRM, økonomi og andre systemer gir ulike tall, kan kunden trenge integrasjon, datakvalitet og felles definisjoner.",
-        "route": "arkitektur",
-        "routeLabel": "Slik henger data sammen",
-        "sources": [
+        "id": "platform",
+        "number": "01",
+        "eyebrow": "DATAGRUNNLAG OG PLATTFORM",
+        "title": "Få data til å henge sammen",
+        "summary": "Når kunden sliter med ulike tall, manuell dataflyt eller vanskelig tilgang, begynner verdien med integrasjon, datakvalitet, modeller og styring.",
+        "example": "«Vi bruker flere dager på å samle tall, og avdelingene er ikke enige.»",
+        "question": "Hvilke data og beslutninger skaper mest friksjon i dag?",
+        "link": "#arkitektur/bi",
+        "linkText": "Slik ser et typisk dataløp ut",
+        "sourceIds": [
           "webstep1"
         ]
       },
       {
-        "id": "analytics",
-        "type": "eu-analytics",
-        "icon": "bar-chart",
-        "eyebrow": "Analyse og beslutningsstøtte",
-        "title": "Foretak gjør dataanalyse selv",
-        "description": "Foretak med minst ti sysselsatte. Måler intern dataanalyse, ikke etterspørsel etter konsulenter.",
-        "route": "forretning",
-        "routeLabel": "Se forretningsbehov",
-        "sources": [
-          "eurostatAnalytics"
+        "id": "insight",
+        "number": "02",
+        "eyebrow": "ANALYSE OG BESLUTNINGER",
+        "title": "Bruke data til bedre valg",
+        "summary": "BI, analyse og prognoser gjør informasjon nyttig i økonomi, salg, kundeservice og drift. Målet er raskere og bedre beslutninger – ikke flere dashboards.",
+        "example": "«Vi ser tallene, men ikke hva som driver lønnsomheten.»",
+        "question": "Hva ville dere besluttet annerledes med bedre innsikt?",
+        "link": "#forretning",
+        "linkText": "Se forretningsbehov",
+        "sourceIds": [
+          "webstep1",
+          "webstep2"
         ]
       },
       {
         "id": "ai",
-        "type": "norway-ai",
-        "icon": "sparkles",
-        "eyebrow": "KI som ny pådriver",
-        "title": "Foretak bruker KI",
-        "description": "Foretak med minst ti sysselsatte, ekskl. finans. Bruk er ikke dokumentert gevinst.",
-        "route": "ai",
-        "routeLabel": "Se KI i plattformene",
-        "sources": [
-          "ssb"
+        "number": "03",
+        "eyebrow": "KI OG NYE ARBEIDSMÅTER",
+        "title": "Bygge videre på dataene med KI",
+        "summary": "KI kan hjelpe datateam å levere raskere og forretningen å bruke egne data på nye måter. Verdien avhenger av kvalitet, sikkerhet og reelle brukstilfeller.",
+        "example": "«Vi vil bruke KI på egne data, men får ikke pålitelige svar.»",
+        "question": "Hva skal KI faktisk forbedre, og hvilket datagrunnlag kreves?",
+        "link": "#arkitektur/ai-on-data",
+        "linkText": "Se hvordan KI bygger på data",
+        "sourceIds": [
+          "ssb",
+          "webstep1"
         ]
       }
     ]
@@ -353,39 +369,37 @@
     }
   },
   "marketIntro": {
-    "dataTitle": "Analyse og dataplattform – verdien før teknologien",
-    "dataLead": "Virksomheter trenger pålitelige data, felles styring og gode analyser enten de satser på KI eller ikke. Dataplattformen skal gjøre informasjon tilgjengelig og gjenbrukbar.",
-    "analyticsTitle": "Dataanalyse i europeiske foretak",
-    "analyticsDetail": "EU-foretak med minst ti sysselsatte. Analyse utført av egne ansatte. Ikke direkte sammenlignbart med de norske KI-tallene.",
-    "aiTitle": "KI-bruken øker i Norge",
-    "aiDetail": "Foretak med minst ti sysselsatte, ekskl. finans. Bruk er ikke det samme som dokumentert gevinst.",
+    "dataTitle": "Tre typer behov – ikke en konkurranse mellom tall",
+    "dataLead": "En kunde kan ha nytte av dataplattform og analyse lenge før de ønsker KI. Samtidig gjør KI det mer aktuelt å rydde i datagrunnlag, definisjoner og tilgang. Det viktigste er å forstå kundens beslutninger og flaskehalser.",
+    "aiTitle": "KI vokser raskt",
+    "aiDetail": "SSBs norske tall viser sterk utvikling. Dette sier ikke noe direkte om lønnsomhet, modenhet eller hvilke konsulentprosjekter som oppstår.",
     "sectorsTitle": "Ulik KI-bruk mellom næringer",
     "sectorIntro": "Tilleggsinformasjon fra SSB – ikke et mål på konsulentbehov.",
     "dataStory": [
       {
-        "id": "connect",
-        "title": "Koble sammen",
-        "body": "Data fra kunder, økonomi og drift ligger ofte i ulike systemer. Integrasjon gjør informasjonen tilgjengelig på tvers.",
-        "sourceIds": [
-          "webstep1",
-          "googleIntegration"
-        ]
-      },
-      {
-        "id": "trust",
-        "title": "Få kontroll på tallene",
-        "body": "Felles definisjoner, kvalitet og ansvar bidrar til pålitelig rapportering og bedre beslutninger.",
+        "id": "platform",
+        "title": "Datagrunnlag",
+        "body": "Koble sammen kilder, definere nøkkeltall, sikre kvalitet og tilgang. Et selvstendig forbedringsbehov.",
         "sourceIds": [
           "webstep1"
         ]
       },
       {
-        "id": "use",
-        "title": "Bruke innsikten",
-        "body": "BI, analyse, prognoser og KI bygger videre på datagrunnlaget, med ulike muligheter og risikoer.",
+        "id": "analysis",
+        "title": "Analyse og innsikt",
+        "body": "Gjøre tall og sammenhenger tilgjengelige for beslutninger, prognoser og bedre operativ styring.",
         "sourceIds": [
           "webstep1",
-          "eurostatAnalytics"
+          "webstep2"
+        ]
+      },
+      {
+        "id": "ai",
+        "title": "KI og automatisering",
+        "body": "Forbedre datautvikling og skape nye tjenester på egne data, med testing, datastyring og kontroll.",
+        "sourceIds": [
+          "ssb",
+          "fabricagent"
         ]
       }
     ]

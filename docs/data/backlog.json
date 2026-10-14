@@ -110,5 +110,21 @@
     "status": "åpen",
     "priority": "middels",
     "why": "Foreløpig åpne maler uten kundeopplysninger eller CRM-integrasjon."
+  },
+  {
+    "id": "B-15",
+    "title": "Utvikle godkjent intern prompt- og datakobling etter flytting",
+    "area": "Arbeidsflyt",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Koble CRM/HubSpot, Google Drive og eventuelt kompetanseoversikt først etter godkjent innlogging, datatilgang og sikkerhetskontroll. Ikke synkroniser data til offentlig repo."
+  },
+  {
+    "id": "B-16",
+    "title": "La selgere kvalitetssikre og rangere promptmaler",
+    "area": "Faginnhold",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Se hvilke maler som faktisk gir bedre forberedelser og kundedialoger, og fjern overflødig eller generisk innhold."
   }
 ]
