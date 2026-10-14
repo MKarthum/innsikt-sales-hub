@@ -1,4 +1,7 @@
 import fs from 'node:fs';
+import vm from 'node:vm';
+const resolverSandbox={window:{}};
+vm.runInNewContext(fs.readFileSync('docs/assets/content.js','utf8'),resolverSandbox);
 const read=n=>JSON.parse(fs.readFileSync('docs/data/'+n+'.json','utf8'));
 const site=read('site'), pages=read('pages'), sources=read('sources'), market=read('market'), sales=read('sales'), tech=read('technologies'), backlog=read('backlog'), learning=read('learning');
 const errors=[],fail=x=>errors.push(x),str=x=>typeof x==='string'&&Boolean(x.trim()),ids=(a,name)=>{if(!Array.isArray(a)||!a.length){fail(name+' er tom');return []}const v=a.map(x=>x.id);if(v.some(x=>!str(x)))fail(name+' har manglende ID');if(new Set(v).size!==v.length)fail(name+' har duplikat-ID');return v};
@@ -9,7 +12,7 @@ if(!/^\d+\.\d+\.\d+$/.test(site.version||''))fail('Ugyldig site-versjon');
 if(!date(site.released)||!date(site.reviewed))fail('Mangler dato for utgave eller faglig gjennomgang');
 const pagesNeeded=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont'];
 for(const p of pagesNeeded)if(!str(pages.navigation?.[p]))fail('Mangler navigasjon '+p);
-for(const [key,value] of Object.entries(pages.headers||{}))for(const field of ['eyebrow','title','intro'])if(!str(value[field]))fail('Ufullstendig header '+key+'.'+field);
+for(const [key,value] of Object.entries(pages.headers||{}))for(const field of ['eyebrow','title','intro'])if(!(str(value[field])||(value[field]&&typeof value[field].$content==='string')))fail('Ufullstendig header '+key+'.'+field);
 if(Object.keys(pages.headers||{}).length<13)fail('Grunnkurs/arkitektur/verktøy mangler sidetitler');
 for(const [key,source] of Object.entries(sources)){
  if(!str(source.title)||!str(source.publisher)||!/^https:\/\/[^ /]+/.test(source.url||'')||!date(source.checked))fail('Ufullstendig kilde '+key);
@@ -48,6 +51,7 @@ for(const [key,d] of Object.entries(pages.presentationDecks||{})){
 for(const file of ['docs/index.html','docs/assets/site.js','docs/assets/learning.js','docs/assets/site.css'])if(!fs.existsSync(file))fail('Mangler fil '+file);
 const html=fs.readFileSync('docs/index.html','utf8');
 for(const n of pagesNeeded)if(!html.includes('data-page="'+n+'"'))fail('HTML mangler menypunkt '+n);
+if(!html.includes('content.js?v='+site.version))fail('Manglende versjon eller registrering for innholdsløser');
 if(!html.includes('site.js?v='+site.version)||!html.includes('learning.js?v='+site.version)||!html.includes('site.css?v='+site.version))fail('Manglende felles assetversjon');
 if(!Array.isArray(pages.home.pillars)||pages.home.pillars.length!==3)fail('Forsiden må ha tre verdibudskap');
 else {
@@ -57,7 +61,7 @@ else {
 }
 if(market.stats.euAnalytics)fail('Utdatert EU-analysetall skal ikke stå i markedstall');
 if(!pages.marketIntro?.dataStory?.length)fail('Markedssiden mangler datagrunnlagshistorie');
-const prompts=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8'));
+const prompts=resolverSandbox.window.InnsiktContent.materialize({learning,salesGuidance:[],sharedGuidance:sales.sharedGuidance,prompts:read('prompts')}).prompts;
 if(!str(pages.navigation.prompter))fail('Promptnavigasjon mangler');
 if(!prompts?.page||!Array.isArray(prompts.categories)||prompts.categories.length<4)fail('Manglende promptbibliotek og kategorier');
 ids(prompts.items,'Promptmaler');

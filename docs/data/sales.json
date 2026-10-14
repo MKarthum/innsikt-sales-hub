@@ -42,7 +42,9 @@
       "sources": [
         "webstep1",
         "webstep2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "number": "02",
@@ -85,7 +87,9 @@
       "sources": [
         "webstep1",
         "webstep2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "number": "03",
@@ -128,7 +132,9 @@
       "sources": [
         "webstep1",
         "webstep2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "number": "04",
@@ -171,7 +177,9 @@
       "sources": [
         "webstep1",
         "privacy"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "modernisering",
@@ -216,7 +224,9 @@
         "webstep2",
         "fabric",
         "databricks"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "ki-data",
@@ -262,7 +272,9 @@
         "digdir",
         "privacy",
         "webstep1"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "datakvalitet",
@@ -307,7 +319,9 @@
         "webstep1",
         "webstep2",
         "digdir"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "kapasitet",
@@ -350,7 +364,9 @@
       "not": "Ikke lov tilgjengelighet eller navngitte profiler uten avklaring.",
       "sources": [
         "webstep2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     }
   ],
   "scenarios": [
@@ -456,61 +472,73 @@
   "competences": [
     {
       "label": "Data og plattform",
-      "description": "Arkitektur, integrasjoner, datavarehus, datamodellering og data engineering."
+      "description": "Arkitektur, integrasjoner, datavarehus, datamodellering og data engineering.",
+      "id": "competence-1"
     },
     {
       "label": "Analyse og BI",
-      "description": "Rapportering, visualisering, innsikt og avansert analyse."
+      "description": "Rapportering, visualisering, innsikt og avansert analyse.",
+      "id": "competence-2"
     },
     {
       "label": "Kvalitet og styring",
-      "description": "Datakvalitet, tilgang, dokumentasjon og eierskap."
+      "description": "Datakvalitet, tilgang, dokumentasjon og eierskap.",
+      "id": "competence-3"
     },
     {
       "label": "KI og anvendelse",
-      "description": "KI-relevante brukstilfeller, datatilrettelegging og tverrfaglige leveranser."
+      "description": "KI-relevante brukstilfeller, datatilrettelegging og tverrfaglige leveranser.",
+      "id": "competence-4"
     }
   ],
   "audiences": [
     {
       "label": "CFO / økonomi",
       "interest": "Styring, prognoser, rapportering og troverdige tall",
-      "entry": "rapportering"
+      "entry": "rapportering",
+      "id": "audience-1"
     },
     {
       "label": "Salgs- og markedsleder",
       "interest": "Kundelønnsomhet, kanalvalg og kommersiell effekt",
-      "entry": "kundevekst"
+      "entry": "kundevekst",
+      "id": "audience-2"
     },
     {
       "label": "COO / driftsleder",
       "interest": "Kapasitet, effektivitet, avvik og planlegging",
-      "entry": "driftsinnsikt"
+      "entry": "driftsinnsikt",
+      "id": "audience-3"
     },
     {
       "label": "Kundeserviceleder",
       "interest": "Årsaker til kundehenvendelser, kvalitet og produktivitet",
-      "entry": "kundeopplevelse"
+      "entry": "kundeopplevelse",
+      "id": "audience-4"
     },
     {
       "label": "HR- / ressursleder",
       "interest": "Kompetanse, bemanning, planlegging og personvern",
-      "entry": "rapportering"
+      "entry": "rapportering",
+      "id": "audience-5"
     },
     {
       "label": "Daglig leder / forretningsleder",
       "interest": "Gevinstrealisering, effekt og prioritering",
-      "entry": "ki-data"
+      "entry": "ki-data",
+      "id": "audience-6"
     },
     {
       "label": "CIO / IT-leder",
       "interest": "Modernisering, integrasjoner, risiko og kapasitet",
-      "entry": "modernisering"
+      "entry": "modernisering",
+      "id": "audience-7"
     },
     {
       "label": "Data- og analyseleder",
       "interest": "Strategi, datagrunnlag og teamets leveranseevne",
-      "entry": "kapasitet"
+      "entry": "kapasitet",
+      "id": "audience-8"
     }
   ],
   "businessSignals": [
@@ -544,7 +572,9 @@
       "sources": [
         "webstep1",
         "webstep2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "salg",
@@ -576,7 +606,9 @@
       "sources": [
         "webstep1",
         "webstep2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "drift",
@@ -608,7 +640,9 @@
       "sources": [
         "webstep1",
         "webstep2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "kundeservice",
@@ -640,7 +674,9 @@
       "sources": [
         "webstep1",
         "privacy"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "hr",
@@ -672,7 +708,9 @@
       "sources": [
         "webstep1",
         "privacy"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "ledelse",
@@ -704,7 +742,49 @@
       "sources": [
         "webstep1",
         "webstep2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
+    }
+  ],
+  "sharedGuidance": [
+    {
+      "id": "customer-first",
+      "variants": {
+        "short": "Start med problemet, ikke produktnavn.",
+        "normal": "Begynn med kundens problem, konsekvens og tidspunkt. Ta teknologivalg og spesialistvurdering sammen med fagmiljøet.",
+        "long": "Undersøk først hvilket problem kunden vil løse, konsekvensen av det og hvem som eier behovet. Bruk deretter fagmiljøet til å vurdere data, prosess og teknologi før en løsning foreslås."
+      },
+      "evidence": "assessment",
+      "sourceIds": [
+        "webstep1",
+        "webstep2"
+      ],
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "not-a-case",
+      "variants": {
+        "short": "Dette er et pedagogisk eksempel, ikke en dokumentert kundereferanse.",
+        "normal": "Dette er et redaksjonelt forslag til en salgsinngang, ikke en dokumentert kundecase eller garanti for leveranseevne.",
+        "long": "Ikke lov profiler, leveransekapasitet, referanser eller kompetanse uten bekreftelse fra Websteps fagmiljø. Ved overføring til organisasjonens repo kan intern kontaktinformasjon og godkjente referanser legges til."
+      },
+      "evidence": "assessment",
+      "sourceIds": [],
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
+    },
+    {
+      "id": "future-qualification",
+      "variants": {
+        "short": "Avklar gevinst og eierskap.",
+        "normal": "Avklar gevinst, eierskap og forutsetninger før tiltak anbefales."
+      },
+      "evidence": "open-question",
+      "sourceIds": [],
+      "reviewed": "2026-10-14",
+      "visibility": "not-presented"
     }
   ]
 }
