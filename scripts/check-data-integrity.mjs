@@ -19,6 +19,29 @@ for(const [key,source] of Object.entries(sources)){
  if(source.published&&!date(source.published))fail('Ugyldig publiseringsdato '+key);
 }
 ids(sales.plays,'Salgsinnganger');ids(sales.scenarios,'Scenarioer');ids(sales.businessSignals,'Forretningsbehov');
+ids(sales.industrySectors,'Bransjer');ids(sales.industryUseCases,'Bransjecaser');
+if(sales.industrySectors.length<6||sales.industryUseCases.length<30)fail('For få bransjer eller praktiske eksempler');
+const sectors=new Set(sales.industrySectors.map(x=>x.id)),playIds=new Set(sales.plays.map(x=>x.id));
+for(const s of sales.industrySectors){
+ if(!str(s.name)||!str(s.scope)||!str(s.functions)||!str(s.practice)||!str(s.openingQuestion))fail('Ufullstendig bransje '+s.id);
+ if(!['kjerne','tillegg'].includes(s.coverage))fail('Ugyldig bransjekategori '+s.id);
+ if(s.evidence!=='assessment'||!date(s.reviewed)||s.visibility!=='presented')fail('Ugyldig kunnskapsstatus '+s.id);
+ refs(s.sourceIds,'Bransje '+s.id);
+ const count=sales.industryUseCases.filter(c=>c.sectorId===s.id).length;
+ if(count<3)fail('Mangler flere konkrete samtaler for '+s.id);
+}
+for(const c of sales.industryUseCases){
+ if(!sectors.has(c.sectorId))fail('Bransjecase uten bransje: '+c.id);
+ for(const field of ['title','owner','symptom','goal','dataHypothesis','pilot','expand','caution'])if(!str(c[field]))fail('Bransjecase mangler '+field+': '+c.id);
+ if(!Array.isArray(c.questions)||c.questions.length<2||!c.questions.every(str))fail('Mangler dialogspørsmål: '+c.id);
+ if(!Array.isArray(c.metrics)||!c.metrics.length||!c.metrics.every(str))fail('Mangler måleparametre: '+c.id);
+ if(!Array.isArray(c.playIds)||!c.playIds.length||c.playIds.some(id=>!playIds.has(id)))fail('Ukjent leveranseinngang: '+c.id);
+ if(c.evidence!=='assessment'||!date(c.reviewed)||c.visibility!=='presented')fail('Kunnskapsstatus mangler: '+c.id);
+}
+if(sales.industryJourney?.steps?.length!==4||!str(sales.industryJourney.qualification)||!str(sales.industryJourney.maturityCaution))fail('Mangler forretningsdrevet kvalifiseringsløp');
+const ui=pages.industryUi;
+for(const field of ['homeTitle','homeIntro','sectorCases','symptom','goal','questions','metrics','data','pilot','expand','maturity'])if(!str(ui?.[field]))fail('Mangler bransjevisningsfelt: '+field);
+
 ids(market.trends,'Trender');ids(market.marketEvents,'Markedshendelser');ids(market.marketSignals,'Markedsforhold');
 ids(tech.aiProducts,'KI-produkter');ids(backlog,'Forbedringspunkter');ids(learning.diagrams,'Arkitekturer');ids(learning.templates,'Maler');
 if(!Array.isArray(learning.glossary)||learning.glossary.length<10)fail('For få begrepsforklaringer');
@@ -42,9 +65,10 @@ if(!pages.presentationDecks||Object.keys(pages.presentationDecks).length<3)fail(
 for(const [key,d] of Object.entries(pages.presentationDecks||{})){
  if(!str(d.label)||!d.slides?.length)fail('Presentasjonsløp mangler '+key);
  for(const x of d.slides||[]){
-  if(!str(x.title)||!['intro','diagram','metric','case','bullets','takeaway'].includes(x.type))fail('Ugyldig slide '+key);
+  if(!str(x.title)||!['intro','diagram','metric','case','sector-case','bullets','takeaway'].includes(x.type))fail('Ugyldig slide '+key);
   if(x.diagram&&!ds.has(x.diagram))fail('Ukjent diagram i presentasjon '+x.diagram);
   if(x.business&&!bs.has(x.business))fail('Ukjent kundesignal i presentasjon '+x.business);
+  if(x.type==='sector-case'&&!sales.industryUseCases.some(c=>c.id===x.industryCase))fail('Ukjent bransjecase i presentasjon '+x.industryCase);
   if(x.sources)refs(x.sources,'Slide '+x.title);
  }
 }

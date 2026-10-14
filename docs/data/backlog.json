@@ -134,5 +134,29 @@
     "priority": "høy",
     "status": "åpen",
     "why": "Gjør forklaring, tekstvarianter, kilder og status autoritative og gjenbrukbare, også der tekst ikke vises."
+  },
+  {
+    "id": "B-18",
+    "title": "Teste bransjecasene med domeneeksperter og selgere",
+    "area": "Forretning",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Casene er hypoteser. Kvalitetssikre spørsmål, prioritering og første leveranse i kundedialoger."
+  },
+  {
+    "id": "B-19",
+    "title": "Knytte godkjente referanser og dokumenterte resultater til bransjecaser",
+    "area": "Kundereferanser",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Bransjekilder viser praksis, ikke leveranser eller oppnådde resultater fra Webstep."
+  },
+  {
+    "id": "B-20",
+    "title": "Dokumentere eventuelle internasjonale modenhetsforskjeller",
+    "area": "Research",
+    "status": "åpen",
+    "priority": "middels",
+    "why": "Ingen generell påstand om at norske virksomheter ligger etter; sammenlign konkrete praksiser før påstander publiseres."
   }
 ]

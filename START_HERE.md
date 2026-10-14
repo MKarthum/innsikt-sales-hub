@@ -78,3 +78,7 @@ Se `INTERNAL_MIGRATION.md` før vurdering av HubSpot, Google Drive, konsulentpro
 `docs/assets/content.js` løser `$content`-referanser ved lasting av offentlige JSON-filer. For eksempel viser `{"$content":"glossary:dataplattform","variant":"normal"}` den kanoniske ordlisteforklaringen. Prompter kan komponeres fra `promptParts` og `prompts.rules`, slik at kopiert resultat forblir selvstendig uten kopiert vedlikehold. `CONTENT_CONTRACT.md` er bindende.
 
 `REFACTOR_AUDIT.md` er historisk før-kartlegging; `REFACTOR_PLAN.md` beskriver arbeidet, `REFACTOR_REVIEW.md` dokumenterer v0.9.0, og `NORMALIZATION_AUDIT.md` dokumenterer gjennomgangen og normaliseringen i v0.9.1. Ikke hev at all eldre fagtekst er semantisk normalisert, eller at mobil/desktop er visuelt verifisert uten faktisk nettlesertest. Publiser først etter godkjent PR og relevante nettleserkontroller.
+
+## Bransjedrevet inngang (v0.9.2)
+
+Les [INDUSTRY_BUSINESS_DIALOGUE.md](INDUSTRY_BUSINESS_DIALOGUE.md) ved endring av bransjer, verdikjedeproblemer, effekter eller kundespørsmål. Bransjer (\`sales.json.industrySectors\`), caser (\`industryUseCases\`) og metode (\`industryJourney\`) eies av \`sales.json\`, mens \`pages.json.industryUi\` kun eier visningsetiketter. Case refererer sektor og eksisterende \`plays[].id\`; referanser skal valideres. Søk, bransjeruter og Presenter skal bruke samme ID. Ingen påstand om Webstep-caser, leveransekapasitet, gevinst eller norsk modenhetsgap uten dokumentert grunnlag.

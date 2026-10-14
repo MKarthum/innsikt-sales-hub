@@ -58,3 +58,11 @@ Innholdet skal fortsatt kunne være offentlig. Interne data vurderes først ette
 - `prompts.items[].promptParts` komponerer selvstendige kopierbare prompter fra `prompts.rules`. Ikke lag både `prompt` og `promptParts` på samme mal.
 - Ved nye eiere: registrer type i innholdsløser, oppdater kontrakttestene og verifiser alle forbrukere.
 - `REFACTOR_AUDIT.md` er før-kartleggingen. Les `REFACTOR_REVIEW.md` for v0.9.0 og `NORMALIZATION_AUDIT.md` for siste semantiske vurderinger, migrerte eiere og testkrav. Nye overlapp: vurder én eier med hensiktsmessige varianter før separate tekster innføres.
+
+## Bransjecaser
+
+- Hvert bransjecase er en offentlig, redaksjonell \`assessment\`, ikke en kundereferanse. Fokuser på operativt ansvar og resultat før data/teknologi.
+- Vedlikehold \`sales.json.industrySectors\`, \`industryUseCases\` og \`industryJourney\` som én kanonisk eier; visningsetiketter i \`pages.json.industryUi\`, kilder i \`sources.json\`. Ikke lag «kortversjoner» med separate faktapåstander.
+- Beskriv symptom, virksomhetseier, spørsmål, mål/KPI, databehovshypotese, avgrenset pilot, videre løp og relevante risikoforbehold. Koble caser til eksisterende \`plays\` via ID.
+- Oppdater sektor- og case-rutetester, søk og Presenter ved endringer. \`INDUSTRY_BUSINESS_DIALOGUE.md\` inneholder utvalg, metode og kildekritikk.
+- Internasjonal praksis betyr ikke at norske kunder er mindre modne. Dokumenter sammenlignbare bevis før en slik påstand fremsettes.

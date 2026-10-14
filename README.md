@@ -93,3 +93,9 @@ Testavhengigheten Playwright er **kun for CI og utviklere** – den lastes ikke 
 ## Overføring til Webstep
 
 Kontroller sikkerhet og rettigheter, overfør repoets kode og åpne innhold til godkjent enterprise-repo, og publiser først bak dokumentert tilgangskontroll. Deretter kan interne referanser og kontaktpunkter eventuelt kvalitetssikres og legges inn.
+
+## Bransjedrevne kundedialoger (v0.9.2)
+
+«Forretningsbehov» har nå to innganger: 9 bransjer med 36 konkrete, illustrative problemstillinger og de tidligere generiske behovene i økonomi, salg, drift mv. Begynn med et operativt problem, mål og en forretningseier; gå videre til databehov, avgrenset test og relevant fagkompetanse. Casene er **salgs- og utforskningshypoteser**, ikke dokumenterte Webstep-leveranser.
+
+Bransjeinformasjon og caser eies av \`sales.json.industrySectors\`, \`sales.json.industryUseCases\` og \`sales.json.industryJourney\`; felles presentasjons- og sideord eies av \`pages.json.industryUi\`. \`sources.json\` er kanonisk kilderegister. Se [bransjeanalyse og innholdsmodell](INDUSTRY_BUSINESS_DIALOGUE.md) for utvalg, eksempler, metoden, kildekritikk, begrensninger og videre testing. Nye ruter \`#forretning/sektor-ID\` og \`#forretning/case-ID\` er inkludert i søk og Presenter.

@@ -33,7 +33,7 @@
     "FORRETNINGSBEHOV": {
       "eyebrow": "FORRETNINGSBEHOV",
       "title": "Lytt etter problemer – ikke teknologinavn",
-      "intro": "Start der kunden er: økonomi, salg, drift, kundeservice, HR eller ledelse. Eksemplene er generiske og skal kvalifiseres, ikke presenteres som dokumenterte kundeoppdrag."
+      "intro": "Snakk først med dem som eier prosesser, risiko og resultater. Utforsk konkrete bransjebehov før data, analyse og teknologi blir aktuelle virkemidler."
     },
     "MARKED OG DRIVERE": {
       "eyebrow": "MARKED OG DRIVERE",
@@ -242,7 +242,14 @@
     "feedbackModalNotice": {
       "$content": "notice:feedback-privacy",
       "variant": "modal"
-    }
+    },
+    "industryCasesTitle": "Start med kundens verdikjede",
+    "industryCasesIntro": "Velg bransje og konkrete driftsproblemer. Følg spørsmålene fra ønsket effekt til en mulig avgrenset leveranse.",
+    "industryCasesHome": "Fra gate-tid og catering på fly til lageroptimalisering, pasientflyt og nettkapasitet.",
+    "industryCasesExistingTitle": "Andre innganger til forretningsbehov",
+    "industryCasesMethodsTitle": "Fra problem til tverrfaglig forbedring",
+    "industryCasesSourceNote": "Eksemplene er kvalifiseringshypoteser – ikke faktiske Webstep-oppdrag, dokumenterte gevinster eller påstander om kundens modenhet.",
+    "industryCasesScopeNote": "Kjernebransjer følger Websteps offentlige bransjebeskrivelse. Transport er også omtalt i Q2-rapporten. Handel og havbruk er illustrative tillegg, ikke dokumentasjon på Websteps kundesammensetning."
   },
   "presentationDecks": {
     "intro": {
@@ -323,6 +330,12 @@
           "type": "diagram",
           "title": "Dataarbeid i praksis",
           "diagram": "bi"
+        },
+        {
+          "type": "sector-case",
+          "title": "Luftfart: det operative spørsmålet",
+          "industryCase": "transport-turnaround",
+          "note": "Spør først hvor forsinkelsen oppstår, hvem som kan endre prosessen og hva resultatet betyr. Dette er ikke dokumentasjon på en Webstep-leveranse."
         },
         {
           "type": "case",
@@ -520,5 +533,37 @@
       "sourceIds": [],
       "visibility": "presented"
     }
-  ]
+  ],
+  "industryUi": {
+    "homeTitle": "Bransjer der datadrevne forbedringer kan ha verdi",
+    "homeIntro": "Hva vil kundens forretning oppnå – før teknologien diskuteres?",
+    "actionTitle": "Utforske bransjens forretningsbehov",
+    "actionIntro": "Snakk om prosesser, tap, kvalitet og kundeverdi fremfor IT-status.",
+    "back": "Til alle bransjer",
+    "sectorRole": "Forretningsområder og beslutningstakere",
+    "sectorPractice": "Eksempel fra faglig praksis",
+    "sectorPrompt": "Åpne samtalen med",
+    "sectorCases": "Problemstillinger dere kan utforske",
+    "sectorCasesCount": "samtaleinnganger",
+    "sectorDetail": "Se problemstillinger",
+    "caseDetail": "Se spørsmål og mulig leveranseløp",
+    "owner": "Relevant beslutningstaker",
+    "symptom": "Mulig forretningsproblem",
+    "goal": "Ønsket resultat",
+    "questions": "Spørsmål til kunden",
+    "metrics": "Hvordan kan vi måle forbedring?",
+    "data": "Mulig datagrunnlag",
+    "pilot": "Første avgrensede leveranse",
+    "expand": "Mulig videre utvikling",
+    "caution": "Viktige avklaringer",
+    "linked": "Relaterte kompetanse- og leveranseinnganger",
+    "caseContext": "Bransjekontekst",
+    "basis": "Kildene dokumenterer bransjepraksis, ikke kundens utfordringer eller faktisk gevinst.",
+    "core": "Websteps offentlig omtalte bransjer",
+    "illustrative": "Andre illustrative bransjer",
+    "journey": "Fra forretningsproblem til tverrfaglig leveranse",
+    "qualification": "Før leveransevalg",
+    "maturity": "Ikke anta et modenhetsgap",
+    "example": "Illustrativ samtaleinngang"
+  }
 }

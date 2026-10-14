@@ -303,3 +303,24 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 .horizon-summary ol{margin:0;padding-left:23px;color:#3d5f63;font-size:13px;line-height:1.9}
 @media(max-width:1020px){.horizon-lenses{grid-template-columns:1fr}}
 @media(max-width:760px){.horizon-concept-grid{grid-template-columns:1fr}.horizon-chapter,.horizon-intro{padding:19px}.horizon-intro h2{font-size:19px}}
+
+/* Bransjecaser: felles typografi og korte kort, uten flere CSS-override-lag. */
+.industry-intro{background:#eff8f5;border:1px solid #d6e8e1;border-radius:15px;padding:22px;margin:20px 0 25px}
+.industry-intro h2{font:800 21px 'Manrope',sans-serif;margin:0 0 8px}
+.industry-intro p{font-size:13px;color:#496a74;line-height:1.7;margin:0 0 7px}
+.sector-grid,.industry-case-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.sector-card,.industry-case-card{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid var(--border);border-radius:15px;padding:22px;gap:10px;transition:border-color .16s,box-shadow .16s}
+.sector-card:hover,.sector-card:focus-visible,.industry-case-card:hover,.industry-case-card:focus-visible{border-color:#72b5a3;box-shadow:var(--shadow)}
+.sector-card-type,.case-role{font-size:10px;line-height:1.4;text-transform:uppercase;letter-spacing:.07em;color:#167969;font-weight:800}
+.sector-card h3,.industry-case-card h3{font:800 16px/1.4 'Manrope',sans-serif;margin:0}
+.sector-card p,.industry-case-card p{font-size:12px;line-height:1.7;color:#59717a;margin:0}
+.sector-link{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--teal);font-weight:800;margin-top:auto;padding-top:8px}
+.sector-link svg{width:14px;height:14px}
+.sector-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+.sector-lead-question{font-size:18px!important;color:#225649!important;font-weight:750}
+.industry-journey{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-bottom:14px}
+.industry-journey article{min-width:0;background:#f3f9f7;border:1px solid #d9eae4;border-radius:13px;padding:18px}
+.industry-journey h3{font:800 13px/1.4 'Manrope',sans-serif;color:#255e55;margin:0 0 8px}
+.industry-journey p{font-size:12px;line-height:1.65;color:#4d6970;margin:0}
+@media(max-width:1140px){.sector-grid,.industry-case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.industry-journey{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.sector-grid,.industry-case-grid,.sector-summary-grid,.industry-journey{grid-template-columns:1fr}.industry-intro{padding:17px}.sector-card,.industry-case-card{padding:18px}}
