@@ -73,8 +73,8 @@ Faglig sparring skal først og fremst gjøre salgsbudskapet, eksemplene og promp
 Se `INTERNAL_MIGRATION.md` før vurdering av HubSpot, Google Drive, konsulentprofiler eller annet internt innhold. Det offentlige GitHub-repoet, inkludert commit-historikken, må aldri tilføres private data.
 
 
-## Referansebasert innholdsmodell (arbeidsgren v0.9.0)
+## Referansebasert innholdsmodell (v0.9.1)
 
 `docs/assets/content.js` løser `$content`-referanser ved lasting av offentlige JSON-filer. For eksempel viser `{"$content":"glossary:dataplattform","variant":"normal"}` den kanoniske ordlisteforklaringen. Prompter kan komponeres fra `promptParts` og `prompts.rules`, slik at kopiert resultat forblir selvstendig uten kopiert vedlikehold. `CONTENT_CONTRACT.md` er bindende.
 
-`REFACTOR_AUDIT.md` er historisk før-kartlegging; `REFACTOR_PLAN.md` beskriver arbeidet og `REFACTOR_REVIEW.md` beskriver faktisk implementering, bevis og restanser. Ikke hev at all eldre fagtekst er semantisk normalisert, eller at mobil/desktop er visuelt verifisert uten faktisk nettlesertest. Publiser først etter godkjent PR og relevante nettleserkontroller.
+`REFACTOR_AUDIT.md` er historisk før-kartlegging; `REFACTOR_PLAN.md` beskriver arbeidet, `REFACTOR_REVIEW.md` dokumenterer v0.9.0, og `NORMALIZATION_AUDIT.md` dokumenterer gjennomgangen og normaliseringen i v0.9.1. Ikke hev at all eldre fagtekst er semantisk normalisert, eller at mobil/desktop er visuelt verifisert uten faktisk nettlesertest. Publiser først etter godkjent PR og relevante nettleserkontroller.

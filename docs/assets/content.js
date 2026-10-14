@@ -7,7 +7,10 @@ const owners={
  'prompt-rule':d=>d.prompts.rules,
  'ai-overview':d=>d.aiOverview?[d.aiOverview]:[],
  'market-guidance':d=>d.metricGuidance?[d.metricGuidance]:[],
- risk:d=>d.learning.risks
+ risk:d=>d.learning.risks,
+ value:d=>d.valueThemes||[],
+ 'value-overview':d=>d.valueOverview?[d.valueOverview]:[],
+ notice:d=>d.pages.sharedNotices||[]
 };
 function materialize(data){
  const registry=new Map();

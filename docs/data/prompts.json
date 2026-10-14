@@ -8,7 +8,10 @@
     "eyebrow": "PRAKTISK KI FOR SALG",
     "title": "La KI gjøre forarbeidet – ikke vurderingene for deg",
     "intro": "Her er ferdigskrevne instruksjoner for konkrete salgsoppgaver. Velg en, les hva du bør ha klart, rediger teksten og kopier til et KI-verktøy som er godkjent for informasjonen du bruker.",
-    "publicWarning": "Denne siden er offentlig. Ingen HubSpot-, Drive-, CRM- eller konsulentdata hentes automatisk. Ikke lim inn interne opplysninger, kundelister, persondata eller fortrolige dokumenter i et KI-verktøy uten nødvendig godkjenning.",
+    "publicWarning": {
+      "$content": "notice:public-boundary",
+      "variant": "prompt"
+    },
     "usageTitle": "Slik bruker du biblioteket",
     "usageSteps": [
       "Velg en oppgave og les hvilke opplysninger du trenger.",

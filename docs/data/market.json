@@ -234,7 +234,10 @@
     "variants": {
       "short": "Bruk betyr ikke dokumentert gevinst.",
       "normal": "Bruk KI-tall som inngang, ikke salgsprediksjon.",
-      "long": "Det er kundens problem, beslutning og datagrunnlag som avgjør om Innsikt er relevant. KI-bruk sier ikke i seg selv om virksomheten trenger konsulenter."
+      "long": "Det er kundens problem, beslutning og datagrunnlag som avgjør om Innsikt er relevant. KI-bruk sier ikke i seg selv om virksomheten trenger konsulenter.",
+      "homeEvidence": "Andelen norske foretak som oppgir KI-bruk har økt betydelig. Det kan øke behovet for datatilgang og kvalitet, men bruk betyr ikke dokumentert effekt eller et sikkert konsulentbehov.",
+      "marketDetail": "SSBs norske tall viser sterk utvikling. Dette sier ikke noe direkte om lønnsomhet, modenhet eller hvilke konsulentprosjekter som oppstår.",
+      "sectorContext": "Tilleggsinformasjon fra SSB – ikke et mål på konsulentbehov."
     },
     "evidence": "assessment",
     "sourceIds": [

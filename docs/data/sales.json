@@ -753,7 +753,9 @@
       "variants": {
         "short": "Start med problemet, ikke produktnavn.",
         "normal": "Begynn med kundens problem, konsekvens og tidspunkt. Ta teknologivalg og spesialistvurdering sammen med fagmiljøet.",
-        "long": "Undersøk først hvilket problem kunden vil løse, konsekvensen av det og hvem som eier behovet. Bruk deretter fagmiljøet til å vurdere data, prosess og teknologi før en løsning foreslås."
+        "long": "Undersøk først hvilket problem kunden vil løse, konsekvensen av det og hvem som eier behovet. Bruk deretter fagmiljøet til å vurdere data, prosess og teknologi før en løsning foreslås.",
+        "beginner": "Finn ut hva kunden ønsker å forbedre, hvorfor det er viktig, hvem som eier behovet og om det finnes planer om å gjøre noe. Du trenger ikke velge teknologien selv.",
+        "home": "Hjelp kundene å få data til å henge sammen, bruke informasjonen til bedre beslutninger og ta i bruk KI når det gir nytte. Det starter med forretningsproblemet – ikke med produktnavnet."
       },
       "evidence": "assessment",
       "sourceIds": [
@@ -786,5 +788,63 @@
       "reviewed": "2026-10-14",
       "visibility": "not-presented"
     }
-  ]
+  ],
+  "valueThemes": [
+    {
+      "id": "platform",
+      "variants": {
+        "home": "Når kunden sliter med ulike tall, manuell dataflyt eller vanskelig tilgang, begynner verdien med integrasjon, datakvalitet, modeller og styring.",
+        "market": "Koble sammen kilder, definere nøkkeltall, sikre kvalitet og tilgang. Et selvstendig forbedringsbehov."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "webstep1"
+      ],
+      "visibility": "presented"
+    },
+    {
+      "id": "insight",
+      "variants": {
+        "home": "BI, analyse og prognoser gjør informasjon nyttig i økonomi, salg, kundeservice og drift. Målet er raskere og bedre beslutninger – ikke flere dashboards.",
+        "market": "Gjøre tall og sammenhenger tilgjengelige for beslutninger, prognoser og bedre operativ styring."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "webstep1",
+        "webstep2"
+      ],
+      "visibility": "presented"
+    },
+    {
+      "id": "ai",
+      "variants": {
+        "home": "KI kan hjelpe datateam å levere raskere og forretningen å bruke egne data på nye måter. Verdien avhenger av kvalitet, sikkerhet og reelle brukstilfeller.",
+        "market": "Forbedre datautvikling og skape nye tjenester på egne data, med testing, datastyring og kontroll."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "ssb",
+        "webstep1",
+        "fabricagent"
+      ],
+      "visibility": "presented"
+    }
+  ],
+  "valueOverview": {
+    "id": "three-needs",
+    "variants": {
+      "home": "En god dataplattform kan gjøre analyse enklere og KI mer nyttig. Men rapportering og datakvalitet har stor verdi også uten KI.",
+      "market": "En kunde kan ha nytte av dataplattform og analyse lenge før de ønsker KI. Samtidig gjør KI det mer aktuelt å rydde i datagrunnlag, definisjoner og tilgang. Det viktigste er å forstå kundens beslutninger og flaskehalser."
+    },
+    "evidence": "assessment",
+    "reviewed": "2026-10-14",
+    "sourceIds": [
+      "webstep1",
+      "ssb"
+    ],
+    "visibility": "presented"
+  }
 }

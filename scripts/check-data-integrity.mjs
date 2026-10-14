@@ -53,15 +53,17 @@ const html=fs.readFileSync('docs/index.html','utf8');
 for(const n of pagesNeeded)if(!html.includes('data-page="'+n+'"'))fail('HTML mangler menypunkt '+n);
 if(!html.includes('content.js?v='+site.version))fail('Manglende versjon eller registrering for innholdsløser');
 if(!html.includes('site.js?v='+site.version)||!html.includes('learning.js?v='+site.version)||!html.includes('site.css?v='+site.version))fail('Manglende felles assetversjon');
-if(!Array.isArray(pages.home.pillars)||pages.home.pillars.length!==3)fail('Forsiden må ha tre verdibudskap');
+const resolvedData=resolverSandbox.window.InnsiktContent.materialize({pages,learning,...sales,...market,...tech,prompts:read('prompts')});
+const prompts=resolvedData.prompts, resolvedPages=resolvedData.pages;
+if(!Array.isArray(resolvedPages.home.pillars)||resolvedPages.home.pillars.length!==3)fail('Forsiden må ha tre verdibudskap');
 else {
- const types=new Set(pages.home.pillars.map(x=>x.id));
+ const types=new Set(resolvedPages.home.pillars.map(x=>x.id));
  for(const n of ['platform','insight','ai'])if(!types.has(n))fail('Mangler hovedbudskap: '+n);
- for(const x of pages.home.pillars){if(!str(x.title)||!str(x.summary)||!str(x.question)||!str(x.example)||!str(x.link))fail('Ufullstendig hovedbudskap '+x.id);refs(x.sourceIds,x.title);}
+ for(const x of resolvedPages.home.pillars){if(!str(x.title)||!str(x.summary)||!str(x.question)||!str(x.example)||!str(x.link))fail('Ufullstendig hovedbudskap '+x.id);refs(x.sourceIds,x.title);}
 }
 if(market.stats.euAnalytics)fail('Utdatert EU-analysetall skal ikke stå i markedstall');
 if(!pages.marketIntro?.dataStory?.length)fail('Markedssiden mangler datagrunnlagshistorie');
-const prompts=resolverSandbox.window.InnsiktContent.materialize({learning,sharedGuidance:sales.sharedGuidance,aiOverview:tech.aiOverview,metricGuidance:market.metricGuidance,prompts:read('prompts')}).prompts;
+
 if(!str(pages.navigation.prompter))fail('Promptnavigasjon mangler');
 if(!prompts?.page||!Array.isArray(prompts.categories)||prompts.categories.length<4)fail('Manglende promptbibliotek og kategorier');
 ids(prompts.items,'Promptmaler');

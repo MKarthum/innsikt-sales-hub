@@ -1,4 +1,6 @@
-# Implementasjon og revisjon – Innsikt v0.9.0 (14.10.2026)
+# Historisk implementasjon og revisjon – Innsikt v0.9.0 (14.10.2026)
+
+**Historisk v0.9.0-vurdering.** Refaktoreringen ble senere slått sammen og publisert på `main`. Oppfølgingen i v0.9.1 er dokumentert i [`NORMALIZATION_AUDIT.md`](NORMALIZATION_AUDIT.md). Utestående punkter nedenfor beskriver situasjonen ved v0.9.0, ikke nødvendigvis dagens status.
 
 ## Grunnlag og metode
 
@@ -38,7 +40,7 @@ Kildeoppføringer eies fortsatt av `sources.json`. Eksisterende `source`, `sourc
 - CSS-arket er bevart for ikke å introdusere redesign/regresjon, men større konsolidering av eldre CSS-overstyringer kan fortsatt være aktuelt.
 - Automatiske kontroller fanger eksakt like lange tekststrenger og brutte referanser, men **ikke** semantisk like parafraser. Ingen automatisk kilde-URL-livekontroll eller manuell uavhengig faktarevisjon av alle produktpåstander er gjort i denne implementasjonskjøringen.
 - Første lokale nettleserforsøk på tilkoblet testnode stoppet fordi `libglib-2.0.so.0` manglet og systempakker ikke kunne installeres. Det er derfor lagt til en **egen, reproduserbar Chromium-testjobb i GitHub Actions** (`scripts/check-browser.mjs`) som installerer testavhengigheter på GitHub-runner og tester desktop (1440 px) og mobil (390 px) inkludert alle sider, viktige detaljer, søk, Presenter, promptkopiering/-reset og horisontal overflyt. GitHub Actions-kjøring `38548362859` og tilsvarende PR-kjøring besto 14.10.2026: 16 sider, fem detaljvisninger, søk, promptkopiering og tilbakestilling, Presenter og ingen horisontal overflyt på mobil eller desktop. Dette er funksjonell Chromium-verifikasjon, ikke en manuell piksel-for-piksel-designgodkjenning.
-- Produksjon på `main` blir stående på v0.8.0 frem til PR er vurdert, nødvendige sjekker er grønne og faktisk desktop-/mobiltest er gjennomført. Det er ikke tilkoblet CRM, HubSpot, Drive, ansatte eller andre interne data.
+- Ved denne vurderingen var produksjon på `main` fortsatt v0.8.0. **Senere publisert** som v0.9.0 etter grønne CI-kontroller og desktop-/mobiltest. Det er ikke tilkoblet CRM, HubSpot, Drive, ansatte eller andre interne data.
 
 ## Publiseringsport
 

@@ -9,7 +9,7 @@ try{materialized=box.window.InnsiktContent.materialize(raw)}catch(error){console
 const errors=[],fail=x=>errors.push(x),has=x=>typeof x==='string'&&Boolean(x.trim());
 const date=x=>/^\d{4}-\d\d-\d\d$/.test(x||'')&&!Number.isNaN(Date.parse(x));
 const evidence=new Set(['documented','vendor','assessment','hypothesis','open-question']);
-const owners={glossary:raw.learning.glossary,guidance:raw.sharedGuidance,'prompt-rule':raw.prompts.rules,'market-guidance':[raw.metricGuidance],risk:raw.learning.risks,'ai-overview':[raw.aiOverview],tech:raw.tech,ai:raw.aiProducts,plays:raw.plays,events:raw.marketEvents};
+const owners={glossary:raw.learning.glossary,guidance:raw.sharedGuidance,'prompt-rule':raw.prompts.rules,'market-guidance':[raw.metricGuidance],risk:raw.learning.risks,'ai-overview':[raw.aiOverview],value:raw.valueThemes,'value-overview':[raw.valueOverview],notice:raw.pages.sharedNotices,tech:raw.tech,ai:raw.aiProducts,plays:raw.plays,events:raw.marketEvents};
 for(const [domain,rows] of Object.entries(owners)){
  const ids=new Set();
  for(const x of rows||[]){

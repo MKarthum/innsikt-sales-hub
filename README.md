@@ -1,6 +1,6 @@
 # Innsikt – marked og salg
 
-Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsgren v0.9.0 – ikke godkjent som offisielt internt salgsmateriell. Produksjon på `main` er uendret frem til sammenslåing.**
+Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Offentlig beta – ikke godkjent som offisielt internt salgsmateriell.**
 
 [Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
 
@@ -22,7 +22,7 @@ Et nytt offentlig promptbibliotek med 14 redigerbare, kopierbare instrukser i fe
 - Ny valgfri side **I grenselandet mellom data og KI** (`#horisont`), med tydelig skille mellom fakta, leverandørpåstander og hypoteser.
 - Definisjoner av kunnskapsgraf, ontologi, Company Brain, dataprodukt og datasuverenitet eies av kanonisk ordliste i `learning.json`. Fordypningen i `horizon.json` refererer til dem med ID.
 - **Bindende innholdskontrakt:** `CONTENT_CONTRACT.md`. Én dataeier per semantisk innholdselement, selv om det er kort/langt eller vises null, én eller mange ganger.
-- **Refaktorering v0.9.0:** `docs/assets/content.js` løser referanser mellom autoritative JSON-eiere; Presenter, søk, fordypning og promptbibliotek benytter felles innhold der det er normalisert. Se `CONTENT_CONTRACT.md` og `REFACTOR_REVIEW.md` for dekning og restanser.
+- **Refaktorering v0.9.0–v0.9.1:** `docs/assets/content.js` løser referanser mellom autoritative JSON-eiere; Presenter, søk, fordypning og promptbibliotek benytter felles innhold der det er normalisert. Se `CONTENT_CONTRACT.md`, `REFACTOR_REVIEW.md` (historisk v0.9.0) og `NORMALIZATION_AUDIT.md` (gjeldende semantisk gjennomgang).
 
 ## Formål
 
@@ -48,10 +48,10 @@ python3 -m http.server 8000
 | Fil | Autoritativt ansvar |
 |---|---|
 | `docs/data/site.json` | Versjon og publiseringsmetadata |
-| `docs/data/pages.json` | Sideunike titler, komposisjon, presentasjonsnotater og kvalifisering; felles fagtekst refereres |
+| `docs/data/pages.json` | Sideunike titler, komposisjon, felles offentlige meldinger, presentasjonsnotater og kvalifisering; øvrig felles fagtekst refereres |
 | `docs/data/sources.json` | Felles kildebibliotek |
 | `docs/data/market.json` | Statistikk, markedsutvikling, oppkjøp |
-| `docs/data/sales.json` | Salgsinnganger, forretningsbehov, samtaleøvelser og kompetanse |
+| `docs/data/sales.json` | Salgsinnganger, felles verdibudskap, forretningsbehov, samtaleøvelser og kompetanse |
 | `docs/data/technologies.json` | Produktinformasjon, KI-funksjoner, logoattributter |
 | `docs/data/backlog.json` | Forbedringsoversikt |
 | `docs/data/learning.json` | Grunnkurs, begreper, arkitekturskisser, risiko og maler |
@@ -62,7 +62,7 @@ python3 -m http.server 8000
 | `docs/index.html` | Strukturelt skall og navigasjon |
 | `scripts/check-*.mjs` | Kontroller for innhold, integritet, stil, referanser, endringspropagering og release |
 
-**Hovedregel:** Én autoritativ kilde per semantisk innholdselement. Referanser (`$content`) kan velge `short`, `normal` og `long` hos samme ID. HTML/JS bestemmer visning og henter faginnhold fra JSON. Ikke innfør nye hardkodede fakta eller budskap. V0.9.0 er en dokumentert delnormalisering, ikke en garanti mot alle semantiske duplikater.
+**Hovedregel:** Én autoritativ kilde per semantisk innholdselement. Referanser (`$content`) kan velge `short`, `normal` og `long` hos samme ID. HTML/JS bestemmer visning og henter faginnhold fra JSON. Ikke innfør nye hardkodede fakta eller budskap. V0.9.1 samler også eldre delte tekster om hovedverdier, kundens behov, KI-forbehold og offentlighet. Se `NORMALIZATION_AUDIT.md` for begrunnet skille mellom felles innhold og legitime konteksttekster.
 
 ## Bruk og begrensninger
 
