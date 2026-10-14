@@ -1,6 +1,6 @@
 # Innsikt – marked og salg
 
-Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.7.0 – ikke godkjent som offisielt internt salgsmateriell.**
+Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent dokumenterbart innhold. **Arbeidsversjon v0.8.0 – ikke godkjent som offisielt internt salgsmateriell.**
 
 [Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
 
@@ -16,6 +16,13 @@ Et nytt offentlig promptbibliotek med 14 redigerbare, kopierbare instrukser i fe
 - Tekst i redigeringsfeltet forblir i brukerens nettleser mens siden er åpen; den lagres ikke og sendes ikke av portalen.
 - Salg kopierer selv til en KI-tjeneste godkjent for de faktiske opplysningene.
 - Se `INTERNAL_MIGRATION.md` for videre utvikling mot Webstep-konto med riktige rettigheter.
+
+## Fordypning og innholdskontrakt
+
+- Ny valgfri side **I grenselandet mellom data og KI** (`#horisont`), med tydelig skille mellom fakta, leverandørpåstander og hypoteser.
+- Definisjoner av kunnskapsgraf, ontologi, Company Brain, dataprodukt og datasuverenitet eies av kanonisk ordliste i `learning.json`. Fordypningen i `horizon.json` refererer til dem med ID.
+- **Bindende innholdskontrakt:** `CONTENT_CONTRACT.md`. Én dataeier per semantisk innholdselement, selv om det er kort/langt eller vises null, én eller mange ganger.
+- Større refaktorering er **planlagt, ikke fullført**. Se `REFACTOR_AUDIT.md` og `REFACTOR_NEXT_CHAT.md`.
 
 ## Formål
 
@@ -71,6 +78,7 @@ python3 -m http.server 8000
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
 node --check docs/assets/prompts.js
+node --check docs/assets/horizon.js
 node scripts/check.mjs
 ```
 

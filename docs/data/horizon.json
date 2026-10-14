@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "reviewed": "2026-10-14",
+    "edition": "0.1.0",
+    "editorialScope": "Spekulasjon er merket som hypotese. Alt i JSON er offentlig tilgjengelig selv om det ikke vises i grensesnittet."
+  },
+  "intro": {
+    "title": "Løsningene overlapper – men løser ikke nødvendigvis samme problem",
+    "lead": "Dataplattformen gjør data tilgjengelige, styrte og anvendelige. En kunnskapsgraf kan beskrive sammenhenger og forretningskontekst. Noen løsninger kombinerer dette med KI, men det betyr ikke at alt bør bygges om eller samles i én plattform.",
+    "readHint": "Denne siden er fordypning, ikke en anbefaling om nye verktøy til alle kunder."
+  },
+  "evidenceLabels": {
+    "documented": "Dokumentert funksjonalitet",
+    "vendor": "Leverandørbeskrivelse",
+    "hypothesis": "Vår hypotese",
+    "open-question": "Åpent spørsmål"
+  },
+  "comparison": {
+    "title": "Dataplattform eller kunnskapsgraf?",
+    "intro": "De løser ulike oppgaver og kan utfylle hverandre. Begrepsforklaringene nedenfor hentes fra den samme ordboken som brukes i «Start her».",
+    "conceptIds": [
+      "dataplattform",
+      "kunnskapsgraf",
+      "semantisk-modell",
+      "ontologi"
+    ],
+    "outcome": "En dataplattform kan levere kvalitetssikrede ordre- og kundedata. En graf og ontologi kan tilføre eksplisitte relasjoner og begreper som KI og andre systemer kan bruke. Ikke alle oppgaver krever grafteknologi.",
+    "diagramId": "ai-on-data",
+    "sourceIds": [
+      "fabricIQ",
+      "agent-foundation"
+    ]
+  },
+  "chapters": [
+    {
+      "id": "semantikk-ontologi",
+      "title": "Fra KPI-er til rikere virksomhetsforståelse",
+      "evidence": "documented",
+      "status": "Fabric IQ/ontologi i preview per 14.10.2026",
+      "summary": "Microsoft beskriver muligheter for å knytte forretningsbegreper, relasjoner og regler til data i Fabric. Ontologi kan også bygges med utgangspunkt i eksisterende semantiske modeller.",
+      "interpretation": "Dette er ett tegn på at eksisterende analyseplattformer tilbyr mer eksplisitt forretningskontekst. Det dokumenterer ikke at graf og dataplattform er i ferd med å bli én universell arkitektur.",
+      "customerQuestion": "Er det begrepene og relasjonene mellom data som skaper vansker, eller er hovedproblemet datatilgang og kvalitet?",
+      "sourceIds": [
+        "fabricIQ",
+        "fabricOntology"
+      ],
+      "conceptIds": [
+        "semantisk-modell",
+        "ontologi"
+      ],
+      "relatedLinks": [
+        {
+          "label": "Se grunnarkitektur for KI på data",
+          "route": "arkitektur/ai-on-data"
+        }
+      ]
+    },
+    {
+      "id": "company-brain",
+      "title": "«Company Brain» – en ambisjon, ikke én standard",
+      "evidence": "vendor",
+      "status": "Flere tekniske tilnærminger",
+      "summary": "Glean dokumenterer en kunnskapsgraf bygget fra innhold, personer og aktivitet i tilkoblede arbeidsverktøy. Snowflake beskriver KI-agenter som kombinerer SQL mot strukturerte data med søk i dokumenter.",
+      "interpretation": "Begge kan bidra til mer nyttig KI på virksomhetskontekst, men utgangspunkt, datamodell og bruksområder er forskjellige. En KI-løsning trenger ikke alltid en egen graf, og heller ikke alltid et datavarehus.",
+      "customerQuestion": "Trenger brukerne sikre tall og KPI-er, å finne dokumenter og personer, eller en kombinasjon?",
+      "sourceIds": [
+        "gleanGraph",
+        "gleanConnectors",
+        "agent-foundation"
+      ],
+      "conceptIds": [
+        "company-brain",
+        "kunnskapsgraf",
+        "rag"
+      ],
+      "relatedLinks": [
+        {
+          "label": "Se dokumentbasert KI",
+          "route": "arkitektur/rag"
+        }
+      ]
+    },
+    {
+      "id": "lakehouse-analogi",
+      "title": "En ny lakehouse-lignende sammensmelting?",
+      "evidence": "hypothesis",
+      "status": "Mulig retning – ikke dokumentert konklusjon",
+      "summary": "Lakehouse er en etablert kombinasjon av prinsipper fra data lakes og datavarehus. Vi ser leverandører som bringer graf, semantikk og KI tettere på dataplattformene, men det finnes også selvstendige løsninger.",
+      "interpretation": "En mulig utvikling er flere integrerte plattformer. En annen er et landskap med flere spesialiserte tjenester som spiller sammen via åpne grensesnitt. Det er for tidlig å erklære en vinner.",
+      "customerQuestion": "Hvilket konkret problem ville bli enklere med én samlet løsning, og hva risikerer vi ved tettere leverandørbinding?",
+      "sourceIds": [
+        "lakehouse",
+        "fabricIQ",
+        "gleanConnectors",
+        "agent-foundation"
+      ],
+      "conceptIds": [
+        "lakehouse",
+        "kunnskapsgraf"
+      ],
+      "relatedLinks": [
+        {
+          "label": "Se marked og teknologitrender",
+          "route": "bransje"
+        }
+      ]
+    }
+  ],
+  "questions": {
+    "title": "Fire spørsmål som tåler teknologiskifte",
+    "items": [
+      "Hva er virksomhetens autoritative kilder, begreper og regler?",
+      "Hvilke spørsmål eller oppgaver skal brukeren faktisk løse?",
+      "Hvilken sikkerhet, tilgangskontroll, sporbarhet og kvalitet kreves?",
+      "Kan vi videreutvikle det kunden har, før vi bygger en helt ny parallell kunnskapsbase?"
+    ]
+  },
+  "lenses": {
+    "title": "Hensyn som følger alle alternativene",
+    "items": [
+      {
+        "id": "data-product",
+        "title": "Dataprodukter og eierskap",
+        "conceptId": "dataprodukt",
+        "question": "Hvem eier innholdet og kvaliteten som andre – også KI – skal stole på?",
+        "route": "kompetanse"
+      },
+      {
+        "id": "security",
+        "title": "Sikkerhet og datastyring",
+        "conceptId": "datastyring",
+        "question": "Kan løsningene håndheve rettigheter, kildebruk og revisjonsspor på tvers av systemene?",
+        "route": "arkitektur/ai-on-data"
+      },
+      {
+        "id": "sovereignty",
+        "title": "Suverenitet og valgfrihet",
+        "conceptId": "datasuverenitet",
+        "question": "Hva mister virksomheten av kontroll eller fleksibilitet når data og KI samles hos én leverandør?",
+        "route": "bransje"
+      }
+    ]
+  },
+  "notPublished": [
+    {
+      "id": "later-model-patterns",
+      "visibility": "not-presented",
+      "title": "Arkitekturmønstre for hybride grafer og dataplattformer",
+      "note": "Kun offentlig redaksjonell huskelapp. Må undersøkes før eventuell visning."
+    }
+  ],
+  "ui": {
+    "tagline": "FORDYPNING, IKKE FASIT",
+    "sectionsTitle": "Dokumenterte muligheter og åpne hypoteser",
+    "sectionsIntro": "Merkingen viser hva som finnes, hva leverandørene beskriver og hva vi ennå ikke vet.",
+    "relatedLabel": "Beslektede begreper:",
+    "customerQuestionLabel": "Spør kunden",
+    "exampleLabel": "Eksempel:",
+    "interpretationLabel": "Hva kan det bety?",
+    "diagramLinkLabel": "Se tilhørende arkitekturskisse",
+    "lensesIntro": "Viktige spørsmål uansett teknologivalg",
+    "lensQuestionLabel": "Spør",
+    "lensLinkLabel": "Se relevant innhold",
+    "generalLabel": "UAVHENGIG AV LEVERANDØR"
+  }
+}

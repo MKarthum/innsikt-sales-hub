@@ -284,5 +284,33 @@
     "url": "https://learn.microsoft.com/en-us/microsoft-sales-copilot/sales-chat-overview",
     "type": "offisiell produktveiledning",
     "checked": "2026-10-14"
+  },
+  "fabricIQ": {
+    "title": "Fabric IQ – graf, forretningsbegreper og ontologi (preview)",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/iq/",
+    "type": "leverandørdokumentasjon · preview",
+    "checked": "2026-10-14"
+  },
+  "fabricOntology": {
+    "title": "What is ontology (preview)?",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/iq/ontology/overview",
+    "type": "leverandørdokumentasjon · preview",
+    "checked": "2026-10-14"
+  },
+  "gleanGraph": {
+    "title": "Glean Knowledge Graph – content, people and activity",
+    "publisher": "Glean Documentation",
+    "url": "https://docs.glean.com/security/knowledge-graph",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-14"
+  },
+  "gleanConnectors": {
+    "title": "How connectors power the Glean experience",
+    "publisher": "Glean Documentation",
+    "url": "https://docs.glean.com/connectors/connectors-power-glean",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-14"
   }
 }

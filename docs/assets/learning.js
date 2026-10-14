@@ -32,7 +32,8 @@ function architecture(D,h,id){
  +'<div class="section-heading"><div><h2>Hva er forskjellen på analyse og KI?</h2><p>Velg et oppsett og se dataveien steg for steg. Du trenger ikke velge en bestemt plattform.</p></div></div>'
  +'<div class="learning-grid">'+diagrams.map(x=>card(x,e)).join('')+'</div>'
  +'<section class="subsection"><div class="section-heading"><div><h2>Risiko når KI får et svakt datagrunnlag</h2><p>KI kan gjøre det enklere å stille spørsmål, men ikke automatisk gjøre tallene riktige.</p></div></div><div class="risk-grid">'+D.learning.risks.map(x=>'<article class="risk-card"><h3>'+e(x.title)+'</h3><p>'+e(x.example)+'</p><div class="risk-action"><strong>Hva hjelper?</strong> '+e(x.action)+'</div></article>').join('')+'</div></section>'
- +'<section class="subsection"><div class="note-card"><b>Viktig nyanse</b>Strukturerte data er spesielt viktig når KI skal svare på tall, KPI-er og hendelser. Dokumentbasert KI kan også bruke tekst og ustrukturerte kilder, men krever tilsvarende arbeid med kvalitet, tilgang og etterprøving.</div></section>';
+ +'<section class="subsection"><div class="note-card"><b>Viktig nyanse</b>Strukturerte data er spesielt viktig når KI skal svare på tall, KPI-er og hendelser. Dokumentbasert KI kan også bruke tekst og ustrukturerte kilder, men krever tilsvarende arbeid med kvalitet, tilgang og etterprøving.</div></section>'
+ +'<section class="subsection"><a class="text-link" href="#horisont">'+e(D.pages.navigation.horisont)+' '+ico('arrow-right')+'</a></section>';
 }
 function templateText(t){return t.title+'\nFormål: '+t.purpose+'\n\n'+t.sections.map(s=>s.title+'\n'+s.questions.map(q=>'- '+q).join('\n')).join('\n\n')+'\n\nViktig: '+t.caution;}
 function toolkit(D,h,id){

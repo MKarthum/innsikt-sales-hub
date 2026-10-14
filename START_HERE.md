@@ -23,7 +23,7 @@ Tidligere samtaler er kun spor til mulige behov. **Repoets gjeldende `main` er a
 - `backlog.json`: synlige forbedringspunkter og status. Ingen personopplysninger.
 - `learning.json`: introduksjon, ordbok, generiske arkitekturskisser, risiko og maler. Disse skal ikke hardkodes i JS.
 
-Én opplysning skal ha én dataeier. Koble via ID-er; ikke kopier navn, påstander, tall eller lenker inn i en annen datafil. HTML/CSS/JS er kun struktur, visning og interaksjon. **Ingen nye eller endrede faglige fakta eller sidebudskap skal hardkodes i visningskode.**
+**Bindende kontrakt: `CONTENT_CONTRACT.md`.** Én semantisk opplysning har én dataeier, også når den omskrives, forkortes eller brukes flere steder. Kort-/langvariant skal eies av samme stabile ID. Koble via ID-er; ikke kopier faktapåstander og definisjoner. HTML/CSS/JS er kun struktur, visning og interaksjon. **Ingen nye eller endrede faglige fakta eller sidebudskap skal hardkodes i visningskode.**
 
 ## Produktets formål
 
@@ -50,6 +50,7 @@ Kjør i repoets rot:
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
 node --check docs/assets/prompts.js
+node --check docs/assets/horizon.js
 node scripts/check.mjs
 ```
 
@@ -67,3 +68,8 @@ Denne personlige Pages-utgaven kan ses offentlig. Bruk kun informasjon som tåle
 Faglig sparring skal først og fremst gjøre salgsbudskapet, eksemplene og promptene bedre. Ikke opprett tekniske løsninger fordi det er mulig. Forsidens tre spor er datagrunnlag/plattform, analyse/beslutninger og KI. KI-statistikk skal understøtte fortellingen; tilfeldige eller usammenlignbare tall skal ikke gis hovedplass.
 
 Se `INTERNAL_MIGRATION.md` før vurdering av HubSpot, Google Drive, konsulentprofiler eller annet internt innhold. Det offentlige GitHub-repoet, inkludert commit-historikken, må aldri tilføres private data.
+
+
+## Større refaktorering planlagt
+
+Skillet mellom JSON og visningskode er **ikke tilstrekkelig** til å oppfylle hele den semantiske én-kilde-regelen. Se `CONTENT_CONTRACT.md` og `REFACTOR_AUDIT.md`. Bruk `REFACTOR_NEXT_CHAT.md` som start for et separat, grundig refaktoreringsoppdrag. Ikke beskriv refaktoreringen som allerede fullført.

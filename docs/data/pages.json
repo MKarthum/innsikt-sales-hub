@@ -19,7 +19,8 @@
     "verktoy": "Verktøykasse",
     "kilder": "Kilder",
     "utvikling": "Videreutvikling",
-    "prompter": "Prompter for salg"
+    "prompter": "Prompter for salg",
+    "horisont": "I grenselandet"
   },
   "headers": {
     "FORRETNINGSBEHOV": {
@@ -91,6 +92,11 @@
       "eyebrow": "KI SOM ARBEIDSVERKTØY FOR SALG",
       "title": "Gode prompter til faktiske salgsoppgaver",
       "intro": "Velg en oppgave, tilpass en ferdig instruksjon og kopier den til KI-verktøyet dere har lov til å bruke. Prompten gjør ikke jobben av seg selv: vurder kilder, kvalitet og kundens situasjon."
+    },
+    "I GRENSLANDET": {
+      "eyebrow": "FRIVILLIG FORDYPNING · UNDER UTVIKLING",
+      "title": "I grenselandet mellom data og KI",
+      "intro": "Noen av teknologiene får mer til felles. Andre løser forskjellige problemer. Her skiller vi det som finnes i dag, fra leverandørretninger og mulige fremtidige utviklingsløp."
     }
   },
   "home": {

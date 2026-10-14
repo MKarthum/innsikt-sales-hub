@@ -22,6 +22,7 @@ Start alltid med `START_HERE.md`. Les siste `main`, og bruk repoet – aldri gam
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
 node --check docs/assets/prompts.js
+node --check docs/assets/horizon.js
 node scripts/check.mjs
 ```
 
@@ -43,3 +44,13 @@ Innholdet skal fortsatt kunne være offentlig. Interne data vurderes først ette
 - Ikke hev at KI-agenten har kobling til HubSpot, Drive eller CV-/bemanningssystem. En integrasjon skal bare omtales som mulig etter godkjent intern flytting.
 - In-browser redigering er lokal; den skal ikke lagre eller sende innhold, og er ikke et sikkert sted for kundedata.
 - Dataeier bevares ved flytting; tilgangs- og datakoblingslaget bygges separat. Se `INTERNAL_MIGRATION.md`.
+
+
+## Strengere innholdsautoritet og teknologifordypning
+
+- Les `CONTENT_CONTRACT.md` før enhver endring av fagtekst. Et element kan ha kort/langform og vises null, én eller mange ganger, men det finnes bare én dataeier.
+- Skille dokumentert funksjon, leverandørbeskrivelse, hypotese og åpent spørsmål; angi kilder, datoer og preview der relevant.
+- `horizon.json` eier original fordypningsanalyse, ikke parallelle definisjoner, produktfakta eller kildekopier.
+- «Ikke presentert» er ikke privat: JSON og historikk i personlig repo er offentlige.
+- Ikke introduser database/CMS uten å vurdere enklere JSON-/ID-løsninger.
+- Les `REFACTOR_AUDIT.md` og `REFACTOR_NEXT_CHAT.md` før den planlagte innholdsrefaktoreringen.

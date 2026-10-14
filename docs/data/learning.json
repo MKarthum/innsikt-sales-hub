@@ -45,12 +45,14 @@
     {
       "term": "Dataplattform",
       "meaning": "Løsninger som samler, behandler, styrer og tilgjengeliggjør data.",
-      "example": "Felles datagrunnlag på tvers av systemer."
+      "example": "Felles datagrunnlag på tvers av systemer.",
+      "id": "dataplattform"
     },
     {
       "term": "Datavarehus / lakehouse",
       "meaning": "Måter å organisere store datamengder for analyse og deling.",
-      "example": "Historiske salgstall som flere team bruker."
+      "example": "Historiske salgstall som flere team bruker.",
+      "id": "lakehouse"
     },
     {
       "term": "Integrasjon / pipeline",
@@ -60,12 +62,14 @@
     {
       "term": "Datamodell",
       "meaning": "Beskrivelse av hvordan ulike data henger sammen.",
-      "example": "Kunder, ordrer, produkter og datoer."
+      "example": "Kunder, ordrer, produkter og datoer.",
+      "id": "datamodell"
     },
     {
       "term": "Semantisk modell",
       "meaning": "Felles begreper og beregninger som gir lik betydning i rapporter og KI.",
-      "example": "Alle bruker samme definisjon av omsetning."
+      "example": "Alle bruker samme definisjon av omsetning.",
+      "id": "semantisk-modell"
     },
     {
       "term": "Datakvalitet",
@@ -75,7 +79,8 @@
     {
       "term": "Datastyring / governance",
       "meaning": "Ansvar, rettigheter og regler for å bruke data.",
-      "example": "Hvem kan se lønnsopplysninger?"
+      "example": "Hvem kan se lønnsopplysninger?",
+      "id": "datastyring"
     },
     {
       "term": "BI",
@@ -100,12 +105,44 @@
     {
       "term": "RAG",
       "meaning": "KI som henter relevante dokumentutdrag før den svarer.",
-      "example": "Svar fra oppdaterte rutinedokumenter."
+      "example": "Svar fra oppdaterte rutinedokumenter.",
+      "id": "rag"
     },
     {
       "term": "KI-agent",
       "meaning": "KI som bruker data eller verktøy for å løse flere trinn i en oppgave.",
-      "example": "Agent som finner tall og forklarer et avvik."
+      "example": "Agent som finner tall og forklarer et avvik.",
+      "id": "ki-agent"
+    },
+    {
+      "id": "kunnskapsgraf",
+      "term": "Kunnskapsgraf",
+      "meaning": "En måte å beskrive ting og forbindelsene mellom dem, slik at relasjoner og kontekst kan brukes av søk, analyse og KI.",
+      "example": "Hvilke kunder er knyttet til hvilke produkter, leveranser og kontaktpersoner?"
+    },
+    {
+      "id": "ontologi",
+      "term": "Ontologi",
+      "meaning": "En formell beskrivelse av virksomhetens begreper, egenskaper og relasjoner. Beskriver hva noe betyr, ikke bare hvor data ligger.",
+      "example": "At «kunde», «ordre» og «kontrakt» har definerte forbindelser og regler."
+    },
+    {
+      "id": "company-brain",
+      "term": "Company Brain",
+      "meaning": "En uformell samlebetegnelse for KI-løsninger som forsøker å samle virksomhetskontekst på tvers av dokumenter, systemer og mennesker. Ikke én etablert teknisk standard.",
+      "example": "En assistent som kan finne riktig dokument, fagperson og bakgrunn for en beslutning."
+    },
+    {
+      "id": "dataprodukt",
+      "term": "Dataprodukt",
+      "meaning": "Et datasett eller en datatjeneste som er tilrettelagt for konkrete brukere, med eier, definisjon, kvalitet og forventet bruksområde.",
+      "example": "En dokumentert og vedlikeholdt oversikt over kundelønnsomhet."
+    },
+    {
+      "id": "datasuverenitet",
+      "term": "Datasuverenitet",
+      "meaning": "Virksomhetens kontroll over hvor og hvordan data brukes, hvem som har tilgang, og hvilke juridiske eller organisatoriske bindinger som gjelder.",
+      "example": "Krav til kontroll over lagring, overføring, leverandørskifte og tilgang fra andre jurisdiksjoner."
     }
   ],
   "diagrams": [

@@ -7,7 +7,7 @@ const refSource=(id,from)=>{if(!sources[id])fail(from+' peker på ukjent kilde '
 const refs=(a,from)=>{if(!Array.isArray(a)||!a.length)fail(from+' mangler kilde');else a.forEach(id=>refSource(id,from))};
 if(!/^\d+\.\d+\.\d+$/.test(site.version||''))fail('Ugyldig site-versjon');
 if(!date(site.released)||!date(site.reviewed))fail('Mangler dato for utgave eller faglig gjennomgang');
-const pagesNeeded=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter'];
+const pagesNeeded=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont'];
 for(const p of pagesNeeded)if(!str(pages.navigation?.[p]))fail('Mangler navigasjon '+p);
 for(const [key,value] of Object.entries(pages.headers||{}))for(const field of ['eyebrow','title','intro'])if(!str(value[field]))fail('Ufullstendig header '+key+'.'+field);
 if(Object.keys(pages.headers||{}).length<13)fail('Grunnkurs/arkitektur/verktøy mangler sidetitler');
@@ -75,5 +75,27 @@ refs(prompts.sourceIds,'Promptveiledning');
 if(!fs.existsSync('docs/assets/prompts.js'))fail('Promptvisning mangler');
 const pageHtml=fs.readFileSync('docs/index.html','utf8');
 if(!pageHtml.includes('prompts.js?v='+site.version))fail('Promptvisning har feil asset-versjon');
+const horizon=read('horizon');
+if(!horizon?.meta?.reviewed||!date(horizon.meta.reviewed))fail('Fordypning mangler kontrolltid');
+const idsForGlossary=learning.glossary.map(x=>x.id).filter(Boolean);
+if(new Set(idsForGlossary).size!==idsForGlossary.length)fail('Dupliserte glossary-ID-er');
+const knownConcept=(id,owner)=>{if(!idsForGlossary.includes(id))fail(owner+' peker til ukjent begrep '+id)};
+if(!pages.headers['I GRENSLANDET'])fail('Fordypning mangler sidebeskrivelse');
+if(!Array.isArray(horizon.chapters)||horizon.chapters.length<3)fail('Fordypningen mangler tematiske deler');
+if(!horizon.ui||!horizon.evidenceLabels)fail('Fordypningen mangler tekst- og statusregister');
+ids(horizon.chapters,'Fordypningsartikler');
+for(const x of [horizon.comparison,...horizon.chapters]){
+ refs(x.sourceIds,x.id||'Sammenligning');
+ for(const id of x.conceptIds||[])knownConcept(id,x.id||'Sammenligning');
+}
+for(const a of horizon.lenses.items)knownConcept(a.conceptId,'Strategisk hensyn '+a.id);
+for(const x of horizon.chapters){
+ if(!['documented','vendor','hypothesis','open-question'].includes(x.evidence))fail('Ukjent innholdskategori '+x.id);
+ if(!str(x.status)||!str(x.interpretation)||!str(x.customerQuestion))fail('Ufullstendig vurdering '+x.id);
+ for(const link of x.relatedLinks||[])if(!str(link.route)||!str(link.label))fail('Ugyldig relasjonslenke '+x.id);
+}
+for(const x of horizon.notPublished||[])if(x.visibility!=='not-presented')fail('Ikke-vist innhold må ha eksplisitt visibility');
+if(!fs.existsSync('docs/assets/horizon.js'))fail('Mangler visning for fordypningen');
+if(!html.includes('horizon.js?v='+site.version))fail('Utdatert versjon på fordypningsscript');
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log('PASS – '+pagesNeeded.length+' sider, '+learning.diagrams.length+' arkitekturer, '+learning.templates.length+' maler, '+Object.keys(sources).length+' kilder og '+Object.keys(pages.presentationDecks).length+' presentasjonsløp validert');

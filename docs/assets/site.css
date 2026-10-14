@@ -257,3 +257,49 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 .home-prompts-card p{font-size:13px;line-height:1.6;color:#4f6e74;margin:0}
 @media(max-width:1080px){.pillar-grid,.prompt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.prompt-detail-layout{grid-template-columns:minmax(0,1.4fr) minmax(215px,1fr)}}
 @media(max-width:760px){.pillar-grid,.prompt-grid,.prompt-detail-layout{grid-template-columns:1fr}.ki-growth-strip,.home-prompts-card{flex-direction:column;align-items:stretch}.ki-growth-strip .growth-values{justify-content:flex-start}.prompt-editor{min-height:350px}.prompt-intro{padding:17px}.prompt-guide-mark{display:none}.prompt-detail-head{margin-bottom:12px}.prompt-side-panel{grid-template-columns:1fr}.pillar-card{padding:19px}}
+
+/* Fordypningsside – gjenbruker grunnstiler, egen avgrenset layout. */
+.horizon-intro{background:linear-gradient(125deg,#edf7f5,#f7fbfb);border:1px solid #d1e6de;border-radius:17px;padding:26px;margin-bottom:25px}
+.horizon-intro h2{font-size:22px;line-height:1.3;margin:12px 0}
+.horizon-intro>p{font-size:14px;line-height:1.75;color:#416168;max-width:790px}
+.horizon-tagline{font-size:11px;color:#267c6c;letter-spacing:.07em;font-weight:850;display:flex;align-items:center;gap:7px}
+.horizon-tagline svg{width:16px;height:16px}
+.horizon-small-note{font-size:12px;color:#56716c}
+.horizon-concept-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.horizon-concept{background:white;border-radius:13px;padding:20px;border:1px solid #deebe7}
+.horizon-term{font-size:16px;font-weight:850;color:#234b52}
+.horizon-concept p{color:#4f6d74;line-height:1.75;font-size:13px}
+.horizon-example{border-top:1px solid #ebf0ef;padding-top:10px;color:#547377;font-size:12px;line-height:1.6}
+.horizon-outcome{border-left:3px solid #299f86;background:#f0f8f5;border-radius:10px;padding:16px 19px;margin-top:15px}
+.horizon-outcome p{font-size:13px;line-height:1.7;margin:0 0 11px;color:#375c5d}
+.horizon-outcome>a,.horizon-relations>a{font-size:12px;font-weight:850;color:#0e7864;display:inline-flex;align-items:center;gap:6px}
+.horizon-outcome svg,.horizon-relations svg{width:13px;height:13px}
+.horizon-outcome .text-source{font-size:10px;margin-top:10px}
+.horizon-chapter-list{display:grid;gap:16px}
+.horizon-chapter{border:1px solid #dde8e7;background:white;border-radius:15px;padding:24px}
+.horizon-chapter-top{display:flex;gap:11px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:11px}
+.horizon-level{font-weight:850;font-size:11px;color:#146f5d;background:#e9f5ef;padding:5px 8px;border-radius:7px}
+.horizon-status{font-size:11px;color:#6f8184}
+.horizon-chapter h3{margin:0 0 10px;font-size:19px;line-height:1.4}
+.horizon-chapter>p,.horizon-interpretation p{font-size:13px;line-height:1.75;color:#4b6b72;margin:0 0 14px}
+.horizon-interpretation{background:#f4f9f8;border-radius:10px;padding:12px 15px;margin:10px 0}
+.horizon-interpretation strong,.horizon-question strong{font-size:11px;color:#2f6357}
+.horizon-interpretation p,.horizon-question p{margin:5px 0 0;font-size:12px;line-height:1.75}
+.horizon-question{border-left:3px solid #72b4a1;padding:10px 12px;margin:13px 0}
+.horizon-question p{font-size:13px;color:#335b5c}
+.horizon-meta{margin-top:15px;border-top:1px solid #edf0ef;padding-top:11px;display:grid;gap:12px}
+.horizon-related{font-size:11px;color:#608080}
+.horizon-related span{font-weight:800;color:#466766}
+.horizon-relations{display:flex;flex-wrap:wrap;gap:13px}
+.horizon-meta .text-source{font-size:10px}
+.horizon-lenses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.horizon-lenses>article{padding:20px;border:1px solid #dfe9e7;background:#fff;border-radius:14px}
+.horizon-lenses h3{font-size:15px;margin:0 0 10px}
+.horizon-lenses p{font-size:12px;line-height:1.7;color:#557376}
+.horizon-lenses a{color:#117c68;font-weight:850;font-size:12px;display:flex;align-items:center;gap:6px}
+.horizon-lenses svg{width:13px;height:13px}
+.horizon-summary{border-radius:15px;background:#eef7f4;border:1px solid #d8e8df;padding:24px}
+.horizon-summary h2{font-size:18px;margin:6px 0 14px}
+.horizon-summary ol{margin:0;padding-left:23px;color:#3d5f63;font-size:13px;line-height:1.9}
+@media(max-width:1020px){.horizon-lenses{grid-template-columns:1fr}}
+@media(max-width:760px){.horizon-concept-grid{grid-template-columns:1fr}.horizon-chapter,.horizon-intro{padding:19px}.horizon-intro h2{font-size:19px}}

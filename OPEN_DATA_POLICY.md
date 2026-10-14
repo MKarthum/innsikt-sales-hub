@@ -33,3 +33,8 @@ Maler og generiske skisser er kun pedagogiske startpunkter. De skal ikke lagre k
 ## Generiske KI-prompter
 
 Promptbiblioteket er offentlig og gir bare kopierbare instruksjoner, ikke tilgang til systemer eller data. Ingen hemmelige nøkler, direkte CRM-forespørsler eller sensitive eksempler skal inn i versjonsstyringen. Redigering i nettleseren lagres ikke og sendes ikke av portalen. Brukeren må selv velge en godkjent KI-tjeneste og passe på hvilke opplysninger som limes inn.
+
+
+## Ikke-viste offentlige elementer
+
+Et JSON-element med `visibility: not-presented` er ikke privat. Det kan fortsatt leses i den offentlige JSON-filen, på GitHub og i historikken. Ingen interne opplysninger må legges her. Se `CONTENT_CONTRACT.md`.

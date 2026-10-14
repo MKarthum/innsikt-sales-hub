@@ -126,5 +126,13 @@
     "status": "åpen",
     "priority": "høy",
     "why": "Se hvilke maler som faktisk gir bedre forberedelser og kundedialoger, og fjern overflødig eller generisk innhold."
+  },
+  {
+    "id": "B-17",
+    "title": "Koble kanoniske begreper og fakta mellom alle sider via stabile ID-er",
+    "area": "Arkitektur",
+    "priority": "høy",
+    "status": "åpen",
+    "why": "Gjør forklaring, tekstvarianter, kilder og status autoritative og gjenbrukbare, også der tekst ikke vises."
   }
 ]
