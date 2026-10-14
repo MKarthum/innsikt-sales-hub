@@ -227,7 +227,20 @@
     }
   ],
   "marketUi": {
-    "aiStatsLimit": "Det er kundens problem, beslutning og datagrunnlag som avgjør om Innsikt er relevant. KI-bruk sier ikke i seg selv om virksomheten trenger konsulenter.",
     "acquisitionCaution": "At en leverandør kjøper en annen, betyr ikke at kunden må bytte verktøy. Spør om overlapp, avtaler, kompetanse og roadmap først."
+  },
+  "metricGuidance": {
+    "id": "ki-use",
+    "variants": {
+      "short": "Bruk betyr ikke dokumentert gevinst.",
+      "normal": "Bruk KI-tall som inngang, ikke salgsprediksjon.",
+      "long": "Det er kundens problem, beslutning og datagrunnlag som avgjør om Innsikt er relevant. KI-bruk sier ikke i seg selv om virksomheten trenger konsulenter."
+    },
+    "evidence": "assessment",
+    "sourceIds": [
+      "ssb"
+    ],
+    "reviewed": "2026-10-14",
+    "visibility": "presented"
   }
 }

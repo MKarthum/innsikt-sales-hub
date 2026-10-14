@@ -233,7 +233,10 @@
         {
           "type": "metric",
           "title": "KI-bruken øker",
-          "body": "Bruk betyr ikke dokumentert gevinst.",
+          "body": {
+            "$content": "market-guidance:ki-use",
+            "variant": "short"
+          },
           "note": "Spør hva kunden ønsker å oppnå.",
           "sources": [
             "ssb"
@@ -275,7 +278,10 @@
         {
           "type": "metric",
           "title": "Markedet beveger seg",
-          "body": "Bruk KI-tall som inngang, ikke salgsprediksjon.",
+          "body": {
+            "$content": "market-guidance:ki-use",
+            "variant": "normal"
+          },
           "sources": [
             "ssb"
           ]
@@ -366,9 +372,15 @@
           "type": "bullets",
           "title": "Hva kan gå galt?",
           "bullets": [
-            "Ulike definisjoner gir ulike svar.",
+            {
+              "$content": "risk:risk-1",
+              "variant": "short"
+            },
             "Svake data gir feil grunnlag.",
-            "Mangelfull tilgang og kontroll øker risikoen."
+            {
+              "$content": "risk:risk-3",
+              "variant": "short"
+            }
           ],
           "sources": [
             "fabricagent",

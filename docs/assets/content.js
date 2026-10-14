@@ -5,7 +5,9 @@ const owners={
  glossary:d=>d.learning.glossary,
  guidance:d=>d.sharedGuidance,
  'prompt-rule':d=>d.prompts.rules,
- 'ai-overview':d=>d.aiOverview?[d.aiOverview]:[]
+ 'ai-overview':d=>d.aiOverview?[d.aiOverview]:[],
+ 'market-guidance':d=>d.metricGuidance?[d.metricGuidance]:[],
+ risk:d=>d.learning.risks
 };
 function materialize(data){
  const registry=new Map();

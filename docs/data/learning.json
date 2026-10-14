@@ -433,25 +433,52 @@
       "title": "Ulike definisjoner",
       "example": "«Omsetning» betyr fakturert beløp ett sted og ordresum et annet.",
       "action": "Felles begreper, dataeier og tester mot fasit.",
-      "id": "risk-1"
+      "id": "risk-1",
+      "variants": {
+        "short": "Ulike definisjoner gir ulike svar."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "dbtsemantic"
+      ]
     },
     {
       "title": "Manglende historikk",
       "example": "Rabatter og returer mangler. Marginene ser bedre ut enn de er.",
       "action": "Avstemming, kvalitetsregler og avgrensning av datagrunnlaget.",
-      "id": "risk-2"
+      "id": "risk-2",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "digdir"
+      ]
     },
     {
       "title": "Feil tilgang",
       "example": "En bruker får informasjon fra data vedkommende ikke skulle sett.",
       "action": "Rollebasert tilgang og sikkerhetstesting.",
-      "id": "risk-3"
+      "id": "risk-3",
+      "variants": {
+        "short": "Mangelfull tilgang og kontroll øker risikoen."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "privacy",
+        "agent-foundation"
+      ]
     },
     {
       "title": "Overbevisende feil",
       "example": "KI formulerer en plausibel forklaring som tallene ikke støtter.",
       "action": "Kildehenvisninger, evaluering og menneskelig vurdering.",
-      "id": "risk-4"
+      "id": "risk-4",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "digdir"
+      ]
     }
   ],
   "templates": [
