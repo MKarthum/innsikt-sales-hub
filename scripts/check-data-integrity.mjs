@@ -61,7 +61,7 @@ else {
 }
 if(market.stats.euAnalytics)fail('Utdatert EU-analysetall skal ikke stå i markedstall');
 if(!pages.marketIntro?.dataStory?.length)fail('Markedssiden mangler datagrunnlagshistorie');
-const prompts=resolverSandbox.window.InnsiktContent.materialize({learning,salesGuidance:[],sharedGuidance:sales.sharedGuidance,prompts:read('prompts')}).prompts;
+const prompts=resolverSandbox.window.InnsiktContent.materialize({learning,sharedGuidance:sales.sharedGuidance,aiOverview:tech.aiOverview,metricGuidance:market.metricGuidance,prompts:read('prompts')}).prompts;
 if(!str(pages.navigation.prompter))fail('Promptnavigasjon mangler');
 if(!prompts?.page||!Array.isArray(prompts.categories)||prompts.categories.length<4)fail('Manglende promptbibliotek og kategorier');
 ids(prompts.items,'Promptmaler');

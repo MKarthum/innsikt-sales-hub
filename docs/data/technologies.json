@@ -327,7 +327,7 @@
     "variants": {
       "short": "Skillet er mellom å hjelpe datateamet og å gjøre data tilgjengelig for forretningsbrukere.",
       "normal": "To ulike behov: KI som hjelper utviklere og analytikere, og KI som lar forretningen stille spørsmål direkte til virksomhetsdata.",
-      "long": "KI-funksjoner for datateam kan støtte utvikling og forvaltning. Funksjoner for forretningsbrukere kan gjøre det mulig å stille spørsmål til virksomhetsdata med begreper og tilgangskontroll."
+      "long": "KI kan hjelpe utviklere med å lage dataløsninger raskere. KI kan også la forretningen stille spørsmål direkte mot egne data. Begge deler krever kvalitetssikring. Et fint svar er ikke nødvendigvis riktig."
     },
     "evidence": "assessment",
     "sourceIds": [
