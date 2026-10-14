@@ -1,6 +1,6 @@
-# Innholdskontrakt – én autoritativ kilde (v2, 14.10.2026)
+# Innholdskontrakt – én autoritativ kilde (v3, 14.10.2026)
 
-Gjelder alle endringer i Innsikt. Les sammen med `START_HERE.md`, `AGENTS.md`, `OPEN_DATA_POLICY.md` og `REFACTOR_REVIEW.md`. Versjon 0.9.0 innfører en **delvis implementert, maskinelt kontrollert** referansemodell. Kontrakten gjelder også eldre innhold som ennå ikke er fullt normalisert.
+Gjelder alle endringer i Innsikt. Les sammen med `START_HERE.md`, `AGENTS.md`, `OPEN_DATA_POLICY.md` og `REFACTOR_REVIEW.md`. v0.9.0 innførte referansemodellen; v0.9.1 samler identifiserte eldre tverrgående budskap med dokumenterte varianter. Kontrakten gjelder også nytt innhold. Se `NORMALIZATION_AUDIT.md` for hvilke overlapp som er konsolidert og hva som er vurdert som selvstendig tekst.
 
 ## Autoritet og visningsvalg
 
@@ -14,7 +14,7 @@ Gjelder alle endringer i Innsikt. Les sammen med `START_HERE.md`, `AGENTS.md`, `
 
 En referanse er et JSON-objekt: `{ "$content": "glossary:dataplattform", "variant": "normal" }`.
 
-`docs/assets/content.js` løser referanser ved oppstart og returnerer ordinære tekstfelt til visningskomponentene. Den feiler eksplisitt ved manglende eier/ID/variant, duplisert ID og ugyldige referansefelt. Registrerte samlinger er `glossary` (`learning.json.glossary`), `risk` (`learning.json.risks`), `guidance` (`sales.json.sharedGuidance`), `market-guidance` (`market.json.metricGuidance`), `ai-overview` (`technologies.json.aiOverview`) og `prompt-rule` (`prompts.json.rules`). Utvid registeret og kontrakttestene sammen ved nye referansetyper; ikke innfør parallelle lookups.
+`docs/assets/content.js` løser referanser ved oppstart og returnerer ordinære tekstfelt til visningskomponentene. Den feiler eksplisitt ved manglende eier/ID/variant, duplisert ID og ugyldige referansefelt. Registrerte samlinger er `glossary` (`learning.json.glossary`), `risk` (`learning.json.risks`), `guidance` (`sales.json.sharedGuidance`), `market-guidance` (`market.json.metricGuidance`), `ai-overview` (`technologies.json.aiOverview`) og `prompt-rule` (`prompts.json.rules`), samt `value` (`sales.json.valueThemes`), `value-overview` (`sales.json.valueOverview`) og `notice` (`pages.json.sharedNotices`). Utvid registeret og kontrakttestene sammen ved nye referansetyper; ikke innfør parallelle lookups.
 
 Kopierbare prompter kan lagre `promptParts` med veksling mellom strengtekst og `$content`-referanser. Resolveren setter sammen delene **uten ekstra tegn** til ett selvstendig promptfelt før visning, redigering og kopiering. En prompt har enten `prompt` eller `promptParts`, aldri begge. Felles regler eies av `prompts.json.rules`.
 
@@ -28,9 +28,9 @@ En leverandørkilde dokumenterer hva leverandøren beskriver, ikke kundens reali
 
 ## Automatisk verifikasjon og begrensninger
 
-Kjør `node scripts/check.mjs` ved enhver endring. Kontroller omfatter referanser, ID-er, kildefelter, skjult innhold, promptkomposisjon, lange **eksakte** tekstduplikater, 76 genererte visninger og metamorfisk spredning av én begrepsendring til Start her, fordypning, Presenter og søk. Test også i nettleser med mobil og desktop før publisering.
+Kjør `node scripts/check.mjs` ved enhver endring. Kontroller omfatter referanser, ID-er, kildefelter, skjult innhold, promptkomposisjon, lange **eksakte** tekstduplikater, 76 genererte visninger, 20 bindende semantiske konsumentreferanser, 11 simulerte variantediteringer og metamorfisk spredning av én begrepsendring til Start her, fordypning, Presenter og søk. Test også i nettleser med mobil og desktop før publisering.
 
-Eksakttest garanterer ikke at to ulikt formulerte tekster har samme semantikk. Ikke alle eldre felt er referansebaserte, en del generiske UI-etiketter ligger fortsatt i JavaScript, og den manuelt kuraterte søkeindeksen kan kreve oppdatering ved nye typer innhold. Se `REFACTOR_REVIEW.md`. Dette er kjente restanser, ikke grunnlag for å hevde fullstendig semantisk normalisering.
+Eksakttest garanterer ikke at to ulikt formulerte tekster har samme semantikk. Ikke alt innhold skal referansebaseres: sidetitler, oppgaveformuleringer, sitater og pedagogiske eksempler har ofte eget formål. Generiske UI-etiketter ligger fortsatt delvis i JavaScript, og søkeindeksen kan kreve oppdatering for nye innholdstyper. Maskinelle tester kan ikke garantere at alle framtidige omskrivinger er semantisk ulike; vurder delte tema redaksjonelt. Se `NORMALIZATION_AUDIT.md`.
 
 ## Endringsrekkefølge
 

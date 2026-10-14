@@ -16,7 +16,10 @@
       },
       {
         "title": "3. Hva er en dataplattform?",
-        "text": "Et oppsett for å samle, behandle, styre og bruke data. Det erstatter ikke nødvendigvis kundens eksisterende CRM- eller økonomisystem. Fabric, Databricks og Snowflake dekker deler av denne verdikjeden.",
+        "text": {
+          "$content": "glossary:dataplattform",
+          "variant": "beginner"
+        },
         "id": "chapter-3"
       },
       {
@@ -29,7 +32,10 @@
       },
       {
         "title": "5. Hva skal salg gjøre?",
-        "text": "Finn ut hva kunden ønsker å forbedre, hvorfor det er viktig, hvem som eier behovet og om det finnes planer om å gjøre noe. Du trenger ikke velge teknologien selv.",
+        "text": {
+          "$content": "guidance:customer-first",
+          "variant": "beginner"
+        },
         "id": "chapter-5"
       }
     ],
@@ -69,7 +75,8 @@
       "reviewed": "2026-10-14",
       "variants": {
         "short": "Felles grunnlag for å lagre, organisere og bruke data.",
-        "long": "Løsninger som samler, behandler, styrer og tilgjengeliggjør data. Plattformen alene avgjør ikke kvaliteten på beslutningene; begreper, eierskap og tilgang må avklares."
+        "long": "Løsninger som samler, behandler, styrer og tilgjengeliggjør data. Plattformen alene avgjør ikke kvaliteten på beslutningene; begreper, eierskap og tilgang må avklares.",
+        "beginner": "Et oppsett for å samle, behandle, styre og bruke data. Det erstatter ikke nødvendigvis kundens eksisterende CRM- eller økonomisystem. Fabric, Databricks og Snowflake dekker deler av denne verdikjeden."
       },
       "sourceIds": [
         "fabric",

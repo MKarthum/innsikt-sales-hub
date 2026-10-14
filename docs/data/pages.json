@@ -2,8 +2,14 @@
   "site": {
     "title": "Innsikt | Marked og salg",
     "classification": "Åpent arbeidsgrunnlag – ingen interne data",
-    "disclaimer": "Arbeidsversjon på offentlig kildegrunnlag. Salgsinnganger er forslag som skal valideres, ikke dokumenterte kundetilbud.",
-    "publicNotice": "Dette er en prototype basert på offentlig informasjon. Ingen kundedata eller interne notater."
+    "disclaimer": {
+      "$content": "notice:public-boundary",
+      "variant": "disclaimer"
+    },
+    "publicNotice": {
+      "$content": "notice:public-boundary",
+      "variant": "sidebar"
+    }
   },
   "navigation": {
     "oversikt": "Oversikt",
@@ -107,7 +113,10 @@
     "eyebrow": "ET PRAKTISK VERKTØY FOR BEDRE KUNDEDIALOGER",
     "titleLine1": "Se mulighetene.",
     "titleLine2": "Still bedre spørsmål.",
-    "intro": "Hjelp kundene å få data til å henge sammen, bruke informasjonen til bedre beslutninger og ta i bruk KI når det gir nytte. Det starter med forretningsproblemet – ikke med produktnavnet.",
+    "intro": {
+      "$content": "guidance:customer-first",
+      "variant": "home"
+    },
     "statsTitle": "Tre måter Innsikt skaper verdi",
     "statsIntro": "Fra et pålitelig datagrunnlag til bedre styring og nye KI-muligheter. Velg sporet som passer kundens situasjon.",
     "actionTitle": "Hva skal du gjøre?",
@@ -118,9 +127,15 @@
     "advancedTitle": "Erfaren eller på vei til kundemøte?",
     "advancedIntro": "Gå rett til arkitekturskissene, samtaleguidene eller verktøykassen.",
     "pillarTitle": "Slik henger de sammen",
-    "pillarIntro": "En god dataplattform kan gjøre analyse enklere og KI mer nyttig. Men rapportering og datakvalitet har stor verdi også uten KI.",
+    "pillarIntro": {
+      "$content": "value-overview:three-needs",
+      "variant": "home"
+    },
     "kiEvidenceTitle": "KI er en tydelig pådriver",
-    "kiEvidenceBody": "Andelen norske foretak som oppgir KI-bruk har økt betydelig. Det kan øke behovet for datatilgang og kvalitet, men bruk betyr ikke dokumentert effekt eller et sikkert konsulentbehov.",
+    "kiEvidenceBody": {
+      "$content": "market-guidance:ki-use",
+      "variant": "homeEvidence"
+    },
     "promptTitle": "Bruk KI til å forberede en bedre kundedialog",
     "promptBody": "Ferdigskrevne, redigerbare prompter for kundekartlegging, møter, kompetansebehov og presentasjoner. Foreløpig kun med åpne eller generiske data.",
     "promptCta": "Åpne promptbiblioteket",
@@ -130,7 +145,10 @@
         "number": "01",
         "eyebrow": "DATAGRUNNLAG OG PLATTFORM",
         "title": "Få data til å henge sammen",
-        "summary": "Når kunden sliter med ulike tall, manuell dataflyt eller vanskelig tilgang, begynner verdien med integrasjon, datakvalitet, modeller og styring.",
+        "summary": {
+          "$content": "value:platform",
+          "variant": "home"
+        },
         "example": "«Vi bruker flere dager på å samle tall, og avdelingene er ikke enige.»",
         "question": "Hvilke data og beslutninger skaper mest friksjon i dag?",
         "link": "#arkitektur/bi",
@@ -144,7 +162,10 @@
         "number": "02",
         "eyebrow": "ANALYSE OG BESLUTNINGER",
         "title": "Bruke data til bedre valg",
-        "summary": "BI, analyse og prognoser gjør informasjon nyttig i økonomi, salg, kundeservice og drift. Målet er raskere og bedre beslutninger – ikke flere dashboards.",
+        "summary": {
+          "$content": "value:insight",
+          "variant": "home"
+        },
         "example": "«Vi ser tallene, men ikke hva som driver lønnsomheten.»",
         "question": "Hva ville dere besluttet annerledes med bedre innsikt?",
         "link": "#forretning",
@@ -159,7 +180,10 @@
         "number": "03",
         "eyebrow": "KI OG NYE ARBEIDSMÅTER",
         "title": "Bygge videre på dataene med KI",
-        "summary": "KI kan hjelpe datateam å levere raskere og forretningen å bruke egne data på nye måter. Verdien avhenger av kvalitet, sikkerhet og reelle brukstilfeller.",
+        "summary": {
+          "$content": "value:ai",
+          "variant": "home"
+        },
         "example": "«Vi vil bruke KI på egne data, men får ikke pålitelige svar.»",
         "question": "Hva skal KI faktisk forbedre, og hvilket datagrunnlag kreves?",
         "link": "#arkitektur/ai-on-data",
@@ -203,13 +227,22 @@
       "title": "Ikke selg en løsning for tidlig.",
       "body": "Kundens symptomer kan ha organisatoriske, prosessuelle eller tekniske årsaker. Målet er å avdekke hva som er viktig å forbedre og om Innsikt er relevant."
     },
-    "publicRegister": "Dette er en faglig arbeidsversjon med offentlig kildegrunnlag. Kundespesifikke muligheter skal håndteres i godkjente interne systemer etter flytting.",
+    "publicRegister": {
+      "$content": "notice:public-boundary",
+      "variant": "register"
+    },
     "marketTrendsExplainer": "Hva det kan bety i kundedialogen – ikke en prognose for konsulentsalg",
     "goodQualification": "Et godt resultat kan være et konkret behov, riktig kontaktperson og en avtale om et faglig oppfølgingsmøte.",
     "localFeedback": "Bruk innspillfunksjonen og eksporter når du vil. Notatene synkroniseres ikke automatisk til GitHub.",
-    "localFeedbackCaution": "Lagres bare i denne nettleseren. Ikke legg inn kunder, personer eller interne opplysninger.",
+    "localFeedbackCaution": {
+      "$content": "notice:feedback-privacy",
+      "variant": "compact"
+    },
     "feedbackEmpty": "Ingen lokale innspill ennå. Bruk «Gi innspill» øverst for å notere en forbedring.",
-    "feedbackModalNotice": "Innspill lagres lokalt i denne nettleseren og kan eksporteres. Ikke legg inn kundenavn, personopplysninger eller interne opplysninger."
+    "feedbackModalNotice": {
+      "$content": "notice:feedback-privacy",
+      "variant": "modal"
+    }
   },
   "presentationDecks": {
     "intro": {
@@ -410,16 +443,28 @@
   },
   "marketIntro": {
     "dataTitle": "Tre typer behov – ikke en konkurranse mellom tall",
-    "dataLead": "En kunde kan ha nytte av dataplattform og analyse lenge før de ønsker KI. Samtidig gjør KI det mer aktuelt å rydde i datagrunnlag, definisjoner og tilgang. Det viktigste er å forstå kundens beslutninger og flaskehalser.",
+    "dataLead": {
+      "$content": "value-overview:three-needs",
+      "variant": "market"
+    },
     "aiTitle": "KI vokser raskt",
-    "aiDetail": "SSBs norske tall viser sterk utvikling. Dette sier ikke noe direkte om lønnsomhet, modenhet eller hvilke konsulentprosjekter som oppstår.",
+    "aiDetail": {
+      "$content": "market-guidance:ki-use",
+      "variant": "marketDetail"
+    },
     "sectorsTitle": "Ulik KI-bruk mellom næringer",
-    "sectorIntro": "Tilleggsinformasjon fra SSB – ikke et mål på konsulentbehov.",
+    "sectorIntro": {
+      "$content": "market-guidance:ki-use",
+      "variant": "sectorContext"
+    },
     "dataStory": [
       {
         "id": "platform",
         "title": "Datagrunnlag",
-        "body": "Koble sammen kilder, definere nøkkeltall, sikre kvalitet og tilgang. Et selvstendig forbedringsbehov.",
+        "body": {
+          "$content": "value:platform",
+          "variant": "market"
+        },
         "sourceIds": [
           "webstep1"
         ]
@@ -427,7 +472,10 @@
       {
         "id": "analysis",
         "title": "Analyse og innsikt",
-        "body": "Gjøre tall og sammenhenger tilgjengelige for beslutninger, prognoser og bedre operativ styring.",
+        "body": {
+          "$content": "value:insight",
+          "variant": "market"
+        },
         "sourceIds": [
           "webstep1",
           "webstep2"
@@ -436,12 +484,41 @@
       {
         "id": "ai",
         "title": "KI og automatisering",
-        "body": "Forbedre datautvikling og skape nye tjenester på egne data, med testing, datastyring og kontroll.",
+        "body": {
+          "$content": "value:ai",
+          "variant": "market"
+        },
         "sourceIds": [
           "ssb",
           "fabricagent"
         ]
       }
     ]
-  }
+  },
+  "sharedNotices": [
+    {
+      "id": "public-boundary",
+      "variants": {
+        "sidebar": "Dette er en prototype basert på offentlig informasjon. Ingen kundedata eller interne notater.",
+        "disclaimer": "Arbeidsversjon på offentlig kildegrunnlag. Salgsinnganger er forslag som skal valideres, ikke dokumenterte kundetilbud.",
+        "register": "Dette er en faglig arbeidsversjon med offentlig kildegrunnlag. Kundespesifikke muligheter skal håndteres i godkjente interne systemer etter flytting.",
+        "prompt": "Denne siden er offentlig. Ingen HubSpot-, Drive-, CRM- eller konsulentdata hentes automatisk. Ikke lim inn interne opplysninger, kundelister, persondata eller fortrolige dokumenter i et KI-verktøy uten nødvendig godkjenning."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [],
+      "visibility": "presented"
+    },
+    {
+      "id": "feedback-privacy",
+      "variants": {
+        "compact": "Lagres bare i denne nettleseren. Ikke legg inn kunder, personer eller interne opplysninger.",
+        "modal": "Innspill lagres lokalt i denne nettleseren og kan eksporteres. Ikke legg inn kundenavn, personopplysninger eller interne opplysninger."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [],
+      "visibility": "presented"
+    }
+  ]
 }
