@@ -7,7 +7,10 @@
       "signal": "Power BI, Azure, samlet lagring og analyse.",
       "talk": "Hva skal forbedres: tilgang, rapportering eller utvikling?",
       "caution": "Vurder lisensiering, kapasitet og kostnad.",
-      "logo": "fabric"
+      "logo": "fabric",
+      "id": "microsoft-fabric",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Databricks",
@@ -16,7 +19,10 @@
       "signal": "Lakehouse, data engineering, ML eller Unity Catalog.",
       "talk": "Hva er de viktigste data- og analyseproduktene?",
       "caution": "Kostnad og styring varierer etter arbeidslast.",
-      "logo": "databricks"
+      "logo": "databricks",
+      "id": "databricks",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Snowflake",
@@ -25,7 +31,10 @@
       "signal": "Datavarehus, modernisering, datadeling eller KI på virksomhetsdata.",
       "talk": "Hva skal de få mer verdi fra, og hva begrenser dem?",
       "caution": "Ikke anta at migrering er nødvendig.",
-      "logo": "snowflake"
+      "logo": "snowflake",
+      "id": "snowflake",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Google BigQuery",
@@ -34,7 +43,10 @@
       "signal": "Google Cloud, SQL-analyse eller datavarehus i sky.",
       "talk": "Hva er datakildene, kostnadene og analysebehovet?",
       "caution": "Sammenlign eksisterende kompetanse og drift.",
-      "logo": "bigquery"
+      "logo": "bigquery",
+      "id": "google-bigquery",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "dbt",
@@ -43,7 +55,10 @@
       "signal": "SQL-transformasjoner, tester, dokumentasjon, lineage eller felles KPI-er.",
       "talk": "Hvordan sikrer de konsistente data fra kilde til rapport og KI?",
       "caution": "Skill mellom dbt v2, dbt OSS og kommersielle tjenester.",
-      "logo": "dbt"
+      "logo": "dbt",
+      "id": "dbt",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Fivetran",
@@ -51,7 +66,10 @@
       "source": "merger",
       "signal": "Automatiserte dataflyter fra ERP, CRM og SaaS-kilder.",
       "talk": "Hvilke data må flyttes og hvor går det mest tid?",
-      "caution": "Fivetran og dbt Labs fullførte sammenslåing i juni 2026."
+      "caution": "Fivetran og dbt Labs fullførte sammenslåing i juni 2026.",
+      "id": "fivetran",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Airbyte",
@@ -60,7 +78,10 @@
       "signal": "Åpne connectorer og dataintegrasjoner.",
       "talk": "Hvilke forbindelser må vedlikeholdes, og av hvem?",
       "caution": "Egen drift og kvalitet må vurderes.",
-      "logo": "airbyte"
+      "logo": "airbyte",
+      "id": "airbyte",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Apache Airflow",
@@ -69,7 +90,10 @@
       "signal": "Orkestrering, tidsstyring og avhengigheter i datajobber.",
       "talk": "Hva skjer når en jobb feiler, og hvem følger opp?",
       "caution": "Orkestrering er ikke det samme som dataintegrasjon.",
-      "logo": "airflow"
+      "logo": "airflow",
+      "id": "apache-airflow",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Power BI",
@@ -78,7 +102,10 @@
       "signal": "Dashboards, semantiske modeller, selvbetjening eller Copilot.",
       "talk": "Hvilke beslutninger skal støttes, og har dere felles definisjoner?",
       "caution": "Copilot forutsetter korrekte modeller, kapasitet og rettigheter.",
-      "logo": "powerbi"
+      "logo": "powerbi",
+      "id": "power-bi",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Qlik / Talend",
@@ -87,7 +114,10 @@
       "signal": "Qlik-analyse, Talend-integrasjon eller modernisering.",
       "talk": "Hva fungerer godt, og hva er tungt å vedlikeholde?",
       "caution": "Qlik overtok Talend i 2023; et oppkjøp betyr ikke automatisk migrering.",
-      "logo": "qlik"
+      "logo": "qlik",
+      "id": "qlik-talend",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Informatica",
@@ -96,7 +126,10 @@
       "signal": "Datakvalitet, MDM, metadata og governance.",
       "talk": "Hvem eier data og kontrollen over definisjonene?",
       "caution": "Salesforce overtok Informatica i 2025.",
-      "logo": "informatica"
+      "logo": "informatica",
+      "id": "informatica",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "name": "Datavarehus og integrasjoner",
@@ -104,7 +137,10 @@
       "source": "webstep1",
       "signal": "SQL, ETL, eldre systemer og periodiske kvalitetsfeil.",
       "talk": "Hva fungerer ikke, og hva kan videreutvikles uten plattformbytte?",
-      "caution": "Eksisterende løsning kan fortsatt være best."
+      "caution": "Eksisterende løsning kan fortsatt være best.",
+      "id": "datavarehus-og-integrasjoner",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     }
   ],
   "aiProducts": [
@@ -119,7 +155,9 @@
       "limits": "Krever riktig rolle, oppfølging og kostnadsstyring.",
       "status": "Dokumentert",
       "source": "coco",
-      "logo": "snowflake"
+      "logo": "snowflake",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "geniecode",
@@ -132,7 +170,9 @@
       "limits": "Datatilgang, kontroll og forbrukskostnad må vurderes.",
       "status": "Dokumentert",
       "source": "geniecode",
-      "logo": "databricks"
+      "logo": "databricks",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "dbtdev",
@@ -145,7 +185,9 @@
       "limits": "Omtalt som preview i leverandørmateriale; tilgjengelighet må sjekkes.",
       "status": "Preview omtalt",
       "source": "dbtagent",
-      "logo": "dbt"
+      "logo": "dbt",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "fabriccopilot",
@@ -158,7 +200,9 @@
       "limits": "Rettigheter, SKU og funksjonstilgjengelighet varierer.",
       "status": "Funksjonsavhengig",
       "source": "fabriccopilot",
-      "logo": "fabric"
+      "logo": "fabric",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "cortexagents",
@@ -171,7 +215,9 @@
       "limits": "Datakvalitet, semantikk, rettigheter og evaluering er avgjørende.",
       "status": "Dokumentert",
       "source": "cowork",
-      "logo": "snowflake"
+      "logo": "snowflake",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "genieone",
@@ -184,7 +230,9 @@
       "limits": "Svar påvirkes av katalogtilganger, semantikk og datakvalitet.",
       "status": "Dokumentert",
       "source": "genie",
-      "logo": "databricks"
+      "logo": "databricks",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "fabricagent",
@@ -197,7 +245,9 @@
       "limits": "Sjekk datakildestøtte, rettigheter, status og kapasitet.",
       "status": "Funksjonsavhengig",
       "source": "fabricagent",
-      "logo": "fabric"
+      "logo": "fabric",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "powerbicopilot",
@@ -210,7 +260,9 @@
       "limits": "Enkelte funksjoner i preview; kapasitetskrav gjelder.",
       "status": "Funksjonsavhengig",
       "source": "pbicopilot",
-      "logo": "powerbi"
+      "logo": "powerbi",
+      "evidence": "vendor",
+      "reviewed": "2026-10-14"
     }
   ],
   "logoAssets": [
@@ -269,5 +321,26 @@
       "origin": "https://github.com/FabricTools/fabric-icons",
       "usage": "Microsofts bruksregler for produktikoner."
     }
-  ]
+  ],
+  "aiOverview": {
+    "id": "ai-modes",
+    "variants": {
+      "short": "Skillet er mellom å hjelpe datateamet og å gjøre data tilgjengelig for forretningsbrukere.",
+      "normal": "To ulike behov: KI som hjelper utviklere og analytikere, og KI som lar forretningen stille spørsmål direkte til virksomhetsdata.",
+      "long": "KI-funksjoner for datateam kan støtte utvikling og forvaltning. Funksjoner for forretningsbrukere kan gjøre det mulig å stille spørsmål til virksomhetsdata med begreper og tilgangskontroll."
+    },
+    "evidence": "assessment",
+    "sourceIds": [
+      "coco",
+      "genie"
+    ],
+    "reviewed": "2026-10-14",
+    "visibility": "presented"
+  },
+  "techUi": {
+    "developmentHelp": "Assistanse til SQL, pipelines, modellering, dokumentasjon og analyse.",
+    "businessDataHelp": "Naturlig språk til data og rapporter, basert på riktig begrepsmodell og tilgang.",
+    "selfServiceNeed": "Felles definisjoner, eierskap, tilgang og kontroll av svarene er mulige Innsiktsleveranser.",
+    "partnerCaution": "Websteps interne avtaler og kontaktpunkter må kvalitetssikres når dette flyttes til intern løsning."
+  }
 }

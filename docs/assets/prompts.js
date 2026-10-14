@@ -11,7 +11,7 @@ function library(d,h,category){
  +'<section class="prompt-intro"><div class="prompt-intro-top"><div><h2>'+e(p.page.usageTitle)+'</h2><ol>'+p.page.usageSteps.map(x=>'<li>'+e(x)+'</li>').join('')+'</ol></div><div class="prompt-guide-mark">'+ico('sparkles')+'</div></div></section>'
  +'<div class="prompt-safety"><span class="prompt-safety-icon">'+ico('shield')+'</span><p>'+e(p.page.publicWarning)+'</p></div>'
  +(category==='Alle'?'<section class="subsection"><div class="section-heading"><div><h2>'+e(p.page.featuredTitle)+'</h2><p>'+e(p.page.featuredIntro)+'</p></div></div><div class="prompt-grid">'+featured.map(x=>card(x,e)).join('')+'</div></section>':'')
- +'<section class="subsection"><div class="section-heading"><div><h2>'+rows.length+' prompter</h2><p>Velg oppgave. Du kan endre teksten før kopiering.</p></div></div><div class="filters" role="group" aria-label="Filtrer prompter">'
+ +'<section class="subsection"><div class="section-heading"><div><h2>'+rows.length+' prompter</h2><p>'+e(p.page.useHint)+'</p></div></div><div class="filters" role="group" aria-label="Filtrer prompter">'
  +[p.page.allLabel,...p.categories].map(x=>'<button type="button" class="filter '+(x===category?'active':'')+'" aria-pressed="'+(x===category)+'" data-prompt-filter="'+e(x)+'">'+e(x)+'</button>').join('')+'</div>'
  +'<div class="prompt-grid">'+rows.map(x=>card(x,e)).join('')+'</div></section>'
  +'<section class="subsection"><div class="prompt-next-stage"><div><h3>'+e(p.page.internalTitle)+'</h3><p>'+e(p.page.internalBody)+'</p></div><span class="prompt-private-icon">'+ico('lock')+'</span></div>'+sourceLinks(p.sourceIds,d)+'</section>';
@@ -30,7 +30,7 @@ function detail(d,h,id){
  +'<p class="fineprint">'+(x.sourceMode==='approved-internal'?'Bruk bare anonymiserte eller offentlig godkjente opplysninger inntil løsningen er flyttet og tilgangsstyrt.':'Kan brukes med offentlig tilgjengelige eller generiske opplysninger.')+'</p></div>'
  +'<div class="panel"><h3>'+e(p.reviewTitle)+'</h3><ul>'+x.review.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul></div>'
  +'</aside></div>'
- +'<section class="subsection"><div class="insight-strip"><div><h3>Vil du videre etter svaret?</h3><p>Bruk svaret til å avklare nye spørsmål, ikke til å erstatte kundedialogen eller faglig vurdering.</p></div><a href="#forretning" class="btn dark">Se forretningsbehov '+ico('arrow-right')+'</a></div></section>';
+ +'<section class="subsection"><div class="insight-strip"><div><h3>Vil du videre etter svaret?</h3><p>'+e(p.nextStepHint)+'</p></div><a href="#forretning" class="btn dark">Se forretningsbehov '+ico('arrow-right')+'</a></div></section>';
 }
 window.InnsiktPrompts={library,detail};
 })();
