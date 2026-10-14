@@ -3,19 +3,27 @@
     "ki": [
       {
         "year": "2023",
-        "value": 9
+        "value": 9,
+        "evidence": "documented",
+        "reviewed": "2026-10-14"
       },
       {
         "year": "2024",
-        "value": 21
+        "value": 21,
+        "evidence": "documented",
+        "reviewed": "2026-10-14"
       },
       {
         "year": "2025",
-        "value": 30
+        "value": 30,
+        "evidence": "documented",
+        "reviewed": "2026-10-14"
       },
       {
         "year": "2026",
-        "value": 48
+        "value": 48,
+        "evidence": "documented",
+        "reviewed": "2026-10-14"
       }
     ],
     "segments": [
@@ -46,7 +54,8 @@
         "googleIntegration"
       ],
       "evidence": "tjenestebeskrivelse",
-      "checked": "2026-10-14"
+      "checked": "2026-10-14",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "analytics",
@@ -59,7 +68,8 @@
         "webstep2"
       ],
       "evidence": "tjenestebeskrivelse",
-      "checked": "2026-10-14"
+      "checked": "2026-10-14",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "platform",
@@ -73,7 +83,8 @@
         "webstep1"
       ],
       "evidence": "leverandørdokumentasjon",
-      "checked": "2026-10-14"
+      "checked": "2026-10-14",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "adoption",
@@ -86,21 +97,24 @@
         "digdir"
       ],
       "evidence": "statistikk",
-      "checked": "2026-10-14"
+      "checked": "2026-10-14",
+      "reviewed": "2026-10-14"
     }
   ],
   "marketEvents": [
     {
       "id": "fivetran-dbt",
       "date": "2026-06-01",
-      "title": "Fivetran og dbt Labs blir ett selskap",
+      "title": "Fivetran og dbt Labs er slått sammen",
       "fact": "Dataintegrasjon og transformasjon samles i én leverandørgruppe.",
       "why": "Kunden kan ønske færre verktøy, men må vurdere pris, avtaler og åpenhet.",
       "ask": "Hvordan henger deres dataflyt, modellering og leverandøravtaler sammen?",
       "sources": [
         "merger",
         "dbtv2"
-      ]
+      ],
+      "evidence": "documented",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "salesforce-informatica",
@@ -111,7 +125,9 @@
       "ask": "Hva betyr eierskiftet for deres data- og CRM-strategi?",
       "sources": [
         "informaticaDeal"
-      ]
+      ],
+      "evidence": "documented",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "qlik-talend",
@@ -122,7 +138,9 @@
       "ask": "Hvilke systemer og lisenser overlapper i dag?",
       "sources": [
         "qlikDeal"
-      ]
+      ],
+      "evidence": "documented",
+      "reviewed": "2026-10-14"
     }
   ],
   "marketSignals": [
@@ -136,7 +154,9 @@
         "coco",
         "genie",
         "fabriccopilot"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "semantic",
@@ -147,7 +167,9 @@
       "sources": [
         "dbtsemantic",
         "cortexagents"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "consolidation",
@@ -159,7 +181,9 @@
         "merger",
         "informaticaDeal",
         "qlikDeal"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "cost",
@@ -170,7 +194,9 @@
       "sources": [
         "geniecode",
         "fabriccopilot"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "governance",
@@ -182,7 +208,9 @@
         "cortexagents",
         "genie",
         "fabricagent"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "openness",
@@ -193,7 +221,26 @@
       "sources": [
         "dbtoss",
         "merger"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     }
-  ]
+  ],
+  "marketUi": {
+    "acquisitionCaution": "At en leverandør kjøper en annen, betyr ikke at kunden må bytte verktøy. Spør om overlapp, avtaler, kompetanse og roadmap først."
+  },
+  "metricGuidance": {
+    "id": "ki-use",
+    "variants": {
+      "short": "Bruk betyr ikke dokumentert gevinst.",
+      "normal": "Bruk KI-tall som inngang, ikke salgsprediksjon.",
+      "long": "Det er kundens problem, beslutning og datagrunnlag som avgjør om Innsikt er relevant. KI-bruk sier ikke i seg selv om virksomheten trenger konsulenter."
+    },
+    "evidence": "assessment",
+    "sourceIds": [
+      "ssb"
+    ],
+    "reviewed": "2026-10-14",
+    "visibility": "presented"
+  }
 }

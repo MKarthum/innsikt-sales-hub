@@ -35,3 +35,7 @@ Dato: 14.10.2026. Basert på `main` v0.7.0 og den avgrensede fordypningsutvidels
 ## Refaktoreringens mål
 
 Et autoritativt og refererbart innholdslag med stabile ID-er, kort-/langform-varianter, kilde-/statusmetadata og eksplisitt presentasjonsbruk, der vi kan oppdatere én forklaring og få konsistent resultat i alle relevante visninger. Behold dagens statiske løsning og gode salgs-UX.
+
+## Status etter refaktorering v0.9.0
+
+Dette dokumentet er en **før-kartlegging**, ikke en beskrivelse av dagens aktive feil. Se `REFACTOR_REVIEW.md` for faktisk migrerte poster, verifisert testdekning og gjenværende svakheter. De opprinnelige ti punktene beholdes som revisjonshistorikk.

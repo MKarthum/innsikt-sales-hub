@@ -2,7 +2,8 @@
   "site": {
     "title": "Innsikt | Marked og salg",
     "classification": "Åpent arbeidsgrunnlag – ingen interne data",
-    "disclaimer": "Arbeidsversjon på offentlig kildegrunnlag. Salgsinnganger er forslag som skal valideres, ikke dokumenterte kundetilbud."
+    "disclaimer": "Arbeidsversjon på offentlig kildegrunnlag. Salgsinnganger er forslag som skal valideres, ikke dokumenterte kundetilbud.",
+    "publicNotice": "Dette er en prototype basert på offentlig informasjon. Ingen kundedata eller interne notater."
   },
   "navigation": {
     "oversikt": "Oversikt",
@@ -56,7 +57,10 @@
     "INNEBYGD KI": {
       "eyebrow": "INNEBYGD KI",
       "title": "KI i dataplattformene",
-      "intro": "To ulike behov: KI som hjelper utviklere og analytikere, og KI som lar forretningen stille spørsmål direkte til virksomhetsdata."
+      "intro": {
+        "$content": "ai-overview:ai-modes",
+        "variant": "normal"
+      }
     },
     "MARKED OG OPPKJØP": {
       "eyebrow": "MARKED OG OPPKJØP",
@@ -194,7 +198,18 @@
     "devBacklogTitle": "Prioritert forbedringsoversikt",
     "sourcesDateNote": "Publiseringsdato vises når den er kjent. Kontrollert-dato betyr at kildelenken er prøvd, ikke at alle påstander er verifisert.",
     "orientationTitle": "Finn ditt nivå",
-    "orientationIntro": "Du behøver ikke lese alt. Introduksjonen er for nye, mens malene og arkitekturskissene kan brukes ved behov."
+    "orientationIntro": "Du behøver ikke lese alt. Introduksjonen er for nye, mens malene og arkitekturskissene kan brukes ved behov.",
+    "noEarlySolution": {
+      "title": "Ikke selg en løsning for tidlig.",
+      "body": "Kundens symptomer kan ha organisatoriske, prosessuelle eller tekniske årsaker. Målet er å avdekke hva som er viktig å forbedre og om Innsikt er relevant."
+    },
+    "publicRegister": "Dette er en faglig arbeidsversjon med offentlig kildegrunnlag. Kundespesifikke muligheter skal håndteres i godkjente interne systemer etter flytting.",
+    "marketTrendsExplainer": "Hva det kan bety i kundedialogen – ikke en prognose for konsulentsalg",
+    "goodQualification": "Et godt resultat kan være et konkret behov, riktig kontaktperson og en avtale om et faglig oppfølgingsmøte.",
+    "localFeedback": "Bruk innspillfunksjonen og eksporter når du vil. Notatene synkroniseres ikke automatisk til GitHub.",
+    "localFeedbackCaution": "Lagres bare i denne nettleseren. Ikke legg inn kunder, personer eller interne opplysninger.",
+    "feedbackEmpty": "Ingen lokale innspill ennå. Bruk «Gi innspill» øverst for å notere en forbedring.",
+    "feedbackModalNotice": "Innspill lagres lokalt i denne nettleseren og kan eksporteres. Ikke legg inn kundenavn, personopplysninger eller interne opplysninger."
   },
   "presentationDecks": {
     "intro": {
@@ -204,7 +219,10 @@
           "type": "intro",
           "title": "Innsikt starter med kunden",
           "body": "Hjelp virksomheter å gjøre data nyttige for beslutninger.",
-          "note": "Start med problemet, ikke produktnavn."
+          "note": {
+            "$content": "guidance:customer-first",
+            "variant": "short"
+          }
         },
         {
           "type": "diagram",
@@ -215,7 +233,10 @@
         {
           "type": "metric",
           "title": "KI-bruken øker",
-          "body": "Bruk betyr ikke dokumentert gevinst.",
+          "body": {
+            "$content": "market-guidance:ki-use",
+            "variant": "short"
+          },
           "note": "Spør hva kunden ønsker å oppnå.",
           "sources": [
             "ssb"
@@ -257,7 +278,10 @@
         {
           "type": "metric",
           "title": "Markedet beveger seg",
-          "body": "Bruk KI-tall som inngang, ikke salgsprediksjon.",
+          "body": {
+            "$content": "market-guidance:ki-use",
+            "variant": "normal"
+          },
           "sources": [
             "ssb"
           ]
@@ -323,7 +347,11 @@
         {
           "type": "diagram",
           "title": "Grunnarkitektur",
-          "diagram": "bi"
+          "diagram": "bi",
+          "body": {
+            "$content": "glossary:dataplattform",
+            "variant": "normal"
+          }
         },
         {
           "type": "diagram",
@@ -344,9 +372,15 @@
           "type": "bullets",
           "title": "Hva kan gå galt?",
           "bullets": [
-            "Ulike definisjoner gir ulike svar.",
+            {
+              "$content": "risk:risk-1",
+              "variant": "short"
+            },
             "Svake data gir feil grunnlag.",
-            "Mangelfull tilgang og kontroll øker risikoen."
+            {
+              "$content": "risk:risk-3",
+              "variant": "short"
+            }
           ],
           "sources": [
             "fabricagent",

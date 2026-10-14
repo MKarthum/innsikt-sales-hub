@@ -5,7 +5,9 @@ const read=(path)=>fs.readFileSync(path,'utf8');
 const json=(name)=>JSON.parse(read('docs/data/'+name+'.json'));
 const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon]=
   ['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon'].map(json);
-const fixture={meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon};
+const resolverSandbox={window:{}};
+vm.runInNewContext(read('docs/assets/content.js'),resolverSandbox,{filename:'content.js'});
+const fixture=resolverSandbox.window.InnsiktContent.materialize({meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon});
 
 const source=read('docs/assets/site.js');
 const ending=/\binit\(\);\s*\}\)\(\);\s*$/;

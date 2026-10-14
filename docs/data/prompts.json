@@ -24,7 +24,9 @@
     "resetLabel": "Tilbakestill tekst",
     "allLabel": "Alle",
     "featuredTitle": "Et godt sted å begynne",
-    "featuredIntro": "Disse tre dekker de vanligste stegene fra kundekunnskap til faglig neste steg."
+    "featuredIntro": "Disse tre dekker de vanligste stegene fra kundekunnskap til faglig neste steg.",
+    "useHint": "Velg oppgave. Du kan endre teksten før kopiering.",
+    "nextStepHint": "Bruk svaret til å avklare nye spørsmål, ikke til å erstatte kundedialogen eller faglig vurdering."
   },
   "categories": [
     "Forstå kunden",
@@ -56,13 +58,22 @@
         "Bruk riktig organisasjon og avklar land/virksomhet.",
         "Ikke lim inn CRM-opplysninger her."
       ],
-      "prompt": "Du er en analytisk researchassistent for en konsulentselger i data, analyse og KI.\nOppgave: Lag en kort, kildebasert brief om [KUNDENAVN], i [BRANSJE], før et møte med formål [MØTEFORMÅL].\nBruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.\nUndersøk virksomhetens forretningsmodell, inntekts-/kostnadsdrivere, rapporterte prioriteringer, vesentlige offentlige nyheter og digitaliseringssignal. Oppgi hva som er kjent og hva som bare er en mulig implikasjon.\nSvar i fem seksjoner:\n1. Hva selskapet gjør og hvordan det skaper verdi (maks 120 ord).\n2. Tre dokumenterte hendelser eller prioriteringer (dato og kilde).\n3. Tre mulige utfordringer der data, dataplattform, BI eller KI KAN være relevant (merk som hypoteser).\n4. Seks konkrete spørsmål til et første møte, med ett om forretningsmål.\n5. Hva vi må avklare før vi foreslår kompetanse.\nHvis du ikke kan slå opp ferske kilder, si fra og be om offentlige lenker. Ikke fyll hull med antagelser.",
       "review": [
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres.",
         "Vurder om hypotesene kan knyttes til faktiske forretningsutfordringer."
       ],
-      "priority": 1
+      "priority": 1,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment",
+      "promptParts": [
+        "Du er en analytisk researchassistent for en konsulentselger i data, analyse og KI.\nOppgave: Lag en kort, kildebasert brief om [KUNDENAVN], i [BRANSJE], før et møte med formål [MØTEFORMÅL].\n",
+        {
+          "$content": "prompt-rule:verified-public",
+          "variant": "normal"
+        },
+        "\nUndersøk virksomhetens forretningsmodell, inntekts-/kostnadsdrivere, rapporterte prioriteringer, vesentlige offentlige nyheter og digitaliseringssignal. Oppgi hva som er kjent og hva som bare er en mulig implikasjon.\nSvar i fem seksjoner:\n1. Hva selskapet gjør og hvordan det skaper verdi (maks 120 ord).\n2. Tre dokumenterte hendelser eller prioriteringer (dato og kilde).\n3. Tre mulige utfordringer der data, dataplattform, BI eller KI KAN være relevant (merk som hypoteser).\n4. Seks konkrete spørsmål til et første møte, med ett om forretningsmål.\n5. Hva vi må avklare før vi foreslår kompetanse.\nHvis du ikke kan slå opp ferske kilder, si fra og be om offentlige lenker. Ikke fyll hull med antagelser."
+      ]
     },
     {
       "id": "meeting-prep",
@@ -82,12 +93,21 @@
         "Avklar hvem du skal møte og formålet.",
         "Hold interne møtenotater utenfor offentlig KI-miljø."
       ],
-      "prompt": "Vær min kritiske møteforbereder for en samtale om data, analyse og KI.\nKunde: [KUNDE]. Rolle hos kunden: [ROLLE]. Tid: [MØTELENGDE]. Hensikt: [MÅL].\nBruk bare informasjonen i denne prompten og åpne, verifiserbare kilder hvis de er tilgjengelige.\nLag en briefing på maks én side med:\n- foreslått agenda med minutter;\n- tre mulige forretningsproblem å utforske (som hypoteser, ikke fakta);\n- fem prioriterte åpne spørsmål, med naturlige oppfølgingsspørsmål;\n- hva jeg bør lytte etter om datakvalitet, integrasjon, BI, KI og kompetansemangel;\n- typiske fallgruver ved å gå for tidlig inn i teknologi;\n- forslag til avslutning som avklarer neste steg.\nBruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.\nSkriv på naturlig norsk for en selger som ikke er dataarkitekt.",
       "review": [
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment",
+      "promptParts": [
+        "Vær min kritiske møteforbereder for en samtale om data, analyse og KI.\nKunde: [KUNDE]. Rolle hos kunden: [ROLLE]. Tid: [MØTELENGDE]. Hensikt: [MÅL].\nBruk bare informasjonen i denne prompten og åpne, verifiserbare kilder hvis de er tilgjengelige.\nLag en briefing på maks én side med:\n- foreslått agenda med minutter;\n- tre mulige forretningsproblem å utforske (som hypoteser, ikke fakta);\n- fem prioriterte åpne spørsmål, med naturlige oppfølgingsspørsmål;\n- hva jeg bør lytte etter om datakvalitet, integrasjon, BI, KI og kompetansemangel;\n- typiske fallgruver ved å gå for tidlig inn i teknologi;\n- forslag til avslutning som avklarer neste steg.\n",
+        {
+          "$content": "prompt-rule:verified-public",
+          "variant": "normal"
+        },
+        "\nSkriv på naturlig norsk for en selger som ikke er dataarkitekt."
+      ]
     },
     {
       "id": "industry-discovery",
@@ -104,12 +124,21 @@
       "before": [
         "Velg en tydelig bransje og kundetype."
       ],
-      "prompt": "Du er rådgiver for et konsulentselskap som leverer kompetanse innen dataplattform, datakvalitet, BI, analyse og KI.\nLag et salgsorientert men nøkternt kart over mulige behov i [BRANSJE] for [KUNDETYPE].\nBruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.\nPresenter 5 konkrete forretningssituasjoner som kan oppstå. For hver: hva en leder kan si, mulig konsekvens, hvilke data som typisk trengs, mulige typer Innsikt-kompetanse, to åpne spørsmål og hvem som sannsynligvis eier problemet.\nTa med minst to situasjoner uten KI. Ikke anta at alle trenger modernisering. Ranger etter hvor lett en selger kan verifisere behovet, ikke etter teknologisk nyhetsverdi.\nAvslutt med tre falske positive signaler – situasjoner der en data-/KI-leveranse kanskje ikke er riktig neste steg.",
       "review": [
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment",
+      "promptParts": [
+        "Du er rådgiver for et konsulentselskap som leverer kompetanse innen dataplattform, datakvalitet, BI, analyse og KI.\nLag et salgsorientert men nøkternt kart over mulige behov i [BRANSJE] for [KUNDETYPE].\n",
+        {
+          "$content": "prompt-rule:verified-public",
+          "variant": "normal"
+        },
+        "\nPresenter 5 konkrete forretningssituasjoner som kan oppstå. For hver: hva en leder kan si, mulig konsekvens, hvilke data som typisk trengs, mulige typer Innsikt-kompetanse, to åpne spørsmål og hvem som sannsynligvis eier problemet.\nTa med minst to situasjoner uten KI. Ikke anta at alle trenger modernisering. Ranger etter hvor lett en selger kan verifisere behovet, ikke etter teknologisk nyhetsverdi.\nAvslutt med tre falske positive signaler – situasjoner der en data-/KI-leveranse kanskje ikke er riktig neste steg."
+      ]
     },
     {
       "id": "discovery",
@@ -131,7 +160,9 @@
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "consultant-match",
@@ -155,7 +186,9 @@
         "Fjern antagelser eller påstander som ikke kan dokumenteres.",
         "Verifiser kompetanse og kapasitet med fag-/bemanningsansvarlig."
       ],
-      "priority": 1
+      "priority": 1,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "opportunity-map",
@@ -178,7 +211,9 @@
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "poc-design",
@@ -201,7 +236,9 @@
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "meeting-agenda",
@@ -224,7 +261,9 @@
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "deck-outline",
@@ -244,13 +283,22 @@
         "Bruk kun offentlig godkjente kundereferanser og fakta.",
         "Ikke la KI lage udokumenterte suksesshistorier eller tall."
       ],
-      "prompt": "Du er redaktør for en kort konsulentpresentasjon, ikke reklameskribent.\nMålgruppe: [MÅLGRUPPE]. Problem som skal belyses: [PROBLEM]. Møtets formål: [MØTEFORMÅL]. Maks slides: [ANTALL_LYSBILDER].\nForeslå en fortelling: kundens utfordring → hvorfor det betyr noe → typiske databehov → mulige tilnærminger → spørsmål vi vil avklare → neste steg.\nLever en tabell med lysbildetittel (budskap, ikke emneord), én konkret visualiseringsidé, maks tre poenger, kildekrav og presentatørnotat.\nBruk arkitekturskisser ved behov, men forklar dem for ikke-tekniske mottakere.\nBruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.\nIkke finn på kundeeksempler, referanser, partnere, tall, leveransekapasitet eller løfter. Hvis fakta mangler, skriv [MÅ UNDERSØKES].\nAvslutt med en liste over hva som må verifiseres før presentasjonen kan sendes.",
       "review": [
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres.",
         "Gjør presentasjonsutkastet tilpasset deltakerne; ikke generisk salgspitch."
       ],
-      "priority": 1
+      "priority": 1,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment",
+      "promptParts": [
+        "Du er redaktør for en kort konsulentpresentasjon, ikke reklameskribent.\nMålgruppe: [MÅLGRUPPE]. Problem som skal belyses: [PROBLEM]. Møtets formål: [MØTEFORMÅL]. Maks slides: [ANTALL_LYSBILDER].\nForeslå en fortelling: kundens utfordring → hvorfor det betyr noe → typiske databehov → mulige tilnærminger → spørsmål vi vil avklare → neste steg.\nLever en tabell med lysbildetittel (budskap, ikke emneord), én konkret visualiseringsidé, maks tre poenger, kildekrav og presentatørnotat.\nBruk arkitekturskisser ved behov, men forklar dem for ikke-tekniske mottakere.\n",
+        {
+          "$content": "prompt-rule:verified-public",
+          "variant": "normal"
+        },
+        "\nIkke finn på kundeeksempler, referanser, partnere, tall, leveransekapasitet eller løfter. Hvis fakta mangler, skriv [MÅ UNDERSØKES].\nAvslutt med en liste over hva som må verifiseres før presentasjonen kan sendes."
+      ]
     },
     {
       "id": "exec-summary",
@@ -272,7 +320,9 @@
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "followup",
@@ -297,7 +347,9 @@
         "Fjern antagelser eller påstander som ikke kan dokumenteres.",
         "Sjekk mottakere, avtalte tiltak og datoer."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "objection-coach",
@@ -319,7 +371,9 @@
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "partner-intake",
@@ -343,7 +397,9 @@
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
     },
     {
       "id": "critical-review",
@@ -365,7 +421,23 @@
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
-      "priority": 2
+      "priority": 2,
+      "reviewed": "2026-10-14",
+      "evidence": "assessment"
+    }
+  ],
+  "rules": [
+    {
+      "id": "verified-public",
+      "text": "Bruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.",
+      "evidence": "assessment",
+      "sourceIds": [
+        "openaiPrompting",
+        "microsoftSalesPrompts",
+        "microsoftSalesAgent"
+      ],
+      "reviewed": "2026-10-14",
+      "visibility": "presented"
     }
   ]
 }

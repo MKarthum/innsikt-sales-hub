@@ -6,23 +6,31 @@
     "chapters": [
       {
         "title": "1. Hva er data og innsikt?",
-        "text": "Data er registreringer av det som skjer – for eksempel ordre og kundesaker. Innsikt oppstår når tallene settes i sammenheng og gir grunnlag for en bedre beslutning. Rapporten er et middel, ikke målet."
+        "text": "Data er registreringer av det som skjer – for eksempel ordre og kundesaker. Innsikt oppstår når tallene settes i sammenheng og gir grunnlag for en bedre beslutning. Rapporten er et middel, ikke målet.",
+        "id": "chapter-1"
       },
       {
         "title": "2. Hva gjør et datateam?",
-        "text": "Datateamet kobler systemer sammen, rydder data, lager felles definisjoner og gjør informasjon tilgjengelig for rapportering, analyse og KI. Mye av verdien ligger i det som skjer før et dashboard vises."
+        "text": "Datateamet kobler systemer sammen, rydder data, lager felles definisjoner og gjør informasjon tilgjengelig for rapportering, analyse og KI. Mye av verdien ligger i det som skjer før et dashboard vises.",
+        "id": "chapter-2"
       },
       {
         "title": "3. Hva er en dataplattform?",
-        "text": "Et oppsett for å samle, behandle, styre og bruke data. Det erstatter ikke nødvendigvis kundens eksisterende CRM- eller økonomisystem. Fabric, Databricks og Snowflake dekker deler av denne verdikjeden."
+        "text": "Et oppsett for å samle, behandle, styre og bruke data. Det erstatter ikke nødvendigvis kundens eksisterende CRM- eller økonomisystem. Fabric, Databricks og Snowflake dekker deler av denne verdikjeden.",
+        "id": "chapter-3"
       },
       {
         "title": "4. Hva endrer KI?",
-        "text": "KI kan hjelpe utviklere med å lage dataløsninger raskere. KI kan også la forretningen stille spørsmål direkte mot egne data. Begge deler krever kvalitetssikring. Et fint svar er ikke nødvendigvis riktig."
+        "text": {
+          "$content": "ai-overview:ai-modes",
+          "variant": "long"
+        },
+        "id": "chapter-4"
       },
       {
         "title": "5. Hva skal salg gjøre?",
-        "text": "Finn ut hva kunden ønsker å forbedre, hvorfor det er viktig, hvem som eier behovet og om det finnes planer om å gjøre noe. Du trenger ikke velge teknologien selv."
+        "text": "Finn ut hva kunden ønsker å forbedre, hvorfor det er viktig, hvem som eier behovet og om det finnes planer om å gjøre noe. Du trenger ikke velge teknologien selv.",
+        "id": "chapter-5"
       }
     ],
     "questions": [
@@ -35,114 +43,232 @@
     {
       "term": "CRM",
       "meaning": "System som følger kunder, salgsmuligheter og aktiviteter.",
-      "example": "Kundeoversikt og pipeline."
+      "example": "Kundeoversikt og pipeline.",
+      "id": "crm",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "webstep1"
+      ]
     },
     {
       "term": "ERP",
       "meaning": "System for økonomi, innkjøp, logistikk og andre kjerneprosesser.",
-      "example": "Faktura, ordre og lager."
+      "example": "Faktura, ordre og lager.",
+      "id": "erp",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": []
     },
     {
       "term": "Dataplattform",
       "meaning": "Løsninger som samler, behandler, styrer og tilgjengeliggjør data.",
       "example": "Felles datagrunnlag på tvers av systemer.",
-      "id": "dataplattform"
+      "id": "dataplattform",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "variants": {
+        "short": "Felles grunnlag for å lagre, organisere og bruke data.",
+        "long": "Løsninger som samler, behandler, styrer og tilgjengeliggjør data. Plattformen alene avgjør ikke kvaliteten på beslutningene; begreper, eierskap og tilgang må avklares."
+      },
+      "sourceIds": [
+        "fabric",
+        "databricks",
+        "snowflake"
+      ]
     },
     {
       "term": "Datavarehus / lakehouse",
       "meaning": "Måter å organisere store datamengder for analyse og deling.",
       "example": "Historiske salgstall som flere team bruker.",
-      "id": "lakehouse"
+      "id": "lakehouse",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "lakehouse"
+      ]
     },
     {
       "term": "Integrasjon / pipeline",
       "meaning": "Automatisk innhenting og flytting av data.",
-      "example": "Ordre fra ERP overføres til analyseplattform."
+      "example": "Ordre fra ERP overføres til analyseplattform.",
+      "id": "integrasjon-pipeline",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "googleIntegration"
+      ]
     },
     {
       "term": "Datamodell",
       "meaning": "Beskrivelse av hvordan ulike data henger sammen.",
       "example": "Kunder, ordrer, produkter og datoer.",
-      "id": "datamodell"
+      "id": "datamodell",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "dbtsemantic"
+      ]
     },
     {
       "term": "Semantisk modell",
       "meaning": "Felles begreper og beregninger som gir lik betydning i rapporter og KI.",
       "example": "Alle bruker samme definisjon av omsetning.",
-      "id": "semantisk-modell"
+      "id": "semantisk-modell",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "dbtsemantic",
+        "fabricIQ"
+      ]
     },
     {
       "term": "Datakvalitet",
       "meaning": "Om dataene er riktige, oppdaterte og fullstendige nok til bruken.",
-      "example": "En ordre telles ikke dobbelt."
+      "example": "En ordre telles ikke dobbelt.",
+      "id": "datakvalitet",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "informatica",
+        "digdir"
+      ]
     },
     {
       "term": "Datastyring / governance",
       "meaning": "Ansvar, rettigheter og regler for å bruke data.",
       "example": "Hvem kan se lønnsopplysninger?",
-      "id": "datastyring"
+      "id": "datastyring",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "informatica",
+        "digdir"
+      ]
     },
     {
       "term": "BI",
       "meaning": "Rapporter og analyse som gjør data nyttige for beslutninger.",
-      "example": "Dashboard for salgsledelsen."
+      "example": "Dashboard for salgsledelsen.",
+      "id": "bi",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "qlik"
+      ]
     },
     {
       "term": "SQL",
       "meaning": "Språk for å hente, kombinere og analysere strukturerte data.",
-      "example": "Hent ordre per måned."
+      "example": "Hent ordre per måned.",
+      "id": "sql",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "snowflake"
+      ]
     },
     {
       "term": "dbt",
       "meaning": "Verktøy for å bygge, teste og dokumentere datamodeller.",
-      "example": "Beregne marginer på samme måte flere steder."
+      "example": "Beregne marginer på samme måte flere steder.",
+      "id": "dbt",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "dbtoss"
+      ]
     },
     {
       "term": "LLM / språkmodell",
       "meaning": "KI som genererer og analyserer språk, men også kan svare feil.",
-      "example": "Assistent som forklarer rapporter."
+      "example": "Assistent som forklarer rapporter.",
+      "id": "llm-spra-kmodell",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "openaiPrompting"
+      ]
     },
     {
       "term": "RAG",
       "meaning": "KI som henter relevante dokumentutdrag før den svarer.",
       "example": "Svar fra oppdaterte rutinedokumenter.",
-      "id": "rag"
+      "id": "rag",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "agent-foundation"
+      ]
     },
     {
       "term": "KI-agent",
       "meaning": "KI som bruker data eller verktøy for å løse flere trinn i en oppgave.",
       "example": "Agent som finner tall og forklarer et avvik.",
-      "id": "ki-agent"
+      "id": "ki-agent",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "agent-foundation"
+      ]
     },
     {
       "id": "kunnskapsgraf",
       "term": "Kunnskapsgraf",
       "meaning": "En måte å beskrive ting og forbindelsene mellom dem, slik at relasjoner og kontekst kan brukes av søk, analyse og KI.",
-      "example": "Hvilke kunder er knyttet til hvilke produkter, leveranser og kontaktpersoner?"
+      "example": "Hvilke kunder er knyttet til hvilke produkter, leveranser og kontaktpersoner?",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "gleanGraph",
+        "fabricIQ"
+      ]
     },
     {
       "id": "ontologi",
       "term": "Ontologi",
       "meaning": "En formell beskrivelse av virksomhetens begreper, egenskaper og relasjoner. Beskriver hva noe betyr, ikke bare hvor data ligger.",
-      "example": "At «kunde», «ordre» og «kontrakt» har definerte forbindelser og regler."
+      "example": "At «kunde», «ordre» og «kontrakt» har definerte forbindelser og regler.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "fabricOntology"
+      ]
     },
     {
       "id": "company-brain",
       "term": "Company Brain",
       "meaning": "En uformell samlebetegnelse for KI-løsninger som forsøker å samle virksomhetskontekst på tvers av dokumenter, systemer og mennesker. Ikke én etablert teknisk standard.",
-      "example": "En assistent som kan finne riktig dokument, fagperson og bakgrunn for en beslutning."
+      "example": "En assistent som kan finne riktig dokument, fagperson og bakgrunn for en beslutning.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "gleanGraph",
+        "gleanConnectors"
+      ]
     },
     {
       "id": "dataprodukt",
       "term": "Dataprodukt",
       "meaning": "Et datasett eller en datatjeneste som er tilrettelagt for konkrete brukere, med eier, definisjon, kvalitet og forventet bruksområde.",
-      "example": "En dokumentert og vedlikeholdt oversikt over kundelønnsomhet."
+      "example": "En dokumentert og vedlikeholdt oversikt over kundelønnsomhet.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "digdir"
+      ]
     },
     {
       "id": "datasuverenitet",
       "term": "Datasuverenitet",
       "meaning": "Virksomhetens kontroll over hvor og hvordan data brukes, hvem som har tilgang, og hvilke juridiske eller organisatoriske bindinger som gjelder.",
-      "example": "Krav til kontroll over lagring, overføring, leverandørskifte og tilgang fra andre jurisdiksjoner."
+      "example": "Krav til kontroll over lagring, overføring, leverandørskifte og tilgang fra andre jurisdiksjoner.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "digdir",
+        "privacy"
+      ]
     }
   ],
   "diagrams": [
@@ -182,7 +308,12 @@
         "webstep1",
         "fabric",
         "dbtv2"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "variants": {
+        "long": "Datakilder → integrasjon → transformasjon og semantikk → analyse og KI. Plattformene dekker flere av disse delene, og funksjonene overlapper."
+      }
     },
     {
       "id": "ai-on-data",
@@ -220,7 +351,9 @@
         "fabricagent",
         "agent-foundation",
         "genie"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "ai-in-development",
@@ -254,7 +387,9 @@
         "coco",
         "geniecode",
         "fabriccopilot"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     },
     {
       "id": "rag",
@@ -291,29 +426,62 @@
       "sources": [
         "agent-foundation",
         "privacy"
-      ]
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-14"
     }
   ],
   "risks": [
     {
       "title": "Ulike definisjoner",
       "example": "«Omsetning» betyr fakturert beløp ett sted og ordresum et annet.",
-      "action": "Felles begreper, dataeier og tester mot fasit."
+      "action": "Felles begreper, dataeier og tester mot fasit.",
+      "id": "risk-1",
+      "variants": {
+        "short": "Ulike definisjoner gir ulike svar."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "dbtsemantic"
+      ]
     },
     {
       "title": "Manglende historikk",
       "example": "Rabatter og returer mangler. Marginene ser bedre ut enn de er.",
-      "action": "Avstemming, kvalitetsregler og avgrensning av datagrunnlaget."
+      "action": "Avstemming, kvalitetsregler og avgrensning av datagrunnlaget.",
+      "id": "risk-2",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "digdir"
+      ]
     },
     {
       "title": "Feil tilgang",
       "example": "En bruker får informasjon fra data vedkommende ikke skulle sett.",
-      "action": "Rollebasert tilgang og sikkerhetstesting."
+      "action": "Rollebasert tilgang og sikkerhetstesting.",
+      "id": "risk-3",
+      "variants": {
+        "short": "Mangelfull tilgang og kontroll øker risikoen."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "privacy",
+        "agent-foundation"
+      ]
     },
     {
       "title": "Overbevisende feil",
       "example": "KI formulerer en plausibel forklaring som tallene ikke støtter.",
-      "action": "Kildehenvisninger, evaluering og menneskelig vurdering."
+      "action": "Kildehenvisninger, evaluering og menneskelig vurdering.",
+      "id": "risk-4",
+      "evidence": "assessment",
+      "reviewed": "2026-10-14",
+      "sourceIds": [
+        "digdir"
+      ]
     }
   ],
   "templates": [
@@ -465,5 +633,9 @@
       ],
       "caution": "Bruk godkjent intern kanal når opplysningene er reelle og identifiserbare."
     }
-  ]
+  ],
+  "ui": {
+    "glossaryTitle": "Ordene du møter",
+    "glossaryIntro": "Korte forklaringer med eksempler. Åpne de du trenger – resten kan vente."
+  }
 }

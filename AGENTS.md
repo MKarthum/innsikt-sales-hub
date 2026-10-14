@@ -19,6 +19,7 @@ Start alltid med `START_HERE.md`. Les siste `main`, og bruk repoet – aldri gam
 ## Kontroller
 
 ```sh
+node --check docs/assets/content.js
 node --check docs/assets/site.js
 node --check docs/assets/learning.js
 node --check docs/assets/prompts.js
@@ -53,4 +54,7 @@ Innholdet skal fortsatt kunne være offentlig. Interne data vurderes først ette
 - `horizon.json` eier original fordypningsanalyse, ikke parallelle definisjoner, produktfakta eller kildekopier.
 - «Ikke presentert» er ikke privat: JSON og historikk i personlig repo er offentlige.
 - Ikke introduser database/CMS uten å vurdere enklere JSON-/ID-løsninger.
-- Les `REFACTOR_AUDIT.md` og `REFACTOR_NEXT_CHAT.md` før den planlagte innholdsrefaktoreringen.
+- V0.9.0 innfører `docs/assets/content.js`: visninger bruker `{ "$content": "owner:id", "variant": "normal" }`, med `short`/`normal`/`long` under samme objekt. Endre kanonisk eier, ikke tekstkopi.
+- `prompts.items[].promptParts` komponerer selvstendige kopierbare prompter fra `prompts.rules`. Ikke lag både `prompt` og `promptParts` på samme mal.
+- Ved nye eiere: registrer type i innholdsløser, oppdater kontrakttestene og verifiser alle forbrukere.
+- `REFACTOR_AUDIT.md` er før-kartleggingen. Les `REFACTOR_REVIEW.md` for migrerte områder, gjenværende semantisk gjeld og testing.
