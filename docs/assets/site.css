@@ -437,3 +437,13 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
  #present-modal.presenter-fullscreen #slide-next span,
  #present-modal.presenter-fullscreen #present-fullscreen-toggle span{display:none}
 }
+
+/* Kompakt, tilgjengelig navigasjon når fire Presenter-kontroller deler en mobilrad. */
+@media(max-width:620px){
+ #present-modal:not(.presenter-fullscreen) .present-controls{gap:6px;justify-content:space-between;min-width:0}
+ #present-modal:not(.presenter-fullscreen) .present-controls .btn{padding:6px 8px;min-width:34px;min-height:36px}
+ #present-modal:not(.presenter-fullscreen) #slide-prev span,
+ #present-modal:not(.presenter-fullscreen) #slide-next span,
+ #present-modal:not(.presenter-fullscreen) #present-fullscreen-toggle span{display:none}
+ #present-modal:not(.presenter-fullscreen) #present-fullscreen-toggle{margin-left:0}
+}
