@@ -185,42 +185,85 @@ function saveFeedback(){const t=document.getElementById('feedback-note')?.value.
 function exportFeedback(){const txt='# Innspill – Innsikt\n\n'+notes.map((n,i)=>`## ${i+1}. ${n.page} (${n.date})\n\n${n.text}\n`).join('\n');const b=new Blob([txt],{type:'text/markdown;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='innsikt-innspill.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Eksportert som Markdown.')}
 let selectedDeck='sales',showSpeakerNotes=false;
 function presentationSlides(){return D.pages.presentationDecks[selectedDeck]?.slides||[]}
-function showSlide(){
- const slides=presentationSlides(),s=slides[slide];if(!s)return;
- let v='<div class="slide-eyebrow">INNSIKT · '+esc(D.pages.presentationDecks[selectedDeck].label.toUpperCase())+' · '+(slide+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
+function slideMarkup(s,index,deckId,notes=false){
+ const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
+ let v='<div class="slide-eyebrow">INNSIKT · '+esc(deck.label.toUpperCase())+' · '+(index+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
  if(s.type==='metric'){
-   const a=D.stats.ki.at(-1);v+='<div class="slide-metric"><b>'+esc(a.value)+' %</b><span>av norske foretak med minst ti sysselsatte bruker KI i '+esc(a.year)+'</span></div>';
+  const a=D.stats.ki.at(-1);
+  v+='<div class="slide-metric"><b>'+esc(a.value)+' %</b><span>av norske foretak med minst ti sysselsatte bruker KI i '+esc(a.year)+'</span></div>';
  }
  if(s.type==='diagram'){
-   const d=D.learning.diagrams.find(x=>x.id===s.diagram);
-   if(d)v+=window.InnsiktLearning.diagram(d,learningHelpers());
+  const d=D.learning.diagrams.find(x=>x.id===s.diagram);
+  if(d)v+='<div class="present-flow" role="group" aria-label="'+esc(d.title)+'">'+d.steps.map((step,i)=>
+   '<div class="present-flow-step"><span class="present-step-number">'+(i+1)+'</span><strong>'+esc(step.title)+'</strong><p>'+esc(step.detail)+'</p></div>'
+  ).join('')+'</div><p class="present-flow-outcome">'+esc(d.outcome)+'</p>';
  }
  if(s.type==='sector-case'){
-   const c=D.industryUseCases.find(x=>x.id===s.industryCase);
-   if(c)v+='<div class="slide-case"><strong>'+esc(c.title)+'</strong><p>'+esc(c.symptom)+'</p><ul>'+c.questions.map(q=>'<li>'+esc(q)+'</li>').join('')+'</ul><p>'+esc(c.pilot)+'</p></div>';
+  const c=D.industryUseCases.find(x=>x.id===s.industryCase);
+  if(c)v+='<div class="slide-case"><strong>'+esc(c.title)+'</strong><p>'+esc(c.symptom)+'</p><ul>'+c.questions.slice(0,2).map(q=>'<li>'+esc(q)+'</li>').join('')+'</ul><p>'+esc(c.pilot)+'</p></div>';
  }
  if(s.type==='case'){
-   const c=D.businessSignals.find(x=>x.id===s.business);
-   if(c)v+='<div class="slide-case"><strong>'+esc(c.says)+'</strong><p>Spør for eksempel:</p><ul>'+c.ask.slice(0,2).map(q=>'<li>'+esc(q)+'</li>').join('')+'</ul></div>';
+  const c=D.businessSignals.find(x=>x.id===s.business);
+  if(c)v+='<div class="slide-case"><strong>'+esc(c.says)+'</strong><p>Spør for eksempel:</p><ul>'+c.ask.slice(0,2).map(q=>'<li>'+esc(q)+'</li>').join('')+'</ul></div>';
  }
  if(s.body)v+='<p class="slide-description">'+esc(s.body)+'</p>';
  if(s.bullets?.length)v+='<ul class="slide-bullets">'+s.bullets.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
- if(s.dynamic==='market-events')v+='<div class="slide-events">'+D.marketEvents.map(x=>'<span>'+esc(x.title)+'</span>').join('')+'</div>';
- if(s.sources)v+=sourceLinks(s.sources,D);
- if(s.note&&showSpeakerNotes)v+='<aside class="slide-speaker"><strong>Notat for den som presenterer</strong><p>'+esc(s.note)+'</p></aside>';
- document.getElementById('slide-body').innerHTML=v;window.InnsiktGlossary?.enhance(document.getElementById('slide-body'));
+ if(s.dynamic==='market-events')v+='<div class="slide-events">'+D.marketEvents.slice(0,4).map(x=>'<span>'+esc(x.title)+'</span>').join('')+'</div>';
+ if(s.type==='prompt'&&s.promptId){
+  const prompt=D.prompts.items.find(x=>x.id===s.promptId);
+  if(prompt)v+='<div class="slide-prompt"><strong>'+esc(prompt.title)+'</strong><p>'+esc(prompt.summary)+'</p><button type="button" class="btn dark" data-deck-prompt="'+esc(prompt.id)+'">Kopier tilpasningsprompt '+ico('copy')+'</button></div>';
+ }
+ if(s.sources?.length)v+=sourceLinks(s.sources,D);
+ if(notes&&s.note)v+='<aside class="slide-speaker"><strong>Presentatørnotat</strong><p>'+esc(s.note)+'</p></aside>';
+ return v;
+}
+function showSlide(){
+ const slides=presentationSlides(),s=slides[slide];if(!s)return;
+ document.getElementById('slide-body').innerHTML=slideMarkup(s,slide,selectedDeck);
+ window.InnsiktGlossary?.enhance(document.getElementById('slide-body'));
  document.getElementById('slide-counter').textContent=(slide+1)+' av '+slides.length;
  document.getElementById('slide-prev').disabled=slide===0;
  document.getElementById('slide-next').disabled=slide===slides.length-1;
- document.querySelectorAll('[data-deck]').forEach(b=>{b.classList.toggle('active',b.dataset.deck===selectedDeck);b.setAttribute('aria-pressed',String(b.dataset.deck===selectedDeck))});
+ const hint=document.getElementById('deck-context');
+ if(hint)hint.textContent=D.pages.presentationDecks[selectedDeck].intro||'';
+ const note=document.getElementById('slide-speaker-notes');
+ if(note)note.innerHTML=showSpeakerNotes&&s.note?'<strong>Presentatørnotat</strong><p>'+esc(s.note)+'</p>':'';
+ if(note)note.hidden=!showSpeakerNotes||!s.note;
+ document.querySelectorAll('[data-deck]').forEach(b=>{
+  b.classList.toggle('active',b.dataset.deck===selectedDeck);
+  b.setAttribute('aria-pressed',String(b.dataset.deck===selectedDeck));
+ });
+}
+function copyDeckPrompt(id){
+ const item=D.prompts.items.find(x=>x.id===id);
+ if(!item||!navigator.clipboard?.writeText){toast('Kopiering er ikke tilgjengelig.');return;}
+ navigator.clipboard.writeText(item.prompt).then(()=>toast('Tilpasningsprompten er kopiert.')).catch(()=>toast('Nettleseren blokkerte kopiering.'));
+}
+function exportPresentation(mode){
+ const deck=D.pages.presentationDecks[selectedDeck];
+ return window.InnsiktPresenterExport.exportDeck({
+  id:selectedDeck,label:deck.label,notice:deck.intro||'',version:D.meta.version,
+  slides:deck.slides.map((s,i)=>slideMarkup(s,i,selectedDeck))
+ },mode).then(()=>{if(mode==='html')toast('Presentasjonen er lastet ned som HTML.');})
+ .catch(e=>toast('Kunne ikke eksportere: '+e.message));
 }
 function presentation(){
- slide=0;selectedDeck='sales';showSpeakerNotes=false;
- const choices=Object.entries(D.pages.presentationDecks).map(([id,d])=>'<button class="deck-option '+(id===selectedDeck?'active':'')+'" type="button" data-deck="'+esc(id)+'" aria-pressed="'+(id===selectedDeck)+'">'+esc(d.label)+'</button>').join('');
- const markup='<div class="deck-controls" role="group" aria-label="Velg presentasjonsløp">'+choices+'</div><div class="present-frame present-rich" id="slide-body"></div><div class="present-controls"><button class="btn subtle" id="slide-prev">'+ico('arrow-left')+' Forrige</button><span class="pager" id="slide-counter"></span><button class="btn dark" id="slide-next">Neste '+ico('arrow-right')+'</button></div><div class="present-footer"><label><input type="checkbox" id="speaker-toggle" /> Vis presentatørnotater</label><span>Piltaster bytter lysbilde · Esc lukker</span></div>';
- modal('Presentasjonsvisning',markup,true,'present-modal');showSlide();
+ slide=0;selectedDeck='portal';showSpeakerNotes=false;
+ const choices=Object.entries(D.pages.presentationDecks).map(([id,d])=>
+  '<button class="deck-option '+(id===selectedDeck?'active':'')+'" type="button" data-deck="'+esc(id)+'" aria-pressed="'+(id===selectedDeck)+'">'+esc(d.label)+'</button>'
+ ).join('');
+ const markup='<div class="deck-controls" role="group" aria-label="Velg presentasjonsløp">'+choices+'</div>'
+  +'<p id="deck-context" class="deck-context"></p>'
+  +'<div class="present-frame present-rich" id="slide-body" aria-live="polite"></div>'
+  +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev">'+ico('arrow-left')+' Forrige</button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next">Neste '+ico('arrow-right')+'</button></div>'
+  +'<div class="present-footer"><label><input type="checkbox" id="speaker-toggle" /> Vis presentatørnotater</label>'
+  +'<span>Piltaster bytter lysbilde · Esc lukker</span></div>'
+  +'<aside id="slide-speaker-notes" class="slide-speaker" hidden></aside>'
+  +'<div class="present-export-controls"><button class="btn subtle" type="button" id="deck-download">'+ico('download')+' Last ned HTML</button>'
+  +'<button class="btn subtle" type="button" id="deck-print">'+ico('file-text')+' Skriv ut / PDF</button>'
+  +'<span>HTML-filen kan åpnes uten nettilgang. PDF lagres fra utskriftsvinduet.</span></div>';
+ modal('Presenter Innsikt',markup,true,'present-modal');showSlide();
 }
-
 function copyLearningTemplate(id){
  const t=D.learning.templates.find(x=>x.id===id);if(!t)return;
  if(!navigator.clipboard?.writeText){toast('Kopiering støttes ikke av nettleseren her.');return}
@@ -233,7 +276,7 @@ const pc=e.target.closest('[data-prompt-copy]');
 if(pc){const editor=document.getElementById('prompt-editor');if(editor){if(!navigator.clipboard?.writeText){toast('Nettleseren støtter ikke kopiering her.');return}navigator.clipboard.writeText(editor.value).then(()=>toast('Prompten er kopiert.')).catch(()=>toast('Kopiering ble blokkert.'));}return}
 const pr=e.target.closest('[data-prompt-reset]');
 if(pr){const item=D.prompts.items.find(x=>x.id===pr.dataset.promptReset),editor=document.getElementById('prompt-editor');if(item&&editor){editor.value=item.prompt;toast('Prompten er tilbakestilt.')}return}
-const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;render();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}if(e.target.closest('#slide-next')){slide=Math.min(slide+1,presentationSlides().length-1);showSlide();return}if(e.target.closest('#slide-prev')){slide=Math.max(slide-1,0);showSlide();return}if(e.target.closest('#reset-qualify')){selectedChecklist.clear();render();return}const scen=e.target.closest('[data-scenario]');if(scen){scenarioIndex=Number(scen.dataset.scenario);render();return}if(e.target.closest('[data-search-select]')){closeModal();return}if(e.target.closest('[data-dismiss]')&&(e.target.matches('.overlay')||e.target.closest('.modal-close'))){closeModal();return}if(e.target.closest('#menu-toggle')){let bar=document.getElementById('sidebar');const open=bar.classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(open));return}});document.addEventListener('change',e=>{if(e.target.matches('#speaker-toggle')){showSpeakerNotes=e.target.checked;showSlide();return}if(e.target.matches('[data-qualify]')){let id=Number(e.target.dataset.qualify);if(e.target.checked)selectedChecklist.add(id);else selectedChecklist.delete(id);document.getElementById('qualify-progress').style.width=(selectedChecklist.size/qualification().length*100)+'%';document.getElementById('progress-count').textContent=selectedChecklist.size+' av 6 belyst';document.getElementById('qualify-message').textContent=qualificationMessage()}});document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!document.querySelector('.overlay'))search()}});window.addEventListener('hashchange',render)}
+if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;render();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}if(e.target.closest('#slide-next')){slide=Math.min(slide+1,presentationSlides().length-1);showSlide();return}if(e.target.closest('#slide-prev')){slide=Math.max(slide-1,0);showSlide();return}if(e.target.closest('#reset-qualify')){selectedChecklist.clear();render();return}const scen=e.target.closest('[data-scenario]');if(scen){scenarioIndex=Number(scen.dataset.scenario);render();return}if(e.target.closest('[data-search-select]')){closeModal();return}if(e.target.closest('[data-dismiss]')&&(e.target.matches('.overlay')||e.target.closest('.modal-close'))){closeModal();return}if(e.target.closest('#menu-toggle')){let bar=document.getElementById('sidebar');const open=bar.classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(open));return}});document.addEventListener('change',e=>{if(e.target.matches('#speaker-toggle')){showSpeakerNotes=e.target.checked;showSlide();return}if(e.target.matches('[data-qualify]')){let id=Number(e.target.dataset.qualify);if(e.target.checked)selectedChecklist.add(id);else selectedChecklist.delete(id);document.getElementById('qualify-progress').style.width=(selectedChecklist.size/qualification().length*100)+'%';document.getElementById('progress-count').textContent=selectedChecklist.size+' av 6 belyst';document.getElementById('qualify-message').textContent=qualificationMessage()}});document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!document.querySelector('.overlay'))search()}});window.addEventListener('hashchange',render)}
 async function init(){document.querySelectorAll('[data-icon]').forEach(x=>x.innerHTML=ico(x.dataset.icon));try{const namesOfFiles=['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon'];const files=await Promise.all(namesOfFiles.map(async name=>{const response=await fetch('./data/'+name+'.json',{cache:'no-store'});if(!response.ok)throw new Error(name+': HTTP '+response.status);return response.json()}));const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon]=files;D=window.InnsiktContent.materialize({meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon});names=D.pages.navigation;document.querySelectorAll('[data-nav-label]').forEach(el=>{el.textContent=names[el.dataset.navLabel]||''});document.getElementById('sidebar-notice').textContent=D.pages.site.publicNotice;document.getElementById('version-label').textContent=D.meta.version;document.getElementById('footer-status').textContent='Oppdatert '+D.meta.released;document.getElementById('backlog-count').textContent=D.backlog.filter(x=>x.status!=='lukket').length;initEvents();window.InnsiktGlossary?.init(D.learning.glossary);render()}catch(e){document.getElementById('main').innerHTML=`<section class="panel"><h1>Kunne ikke laste nettsidens data</h1><p>Start en lokal webserver i prosjektmappen, for eksempel <code>python3 -m http.server 8000</code>. Åpne deretter <code>http://localhost:8000/docs/</code>.</p><p class="fineprint">${esc(e.message)}</p></section>`;console.error(e)}}
 init();
 })();
