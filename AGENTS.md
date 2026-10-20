@@ -66,3 +66,12 @@ Innholdet skal fortsatt kunne være offentlig. Interne data vurderes først ette
 - Beskriv symptom, virksomhetseier, spørsmål, mål/KPI, databehovshypotese, avgrenset pilot, videre løp og relevante risikoforbehold. Koble caser til eksisterende \`plays\` via ID.
 - Oppdater sektor- og case-rutetester, søk og Presenter ved endringer. \`INDUSTRY_BUSINESS_DIALOGUE.md\` inneholder utvalg, metode og kildekritikk.
 - Internasjonal praksis betyr ikke at norske kunder er mindre modne. Dokumenter sammenlignbare bevis før en slik påstand fremsettes.
+
+
+## Kontekstuell begrepshjelp – varig regel
+
+Faguttrykk og forkortelser som kan være ukjente for målgruppen, bør forklares ved behov gjennom én diskret, felles komponent fremfor gjentatte definisjoner i sidetekster. `docs/data/learning.json.glossary` er eneste autoritative eier av begrepsdefinisjoner og eksempler. Bruk eksisterende stabile ID-er og `$content`-referanser; aktiver inline-visning og alternative skrivemåter med `inline`-metadata på samme begrepsobjekt. Nye begreper legges til hos denne eieren. En separat kortvariant kan bare legges inn under samme ID dersom den faktisk trengs.
+
+Gjenbruk `docs/assets/glossary.js` både i oversikt, detaljvisninger og dynamisk innhold etter hash-navigasjon. Marker selektivt; ikke alle forekomster, vanlige ord eller produktnavn. Bevar alltid det synlige begrepet og den opprinnelige faglige betydningen, kilder, forbehold og skillet mellom fakta, leverandørpåstander og vurderinger. Fjern kun overflødige parentesdefinisjoner hvis substansen beholdes.
+
+Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til interaktive begreper. Popupen skal fungere på mobil og desktop, kunne brukes med tastatur, lukkes via Escape og uteklikk, føre fokus hensiktsmessig og holdes innenfor skjermen. Oppdater eksisterende innholds- og nettlesertester ved endringer.
