@@ -99,3 +99,7 @@ Kontroller sikkerhet og rettigheter, overfør repoets kode og åpne innhold til 
 «Forretningsbehov» har nå to innganger: 9 bransjer med 36 konkrete, illustrative problemstillinger og de tidligere generiske behovene i økonomi, salg, drift mv. Begynn med et operativt problem, mål og en forretningseier; gå videre til databehov, avgrenset test og relevant fagkompetanse. Casene er **salgs- og utforskningshypoteser**, ikke dokumenterte Webstep-leveranser.
 
 Bransjeinformasjon og caser eies av \`sales.json.industrySectors\`, \`sales.json.industryUseCases\` og \`sales.json.industryJourney\`; felles presentasjons- og sideord eies av \`pages.json.industryUi\`. \`sources.json\` er kanonisk kilderegister. Se [bransjeanalyse og innholdsmodell](INDUSTRY_BUSINESS_DIALOGUE.md) for utvalg, eksempler, metoden, kildekritikk, begrensninger og videre testing. Nye ruter \`#forretning/sektor-ID\` og \`#forretning/case-ID\` er inkludert i søk og Presenter.
+
+## Kontekstuell begrepshjelp (v0.9.3)
+
+`learning.json.glossary` eier definisjoner og eksempler. `inline`-metadata aktiverer ord og alternative skrivemåter, mens `glossary.js` har ansvar for selektiv tekstmarkering, oppslag, popup og tilgjengelighet. Ingen nye backendtjenester eller avhengigheter. Sjekkes i `scripts/check.mjs` og `scripts/check-browser.mjs`.
