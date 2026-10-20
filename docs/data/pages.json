@@ -385,14 +385,20 @@
         {
           "type": "prompt",
           "title": "Lag en versjon for din kunde",
-          "body": "Dette presentasjonsløpet er inspirasjon. Bruk malen for et konkret kundebehov, med egne mål, spørsmål og kvalitetssikrede kilder.",
+          "body": {
+            "$content": "notice:deck-adaptation",
+            "variant": "slide"
+          },
           "bullets": [
             "Avklar kunde, deltakere, formål og ønsket neste steg.",
             "Bruk tilpasningsprompten for et strukturert utkast.",
             "Kontroller fakta, forbehold og referanser før ekstern bruk."
           ],
           "promptId": "deck-outline",
-          "note": "En KI-generert presentasjon må gjennomgås og eventuelt flyttes til selskapets godkjente presentasjonsmal."
+          "note": {
+            "$content": "notice:deck-adaptation",
+            "variant": "note"
+          }
         }
       ],
       "audience": "Workshopinspirasjon – ikke et ferdig kundedeck",
@@ -470,14 +476,20 @@
         {
           "type": "prompt",
           "title": "Lag en versjon for din kunde",
-          "body": "Dette presentasjonsløpet er inspirasjon. Bruk malen for et konkret kundebehov, med egne mål, spørsmål og kvalitetssikrede kilder.",
+          "body": {
+            "$content": "notice:deck-adaptation",
+            "variant": "slide"
+          },
           "bullets": [
             "Avklar kunde, deltakere, formål og ønsket neste steg.",
             "Bruk tilpasningsprompten for et strukturert utkast.",
             "Kontroller fakta, forbehold og referanser før ekstern bruk."
           ],
           "promptId": "deck-outline",
-          "note": "En KI-generert presentasjon må gjennomgås og eventuelt flyttes til selskapets godkjente presentasjonsmal."
+          "note": {
+            "$content": "notice:deck-adaptation",
+            "variant": "note"
+          }
         }
       ],
       "audience": "Faglig illustrasjon – tilpasses mottakeren",
@@ -635,6 +647,17 @@
       },
       "evidence": "assessment",
       "reviewed": "2026-10-14",
+      "sourceIds": [],
+      "visibility": "presented"
+    },
+    {
+      "id": "deck-adaptation",
+      "variants": {
+        "slide": "Dette presentasjonsløpet er inspirasjon. Bruk malen for et konkret kundebehov, med egne mål, spørsmål og kvalitetssikrede kilder.",
+        "note": "En KI-generert presentasjon må gjennomgås og eventuelt flyttes til selskapets godkjente presentasjonsmal."
+      },
+      "evidence": "assessment",
+      "reviewed": "2026-10-20",
       "sourceIds": [],
       "visibility": "presented"
     }
