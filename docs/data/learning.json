@@ -55,7 +55,14 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "webstep1"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "CRM"
+        ],
+        "caseSensitive": true
+      }
     },
     {
       "term": "ERP",
@@ -64,7 +71,14 @@
       "id": "erp",
       "evidence": "assessment",
       "reviewed": "2026-10-14",
-      "sourceIds": []
+      "sourceIds": [],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "ERP"
+        ],
+        "caseSensitive": true
+      }
     },
     {
       "term": "Dataplattform",
@@ -82,7 +96,15 @@
         "fabric",
         "databricks",
         "snowflake"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "dataplattform",
+          "dataplattformer"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "term": "Datavarehus / lakehouse",
@@ -93,7 +115,15 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "lakehouse"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "lakehouse",
+          "datavarehus"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "term": "Integrasjon / pipeline",
@@ -115,7 +145,15 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "dbtsemantic"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "datamodell",
+          "datamodeller"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "term": "Semantisk modell",
@@ -127,7 +165,15 @@
       "sourceIds": [
         "dbtsemantic",
         "fabricIQ"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "semantisk modell",
+          "semantiske modeller"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "term": "Datakvalitet",
@@ -139,7 +185,14 @@
       "sourceIds": [
         "informatica",
         "digdir"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "datakvalitet"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "term": "Datastyring / governance",
@@ -151,7 +204,15 @@
       "sourceIds": [
         "informatica",
         "digdir"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "datastyring",
+          "governance"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "term": "BI",
@@ -162,7 +223,14 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "qlik"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "BI"
+        ],
+        "caseSensitive": true
+      }
     },
     {
       "term": "SQL",
@@ -173,7 +241,14 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "snowflake"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "SQL"
+        ],
+        "caseSensitive": true
+      }
     },
     {
       "term": "dbt",
@@ -184,7 +259,14 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "dbtoss"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "dbt"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "term": "LLM / språkmodell",
@@ -195,7 +277,15 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "openaiPrompting"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "LLM",
+          "språkmodell"
+        ],
+        "caseSensitive": true
+      }
     },
     {
       "term": "RAG",
@@ -206,7 +296,14 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "agent-foundation"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "RAG"
+        ],
+        "caseSensitive": true
+      }
     },
     {
       "term": "KI-agent",
@@ -217,7 +314,15 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "agent-foundation"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "KI-agent",
+          "KI-agenter"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "id": "kunnskapsgraf",
@@ -229,7 +334,15 @@
       "sourceIds": [
         "gleanGraph",
         "fabricIQ"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "kunnskapsgraf",
+          "kunnskapsgrafer"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "id": "ontologi",
@@ -240,7 +353,15 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "fabricOntology"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "ontologi",
+          "ontologier"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "id": "company-brain",
@@ -252,7 +373,14 @@
       "sourceIds": [
         "gleanGraph",
         "gleanConnectors"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "Company Brain"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "id": "dataprodukt",
@@ -263,7 +391,15 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "digdir"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "dataprodukt",
+          "dataprodukter"
+        ],
+        "caseSensitive": false
+      }
     },
     {
       "id": "datasuverenitet",
@@ -275,7 +411,14 @@
       "sourceIds": [
         "digdir",
         "privacy"
-      ]
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "datasuverenitet"
+        ],
+        "caseSensitive": false
+      }
     }
   ],
   "diagrams": [
