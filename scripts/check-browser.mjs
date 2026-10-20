@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.4',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.5',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -90,11 +90,36 @@ try {
     assert.ok(copiedPrompt.includes('Målgruppe: [MÅLGRUPPE]'),label+': kanonisk presentasjonsprompt '+deck);
    }
   }
+  // Slide, modal og navigasjonskontroller skal være synlige uten scrolling i dialogen.
+  const viewports=[{width,height},{width:1280,height:720},{width:390,height:667},{width:844,height:390}];
+  for(const viewport of viewports){
+   await page.setViewportSize(viewport);
+   await page.waitForTimeout(100);
+   for(const deck of ['portal','intro','sales','technical']){
+    await page.locator('[data-deck="'+deck+'"]').click();
+    const measurements=await page.evaluate(()=>{
+     const modal=document.getElementById('present-modal'),stage=document.getElementById('present-stage');
+     const slide=document.getElementById('slide-body'),next=document.getElementById('slide-next'),download=document.getElementById('deck-download');
+     const rect=node=>{const r=node.getBoundingClientRect();return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
+     return {modal:rect(modal),stage:rect(stage),slide:rect(slide),next:rect(next),download:rect(download),
+       viewport:{width:innerWidth,height:innerHeight}, scrollHeight:modal.scrollHeight,clientHeight:modal.clientHeight};
+    });
+    const m=measurements,v=m.viewport,tolerance=3;
+    const inside=(child,parent)=>child.left>=parent.left-tolerance&&child.top>=parent.top-tolerance&&child.right<=parent.right+tolerance&&child.bottom<=parent.bottom+tolerance;
+    assert.ok(inside(m.modal,{left:0,top:0,right:v.width,bottom:v.height}),label+': modal utenfor viewport '+deck+' '+JSON.stringify(m));
+    assert.ok(inside(m.slide,m.stage),label+': slide klippes i stage '+deck+' '+JSON.stringify(m));
+    assert.ok(inside(m.slide,m.modal),label+': slide utenfor modal '+deck+' '+JSON.stringify(m));
+    assert.ok(inside(m.next,m.modal)&&inside(m.download,m.modal),label+': kontroller utenfor modal '+deck);
+    assert.ok(m.scrollHeight<=m.clientHeight+3,label+': modal trenger scrolling '+deck+' '+JSON.stringify(m));
+    assert.ok(Math.abs(m.slide.width/m.slide.height-16/9)<0.02,label+': 16:9 ved '+v.width+'×'+v.height);
+   }
+  }
+  await page.setViewportSize({width,height});
   await page.locator('[data-deck="portal"]').click();
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.9.4')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.9.5')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes('Innsikt – fra markedssignal')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,7,'alle portal-slides er eksportert');

@@ -110,3 +110,7 @@ Bransjeinformasjon og caser eies av \`sales.json.industrySectors\`, \`sales.json
 Fire presentasjonsløp: en egen gjennomgang av Innsikt-portalen, introduksjon, salgsworkshop og Data/KI. Presenter har en stabil 16:9-visning, kontrastjusterte kort og presentatørnotater utenfor selve lysbildet. Salgsworkshopen er **inspirasjon, ikke kundetilpasset presentasjon**. Salgs- og teknologiløpene avsluttes med en kopierbar, kanonisk `deck-outline`-prompt fra promptbiblioteket.
 
 Hvert løp kan lastes ned som selvstendig HTML-presentasjon uten runtimeavhengigheter, eller åpnes for utskrift/«Lagre som PDF» i nettleseren. Dette er ikke en PowerPoint-fil og er ikke ferdig formgitt kundemateriell. Redigerbar PPTX er registrert i backlog B-25. Innholds-, kilde- og releaseversjoner følger JSON-kontrakten. Se også `INTERNAL_MIGRATION.md` for senere Webstep/Artifacts-vurdering.
+
+## Presenter: tilpasning til visningsflaten (v0.9.5)
+
+Presenter bruker en fast logisk 960 × 540-flate (16:9), men hele flaten skaleres etter faktisk ledig plass inni presentasjonsdialogen. Størrelsen på modal, valg, notater, navigasjon og eksport er regnet inn; presentasjonen skal ikke kreve vertikal eller horisontal scrolling. På mobil i stående format blir teksten nødvendigvis mindre; liggende skjerm gir bedre lesbarhet. Playwright verifiserer viewportplassering også ved kort skjermhøyde.
