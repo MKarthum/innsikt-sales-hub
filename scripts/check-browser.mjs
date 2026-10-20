@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.2',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.3',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -66,6 +66,41 @@ try {
   await page.locator('#speaker-toggle').check();
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#present-modal').count(),0,'lukke Presenter');
+  // Popover testes i faktiske DOM-visninger på både mobil og desktop.
+  for(const route of ['horisont','teknologi','guide']){
+   await page.evaluate(id=>{location.hash='#'+id},route);
+   await page.waitForFunction(id=>{
+    const target=id==='horisont'?'.horizon-intro':id==='guide'?'.lesson-chapter':'.tech-item';
+    return location.hash==='#'+id&&document.querySelector(target)&&document.querySelector('#main .glossary-trigger');
+   },route);
+   const term=page.locator('#main .glossary-trigger').first();
+   const word=await term.innerText(),id=await term.getAttribute('data-glossary-id');
+   assert.ok(word.trim().length>1,label+': begrep bevart '+route);
+   const meaning=await page.evaluate(async id=>{
+    const data=await (await fetch('./data/learning.json')).json();
+    return data.glossary.find(x=>x.id===id)?.meaning;
+   },id);
+   await term.click();
+   const popup=page.locator('#innsikt-glossary-popover');await popup.waitFor();
+   assert.ok((await popup.innerText()).includes(meaning),label+': kanonisk definisjon '+route);
+   assert.equal(await term.getAttribute('aria-expanded'),'true',label+': aria-expanded');
+   const b=await popup.boundingBox();
+   assert.ok(b&&b.x>=-1&&b.y>=-1&&b.x+b.width<=width+2&&b.y+b.height<=height+2,label+': popup innenfor skjerm');
+   await page.keyboard.press('Escape');
+   assert.equal(await popup.count(),0,label+': Escape lukker');
+   assert.ok(await term.evaluate(el=>document.activeElement===el),label+': fokus tilbake');
+   await term.press('Enter');await popup.waitFor();
+   await page.locator('.topbar .breadcrumb').click();
+   assert.equal(await popup.count(),0,label+': uteklikk lukker');
+  }
+  await page.evaluate(()=>{location.hash='#horisont'});
+  await page.locator('#main .glossary-trigger').first().click();
+  await page.evaluate(()=>{location.hash='#teknologi'});
+  await page.waitForFunction(()=>location.hash==='#teknologi'&&document.querySelector('.tech-item'));
+  assert.equal(await page.locator('#innsikt-glossary-popover').count(),0,label+': popup ryddet ved hash-navigasjon');
+  await page.evaluate(()=>{location.hash='#prompter/account-research'});
+  await page.locator('#prompt-editor').waitFor();
+  assert.equal(await page.locator('#prompt-editor .glossary-trigger').count(),0,label+': redigerbare prompter urørt');
   await page.evaluate(()=>{location.hash='#oversikt'});
   const widthCheck=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,window:innerWidth}));
   assert.ok(widthCheck.scroll<=widthCheck.window+5,label+': horisontal overflyt '+JSON.stringify(widthCheck));
