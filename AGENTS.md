@@ -75,3 +75,12 @@ Faguttrykk og forkortelser som kan være ukjente for målgruppen, bør forklares
 Gjenbruk `docs/assets/glossary.js` både i oversikt, detaljvisninger og dynamisk innhold etter hash-navigasjon. Marker selektivt; ikke alle forekomster, vanlige ord eller produktnavn. Bevar alltid det synlige begrepet og den opprinnelige faglige betydningen, kilder, forbehold og skillet mellom fakta, leverandørpåstander og vurderinger. Fjern kun overflødige parentesdefinisjoner hvis substansen beholdes.
 
 Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til interaktive begreper. Popupen skal fungere på mobil og desktop, kunne brukes med tastatur, lukkes via Escape og uteklikk, føre fokus hensiktsmessig og holdes innenfor skjermen. Oppdater eksisterende innholds- og nettlesertester ved endringer.
+
+
+## Presenter- og Artifact-prinsipper
+
+- Presenter har fast 16:9-visningsflate; ikke tilpass lysbildestørrelse etter innholdet. Flytt overløp til notater eller del det på flere lysbilder. Kontrast må verifiseres i både mørke og lyse flater.
+- Presentasjonsløp, tekster, struktur og tilpasningsprompter eies av henholdsvis `pages.json` og `prompts.json` med kanoniske referanser; HTML/CSS/JS er kun visnings- og eksportlag.
+- Skil demonstrasjon av selve portalen fra illustrative salgsworkshoper. Presenter kundecaser som hypoteser inntil dokumenterte og godkjente referanser foreligger.
+- Eksporterte presentasjoner skal ha versjonsmarkering, fungere uten private data og ikke kreve ekstern LLM ved åpning. Test nedlasting og 16:9 på desktop/mobil i eksisterende nettlesertester.
+- Uavklarte spørsmål om Webstep-repo, intern konfigurering, Artifacts-bygg og framtidig profilering styres i `backlog.json` og `INTERNAL_MIGRATION.md`. Ikke opprett interne filer eller Artifact-integrasjon i offentlig repo før sikkerhet og arkitektur er avklart.
