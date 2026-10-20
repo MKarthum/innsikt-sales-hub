@@ -254,7 +254,7 @@ function presentation(){
  ).join('');
  const markup='<div class="deck-controls" role="group" aria-label="Velg presentasjonsløp">'+choices+'</div>'
   +'<p id="deck-context" class="deck-context"></p>'
-  +'<div class="present-frame present-rich" id="slide-body" aria-live="polite"></div>'
+  +'<div class="present-stage"><div class="present-frame present-rich" id="slide-body" aria-live="polite"></div></div>'
   +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev">'+ico('arrow-left')+' Forrige</button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next">Neste '+ico('arrow-right')+'</button></div>'
   +'<div class="present-footer"><label><input type="checkbox" id="speaker-toggle" /> Vis presentatørnotater</label>'
   +'<span>Piltaster bytter lysbilde · Esc lukker</span></div>'
