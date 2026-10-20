@@ -304,7 +304,9 @@
           ],
           "note": "Oppsummer kort."
         }
-      ]
+      ],
+      "audience": "Internt introduksjonsløp",
+      "intro": "En kort faglig introduksjon med kunderelaterte eksempler. Tilpass innholdet og kildene til målgruppen."
     },
     "sales": {
       "label": "Salgsworkshop · 30 min",
@@ -379,8 +381,22 @@
             "Bruk samtalemalen.",
             "Involver fagmiljøet på riktig tidspunkt."
           ]
+        },
+        {
+          "type": "prompt",
+          "title": "Lag en versjon for din kunde",
+          "body": "Dette presentasjonsløpet er inspirasjon. Bruk malen for et konkret kundebehov, med egne mål, spørsmål og kvalitetssikrede kilder.",
+          "bullets": [
+            "Avklar kunde, deltakere, formål og ønsket neste steg.",
+            "Bruk tilpasningsprompten for et strukturert utkast.",
+            "Kontroller fakta, forbehold og referanser før ekstern bruk."
+          ],
+          "promptId": "deck-outline",
+          "note": "En KI-generert presentasjon må gjennomgås og eventuelt flyttes til selskapets godkjente presentasjonsmal."
         }
-      ]
+      ],
+      "audience": "Workshopinspirasjon – ikke et ferdig kundedeck",
+      "intro": "Illustrative problemstillinger og samtalestruktur. Ingen dokumenterte kundecaser eller ferdig rådgivningsmateriell; må kvalitetssikres og tilpasses før ekstern bruk."
     },
     "technical": {
       "label": "Data og KI · 20 min",
@@ -450,6 +466,95 @@
             "Hva kan dere stole på av data og definisjoner?",
             "Hva trenger dere kompetanse til?"
           ]
+        },
+        {
+          "type": "prompt",
+          "title": "Lag en versjon for din kunde",
+          "body": "Dette presentasjonsløpet er inspirasjon. Bruk malen for et konkret kundebehov, med egne mål, spørsmål og kvalitetssikrede kilder.",
+          "bullets": [
+            "Avklar kunde, deltakere, formål og ønsket neste steg.",
+            "Bruk tilpasningsprompten for et strukturert utkast.",
+            "Kontroller fakta, forbehold og referanser før ekstern bruk."
+          ],
+          "promptId": "deck-outline",
+          "note": "En KI-generert presentasjon må gjennomgås og eventuelt flyttes til selskapets godkjente presentasjonsmal."
+        }
+      ],
+      "audience": "Faglig illustrasjon – tilpasses mottakeren",
+      "intro": "Generiske arkitekturprinsipper og faglige vurderinger, ikke løsningsdesign for en bestemt kunde."
+    },
+    "portal": {
+      "label": "Slik bruker du Innsikt · 8 min",
+      "audience": "Om løsningen",
+      "intro": "En kort gjennomgang av hva Innsikt inneholder, hvem det er for, og hvor ulike brukere bør starte.",
+      "slides": [
+        {
+          "type": "intro",
+          "title": "Innsikt – fra markedssignal til bedre kundedialog",
+          "body": "Et felles utgangspunkt for å forstå markedet, finne relevante behov og bruke fagkompetanse på rett tidspunkt.",
+          "note": "Dette er en demonstrasjon av selve Innsikt-løsningen, ikke et tilbud eller en beskrivelse av en kundeleveranse."
+        },
+        {
+          "type": "bullets",
+          "title": "Tre hovedspor i løsningen",
+          "bullets": [
+            "Datagrunnlag og plattform: Når informasjon må samles, kvalitetssikres og deles.",
+            "Analyse og beslutninger: Når data skal gi bedre oversikt, styring og handling.",
+            "KI og nye arbeidsmåter: Når teknologien kan forbedre oppgaver, med gode data og kontroll."
+          ],
+          "note": "Bruk sporene til å spørre hva virksomheten ønsker å oppnå, ikke til å starte med produkter."
+        },
+        {
+          "type": "metric",
+          "title": "Markedet er i bevegelse",
+          "body": {
+            "$content": "market-guidance:ki-use",
+            "variant": "short"
+          },
+          "sources": [
+            "ssb"
+          ],
+          "note": "Dette er én dokumentert indikator på endring; ikke en påstand om effekt eller modenhet hos kunden."
+        },
+        {
+          "type": "bullets",
+          "title": "Hvor starter du?",
+          "bullets": [
+            "Ny i data og KI? Velg «Start her» for et kort grunnkurs og begrepshjelp.",
+            "Kundeansvarlig? Gå til «Forretningsbehov» og «Salgsinnganger» for problemer og spørsmål.",
+            "Fagperson? Bruk «Arkitektur», «Teknologi» og fordypningsstoffet for vurderinger og nyanser."
+          ],
+          "note": "Vis gjerne sidene etter presentasjonen. Bruk presentasjonen som kart fremfor å klikke gjennom alt."
+        },
+        {
+          "type": "bullets",
+          "title": "Fra observasjon til mulig oppdrag",
+          "bullets": [
+            "Begynn med virksomhetens konkrete problem, mål og ansvarlig.",
+            "Utforsk konsekvenser, databehov og hva som kan testes i liten skala.",
+            "Bruk salgsinngangene og samtalemalene til å formulere gode neste spørsmål."
+          ],
+          "note": "Bransjecaser er illustrative hypoteser, ikke dokumenterte Webstep-leveranser."
+        },
+        {
+          "type": "bullets",
+          "title": "Hjelpemidler når du trenger dem",
+          "bullets": [
+            "Søk finner tema, bransjer, behov og teknologi på tvers av løsningen.",
+            "Begreper med stiplet understrek gir forklaring uten å avbryte lesingen.",
+            "Presenter gir tematiske gjennomganger; promptbiblioteket gir redigerbare arbeidsutkast."
+          ],
+          "note": "Vis et begrep og et søk kort dersom det er relevant for målgruppen."
+        },
+        {
+          "type": "takeaway",
+          "title": "Kom i gang på to minutter",
+          "bullets": [
+            "Velg inngangen som passer rollen din og møtet du skal forberede.",
+            "Finn et problem eller spørsmål kunden kan kjenne seg igjen i.",
+            "Bruk kildehenvisningene, tilpass malen og avklar faglig neste steg."
+          ],
+          "note": "Løsningen er et åpent arbeidsgrunnlag; konkrete leveranser og kundepåstander må kvalitetssikres."
         }
       ]
     }
