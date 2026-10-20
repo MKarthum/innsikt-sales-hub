@@ -341,11 +341,19 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 
 
 /* Presenter v0.9.4: én 16:9-flate per lysbilde, tydelig kontrast og kompakt innhold. */
-#present-modal{width:min(1120px,calc(100vw - 32px));max-height:calc(100dvh - 24px);padding:18px 20px;overflow-y:auto}
+#present-modal{box-sizing:border-box;width:min(1120px,calc(100vw - 32px));height:calc(100dvh - 44px);max-height:calc(100dvh - 44px);padding:12px 16px;display:flex;flex-direction:column;overflow:hidden}
+#present-modal .modal-header{flex:0 0 auto;margin-bottom:8px}
+#present-modal .deck-controls{flex:0 0 auto;margin-bottom:5px}
+#present-modal .deck-context{flex:0 0 auto;margin:5px 0 9px;max-height:3em;overflow:hidden}
+#present-modal .present-stage{flex:1 1 auto;min-height:0;min-width:0;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:#eef5f4}
+#present-modal .present-controls{flex:0 0 auto;margin-top:8px}
+#present-modal .present-footer{flex:0 0 auto;margin-top:6px}
+#present-modal .present-export-controls{flex:0 0 auto;margin-top:7px;padding-top:7px}
+#present-modal #slide-speaker-notes{flex:0 0 auto;max-height:70px;overflow:auto}
 #present-modal .deck-controls{display:flex;flex-wrap:wrap;gap:7px}
 #present-modal .deck-option{flex:0 0 auto}
 .deck-context{font-size:12px;line-height:1.5;color:#536c75;margin:10px 0}
-#present-modal .present-rich{box-sizing:border-box;width:100%;height:auto;min-height:0;aspect-ratio:16/9;overflow:hidden;padding:4.5% 6%;display:flex;flex-direction:column;justify-content:center;gap:0;container-type:inline-size}
+#present-modal .present-rich{box-sizing:border-box;width:960px;height:540px;min-width:960px;min-height:540px;max-width:none;max-height:none;flex:0 0 auto;aspect-ratio:16/9;overflow:hidden;padding:4.5% 6%;display:flex;flex-direction:column;justify-content:center;gap:0;container-type:inline-size;transform:scale(var(--slide-fit,1));transform-origin:center center}
 #present-modal .present-rich h2,.export-slide h2{font-size:clamp(21px,3.4cqw,39px);line-height:1.2;margin:8px 0 15px;color:white}
 #present-modal .present-rich .slide-eyebrow,.export-slide .slide-eyebrow{color:#b4f0db;font-size:clamp(9px,1.1cqw,12px)}
 #present-modal .present-rich .slide-description,.export-slide .slide-description{font-size:clamp(12px,1.7cqw,19px);line-height:1.5;color:#e2f1f2;max-width:780px;margin:10px 0}
@@ -371,7 +379,7 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 .present-export-controls span{color:#657c82;font-size:11px}
 #present-modal #slide-speaker-notes{margin-top:11px;color:#514c37}
 #present-modal #slide-speaker-notes[hidden]{display:none}
-@media(max-width:760px){#present-modal{padding:13px}#present-modal .present-rich{min-width:620px}#present-modal .present-stage{overflow-x:auto;overscroll-behavior-x:contain}#present-modal .deck-controls{max-height:90px;overflow:auto}#present-modal .present-rich h2{font-size:26px}}
+@media(max-width:760px){#present-modal{padding:10px}#present-modal .deck-controls{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;max-height:none;scrollbar-width:thin}#present-modal .deck-option{white-space:nowrap;padding:7px 10px}#present-modal .modal-header h2{font-size:18px}#present-modal .present-rich h2{font-size:26px}#present-modal .present-export-controls span{display:none}}
 
 
 /* Komprimer innhold i den skalerbare mobilvisningen uten å endre 16:9-størrelsen. */
