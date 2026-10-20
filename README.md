@@ -103,3 +103,10 @@ Bransjeinformasjon og caser eies av \`sales.json.industrySectors\`, \`sales.json
 ## Kontekstuell begrepshjelp (v0.9.3)
 
 `learning.json.glossary` eier definisjoner og eksempler. `inline`-metadata aktiverer ord og alternative skrivemåter, mens `glossary.js` har ansvar for selektiv tekstmarkering, oppslag, popup og tilgjengelighet. Ingen nye backendtjenester eller avhengigheter. Sjekkes i `scripts/check.mjs` og `scripts/check-browser.mjs`.
+
+
+## Presenter (v0.9.4)
+
+Fire presentasjonsløp: en egen gjennomgang av Innsikt-portalen, introduksjon, salgsworkshop og Data/KI. Presenter har en stabil 16:9-visning, kontrastjusterte kort og presentatørnotater utenfor selve lysbildet. Salgsworkshopen er **inspirasjon, ikke kundetilpasset presentasjon**. Salgs- og teknologiløpene avsluttes med en kopierbar, kanonisk `deck-outline`-prompt fra promptbiblioteket.
+
+Hvert løp kan lastes ned som selvstendig HTML-presentasjon uten runtimeavhengigheter, eller åpnes for utskrift/«Lagre som PDF» i nettleseren. Dette er ikke en PowerPoint-fil og er ikke ferdig formgitt kundemateriell. Redigerbar PPTX er registrert i backlog B-25. Innholds-, kilde- og releaseversjoner følger JSON-kontrakten. Se også `INTERNAL_MIGRATION.md` for senere Webstep/Artifacts-vurdering.
