@@ -17,6 +17,7 @@ jobs:
       - name: JavaScript-syntaks
         run: |
           node --check docs/assets/glossary.js
+          node --check docs/assets/presenter-export.js
           node --check docs/assets/content.js
           node --check docs/assets/site.js
           node --check docs/assets/learning.js

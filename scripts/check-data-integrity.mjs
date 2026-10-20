@@ -65,14 +65,15 @@ if(!pages.presentationDecks||Object.keys(pages.presentationDecks).length<3)fail(
 for(const [key,d] of Object.entries(pages.presentationDecks||{})){
  if(!str(d.label)||!d.slides?.length)fail('Presentasjonsløp mangler '+key);
  for(const x of d.slides||[]){
-  if(!str(x.title)||!['intro','diagram','metric','case','sector-case','bullets','takeaway'].includes(x.type))fail('Ugyldig slide '+key);
+  if(!str(x.title)||!['intro','diagram','metric','case','sector-case','bullets','takeaway','prompt'].includes(x.type))fail('Ugyldig slide '+key);
   if(x.diagram&&!ds.has(x.diagram))fail('Ukjent diagram i presentasjon '+x.diagram);
   if(x.business&&!bs.has(x.business))fail('Ukjent kundesignal i presentasjon '+x.business);
   if(x.type==='sector-case'&&!sales.industryUseCases.some(c=>c.id===x.industryCase))fail('Ukjent bransjecase i presentasjon '+x.industryCase);
+  if(x.type==='prompt'&&!read('prompts').items.some(p=>p.id===x.promptId))fail('Ukjent presentasjonsprompt '+x.promptId);
   if(x.sources)refs(x.sources,'Slide '+x.title);
  }
 }
-for(const file of ['docs/index.html','docs/assets/site.js','docs/assets/learning.js','docs/assets/site.css'])if(!fs.existsSync(file))fail('Mangler fil '+file);
+for(const file of ['docs/index.html','docs/assets/site.js','docs/assets/learning.js','docs/assets/presenter-export.js','docs/assets/site.css'])if(!fs.existsSync(file))fail('Mangler fil '+file);
 const html=fs.readFileSync('docs/index.html','utf8');
 for(const n of pagesNeeded)if(!html.includes('data-page="'+n+'"'))fail('HTML mangler menypunkt '+n);
 if(!html.includes('content.js?v='+site.version))fail('Manglende versjon eller registrering for innholdsløser');
@@ -127,5 +128,6 @@ for(const x of horizon.chapters){
 for(const x of horizon.notPublished||[])if(x.visibility!=='not-presented')fail('Ikke-vist innhold må ha eksplisitt visibility');
 if(!fs.existsSync('docs/assets/horizon.js'))fail('Mangler visning for fordypningen');
 if(!html.includes('horizon.js?v='+site.version))fail('Utdatert versjon på fordypningsscript');
+if(!html.includes('presenter-export.js?v='+site.version))fail('Utdatert versjon på presentasjonseksport');
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log('PASS – '+pagesNeeded.length+' sider, '+learning.diagrams.length+' arkitekturer, '+learning.templates.length+' maler, '+Object.keys(sources).length+' kilder og '+Object.keys(pages.presentationDecks).length+' presentasjonsløp validert');

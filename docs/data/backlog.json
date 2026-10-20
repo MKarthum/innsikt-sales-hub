@@ -158,5 +158,45 @@
     "status": "åpen",
     "priority": "middels",
     "why": "Ingen generell påstand om at norske virksomheter ligger etter; sammenlign konkrete praksiser før påstander publiseres."
+  },
+  {
+    "id": "B-21",
+    "title": "Planlegge Webstep-eid, tilgangsstyrt repo og adskilte data",
+    "area": "Arkitektur",
+    "status": "senere",
+    "priority": "høy",
+    "why": "Avklar sikkerhet, repo-eierskap, tilgang, kildegrenser og hvilke data som lovlig kan ligge i en intern portalløsning. Ingen interne data skal tilbakeføres til offentlig kilde."
+  },
+  {
+    "id": "B-22",
+    "title": "Definere reproducerbar bygging og publisering som Claude Artifacts",
+    "area": "Publisering",
+    "status": "senere",
+    "priority": "høy",
+    "why": "Lag en deterministisk byggejobb som leser godkjente JSON-data og produserer statisk Artifact uten LLM-kall ved vanlig visning. Merk output med kildeversjon, build-ID og publisert versjon; undersøk faktisk plattformstøtte og begrensninger før valg."
+  },
+  {
+    "id": "B-23",
+    "title": "Utforme kildeimport med Webstep-overstyring og intern konfigurasjon",
+    "area": "Arkitektur",
+    "status": "senere",
+    "priority": "høy",
+    "why": "Utred allowlist-basert enveissynk fra offentlig kilde til internt repo, med eget tema, konfigurasjon og intern datasone som aldri overskrives. Definer konfliktregler, migrering og validering før automatisering."
+  },
+  {
+    "id": "B-24",
+    "title": "Velge lokal forhåndsvisning og senere Webstep/DevStep-designmal",
+    "area": "Design",
+    "status": "senere",
+    "priority": "middels",
+    "why": "Bruk dagens lokale Pages-preview for visuelt arbeid før Artifact-bygg. Vent med ny designmal til målrepo, malens kilde og vedlikeholdsansvar er avklart."
+  },
+  {
+    "id": "B-25",
+    "title": "Vurdere redigerbar PowerPoint-eksport av presentasjoner",
+    "area": "Presenter",
+    "status": "senere",
+    "priority": "middels",
+    "why": "Versjon 0.9.4 gir portabel HTML og PDF via utskrift. Vurder behov for PPTX og godkjente bedriftstemplater før ny eksportavhengighet eller byggetrinn innføres."
   }
 ]
