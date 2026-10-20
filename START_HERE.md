@@ -82,3 +82,12 @@ Se `INTERNAL_MIGRATION.md` før vurdering av HubSpot, Google Drive, konsulentpro
 ## Bransjedrevet inngang (v0.9.2)
 
 Les [INDUSTRY_BUSINESS_DIALOGUE.md](INDUSTRY_BUSINESS_DIALOGUE.md) ved endring av bransjer, verdikjedeproblemer, effekter eller kundespørsmål. Bransjer (\`sales.json.industrySectors\`), caser (\`industryUseCases\`) og metode (\`industryJourney\`) eies av \`sales.json\`, mens \`pages.json.industryUi\` kun eier visningsetiketter. Case refererer sektor og eksisterende \`plays[].id\`; referanser skal valideres. Søk, bransjeruter og Presenter skal bruke samme ID. Ingen påstand om Webstep-caser, leveransekapasitet, gevinst eller norsk modenhetsgap uten dokumentert grunnlag.
+
+
+## Kontekstuell begrepshjelp – varig regel
+
+Faguttrykk og forkortelser som kan være ukjente for målgruppen, bør forklares ved behov gjennom én diskret, felles komponent fremfor gjentatte definisjoner i sidetekster. `docs/data/learning.json.glossary` er eneste autoritative eier av begrepsdefinisjoner og eksempler. Bruk eksisterende stabile ID-er og `$content`-referanser; aktiver inline-visning og alternative skrivemåter med `inline`-metadata på samme begrepsobjekt. Nye begreper legges til hos denne eieren. En separat kortvariant kan bare legges inn under samme ID dersom den faktisk trengs.
+
+Gjenbruk `docs/assets/glossary.js` både i oversikt, detaljvisninger og dynamisk innhold etter hash-navigasjon. Marker selektivt; ikke alle forekomster, vanlige ord eller produktnavn. Bevar alltid det synlige begrepet og den opprinnelige faglige betydningen, kilder, forbehold og skillet mellom fakta, leverandørpåstander og vurderinger. Fjern kun overflødige parentesdefinisjoner hvis substansen beholdes.
+
+Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til interaktive begreper. Popupen skal fungere på mobil og desktop, kunne brukes med tastatur, lukkes via Escape og uteklikk, føre fokus hensiktsmessig og holdes innenfor skjermen. Oppdater eksisterende innholds- og nettlesertester ved endringer.

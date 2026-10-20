@@ -324,3 +324,17 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 .industry-journey p{font-size:12px;line-height:1.65;color:#4d6970;margin:0}
 @media(max-width:1140px){.sector-grid,.industry-case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.industry-journey{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.sector-grid,.industry-case-grid,.sector-summary-grid,.industry-journey{grid-template-columns:1fr}.industry-intro{padding:17px}.sector-card,.industry-case-card{padding:18px}}
+
+
+/* Diskret, felles begrepshjelp. */
+.glossary-trigger{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed currentColor;padding:0 0 1px;cursor:help;line-height:inherit;text-align:inherit;border-radius:0;text-decoration:none}
+.glossary-trigger:hover{color:#0e7864;border-bottom-style:solid}
+.glossary-trigger:focus-visible{outline:2px solid #0e927a;outline-offset:3px;border-radius:2px}
+.glossary-popover{position:fixed;box-sizing:border-box;z-index:130;width:min(330px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;border:1px solid #cadfdb;border-radius:12px;background:white;color:#294b53;box-shadow:0 12px 38px #102e3540;padding:15px 17px;font-size:13px;line-height:1.55}
+.glossary-popover-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px}
+.glossary-popover-head strong{font:800 15px/1.4 'Manrope',sans-serif;color:#173c43}
+.glossary-popover-close{font:24px/1 sans-serif;border:0;background:transparent;color:#557077;cursor:pointer;min-width:28px;min-height:28px;display:grid;place-items:center;margin:-5px -8px 0 0}
+.glossary-popover-close:focus-visible{outline:2px solid #0e927a;outline-offset:2px}
+.glossary-popover p{margin:0;font-size:13px;color:#435d65;line-height:1.6}
+.glossary-popover .glossary-popover-example{border-top:1px solid #e4edeb;padding-top:9px;margin-top:10px;font-size:12px;color:#577179}
+.glossary-popover-example strong{color:#355c59}

@@ -47,3 +47,12 @@ Eksakttest garanterer ikke at to ulikt formulerte tekster har samme semantikk. I
 - \`sales.json.industryJourney\` eier delte metodiske trinn. \`pages.json.industryUi\` eier kun etiketter og sidekomposisjon; Presenter peker til case-ID. Søk/HTML viser samme autoritative objekt.
 - \`sources.json\` eier kildeinformasjon; \`sourceIds\` på sektor beskriver bransjepraksis, ikke dokumentert effekt av hvert hypotetiske case. Faglig innhold er \`assessment\` med \`reviewed\` dato. Ingen sammenblanding av publisering/kildekontroll og faglig validering.
 - Se \`INDUSTRY_BUSINESS_DIALOGUE.md\` for prinsipper og test av faktisk forretningsverdi. \`scripts/check-render-output.mjs\` skal dekke hver sektor og hvert case, også ved ny kobling til Presenter.
+
+
+## Kontekstuell begrepshjelp – varig regel
+
+Faguttrykk og forkortelser som kan være ukjente for målgruppen, bør forklares ved behov gjennom én diskret, felles komponent fremfor gjentatte definisjoner i sidetekster. `docs/data/learning.json.glossary` er eneste autoritative eier av begrepsdefinisjoner og eksempler. Bruk eksisterende stabile ID-er og `$content`-referanser; aktiver inline-visning og alternative skrivemåter med `inline`-metadata på samme begrepsobjekt. Nye begreper legges til hos denne eieren. En separat kortvariant kan bare legges inn under samme ID dersom den faktisk trengs.
+
+Gjenbruk `docs/assets/glossary.js` både i oversikt, detaljvisninger og dynamisk innhold etter hash-navigasjon. Marker selektivt; ikke alle forekomster, vanlige ord eller produktnavn. Bevar alltid det synlige begrepet og den opprinnelige faglige betydningen, kilder, forbehold og skillet mellom fakta, leverandørpåstander og vurderinger. Fjern kun overflødige parentesdefinisjoner hvis substansen beholdes.
+
+Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til interaktive begreper. Popupen skal fungere på mobil og desktop, kunne brukes med tastatur, lukkes via Escape og uteklikk, føre fokus hensiktsmessig og holdes innenfor skjermen. Oppdater eksisterende innholds- og nettlesertester ved endringer.
