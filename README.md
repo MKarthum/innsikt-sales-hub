@@ -114,3 +114,10 @@ Hvert løp kan lastes ned som selvstendig HTML-presentasjon uten runtimeavhengig
 ## Presenter: tilpasning til visningsflaten (v0.9.5)
 
 Presenter bruker en fast logisk 960 × 540-flate (16:9), men hele flaten skaleres etter faktisk ledig plass inni presentasjonsdialogen. Størrelsen på modal, valg, notater, navigasjon og eksport er regnet inn; presentasjonen skal ikke kreve vertikal eller horisontal scrolling. På mobil i stående format blir teksten nødvendigvis mindre; liggende skjerm gir bedre lesbarhet. Playwright verifiserer viewportplassering også ved kort skjermhøyde.
+
+
+## Fullskjerm i Presenter (v0.9.6)
+
+Knappen **Fullskjerm** i Presenter viser det valgte lysbildet uten portalnavigasjon, presentasjonstitler, kildekontekst og eksportkontroller. Bruk piltaster eller diskrete navigasjonsknapper for å bytte lysbilde. Trykk **Esc** eller **Avslutt fullskjerm** for å gå tilbake til vanlig Presenter-dialog uten å miste valgt presentasjon eller aktivt lysbilde.
+
+Der nettleseren støtter Fullscreen API, brukes ekte nettleserfullskjerm. Hvis det ikke er tillatt (typisk på enkelte iOS-nettlesere), brukes et CSS-basert fullskjermoppsett innenfor tilgjengelig nettsideviewport; operativsystemets nettleserkrom kan da bli værende synlig. Fullskjerm bevarer det logiske 16:9-formatet og skalerer proporsjonalt. Verifiseres på mobil/desktop via Playwright.
