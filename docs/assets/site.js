@@ -329,7 +329,7 @@ function presentation(){
  const markup='<div class="deck-controls" role="group" aria-label="Velg presentasjonsløp">'+choices+'</div>'
   +'<p id="deck-context" class="deck-context"></p>'
   +'<div class="present-stage" id="present-stage"><div class="present-frame present-rich" id="slide-body" aria-live="polite"></div></div>'
-  +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev">'+ico('arrow-left')+' <span>Forrige</span></button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next"><span>Neste</span> '+ico('arrow-right')+'</button><button class="btn subtle" type="button" id="present-fullscreen-toggle" aria-label="Vis i fullskjerm" aria-pressed="false" title="Vis i fullskjerm">'+ico('maximize')+' <span>Fullskjerm</span></button></div>'
+  +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev" aria-label="Forrige lysbilde">'+ico('arrow-left')+' <span>Forrige</span></button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next" aria-label="Neste lysbilde"><span>Neste</span> '+ico('arrow-right')+'</button><button class="btn subtle" type="button" id="present-fullscreen-toggle" aria-label="Vis i fullskjerm" aria-pressed="false" title="Vis i fullskjerm">'+ico('maximize')+' <span>Fullskjerm</span></button></div>'
   +'<div class="present-footer"><label><input type="checkbox" id="speaker-toggle" /> Vis presentatørnotater</label>'
   +'<span>Piltaster bytter lysbilde · Esc lukker</span></div>'
   +'<aside id="slide-speaker-notes" class="slide-speaker" hidden></aside>'
