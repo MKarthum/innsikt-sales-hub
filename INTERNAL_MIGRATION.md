@@ -36,3 +36,19 @@ Dette er en arkitekturnotat / sjekkliste, ikke en gjennomført migrering. Offent
 ## 5. Endringsregler
 
 Behold `START_HERE.md`, `AGENTS.md` og kanonisk JSON per domene. Legg til intern innholdsautoritet separat, med tilgangsregler og godkjenning. Ikke legg på kjappe, ukontrollerte integrasjoner. Prioriter løpende innholdskvalitet og nytte for selgerne.
+
+
+## Framtidig kilde-/publiseringsmodell (ikke implementert)
+
+Behovet er to forskjellige leveranser: et offentlig godkjent, vedlikeholdt kunnskapsgrunnlag og en eventuell Webstep-eid, tilgangsstyrt utgave med særskilt profil og interne tillegg. Førstnevnte kan forbli en offentlig kilde eller fases ut; begge muligheter er åpne.
+
+Foreløpig teknisk retning (skal valideres før gjennomføring):
+
+1. **Enveis import av godkjent åpent innhold:** Internt repo kan hente eksplisitt tillatte filer/ID-er fra en versjon/tag i offentlig kilde, ikke ukontrollert hele historikken. Spor kilde-SHA og test semantiske konflikter.
+2. **Intern overstyring uten kopiert vedlikehold:** Et internt konfigurasjons-/temalag velger logo, layout og publisering. Egne interne innholdsmoduler holdes utenfor den offentlige kilden og merges på stabile ID-er etter definerte konfliktregler. Ikke kopier kanoniske definisjoner.
+3. **Kildegrense:** Ingen automatisk synk motsatt vei. Ingenting internt eller konfidensielt sendes til offentlig repo eller tredjeparts Artifact-tjenester uten eksplisitt sikkerhetsgodkjenning.
+4. **Reproduserbart Artifact-bygg:** Eksporter kun autorisert statisk innhold fra kildeversjonen. Bygg uten LLM ved gjentatt kjøring, og identifiser både kildeversjon, intern release og eksakt Artifact-versjon i brukergrensesnittet. Må først verifisere publiserings- og tilgangsmodell på den valgte Artifact-plattformen.
+5. **Visuell forhåndsvisning:** Den eksisterende statiske appen kan forhåndsvises lokalt med webserver og Playwright før bygg. Internt temalag bør ha egen preview; en Artifact-bygging skal ikke være eneste måte å se layoutendringer på.
+6. **Designmal:** Vent med Webstep/DevStep-branding. Når riktig mal og eierskap er avklart, implementeres den som eget tema, ikke som endringer i det offentlige innholdsgrunnlaget.
+
+Arbeidet er registrert i `backlog.json` B-21 til B-25. Ingen interne filer, legitimasjon, CI-nøkler eller data er opprettet i denne offentlige utgaven.
