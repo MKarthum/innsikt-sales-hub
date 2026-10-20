@@ -175,7 +175,7 @@ function dev(){let done=D.backlog.filter(x=>x.status==='lukket').length;return `
 <section class="subsection"><div class="section-heading"><div><h2>Dine lokale innspill</h2><p>${esc(D.pages.copy.localFeedbackCaution)}</p></div><button class="btn subtle" id="export-notes" ${notes.length?'':'disabled'}>${ico('download')} Eksporter Markdown</button></div>${notes.length?`<div class="trend-list">${notes.slice().reverse().map((n,i)=>`<div class="panel"><div class="small-label">${esc(n.page)} · ${esc(n.date)}</div><p style="white-space:pre-wrap;color:#244351">${esc(n.text)}</p></div>`).join('')}</div>`:'<div class="empty">'+esc(D.pages.copy.feedbackEmpty)+'</div>'}</section>`}
 function render(){const raw=location.hash.slice(1)||'oversikt';const [p,sub]=raw.split('/');current=names[p]?p:'oversikt';let crumb=names[current];if(sub){const entity=current==='arkitektur'?D.learning.diagrams.find(x=>x.id===sub):current==='verktoy'?D.learning.templates.find(x=>x.id===sub):current==='prompter'?D.prompts.items.find(x=>x.id===sub):current==='muligheter'?D.plays.find(x=>x.id===sub):current==='forretning'?(D.businessSignals.find(x=>x.id===sub)||(sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null)||(sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null)):null;if(entity)crumb+=' / '+(entity.title||entity.name||entity.area)}document.getElementById('crumb').textContent=crumb;document.querySelectorAll('.nav a').forEach(a=>{const active=a.dataset.page===current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});document.getElementById('sidebar').classList.remove('open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');let html='';if(current==='muligheter'&&sub){const pl=D.plays.find(x=>x.id===sub);html=pl?playDetail(pl):plays()}else if(current==='forretning'&&sub){const sector=sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null,caseItem=sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null,b=D.businessSignals.find(x=>x.id===sub);html=sector?industrySectorPage(sector):caseItem?industryCasePage(caseItem):b?businessDetail(b):business()}else if(current==='arkitektur'){html=architecture(sub)}else if(current==='verktoy'){html=toolkit(sub)}else if(current==='prompter'){html=prompts(sub)}else{html=({oversikt:overview,guide,marked:market,muligheter:plays,kundedialog:dialogue,forretning:business,kompetanse:competence,teknologi:technology,ai:aiProducts,bransje:industry,horisont:horizon,kilder:sources,utvikling:dev}[current])()}document.getElementById('main').innerHTML=html;window.InnsiktGlossary?.enhance(document.getElementById('main'));window.scrollTo({top:0,behavior:'instant'});document.title=`${crumb} · Innsikt`;}
 function toast(t){document.querySelector('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),2700)}
-function closeModal(){document.getElementById('overlay-root').innerHTML='';document.removeEventListener('keydown',modalEsc)}
+function closeModal(){presenterResizeObserver?.disconnect();presenterResizeObserver=null;document.getElementById('overlay-root').innerHTML='';document.removeEventListener('keydown',modalEsc)}
 function modalEsc(e){if(e.key==='Escape')closeModal();if(document.querySelector('#present-modal')){if(e.key==='ArrowRight'){slide=Math.min(slide+1,presentationSlides().length-1);showSlide()}if(e.key==='ArrowLeft'){slide=Math.max(slide-1,0);showSlide()}}}
 function modal(title,body,wide=false,id=''){document.getElementById('overlay-root').innerHTML=`<div class="overlay" role="presentation" data-dismiss="1"><section class="modal ${wide?'wide':''}" role="dialog" aria-modal="true" aria-label="${esc(title)}" ${id?`id="${id}"`:''}><header class="modal-header"><h2>${esc(title)}</h2><button class="modal-close" type="button" data-dismiss="1" aria-label="Lukk">${ico('close')}</button></header>${body}</section></div>`;document.addEventListener('keydown',modalEsc);document.querySelector('.modal button,.modal input')?.focus()}
 function search(){modal('Søk i Innsikt',`<input id="search-input" class="input" placeholder="Søk på problem, teknologi, rolle eller kundesignal …" aria-label="Søkeord" autocomplete="off"/><div id="search-results" style="max-height:55vh;overflow:auto"></div>`,true);const box=document.getElementById('search-input');box.focus();box.addEventListener('input',()=>searchResults(box.value));searchResults('')}
@@ -183,7 +183,7 @@ function searchResults(q){const needle=q.toLocaleLowerCase('no').trim();let a=[.
 function feedback(){modal('Gi innspill til neste versjon',`<p class="fineprint">${esc(D.pages.copy.feedbackModalNotice)}</p><label class="input-label" for="feedback-note">Hva bør endres eller undersøkes?</label><textarea class="input" id="feedback-note" placeholder="Eksempel: Spørsmål 3 i salgsinngang 2 er for teknisk. Foreslå et enklere alternativ."></textarea><div class="detail-actions"><span class="fineprint">Side: ${esc(names[current])}</span><button class="btn dark" id="save-feedback">Lagre lokalt ${ico('check')}</button></div>`);document.getElementById('feedback-note').focus()}
 function saveFeedback(){const t=document.getElementById('feedback-note')?.value.trim();if(!t){toast('Skriv et innspill først.');return}notes.push({page:names[current],text:t,date:new Date().toISOString().slice(0,10)});try{localStorage.setItem('innsikt-feedback-v1',JSON.stringify(notes))}catch{toast('Lagring er blokkert i nettleseren. Kopier innspillet manuelt.');return}closeModal();toast('Innspillet er lagret lokalt. Eksporter før du bytter enhet.');if(current==='utvikling')render()}
 function exportFeedback(){const txt='# Innspill – Innsikt\n\n'+notes.map((n,i)=>`## ${i+1}. ${n.page} (${n.date})\n\n${n.text}\n`).join('\n');const b=new Blob([txt],{type:'text/markdown;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='innsikt-innspill.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Eksportert som Markdown.')}
-let selectedDeck='sales',showSpeakerNotes=false;
+let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null;
 function presentationSlides(){return D.pages.presentationDecks[selectedDeck]?.slides||[]}
 function slideMarkup(s,index,deckId,notes=false){
  const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
@@ -217,6 +217,13 @@ function slideMarkup(s,index,deckId,notes=false){
  if(notes&&s.note)v+='<aside class="slide-speaker"><strong>Presentatørnotat</strong><p>'+esc(s.note)+'</p></aside>';
  return v;
 }
+// Logisk 960×540-flate som skaleres proporsjonalt til ledig plass.
+function fitPresentationSlide(){
+ const stage=document.getElementById('present-stage'),frame=document.getElementById('slide-body');
+ if(!stage||!frame||!stage.clientWidth||!stage.clientHeight)return;
+ const scale=Math.min(stage.clientWidth/960,stage.clientHeight/540,1.5);
+ frame.style.setProperty('--slide-fit',String(Math.max(0.05,scale)));
+}
 function showSlide(){
  const slides=presentationSlides(),s=slides[slide];if(!s)return;
  document.getElementById('slide-body').innerHTML=slideMarkup(s,slide,selectedDeck);
@@ -233,6 +240,7 @@ function showSlide(){
   b.classList.toggle('active',b.dataset.deck===selectedDeck);
   b.setAttribute('aria-pressed',String(b.dataset.deck===selectedDeck));
  });
+ fitPresentationSlide();
 }
 function copyDeckPrompt(id){
  const item=D.prompts.items.find(x=>x.id===id);
@@ -254,7 +262,7 @@ function presentation(){
  ).join('');
  const markup='<div class="deck-controls" role="group" aria-label="Velg presentasjonsløp">'+choices+'</div>'
   +'<p id="deck-context" class="deck-context"></p>'
-  +'<div class="present-stage"><div class="present-frame present-rich" id="slide-body" aria-live="polite"></div></div>'
+  +'<div class="present-stage" id="present-stage"><div class="present-frame present-rich" id="slide-body" aria-live="polite"></div></div>'
   +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev">'+ico('arrow-left')+' Forrige</button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next">Neste '+ico('arrow-right')+'</button></div>'
   +'<div class="present-footer"><label><input type="checkbox" id="speaker-toggle" /> Vis presentatørnotater</label>'
   +'<span>Piltaster bytter lysbilde · Esc lukker</span></div>'
@@ -263,6 +271,10 @@ function presentation(){
   +'<button class="btn subtle" type="button" id="deck-print">'+ico('file-text')+' Skriv ut / PDF</button>'
   +'<span>HTML-filen kan åpnes uten nettilgang. PDF lagres fra utskriftsvinduet.</span></div>';
  modal('Presenter Innsikt',markup,true,'present-modal');showSlide();
+ presenterResizeObserver?.disconnect();
+ presenterResizeObserver=new ResizeObserver(fitPresentationSlide);
+ presenterResizeObserver.observe(document.getElementById('present-stage'));
+ fitPresentationSlide();
 }
 function copyLearningTemplate(id){
  const t=D.learning.templates.find(x=>x.id===id);if(!t)return;
