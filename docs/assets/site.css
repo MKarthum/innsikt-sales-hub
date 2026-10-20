@@ -372,3 +372,16 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 #present-modal #slide-speaker-notes{margin-top:11px;color:#514c37}
 #present-modal #slide-speaker-notes[hidden]{display:none}
 @media(max-width:760px){#present-modal{padding:13px}#present-modal .present-rich{min-width:620px}#present-modal .present-stage{overflow-x:auto;overscroll-behavior-x:contain}#present-modal .deck-controls{max-height:90px;overflow:auto}#present-modal .present-rich h2{font-size:26px}}
+
+
+/* Komprimer innhold i den skalerbare mobilvisningen uten å endre 16:9-størrelsen. */
+@media(max-width:760px){
+ #present-modal .present-rich h2{margin:5px 0 9px;font-size:25px}
+ #present-modal .present-rich .slide-description{margin:5px 0;font-size:12px;line-height:1.35}
+ #present-modal .present-rich .slide-bullets{margin:4px 0;font-size:11px;line-height:1.32}
+ #present-modal .present-rich .slide-bullets li{margin-bottom:4px}
+ #present-modal .present-rich .slide-prompt{padding:8px 11px;margin-top:4px}
+ #present-modal .present-rich .slide-prompt p{font-size:11px!important;margin:2px 0 5px!important}
+ #present-modal .present-rich .slide-prompt strong{font-size:12px}
+ #present-modal .present-rich .slide-prompt .btn{font-size:11px;min-height:30px;padding:5px 8px}
+}
