@@ -393,3 +393,57 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
  #present-modal .present-rich .slide-prompt strong{font-size:12px}
  #present-modal .present-rich .slide-prompt .btn{font-size:11px;min-height:30px;padding:5px 8px}
 }
+
+/* Fullskjerm for Presenter. Hold øvrige kontroller utenfor en ren lysbildeflate. */
+#present-modal .present-controls{gap:10px}
+#present-modal #present-fullscreen-toggle{margin-left:auto;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+#present-modal #present-fullscreen-toggle svg{width:16px;height:16px}
+#present-modal.presenter-fullscreen{
+ position:fixed;inset:0;box-sizing:border-box;margin:0;padding:0;
+ width:100vw;height:100dvh;max-width:none;max-height:none;
+ border:0;border-radius:0;background:#071923;box-shadow:none;z-index:110;
+ overflow:hidden;color:white
+}
+#present-modal.presenter-fullscreen .modal-header,
+#present-modal.presenter-fullscreen .deck-controls,
+#present-modal.presenter-fullscreen .deck-context,
+#present-modal.presenter-fullscreen .present-footer,
+#present-modal.presenter-fullscreen #slide-speaker-notes,
+#present-modal.presenter-fullscreen .present-export-controls{display:none!important}
+#present-modal.presenter-fullscreen .present-stage{
+ flex:1 1 auto;min-height:0;min-width:0;width:100%;
+ border:0;border-radius:0;background:#071923;overflow:hidden
+}
+#present-modal.presenter-fullscreen .present-rich{border-radius:0}
+#present-modal.presenter-fullscreen .present-controls{
+ flex:0 0 50px;box-sizing:border-box;margin:0;padding:4px 12px;
+ display:flex;gap:12px;align-items:center;justify-content:center;
+ background:#071923;color:#e1eded
+}
+#present-modal.presenter-fullscreen .present-controls .pager{color:#cbdce0;font-variant-numeric:tabular-nums}
+#present-modal.presenter-fullscreen .present-controls .btn{
+ background:#193944;color:#e6f2f3;border:1px solid #48636d;
+ min-height:36px;padding:7px 12px
+}
+#present-modal.presenter-fullscreen .present-controls .btn:hover,
+#present-modal.presenter-fullscreen .present-controls .btn:focus-visible{
+ background:#285767;color:white;outline-color:#b4f0db
+}
+#present-modal.presenter-fullscreen #present-fullscreen-toggle{margin-left:auto}
+@media(max-width:620px){
+ #present-modal.presenter-fullscreen .present-controls{gap:8px;padding:4px 8px}
+ #present-modal.presenter-fullscreen .present-controls .btn{padding:6px 8px}
+ #present-modal.presenter-fullscreen #slide-prev span,
+ #present-modal.presenter-fullscreen #slide-next span,
+ #present-modal.presenter-fullscreen #present-fullscreen-toggle span{display:none}
+}
+
+/* Kompakt, tilgjengelig navigasjon når fire Presenter-kontroller deler en mobilrad. */
+@media(max-width:620px){
+ #present-modal:not(.presenter-fullscreen) .present-controls{gap:6px;justify-content:space-between;min-width:0}
+ #present-modal:not(.presenter-fullscreen) .present-controls .btn{padding:6px 8px;min-width:34px;min-height:36px}
+ #present-modal:not(.presenter-fullscreen) #slide-prev span,
+ #present-modal:not(.presenter-fullscreen) #slide-next span,
+ #present-modal:not(.presenter-fullscreen) #present-fullscreen-toggle span{display:none}
+ #present-modal:not(.presenter-fullscreen) #present-fullscreen-toggle{margin-left:0}
+}

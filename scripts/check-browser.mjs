@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.5',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.6',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -116,10 +116,57 @@ try {
   }
   await page.setViewportSize({width,height});
   await page.locator('[data-deck="portal"]').click();
+  // Presentatørfullskjerm: native nettleser-API når mulig, CSS-reserve hvis API ikke støttes.
+  await page.locator('#present-fullscreen-toggle').click();
+  await page.waitForFunction(()=>document.querySelector('#present-modal.presenter-fullscreen'));
+  assert.equal(await page.locator('#present-fullscreen-toggle').getAttribute('aria-pressed'),'true',label+': fullskjerm er aktiv');
+  assert.equal(await page.locator('#present-modal .modal-header').isVisible(),false,label+': tittellinjen skjules i fullskjerm');
+  assert.equal(await page.locator('#present-modal .deck-controls').isVisible(),false,label+': deckvalg skjules i fullskjerm');
+  assert.equal(await page.locator('#deck-download').isVisible(),false,label+': eksportkontroller skjules i fullskjerm');
+  const slideInFullscreen=await page.evaluate(()=>{
+   const modal=document.getElementById('present-modal').getBoundingClientRect(),
+    stage=document.getElementById('present-stage').getBoundingClientRect(),
+    slide=document.getElementById('slide-body').getBoundingClientRect();
+   return {m:{x:modal.x,y:modal.y,width:modal.width,height:modal.height},
+    stage:{x:stage.x,y:stage.y,width:stage.width,height:stage.height},
+    slide:{x:slide.x,y:slide.y,width:slide.width,height:slide.height},
+    viewport:{width:innerWidth,height:innerHeight}};
+  });
+  const fs=slideInFullscreen;
+  assert.ok(fs.m.x>=-2&&fs.m.y>=-2&&fs.m.width>=fs.viewport.width-3&&fs.m.height>=fs.viewport.height-3,label+': fullskjerm dekker viewport '+JSON.stringify(fs));
+  assert.ok(fs.slide.x>=fs.stage.x-3&&fs.slide.y>=fs.stage.y-3&&fs.slide.x+fs.slide.width<=fs.stage.x+fs.stage.width+3&&fs.slide.y+fs.slide.height<=fs.stage.y+fs.stage.height+3,label+': lysbilde får plass i fullskjerm '+JSON.stringify(fs));
+  assert.ok(Math.abs(fs.slide.width/fs.slide.height-16/9)<0.02,label+': fullskjerm beholder 16:9');
+  await page.keyboard.press('ArrowRight');
+  assert.ok((await page.locator('#slide-counter').innerText()).startsWith('2 av'),label+': neste lysbilde i fullskjerm');
+  await page.keyboard.press('ArrowLeft');
+  assert.ok((await page.locator('#slide-counter').innerText()).startsWith('1 av'),label+': forrige lysbilde i fullskjerm');
+  await page.locator('#present-fullscreen-toggle').click();
+  await page.waitForFunction(()=>!document.querySelector('#present-modal.presenter-fullscreen')&&!document.fullscreenElement);
+  assert.equal(await page.locator('#present-modal').count(),1,label+': ut av fullskjerm uten å lukke Presenter');
+  assert.equal(await page.locator('#present-fullscreen-toggle').getAttribute('aria-pressed'),'false',label+': knapp tilbakestilt');
+  // Test eksplisitt CSS-reserve for mobilnettlesere uten fullscreen-API.
+  await page.locator('#present-modal').evaluate(el=>{el.requestFullscreen=undefined;});
+  await page.locator('#present-fullscreen-toggle').click();
+  await page.waitForFunction(()=>document.querySelector('#present-modal.presenter-fullscreen'));
+  assert.equal(await page.evaluate(()=>document.fullscreenElement),null,label+': CSS-reserve uten Fullscreen API');
+  await page.setViewportSize({width:844,height:390});
+  await page.waitForTimeout(90);
+  const compact=await page.evaluate(()=>{
+   const stage=document.getElementById('present-stage').getBoundingClientRect();
+   const slide=document.getElementById('slide-body').getBoundingClientRect();
+   return {x:slide.x,y:slide.y,r:slide.right,b:slide.bottom,
+    stageX:stage.x,stageY:stage.y,stageR:stage.right,stageB:stage.bottom};
+  });
+  assert.ok(compact.x>=compact.stageX-3&&compact.y>=compact.stageY-3&&compact.r<=compact.stageR+3&&compact.b<=compact.stageB+3,label+': fullskjerm også i lavt landskapsvindu '+JSON.stringify(compact));
+  await page.keyboard.press('Escape');
+  await page.waitForFunction(()=>!document.querySelector('#present-modal.presenter-fullscreen'));
+  assert.equal(await page.locator('#present-modal').count(),1,label+': Esc går ut av CSS-fullskjerm uten å lukke Presenter');
+  await page.setViewportSize({width,height});
+  await page.locator('[data-deck="portal"]').click();
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.9.5')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.9.6')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes('Innsikt – fra markedssignal')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,7,'alle portal-slides er eksportert');

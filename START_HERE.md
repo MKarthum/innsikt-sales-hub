@@ -100,3 +100,6 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 - Skil demonstrasjon av selve portalen fra illustrative salgsworkshoper. Presenter kundecaser som hypoteser inntil dokumenterte og godkjente referanser foreligger.
 - Eksporterte presentasjoner skal ha versjonsmarkering, fungere uten private data og ikke kreve ekstern LLM ved åpning. Test nedlasting og 16:9 på desktop/mobil i eksisterende nettlesertester.
 - Uavklarte spørsmål om Webstep-repo, intern konfigurering, Artifacts-bygg og framtidig profilering styres i `backlog.json` og `INTERNAL_MIGRATION.md`. Ikke opprett interne filer eller Artifact-integrasjon i offentlig repo før sikkerhet og arkitektur er avklart.
+
+
+- Fullskjermmodus i Presenter skal vise ett skalert 16:9-lysbilde uten portal-/redigeringskontroller, men med tilgjengelig frem/tilbake og tydelig vei ut. Bruk native Fullscreen API når tilgjengelig, med skjermtilpasset CSS-reserve der API mangler. Esc skal gå ut av fullskjerm først, ikke lukke hele Presenter-dialogen. Test også kort landskapsviewport, tastatur og retur til normal visning.
