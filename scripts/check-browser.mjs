@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.3',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.4',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -56,13 +56,54 @@ try {
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#search-input').count(),0,'lukke søk');
   await page.locator('#present-button').click();
-  assert.equal(await page.locator('[data-deck]').count(),3,'Presenter-løp');
-  for(const deck of ['intro','sales','technical']) {
+  assert.equal(await page.locator('[data-deck]').count(),4,'Presenter-løp');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt – fra markedssignal'),'demonstrasjonsløp er startpunkt');
+  for(const deck of ['portal','intro','sales','technical']) {
    await page.locator('[data-deck="'+deck+'"]').click();
    assert.ok((await page.locator('#slide-body').innerText()).length>15,'Presenter '+deck);
    await page.locator('#slide-next').click();
    assert.ok((await page.locator('#slide-counter').innerText()).startsWith('2 av'),'neste lysbilde '+deck);
   }
+  // Alle lysbilder beholder samme 16:9-flate på hver skjermstørrelse.
+  for(const deck of ['portal','intro','sales','technical']){
+   await page.locator('[data-deck="'+deck+'"]').click();
+   const count=await page.locator('#slide-counter').innerText();
+   const total=Number(count.split(' av ')[1]);
+   let expected=null;
+   for(let i=0;i<total;i++){
+    const measures=await page.locator('#slide-body').evaluate(el=>{
+     const rect=el.getBoundingClientRect();
+     return {width:rect.width,height:rect.height,overflowY:el.scrollHeight-el.clientHeight,overflowX:el.scrollWidth-el.clientWidth};
+    });
+    assert.ok(Math.abs(measures.width/measures.height-16/9)<0.02,label+': 16:9 '+deck+' '+i);
+    if(expected)assert.ok(Math.abs(expected.height-measures.height)<2,label+': stabil slidehøyde '+deck);
+    expected=measures;
+    // Innhold må ikke klippes av den faste visningsflaten.
+    assert.ok(measures.overflowY<=3&&measures.overflowX<=3,label+': slide-overflyt '+deck+' '+i+' '+JSON.stringify(measures));
+    if(i<total-1)await page.locator('#slide-next').click();
+   }
+   if(deck==='sales'||deck==='technical'){
+    const prompt=page.locator('[data-deck-prompt]');
+    await prompt.waitFor();
+    await prompt.click();
+    const copiedPrompt=await page.evaluate(()=>navigator.clipboard.readText());
+    assert.ok(copiedPrompt.includes('Målgruppe: [MÅLGRUPPE]'),label+': kanonisk presentasjonsprompt '+deck);
+   }
+  }
+  await page.locator('[data-deck="portal"]').click();
+  const downloadPromise=page.waitForEvent('download');
+  await page.locator('#deck-download').click();
+  const download=await downloadPromise;
+  assert.ok(download.suggestedFilename().includes('0.9.4')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
+  assert.ok(exported.includes('Innsikt – fra markedssignal')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
+  assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,7,'alle portal-slides er eksportert');
+  const popupPromise=context.waitForEvent('page');
+  await page.locator('#deck-print').click();
+  const printed=await popupPromise;
+  await printed.waitForFunction(()=>document.querySelectorAll('.export-slide').length===7);
+  assert.ok((await printed.locator('#export-print').count())===1,'utskriftsvisning har PDF-knapp');
+  await printed.close();
   await page.locator('#speaker-toggle').check();
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#present-modal').count(),0,'lukke Presenter');
