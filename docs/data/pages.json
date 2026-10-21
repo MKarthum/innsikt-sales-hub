@@ -351,7 +351,8 @@
           "cue": "VIS FREM LØSNINGEN",
           "title": "Innsikt hjelper oss fra usikkerhet til en bedre kundesamtale",
           "body": "Et arbeidsverktøy for kundeansvarlige og fagpersoner: finn en relevant oppgave, bruk innholdet og kom videre.",
-          "note": "Åpne med situasjonen, ikke menyen: «Se for dere at jeg skal i kundemøte i morgen. Jeg vil være godt forberedt, men jeg trenger ikke å bli ekspert på alle data- og KI-teknologiene først.» Innsikt hjelper oss med to ting: å finne noe vi kan bruke umiddelbart, og å forstå mer når vi trenger det. Dette er en gjennomgang av arbeidsverktøyet, ikke en presentasjon av et bestemt kundeprosjekt. Forklar at vi skal følge en vanlig forberedelsessituasjon gjennom løsningen. Overgang: Hva ønsker vi å få gjort først?"
+          "note": "Åpne med situasjonen, ikke menyen: «Se for dere at jeg skal i kundemøte i morgen. Jeg vil være godt forberedt, men jeg trenger ikke å bli ekspert på alle data- og KI-teknologiene først.» Innsikt hjelper oss med to ting: å finne noe vi kan bruke umiddelbart, og å forstå mer når vi trenger det. Dette er en gjennomgang av arbeidsverktøyet, ikke en presentasjon av et bestemt kundeprosjekt. Forklar at vi skal følge en vanlig forberedelsessituasjon gjennom løsningen. Overgang: Hva ønsker vi å få gjort først?",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -363,7 +364,8 @@
             "Fanget opp et behov → problemer og avklaringsspørsmål.",
             "Forstå et fagtema → forklaringer og fordypning."
           ],
-          "note": "Vis forsiden mens du forklarer at dette er de tre oppgavekortene brukeren møter der. Ikke framstill dem som et kurs som må gjennomføres i denne rekkefølgen. En kundeansvarlig velger en konkret oppgave, mens en teknisk konsulent kan gå rett til fagstoff. Fortell at du demonstrerer den første inngangen nå, og viser de to andre etterpå. Her ligger forskjellen fra den gamle løsningen: Nytten kommer før den store oversikten. Det er ingen grunn til å lese markedssider før man lager en møtebrief hvis man allerede vet hvorfor man skal i møtet. Overgang: La oss prøve den raskeste veien til et brukbart resultat."
+          "note": "Vis forsiden mens du forklarer at dette er de tre oppgavekortene brukeren møter der. Ikke framstill dem som et kurs som må gjennomføres i denne rekkefølgen. En kundeansvarlig velger en konkret oppgave, mens en teknisk konsulent kan gå rett til fagstoff. Fortell at du demonstrerer den første inngangen nå, og viser de to andre etterpå. Her ligger forskjellen fra den gamle løsningen: Nytten kommer før den store oversikten. Det er ingen grunn til å lese markedssider før man lager en møtebrief hvis man allerede vet hvorfor man skal i møtet. Overgang: La oss prøve den raskeste veien til et brukbart resultat.",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -375,7 +377,8 @@
             "Åpne «Møtebrief på én side» og tilpass feltene.",
             "Kopier til godkjent KI-verktøy og kontroller utkastet."
           ],
-          "note": "Demonstrer fra «Oversikt»: Velg «Lag en møtebrief», som går til #prompter/meeting-prep. Vis at prompten kan redigeres før den kopieres. Den skal gi en kort agenda, relevante spørsmål og et tydelig neste steg. Den kjøres ikke inne i portalen. Dette gir umiddelbar nytte, men er ikke en automatisk kundebeskrivelse eller et ferdig kvalitetssikret råd. Hvis opplysninger mangler, bruk «ukjent» heller enn å finne på fakta. Bruk bare opplysninger godkjent for det valgte KI-verktøyet; ingen fortrolige kundedata i den offentlige portalen. Overgang: Ikke alle starter med et booket møte. Noen har bare fanget opp et problem hos kunden."
+          "note": "Demonstrer fra «Oversikt»: Velg «Lag en møtebrief», som går til #prompter/meeting-prep. Vis at prompten kan redigeres før den kopieres. Den skal gi en kort agenda, relevante spørsmål og et tydelig neste steg. Den kjøres ikke inne i portalen. Dette gir umiddelbar nytte, men er ikke en automatisk kundebeskrivelse eller et ferdig kvalitetssikret råd. Hvis opplysninger mangler, bruk «ukjent» heller enn å finne på fakta. Bruk bare opplysninger godkjent for det valgte KI-verktøyet; ingen fortrolige kundedata i den offentlige portalen. Overgang: Ikke alle starter med et booket møte. Noen har bare fanget opp et problem hos kunden.",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -391,7 +394,8 @@
             "«Salgsinnganger» peker mot mulige faglige spor.",
             "«Kundedialog» trener oss på å se bak første bestilling."
           ],
-          "note": "Bruk et kort muntlig eksempel: «En økonomileder sier at rapporteringen tar for lang tid og tallene spriker.» Fra oppgavekortet «Jeg har fanget opp et behov» går vi til Forretningsbehov, hvor vi finner et illustrativt økonomieksempel med avklaringsspørsmål. Det er møtestøtte, ikke en dokumentert kundereferanse. Spørsmålet er ikke hvilken plattform vi kan selge, men hvilken beslutning som blir forsinket, og hvem som eier problemet. Eksemplet kan vises i sin helhet i den korte presentasjonen etterpå. Overgang: Hva hvis spørsmålene krever mer faglig kunnskap enn jeg har selv?"
+          "note": "Bruk et kort muntlig eksempel: «En økonomileder sier at rapporteringen tar for lang tid og tallene spriker.» Fra oppgavekortet «Jeg har fanget opp et behov» går vi til Forretningsbehov, hvor vi finner et illustrativt økonomieksempel med avklaringsspørsmål. Det er møtestøtte, ikke en dokumentert kundereferanse. Spørsmålet er ikke hvilken plattform vi kan selge, men hvilken beslutning som blir forsinket, og hvem som eier problemet. Eksemplet kan vises i sin helhet i den korte presentasjonen etterpå. Overgang: Hva hvis spørsmålene krever mer faglig kunnskap enn jeg har selv?",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -403,7 +407,8 @@
             "«Data og KI i praksis» forklarer sammenhenger og arkitektur.",
             "Teknologikart og KI-oversikter gir videre fordypning."
           ],
-          "note": "Skill det å føre behovssamtalen fra det å velge løsning: «Som kundeansvarlig trenger jeg ikke forstå hver teknisk detalj, men jeg må forstå når spørsmål om definisjoner, datakvalitet eller arkitektur bør tas videre med en fagperson.» På forsiden ligger oppgavekortet «Jeg vil forstå et fagtema» med direkte inngang til fordypning; «Start her» er frivillig. Teknologikartet og arkitekturskissene er oppslagsstoff, ikke en sjekkliste alle må gjennom. Ikke vis et tilfeldig diagram bare for å fylle tid. Vis ett relevant oppslag om publikum ønsker det. Overgang: Vi har sett oppgavene og fagstoffet – når trenger vi markedskunnskap?"
+          "note": "Skill det å føre behovssamtalen fra det å velge løsning: «Som kundeansvarlig trenger jeg ikke forstå hver teknisk detalj, men jeg må forstå når spørsmål om definisjoner, datakvalitet eller arkitektur bør tas videre med en fagperson.» På forsiden ligger oppgavekortet «Jeg vil forstå et fagtema» med direkte inngang til fordypning; «Start her» er frivillig. Teknologikartet og arkitekturskissene er oppslagsstoff, ikke en sjekkliste alle må gjennom. Ikke vis et tilfeldig diagram bare for å fylle tid. Vis ett relevant oppslag om publikum ønsker det. Overgang: Vi har sett oppgavene og fagstoffet – når trenger vi markedskunnskap?",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -415,7 +420,8 @@
             "«Trendradar» skiller tidlige signaler fra etablerte forhold.",
             "Ingen av delene beviser kundens behov eller et oppdrag."
           ],
-          "note": "Forklar hvorfor markedet ikke lenger er starten på den obligatoriske historien. «I noen samtaler kjenner vi allerede kundeproblemet. I andre trenger vi bakgrunn om hva som endrer seg.» Vis gjerne «Marked og trender» under Kundearbeid og hvordan dokumentasjon skiller seg fra vurdering. «Trendradar» finnes i det utvidbare Faglig oppslag, og er bevisst mer usikker. Dette skal ikke bli en nyhetsoppramsing, men en kort forklaring på at portalen også støtter dem som trenger oppdatert, kritisk kontekst. Overgang: Hva sitter jeg faktisk igjen med når jeg har brukt den?"
+          "note": "Forklar hvorfor markedet ikke lenger er starten på den obligatoriske historien. «I noen samtaler kjenner vi allerede kundeproblemet. I andre trenger vi bakgrunn om hva som endrer seg.» Vis gjerne «Marked og trender» under Kundearbeid og hvordan dokumentasjon skiller seg fra vurdering. «Trendradar» finnes i det utvidbare Faglig oppslag, og er bevisst mer usikker. Dette skal ikke bli en nyhetsoppramsing, men en kort forklaring på at portalen også støtter dem som trenger oppdatert, kritisk kontekst. Overgang: Hva sitter jeg faktisk igjen med når jeg har brukt den?",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -427,7 +433,8 @@
             "Bedre spørsmål om problem, konsekvens og ansvar.",
             "Et neste steg med tilgang til riktig fagkompetanse."
           ],
-          "note": "Samle den lille historien: «Vi begynte med et kundemøte jeg skulle forberede. Nå kan jeg ha et førsteutkast til møtebrief, skarpere avklaringsspørsmål og en pekepinn på når fagmiljøet bør involveres.» Dette er ikke en obligatorisk lineær reise. Forsiden viser alternative startpunkter, promptbiblioteket gjør en praktisk oppgave rask, mens forretningsbehov og fagstoff gjør oss bedre i samtalen. Ikke påstå at portalen henter fra CRM, interne CV-er eller dokumenter automatisk. Overgang: Dermed er det også viktig å si hva verktøyet ikke skal gjøre for oss."
+          "note": "Samle den lille historien: «Vi begynte med et kundemøte jeg skulle forberede. Nå kan jeg ha et førsteutkast til møtebrief, skarpere avklaringsspørsmål og en pekepinn på når fagmiljøet bør involveres.» Dette er ikke en obligatorisk lineær reise. Forsiden viser alternative startpunkter, promptbiblioteket gjør en praktisk oppgave rask, mens forretningsbehov og fagstoff gjør oss bedre i samtalen. Ikke påstå at portalen henter fra CRM, interne CV-er eller dokumenter automatisk. Overgang: Dermed er det også viktig å si hva verktøyet ikke skal gjøre for oss.",
+          "delivery": "tell"
         },
         {
           "type": "takeaway",
@@ -439,7 +446,8 @@
             "Bruk prompter, spørsmål og fordypning etter behov.",
             "Kontroller fakta og forankre neste steg hos kunde og fagmiljø."
           ],
-          "note": "Lukk sirkelen til åpningen: «Jeg trengte ikke lese alt for å få nytte. Jeg kunne velge min oppgave, ta i bruk en ferdig prompt, finne bedre spørsmål og vite hvor jeg skulle lete videre.» Dette er et offentlig arbeidsgrunnlag, ikke en fullautomatisert rådgiver eller et sted for fortrolige kundedata. En erfaren arkitekt kan hoppe rett til dybde, mens en ny kollega kanskje begynner med møtebriefen. Vi har dermed forklart bruken av løsningen, ikke bare menyen. Nå kan du, dersom du ønsker, vise den andre korte presentasjonen som konkret eksempel på Forretningsbehov."
+          "note": "Lukk sirkelen til åpningen: «Jeg trengte ikke lese alt for å få nytte. Jeg kunne velge min oppgave, ta i bruk en ferdig prompt, finne bedre spørsmål og vite hvor jeg skulle lete videre.» Dette er et offentlig arbeidsgrunnlag, ikke en fullautomatisert rådgiver eller et sted for fortrolige kundedata. En erfaren arkitekt kan hoppe rett til dybde, mens en ny kollega kanskje begynner med møtebriefen. Vi har dermed forklart bruken av løsningen, ikke bare menyen. Nå kan du, dersom du ønsker, vise den andre korte presentasjonen som konkret eksempel på Forretningsbehov.",
+          "delivery": "tell"
         }
       ]
     },
@@ -480,7 +488,8 @@
           "cue": "ET KONKRET EKSEMPEL",
           "title": "Kunden sier at tallene ikke stemmer. Hva gjør vi nå?",
           "body": "Et fiktivt eksempel fra «Forretningsbehov». Vi skal ikke diagnostisere kunden, men forberede en bedre samtale.",
-          "note": "Knytt denne presentasjonen til den nye forsidens oppgavekort: «Hvis jeg allerede har fanget opp et behov, velger jeg ‘Jeg har fanget opp et behov’ og går direkte til Forretningsbehov.» Vi følger ett konkret innholdselement og viser hvorfor det kan være nyttig for en kundeansvarlig. Økonomilederen er fiktiv, og vi vet ikke hva som har skapt problemet. Poenget er ikke at vi har gjort en kundeleveranse, men å vise hvordan vi kan gjøre et løst symptom til bedre spørsmål og en forsvarlig oppfølging. Overgang: Hva sier økonomilederen i dette tenkte eksempelet?"
+          "note": "Knytt denne presentasjonen til den nye forsidens oppgavekort: «Hvis jeg allerede har fanget opp et behov, velger jeg ‘Jeg har fanget opp et behov’ og går direkte til Forretningsbehov.» Vi følger ett konkret innholdselement og viser hvorfor det kan være nyttig for en kundeansvarlig. Økonomilederen er fiktiv, og vi vet ikke hva som har skapt problemet. Poenget er ikke at vi har gjort en kundeleveranse, men å vise hvordan vi kan gjøre et løst symptom til bedre spørsmål og en forsvarlig oppfølging. Overgang: Hva sier økonomilederen i dette tenkte eksempelet?",
+          "delivery": "tell"
         },
         {
           "type": "case",
@@ -488,7 +497,8 @@
           "cue": "FRA «FORRETNINGSBEHOV»",
           "title": "«Vi bruker flere dager på månedsavslutning»",
           "business": "okonomi",
-          "note": "Vis gjerne Forretningsbehov → Økonomi og styring (#forretning/okonomi). Les det kanoniske utsagnet og de tilhørende avklaringsspørsmålene slik de vises på siden. Vi vet at kunden opplever treg rapportering og ulike tall; vi vet ikke om årsaken er teknisk eller organisatorisk. Det er nettopp poenget med å finne et forretningsbehov før man foreslår teknologi. Ikke presenter dette som en faktisk kundereferanse, og ikke legg navn eller interne opplysninger inn i portalen. La publikum forstå situasjonen før hypotesene introduseres. Overgang: Hva kan ligge bak uten at vi vet svaret ennå?"
+          "note": "Vis gjerne Forretningsbehov → Økonomi og styring (#forretning/okonomi). Les det kanoniske utsagnet og de tilhørende avklaringsspørsmålene slik de vises på siden. Vi vet at kunden opplever treg rapportering og ulike tall; vi vet ikke om årsaken er teknisk eller organisatorisk. Det er nettopp poenget med å finne et forretningsbehov før man foreslår teknologi. Ikke presenter dette som en faktisk kundereferanse, og ikke legg navn eller interne opplysninger inn i portalen. La publikum forstå situasjonen før hypotesene introduseres. Overgang: Hva kan ligge bak uten at vi vet svaret ennå?",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -500,7 +510,8 @@
             "Data kan samles inn og avstemmes manuelt.",
             "Rapporteringen kan komme for sent til beslutningen."
           ],
-          "note": "Gå gjennom ett mulig alternativ om gangen uten å presentere det som et funn: «Hvis avdelingene bruker ulike definisjoner, er ikke svaret automatisk et nytt dashboard. Hvis innsamlingen er tungvint, kan arbeidsflyten være problemet. Hvis informasjonen kommer etter at beslutningen skulle tas, kan behovet være et annet.» Dette er hypoteser, ikke bekreftet diagnose. Forklar at siden Forretningsbehov gjør disse alternativene lettere å diskutere på rett nivå. Nå trenger vi spørsmål som kan skille dem. Overgang: Hva ville vi faktisk spurt kunden om?"
+          "note": "Gå gjennom ett mulig alternativ om gangen uten å presentere det som et funn: «Hvis avdelingene bruker ulike definisjoner, er ikke svaret automatisk et nytt dashboard. Hvis innsamlingen er tungvint, kan arbeidsflyten være problemet. Hvis informasjonen kommer etter at beslutningen skulle tas, kan behovet være et annet.» Dette er hypoteser, ikke bekreftet diagnose. Forklar at siden Forretningsbehov gjør disse alternativene lettere å diskutere på rett nivå. Nå trenger vi spørsmål som kan skille dem. Overgang: Hva ville vi faktisk spurt kunden om?",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -512,7 +523,8 @@
             "Hvor oppstår forskjellene, og hvem eier definisjonene?",
             "Hva må vi undersøke før vi anbefaler et tiltak?"
           ],
-          "note": "Knyt spørsmålene til den eksisterende visningen i portalen, ikke til et generisk salgsrammeverk. «Forretningsbehov» viser oss konsekvens, datagrunnlag og hvem som er involvert. I det fiktive eksempelet gjør dette oppfølgingen mer presis, selv om vi fortsatt ikke vet årsaken. Det er en viktig begrensning: Vi ber ikke en kundeansvarlig velge løsning ut fra noen få punkter, og det er normalt å involvere riktig fagkompetanse. Vis eventuelt de relaterte salgsinngangene. Overgang: Hvordan kan brukeren forberede den videre samtalen uten å begynne på et blankt ark?"
+          "note": "Knyt spørsmålene til den eksisterende visningen i portalen, ikke til et generisk salgsrammeverk. «Forretningsbehov» viser oss konsekvens, datagrunnlag og hvem som er involvert. I det fiktive eksempelet gjør dette oppfølgingen mer presis, selv om vi fortsatt ikke vet årsaken. Det er en viktig begrensning: Vi ber ikke en kundeansvarlig velge løsning ut fra noen få punkter, og det er normalt å involvere riktig fagkompetanse. Vis eventuelt de relaterte salgsinngangene. Overgang: Hvordan kan brukeren forberede den videre samtalen uten å begynne på et blankt ark?",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -524,7 +536,8 @@
             "Bruk et generisk eller anonymisert kundesignal.",
             "Tilpass, kopier og kvalitetssikre spørsmålene."
           ],
-          "note": "Dette er koblingen til den oppgaveorienterte forsiden. Prompten «Bygg en behovssamtale» finnes på #prompter/discovery og er blant de fremhevede promptene. Den lager et utkast til spørsmål og mulig neste steg ut fra et uklart signal. Vis gjerne den reelle prompten, at teksten kan redigeres, og at den kopieres til et godkjent KI-verktøy fremfor å kjøres i portalen. Ikke lim inn konfidensielle kundesitater eller anta at et generert svar er sant. Dette gir likevel en umiddelbart nyttig måte å forberede neste møte på. Overgang: Hva skal vi bruke utkastet til?"
+          "note": "Dette er koblingen til den oppgaveorienterte forsiden. Prompten «Bygg en behovssamtale» finnes på #prompter/discovery og er blant de fremhevede promptene. Den lager et utkast til spørsmål og mulig neste steg ut fra et uklart signal. Vis gjerne den reelle prompten, at teksten kan redigeres, og at den kopieres til et godkjent KI-verktøy fremfor å kjøres i portalen. Ikke lim inn konfidensielle kundesitater eller anta at et generert svar er sant. Dette gir likevel en umiddelbart nyttig måte å forberede neste møte på. Overgang: Hva skal vi bruke utkastet til?",
+          "delivery": "tell"
         },
         {
           "type": "bullets",
@@ -536,7 +549,8 @@
             "Undersøk én rapporteringsflyt og definisjonene bak.",
             "Vurder først deretter om videre arbeid er nødvendig."
           ],
-          "note": "Avslutt den tenkte kundehistorien uten å overselge: «Nå kan vi foreslå et kort møte med økonomiansvarlig og relevant fagperson for å forstå én rapporteringsflyt og hvordan tallene defineres.» Det er en mulig avklaring, ikke et løfte om et prosjekt eller en bestemt effekt. Det kan vise seg at utfordringen skyldes prosess eller at problemet ikke rettferdiggjør et oppdrag. Slik viser vi hvordan løsningen kan bidra til et bedre utgangspunkt for en reell faglig vurdering, uten å late som den erstatter den. Overgang: Hva var den konkrete gevinsten for brukeren?"
+          "note": "Avslutt den tenkte kundehistorien uten å overselge: «Nå kan vi foreslå et kort møte med økonomiansvarlig og relevant fagperson for å forstå én rapporteringsflyt og hvordan tallene defineres.» Det er en mulig avklaring, ikke et løfte om et prosjekt eller en bestemt effekt. Det kan vise seg at utfordringen skyldes prosess eller at problemet ikke rettferdiggjør et oppdrag. Slik viser vi hvordan løsningen kan bidra til et bedre utgangspunkt for en reell faglig vurdering, uten å late som den erstatter den. Overgang: Hva var den konkrete gevinsten for brukeren?",
+          "delivery": "tell"
         },
         {
           "type": "takeaway",
@@ -548,7 +562,8 @@
             "En ferdig prompt gjorde spørsmålene lettere å forberede.",
             "Vi fikk et kvalifisert neste møte, ikke en ferdig diagnose."
           ],
-          "note": "Avslutt med to konkrete steder i portalen, ikke en ny forelesning: «Det vi nettopp viste, finnes der: et illustrativt økonomibehov under Forretningsbehov og prompten ‘Bygg en behovssamtale’ i promptbiblioteket.» Det er ikke en kundereferanse og heller ikke en påstand om resultatet av et virkelig prosjekt. Poenget er at faglig innhold og praktiske verktøy nå henger sammen slik at brukeren kan gå fra et signal til en mer meningsfull handling. For et faktisk oppdrag må kundens fakta og faglige behov kontrolleres separat. Avslutt her."
+          "note": "Avslutt med to konkrete steder i portalen, ikke en ny forelesning: «Det vi nettopp viste, finnes der: et illustrativt økonomibehov under Forretningsbehov og prompten ‘Bygg en behovssamtale’ i promptbiblioteket.» Det er ikke en kundereferanse og heller ikke en påstand om resultatet av et virkelig prosjekt. Poenget er at faglig innhold og praktiske verktøy nå henger sammen slik at brukeren kan gå fra et signal til en mer meningsfull handling. For et faktisk oppdrag må kundens fakta og faglige behov kontrolleres separat. Avslutt her.",
+          "delivery": "tell"
         }
       ]
     }
