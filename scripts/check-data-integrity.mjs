@@ -37,6 +37,7 @@ for(const c of sales.industryUseCases){
  if(!Array.isArray(c.metrics)||!c.metrics.length||!c.metrics.every(str))fail('Mangler måleparametre: '+c.id);
  if(!Array.isArray(c.playIds)||!c.playIds.length||c.playIds.some(id=>!playIds.has(id)))fail('Ukjent leveranseinngang: '+c.id);
  if(c.evidence!=='assessment'||!date(c.reviewed)||c.visibility!=='presented')fail('Kunnskapsstatus mangler: '+c.id);
+ if(c.maturitySteps)for(const step of c.maturitySteps)if(!str(step.label)||!str(step.description)||!str(step.value))fail('Ufullstendig modenhetstrinn i '+c.id);
 }
 if(sales.industryJourney?.steps?.length!==4||!str(sales.industryJourney.qualification)||!str(sales.industryJourney.maturityCaution))fail('Mangler forretningsdrevet kvalifiseringsløp');
 const ui=pages.industryUi;
