@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.10.1',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.10.2',label+': versjon');
   assert.equal(await page.locator('.home-task').count(),3,label+': rask oppgavestart');
   assert.equal(await page.locator('#main .prompt-card').count(),3,label+': fremhevede prompter');
   for (const route of [...pages,...details]) {
@@ -70,23 +70,37 @@ try {
   assert.equal(await page.locator('#search-input').count(),0,'lukke søk');
   await page.locator('#present-button').click();
   assert.equal(await page.locator('[data-deck]').count(),2,'To selvstendige Presenter-løp');
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt gjør fagkunnskap nyttig'),label+': løsningen presenteres først');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt hjelper oss fra usikkerhet'),label+': løsningen presenteres først');
   for(const deck of ['portal','sales']) {
    await page.locator('[data-deck="'+deck+'"]').click();
    assert.ok((await page.locator('#slide-body').innerText()).length>15,'Presenter '+deck);
    await page.locator('#slide-next').click();
    assert.ok((await page.locator('#slide-counter').innerText()).startsWith('2 av'),'neste lysbilde '+deck);
   }
+  // Hovedfortellingen skal følge de samme oppgavene som den nye forsiden.
+  await page.locator('[data-deck="portal"]').click();
+  await page.locator('#slide-next').click();
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Tre vanlige oppgaver'),label+': oppgaver kommer før fagkatalog');
+  await page.locator('#slide-next').click();
+  assert.ok((await page.locator('#slide-body').innerText()).includes('En møtebrief kan være første nyttige resultat'),label+': klar første nytte');
+  await page.locator('#slide-next').click();
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Et kundesignal blir nyttig'),label+': kundebehov er neste alternativ');
+  await page.locator('#slide-next').click();
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Fagstoffet er der'),label+': fagdybde kommer når nødvendig');
   // Eksempelet skal gjenbruke et kanonisk forretningsbehov, ikke være en kundereferanse.
   await page.locator('[data-deck="sales"]').click();
   const exampleOpening=await page.locator('#slide-body').innerText();
-  assert.ok(exampleOpening.includes('Situasjonen er fiktiv'),label+': eksempel tydelig merket');
+  assert.ok(exampleOpening.includes('fiktivt eksempel'),label+': eksempel tydelig merket');
   await page.locator('#slide-next').click();
   const exampleContent=await page.locator('#slide-body').innerText();
-  assert.ok(exampleContent.includes('månedsavslutning')&&exampleContent.includes('Økonomilederen'),label+': reelt innhold fra forretningsbehov');
+  assert.ok(exampleContent.includes('månedsavslutning')&&exampleContent.includes('Vi bruker flere dager'),label+': kanonisk forretningsbehov i eksempel');
   await page.locator('#slide-next').click();
   const explanation=await page.locator('#slide-body').innerText();
-  assert.ok(explanation.includes('Ulike tall kan ha ulike forklaringer'),label+': årsaker vurderes etter symptomet');
+  assert.ok(explanation.includes('Symptomet kan ha flere ulike årsaker'),label+': årsaker vurderes etter symptomet');
+  // Eksempelløpet må peke til en faktisk tilgjengelig, kanonisk prompt.
+  await page.locator('#slide-next').click();
+  await page.locator('#slide-next').click();
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Bygg en behovssamtale'),label+': prompt som eksisterer i biblioteket');
   // Alle lysbilder beholder samme 16:9-flate på hver skjermstørrelse.
   for(const deck of ['portal','sales']){
    await page.locator('[data-deck="'+deck+'"]').click();
@@ -182,9 +196,9 @@ try {
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.10.1')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.10.2')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
-  assert.ok(exported.includes('Innsikt gjør fagkunnskap nyttig')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
+  assert.ok(exported.includes('Innsikt hjelper oss fra usikkerhet')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,8,'alle portal-slides er eksportert');
   const popupPromise=context.waitForEvent('page');
   await page.locator('#deck-print').click();
