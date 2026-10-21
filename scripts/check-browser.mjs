@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.7',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.8',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
