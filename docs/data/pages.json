@@ -116,22 +116,22 @@
     }
   },
   "home": {
-    "eyebrow": "ET PRAKTISK VERKTØY FOR BEDRE KUNDEDIALOGER",
-    "titleLine1": "Se mulighetene.",
-    "titleLine2": "Still bedre spørsmål.",
+    "eyebrow": "ET ARBEIDSVERKTØY FOR KUNDESAMTALER",
+    "titleLine1": "Forstå behovet.",
+    "titleLine2": "Kom videre i samtalen.",
     "intro": {
       "$content": "guidance:customer-first",
       "variant": "home"
     },
-    "statsTitle": "Tre måter Innsikt skaper verdi",
-    "statsIntro": "Fra et pålitelig datagrunnlag til bedre styring og nye KI-muligheter. Velg sporet som passer kundens situasjon.",
-    "actionTitle": "Hva skal du gjøre?",
-    "actionIntro": "Ta utgangspunkt i situasjonen du står i",
-    "startTitle": "Helt ny innen data og analyse?",
-    "startIntro": "Bruk åtte minutter på hva en dataplattform gjør, hvor KI passer inn og hvilke begreper du trenger å kjenne.",
+    "statsTitle": "Tre typer behov",
+    "statsIntro": "Forstå sammenhengen mellom datagrunnlag, beslutningsstøtte og KI.",
+    "actionTitle": "Hva trenger du hjelp med?",
+    "actionIntro": "Velg en konkret oppgave. Du kan gå direkte til verktøyene eller fordype deg underveis.",
+    "startTitle": "Ny innen data, analyse og KI?",
+    "startIntro": "Få en kort innføring i hva fagområdet handler om og hvilke begreper du trenger. Introduksjonen er valgfri.",
     "startAction": "Ta introduksjonen",
-    "advancedTitle": "Erfaren eller på vei til kundemøte?",
-    "advancedIntro": "Gå rett til arkitekturskissene, samtaleguidene eller verktøykassen.",
+    "advancedTitle": "For deg som vil gå dypere",
+    "advancedIntro": "Gå rett til relevant fagstoff eller praktiske maler.",
     "pillarTitle": "Slik henger de sammen",
     "pillarIntro": {
       "$content": "value-overview:three-needs",
@@ -142,9 +142,9 @@
       "$content": "market-guidance:ki-use",
       "variant": "homeEvidence"
     },
-    "promptTitle": "Bruk KI til å forberede en bedre kundedialog",
-    "promptBody": "Ferdigskrevne, redigerbare prompter for kundekartlegging, møter, kompetansebehov og presentasjoner. Foreløpig kun med åpne eller generiske data.",
-    "promptCta": "Åpne promptbiblioteket",
+    "promptTitle": "Tre prompter du kan bruke med én gang",
+    "promptBody": "Velg en oppgave, tilpass feltene og kopier til et KI-verktøy som er godkjent for opplysningene du bruker.",
+    "promptCta": "Se alle prompter",
     "pillars": [
       {
         "id": "platform",
@@ -198,6 +198,58 @@
           "ssb",
           "webstep1"
         ]
+      }
+    ],
+    "heroActions": [
+      {
+        "title": "Lag en møtebrief",
+        "route": "#prompter/meeting-prep",
+        "style": "mint"
+      },
+      {
+        "title": "Utforsk forretningsbehov",
+        "route": "#forretning",
+        "style": "ghost"
+      }
+    ],
+    "quickTasks": [
+      {
+        "id": "meeting",
+        "icon": "calendar",
+        "title": "Jeg skal forberede et kundemøte",
+        "description": "Lag en kort møtebrief med agenda og relevante spørsmål.",
+        "route": "#prompter/meeting-prep",
+        "action": "Lag møtebrief"
+      },
+      {
+        "id": "need",
+        "icon": "target",
+        "title": "Jeg har fanget opp et behov",
+        "description": "Utforsk hva som kan ligge bak, og hvilke spørsmål du bør stille.",
+        "route": "#forretning",
+        "action": "Utforsk behovet"
+      },
+      {
+        "id": "expert",
+        "icon": "network",
+        "title": "Jeg vil forstå et fagtema",
+        "description": "Finn forklaringer, arkitekturprinsipper og teknisk bakgrunn.",
+        "route": "#arkitektur",
+        "action": "Se faglig fordypning"
+      }
+    ],
+    "advancedLinks": [
+      {
+        "label": "Arkitektur",
+        "route": "#arkitektur"
+      },
+      {
+        "label": "Teknologikart",
+        "route": "#teknologi"
+      },
+      {
+        "label": "Maler og sjekklister",
+        "route": "#verktoy"
       }
     ]
   },
@@ -624,5 +676,25 @@
     "reviewedLabel": "Vurdert",
     "methodTitle": "Når flyttes et signal ut av radaren?",
     "methodText": "Et signal blir del av kjerneinnholdet først når det endrer et konkret kundebehov, et arkitekturvalg, en arbeidsprosess eller et kompetansebehov. Hvis nytten uteblir, arkiveres signalet. Kilder viser grunnlaget, ikke dokumentert kundegevinst."
+  },
+  "navigationGroups": {
+    "start": "KOM I GANG",
+    "work": "KUNDEARBEID",
+    "reference": "FAGLIG OPPSLAG",
+    "about": "OM LØSNINGEN"
+  },
+  "promptActions": {
+    "play": {
+      "promptId": "discovery",
+      "title": "Bruk dette signalet i en behovssamtale",
+      "description": "Få konkrete spørsmål basert på en anonymisert beskrivelse av kundens problem.",
+      "label": "Åpne behovsprompt"
+    },
+    "business": {
+      "promptId": "opportunity-map",
+      "title": "Fra forretningsbehov til neste steg",
+      "description": "Kvalifiser et anonymisert problem uten å forutsette en bestemt løsning.",
+      "label": "Åpne kvalifiseringsprompt"
+    }
   }
 }

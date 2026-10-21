@@ -37,7 +37,7 @@
     "area": "Brukerinnsikt",
     "status": "åpen",
     "priority": "høy",
-    "why": "Se om spørsmål og innganger fungerer uten en fagekspert i rommet."
+    "why": "Test med faktiske nye brukere og selgere: Forstår de formålet på ett minutt, finner de møtebrief eller behovsspørsmål uten veiledning, og kommer de videre fra et kundesignal? Skill observasjoner fra antagelser."
   },
   {
     "id": "B-06",
@@ -206,5 +206,13 @@
     "status": "åpen",
     "priority": "middels",
     "why": "Vurder om hvert tidlige signal skal oppdateres, flyttes til eksisterende kjerneinnhold eller fjernes. Bekreft kilder, faktisk modenhet og relevans før publisering."
+  },
+  {
+    "id": "B-27",
+    "title": "Teste kvaliteten på utdata fra prioriterte prompter",
+    "area": "Prompter",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Kjør representative, offentlig delbare scenarioer med relevante godkjente KI-modeller. Vurder konkrete svar, faktagrunnlag, kildebruk og nytte før biblioteket utvides."
   }
 ]

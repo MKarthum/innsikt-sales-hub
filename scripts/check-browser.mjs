@@ -15,7 +15,9 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.10.0',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.10.1',label+': versjon');
+  assert.equal(await page.locator('.home-task').count(),3,label+': rask oppgavestart');
+  assert.equal(await page.locator('#main .prompt-card').count(),3,label+': fremhevede prompter');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -36,6 +38,11 @@ try {
   await page.evaluate(()=>{location.hash='#arkitektur/ai-on-data'});
   await page.locator('.diagram-flow-up').waitFor();
   assert.equal(await page.locator('.diagram-flow-up').evaluate(el=>getComputedStyle(el).flexDirection),'column-reverse',label+': diagram leses nedenfra og opp');
+  await page.evaluate(()=>{location.hash='#prompter'});await page.locator('.prompt-featured').waitFor();
+  assert.equal(await page.locator('.prompt-featured .prompt-card').count(),3,label+': tre promptforslag');
+  assert.equal(await page.locator('#main .prompt-card').count(),14,label+': alle prompter uten duplikater');
+  await page.evaluate(()=>{location.hash='#muligheter/rapportering'});await page.locator('.related-prompt a[href="#prompter/discovery"]').waitFor();
+  await page.evaluate(()=>{location.hash='#forretning/okonomi'});await page.locator('.related-prompt a[href="#prompter/opportunity-map"]').waitFor();
   await page.evaluate(()=>{location.hash='#prompter/account-research'});
   await page.locator('#prompt-editor').waitFor();
   const original=await page.locator('#prompt-editor').inputValue();
@@ -175,7 +182,7 @@ try {
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.10.0')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.10.1')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes('Innsikt gjør fagkunnskap nyttig')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,8,'alle portal-slides er eksportert');
