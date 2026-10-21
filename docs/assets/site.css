@@ -447,3 +447,8 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
  #present-modal:not(.presenter-fullscreen) #present-fullscreen-toggle span{display:none}
  #present-modal:not(.presenter-fullscreen) #present-fullscreen-toggle{margin-left:0}
 }
+
+/* Kun presentasjon: diagramretning styres av learning.json, aldri av fagtekst i CSS. */
+.diagram-flow.diagram-flow-up{display:flex;flex-direction:column-reverse;gap:10px;max-width:550px;margin:0 auto}
+.diagram-flow-up .diagram-step{width:100%;max-width:none;min-width:0;flex:0 0 auto;padding:15px 20px}
+.diagram-flow-up .diagram-arrow{margin:0 auto;transform:none;flex:0 0 auto}
