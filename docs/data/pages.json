@@ -467,120 +467,172 @@
       "slides": [
         {
           "type": "intro",
-          "title": "Kunden vil ha KI. Oppdraget er fortsatt uklart.",
-          "body": "Workshopøvelse: Kan vi gå fra en teknologibestilling til en testbar forretningsmulighet?",
-          "note": "Sett rammen tydelig: Dette er en øvelse basert på et fiktivt operativt scenario, ikke en Webstep-referanse. Del gjerne deltakerne i par. Si at kunden kommer til oss med formuleringen «Vi vil bruke KI for å effektivisere driften». Vi skal motstå fristelsen til å velge produkt eller rolle umiddelbart og heller finne ut hvor verdien kan ligge. Målet etter workshopen er ikke et tilbud, men et beslutningsgrunnlag for om en avgrenset faglig utforsking gir mening. Overgang: Vi konkretiserer problemet i én bransje."
+          "beat": "contract",
+          "delivery": "tell",
+          "title": "Intern workshop: fra KI-ønske til kvalifisert neste steg",
+          "body": "For kundeansvarlige og fagkonsulenter. Vi trener med ett fiktivt luftfartscase – ikke en ferdig kundepresentasjon.",
+          "bullets": [
+            "Vi følger et tenkt kundemøte fra første spørsmål til mulig oppfølging.",
+            "Underveis stopper vi for tre korte øvelser.",
+            "Målet er å lære en metode som kan brukes i andre kundedialoger."
+          ],
+          "note": "Start med en tydelig avtale med rommet: «Dette er en intern treningsøkt for oss som møter kunder. Vi skal ikke presentere en løsning for et flyselskap. Vi skal øve på hva vi spør om når noen kommer med et uklart KI-ønske.» Forklar at alt som skjer hos kunden er oppdiktet, mens spørsmålene og metoden er ment for gjenbruk. Fortell at du først presenterer en situasjon; ved lysbilder merket Øvelse skal deltakerne diskutere i par før dere går videre. Det forventede resultatet er et forslag til et kvalifiserende neste møte, ikke et tilbud. Bruk omtrent to minutter. Overgang: Nå møter vi kunden i dette fiktive eksempelet."
         },
         {
           "type": "sector-case",
-          "title": "En forsinkelse kan ha flere årsaker",
+          "beat": "encounter",
+          "delivery": "tell",
+          "title": "Fiktivt kundemøte: Hva er det egentlig som forsinkes?",
           "industryCase": "transport-turnaround",
-          "note": "Les scenariet som et eksempel fra luftfart: Turnaround omfatter flere aktører, og forsinkelser kan oppstå i overleveringer, bemanning eller registrering. Be deltakerne peke på forskjellen mellom symptom og årsak. Gjenta at vi ikke vet om dataene er riktige eller om KI er relevant. Vis spørsmålet om lik registrering av start- og sluttid: Ulike definisjoner kan skape falske sammenligninger. Sikkerhetsprosedyrer er ikke noe vi skal optimalisere bort. Overgang: Hvilke spørsmål kommer før en analyse?"
+          "caseView": "situation",
+          "body": "Vi er rådgiverne. Motparten er en operativ leder som sier: «Vi vil se om KI kan hjelpe oss å få bedre flyt.»",
+          "note": "Fortell dette som begynnelsen på én sammenhengende historie: «Se for dere at vi møter en operativ leder i et tenkt luftfartsmiljø. Vedkommende beskriver at flere små forsinkelser under bakkearbeidet summeres, og ønsker å se om KI kan hjelpe.» Forklar kort at bakkearbeidet omfatter samordnede aktiviteter som renhold, catering og lasting. Vi vet ennå ikke hvor mye variasjon det er, hva årsaken er eller om KI passer. Ikke røp forslag til pilot, løsninger eller mulige leveranser nå. Publikum har rollen som rådgivere; kunden i historien er oppdiktet. Bruk omtrent to minutter. Overgang: Hva spør vi denne lederen om før vi snakker om teknologi?"
         },
         {
           "type": "bullets",
-          "title": "Ikke forveksle en måling med en forklaring",
+          "beat": "discovery",
+          "delivery": "exercise",
+          "title": "Øvelse 1: Still spørsmålet som åpner problemet",
+          "body": "I par, 3 minutter: Velg ett spørsmål dere faktisk ville stilt nå.",
           "bullets": [
-            "Symptom: Bakketiden varierer mer enn ønsket.",
-            "Mulige årsaker: Kapasitet, avhengigheter, registrering eller arbeidsflyt.",
-            "Avklaring: Hva kan den operative lederen faktisk påvirke?"
+            "Hvilken konkret hendelse eller beslutning skaper friksjon?",
+            "Hva får forsinkelsen av konsekvenser, og for hvem?",
+            "Hvem kan endre arbeidsmåten dersom vi finner årsaken?"
           ],
-          "note": "Be gruppene komme med to ulike hypoteser. Hvis en registrering kommer sent inn i systemet, kan en hendelse se forsinket ut selv om arbeidet var ferdig. Hvis to lag venter på hverandre, kan prosessen være problemet. Dette er hypoteser, ikke fakta om luftfartsdrift. Unngå å love at data alene vil gi årsaken. Spør: «Hvilken observasjon ville gjort at vi endret mening?» Den typen spørsmål skiller en salgsmulighet fra et løst forbedringsønske. Overgang: Hvem skal eie gevinsten og beslutningen?"
+          "note": "Stopp historien. Gi parene tre minutter og be dem velge ett av spørsmålene eller formulere et bedre. Ikke svar på spørsmålene på vegne av den oppdiktede kunden. Be to par lese opp valget sitt og hvorfor det er mer nyttig enn «hvilket KI-verktøy har dere?». Oppsummer at målet med denne første avklaringen er å oppdage konsekvens, virksomhetseier og hva som faktisk kan påvirkes. Skillet er viktig: Dette lysbildet er en deltakerøvelse, ikke en påstand om hva som skjer i luftfartsdrift. Overgang: Vi fortsetter historien med det kunden har oppgitt – og markerer hva som fortsatt er ukjent."
         },
         {
           "type": "bullets",
-          "title": "Uten eier og konsekvens har vi ingen kvalifisert mulighet",
+          "beat": "discovery",
+          "delivery": "tell",
+          "title": "Et symptom er ikke det samme som en årsak",
+          "body": "Tilbake til caset: Kunden peker på samlet bakketid. Det er fortsatt en observasjon, ikke en diagnose.",
           "bullets": [
-            "Hvem har ansvar for avgangspresisjon og bakketid?",
-            "Hva betyr variasjonen for drift, kostnad eller kundens opplevelse?",
-            "Hvilken beslutning kan tas annerledes hvis vi får bedre oversikt?"
+            "Oppgitt: Små forsinkelser oppstår i flere aktiviteter.",
+            "Uavklart: Venting, kapasitet, overlevering eller registrering?",
+            "Avgjørende: Hva kan operativ leder måle og påvirke?"
           ],
-          "note": "Dette er det kommersielt viktige punktet, men hold samtalen på kundens premisser. En teknisk sponsor er ikke nødvendigvis den som eier effekten. Spør hvem som kan prioritere tiltak, hvem som bruker resultatet, og hvilken tidshorisont som gjelder. Ikke finn på besparelser eller prosentforbedringer. Be en deltaker formulere én setning som knytter observerbart problem til en ansvarlig leder. Først da kan vi diskutere relevant kompetanse. Overgang: Hvilke data må vi stole på før vi konkluderer?"
+          "note": "Ta tråden opp igjen: «Nå vet vi hvorfor kunden er bekymret, men vi vet fortsatt ikke hva som driver forsinkelsene.» Pek på forskjellen mellom samlet bakketid som resultat og de enkelte hendelsene som kan ha bidratt. Opplysningene på skjermen beskriver casets forutsetninger og spørsmål som må undersøkes, ikke påviste forhold hos et faktisk flyselskap. Si gjerne: «Hvis vi går rett på prediksjon, risikerer vi bare å predikere et tall vi ikke forstår.» Spør kort hva vi trenger å se i dataene. Bruk to minutter. Overgang: La oss innføre en mulig opplysning som utfordrer den første forklaringen."
         },
         {
           "type": "bullets",
-          "title": "Et felles tidsbilde er viktigere enn et nytt dashboard",
+          "beat": "complication",
+          "delivery": "tell",
+          "title": "Anta at «ferdig» betyr noe ulikt for to aktører",
+          "body": "Nytt hypotetisk funn i øvelsen – ikke en konstatert årsak hos kunden.",
           "bullets": [
-            "Avklar hva «start» og «ferdig» betyr for hvert bakketrinn.",
-            "Undersøk hvilke hendelser, systemer og aktører som kan kobles.",
-            "Finn datamangler og mulige skjevheter før årsaker rangeres."
+            "Den ene aktøren registrerer når arbeidet avsluttes.",
+            "Den andre registrerer når hendelsen godkjennes i systemet.",
+            "Da kan en sammenligning vise tidsforskjeller som ikke er faktisk venting."
           ],
-          "note": "Dette er stedet for å invitere en data engineer eller analytiker, men ikke til å foreslå plattform uten videre. Konkretiser: Når renhold registrerer ferdig og når lasting faktisk starter, kan være to ulike hendelser. Hvis tidsstempler mangler eller har ulik presisjon, må dette løses eller synliggjøres før man ser etter mønstre. Påpek at tilgang, personvern og sikkerhet også må avklares. Spør gruppen hva de ville bedt kunden vise på neste møte, uten å kreve eksport av sensitive data. Overgang: Nå kan vi skille mulige tiltak."
+          "note": "Dette er historiens første vendepunkt. Si eksplisitt: «Vi innfører nå en hypotese for å teste tenkningen vår. Anta at 'ferdig' registreres ved fysisk avslutning i én prosess og ved senere godkjenning i en annen.» Forklar hvorfor dette kan gjøre målinger misvisende, men ikke si at denne hypotesen er bekreftet. Den underliggende utfordringen kan fortsatt ligge i kapasitet eller arbeidsflyt. La publikum merke at det opprinnelige KI-ønsket ikke svarer på dette. Eksempelet illustrerer behovet for begrepsavklaring og kvalitet. Bruk to minutter. Overgang: Hvordan finner vi ut hvilken forklaring som holder?"
         },
         {
           "type": "bullets",
-          "title": "Ulike funn leder til ulike oppdrag",
+          "beat": "complication",
+          "delivery": "exercise",
+          "title": "Øvelse 2: Hvilken forklaring kan vi faktisk teste?",
+          "body": "Diskuter i par, 3 minutter: Velg én hypotese og ett bevis som kan avkrefte den.",
           "bullets": [
-            "Dårlige registreringer → datakvalitet, definisjoner og eierskap.",
-            "Flaskehalser i overlevering → prosessinnsikt og operativ analyse.",
-            "Behov for tidligere varsling → undersøk prediksjon, men bare hvis data holder."
+            "A: Målingene er ulike fordi begrepene er ulike.",
+            "B: Det finnes reell venting mellom to arbeidsoppgaver.",
+            "C: Varierende bemanning eller kapasitet er hoveddriveren."
           ],
-          "note": "Dette er vendepunktet i workshopen: Tre plausible funn gir tre forskjellige arbeidsretninger. Det er ingen automatikk i at KI er det tredje svaret; prediksjon kan også løses med enklere statistikk eller regler. Presenter mulighetene som grener, ikke som tre leveranser kunden trenger samtidig. Be deltakerne foreslå hva som ville fått dem til å forkaste hver gren. Dette gjør det tydelig hvorfor kvalifisering og faglig involvering må komme før teknologivalg. Overgang: Kan vi teste én av grenene i liten skala?"
+          "note": "Pause i fortellingen igjen. Be hvert par velge A, B eller C, men ikke kåre en vinner. Spør hva de ville undersøkt for å avkrefte hypotesen: for A kan det være sammenligning av definisjoner og hendelseslogger; for B tidsstempler og observerte overleveringer; for C bemanning og belastning over tid. Vi har ingen slike data her, så ingen av svarene er fasit. Poenget er å omsette et løst problem til testbare alternativer. Be to par dele sitt beviskrav. Bruk tre minutter. Overgang: Når vi har hypotesene, kan vi avklare hvilke data som trengs – og hvem som eier dem."
         },
         {
           "type": "bullets",
-          "title": "Design en test som kan motbevise hypotesen",
+          "beat": "complication",
+          "delivery": "tell",
+          "title": "Før analyse må hendelsene bety det samme",
+          "body": "Fortsett caset: Vi undersøker ett sammenhengende bakkeforløp, ikke hele virksomheten.",
           "bullets": [
-            "Avgrens til én flytype eller én definert del av bakkeforløpet.",
-            "Bli enige om målemetode, dagens nivå og hva som teller som forbedring.",
-            "La drift og sikkerhetsansvarlige godkjenne eventuelle endringer."
+            "Bli enige om definisjonen av start, ferdig og ventetid.",
+            "Se om hendelser kan kobles sikkert mellom aktører og systemer.",
+            "La operativt ansvarlige kontrollere hva registreringene faktisk betyr."
           ],
-          "note": "Vis til det kanoniske forslaget om å måle et konkret bakkeforløp på én flytype. Det er en pedagogisk avgrensning, ikke en anbefaling om å teste på aktive flyoperasjoner uten nødvendige godkjenninger. Forklar at en første fase også kan være ren datakartlegging og analyse, uten endringer i drift. Be publikum formulere én falsifiserbar hypotese, for eksempel at variasjonen i én overgang kan forklares av registrerte ventetider. Ikke lov gevinst før man har data. Overgang: Hva ville rettferdiggjort KI i en senere fase?"
+          "note": "Bruk svarene fra øvelse 2: Hvis gruppen vil undersøke tidsstempler, må vi først forstå hva tidspunktene representerer. Forklar at selv avansert analyse ikke gir pålitelige slutninger når definisjonene er uklare. Hold dette konkret: En operativ leder bør kunne forklare prosessen, mens en data-/analyseperson vurderer kildegrunnlag, sammenstilling og kvalitet. Det kan hende oppgaven allerede her blir et datakvalitetsarbeid snarere enn et KI-prosjekt. Avklar tilgang, personvern og sikkerhet før eventuell bruk av operative data. Bruk to minutter. Overgang: Nå kan vi skissere ulike veier avhengig av hva undersøkelsen avdekker."
         },
         {
           "type": "bullets",
-          "title": "KI er én mulighet – ikke konklusjonen",
+          "beat": "choice",
+          "delivery": "tell",
+          "title": "Samme forespørsel kan ende i tre forskjellige tiltak",
+          "body": "Dette er alternative utfall – ikke tre leveranser kunden automatisk trenger.",
           "bullets": [
-            "Beskrivende analyse når vi trenger å forstå hva som skjer.",
-            "Regler eller enklere modeller når behovet er stabile varsler.",
-            "Mer avansert KI først når nytten, datagrunnlaget og kontrollen tilsier det."
+            "Feil i registreringene → felles definisjoner og datakvalitet.",
+            "Reell venting i prosessen → operativ analyse og forbedringsarbeid.",
+            "Behov for varsling → test regler eller modeller før avansert KI."
           ],
-          "note": "Spør om noen fremdeles ville solgt en KI-agent etter de første syv lysbildene. Bruk svarene til å skille analyse, varsling, prediksjon og automatisert handling. Jo nærmere løsningen kommer faktisk operativ handling, desto viktigere er rettigheter, evaluering, menneskelig kontroll og sikkerhetskrav. Det gjelder særlig i et sikkerhetskritisk miljø. Dette er en faglig beslutningsramme, ikke en rangering av leverandørprodukter. Overgang: Hvilke mennesker trengs for å avklare en slik mulighet?"
+          "note": "Presenter dette som et veiskille i historien: Hvis dataene er lite sammenlignbare, bør man rydde i grunnlaget. Hvis datagrunnlaget holder og man finner faktisk venting, kan prosessinnsikt være relevant. Hvis hovedbehovet er å varsle tidligere, kan en enkel regel eller modell være bedre enn en agent. Forklar at dette er kondisjonale valg, ikke diagnoser eller løfter om effekt. Bruk spørsmålet «Hva må vi ha sett for å velge denne grenen?» for å utfordre publikum. Hold produktene helt ute av diskusjonen. Bruk to minutter. Overgang: Hvordan lager vi et neste steg uten å love et større prosjekt?"
         },
         {
           "type": "bullets",
-          "title": "Ta med fagfolk når spørsmålene er konkrete",
+          "beat": "choice",
+          "delivery": "tell",
+          "title": "Første steg bør være avgrenset og mulig å stoppe",
+          "body": "I det fiktive caset foreslår vi en kort kartlegging før eventuelle tiltak i drift.",
           "bullets": [
-            "Virksomhetseier: mål, prioritering og endring i arbeidsprosess.",
-            "Analyse og data: hendelser, kvalitet, metode og mulige tester.",
-            "Arkitektur og sikkerhet: tilgang, integrasjon og kontroll ved behov."
+            "Avgrens til én flytype og ett definert bakkeforløp.",
+            "Etabler dagens nivå og hva dataene faktisk kan forklare.",
+            "Vurder endringer først etter operativ og sikkerhetsfaglig avklaring."
           ],
-          "note": "Forklar at sammensetningen av teamet følger usikkerheten som skal reduseres. Vi trenger ikke sende en stor delegasjon til et uavklart første møte. Når problemet og eieren er tydelige, kan én relevant fagperson hjelpe med å undersøke datatilgang eller analysemetode. Kompetanse og kapasitet hos Webstep må bekreftes internt før noe loves. Be en deltaker formulere agendaen for et 45-minutters oppfølgingsmøte med kundens operative ansvarlige. Overgang: Hva skal det møtet ende med?"
+          "note": "Her kommer første konkrete forslag, og det er med vilje beskjedent. Knytt det til bransjecasets kanoniske pilotidé om å undersøke et avgrenset bakkeforløp på én flytype. Ikke anta at operative endringer kan testes uten godkjenning; første steg kan være ren gjennomgang av data og prosess. Be publikum merke at vi ennå ikke har valgt verktøy, lovet kostnadsreduksjon eller besluttet KI. En pilot skal redusere usikkerhet, med mål og stoppkriterier, ikke være en skjult start på et stort leveranseprosjekt. Bruk to minutter. Overgang: Hva må vi så avtale med kunden for at dette skal bli et kvalifisert neste steg?"
         },
         {
           "type": "bullets",
-          "title": "En god avklaring ender med en beslutning, ikke en idéliste",
+          "beat": "choice",
+          "delivery": "exercise",
+          "title": "Øvelse 3: Formuler neste kundemøte",
+          "body": "I par, 3 minutter: Fullfør «Vi foreslår et møte for å …»",
           "bullets": [
-            "Undersøk videre: Eier, problem og datatilgang er tilstrekkelig tydelige.",
-            "Avklar først: Vi mangler kritisk informasjon om effekt eller ansvar.",
-            "Stopp: Tiltaket har ikke identifiserbar nytte eller akseptable rammer."
+            "Mål: Hvilket spørsmål eller hvilken hypotese skal avklares?",
+            "Deltakere: Hvem eier prosessen, og hvilken fagkompetanse trengs?",
+            "Beslutning: Hva må vi vite for å fortsette, endre retning eller stoppe?"
           ],
-          "note": "Gjør beslutningsalternativene eksplisitte. Et godt kundemøte kan ende med «ikke nå», og det er et tegn på kvalifisering, ikke mislykket salg. Dersom data mangler, kan det være behov for en separat datakvalitetsvurdering; det skal ikke smugles inn som en automatisk del av et KI-prosjekt. Be deltakerne begrunne hvilken av de tre utgangene de ville valgt i eksempelet, og hvilken opplysning som ville endret beslutningen. Overgang: Nå tar vi metoden ut av luftfartseksempelet."
+          "note": "Be hvert par formulere én sammenhengende setning, ikke en liste med tjenester. Eksempel på form, ikke fasit: «Vi foreslår et møte med operativ leder og en relevant datafagperson for å forstå hvordan tidspunktene registreres og vurdere om et begrenset analysearbeid vil være nyttig.» La ett par presentere, og spør hva som mangler for at kunden skal kunne si ja til neste steg. Unngå å love at en navngitt kompetanse eller kapasitet er tilgjengelig. Presenter dette som den tredje og siste øvelsen, og si at vi nå går mot oppsummering. Bruk tre minutter. Overgang: Hvilken beslutning kan vi ta med den informasjonen vi faktisk har?"
+        },
+        {
+          "type": "bullets",
+          "beat": "choice",
+          "delivery": "debrief",
+          "title": "Et godt utfall kan også være «ikke nå»",
+          "body": "Vi skal ikke ende med et KI-tilbud når problemet fortsatt er uavklart.",
+          "bullets": [
+            "Gå videre hvis eier, verdi og nødvendig undersøkelse er avklart.",
+            "Avklar mer hvis kritisk informasjon fortsatt mangler.",
+            "Stopp hvis nytten er uklar eller rammene ikke er forsvarlige."
+          ],
+          "note": "Lukk kundehistorien med den viktigste kvalifiseringsbeslutningen: Vi har ikke bevist hva som skaper forsinkelsene, men vi har formulert hva som må undersøkes. Dersom kunden har en ansvarlig prosesseier, tilgang til relevante beskrivelser og en reell konsekvens av problemet, kan neste møte være aktuelt. Hvis ikke kan det være riktig å undersøke mer – eller la saken ligge. Stopp er et legitimt resultat. Be deltakerne sammenligne dette med første slide, hvor ønsket bare var «mer KI». Bruk ett til to minutter. Overgang: Hva tar vi med oss uavhengig av bransje?"
         },
         {
           "type": "takeaway",
-          "title": "Ta denne strukturen med til neste kundemøte",
+          "beat": "transfer",
+          "delivery": "debrief",
+          "title": "Det som kan gjenbrukes, er samtalen – ikke luftfartscaset",
           "bullets": [
-            "Hva skjer, hvem rammes og hvem eier problemet?",
-            "Hvordan måler vi dagens nivå, og hvilken hypotese vil vi teste?",
-            "Hvem må delta for å avgjøre neste steg – og hva kan få oss til å stoppe?"
+            "Gå fra kundens bestilling til problem, konsekvens og ansvarlig.",
+            "Gjør ukjente årsaker til testbare hypoteser.",
+            "Avtal en beslutning om neste steg før du diskuterer løsning."
           ],
-          "note": "Knyt historien tilbake til første setning, «Vi vil bruke KI». Nå har vi gått fra et løst teknologibehov til en mulig, avgrenset undersøkelse med spørsmål om ansvar, datakvalitet og effekt. Be hver deltaker tenke på én faktisk kundedialog der samme rekkefølge kunne forbedret samtalen. Ikke før inn ekte kundedata i dette offentlige repoet. Dersom workshopen brukes eksternt, må eksempelet tilpasses kunden og all faglig informasjon kontrolleres. Overgang: Tilpasningsverktøyet kan hjelpe med struktur, men ikke kvalitetssikre resultatet for oss."
+          "note": "Skill eksplisitt mellom demonstrasjon og gjenbruk: Det fiktive luftfartscaset var et treningsmiljø. Vi har verken dokumenterte driftstall eller verifiserte kundeeffekter, og caset er ikke et eksternt salgsdeck. Det som skal følge deltakerne ut av rommet, er rekkefølgen i kvalifiseringen. Be alle nevne én faktisk kundedialog hvor de skal stille et bedre første spørsmål – men ikke samle inn navn eller konfidensielle opplysninger i denne offentlige portalen. Dette er oppsummeringen av hele fortellingen, ikke et ekstra teknologitema. Bruk ett minutt. Overgang: Ønsker du en egen presentasjon, kan du tilpasse metoden uten å kopiere eksempelinnholdet."
         },
         {
           "type": "prompt",
-          "title": "Lag en historie om kundens problem – ikke teknologilisten",
+          "beat": "transfer",
+          "delivery": "tool",
+          "title": "Bygg et kundetilpasset opplegg – uten å kopiere eksempelet",
           "body": {
             "$content": "notice:deck-adaptation",
             "variant": "slide"
           },
           "bullets": [
-            "Start med kundens beslutning, ikke løsningen dere ønsker å vise.",
-            "Bygg opp ett gjennomgående eksempel med åpne spørsmål og mulige utfall.",
-            "Kontroller forutsetninger, kilder og påstander før ekstern bruk."
+            "Bytt ut det fiktive caset med et kvalitetssikret kundeproblem.",
+            "Lag en tydelig historie før du fordeler innholdet på lysbilder.",
+            "Skill dokumenterte fakta fra antakelser og øvelsesspørsmål."
           ],
           "promptId": "deck-outline",
-          "note": "Vis at prompten bare gir et førsteutkast. Den kan hjelpe med å lage en struktur med problem, konsekvens, undersøkelse og neste steg. Den kan ikke verifisere at et kundecase er ekte, at målt effekt finnes eller at vi har kapasiteten som beskrives. Be brukeren erstatte den generiske luftfartshistorien med en godkjent, kunderelevant problemstilling og sørge for at et menneske kvalitetssikrer alt før bruk. Del aldri konfidensielle kundeopplysninger via denne offentlige portalen."
+          "note": "Dette siste lysbildet er et valgfritt arbeidsverktøy etter workshopen, ikke en del av den fiktive kundehistorien. Forklar at kopierbar tilpasningsprompt kan hjelpe med et førsteutkast, men at hver påstand, hvert tall og hvert kunderelevant eksempel må kontrolleres av mennesker. Et nytt kundedeck må få sin egen målgruppe og bruksform og bruke bare offentlig eller godkjent informasjon i riktig system. Visuelt er dette avslutningen; ikke bruk fem minutter på et nytt promptkurs. Den metodiske læringen er allerede oppsummert på forrige lysbilde."
         }
       ],
       "narrative": {
