@@ -25,7 +25,7 @@ const setup=[
 '   oversikt:overview,guide,forretning:business,muligheter:plays,kundedialog:dialogue,',
 '   marked:market,kompetanse:competence,arkitektur:()=>architecture(),',
 '   teknologi:technology,ai:aiProducts,bransje:industry,',
-'   verktoy:()=>toolkit(),prompter:()=>prompts(),horisont:horizon,kilder:sources,utvikling:dev',
+'   verktoy:()=>toolkit(),prompter:()=>prompts(),horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev',
 ' }))add(name,fn);',
 " D.plays.forEach(x=>add('muligheter/'+x.id,()=>playDetail(x)));",
 " D.businessSignals.forEach(x=>add('forretning/'+x.id,()=>businessDetail(x)));",
@@ -70,6 +70,7 @@ const caseHtml=new Map(entries.filter(x=>x.name.startsWith('forretning/case-')).
 for(const item of sales.industryUseCases){
  const html=caseHtml.get('forretning/case-'+item.id);
  if(!html||!html.includes(item.title)||!html.includes(item.pilot)||!html.includes(item.dataHypothesis))errors.push('Manglende kanonisk caseinnhold: '+item.id);
+ if(item.maturitySteps?.length)for(const step of item.maturitySteps)if(!html?.includes(step.description))errors.push('Manglende modenhetstrinn: '+item.id+'/'+step.label);
 }
 for(const sector of sales.industrySectors){
  const html=entries.find(x=>x.name==='forretning/sektor-'+sector.id)?.html;

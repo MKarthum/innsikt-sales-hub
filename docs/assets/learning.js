@@ -7,7 +7,7 @@ function card(d,e){
 function diagram(d,{esc:e,ico}){
  return '<figure class="diagram" aria-label="'+e(d.title)+'">'
  +'<figcaption><h3>'+e(d.title)+'</h3><p>'+e(d.description)+'</p></figcaption>'
- +'<div class="diagram-flow">'+d.steps.map((s,i)=>'<div class="diagram-step"><div class="diagram-step-number">'+(i+1)+'</div><strong>'+e(s.title)+'</strong><span>'+e(s.detail)+'</span></div>'+(i<d.steps.length-1?'<span class="diagram-arrow" aria-hidden="true">'+ico('arrow-right')+'</span>':'')).join('')+'</div>'
+ +'<div class="diagram-flow'+(d.direction==='up'?' diagram-flow-up':'')+'">'+d.steps.map((s,i)=>'<div class="diagram-step"><div class="diagram-step-number">'+(i+1)+'</div><strong>'+e(s.title)+'</strong><span>'+e(s.detail)+'</span></div>'+(i<d.steps.length-1?'<span class="diagram-arrow" aria-hidden="true">'+ico(d.direction==='up'?'arrow-up':'arrow-right')+'</span>':'')).join('')+'</div>'
  +'<div class="diagram-outcome"><strong>Hva gir dette?</strong><p>'+e(d.outcome)+'</p></div>'
  +'</figure>';
 }

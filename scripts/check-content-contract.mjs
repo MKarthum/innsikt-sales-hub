@@ -9,7 +9,7 @@ try{materialized=box.window.InnsiktContent.materialize(raw)}catch(error){console
 const errors=[],fail=x=>errors.push(x),has=x=>typeof x==='string'&&Boolean(x.trim());
 const date=x=>/^\d{4}-\d\d-\d\d$/.test(x||'')&&!Number.isNaN(Date.parse(x));
 const evidence=new Set(['documented','vendor','assessment','hypothesis','open-question']);
-const owners={glossary:raw.learning.glossary,guidance:raw.sharedGuidance,'prompt-rule':raw.prompts.rules,'market-guidance':[raw.metricGuidance],risk:raw.learning.risks,'ai-overview':[raw.aiOverview],value:raw.valueThemes,'value-overview':[raw.valueOverview],notice:raw.pages.sharedNotices,tech:raw.tech,ai:raw.aiProducts,plays:raw.plays,events:raw.marketEvents};
+const owners={glossary:raw.learning.glossary,guidance:raw.sharedGuidance,'prompt-rule':raw.prompts.rules,'market-guidance':[raw.metricGuidance],risk:raw.learning.risks,'ai-overview':[raw.aiOverview],value:raw.valueThemes,'value-overview':[raw.valueOverview],notice:raw.pages.sharedNotices,tech:raw.tech,ai:raw.aiProducts,plays:raw.plays,events:raw.marketEvents,radar:raw.emergingSignals};
 for(const [domain,rows] of Object.entries(owners)){
  const ids=new Set();
  for(const x of rows||[]){
@@ -50,6 +50,7 @@ for(const [name,content] of Object.entries(materialized.pages.presentationDecks)
 }
 for(const item of raw.learning.glossary){if(!has(item.meaning)||!has(item.term))fail('Begrep uten definisjon '+item.id);}
 if(!raw.horizon.notPublished.every(x=>x.visibility==='not-presented'))fail('Fordypningens usynlige innhold uten markering');
+for(const x of raw.emergingSignals){if(ui.includes(x.title)||ui.includes(x.summary))fail('Trendradar-fagtekst hardkodet i visningskode: '+x.id);}
 if(ui.includes('Begynn med kundens problem, konsekvens og tidspunkt.'))fail('Kopiert salgsbudskap i JS');
 if(ui.includes('Redaksjonelt eksempel på hva som kan utløse behov for analysekompetanse'))fail('Kopiert kundecase-avgrensning i JS');
 // Identiske lange fagtekster skal ikke vedlikeholdes uavhengig i domenefilene.

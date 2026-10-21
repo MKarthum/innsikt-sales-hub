@@ -198,5 +198,13 @@
     "status": "senere",
     "priority": "middels",
     "why": "Versjon 0.9.4 gir portabel HTML og PDF via utskrift. Vurder behov for PPTX og godkjente bedriftstemplater før ny eksportavhengighet eller byggetrinn innføres."
+  },
+  {
+    "id": "B-26",
+    "title": "Redaksjonell kvartalsvurdering av trendradaren",
+    "area": "Research",
+    "status": "åpen",
+    "priority": "middels",
+    "why": "Vurder om hvert tidlige signal skal oppdateres, flyttes til eksisterende kjerneinnhold eller fjernes. Bekreft kilder, faktisk modenhet og relevans før publisering."
   }
 ]

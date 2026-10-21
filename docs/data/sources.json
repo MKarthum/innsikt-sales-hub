@@ -417,5 +417,67 @@
     "url": "https://www.norwegianseafoodcouncil.com/aquaculture/salmon/salmon-lice/",
     "type": "Bransjekilde",
     "checked": "2026-10-14"
+  },
+  "gartner27": {
+    "title": "Gartner – Top Strategic Technology Trends for 2027",
+    "publisher": "Gartner",
+    "url": "https://www.gartner.com/en/articles/top-technology-trends-2027",
+    "type": "analyse og fremtidsprognoser",
+    "published": "2026-10-20",
+    "checked": "2026-10-21"
+  },
+  "gartner-context": {
+    "title": "Gartner – AI Context Platforms (offentlig sammendrag)",
+    "publisher": "Gartner",
+    "url": "https://www.gartner.com/en/documents/8475745",
+    "type": "offentlig sammendrag av abonnementsrapport",
+    "published": "2026-10-16",
+    "checked": "2026-10-21"
+  },
+  "gartner-data26": {
+    "title": "Gartner – Data and Analytics Predictions 2026",
+    "publisher": "Gartner",
+    "url": "https://www.gartner.com/en/newsroom/press-releases/2026-03-11-gartner-announces-top-predictions-for-data-and-analytics-in-2026",
+    "type": "fremtidsprognoser",
+    "published": "2026-03-11",
+    "checked": "2026-10-21"
+  },
+  "mckinsey-ai26": {
+    "title": "McKinsey – AI is changing work. Now it has to change the organization",
+    "publisher": "McKinsey",
+    "url": "https://www.mckinsey.com/capabilities/people-and-organization/our-insights/ai-is-changing-work-now-it-has-to-change-the-organization",
+    "type": "analyse og spørreundersøkelse",
+    "published": "2026-10-05",
+    "checked": "2026-10-21"
+  },
+  "stanford-economy26": {
+    "title": "Stanford HAI – AI Index 2026: Economy",
+    "publisher": "Stanford University",
+    "url": "https://hai.stanford.edu/ai-index/2026-ai-index-report/economy",
+    "type": "forskningsrapport",
+    "checked": "2026-10-21"
+  },
+  "stanford-performance26": {
+    "title": "Stanford HAI – AI Index 2026: Technical Performance",
+    "publisher": "Stanford University",
+    "url": "https://hai.stanford.edu/ai-index/2026-ai-index-report/technical-performance",
+    "type": "forskningsrapport",
+    "checked": "2026-10-21"
+  },
+  "nvidia-cosmos26": {
+    "title": "NVIDIA – Cosmos 3: Physical AI World Foundation Model",
+    "publisher": "NVIDIA",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-launches-cosmos-3-the-open-frontier-foundation-model-for-physical-ai",
+    "type": "leverandørbeskrivelse",
+    "published": "2026-05-31",
+    "checked": "2026-10-21"
+  },
+  "nist-agent-identity26": {
+    "title": "NIST – Identity and Authority of Software Agents",
+    "publisher": "NIST",
+    "url": "https://www.nist.gov/news-events/news/2026/02/new-concept-paper-identity-and-authority-software-agents",
+    "type": "offentlig konseptnotat",
+    "published": "2026-02-05",
+    "checked": "2026-10-21"
   }
 }

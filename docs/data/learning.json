@@ -419,6 +419,25 @@
         ],
         "caseSensitive": false
       }
+    },
+    {
+      "id": "virksomhetskontekst",
+      "term": "Virksomhetskontekst",
+      "meaning": "Begreper, sammenhenger, regler og rettigheter som gjør det mulig å tolke data riktig i en bestemt virksomhet.",
+      "example": "En ordre kan behandles ulikt avhengig av kundens avtale og hvem som har fullmakt.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-21",
+      "sourceIds": [
+        "gartner-context",
+        "nist-agent-identity26"
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "virksomhetskontekst"
+        ],
+        "caseSensitive": false
+      }
     }
   ],
   "diagrams": [
@@ -467,43 +486,42 @@
     },
     {
       "id": "ai-on-data",
-      "title": "KI som svarer på spørsmål om virksomheten",
-      "description": "Felles data og begreper lar en KI-assistent hente frem relevante tall med passende tilgang.",
+      "title": "Fra datagrunnlag til verdi i organisasjonen",
+      "description": "Les skissen nedenfra og opp: Datagrunnlag og virksomhetskontekst kan støtte både tradisjonell analyse og KI, som igjen må levere nytte til organisasjonen.",
       "steps": [
         {
-          "title": "Virksomhetsdata",
-          "detail": "Ordre · kunder · økonomi"
+          "title": "Datagrunnlag",
+          "detail": "Virksomhetsdata · dokumenter · kilder"
         },
         {
-          "title": "Kvalitet og modeller",
-          "detail": "Avstemming og struktur"
+          "title": "Virksomhetskontekst",
+          "detail": "Begreper · relasjoner · regler · rettigheter"
         },
         {
-          "title": "Begreper og tilgang",
-          "detail": "Felles KPI-er og roller"
+          "title": "Analyse og KI",
+          "detail": "Rapporter og prognoser · KI-svar · forslag og kontrollerte handlinger"
         },
         {
-          "title": "KI-assistent",
-          "detail": "Genie · Cortex · Fabric"
-        },
-        {
-          "title": "Etterprøvbart svar",
-          "detail": "Kontroll og evaluering"
+          "title": "Organisasjonen",
+          "detail": "Bedre beslutninger · arbeidsprosesser · målbar effekt"
         }
       ],
-      "outcome": "En leder kan spørre «Hvordan utviklet marginene seg?» og få et svar fra kvalitetssikrede kilder.",
-      "caution": "Gode data reduserer risiko, men garanterer ikke korrekte KI-svar. Evaluering, sikkerhet og menneskelig kontroll er fortsatt nødvendig.",
+      "outcome": "Verdien skapes hos dem som tar beslutninger og utfører arbeidet – ikke i dataplattformen eller modellen alene.",
+      "caution": "Dette er en prinsippskisse, ikke en bestemt produktarkitektur. Det kreves ikke alltid kunnskapsgraf, separat kontekstplattform eller KI-agent. Handlinger krever særlig kontroll med roller, fullmakter og evaluering.",
       "questions": [
-        "Hvilke spørsmål må kunne besvares korrekt?",
-        "Hvem er ansvarlig for fasit og tilgang?"
+        "Hvilken beslutning eller arbeidsprosess skal faktisk bli bedre?",
+        "Trenger brukeren rapport, svar, anbefaling eller utført handling?",
+        "Hvilke rettigheter, regler og menneskelige godkjenninger må håndheves?"
       ],
       "sources": [
         "fabricagent",
         "agent-foundation",
-        "genie"
+        "gartner-context",
+        "nist-agent-identity26"
       ],
       "evidence": "assessment",
-      "reviewed": "2026-10-14"
+      "reviewed": "2026-10-21",
+      "direction": "up"
     },
     {
       "id": "ai-in-development",
@@ -631,6 +649,18 @@
       "reviewed": "2026-10-14",
       "sourceIds": [
         "digdir"
+      ]
+    },
+    {
+      "id": "risk-5",
+      "title": "Handlinger uten tydelig fullmakt",
+      "example": "En agent foreslår eller forsøker å utføre en bestilling uten riktig godkjenning.",
+      "action": "Begrens tilganger og handlinger, bruk godkjenningspunkter og logg utførelse.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-21",
+      "sourceIds": [
+        "nist-agent-identity26",
+        "gartner27"
       ]
     }
   ],

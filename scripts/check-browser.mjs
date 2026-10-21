@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
-const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont'];
+const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const problems=[];
@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.6',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.7',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -30,6 +30,12 @@ try {
    assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true','mobilmeny åpner');
    await page.locator('#menu-toggle').click();
   }
+  await page.evaluate(()=>{location.hash='#trendradar'});
+  await page.locator('#radar-world-models').waitFor();
+  assert.equal(await page.locator('#main .horizon-chapter').count(),5,label+': trendradar viser fem dataeide signaler');
+  await page.evaluate(()=>{location.hash='#arkitektur/ai-on-data'});
+  await page.locator('.diagram-flow-up').waitFor();
+  assert.equal(await page.locator('.diagram-flow-up').evaluate(el=>getComputedStyle(el).flexDirection),'column-reverse',label+': diagram leses nedenfra og opp');
   await page.evaluate(()=>{location.hash='#prompter/account-research'});
   await page.locator('#prompt-editor').waitFor();
   const original=await page.locator('#prompt-editor').inputValue();
@@ -166,7 +172,7 @@ try {
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.9.6')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.9.7')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes('Innsikt – fra markedssignal')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,7,'alle portal-slides er eksportert');

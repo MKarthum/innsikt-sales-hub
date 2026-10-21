@@ -103,3 +103,11 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 
 
 - Fullskjermmodus i Presenter skal vise ett skalert 16:9-lysbilde uten portal-/redigeringskontroller, men med tilgjengelig frem/tilbake og tydelig vei ut. Bruk native Fullscreen API når tilgjengelig, med skjermtilpasset CSS-reserve der API mangler. Esc skal gå ut av fullskjerm først, ikke lukke hele Presenter-dialogen. Test også kort landskapsviewport, tastatur og retur til normal visning.
+
+
+## Trendradar, verdiarkitektur og portabilitet (v0.9.7)
+
+- `market.json.emergingSignals` eier tidlige signaler for siden Trendradar; ikke kopier signalene til `marketSignals`, presentasjoner eller `horizon.json`. `pages.json` eier sidetitler, etiketter og komposisjon. Trendradaren skal være kuratert og ha kilde, modenhet, usikkerhet, relevant kobling og dato.
+- `learning.json.diagrams[id=ai-on-data]` har `direction: up` og semantisk rekkefølge fra datagrunnlag til organisasjonen. Visningskomponenter kan presentere trinnene nedenfra og opp, men aldri eie eller duplisere fagteksten.
+- Datamodellen skal kunne leses av et helt annet grensesnitt i Webstep. Ingen innholdslogikk, databeslutninger, forbehold, kildegrunnlag eller sidetitler skal være avhengig av `site.js`, `learning.js` eller CSS. De er kun adaptere til den nåværende statiske portalen.
+- Beslutning om å løfte et signal inn i kjerneinnholdet tas redaksjonelt og krever dokumentert relevans for kundens problem, prosess, arkitektur eller kompetanse. Flytt/oppdater hos kanonisk dataeier og fjern radaroppføringen ved overlapp.

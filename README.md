@@ -98,7 +98,7 @@ Kontroller sikkerhet og rettigheter, overfør repoets kode og åpne innhold til 
 
 «Forretningsbehov» har nå to innganger: 9 bransjer med 36 konkrete, illustrative problemstillinger og de tidligere generiske behovene i økonomi, salg, drift mv. Begynn med et operativt problem, mål og en forretningseier; gå videre til databehov, avgrenset test og relevant fagkompetanse. Casene er **salgs- og utforskningshypoteser**, ikke dokumenterte Webstep-leveranser.
 
-Bransjeinformasjon og caser eies av \`sales.json.industrySectors\`, \`sales.json.industryUseCases\` og \`sales.json.industryJourney\`; felles presentasjons- og sideord eies av \`pages.json.industryUi\`. \`sources.json\` er kanonisk kilderegister. Se [bransjeanalyse og innholdsmodell](INDUSTRY_BUSINESS_DIALOGUE.md) for utvalg, eksempler, metoden, kildekritikk, begrensninger og videre testing. Nye ruter \`#forretning/sektor-ID\` og \`#forretning/case-ID\` er inkludert i søk og Presenter.
+Bransjeinformasjon og caser eies av `sales.json.industrySectors`, `sales.json.industryUseCases` og `sales.json.industryJourney`; felles presentasjons- og sideord eies av `pages.json.industryUi`. `sources.json` er kanonisk kilderegister. Se [bransjeanalyse og innholdsmodell](INDUSTRY_BUSINESS_DIALOGUE.md) for utvalg, eksempler, metoden, kildekritikk, begrensninger og videre testing. Nye ruter `#forretning/sektor-ID` og `#forretning/case-ID` er inkludert i søk og Presenter.
 
 ## Kontekstuell begrepshjelp (v0.9.3)
 
@@ -121,3 +121,11 @@ Presenter bruker en fast logisk 960 × 540-flate (16:9), men hele flaten skalere
 Knappen **Fullskjerm** i Presenter viser det valgte lysbildet uten portalnavigasjon, presentasjonstitler, kildekontekst og eksportkontroller. Bruk piltaster eller diskrete navigasjonsknapper for å bytte lysbilde. Trykk **Esc** eller **Avslutt fullskjerm** for å gå tilbake til vanlig Presenter-dialog uten å miste valgt presentasjon eller aktivt lysbilde.
 
 Der nettleseren støtter Fullscreen API, brukes ekte nettleserfullskjerm. Hvis det ikke er tillatt (typisk på enkelte iOS-nettlesere), brukes et CSS-basert fullskjermoppsett innenfor tilgjengelig nettsideviewport; operativsystemets nettleserkrom kan da bli værende synlig. Fullskjerm bevarer det logiske 16:9-formatet og skalerer proporsjonalt. Verifiseres på mobil/desktop via Playwright.
+
+
+## Trendradar og datastyrt verdiarkitektur (v0.9.7)
+
+- **Trendradar** (`#trendradar`) er en egen side for tidlige, usikre signaler. Den er ikke en produktkatalog eller automatisk salgsprioritering. De fem signalene forvaltes kun i `docs/data/market.json.emergingSignals`, med egne kilder, usikkerhet, vurderingsdato og observasjonspunkter. Sideoverskrift og etiketter ligger i `pages.json`.
+- **Arkitektur nedenfra og opp**: `learning.json.diagrams[id=ai-on-data]` beskriver data → kontekst → analyse/KI → organisasjon, med `direction: up`. CSS/JS kan rendere modellen ulikt, men får ikke eie fagtekst eller trinnrekkefølge.
+- **Gjenbruk uten layout**: `market.json`, `learning.json`, `horizon.json`, `sales.json` og `pages.json` er innholds- og komposisjonskilder. En fremtidig Webstep-artefakt skal kunne lese disse filene uten å kopiere HTML, CSS eller dagens visningskomponenter. Se `CONTENT_CONTRACT.md`.
+- Et nytt signal skal bare innarbeides i kjerneinnholdet dersom det gir en dokumenterbar endring i kundebehov, prosess, arkitekturvalg eller kompetansebehov. Ellers oppdateres eller fjernes det ved redaksjonell gjennomgang.

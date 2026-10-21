@@ -10,7 +10,7 @@ const refSource=(id,from)=>{if(!sources[id])fail(from+' peker på ukjent kilde '
 const refs=(a,from)=>{if(!Array.isArray(a)||!a.length)fail(from+' mangler kilde');else a.forEach(id=>refSource(id,from))};
 if(!/^\d+\.\d+\.\d+$/.test(site.version||''))fail('Ugyldig site-versjon');
 if(!date(site.released)||!date(site.reviewed))fail('Mangler dato for utgave eller faglig gjennomgang');
-const pagesNeeded=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont'];
+const pagesNeeded=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont','trendradar'];
 for(const p of pagesNeeded)if(!str(pages.navigation?.[p]))fail('Mangler navigasjon '+p);
 for(const [key,value] of Object.entries(pages.headers||{}))for(const field of ['eyebrow','title','intro'])if(!(str(value[field])||(value[field]&&typeof value[field].$content==='string')))fail('Ufullstendig header '+key+'.'+field);
 if(Object.keys(pages.headers||{}).length<13)fail('Grunnkurs/arkitektur/verktøy mangler sidetitler');
@@ -37,11 +37,16 @@ for(const c of sales.industryUseCases){
  if(!Array.isArray(c.metrics)||!c.metrics.length||!c.metrics.every(str))fail('Mangler måleparametre: '+c.id);
  if(!Array.isArray(c.playIds)||!c.playIds.length||c.playIds.some(id=>!playIds.has(id)))fail('Ukjent leveranseinngang: '+c.id);
  if(c.evidence!=='assessment'||!date(c.reviewed)||c.visibility!=='presented')fail('Kunnskapsstatus mangler: '+c.id);
+ if(c.maturitySteps)for(const step of c.maturitySteps)if(!str(step.label)||!str(step.description)||!str(step.value))fail('Ufullstendig modenhetstrinn i '+c.id);
 }
 if(sales.industryJourney?.steps?.length!==4||!str(sales.industryJourney.qualification)||!str(sales.industryJourney.maturityCaution))fail('Mangler forretningsdrevet kvalifiseringsløp');
 const ui=pages.industryUi;
 for(const field of ['homeTitle','homeIntro','sectorCases','symptom','goal','questions','metrics','data','pilot','expand','maturity'])if(!str(ui?.[field]))fail('Mangler bransjevisningsfelt: '+field);
 
+ids(market.emergingSignals,'Trendradar');
+if(!pages.headers.TRENDRADAR||!pages.trendRadarUi)fail('Trendradar mangler dataeide overskrifter og UI-etiketter');
+const radarFields=['title','stage','summary','whyFollow','uncertainty','watch','relatedRoute'];
+for(const x of market.emergingSignals||[]){for(const f of radarFields)if(!str(x[f]))fail('Trendradar mangler '+f+': '+x.id);if(x.evidence!=='assessment'||!date(x.reviewed))fail('Trendradar uten vurdering/dato: '+x.id);refs(x.sources,'Trendradar '+x.id);if(x.relatedRoute.startsWith('#')||x.relatedRoute.startsWith('http'))fail('Trendradar skal bruke intern hash-rute: '+x.id);}
 ids(market.trends,'Trender');ids(market.marketEvents,'Markedshendelser');ids(market.marketSignals,'Markedsforhold');
 ids(tech.aiProducts,'KI-produkter');ids(backlog,'Forbedringspunkter');ids(learning.diagrams,'Arkitekturer');ids(learning.templates,'Maler');
 if(!Array.isArray(learning.glossary)||learning.glossary.length<10)fail('For få begrepsforklaringer');
@@ -55,6 +60,8 @@ for(const x of market.stats?.ki||[])if(typeof x.value!=='number'||x.value<0||x.v
 for(const x of tech.tech){refSource(x.source,x.name);if(x.logo&&!fs.existsSync('docs/assets/brands/'+x.logo+'.svg'))fail('Mangler produktlogo '+x.logo)}
 for(const x of tech.aiProducts){refSource(x.source,x.name);if(x.logo&&!fs.existsSync('docs/assets/brands/'+x.logo+'.svg'))fail('Mangler KI-logo '+x.logo);if(!str(x.signal)||!str(x.question))fail('Produkt mangler salgsvinkel '+x.name)}
 for(const x of learning.diagrams){
+ if(x.direction&&!['up','right'].includes(x.direction))fail('Ukjent diagramretning '+x.id);
+ if(x.id==='ai-on-data'&&(x.direction!=='up'||x.steps.at(0).title!=='Datagrunnlag'||x.steps.at(-1).title!=='Organisasjonen'))fail('Verdiarkitekturen må bygge nedenfra og opp');
  if(!str(x.title)||!str(x.description)||!str(x.caution)||!str(x.outcome)||!Array.isArray(x.steps)||x.steps.length<3)fail('Ufullstendig diagram '+x.id);
  if(!x.questions?.length)fail('Diagram mangler kundespørsmål '+x.id);
  refs(x.sources,'Diagram '+x.id);

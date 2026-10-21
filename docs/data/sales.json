@@ -239,15 +239,18 @@
         "Mange eksperimenter – få produksjonssatte løsninger",
         "Ønske om KI på interne data",
         "Uklar effekt eller ansvar for KI-satsingen",
-        "Bekymring for tilgang, personvern eller datakvalitet"
+        "Bekymring for tilgang, personvern eller datakvalitet",
+        "KI brukes av ansatte, men endrer ikke den samlede arbeidsprosessen"
       ],
-      "why": "KI-bruk skaper ofte behov for datatilrettelegging, integrasjoner, evaluering, sikkerhet og drift – ikke bare modellkompetanse.",
+      "why": "KI-behov handler ikke bare om modellvalg. Å gå fra pilot til drift kan kreve datatilrettelegging, felles begreper, prosessdesign, evaluering, kontroll av handlinger og målbar forretningsverdi.",
       "questions": [
         "Hvilken arbeidsprosess eller beslutning skal forbedres?",
         "Hva har dere testet, og hva har fungert eller stoppet?",
+        "Skal løsningen gi informasjon, anbefale tiltak eller faktisk utføre handlinger – og hvem godkjenner hva?",
         "Hvilke interne data må løsningen bruke?",
         "Hvordan måler dere nytte, kvalitet og risiko?",
-        "Hvem skal eie løsningen etter piloten?"
+        "Hvem skal eie løsningen etter piloten?",
+        "Hva er dagens kostnad eller kvalitet, og hva vil dokumentere at piloten bør skaleres eller stoppes?"
       ],
       "roles": [
         "Leder for digitalisering / KI",
@@ -265,16 +268,18 @@
         "Tilgjengelige data eller avklart databehov",
         "Plan for gevinst, investering eller pilot"
       ],
-      "next": "Foreslå en kort avklaringssamtale om brukstilfelle, datagrunnlag, effektmål og realiserbarhet.",
+      "next": "Avklar én prosess, forretningseier, kontrollbehov og målbar effekt. Undersøk datagrunnlaget før valg av KI-funksjon eller agent.",
       "not": "Ikke anta at alle KI-prosjekter er et Innsikt-oppdrag. Involver relevante KI-/utviklingsmiljøer etter behov.",
       "sources": [
         "ssb",
         "digdir",
         "privacy",
-        "webstep1"
+        "webstep1",
+        "mckinsey-ai26",
+        "nist-agent-identity26"
       ],
       "evidence": "assessment",
-      "reviewed": "2026-10-14"
+      "reviewed": "2026-10-21"
     },
     {
       "id": "datakvalitet",
@@ -1776,8 +1781,25 @@
         "datakvalitet"
       ],
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
-      "visibility": "presented"
+      "reviewed": "2026-10-21",
+      "visibility": "presented",
+      "maturitySteps": [
+        {
+          "label": "Analyse",
+          "description": "Se lagerbeholdning, etterspørsel og variasjon mellom produkter og butikker.",
+          "value": "Bedre beslutningsgrunnlag for innkjøp og vareflyt."
+        },
+        {
+          "label": "KI-assistert vurdering",
+          "description": "Bruk godkjente data til å forklare risiko for utsolgte varer og foreslå tiltak.",
+          "value": "Raskere vurdering og prioritering, med kontroll av forslag."
+        },
+        {
+          "label": "Kontrollert handling",
+          "description": "Utred forslag til varebestilling innenfor avtalte rammer, med menneskelig godkjenning før bestilling.",
+          "value": "Mulig kortere vei fra innsikt til tiltak, dersom kvalitet og effekt dokumenteres."
+        }
+      ]
     },
     {
       "id": "handel-pris",
