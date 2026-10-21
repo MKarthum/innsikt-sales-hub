@@ -98,7 +98,7 @@ Kontroller sikkerhet og rettigheter, overfør repoets kode og åpne innhold til 
 
 «Forretningsbehov» har nå to innganger: 9 bransjer med 36 konkrete, illustrative problemstillinger og de tidligere generiske behovene i økonomi, salg, drift mv. Begynn med et operativt problem, mål og en forretningseier; gå videre til databehov, avgrenset test og relevant fagkompetanse. Casene er **salgs- og utforskningshypoteser**, ikke dokumenterte Webstep-leveranser.
 
-Bransjeinformasjon og caser eies av \`sales.json.industrySectors\`, \`sales.json.industryUseCases\` og \`sales.json.industryJourney\`; felles presentasjons- og sideord eies av \`pages.json.industryUi\`. \`sources.json\` er kanonisk kilderegister. Se [bransjeanalyse og innholdsmodell](INDUSTRY_BUSINESS_DIALOGUE.md) for utvalg, eksempler, metoden, kildekritikk, begrensninger og videre testing. Nye ruter \`#forretning/sektor-ID\` og \`#forretning/case-ID\` er inkludert i søk og Presenter.
+Bransjeinformasjon og caser eies av `sales.json.industrySectors`, `sales.json.industryUseCases` og `sales.json.industryJourney`; felles presentasjons- og sideord eies av `pages.json.industryUi`. `sources.json` er kanonisk kilderegister. Se [bransjeanalyse og innholdsmodell](INDUSTRY_BUSINESS_DIALOGUE.md) for utvalg, eksempler, metoden, kildekritikk, begrensninger og videre testing. Nye ruter `#forretning/sektor-ID` og `#forretning/case-ID` er inkludert i søk og Presenter.
 
 ## Kontekstuell begrepshjelp (v0.9.3)
 
@@ -125,7 +125,7 @@ Der nettleseren støtter Fullscreen API, brukes ekte nettleserfullskjerm. Hvis d
 
 ## Trendradar og datastyrt verdiarkitektur (v0.9.7)
 
-- **Trendradar** (\`#trendradar\`) er en egen side for tidlige, usikre signaler. Den er ikke en produktkatalog eller automatisk salgsprioritering. De fem signalene forvaltes kun i \`docs/data/market.json.emergingSignals\`, med egne kilder, usikkerhet, vurderingsdato og observasjonspunkter. Sideoverskrift og etiketter ligger i \u0060pages.json\u0060.
-- **Arkitektur nedenfra og opp**: \u0060learning.json.diagrams[id=ai-on-data]\u0060 beskriver data → kontekst → analyse/KI → organisasjon, med \u0060direction: up\u0060. CSS/JS kan rendere modellen ulikt, men får ikke eie fagtekst eller trinnrekkefølge.
-- **Gjenbruk uten layout**: \u0060market.json\u0060, \u0060learning.json\u0060, \u0060horizon.json\u0060, \u0060sales.json\u0060 og \u0060pages.json\u0060 er innholds- og komposisjonskilder. En fremtidig Webstep-artefakt skal kunne lese disse filene uten å kopiere HTML, CSS eller dagens visningskomponenter. Se \u0060CONTENT_CONTRACT.md\u0060.
+- **Trendradar** (`#trendradar`) er en egen side for tidlige, usikre signaler. Den er ikke en produktkatalog eller automatisk salgsprioritering. De fem signalene forvaltes kun i `docs/data/market.json.emergingSignals`, med egne kilder, usikkerhet, vurderingsdato og observasjonspunkter. Sideoverskrift og etiketter ligger i `pages.json`.
+- **Arkitektur nedenfra og opp**: `learning.json.diagrams[id=ai-on-data]` beskriver data → kontekst → analyse/KI → organisasjon, med `direction: up`. CSS/JS kan rendere modellen ulikt, men får ikke eie fagtekst eller trinnrekkefølge.
+- **Gjenbruk uten layout**: `market.json`, `learning.json`, `horizon.json`, `sales.json` og `pages.json` er innholds- og komposisjonskilder. En fremtidig Webstep-artefakt skal kunne lese disse filene uten å kopiere HTML, CSS eller dagens visningskomponenter. Se `CONTENT_CONTRACT.md`.
 - Et nytt signal skal bare innarbeides i kjerneinnholdet dersom det gir en dokumenterbar endring i kundebehov, prosess, arkitekturvalg eller kompetansebehov. Ellers oppdateres eller fjernes det ved redaksjonell gjennomgang.
