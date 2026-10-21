@@ -121,3 +121,11 @@ Presenter bruker en fast logisk 960 × 540-flate (16:9), men hele flaten skalere
 Knappen **Fullskjerm** i Presenter viser det valgte lysbildet uten portalnavigasjon, presentasjonstitler, kildekontekst og eksportkontroller. Bruk piltaster eller diskrete navigasjonsknapper for å bytte lysbilde. Trykk **Esc** eller **Avslutt fullskjerm** for å gå tilbake til vanlig Presenter-dialog uten å miste valgt presentasjon eller aktivt lysbilde.
 
 Der nettleseren støtter Fullscreen API, brukes ekte nettleserfullskjerm. Hvis det ikke er tillatt (typisk på enkelte iOS-nettlesere), brukes et CSS-basert fullskjermoppsett innenfor tilgjengelig nettsideviewport; operativsystemets nettleserkrom kan da bli værende synlig. Fullskjerm bevarer det logiske 16:9-formatet og skalerer proporsjonalt. Verifiseres på mobil/desktop via Playwright.
+
+
+## Trendradar og datastyrt verdiarkitektur (v0.9.7)
+
+- **Trendradar** (\`#trendradar\`) er en egen side for tidlige, usikre signaler. Den er ikke en produktkatalog eller automatisk salgsprioritering. De fem signalene forvaltes kun i \`docs/data/market.json.emergingSignals\`, med egne kilder, usikkerhet, vurderingsdato og observasjonspunkter. Sideoverskrift og etiketter ligger i \u0060pages.json\u0060.
+- **Arkitektur nedenfra og opp**: \u0060learning.json.diagrams[id=ai-on-data]\u0060 beskriver data → kontekst → analyse/KI → organisasjon, med \u0060direction: up\u0060. CSS/JS kan rendere modellen ulikt, men får ikke eie fagtekst eller trinnrekkefølge.
+- **Gjenbruk uten layout**: \u0060market.json\u0060, \u0060learning.json\u0060, \u0060horizon.json\u0060, \u0060sales.json\u0060 og \u0060pages.json\u0060 er innholds- og komposisjonskilder. En fremtidig Webstep-artefakt skal kunne lese disse filene uten å kopiere HTML, CSS eller dagens visningskomponenter. Se \u0060CONTENT_CONTRACT.md\u0060.
+- Et nytt signal skal bare innarbeides i kjerneinnholdet dersom det gir en dokumenterbar endring i kundebehov, prosess, arkitekturvalg eller kompetansebehov. Ellers oppdateres eller fjernes det ved redaksjonell gjennomgang.
