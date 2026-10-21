@@ -87,3 +87,8 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 
 
 - Fullskjermmodus i Presenter skal vise ett skalert 16:9-lysbilde uten portal-/redigeringskontroller, men med tilgjengelig frem/tilbake og tydelig vei ut. Bruk native Fullscreen API når tilgjengelig, med skjermtilpasset CSS-reserve der API mangler. Esc skal gå ut av fullskjerm først, ikke lukke hele Presenter-dialogen. Test også kort landskapsviewport, tastatur og retur til normal visning.
+
+
+## Separasjon mellom innhold og layout – Trendradar v0.9.7
+
+`docs/data/market.json.emergingSignals` er eneste kilde for radarens signaler, og `docs/data/pages.json` eier sideunike etiketter og titler. `site.js` er kun en generisk visningsadapter. `learning.json` eier verdiarkitekturens faglige trinn og semantiske retning (opp mot organisasjonen). En Webstep-artefakt kan bruke en annen layout og fortsatt benytte samme innholdsdata. Endringer i design må aldri flytte innhold til HTML/JS/CSS. Unngå kopier av radarstoff i det modne markedssignalsregisteret.
