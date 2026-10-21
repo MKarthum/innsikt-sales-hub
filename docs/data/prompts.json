@@ -12,7 +12,7 @@
       "$content": "notice:public-boundary",
       "variant": "prompt"
     },
-    "usageTitle": "Slik bruker du biblioteket",
+    "usageTitle": "Slik bruker du promptene",
     "usageSteps": [
       "Velg en oppgave og les hvilke opplysninger du trenger.",
       "Kopier eller juster teksten. Bytt ut feltene i [KLAMMER].",
@@ -26,10 +26,16 @@
     "copyLabel": "Kopier prompt",
     "resetLabel": "Tilbakestill tekst",
     "allLabel": "Alle",
-    "featuredTitle": "Et godt sted å begynne",
-    "featuredIntro": "Disse tre dekker de vanligste stegene fra kundekunnskap til faglig neste steg.",
+    "featuredTitle": "Start med en konkret oppgave",
+    "featuredIntro": "Møtebrief, behovssamtale eller kundekartlegging – velg det som passer.",
     "useHint": "Velg oppgave. Du kan endre teksten før kopiering.",
-    "nextStepHint": "Bruk svaret til å avklare nye spørsmål, ikke til å erstatte kundedialogen eller faglig vurdering."
+    "nextStepHint": "Bruk svaret til å avklare nye spørsmål, ikke til å erstatte kundedialogen eller faglig vurdering.",
+    "featuredIds": [
+      "meeting-prep",
+      "discovery",
+      "account-research"
+    ],
+    "moreTitle": "Flere prompter"
   },
   "categories": [
     "Forstå kunden",
@@ -82,7 +88,7 @@
       "id": "meeting-prep",
       "category": "Forbered møte",
       "title": "Møtebrief på én side",
-      "summary": "Skap en konkret møteplan med agenda, vinkling og spørsmål.",
+      "summary": "En møtebrief på én side med agenda, fem spørsmål og et tydelig neste steg.",
       "when": "Når møtet er booket, men du ikke kjenner alle detaljene.",
       "audience": "Alle selgere · 10 min",
       "sourceMode": "public",
@@ -93,23 +99,24 @@
         "MÅL"
       ],
       "before": [
-        "Avklar hvem du skal møte og formålet.",
-        "Hold interne møtenotater utenfor offentlig KI-miljø."
+        "Avklar møtets formål, hvem du skal møte og omtrent hvor mye tid dere har.",
+        "Ikke finn på manglende opplysninger; bruk «ukjent» ved behov."
       ],
       "review": [
-        "Sjekk kildene og datoene selv.",
-        "Fjern antagelser eller påstander som ikke kan dokumenteres."
+        "Kontroller at agendaen passer faktisk varighet og hvem som deltar.",
+        "Fjern udokumenterte kundepåstander.",
+        "Velg spørsmålene som passer samtalen; les dem ikke opp mekanisk."
       ],
       "priority": 2,
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "evidence": "assessment",
       "promptParts": [
-        "Vær min kritiske møteforbereder for en samtale om data, analyse og KI.\nKunde: [KUNDE]. Rolle hos kunden: [ROLLE]. Tid: [MØTELENGDE]. Hensikt: [MÅL].\nBruk bare informasjonen i denne prompten og åpne, verifiserbare kilder hvis de er tilgjengelige.\nLag en briefing på maks én side med:\n- foreslått agenda med minutter;\n- tre mulige forretningsproblem å utforske (som hypoteser, ikke fakta);\n- fem prioriterte åpne spørsmål, med naturlige oppfølgingsspørsmål;\n- hva jeg bør lytte etter om datakvalitet, integrasjon, BI, KI og kompetansemangel;\n- typiske fallgruver ved å gå for tidlig inn i teknologi;\n- forslag til avslutning som avklarer neste steg.\n",
+        "Du er en kritisk møteforbereder for data, analyse og KI. Kunde: [KUNDE]. Rolle: [ROLLE]. Varighet: [MØTELENGDE]. Formål: [MÅL].\nSkap en praktisk møtebrief – ikke en generell selskapsprofil. Manglende opplysninger skal merkes ukjent, ikke diktes opp.\nLever maks 450 ord i denne rekkefølgen:\n1. Formål med møtet og ønsket utfall i én setning.\n2. En kort tidsatt agenda som summerer til oppgitt møtelengde.\n3. Maks tre mulige forretningsutfordringer (tydelig merket som hypoteser).\n4. Fem prioriterte åpne spørsmål med ett relevant oppfølgingsspørsmål hver. Begynn med mål og konsekvenser; ikke start med teknologi.\n5. Hva jeg bør lytte etter, og hva som kan tale mot behov for data- eller KI-hjelp.\n6. En naturlig avslutning der vi avklarer eier, beslutning og neste steg.\n",
         {
           "$content": "prompt-rule:verified-public",
           "variant": "normal"
         },
-        "\nSkriv på naturlig norsk for en selger som ikke er dataarkitekt."
+        "\nHvis vesentlig informasjon mangler, lag et brukbart generisk opplegg og oppgi kort hva jeg må avklare. Skill dokumenterte fakta fra antagelser."
       ]
     },
     {
@@ -147,7 +154,7 @@
       "id": "discovery",
       "category": "Forbered møte",
       "title": "Bygg en behovssamtale",
-      "summary": "Lag spørsmål som beveger samtalen fra symptom til konsekvens og beslutning.",
+      "summary": "Fra et uklart kundesignal til spørsmål og et mulig neste steg.",
       "when": "Når kunden har sagt noe interessant, men problemet er uklart.",
       "audience": "Salg / rådgiver",
       "sourceMode": "public",
@@ -158,13 +165,13 @@
       "before": [
         "Bruk generiske utsagn, ikke fortrolige sitater fra identifiserbare kunder."
       ],
-      "prompt": "Hjelp meg å forberede en behovssamtale.\nKunden har uttrykt dette problemet i anonymisert form: [KUNDENS_UTSAGN]. Bransje: [BRANSJE].\nJeg selger konsulentkompetanse innen dataplattform, BI, analyse og KI, ikke et bestemt produkt.\nSvar med:\nA. Tre mulige underliggende årsaker, tydelig merket hypoteser.\nB. En naturlig samtaletrapp med 8 spørsmål: problem → konsekvens → dagens løsning → data → eier → ønsket endring → tid → neste steg.\nC. Hvilke signaler som tyder på behov for data engineering, analyse, styring eller KI.\nD. Når vi bør trekke inn fagspesialist, og hva vedkommende må vite.\nE. To eksempler på hvordan jeg kan oppsummere uten å love en løsning.\nIkke fyll inn kundespesifikke fakta jeg ikke har gitt.",
+      "prompt": "Hjelp meg å forberede en naturlig behovssamtale om data, analyse og KI.\nKundens utsagn i anonymisert form: [KUNDENS_UTSAGN]. Bransje: [BRANSJE].\nIkke anta at kunden trenger en bestemt teknologi eller ekstern hjelp.\nSvar med:\nA. Tre mulige underliggende årsaker, merket som hypoteser. Ta med en mulig organisatorisk eller prosessuell årsak.\nB. Seks åpne spørsmål i naturlig rekkefølge: problem, konsekvens, dagens praksis, data, ansvar og beslutning. Gi korte oppfølgingsspørsmål der det er relevant.\nC. Hva som kan indikere behov for dataplattform, analyse eller KI, og hva som taler mot en teknisk leveranse.\nD. Når en fagspesialist bør involveres og hvilke tre opplysninger vedkommende trenger.\nE. En kort oppsummering jeg kan bruke i møtet uten å love en løsning.\nBruk klart norsk. Ikke dikt opp kundefakta. Hvis signalet er uklart, gi anvendelige spørsmål med forbehold.",
       "review": [
         "Sjekk kildene og datoene selv.",
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
       "priority": 2,
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "evidence": "assessment"
     },
     {
