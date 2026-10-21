@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.8',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.9',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -63,13 +63,24 @@ try {
   assert.equal(await page.locator('#search-input').count(),0,'lukke søk');
   await page.locator('#present-button').click();
   assert.equal(await page.locator('[data-deck]').count(),4,'Presenter-løp');
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt – fra markedssignal'),'demonstrasjonsløp er startpunkt');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Demonstrasjon: Slik hjelper Innsikt'),'demonstrasjonsløp er startpunkt');
   for(const deck of ['portal','intro','sales','technical']) {
    await page.locator('[data-deck="'+deck+'"]').click();
    assert.ok((await page.locator('#slide-body').innerText()).length>15,'Presenter '+deck);
    await page.locator('#slide-next').click();
    assert.ok((await page.locator('#slide-counter').innerText()).startsWith('2 av'),'neste lysbilde '+deck);
   }
+  // Salgsworkshop: publikumsavtale, fiktiv situasjon og reelle øvelsesgrenser.
+  await page.locator('[data-deck="sales"]').click();
+  const workshopOpening=await page.locator('#slide-body').innerText();
+  assert.ok(workshopOpening.includes('For kundeansvarlige')&&workshopOpening.includes('fiktivt luftfartscase'),label+': målgruppe og format på første slide');
+  await page.locator('#slide-next').click();
+  const fictionalScene=await page.locator('#slide-body').innerText();
+  assert.ok(fictionalScene.includes('FIKTIV KUNDESITUASJON'),label+': case er merket fiktivt');
+  assert.ok(!fictionalScene.includes('Mål et konkret bakkeforløp'),label+': pilot avsløres ikke i oppsettet');
+  await page.locator('#slide-next').click();
+  const exercise=await page.locator('#slide-body').innerText();
+  assert.ok(exercise.includes('DELTAKERØVELSE 1')&&exercise.includes('I par, 3 minutter'),label+': tydelig overgang til deltakeroppgave');
   // Alle lysbilder beholder samme 16:9-flate på hver skjermstørrelse.
   for(const deck of ['portal','intro','sales','technical']){
    await page.locator('[data-deck="'+deck+'"]').click();
@@ -172,9 +183,9 @@ try {
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.9.8')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.9.9')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
-  assert.ok(exported.includes('Innsikt – fra markedssignal')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
+  assert.ok(exported.includes('Demonstrasjon: Slik hjelper Innsikt')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,8,'alle portal-slides er eksportert');
   const popupPromise=context.waitForEvent('page');
   await page.locator('#deck-print').click();
