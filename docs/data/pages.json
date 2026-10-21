@@ -559,7 +559,11 @@
             "Trenger vi forklaring eller prognose? Vurder analysemetode og etterprøvbarhet.",
             "Trenger vi språkbasert samhandling? Undersøk KI først når dette er begrunnet."
           ],
-          "note": "Presenter dette som en beslutningstest for design, ikke som tre modenhetstrinn alle må gjennom. I det første tilfellet kan felles semantikk og en rapport være tilstrekkelig. I det andre må analyse og eventuell modell evalueres mot kjente utfall. I det tredje blir språkmodellens begrensninger, kildegrunnlag og tilgangskontroll viktige. Styr unna en leverandørs produktkart: Flere plattformer har overlappende evner, og arkitektur følger behov og begrensninger. Overgang: Når vi faktisk tegner sammenhengen, hvilken retning skal den leses i?"
+          "note": "Presenter dette som en beslutningstest for design, ikke som tre modenhetstrinn alle må gjennom. Definisjonen av dataplattform på skjermen er bevisst generell: Den sier hva et slikt grunnlag gjør, ikke at kunden trenger å anskaffe en ny plattform. I det første tilfellet kan felles semantikk og en rapport være tilstrekkelig. I det andre må analyse og eventuell modell evalueres mot kjente utfall. I det tredje blir språkmodellens begrensninger, kildegrunnlag og tilgangskontroll viktige. Styr unna en leverandørs produktkart: Flere plattformer har overlappende evner, og arkitektur følger behov og begrensninger. Overgang: Når vi faktisk tegner sammenhengen, hvilken retning skal den leses i?",
+          "body": {
+            "$content": "glossary:dataplattform",
+            "variant": "normal"
+          }
         },
         {
           "type": "diagram",
