@@ -259,634 +259,234 @@
   },
   "presentationDecks": {
     "portal": {
-      "label": "Slik bruker du Innsikt · 8 min",
-      "audience": "Kolleger og ledere som vil forstå formålet med Innsikt-portalen.",
-      "intro": "Demonstrasjon av selve portalen for kolleger og ledere. Én fiktiv kundesamtale viser hvorfor og når ulike deler av arbeidsflaten brukes; ikke et salgskurs eller en kundeleveranse.",
-      "slides": [
-        {
-          "type": "intro",
-          "title": "Demonstrasjon: Slik hjelper Innsikt oss i kundedialogen",
-          "body": "For kolleger og ledere. Vi følger én oppdiktet kundesamtale for å vise hvorfor portalen finnes – ikke en omvisning i hver side.",
-          "note": "Fortell eksplisitt hvem denne gjennomgangen er for: kolleger og ledere som vil forstå hva portalen bidrar med. Dette er en produktdemonstrasjon, men vi bruker et oppdiktet kundeeksempel som rød tråd. Vi skal ikke trene salg i grupper eller late som vi viser en gjennomført kundeleveranse. Åpne med kontrasten: Vi vet stadig mer om KI, plattformer og verktøy, men det hjelper lite dersom samtalen med kunden stopper ved produktnavn. Fortell at denne presentasjonen ikke skal ta publikum gjennom alle sidene i portalen. Den skal følge én tenkt kundedialog, fra et uklart signal til et konkret neste steg. Dette er en demonstrasjon av et åpent arbeidsgrunnlag, ikke en kundereferanse eller et ferdig tilbud. Overgang: Hva skjer når kunden begynner med teknologien, ikke problemet?",
-          "beat": "promise",
-          "delivery": "tell",
-          "cue": "PORTALDEMONSTRASJON"
-        },
-        {
-          "type": "intro",
-          "title": "Fiktivt kundemøte: «Vi bør gjøre mer med KI»",
-          "body": "Kunden har hørt om KI-agenter, men har ennå ikke beskrevet hvilken oppgave eller beslutning som bør bli bedre.",
-          "note": "Ta opp historien fra åpningen: I den tenkte samtalen møter vi en leder som ønsker mer KI. Vi vet ennå ikke hvilken prosess som skal forbedres. Dette er en situasjon vi bruker for å demonstrere hvordan portalen hjelper oss videre. Spill rollen som kundeansvarlig: En leder har hørt om KI-agenter og vil undersøke mulighetene. Hvis vi svarer med verktøy eller arkitektur umiddelbart, risikerer vi å løse feil problem. Si heller: «Hvilken oppgave eller beslutning skulle blitt merkbart bedre?» Poenget er ikke at KI er irrelevant, men at behovet må beskrives før mulige tiltak vurderes. Forklar at resten av gjennomgangen viser hvordan portalen kan støtte denne undersøkelsen. Overgang: Først henter vi kontekst, ikke et produktforslag.",
-          "beat": "promise",
-          "delivery": "tell",
-          "cue": "FIKTIV KUNDESITUASJON"
-        },
-        {
-          "type": "bullets",
-          "title": "Først søker vi kontekst – ikke et produkt",
-          "bullets": [
-            "«Marked» gir dokumenterte endringer og kilder.",
-            "«Trendradar» viser usikre signaler vi følger med på.",
-            "I vår tenkte samtale spør vi: Hva påvirker dette hos kunden?"
-          ],
-          "note": "Vis gjerne «Marked» og «Trendradar» etter presentasjonen, men unngå å lese opp tall og trender her. Forklar forskjellen på en markedsobservasjon og kundens situasjon: En økning i KI-bruk kan være relevant bakgrunn, men dokumenterer verken gevinst eller investeringsbehov hos en bestemt virksomhet. Demonstrer kildehenvisningene dersom publikum lurer på troverdighet. Gjør det tydelig at trendradaren er et sted for hypoteser som skal følges, ikke en liste over løsninger som skal selges. Overgang: Nå trenger vi et konkret problem å undersøke.",
-          "beat": "journey",
-          "delivery": "tell",
-          "cue": "MARKEDSKONTEKST"
-        },
-        {
-          "type": "case",
-          "title": "Kunden beskriver et problem med økonomirapporteringen",
-          "business": "okonomi",
-          "note": "Gjør spranget tydelig: I vår fiktive dialog viser det seg at ønsket om KI skjuler et mer konkret rapporteringsproblem. Her kan vi slå opp en illustrativ problemstilling under «Forretningsbehov». Ikke framstill dette som bekreftet kundeinformasjon. Presenter økonomieksempelet som en illustrasjon, ikke en faktisk kunde: Ulike avdelinger bruker tid på å avstemme tall og månedsrapporteringen kommer sent. Les den første replikken høyt og still ett av de to spørsmålene på lysbildet til publikum. Det viktige er å flytte samtalen fra «en ny rapport» til konsekvensen: Hvilke beslutninger eller prioriteringer blir forsinket? Vis deretter hvordan «Forretningsbehov» kan brukes for å finne mer presise spørsmål. Overgang: Et godt problem peker mot ulike typer behov, ikke ett forhåndsvalgt verktøy.",
-          "beat": "journey",
-          "delivery": "tell",
-          "body": "Fiktivt eksempel: Nå flytter vi samtalen fra KI til hva økonomilederen faktisk strever med.",
-          "cue": "FIKTIVT EKSEMPEL"
-        },
-        {
-          "type": "bullets",
-          "title": "Det samme problemet har flere mulige forklaringer",
-          "bullets": [
-            "Ulike definisjoner? Begynn med datagrunnlag, eierskap og kvalitet.",
-            "Riktige tall, men svake beslutninger? Se på analyse og arbeidsflyt.",
-            "Mye manuelt arbeid? Undersøk automatisering og eventuelt KI."
-          ],
-          "note": "Bruk økonomieksempelet videre. Hvis to avdelinger definerer margin forskjellig, løser ikke en språkmodell selve uenigheten. Hvis alle stoler på tallene, men ingen bruker dem når beslutninger tas, er problemet et annet. Hvis medarbeidere gjentar en stabil, regelstyrt oppgave, kan enkel automatisering være bedre enn generativ KI. Dette er tre undersøkelsesretninger, ikke tre produkter som må innføres. Pek på at portalen har egne innganger for hvert spor, og at fagmiljøet må vurdere riktig tiltak. Overgang: Hvor finner vi hjelpen til å gå dypere?",
-          "beat": "journey",
-          "delivery": "tell",
-          "cue": "ALTERNATIVE FORKLARINGER"
-        },
-        {
-          "type": "bullets",
-          "title": "Slik bruker vi portalen når problemet er konkret",
-          "bullets": [
-            "«Salgsinnganger» hjelper med kvalifisering og mulige neste spørsmål.",
-            "«Arkitektur» og «Teknologi» gir prinsipper, alternativer og forbehold.",
-            "Søk og begrepsforklaringer gjør det enklere å finne fram underveis."
-          ],
-          "note": "Fortell at vi nå har kommet fra signal via problem til verktøy for videre forberedelse, og at portalen brukes etter behov, ikke i en fast lineær klikksti. Ikke gjennomfør en lang funksjonsdemo. Fortell én kort brukssituasjon: En selger forbereder møtet via Forretningsbehov, velger en relevant salgsinngang og inviterer deretter en fagperson som undersøker datadefinisjoner og tilgang. Arkitekturskissene er generiske samtalehjelpemidler, ikke løsningsforslag som skal brukes ukritisk. Demonstrer eventuelt ett søk og én begrepsforklaring, men gjør det etter å ha forklart hvorfor de er nyttige. Overgang: Et arbeidsgrunnlag er bare nyttig dersom det endrer hva vi gjør etter møtet.",
-          "beat": "tool",
-          "delivery": "tell",
-          "cue": "PORTAL I BRUK"
-        },
-        {
-          "type": "bullets",
-          "title": "Hva ville vi forberedt før neste møte?",
-          "bullets": [
-            "Formuler problemet, eieren og konsekvensen i kundens språk.",
-            "Avklar hva som må undersøkes eller måles før løsning velges.",
-            "Bruk en mal eller en prompt til forberedelse – og kvalitetssikre utkastet."
-          ],
-          "note": "Knyt de tre punktene til økonomieksempelet: Ikke send en generisk presentasjon om KI. Avtal heller en kort samtale mellom økonomiansvarlig og en relevant data-/analysefagperson, med mål om å forstå hvor tallene spriker og hva det koster i tid eller beslutningskvalitet. Promptbiblioteket lager utkast, ikke bekreftede fakta; aldri legg konfidensielt kundeinnhold i denne offentlige løsningen. Overgang: Dermed kan vi avslutte med en enkel arbeidsvane, fremfor enda en produktgjennomgang.",
-          "beat": "tool",
-          "delivery": "tell",
-          "cue": "FORBEREDELSE"
-        },
-        {
-          "type": "takeaway",
-          "title": "Resultatet er et bedre spørsmål – ikke et produktforslag",
-          "bullets": [
-            "Finn et signal eller problem kunden kjenner igjen.",
-            "Få fram konsekvens, ansvar og det viktigste ubesvarte spørsmålet.",
-            "Ta med riktig fagkompetanse før dere velger løsning."
-          ],
-          "note": "Oppsummer historien i én setning: Vi begynte med «mer KI», men endte med et konkret økonomiproblem og et bedre spørsmål til riktig person. Foreslå at publikum prøver den samme metoden i neste kundemøte. Presiser at portalen er offentlig beta med illustrative salgsinnganger: Ingen dokumenterte Webstep-leveranser, intern kapasitet eller kundefakta ligger her. Avslutt gjerne med å åpne portalen og be publikum nevne et eget problem de vil slå opp, men ikke begynn en ny omvisning.",
-          "beat": "finish",
-          "delivery": "debrief",
-          "cue": "OPPSUMMERING"
-        }
-      ],
+      "label": "Presenter Innsikt · 7 min",
+      "audience": "Kolleger, ledere og andre som skal få en kort, selvstendig introduksjon til Innsikt-løsningen.",
+      "intro": "Hovedpresentasjonen: hva løsningen bidrar med, hvem den hjelper, hvordan ulike innholdsdeler henger sammen, og hvor grensene går.",
       "narrative": {
-        "mode": "portal-demonstration",
-        "use": "Kan fremføres som en kort selvstendig demonstrasjon, med valgfri navigasjon i portalen etterpå.",
-        "centralQuestion": "Hvordan hjelper portalen oss fra et løst markedssignal til en relevant kundedialog?",
-        "turn": "Et hypotetisk KI-ønske blir til et konkret beslutningsproblem.",
-        "resolution": "Publikum forstår når og hvorfor de kan bruke portalen; ikke bare hvilke sider den har.",
+        "mode": "product-demonstration",
+        "use": "Brukes ved fremvisning av selve portalen. Kan holdes uten live-navigasjon, men notatene angir naturlige steder å åpne relevante sider. Ingen kundereferanse.",
+        "centralQuestion": "Hvordan gjør Innsikt markeds- og fagkunnskap nyttig før et kundemøte?",
+        "turn": "Portalen er mest nyttig når den følges som en tankerekke fra relevans til kundespørsmål, ikke som en oversikt over flest mulig teknologier.",
+        "resolution": "Brukeren forlater demonstrasjonen med et tydelig bilde av hva løsningen hjelper med og hvordan den tas i bruk.",
+        "story": "En kollega forbereder et kundemøte og møter et velkjent problem: Det finnes mange markedsnyheter, produkter og faglige beskrivelser, men den neste samtalen krever en konkret forståelse av kundens behov. Innsikt er bygget for å gjøre denne overgangen enklere. Vi begynner derfor ikke med å demonstrere menyen, men med de tre spørsmålene arbeidet må svare på: Hva skjer, hvor kan det være relevant, og hvordan kommer vi faglig videre? Marked og Trendradar gir bakgrunn; Forretningsbehov og Salgsinnganger hjelper oss å kvalifisere; Arkitektur, teknologi og praktiske maler støtter neste steg. Når møtet nærmer seg, er resultatet ikke en garantert løsning, men bedre spørsmål, klarere forbehold og en konkret oppfølging. Nettopp fordi portalen er et åpent arbeidsgrunnlag, må kunden og fagmiljøet selv bekrefte hva som stemmer og hva som skal gjøres.",
         "beats": [
           {
-            "id": "promise",
-            "function": "Etabler hva portalen skal hjelpe med – og at kundedialogen er fiktiv."
+            "id": "need",
+            "function": "Etabler mottakerens utfordring og produktets formål."
           },
           {
-            "id": "journey",
-            "function": "Vis hvordan et signal blir et problem og et faglig neste steg."
+            "id": "approach",
+            "function": "Gå gjennom den sammenhengende arbeidsmåten og dens faglige innganger."
           },
           {
-            "id": "tool",
-            "function": "Knytt portalens funksjoner til et konkret behov i historien."
-          },
-          {
-            "id": "finish",
-            "function": "Avslutt med en enkel bruksmåte."
+            "id": "outcome",
+            "function": "Vis hva brukeren tar videre, og hva verktøyet ikke lover."
           }
         ]
-      }
-    },
-    "intro": {
-      "label": "Introduksjon · 10 min",
-      "audience": "Kundeansvarlige og kolleger som ønsker en faglig inngang til innsikt, data og KI.",
-      "intro": "Kort faglig introduksjon, ikke kundetilpasset presentasjon. Et fiktivt økonomieksempel illustrerer forskjellen på rapporter, beslutninger og teknologivalg.",
+      },
       "slides": [
         {
           "type": "intro",
-          "title": "Faglig introduksjon: Mer data er ikke det samme som bedre beslutninger",
-          "body": "For kolleger og kundeansvarlige. Vi følger et fiktivt økonomieksempel fra uenige tall til en beslutning som trenger bedre støtte.",
-          "note": "Denne gjennomgangen er en faglig introduksjon, ikke en treningsworkshop eller et ferdig kundedeck. Vi følger ett oppdiktet økonomieksempel gjennom hele fortellingen. Innled med et gjenkjennelig bilde: Månedsmøtet starter, men samtalen handler om hvorfor salg og økonomi viser ulik margin i stedet for hva ledelsen bør gjøre. Ikke påstå at dette skjer hos en bestemt kunde. Spør publikum: «Hva er det egentlige problemet – rapporten eller beslutningen?» Dette etablerer spenningen i historien. Vi skal følge den fra symptom, via årsak, til hva et innsiktsmiljø faktisk kan bidra med. Overgang: Hør hvordan behovet kan høres ut fra kundens side.",
-          "beat": "question",
+          "title": "Innsikt gjør fagkunnskap nyttig i kundedialogen",
+          "beat": "need",
+          "cue": "OM LØSNINGEN",
           "delivery": "tell",
-          "cue": "FAGLIG INTRODUKSJON"
+          "body": "En arbeidsflate for å gå fra markedsutvikling og kundebehov til relevante spørsmål og faglig oppfølging.",
+          "note": "Start med mottakeren, ikke menyen: «Dette er en kort gjennomgang for dem som møter kunder eller skal støtte dem faglig. Innsikt skal gjøre det enklere å omsette det vi vet om data og KI til en bedre samtale med kunden.» Vi viser hva løsningen hjelper oss å gjøre, og når vi ville åpnet den. Vi skal ikke presentere en konkret kunde eller love en bestemt leveranse. Det vi trenger å forstå først, er problemet med arbeidsmåten i dag. Overgang: Hva er det som faktisk er krevende før et kundemøte?"
         },
-        {
-          "type": "case",
-          "title": "I vårt tenkte eksempel stemmer ikke tallene",
-          "business": "okonomi",
-          "note": "Knytt eksempelet tydelig til åpningen: I vårt tenkte månedsmøte diskuterer ledelsen tallene i stedet for å ta beslutninger. Kundereplikken er illustrativ, ikke en virkelig referanse. Les kundereplikken høyt, og la det henge litt. De to spørsmålene som vises, er bedre enn et umiddelbart forslag om dashboard. Still et oppfølgingsspørsmål muntlig: «Hvem oppdager avviket, og hvilken beslutning må vente?» Dette scenariet er redaksjonelt og illustrativt, ikke en dokumentert leveranse. Målet er å vise at Innsikt arbeider i grenseflaten mellom virksomhetens ansvar, datagrunnlag og analyse. Overgang: Hva må vi finne ut før vi lager noe nytt?",
-          "beat": "question",
-          "delivery": "tell",
-          "cue": "FIKTIVT ØKONOMIEKSEMPEL"
-        },
-        {
-          "type": "bullets",
-          "title": "Hvorfor kan to riktige rapporter likevel være uenige?",
-          "bullets": [
-            "Kilder: Systemene registrerer ulike hendelser eller tidsperioder.",
-            "Begreper: Avdelingene legger forskjellig betydning i samme nøkkeltall.",
-            "Bruk: Ingen har avklart hvilken beslutning tallet skal støtte."
-          ],
-          "note": "Her er vendepunktet: Flere rapporter vil ikke nødvendigvis løse problemet, fordi symptomene kan ha ulike årsaker. Gi et konkret, hypotetisk eksempel: Salg teller signerte avtaler; økonomi teller bokførte inntekter. Begge tall kan være korrekte, men svare på forskjellige spørsmål. Vær nøye med ikke å framstille eksempelet som en universell regnskapsregel. Be publikum velge hvilken av de tre årsakene de ville undersøkt først, og hvorfor. Overgang: Vi må koble arbeid med data til en faktisk beslutningssituasjon.",
-          "beat": "reframe",
-          "delivery": "tell",
-          "cue": "MULIGE FORKLARINGER"
-        },
-        {
-          "type": "bullets",
-          "title": "Start med beslutningen som venter, og arbeid bakover",
-          "bullets": [
-            "Hvem må ta beslutningen – og når trenger vedkommende svaret?",
-            "Hvilke definisjoner og data må være til å stole på?",
-            "Hva skal være annerledes i arbeidsprosessen når svaret finnes?"
-          ],
-          "note": "Tegn gjerne kjeden muntlig i motsatt retning av teknisk implementasjon: Først beslutning, så nødvendig informasjon, deretter kilder og databehandling. I økonomieksempelet kan behovet være en tidligere og mer pålitelig månedsprognose; dette må kunden selv bekrefte. Snakk om hvem som eier definisjoner og hvem som faktisk bruker analysen. Forklar at rollen til fagmiljøet ikke bare er å bygge datarør, men å sikre at data gir relevant beslutningsstøtte. Overgang: Hva skjer når KI kommer inn i denne ligningen?",
-          "beat": "reframe",
-          "delivery": "tell",
-          "cue": "BESLUTNING FØR TEKNOLOGI"
-        },
-        {
-          "type": "metric",
-          "title": "Økende KI-bruk løser ikke et uklart beslutningsproblem",
-          "body": {
-            "$content": "market-guidance:ki-use",
-            "variant": "short"
-          },
-          "sources": [
-            "ssb"
-          ],
-          "note": "Marker at vi tar et kort steg ut fra økonomihistorien for å gi relevant markedskontekst før vi vender tilbake til spørsmålet om beslutningsstøtte. La tallet stå et øyeblikk, men selg det ikke som en gevinst. Dette er SSBs brukstall for norske foretak med minst ti sysselsatte, med årstallet vist på lysbildet. Det sier ikke hvor god kvaliteten på løsningene er, hvilken effekt de skaper, eller om en konkret virksomhet trenger et konsulentprosjekt. Koble tallet til historien: Når nye verktøy blir tilgjengelige, blir det enda viktigere å være presis om data, kontekst og kontroll. Overgang: Slik kan vi forklare sammenhengen uten å gjøre teknologien til hovedperson.",
-          "beat": "principle",
-          "delivery": "tell",
-          "cue": "MARKEDSKONTEKST"
-        },
-        {
-          "type": "diagram",
-          "title": "Hele arkitekturen må støtte dem som skal handle",
-          "diagram": "ai-on-data",
-          "note": "Be publikum lese figuren nedenfra og opp, selv om visningsformen er en enkel stegskisse: Datagrunnlag og kontekst gjør analyse og KI mulig, men nytten realiseres hos mennesker som tar beslutninger eller utfører arbeid. Bruk økonomieksempelet: Et riktig margintall hjelper først når riktig ansvarlig får det tidsnok og kan gjøre noe med det. Dette er en prinsippmodell, ikke en anbefalt stack og ikke et krav om KI, kunnskapsgraf eller en ny plattform. Stopp ved organisasjonen øverst. Overgang: Hva gjør vi da i et første møte?",
-          "beat": "principle",
-          "delivery": "tell",
-          "cue": "PRINSIPPSKISSE"
-        },
-        {
-          "type": "bullets",
-          "title": "Første samtale handler om å finne riktig problem",
-          "bullets": [
-            "Den avklarer problem, konsekvens og ansvarlig.",
-            "Den skiller mellom datakvalitet, analysebehov og mulig automatisering.",
-            "Den definerer hva som må undersøkes sammen med fagmiljøet."
-          ],
-          "note": "Dette er ikke en oppfordring om å bruke lengst mulig tid på analyse. Forklar at et kort, strukturert første møte ofte sparer arbeid fordi man unngår å foreslå en løsning før problemet er forstått. Etabler eksempelvis tre ting som må dokumenteres: Hvilken beslutning er forsinket, hvor kommer de motstridende tallene fra, og hvem kan godkjenne en felles definisjon? Det er nok til å vurdere om et mer teknisk arbeidsmøte har verdi. Overgang: Hva er det ene budskapet publikum skal ta med seg?",
-          "beat": "finish",
-          "delivery": "tell",
-          "cue": "FØRSTE SAMTALE"
-        },
-        {
-          "type": "takeaway",
-          "title": "Lærdommen: God innsikt begynner med en beslutning",
-          "bullets": [
-            "Start med beslutningen og den som har ansvar for den.",
-            "Bygg tillit til tall, definisjoner og datatilgang.",
-            "Bruk analyse eller KI når det gir en målbar forbedring i arbeidet."
-          ],
-          "note": "Lukk sirkelen til åpningsscenen: Målet var ikke å lage enda en rapport, men å la møtet handle om hva virksomheten skal gjøre. Gjenta at dette kan ende i datakvalitet, modellering, BI, prosessendring, automatisering eller KI – og at det ikke er bestemt på forhånd. Still gjerne ett siste spørsmål: «Hvilket beslutningsproblem hos en kunde kjenner dere igjen?» Dette åpner for en faglig samtale, ikke et produktpitch. For konkrete oppdrag må referanser, leveranseevne og forslag kvalitetssikres separat.",
-          "beat": "finish",
-          "delivery": "debrief",
-          "cue": "OPPSUMMERING"
-        }
-      ],
-      "narrative": {
-        "mode": "educational-talk",
-        "use": "Kan brukes som intern innføring og tilpasses i samarbeid med fagmiljøet før eventuell kundebruk.",
-        "centralQuestion": "Hvorfor fører ikke mer data automatisk til bedre beslutninger?",
-        "turn": "Det tilsynelatende rapportproblemet viser seg å kunne handle om definisjoner og beslutninger.",
-        "resolution": "Verdien ligger i å støtte en bestemt beslutning, ikke å bygge mer teknologi.",
-        "beats": [
-          {
-            "id": "question",
-            "function": "Sett scene og eksempelsituasjon."
-          },
-          {
-            "id": "reframe",
-            "function": "Undersøk mulige årsaker, eierskap og beslutning."
-          },
-          {
-            "id": "principle",
-            "function": "Forklar hvordan data, analyse og KI kan støtte beslutningen."
-          },
-          {
-            "id": "finish",
-            "function": "Forankre ett anvendbart prinsipp."
-          }
-        ]
-      }
-    },
-    "sales": {
-      "label": "Salgsworkshop · 30 min",
-      "audience": "Internt: kundeansvarlige, rådgivere og fagkonsulenter som trener på kvalifisering.",
-      "intro": "Fasilitert intern workshop. Ett tydelig fiktivt luftfartseksempel utvikler seg fra en vag KI-forespørsel til testbare hypoteser og et mulig neste møte. Eksempelet diskuteres i øvelser og skal ikke brukes som ferdig kundepresentasjon.",
-      "slides": [
         {
           "type": "intro",
-          "beat": "contract",
+          "title": "Det vanskelige er å vite hva som er relevant",
+          "beat": "need",
+          "cue": "UTFORDRINGEN",
           "delivery": "tell",
-          "title": "Intern workshop: fra KI-ønske til kvalifisert neste steg",
-          "body": "For kundeansvarlige og fagkonsulenter. Vi trener med ett fiktivt luftfartscase – ikke en ferdig kundepresentasjon.",
-          "bullets": [
-            "Vi følger et tenkt kundemøte fra første spørsmål til mulig oppfølging.",
-            "Underveis stopper vi for tre korte øvelser.",
-            "Målet er å lære en metode som kan brukes i andre kundedialoger."
-          ],
-          "note": "Start med en tydelig avtale med rommet: «Dette er en intern treningsøkt for oss som møter kunder. Vi skal ikke presentere en løsning for et flyselskap. Vi skal øve på hva vi spør om når noen kommer med et uklart KI-ønske.» Forklar at alt som skjer hos kunden er oppdiktet, mens spørsmålene og metoden er ment for gjenbruk. Fortell at du først presenterer en situasjon; ved lysbilder merket Øvelse skal deltakerne diskutere i par før dere går videre. Det forventede resultatet er et forslag til et kvalifiserende neste møte, ikke et tilbud. Bruk omtrent to minutter. Overgang: Nå møter vi kunden i dette fiktive eksempelet.",
-          "cue": "INTERN WORKSHOP"
+          "body": "Fagstoff og markedsnyheter hjelper lite hvis vi fortsatt mangler gode spørsmål til det møtet vi skal i.",
+          "note": "Beskriv en gjenkjennelig situasjon uten å påstå at alle jobber slik: «Før et møte kan vi finne artikler om KI, lese om nye plattformer og lete etter tidligere løsningsbeskrivelser. Men kunden får liten nytte av at vi kan nevne mange teknologier. Vi må forstå hvilket problem kunden ønsker å løse, og hvem som har ansvar for det.» Dette er behovet portalen er bygget for å støtte. Den erstatter ikke samtalen eller fagpersonens vurdering. Overgang: Løsningen hjelper oss å forberede tre spørsmål i riktig rekkefølge."
         },
         {
-          "type": "sector-case",
-          "beat": "encounter",
+          "type": "bullets",
+          "title": "Tre spørsmål gir arbeidet en retning",
+          "beat": "approach",
+          "cue": "EN ENKEL ARBEIDSFLYT",
           "delivery": "tell",
-          "title": "Fiktivt kundemøte: Hva er det egentlig som forsinkes?",
-          "industryCase": "transport-turnaround",
-          "caseView": "situation",
-          "body": "Vi er rådgiverne. Motparten er en operativ leder som sier: «Vi vil se om KI kan hjelpe oss å få bedre flyt.»",
-          "note": "Fortell dette som begynnelsen på én sammenhengende historie: «Se for dere at vi møter en operativ leder i et tenkt luftfartsmiljø. Vedkommende beskriver at flere små forsinkelser under bakkearbeidet summeres, og ønsker å se om KI kan hjelpe.» Forklar kort at bakkearbeidet omfatter samordnede aktiviteter som renhold, catering og lasting. Vi vet ennå ikke hvor mye variasjon det er, hva årsaken er eller om KI passer. Ikke røp forslag til pilot, løsninger eller mulige leveranser nå. Publikum har rollen som rådgivere; kunden i historien er oppdiktet. Bruk omtrent to minutter. Overgang: Hva spør vi denne lederen om før vi snakker om teknologi?",
-          "cue": "FIKTIV KUNDESITUASJON"
-        },
-        {
-          "type": "bullets",
-          "beat": "discovery",
-          "delivery": "exercise",
-          "title": "Øvelse 1: Still spørsmålet som åpner problemet",
-          "body": "I par, 3 minutter: Velg ett spørsmål dere faktisk ville stilt nå.",
           "bullets": [
-            "Hvilken konkret hendelse eller beslutning skaper friksjon?",
-            "Hva får forsinkelsen av konsekvenser, og for hvem?",
-            "Hvem kan endre arbeidsmåten dersom vi finner årsaken?"
+            "Hva skjer? Finn utviklingstrekk og kontroller kildene.",
+            "Hvor kan det gjøre en forskjell? Utforsk problemer i bransjer og funksjoner.",
+            "Hvordan kommer vi videre? Finn gode spørsmål, faglige vurderinger og neste steg."
           ],
-          "note": "Stopp historien. Gi parene tre minutter og be dem velge ett av spørsmålene eller formulere et bedre. Ikke svar på spørsmålene på vegne av den oppdiktede kunden. Be to par lese opp valget sitt og hvorfor det er mer nyttig enn «hvilket KI-verktøy har dere?». Oppsummer at målet med denne første avklaringen er å oppdage konsekvens, virksomhetseier og hva som faktisk kan påvirkes. Skillet er viktig: Dette lysbildet er en deltakerøvelse, ikke en påstand om hva som skjer i luftfartsdrift. Overgang: Vi fortsetter historien med det kunden har oppgitt – og markerer hva som fortsatt er ukjent.",
-          "cue": "DELTAKERØVELSE 1"
+          "note": "Dette er kjernen i demonstrasjonen. Si: «I stedet for å navigere etter produktnavn kan vi følge en tankerekke: Hva endrer seg, hvorfor kan det være relevant for kunden, og hva trenger vi å finne ut?» Pek på at dette ikke er en obligatorisk trestegsprosess. En erfaren bruker kan gå rett til et kjent behov; en ny kollega kan begynne med marked eller «Start her». Hovedpoenget er at marked, forretning og fag ikke er separate kataloger, men hjelpemidler i samme samtale. Overgang: Slik ser det ut når vi begynner med omverdenen."
         },
         {
           "type": "bullets",
-          "beat": "discovery",
+          "title": "Vi bruker markedet til å stille spørsmål – ikke trekke konklusjoner",
+          "beat": "approach",
+          "cue": "FØRSTE INNGANG",
           "delivery": "tell",
-          "title": "Et symptom er ikke det samme som en årsak",
-          "body": "Tilbake til caset: Kunden peker på samlet bakketid. Det er fortsatt en observasjon, ikke en diagnose.",
+          "body": "Et markedssignal er bakgrunn for en samtale, ikke bevis for at en bestemt kunde trenger et prosjekt.",
           "bullets": [
-            "Oppgitt: Små forsinkelser oppstår i flere aktiviteter.",
-            "Uavklart: Venting, kapasitet, overlevering eller registrering?",
-            "Avgjørende: Hva kan operativ leder måle og påvirke?"
+            "«Marked» samler utviklingstrekk med kilder.",
+            "«Trendradar» viser tidlige signaler og usikkerhet.",
+            "Velg bare det som faktisk kan berøre kundens virksomhet."
           ],
-          "note": "Ta tråden opp igjen: «Nå vet vi hvorfor kunden er bekymret, men vi vet fortsatt ikke hva som driver forsinkelsene.» Pek på forskjellen mellom samlet bakketid som resultat og de enkelte hendelsene som kan ha bidratt. Opplysningene på skjermen beskriver casets forutsetninger og spørsmål som må undersøkes, ikke påviste forhold hos et faktisk flyselskap. Si gjerne: «Hvis vi går rett på prediksjon, risikerer vi bare å predikere et tall vi ikke forstår.» Spør kort hva vi trenger å se i dataene. Bruk to minutter. Overgang: La oss innføre en mulig opplysning som utfordrer den første forklaringen.",
-          "cue": "HISTORIEN FORTSETTER"
+          "note": "Vis eventuelt «Marked» på portalen mens du snakker, men bruk under ett minutt. Fortell: «Her kan vi lese hva som faktisk er dokumentert, og hva som fortsatt er tidlige signaler. For eksempel betyr økende bruk av KI ikke at alle trenger et KI-prosjekt.» Unngå en oppramsing av statistikk. Dette er stedet å vise at kilder, forbehold og vurderingsdatoer følger innholdet, slik at selgeren kan være presis. Vi går ikke videre fordi markedet beviser noe om kunden, men fordi det gir et spørsmål det er verdt å undersøke. Overgang: Nå flytter vi oppmerksomheten fra markedet til det kunden faktisk opplever."
         },
         {
           "type": "bullets",
-          "beat": "complication",
+          "title": "Når vi kjenner problemet, blir inngangen mer konkret",
+          "beat": "approach",
+          "cue": "ANDRE INNGANG",
           "delivery": "tell",
-          "title": "Anta at «ferdig» betyr noe ulikt for to aktører",
-          "body": "Nytt hypotetisk funn i øvelsen – ikke en konstatert årsak hos kunden.",
-          "bullets": [
-            "Den ene aktøren registrerer når arbeidet avsluttes.",
-            "Den andre registrerer når hendelsen godkjennes i systemet.",
-            "Da kan en sammenligning vise tidsforskjeller som ikke er faktisk venting."
-          ],
-          "note": "Dette er historiens første vendepunkt. Si eksplisitt: «Vi innfører nå en hypotese for å teste tenkningen vår. Anta at 'ferdig' registreres ved fysisk avslutning i én prosess og ved senere godkjenning i en annen.» Forklar hvorfor dette kan gjøre målinger misvisende, men ikke si at denne hypotesen er bekreftet. Den underliggende utfordringen kan fortsatt ligge i kapasitet eller arbeidsflyt. La publikum merke at det opprinnelige KI-ønsket ikke svarer på dette. Eksempelet illustrerer behovet for begrepsavklaring og kvalitet. Bruk to minutter. Overgang: Hvordan finner vi ut hvilken forklaring som holder?",
-          "cue": "HYPOTETISK VENDING"
-        },
-        {
-          "type": "bullets",
-          "beat": "complication",
-          "delivery": "exercise",
-          "title": "Øvelse 2: Hvilken forklaring kan vi faktisk teste?",
-          "body": "Diskuter i par, 3 minutter: Velg én hypotese og ett bevis som kan avkrefte den.",
-          "bullets": [
-            "A: Målingene er ulike fordi begrepene er ulike.",
-            "B: Det finnes reell venting mellom to arbeidsoppgaver.",
-            "C: Varierende bemanning eller kapasitet er hoveddriveren."
-          ],
-          "note": "Pause i fortellingen igjen. Be hvert par velge A, B eller C, men ikke kåre en vinner. Spør hva de ville undersøkt for å avkrefte hypotesen: for A kan det være sammenligning av definisjoner og hendelseslogger; for B tidsstempler og observerte overleveringer; for C bemanning og belastning over tid. Vi har ingen slike data her, så ingen av svarene er fasit. Poenget er å omsette et løst problem til testbare alternativer. Be to par dele sitt beviskrav. Bruk tre minutter. Overgang: Når vi har hypotesene, kan vi avklare hvilke data som trengs – og hvem som eier dem.",
-          "cue": "DELTAKERØVELSE 2"
-        },
-        {
-          "type": "bullets",
-          "beat": "complication",
-          "delivery": "tell",
-          "title": "Før analyse må hendelsene bety det samme",
-          "body": "Fortsett caset: Vi undersøker ett sammenhengende bakkeforløp, ikke hele virksomheten.",
-          "bullets": [
-            "Bli enige om definisjonen av start, ferdig og ventetid.",
-            "Se om hendelser kan kobles sikkert mellom aktører og systemer.",
-            "La operativt ansvarlige kontrollere hva registreringene faktisk betyr."
-          ],
-          "note": "Bruk svarene fra øvelse 2: Hvis gruppen vil undersøke tidsstempler, må vi først forstå hva tidspunktene representerer. Forklar at selv avansert analyse ikke gir pålitelige slutninger når definisjonene er uklare. Hold dette konkret: En operativ leder bør kunne forklare prosessen, mens en data-/analyseperson vurderer kildegrunnlag, sammenstilling og kvalitet. Det kan hende oppgaven allerede her blir et datakvalitetsarbeid snarere enn et KI-prosjekt. Avklar tilgang, personvern og sikkerhet før eventuell bruk av operative data. Bruk to minutter. Overgang: Nå kan vi skissere ulike veier avhengig av hva undersøkelsen avdekker.",
-          "cue": "UNDERSØKELSE"
-        },
-        {
-          "type": "bullets",
-          "beat": "choice",
-          "delivery": "tell",
-          "title": "Samme forespørsel kan ende i tre forskjellige tiltak",
-          "body": "Dette er alternative utfall – ikke tre leveranser kunden automatisk trenger.",
-          "bullets": [
-            "Feil i registreringene → felles definisjoner og datakvalitet.",
-            "Reell venting i prosessen → operativ analyse og forbedringsarbeid.",
-            "Behov for varsling → test regler eller modeller før avansert KI."
-          ],
-          "note": "Presenter dette som et veiskille i historien: Hvis dataene er lite sammenlignbare, bør man rydde i grunnlaget. Hvis datagrunnlaget holder og man finner faktisk venting, kan prosessinnsikt være relevant. Hvis hovedbehovet er å varsle tidligere, kan en enkel regel eller modell være bedre enn en agent. Forklar at dette er kondisjonale valg, ikke diagnoser eller løfter om effekt. Bruk spørsmålet «Hva må vi ha sett for å velge denne grenen?» for å utfordre publikum. Hold produktene helt ute av diskusjonen. Bruk to minutter. Overgang: Hvordan lager vi et neste steg uten å love et større prosjekt?",
-          "cue": "MULIGE UTFALL"
-        },
-        {
-          "type": "bullets",
-          "beat": "choice",
-          "delivery": "tell",
-          "title": "Første steg bør være avgrenset og mulig å stoppe",
-          "body": "I det fiktive caset foreslår vi en kort kartlegging før eventuelle tiltak i drift.",
-          "bullets": [
-            "Avgrens til én flytype og ett definert bakkeforløp.",
-            "Etabler dagens nivå og hva dataene faktisk kan forklare.",
-            "Vurder endringer først etter operativ og sikkerhetsfaglig avklaring."
-          ],
-          "note": "Her kommer første konkrete forslag, og det er med vilje beskjedent. Knytt det til bransjecasets kanoniske pilotidé om å undersøke et avgrenset bakkeforløp på én flytype. Ikke anta at operative endringer kan testes uten godkjenning; første steg kan være ren gjennomgang av data og prosess. Be publikum merke at vi ennå ikke har valgt verktøy, lovet kostnadsreduksjon eller besluttet KI. En pilot skal redusere usikkerhet, med mål og stoppkriterier, ikke være en skjult start på et stort leveranseprosjekt. Bruk to minutter. Overgang: Hva må vi så avtale med kunden for at dette skal bli et kvalifisert neste steg?",
-          "cue": "MULIG FØRSTE STEG"
-        },
-        {
-          "type": "bullets",
-          "beat": "choice",
-          "delivery": "exercise",
-          "title": "Øvelse 3: Formuler neste kundemøte",
-          "body": "I par, 3 minutter: Fullfør «Vi foreslår et møte for å …»",
-          "bullets": [
-            "Mål: Hvilket spørsmål eller hvilken hypotese skal avklares?",
-            "Deltakere: Hvem eier prosessen, og hvilken fagkompetanse trengs?",
-            "Beslutning: Hva må vi vite for å fortsette, endre retning eller stoppe?"
-          ],
-          "note": "Be hvert par formulere én sammenhengende setning, ikke en liste med tjenester. Eksempel på form, ikke fasit: «Vi foreslår et møte med operativ leder og en relevant datafagperson for å forstå hvordan tidspunktene registreres og vurdere om et begrenset analysearbeid vil være nyttig.» La ett par presentere, og spør hva som mangler for at kunden skal kunne si ja til neste steg. Unngå å love at en navngitt kompetanse eller kapasitet er tilgjengelig. Presenter dette som den tredje og siste øvelsen, og si at vi nå går mot oppsummering. Bruk tre minutter. Overgang: Hvilken beslutning kan vi ta med den informasjonen vi faktisk har?",
-          "cue": "DELTAKERØVELSE 3"
-        },
-        {
-          "type": "bullets",
-          "beat": "choice",
-          "delivery": "debrief",
-          "title": "Et godt utfall kan også være «ikke nå»",
-          "body": "Vi skal ikke ende med et KI-tilbud når problemet fortsatt er uavklart.",
-          "bullets": [
-            "Gå videre hvis eier, verdi og nødvendig undersøkelse er avklart.",
-            "Avklar mer hvis kritisk informasjon fortsatt mangler.",
-            "Stopp hvis nytten er uklar eller rammene ikke er forsvarlige."
-          ],
-          "note": "Lukk kundehistorien med den viktigste kvalifiseringsbeslutningen: Vi har ikke bevist hva som skaper forsinkelsene, men vi har formulert hva som må undersøkes. Dersom kunden har en ansvarlig prosesseier, tilgang til relevante beskrivelser og en reell konsekvens av problemet, kan neste møte være aktuelt. Hvis ikke kan det være riktig å undersøke mer – eller la saken ligge. Stopp er et legitimt resultat. Be deltakerne sammenligne dette med første slide, hvor ønsket bare var «mer KI». Bruk ett til to minutter. Overgang: Hva tar vi med oss uavhengig av bransje?",
-          "cue": "OPPSUMMERING AV CASET"
-        },
-        {
-          "type": "takeaway",
-          "beat": "transfer",
-          "delivery": "debrief",
-          "title": "Det som kan gjenbrukes, er samtalen – ikke luftfartscaset",
-          "bullets": [
-            "Gå fra kundens bestilling til problem, konsekvens og ansvarlig.",
-            "Gjør ukjente årsaker til testbare hypoteser.",
-            "Avtal en beslutning om neste steg før du diskuterer løsning."
-          ],
-          "note": "Skill eksplisitt mellom demonstrasjon og gjenbruk: Det fiktive luftfartscaset var et treningsmiljø. Vi har verken dokumenterte driftstall eller verifiserte kundeeffekter, og caset er ikke et eksternt salgsdeck. Det som skal følge deltakerne ut av rommet, er rekkefølgen i kvalifiseringen. Be alle nevne én faktisk kundedialog hvor de skal stille et bedre første spørsmål – men ikke samle inn navn eller konfidensielle opplysninger i denne offentlige portalen. Dette er oppsummeringen av hele fortellingen, ikke et ekstra teknologitema. Bruk ett minutt. Overgang: Ønsker du en egen presentasjon, kan du tilpasse metoden uten å kopiere eksempelinnholdet.",
-          "cue": "METODEN DU KAN GJENBRUKE"
-        },
-        {
-          "type": "prompt",
-          "beat": "transfer",
-          "delivery": "tool",
-          "title": "Bygg et kundetilpasset opplegg – uten å kopiere eksempelet",
           "body": {
-            "$content": "notice:deck-adaptation",
-            "variant": "slide"
-          },
-          "bullets": [
-            "Bytt ut det fiktive caset med et kvalitetssikret kundeproblem.",
-            "Lag en tydelig historie før du fordeler innholdet på lysbilder.",
-            "Skill dokumenterte fakta fra antakelser og øvelsesspørsmål."
-          ],
-          "promptId": "deck-outline",
-          "note": "Dette siste lysbildet er et valgfritt arbeidsverktøy etter workshopen, ikke en del av den fiktive kundehistorien. Forklar at kopierbar tilpasningsprompt kan hjelpe med et førsteutkast, men at hver påstand, hvert tall og hvert kunderelevant eksempel må kontrolleres av mennesker. Et nytt kundedeck må få sin egen målgruppe og bruksform og bruke bare offentlig eller godkjent informasjon i riktig system. Visuelt er dette avslutningen; ikke bruk fem minutter på et nytt promptkurs. Den metodiske læringen er allerede oppsummert på forrige lysbilde.",
-          "cue": "VALGFRITT VERKTØY"
-        }
-      ],
-      "narrative": {
-        "mode": "facilitated-internal-workshop",
-        "use": "Lederen forteller kundehistorien, stopper ved navngitte øvelser og samler svarene før neste del. 30 minutter. Gjenbruk kvalifiseringsmetoden – ikke det fiktive caset – i kundemøter.",
-        "centralQuestion": "Hvordan går vi fra «vi vil bruke KI» til et tydelig, kvalifisert neste steg?",
-        "turn": "Når vi undersøker hendelsesdata, blir det klart at både datakvalitet og reelle flaskehalser må være hypoteser inntil de er testet.",
-        "resolution": "Et avgrenset undersøkelsesmøte med rett eier og fagperson, eller en begrunnet beslutning om å ikke gå videre.",
-        "beats": [
-          {
-            "id": "contract",
-            "function": "Fortell publikum hvem de er, hva de skal gjøre, at caset er oppdiktet og hva øvelsen gir."
-          },
-          {
-            "id": "encounter",
-            "function": "Etabler kundemøtet og den observerte friksjonen uten å late som vi vet årsaken."
-          },
-          {
-            "id": "discovery",
-            "function": "La deltakerne velge spørsmål om konsekvens, eier og grunnlag."
-          },
-          {
-            "id": "complication",
-            "function": "Vis en ny antakelse som gjør det opprinnelige KI-ønsket usikkert, og la gruppen velge hva som må undersøkes."
-          },
-          {
-            "id": "choice",
-            "function": "Arbeid fram et kontrollert neste steg, avgrensning og kriterier for å gå videre eller stoppe."
-          },
-          {
-            "id": "transfer",
-            "function": "Oppsummer hva deltakerne konkret kan ta med til sitt neste kundemøte."
-          }
-        ]
-      }
-    },
-    "technical": {
-      "label": "Data og KI · 20 min",
-      "audience": "Data-/KI-fagpersoner, arkitekter og kundeansvarlige som skal forstå sentrale designvalg.",
-      "intro": "Faglig prinsippgjennomgang med et hypotetisk økonomibehov og et separat dokumenteksempel. Ikke arkitekturspesifikasjon, kundereferanse eller ferdig salgsdeck.",
-      "slides": [
-        {
-          "type": "intro",
-          "title": "Faglig gjennomgang: Velg løsning etter beslutningen",
-          "body": "For arkitekter, data-/KI-fagpersoner og kundeansvarlige. Vi bruker to hypotetiske behov for å forklare teknologivalg – ikke en ferdig referansearkitektur.",
-          "note": "Avklar bruksform før du begynner: Dette er en intern faglig prinsippgjennomgang for arkitekter, data-/KI-fagfolk og kundeansvarlige. Den viser to hypotetiske behov, ikke ett kundecase eller en anbefalt stack. Åpne med én konkret påstand: Den vanskeligste designbeslutningen er ofte ikke hvilken modell vi bruker, men hva brukeren faktisk skal gjøre med resultatet. Forklar at presentasjonen følger et beslutningsproblem, sammenligner analyse med dokumentbaserte KI-svar og avslutter med hvordan man kvalifiserer en pilot. Det er en prinsippdrøfting, ikke anbefaling av produktstack eller dokumentasjon på en bestemt kundeleveranse. Overgang: Et konkret, kjent problem er bedre enn et generisk arkitekturdiagram.",
-          "beat": "mandate",
-          "delivery": "tell",
-          "cue": "FAGLIG PRINSIPPGJENNOMGANG"
-        },
-        {
-          "type": "case",
-          "title": "Eksempel A: Økonomilederen trenger pålitelige tall",
-          "business": "okonomi",
-          "note": "Dette er eksempel A. Først følger vi et økonomibehov, slik at hvert arkitekturvalg kan begrunnes i hva en leder må kunne stole på. Bruk samme illustrative økonomiproblem som i introduksjonen. De ulike tallene kan skyldes tidsavgrensning, begreper eller manuelle prosesser. Ikke anta årsaken. Still spørsmålene på skjermen, og forklar at systemdesign først blir meningsfylt når man vet hva beslutningen er og hvilke data den krever. Den faglige vurderingen kan derfor ende i felles datamodell og BI, uten generativ KI. Overgang: Hvordan unngår vi å velge for mye teknologi for tidlig?",
-          "beat": "mandate",
-          "delivery": "tell",
-          "body": "Fiktivt økonomibehov: Først undersøker vi hva som må være sant om datagrunnlaget.",
-          "cue": "EKSEMPEL A · FIKTIVT"
-        },
-        {
-          "type": "bullets",
-          "title": "Første spørsmål: Hvilken funksjon må løsningen levere?",
-          "bullets": [
-            "Trenger vi et stabilt nøkkeltall? Begynn med definisjon, kvalitet og tilgang.",
-            "Trenger vi forklaring eller prognose? Vurder analysemetode og etterprøvbarhet.",
-            "Trenger vi språkbasert samhandling? Undersøk KI først når dette er begrunnet."
-          ],
-          "note": "Presenter dette som en beslutningstest for design, ikke som tre modenhetstrinn alle må gjennom. Definisjonen av dataplattform på skjermen er bevisst generell: Den sier hva et slikt grunnlag gjør, ikke at kunden trenger å anskaffe en ny plattform. I det første tilfellet kan felles semantikk og en rapport være tilstrekkelig. I det andre må analyse og eventuell modell evalueres mot kjente utfall. I det tredje blir språkmodellens begrensninger, kildegrunnlag og tilgangskontroll viktige. Styr unna en leverandørs produktkart: Flere plattformer har overlappende evner, og arkitektur følger behov og begrensninger. Overgang: Når vi faktisk tegner sammenhengen, hvilken retning skal den leses i?",
-          "body": {
-            "$content": "glossary:dataplattform",
+            "$content": "guidance:customer-first",
             "variant": "normal"
           },
-          "beat": "fork",
-          "delivery": "tell",
-          "cue": "VALG AV FUNKSJON"
-        },
-        {
-          "type": "diagram",
-          "title": "Fra datagrunnlag til verdi – nedenfra og opp",
-          "diagram": "ai-on-data",
-          "note": "Les figuren nedenfra og opp. Data og dokumenter trenger riktig kontekst, som definisjoner, relasjoner, regler og rettigheter. Analyse og KI kan bruke dette, men kvaliteten må vurderes i forhold til beslutninger og arbeidsflyt. Den øverste delen, organisasjonen, er poenget; alt under skal støtte den. Forklar at figuren er et sett med funksjonelle hensyn, ikke obligatoriske separate systemkomponenter. Det kreves ikke automatisk kunnskapsgraf, agent eller ny plattform. Overgang: Vi må også skille mellom to forskjellige typer kildegrunnlag.",
-          "beat": "fork",
-          "delivery": "tell",
-          "cue": "GENERISK PRINSIPPSKISSE"
+          "bullets": [
+            "«Forretningsbehov» gir symptomer, roller og spørsmål.",
+            "«Salgsinnganger» viser mulige retninger for videre dialog.",
+            "Vi velger et problem kunden kan bekrefte – ikke et produkt vi vil selge."
+          ],
+          "note": "Dette er løsningens viktigste overgang. Si: «Når kunden beskriver at rapporteringen tar tid eller at data ikke stemmer, kan vi finne tilsvarende problemstillinger under Forretningsbehov. Der finner vi formuleringer og spørsmål som kan hjelpe oss å undersøke hva som ligger bak.» Bruk gjerne økonomi som ett muntlig eksempel, men spar selve gjennomgangen av caset til den korte eksempelpresentasjonen. Forklar at dette er redaksjonelle forslag og illustrative situasjoner, ikke referanser eller ferdige diagnoser. Overgang: Når spørsmålene blir mer faglige, trenger vi støtte til å vurdere alternativer."
         },
         {
           "type": "bullets",
-          "title": "Eksempel A: Tall trenger felles betydning og sporbarhet",
+          "title": "Fagstoffet hjelper oss å vurdere – ikke å love",
+          "beat": "approach",
+          "cue": "FAGLIG FORDYPNING",
+          "delivery": "tell",
           "bullets": [
-            "Et nøkkeltall må ha en eier, definisjon og tidsavgrensning.",
-            "Datakilder og transformasjoner må kunne etterprøves.",
-            "Brukeren må forstå begrensningene før tallet styrer en beslutning."
+            "«Arkitektur» forklarer prinsipper og mulige avhengigheter.",
+            "«Teknologi» og «KI» gir produktoversikt og viktige forbehold.",
+            "«Kompetanse» og begrepshjelp støtter dialogen på riktig nivå."
           ],
-          "note": "Gå tilbake til økonomieksempelet: To korrekte rapporter kan være uenige dersom de definerer periodisering ulikt. Derfor må teamet avklare definisjoner, eierskap, historikk og datalinje. En språkmodell som forklarer et tall, kan forsterke misforståelsen hvis den bygger på feil grunnlag. Avklar hvem som godkjenner definisjoner, ikke bare hvem som bygger løsningen. Unngå å late som en bestemt teknologikomponent automatisk løser dette. Overgang: Dokumenter og fritekst stiller en annen type krav.",
-          "beat": "fork",
-          "delivery": "tell",
-          "cue": "EKSEMPEL A"
-        },
-        {
-          "type": "diagram",
-          "title": "Eksempel B: Et spørsmål om rutiner krever en annen tilnærming",
-          "diagram": "rag",
-          "note": "Si tydelig at vi nå skifter til eksempel B for å sammenligne krav, ikke fordi økonomicase plutselig skal ha en RAG-løsning. Her spør en medarbeider om gjeldende rutine og vil se gyldig kilde. Det er et annet brukerbehov. Bruk et illustrativt eksempel: En medarbeider spør hva gjeldende rutine sier, og systemet finner relevante dokumenter før det utformer svar. Dette er prinsippet bak retrieval-augmented generation (RAG). Marker at søk og referanser ikke i seg selv garanterer sannhet: Gamle versjoner, motstridende rutiner eller feil tilgang kan gi feil svar. Slike løsninger bør evalueres mot faktiske spørsmål, kildekvalitet og tillatelser. Dette er et alternativt brukstilfelle til økonomirapporten, ikke et ekstra lag denne må ha. Overgang: Hva er felles for begge?",
-          "beat": "fork",
-          "delivery": "tell",
-          "body": "Separat, hypotetisk brukstilfelle: En medarbeider skal finne gjeldende rutine i dokumenter.",
-          "cue": "EKSEMPEL B · FIKTIVT"
+          "note": "Forklar hvorfor fordypningsdelen finnes: «Vi skal ikke late som enhver kunde trenger en ny dataplattform eller KI-agent. Når vi forstår behovet bedre, kan fagmiljøet bruke arkitektur, teknologioversikt og begreper til å diskutere hva som er relevant – og hva som ikke er det.» Ikke åpne tilfeldige diagrammer. Demonstrer heller ett oppslag dersom noen spør om et bestemt faguttrykk. Skissene er generiske, og kompetanse eller kapasitet skal ikke loves ut fra en offentlig prototype. Overgang: Innsikt skal også hjelpe oss med det praktiske arbeidet etter at vi har funnet en relevant inngang."
         },
         {
           "type": "bullets",
-          "title": "Begge eksemplene krever kontroll rundt modellen",
-          "bullets": [
-            "Kilder og rettigheter: Hvem får vite hva, og hvilken versjon er gyldig?",
-            "Evaluering: Hvordan oppdager vi feil, usikkerhet og endret kvalitet?",
-            "Arbeidsflyt: Hvem godkjenner eller korrigerer et forslag før handling?"
-          ],
-          "note": "Forklar hvorfor en imponerende demo ikke er nok. Hvis en språkmodell gir et riktig svar til feil person, eller en rutine er utgått, kan løsningen likevel være uakseptabel. Hvis et KI-forslag går videre til en handling, kreves tydelige roller, logg og kontroll. Samtidig må vi unngå å overdesigne små problemer. Be publikum identifisere én risiko de faktisk må dokumentere i pilotens akseptansekriterier. Overgang: Hvordan starter vi uten å binde oss til en stor løsning?",
-          "beat": "controls",
+          "title": "Målet er at neste møte blir bedre forberedt",
+          "beat": "outcome",
+          "cue": "FRA INNSIKT TIL HANDLING",
           "delivery": "tell",
-          "cue": "FELLES RISIKO"
-        },
-        {
-          "type": "bullets",
-          "title": "En pilot må teste faktisk nytte, ikke bare demonstrere KI",
           "bullets": [
-            "Velg én brukergruppe, én oppgave og et kjent sammenligningsgrunnlag.",
-            "Test kvalitet, tilgang og nytte på representative tilfeller.",
-            "Definer på forhånd når vi skal forbedre, stoppe eller skalere."
+            "Ta med ett tydelig problem og noen konkrete spørsmål.",
+            "Avklar hvem som bør delta og hva som fortsatt er ukjent.",
+            "Bruk samtalemaler eller prompter som utkast – kontroller alltid resultatet."
           ],
-          "note": "Forklar forskjellen på en teknisk demo og en beslutningsrelevant pilot. En demo viser at teknologien kan gjøre noe; en pilot må undersøke om dette fungerer i relevant kontekst med riktige data og rettigheter. Mål kan være treffsikkerhet, tidsbruk eller feil som krever menneskelig korrigering, avhengig av oppgaven. Ikke finn på universelle terskler. Dokumenter resultater og svakheter, og sørg for at et mulig neste steg har en navngitt eier. Overgang: Hvilke beslutninger vil vi utsette til vi har slik kunnskap?",
-          "beat": "controls",
-          "delivery": "tell",
-          "cue": "PILOTVALG"
+          "note": "Gi publikum et sluttbilde de kan bruke: «Etter fem minutter i Innsikt skal jeg helst vite hva jeg vil spørre kunden om, hvilke opplysninger som mangler, og hvilken faglig kompetanse det kan være relevant å involvere.» Vis at Verktøykasse og Prompter kan støtte forberedelse og oppfølging, men ikke påstå at det finnes automatiske integrasjoner mot CRM, interne CV-er eller kundedata. Denne offentlige utgaven skal bare ha åpent innhold. Vi har nå gått fra informasjon til en mulig handling. Overgang: Det er også viktig å vite hva løsningen ikke gir oss."
         },
         {
           "type": "takeaway",
-          "title": "Konklusjon: Velg enkleste forsvarlige løsning",
+          "title": "Innsikt er et arbeidsgrunnlag, ikke en fasit",
+          "beat": "outcome",
+          "cue": "OPPSUMMERING",
+          "delivery": "tell",
           "bullets": [
-            "Beslutningen og brukeren definerer behovet.",
-            "Kvalitet, begreper, tilgang og evaluering definerer kravene.",
-            "Teknologien velges når den kan begrunnes og kontrolleres."
+            "Bruk løsningen for å finne relevans og stille bedre spørsmål.",
+            "Skill dokumenterte fakta fra eksempler og vurderinger.",
+            "La kunden og fagmiljøet bekrefte veien videre."
           ],
-          "note": "Lukk sirkelen fra åpningspåstanden. I økonomieksempelet kan riktig svar være felles datagrunnlag og analyse. I dokumenteksempelet kan det være kontrollert søk med eller uten generativt svar. Begge må måles på hva brukeren oppnår, ikke på antall nye komponenter. Spør: «Hva ville få oss til å velge bort KI?» Hvis gruppen kan svare, har vi gjort teknologivalget mer moden. Avslutt med at dette må oversettes til et kundespesifikt beslutningsgrunnlag. Overgang: Tilpasningsprompten er et hjelpemiddel, ikke en faglig godkjenning.",
-          "beat": "finish",
-          "delivery": "debrief",
-          "cue": "OPPSUMMERING"
-        },
-        {
-          "type": "prompt",
-          "title": "Tilpass prinsippene til kundens eget behov",
-          "body": {
-            "$content": "notice:deck-adaptation",
-            "variant": "slide"
-          },
-          "bullets": [
-            "Definer prosess, beslutning, datatyper og hvem som bruker resultatet.",
-            "Sammenlign relevante alternativer – inkludert løsninger uten generativ KI.",
-            "Få fagpersoner til å kontrollere forutsetninger, kilder og risiko."
-          ],
-          "promptId": "deck-outline",
-          "note": "Dette er ikke siste steg i et teknisk designløp, bare et redaksjonelt arbeidsverktøy. Vis hvordan en konkret kundekontekst kan gi et bedre presentasjonsutkast, men si tydelig at generert innhold må etterprøves og vurderes mot interne standarder, sikkerhet og arkitekturkrav. Ikke påstå at løsningen har integrasjoner mot kundens data eller Websteps interne systemer. Bruk bare godkjente data og verktøy når utkastet senere flyttes til intern arbeidsflate.",
-          "beat": "finish",
-          "delivery": "tool",
-          "cue": "VALGFRITT VERKTØY"
+          "note": "Avslutt uten å gjenfortelle menyen. Si: «Poenget med Innsikt er ikke at vi skal bruke flest mulig sider, men at vi kommer til samtalen med bedre forutsetninger. Det som ligger her, skal kunne brukes til å tenke og spørre bedre – ikke til å fastslå hva kunden trenger.» Oppsummer gjerne med tre situasjoner: nytt markedstema, konkret kundeproblem eller behov for faglig fordypning. Avrund med en invitasjon: «For å vise dette mer konkret har jeg også laget et kort eksempel fra økonomirapportering som vi kan se på nå.»"
         }
-      ],
+      ]
+    },
+    "sales": {
+      "label": "Eksempel fra Innsikt · 4 min",
+      "audience": "Samme publikum som hovedpresentasjonen; demonstrerer én konkret type innhold uten workshop eller kundetilbud.",
+      "intro": "Et kort, selvstendig eksempel fra Forretningsbehov: Fra sen månedsrapportering til gode avklaringsspørsmål og et mulig neste steg. Fiktivt scenario.",
       "narrative": {
-        "mode": "technical-briefing",
-        "use": "Internt faglig samtalegrunnlag. Kan inngå i kundedialog først etter at eksempler, krav og arkitektur er kvalitetssikret for den kunden.",
-        "centralQuestion": "Hvordan velger vi et tilstrekkelig, etterprøvbart tiltak – med eller uten KI?",
-        "turn": "Valget mellom strukturerte tall, dokumenter og språkmodellstyre svar avhenger av hva brukeren skal oppnå.",
-        "resolution": "Valg av minste forsvarlige løsning, med datagrunnlag, tilgang, evaluering og avklart pilot.",
+        "mode": "illustrative-content-example",
+        "use": "Vises etter hovedpresentasjonen eller alene som en kort smakebit. Ingen deltakerøvelser og ingen påstand om reell kunde eller dokumentert effekt.",
+        "centralQuestion": "Hva kan en kundeansvarlig faktisk finne i Innsikt, og hvorfor hjelper det?",
+        "turn": "Når vi undersøker et symptom, blir flere årsaker mulige – så vi kan ikke foreslå teknologi før behovet er forstått.",
+        "resolution": "Fra en frustrasjon om rapportering til tre presise spørsmål og en mulig oppfølging med relevant fagmiljø.",
+        "story": "En tenkt økonomileder beskriver en situasjon: månedsrapportering tar flere dager, og avdelingene viser ulike tall. I stedet for å foreslå et dashboard undersøker vi hva dette faktisk betyr. Kan forskjellene skyldes definisjoner, manuelle avstemminger eller at rapporten ikke støtter beslutningene godt nok? Spørsmålene i Innsikts kanoniske økonomieksempel gir oss et bedre utgangspunkt. Vi velger ikke en av hypotesene uten å se nærmere på kilder og arbeidsprosess. Historien ender med et avgrenset neste møte mellom ansvarlige og fagpersoner for å forstå én rapporteringsflyt. Eksempelet demonstrerer hvorfor salgsinnganger og forretningsbehov finnes i portalen: De hjelper oss til å kvalifisere før vi foreslår teknologi. Dette er et fiktivt eksempel, ikke en dokumentert leveranse eller en ferdig kundepresentasjon.",
         "beats": [
           {
-            "id": "mandate",
-            "function": "Definer hvem som skal ta en beslutning og hvorfor teknologi er sekundært."
+            "id": "scene",
+            "function": "Etabler det fiktive kundebehovet med kanonisk forretningsinnhold."
           },
           {
-            "id": "fork",
-            "function": "Skil strukturerte data fra dokumentbaserte spørsmål og vurder om KI er nødvendig."
+            "id": "investigate",
+            "function": "Gjør symptomet om til relevante hypoteser og spørsmål."
           },
           {
-            "id": "controls",
-            "function": "Vis hva som må kunne styres og testes før løsning velges."
-          },
-          {
-            "id": "finish",
-            "function": "Avslutt med en begrunnet pilot-/arkitekturbeslutning, ikke en teknologikatalog."
+            "id": "resolution",
+            "function": "Vis et realistisk neste steg og hva eksempelet demonstrerer om portalen."
           }
         ]
-      }
+      },
+      "slides": [
+        {
+          "type": "intro",
+          "title": "Et eksempel: Når rapporteringen tar for lang tid",
+          "beat": "scene",
+          "cue": "ILLUSTRATIVT EKSEMPEL",
+          "delivery": "tell",
+          "body": "En kort demonstrasjon av innholdet i Innsikt. Situasjonen er fiktiv, men spørsmålene viser hvordan en kundedialog kan kvalifiseres.",
+          "note": "Ramm inn dette presist: «Dette er ikke en kundereferanse og heller ikke en workshop. Jeg skal bare vise et eksempel på den typen innhold vi finner i Innsikt, og hvorfor det kan være nyttig.» Vi følger én tenkt økonomileder i et kort møte. Øvelsen er ikke å selge en løsning, men å gjøre en vag frustrasjon konkret. Det er nettopp her en kundeansvarlig kan få støtte fra innholdet i portalen. Overgang: Dette er hvordan behovet kan komme til uttrykk."
+        },
+        {
+          "type": "case",
+          "title": "Økonomilederen sier at tallene ikke stemmer",
+          "beat": "scene",
+          "cue": "FRA «FORRETNINGSBEHOV»",
+          "delivery": "tell",
+          "note": "Les den illustrative kundereplikken på skjermen: «Vi bruker flere dager på månedsavslutning og får ulike tall fra ulike avdelinger.» Den kommer fra det kanoniske økonomieksempelet i «Forretningsbehov» og er ikke hentet fra en virkelig kunde. La publikum merke seg forskjellen mellom symptom og årsak. Spørsmålene som følger med eksempelet, hjelper oss å finne ut hva som blir forsinket og hva tiden går med til. Fremdeles vet vi ikke om problemet handler om kilder, definisjoner eller arbeidsmåten. Overgang: Hva kan egentlig ligge bak dette symptomet? ",
+          "business": "okonomi"
+        },
+        {
+          "type": "bullets",
+          "title": "Ulike tall kan ha ulike forklaringer",
+          "beat": "investigate",
+          "cue": "FRA SYMPTOM TIL HYPOTESE",
+          "delivery": "tell",
+          "bullets": [
+            "Avdelingene kan bruke ulike definisjoner eller perioder.",
+            "Data kan samles inn og avstemmes manuelt.",
+            "Rapporten kan komme for sent til beslutningen den skal støtte."
+          ],
+          "note": "Dette er tre mulige forklaringer, ikke tre funn hos kunden. Vis hvorfor dette er viktig: «Hvis definisjonene er ulike, hjelper ikke et penere dashboard. Hvis datainnsamlingen tar mye tid, kan arbeidsflyten være problemet. Og hvis rapporten ikke svarer på en konkret beslutning, må vi kanskje begynne et helt annet sted.» Slik beveger vi oss fra kundens formulering til gode faglige hypoteser uten å velge teknologi. Forklar at eksemplet illustrerer verdien av å involvere riktig kompetanse etter hvert som spørsmålet blir konkret. Overgang: Hvilke avklaringer ville gjort det mulig å velge retning?"
+        },
+        {
+          "type": "bullets",
+          "title": "Det første møtet bør avklare tre ting",
+          "beat": "investigate",
+          "cue": "FRA HYPOTESE TIL SPØRSMÅL",
+          "delivery": "tell",
+          "bullets": [
+            "Hvilken beslutning blir dårligere eller forsinket?",
+            "Hvor oppstår forskjellene, og hvem eier definisjonene?",
+            "Hva trenger vi å få se for å undersøke problemet?"
+          ],
+          "note": "Hold deg til en muntlig formulering: «Jeg ville ikke kommet tilbake med et plattformforslag. Jeg ville først villet forstå hvilken beslutning økonomilederen trenger bedre støtte til, hvor ulike tall oppstår, og hvem som kan forklare prosessen.» Dette er et eksempel på kvalifisering, ikke en sjekkliste kunden må fylle ut. Vi ber heller ikke om at faktiske kundedata legges inn i den offentlige portalen. Når spørsmålene er avklart, kan fagpersoner se på datamodell, rapportering eller prosess. Overgang: Nå har vi et legitimt grunnlag for å foreslå et neste steg."
+        },
+        {
+          "type": "bullets",
+          "title": "Et godt neste steg er en kort faglig avklaring",
+          "beat": "resolution",
+          "cue": "ET MULIG NESTE STEG",
+          "delivery": "tell",
+          "body": "Ikke «Vi bygger en ny løsning», men «La oss forstå hvorfor rapporteringen stopper opp».",
+          "bullets": [
+            "Inviter økonomiansvarlig og relevant analyse-/datafagperson.",
+            "Se på én rapporteringsflyt og hvordan tallene defineres.",
+            "Avtal om videre kartlegging er nødvendig – eller ikke."
+          ],
+          "note": "Presenter dette som en mulig avslutning på den tenkte samtalen, ikke et løfte om en bestemt leveranse: «Vi foreslår å gå gjennom én konkret rapporteringsflyt sammen med økonomiansvarlig og relevant fagkompetanse. Da kan vi vurdere om det er behov for videre arbeid, og i så fall hvilket.» Understrek at det også er legitimt å stoppe hvis problemet ikke har tilstrekkelig nytte eller mandat. Dermed er steget fra symptom til oppfølging konkret, uten at vi har solgt et produkt eller antatt en gevinst. Overgang: Det er dette en bruker av Innsikt faktisk har fått hjelp til."
+        },
+        {
+          "type": "takeaway",
+          "title": "Verdien ligger i spørsmålene vi tok med oss",
+          "beat": "resolution",
+          "cue": "DERFOR ER EKSEMPELET NYTTIG",
+          "delivery": "tell",
+          "bullets": [
+            "«Forretningsbehov» ga oss et gjenkjennelig symptom og gode spørsmål.",
+            "«Salgsinnganger» og fagstoff kan brukes til videre vurdering.",
+            "Resultatet er et bedre møte – ikke et ferdig tilbud."
+          ],
+          "note": "Avslutt med å knytte eksempelet tilbake til portalen: «Det startet som en enkel formulering om rapportering. Ved å bruke innholdet i Innsikt fikk vi hjelp til å spørre om konsekvens, definisjoner og mulige årsaker. Vi endte ikke med et produktnavn, men med en konkret og forsvarlig måte å gå videre på.» Hvis du presenterer løsningen live, kan du nå klikke deg til «Forretningsbehov» og vise at eksempelet faktisk finnes der. Husk at illustrasjonen ikke dokumenterer effekt, eksisterende kundeoppdrag eller tilgjengelig kapasitet."
+        }
+      ]
     }
   },
   "marketIntro": {
