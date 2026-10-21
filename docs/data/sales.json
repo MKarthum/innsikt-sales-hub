@@ -372,6 +372,55 @@
       ],
       "evidence": "assessment",
       "reviewed": "2026-10-14"
+    },
+    {
+      "id": "datasuverenitet",
+      "number": "09",
+      "name": "Kontroll over lagring, tilgang og bruk av data",
+      "category": "Datastyring og suverenitet",
+      "short": "Når kunden har krav til hvor data lagres eller behandles, hvem som får tilgang og hvilke leverandører som kan brukes.",
+      "hook": "«Vi må vite hvem som kan få tilgang til dataene våre – også når vi bruker sky og KI.»",
+      "signals": [
+        "Krav om lagring eller behandling i bestemte land eller regioner",
+        "Spørsmål om tilgang fra leverandører og underleverandører",
+        "Usikkerhet om KI-tjenesters viderebruk av data, logging eller modelltrening",
+        "Behov for kontroll med krypteringsnøkler, eksport og leverandørbytte"
+      ],
+      "why": "Spørsmålet kan handle om personvern, sikkerhet, kontrakter, datalokalisering eller faktisk datasuverenitet. Disse forholdene må skilles før arkitektur velges; EU/EØS-lagring alene gir ingen universell garanti.",
+      "questions": [
+        "Hvilke konkrete data og bruksområder gjelder kravene, og hvor sensitive er dataene?",
+        "Hvilke lovkrav, avtalekrav eller interne retningslinjer ligger bak?",
+        "Hvilke krav gjelder lagringssted, behandling, sikkerhetskopier og eventuell overføring?",
+        "Hvem kan få administrativ eller teknisk tilgang, også fra andre jurisdiksjoner og underleverandører?",
+        "Hvordan skal data brukes i KI, og hvilke krav gjelder logging, viderebruk, trening og sletting?",
+        "Hvem kontrollerer krypteringsnøklene, og hvordan kan data og arbeidslaster flyttes til en annen leverandør?"
+      ],
+      "roles": [
+        "CIO / IT-ledelse",
+        "Personvern- og sikkerhetsansvarlig",
+        "Juridisk / compliance",
+        "Data- og plattformleder"
+      ],
+      "competence": [
+        "Dataarkitektur og skytjenester",
+        "Informasjonssikkerhet og datastyring",
+        "Personvern og teknisk etterlevelse",
+        "Dataplattform og integrasjon"
+      ],
+      "qualify": [
+        "Definerte datakategorier og behandlingsformål",
+        "Dokumenterte krav eller vesentlige risikoscenarioer",
+        "Oversikt over aktuelle leverandører, tilgangsmekanismer og beslutningseiere"
+      ],
+      "next": "Avtal en avgrenset kartlegging av dataflyt, behandlingssteder, tilgang, leverandøravhengigheter og dokumenterte krav sammen med relevante fag- og compliance-ressurser.",
+      "not": "Ikke anta at EU-region, lokal drift eller én bestemt leverandør automatisk oppfyller juridiske, sikkerhetsmessige og suverenitetsmessige krav. Ikke gi juridisk konklusjon uten faglig vurdering.",
+      "sources": [
+        "eu-cloud-sovereignty",
+        "privacy",
+        "digdir"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-21"
     }
   ],
   "scenarios": [
@@ -472,6 +521,20 @@
       "avoid": "«Vi sender dere noen CV-er.»",
       "next": "Undersøk om innleie, spesialiststøtte eller team passer best.",
       "id": "scenario-07"
+    },
+    {
+      "id": "scenario-08",
+      "title": "«Vi kan ikke sende dataene våre hvor som helst.»",
+      "role": "CIO / sikkerhetsansvarlig",
+      "context": "Virksomheten vurderer skytjenester og KI, men har ulike krav til lagring, behandling, leverandørtilgang og bruk av data. Det er uklart hvilke krav som er juridiske og hvilke som er interne.",
+      "good": [
+        "Hvilke datasett og konkrete bruksområder gjelder det?",
+        "Hvilke krav gjelder både lagring, behandling, administrativ tilgang og underleverandører?",
+        "Hva er konsekvensen dersom data eller tjenester må flyttes eller leverandøren byttes?"
+      ],
+      "avoid": "Å svare at «EU-region løser problemet» eller anbefale én leverandør uten en krav- og risikovurdering.",
+      "next": "Få sikkerhet, personvern, juridisk og dataplattform til å avklare kravbildet før arkitekturvalg.",
+      "play": "datasuverenitet"
     }
   ],
   "competences": [

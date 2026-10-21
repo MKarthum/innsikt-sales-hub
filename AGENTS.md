@@ -96,3 +96,10 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 ## Presenter v0.10.0 – gjeldende formål
 
 Kun to aktive fortellinger: produktdemonstrasjon og kort, selvstendig eksempel. Et tidligere teknologiløp eller fasilitert salgsworkshop er ikke et påbud for fremtidig innhold. `pages.json.presentationDecks[].narrative.story` skal uttrykke en komplett og forståelig historie før lysbilder skapes. Ikke gjenta irrelevante diagrammer for å tilfredsstille tidligere testinstrumentering. Kvalifisering, kildekritikk og faglig forsiktighet bevares.
+
+## Pedagogisk kvalitet på begreper og kundedialog – varig regel (v0.10.3)
+
+- Kontroller alle begreper for faglig presisjon, forståelig nybegynnerforklaring, et konkret eksempel som viser særskilt funksjon, og tydelig skille fra beslektede begreper. Sjekk relevante primærkilder.
+- Forkortelser i ordlisten skal ha `fullName` på originalspråk, men også selvstendig norsk `meaning` og praktisk `example`. Oppslagsvisning og kontekstuell popup må vise fullt navn. Ikke kopier definisjoner inn i UI.
+- Salgsinnganger om lagring, tilgang og suverenitet må skille datalokalisering, behandling, sikkerhet, personvern, leverandørkontroll og juridiske krav. Ikke gi automatiske lovlighets- eller leverandørkonklusjoner.
+- Navigasjonssti skal ha klikkbare foreldrenivåer og hjemlenke. Presenter støtter horisontale sveip både i portalen og eksportert HTML, uten å blokkere vertikal scrolling eller interaktive kontroller.

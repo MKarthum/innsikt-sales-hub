@@ -415,8 +415,8 @@
       "id": "critical-review",
       "category": "Forstå kunden",
       "title": "Utfordre et salgsresonnement",
-      "summary": "Red-team forslag før vi begynner å love noe.",
-      "when": "Når en anbefaling føles for enkel eller for KI-preget.",
+      "summary": "La KI utfordre antakelser, finne svake argumenter og undersøke alternative forklaringer før kunden får en anbefaling.",
+      "when": "Når et salgsforslag virker for enkelt, for teknologidrevet eller har et svakt faktagrunnlag.",
       "audience": "Salg / fagleder",
       "sourceMode": "public",
       "placeholders": [
@@ -432,7 +432,7 @@
         "Fjern antagelser eller påstander som ikke kan dokumenteres."
       ],
       "priority": 2,
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "evidence": "assessment"
     }
   ],

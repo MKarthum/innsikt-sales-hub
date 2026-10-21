@@ -48,11 +48,11 @@
   "glossary": [
     {
       "term": "CRM",
-      "meaning": "System som følger kunder, salgsmuligheter og aktiviteter.",
-      "example": "Kundeoversikt og pipeline.",
+      "meaning": "System og arbeidsmåte for å følge opp kunder, kontakter, salgsmuligheter og aktiviteter.",
+      "example": "Selgeren ser hvilke tilbud som er åpne og hvem som følger opp kunden.",
       "id": "crm",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "webstep1"
       ],
@@ -62,15 +62,16 @@
           "CRM"
         ],
         "caseSensitive": true
-      }
+      },
+      "fullName": "Customer relationship management"
     },
     {
       "term": "ERP",
-      "meaning": "System for økonomi, innkjøp, logistikk og andre kjerneprosesser.",
-      "example": "Faktura, ordre og lager.",
+      "meaning": "Felles virksomhetssystem for blant annet økonomi, innkjøp, ordre, lager og logistikk.",
+      "example": "Ordren registreres og faktureres i ERP, mens CRM viser salgsprosessen.",
       "id": "erp",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [],
       "inline": {
         "enabled": true,
@@ -78,15 +79,16 @@
           "ERP"
         ],
         "caseSensitive": true
-      }
+      },
+      "fullName": "Enterprise resource planning"
     },
     {
       "term": "Dataplattform",
-      "meaning": "Løsninger som samler, behandler, styrer og tilgjengeliggjør data.",
-      "example": "Felles datagrunnlag på tvers av systemer.",
+      "meaning": "Et sett med tjenester for å hente inn, lagre, behandle, sikre og tilgjengeliggjøre data for analyse og annen bruk. Plattformen garanterer ikke i seg selv god datakvalitet.",
+      "example": "Data fra salg og økonomi samles og kvalitetssikres før de brukes i rapporter eller KI.",
       "id": "dataplattform",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "variants": {
         "short": "Felles grunnlag for å lagre, organisere og bruke data.",
         "long": "Løsninger som samler, behandler, styrer og tilgjengeliggjør data. Plattformen alene avgjør ikke kvaliteten på beslutningene; begreper, eierskap og tilgang må avklares.",
@@ -107,42 +109,60 @@
       }
     },
     {
-      "term": "Datavarehus / lakehouse",
-      "meaning": "Måter å organisere store datamengder for analyse og deling.",
-      "example": "Historiske salgstall som flere team bruker.",
+      "term": "Lakehouse",
+      "meaning": "Arkitektur som kombinerer fleksibel datalagring med funksjoner for strukturert analyse og datastyring. Den er ikke det samme som et tradisjonelt datavarehus.",
+      "example": "Hendelseslogger og ordretabeller lagres og bearbeides i én analysearchitektur.",
       "id": "lakehouse",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "lakehouse"
       ],
       "inline": {
         "enabled": true,
         "aliases": [
-          "lakehouse",
-          "datavarehus"
+          "lakehouse"
+        ],
+        "caseSensitive": false
+      }
+    },
+    {
+      "id": "datavarehus",
+      "term": "Datavarehus",
+      "meaning": "Analysemiljø som samler og strukturerer data fra flere kilder for stabile rapporter og analyser. Skiller seg fra et lakehouse i arkitektur og håndtering av ulike datatyper.",
+      "example": "Salg, ordre og regnskap modelleres i tabeller for historisk rapportering på tvers av avdelinger.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-21",
+      "sourceIds": [
+        "snowflake"
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "datavarehus",
+          "datavarehusene"
         ],
         "caseSensitive": false
       }
     },
     {
       "term": "Integrasjon / pipeline",
-      "meaning": "Automatisk innhenting og flytting av data.",
-      "example": "Ordre fra ERP overføres til analyseplattform.",
+      "meaning": "Integrasjon knytter systemer sammen; en datapipeline flytter og kan også behandle data gjennom flere trinn, ofte automatisk.",
+      "example": "Ordre fra ERP hentes daglig, valideres og legges i analyseplattformen, med varsling ved feil.",
       "id": "integrasjon-pipeline",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "googleIntegration"
       ]
     },
     {
       "term": "Datamodell",
-      "meaning": "Beskrivelse av hvordan ulike data henger sammen.",
-      "example": "Kunder, ordrer, produkter og datoer.",
+      "meaning": "Beskriver hvordan dataobjekter, felter og relasjoner organiseres for et bestemt formål. Kan være både forretningsnær og teknisk.",
+      "example": "En modell knytter hver ordrelinje til kunde, produkt og bestillingsdato.",
       "id": "datamodell",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "dbtsemantic"
       ],
@@ -157,11 +177,11 @@
     },
     {
       "term": "Semantisk modell",
-      "meaning": "Felles begreper og beregninger som gir lik betydning i rapporter og KI.",
-      "example": "Alle bruker samme definisjon av omsetning.",
+      "meaning": "Et felles lag som definerer forretningsbegreper, måltall og beregninger over datagrunnlaget, slik at brukere tolker tall likt.",
+      "example": "Omsetning defineres én gang som fakturert beløp ekskludert mva. og brukes likt i flere rapporter.",
       "id": "semantisk-modell",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "dbtsemantic",
         "fabricIQ"
@@ -177,11 +197,11 @@
     },
     {
       "term": "Datakvalitet",
-      "meaning": "Om dataene er riktige, oppdaterte og fullstendige nok til bruken.",
-      "example": "En ordre telles ikke dobbelt.",
+      "meaning": "Om data er korrekte, komplette, aktuelle og konsistente nok for den aktuelle bruken.",
+      "example": "En rapport oppdager dupliserte ordre og manglende kundereferanser før månedsslutt.",
       "id": "datakvalitet",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "informatica",
         "digdir"
@@ -196,11 +216,11 @@
     },
     {
       "term": "Datastyring / governance",
-      "meaning": "Ansvar, rettigheter og regler for å bruke data.",
-      "example": "Hvem kan se lønnsopplysninger?",
+      "meaning": "Roller, ansvar, regler og prosesser for eierskap, kvalitet, tilgang og forsvarlig bruk av data.",
+      "example": "Økonomi eier definisjonen av omsetning, mens tilgang til lønnsdata styres etter rolle.",
       "id": "datastyring",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "informatica",
         "digdir"
@@ -216,11 +236,11 @@
     },
     {
       "term": "BI",
-      "meaning": "Rapporter og analyse som gjør data nyttige for beslutninger.",
-      "example": "Dashboard for salgsledelsen.",
+      "meaning": "Metoder og verktøy som gjør data til rapporter, nøkkeltall og analyser som støtter beslutninger.",
+      "example": "Salgsledelsen ser utviklingen i ordreinngang og marginer, og kan undersøke avvik.",
       "id": "bi",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "qlik"
       ],
@@ -230,15 +250,16 @@
           "BI"
         ],
         "caseSensitive": true
-      }
+      },
+      "fullName": "Business intelligence"
     },
     {
       "term": "SQL",
-      "meaning": "Språk for å hente, kombinere og analysere strukturerte data.",
-      "example": "Hent ordre per måned.",
+      "meaning": "Standardisert spørrespråk for å hente, kombinere, oppdatere og analysere data i relasjonsdatabaser og mange analyseplattformer.",
+      "example": "En SQL-spørring summerer fakturabeløp per måned og kunde.",
       "id": "sql",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "snowflake"
       ],
@@ -248,17 +269,19 @@
           "SQL"
         ],
         "caseSensitive": true
-      }
+      },
+      "fullName": "Structured query language"
     },
     {
       "term": "dbt",
-      "meaning": "Verktøy for å bygge, teste og dokumentere datamodeller.",
-      "example": "Beregne marginer på samme måte flere steder.",
+      "meaning": "Verktøy for å bygge og vedlikeholde transformasjoner av data som ligger i en dataplattform, ofte med SQL. Støtter gjenbrukbare datamodeller, tester, dokumentasjon og avhengigheter; er ikke primært et verktøy for å hente data fra kildesystemer.",
+      "example": "Ordre- og fakturatabeller er lastet til Snowflake. dbt bygger og tester en omsetningsmodell som flere rapporter bruker.",
       "id": "dbt",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
-        "dbtoss"
+        "dbtoss",
+        "dbt-models"
       ],
       "inline": {
         "enabled": true,
@@ -266,15 +289,16 @@
           "dbt"
         ],
         "caseSensitive": false
-      }
+      },
+      "fullName": "data build tool (opprinnelig navn)"
     },
     {
       "term": "LLM / språkmodell",
-      "meaning": "KI som genererer og analyserer språk, men også kan svare feil.",
-      "example": "Assistent som forklarer rapporter.",
+      "meaning": "En stor språkmodell er en KI-modell som behandler og genererer språk og annet innhold. Svar kan være overbevisende selv når de inneholder feil.",
+      "example": "En assistent foreslår en oppsummering av en rapport, men tall og påstander kontrolleres mot kildene.",
       "id": "llm-spra-kmodell",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "openaiPrompting"
       ],
@@ -285,15 +309,16 @@
           "språkmodell"
         ],
         "caseSensitive": true
-      }
+      },
+      "fullName": "Large language model"
     },
     {
       "term": "RAG",
-      "meaning": "KI som henter relevante dokumentutdrag før den svarer.",
-      "example": "Svar fra oppdaterte rutinedokumenter.",
+      "meaning": "Metode der en KI-løsning henter relevant informasjon fra eksterne kilder og gir den som kontekst til en generativ modell før svaret lages. Kilder må fortsatt kontrolleres.",
+      "example": "En intern assistent finner gjeldende rutiner og bruker utdragene når den svarer på et spørsmål.",
       "id": "rag",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "agent-foundation"
       ],
@@ -303,15 +328,16 @@
           "RAG"
         ],
         "caseSensitive": true
-      }
+      },
+      "fullName": "Retrieval-augmented generation"
     },
     {
       "term": "KI-agent",
-      "meaning": "KI som bruker data eller verktøy for å løse flere trinn i en oppgave.",
-      "example": "Agent som finner tall og forklarer et avvik.",
+      "meaning": "Et KI-basert system som kan planlegge og utføre flere trinn ved å bruke modeller, verktøy og data. Hvor selvstendig det handler, varierer og må styres.",
+      "example": "En agent finner avvik, henter forklarende tall og foreslår oppfølging, men endrer ingenting uten riktig tillatelse.",
       "id": "ki-agent",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "agent-foundation"
       ],
@@ -327,13 +353,13 @@
     {
       "id": "kunnskapsgraf",
       "term": "Kunnskapsgraf",
-      "meaning": "En måte å beskrive ting og forbindelsene mellom dem, slik at relasjoner og kontekst kan brukes av søk, analyse og KI.",
-      "example": "Hvilke kunder er knyttet til hvilke produkter, leveranser og kontaktpersoner?",
+      "meaning": "Strukturert nettverk av objekter, begreper og navngitte relasjoner. Gjør det naturlig å følge sammenhenger over flere ledd og datakilder; graf er ikke eneste måte å analysere relasjoner på.",
+      "example": "Finn kunder som påvirkes av en systemendring ved å følge koblingene system → tjeneste → kontrakt → kunde.",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
-        "gleanGraph",
-        "fabricIQ"
+        "ibm-knowledge-graph",
+        "gleanGraph"
       ],
       "inline": {
         "enabled": true,
@@ -347,12 +373,13 @@
     {
       "id": "ontologi",
       "term": "Ontologi",
-      "meaning": "En formell beskrivelse av virksomhetens begreper, egenskaper og relasjoner. Beskriver hva noe betyr, ikke bare hvor data ligger.",
-      "example": "At «kunde», «ordre» og «kontrakt» har definerte forbindelser og regler.",
+      "meaning": "Formell beskrivelse av hvilke typer objekter, egenskaper, relasjoner og regler som finnes i et fagområde. Den kan gi begrepsgrunnlaget for en kunnskapsgraf, men er ikke selve grafen.",
+      "example": "Definer at en kontrakt kan gjelde én eller flere tjenester, og hva «aktiv kontrakt» betyr.",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
-        "fabricOntology"
+        "fabricOntology",
+        "ibm-knowledge-graph"
       ],
       "inline": {
         "enabled": true,
@@ -366,10 +393,10 @@
     {
       "id": "company-brain",
       "term": "Company Brain",
-      "meaning": "En uformell samlebetegnelse for KI-løsninger som forsøker å samle virksomhetskontekst på tvers av dokumenter, systemer og mennesker. Ikke én etablert teknisk standard.",
-      "example": "En assistent som kan finne riktig dokument, fagperson og bakgrunn for en beslutning.",
+      "meaning": "Uformell markedsbetegnelse på løsninger som gir søk eller KI tilgang til virksomhetskontekst fra flere systemer. Ikke en entydig arkitektur eller etablert standard.",
+      "example": "En ansatt finner både beslutningsgrunnlaget, relevant dokumentasjon og hvem som har ansvar for saken.",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "gleanGraph",
         "gleanConnectors"
@@ -385,10 +412,10 @@
     {
       "id": "dataprodukt",
       "term": "Dataprodukt",
-      "meaning": "Et datasett eller en datatjeneste som er tilrettelagt for konkrete brukere, med eier, definisjon, kvalitet og forventet bruksområde.",
-      "example": "En dokumentert og vedlikeholdt oversikt over kundelønnsomhet.",
+      "meaning": "Data eller en datatjeneste som vedlikeholdes for identifiserte brukere, med tydelig eier, formål, kvalitet og forventninger til bruk.",
+      "example": "Et team leverer en dokumentert kundelønnsomhetsmodell med ansvarlig eier og oppdateringsrutine.",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
         "digdir"
       ],
@@ -404,12 +431,12 @@
     {
       "id": "datasuverenitet",
       "term": "Datasuverenitet",
-      "meaning": "Virksomhetens kontroll over hvor og hvordan data brukes, hvem som har tilgang, og hvilke juridiske eller organisatoriske bindinger som gjelder.",
-      "example": "Krav til kontroll over lagring, overføring, leverandørskifte og tilgang fra andre jurisdiksjoner.",
+      "meaning": "Reell kontroll over data og deres bruk, tilgang, lagring og behandling, inkludert juridiske, tekniske og leverandørmessige avhengigheter. Lagring i EU/EØS er ikke alene tilstrekkelig i alle tilfeller.",
+      "example": "Kunden kartlegger hvor data behandles, hvem som kan få tilgang fra andre jurisdiksjoner, hvem som kontrollerer nøklene, og muligheten til å bytte leverandør.",
       "evidence": "assessment",
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-21",
       "sourceIds": [
-        "digdir",
+        "eu-cloud-sovereignty",
         "privacy"
       ],
       "inline": {
@@ -423,8 +450,8 @@
     {
       "id": "virksomhetskontekst",
       "term": "Virksomhetskontekst",
-      "meaning": "Begreper, sammenhenger, regler og rettigheter som gjør det mulig å tolke data riktig i en bestemt virksomhet.",
-      "example": "En ordre kan behandles ulikt avhengig av kundens avtale og hvem som har fullmakt.",
+      "meaning": "Begreper, roller, regler og relasjoner som forklarer hvordan data skal tolkes og brukes i en bestemt virksomhet.",
+      "example": "En ordre kan telle ulikt i salgsprognose og regnskap, og tilgang avhenger av brukerens ansvar.",
       "evidence": "assessment",
       "reviewed": "2026-10-21",
       "sourceIds": [
@@ -435,6 +462,25 @@
         "enabled": true,
         "aliases": [
           "virksomhetskontekst"
+        ],
+        "caseSensitive": false
+      }
+    },
+    {
+      "id": "red-teaming",
+      "term": "Red teaming",
+      "meaning": "Strukturert testing der noen aktivt utfordrer et system for å avdekke svakheter. I KI-sikkerhet betyr det ofte adversarial testing; en kritisk gjennomgang av et salgsforslag er ikke en full red-team-øvelse.",
+      "example": "Et sikkerhetsteam forsøker å få en KI-assistent til å bryte tilgangsreglene for å finne svakheter før lansering.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-21",
+      "sourceIds": [
+        "nist-red-teaming"
+      ],
+      "inline": {
+        "enabled": false,
+        "aliases": [
+          "red teaming",
+          "red-team"
         ],
         "caseSensitive": false
       }

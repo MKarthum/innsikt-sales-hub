@@ -88,6 +88,7 @@ function open(button){
  const x=document.createElement('button');x.type='button';x.className='glossary-popover-close';
  x.textContent='×';x.setAttribute('aria-label','Lukk forklaring');x.addEventListener('click',()=>close(true));
  head.append(name,x);box.append(head);
+ if(record.fullName){const full=document.createElement('p');full.className='glossary-popover-full';full.textContent=record.fullName;box.append(full)}
  const p=document.createElement('p');p.textContent=record.inline.short||record.meaning;box.append(p);
  if(record.example){
   const example=document.createElement('p');example.className='glossary-popover-example';

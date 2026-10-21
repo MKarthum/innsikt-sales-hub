@@ -68,3 +68,7 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 ## Presenter – semantisk gjenbruk etter v0.10.0
 
 Gjeldende Presenter inneholder ett løp som forklarer løsningen og ett kort illustrativt forretningsbehov. `pages.json` eier manus, rekkefølge, situasjonsramme og forklarende lysbildetekst; `sales.json` eier det kanoniske økonomieksempelet, og `sales.json.sharedGuidance` eier gjenbrukt kundedialogveiledning. Å endre et begrep i ordlisten skal oppdatere de visningene som faktisk bruker begrepet, men skal ikke tvinge det inn i Presenter av hensyn til en foreldet test. Referanser og felles fakta kontrolleres fortsatt ved endring.
+
+## Begrepspresisjon og forkortelser (v0.10.3)
+
+`learning.json.glossary` eier kanonisk `term`, `meaning`, `example` og valgfri `fullName` for forkortelser. `fullName` viser hva bokstavene står for og erstatter ikke den norske forklaringen. Bruk begreps-ID-er i alle visninger; ikke legg parallelle tekststrenger i popup eller grunnkurs. Eksempler skal vise begrepets spesifikke funksjon og avgrense det fra beslektede arkitekturbegreper. Nye fagkilder legges til i `sources.json`.

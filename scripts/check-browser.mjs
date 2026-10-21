@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.10.2',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.10.3',label+': versjon');
   assert.equal(await page.locator('.home-task').count(),3,label+': rask oppgavestart');
   assert.equal(await page.locator('#main .prompt-card').count(),3,label+': fremhevede prompter');
   for (const route of [...pages,...details]) {
@@ -27,6 +27,24 @@ try {
    assert.ok(!html.includes('Kunne ikke laste nettsidens data'),label+': feilside '+route);
    assert.ok(!/\$\{[^{}]+\}/.test(html),label+': rå uttrykk '+route);
   }
+  // Foreldrenivå og hjem skal kunne åpnes fra navigasjonsstien.
+  await page.evaluate(()=>{location.hash='#muligheter/datasuverenitet'});
+  await page.locator('#main .detail-banner').waitFor();
+  assert.equal(await page.locator('.breadcrumb-trail a[href="#muligheter"]').count(),1,label+': forelder i navigasjonsstien');
+  await page.locator('.breadcrumb-trail a[href="#muligheter"]').click();
+  await page.waitForFunction(()=>location.hash==='#muligheter');
+  assert.equal(await page.locator('.breadcrumb-project[href="#oversikt"]').count(),1,label+': hjem i navigasjonsstien');
+  await page.locator('.breadcrumb-project').click();
+  await page.waitForFunction(()=>location.hash==='#oversikt');
+  assert.ok((await page.locator('#nav-main [data-page]').evaluateAll(links=>links.map(a=>a.dataset.page))).indexOf('guide')<
+            (await page.locator('#nav-main [data-page]').evaluateAll(links=>links.map(a=>a.dataset.page))).indexOf('prompter'),label+': Start her foran prompter');
+  await page.evaluate(()=>{location.hash='#guide'});
+  await page.locator('.glossary-item').first().waitFor();
+  assert.ok((await page.locator('.glossary-item').allTextContents()).some(t=>t.includes('Business intelligence')),label+': fullt navn i ordlisten');
+  await page.evaluate(()=>{location.hash='#kundedialog'});
+  await page.locator('[data-scenario="7"]').waitFor();
+  await page.locator('[data-scenario="7"]').click();
+  assert.ok((await page.locator('.scenario-content').innerText()).includes('dataene våre'),label+': suverenitet i kundedialogen');
   if(label==='mobil') {
    await page.locator('#menu-toggle').click();
    assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true','mobilmeny åpner');
@@ -120,6 +138,23 @@ try {
     if(i<total-1)await page.locator('#slide-next').click();
    }
   }
+  // Horisontale sveip navigerer begge veier; vanlig vertikal gest skal ikke utløse skifte.
+  await page.locator('[data-deck="portal"]').click();
+  await page.locator('#present-stage').evaluate(stage=>{
+    const fire=(name,x,y)=>{const ev=new Event(name,{bubbles:true});Object.defineProperty(ev,name==='touchstart'?'touches':'changedTouches',{value:[{clientX:x,clientY:y}]});stage.dispatchEvent(ev)};
+    fire('touchstart',280,150);fire('touchend',100,152);
+  });
+  assert.ok((await page.locator('#slide-counter').innerText()).startsWith('2 av'),label+': sveip til neste slide');
+  await page.locator('#present-stage').evaluate(stage=>{
+    const fire=(name,x,y)=>{const ev=new Event(name,{bubbles:true});Object.defineProperty(ev,name==='touchstart'?'touches':'changedTouches',{value:[{clientX:x,clientY:y}]});stage.dispatchEvent(ev)};
+    fire('touchstart',100,150);fire('touchend',280,151);
+  });
+  assert.ok((await page.locator('#slide-counter').innerText()).startsWith('1 av'),label+': sveip tilbake');
+  await page.locator('#present-stage').evaluate(stage=>{
+    const fire=(name,x,y)=>{const ev=new Event(name,{bubbles:true});Object.defineProperty(ev,name==='touchstart'?'touches':'changedTouches',{value:[{clientX:x,clientY:y}]});stage.dispatchEvent(ev)};
+    fire('touchstart',200,100);fire('touchend',190,290);
+  });
+  assert.ok((await page.locator('#slide-counter').innerText()).startsWith('1 av'),label+': vertikal gest påvirker ikke slide');
   // Slide, modal og navigasjonskontroller skal være synlige uten scrolling i dialogen.
   const viewports=[{width,height},{width:1280,height:720},{width:390,height:667},{width:844,height:390}];
   for(const viewport of viewports){
@@ -196,7 +231,7 @@ try {
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.10.2')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.10.3')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes('Innsikt hjelper oss fra usikkerhet')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,8,'alle portal-slides er eksportert');

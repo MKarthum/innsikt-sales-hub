@@ -479,5 +479,34 @@
     "type": "offentlig konseptnotat",
     "published": "2026-02-05",
     "checked": "2026-10-21"
+  },
+  "eu-cloud-sovereignty": {
+    "title": "Cloud Sovereignty Framework – forklaring og kriterier",
+    "publisher": "Europakommisjonen",
+    "url": "https://commission.europa.eu/news-and-media/news/sovereign-cloud-framework-explained-2026-06-01_en",
+    "type": "offentlig rammeverk",
+    "published": "2026-06-01",
+    "checked": "2026-10-21"
+  },
+  "dbt-models": {
+    "title": "SQL models – dbt Developer Hub",
+    "publisher": "dbt Labs",
+    "url": "https://docs.getdbt.com/docs/build/sql-models",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-21"
+  },
+  "ibm-knowledge-graph": {
+    "title": "What is a knowledge graph?",
+    "publisher": "IBM",
+    "url": "https://www.ibm.com/think/topics/knowledge-graph",
+    "type": "fagforklaring fra leverandør",
+    "checked": "2026-10-21"
+  },
+  "nist-red-teaming": {
+    "title": "Red teaming – NIST Glossary",
+    "publisher": "NIST",
+    "url": "https://csrc.nist.gov/glossary/term/red_teaming",
+    "type": "offentlig terminologi",
+    "checked": "2026-10-21"
   }
 }

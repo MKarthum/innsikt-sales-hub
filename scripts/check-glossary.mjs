@@ -14,6 +14,12 @@ for(const item of items){
   aliases.set(key,item.id);
  }
 }
+for(const term of ['crm','erp','bi','sql','dbt','llm-spra-kmodell','rag']){
+ const entry=items.find(x=>x.id===term);
+ if(!entry?.fullName?.trim())errors.push('Forkortelse mangler fullt navn: '+term);
+}
+for(const item of items)if(!item.meaning?.trim()||!item.example?.trim())errors.push('Begrep mangler forklaring eller eksempel: '+item.id);
+if(!items.some(x=>x.id==='datavarehus')||!items.some(x=>x.id==='lakehouse'))errors.push('Datavarehus og lakehouse skal forklares hver for seg');
 const frontend=read('docs/assets/glossary.js');
 for(const x of items)if(x.meaning.length>35&&frontend.includes(x.meaning))errors.push('Hardkodet definisjon '+x.id);
 if(!frontend.includes('record.meaning')||!frontend.includes('createTreeWalker')||!frontend.includes('Escape')||!frontend.includes('getBoundingClientRect'))errors.push('Komponenten mangler sentrale mekanismer');

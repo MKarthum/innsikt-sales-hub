@@ -18,7 +18,7 @@ function start(D,h){
  +'<section class="panel lesson-story"><div class="small-label">ET GJENKJENNELIG EKSEMPEL</div><h3>'+e(b.storyTitle)+'</h3><p>'+e(b.story)+'</p></section>'
  +'<div class="learning-sections">'+b.chapters.map(x=>'<section class="lesson-chapter"><h3>'+e(x.title)+'</h3><p>'+e(x.text)+'</p></section>').join('')+'</div>'
  +'<div class="section-heading"><div><h2>En dataflyt i ett bilde</h2><p>Hva skjer mellom systemene og rapporten?</p></div></div>'+diagram(D.learning.diagrams.find(x=>x.id==='bi'),h)
- +'<section class="subsection"><div class="section-heading"><div><h2>'+e(D.learning.ui.glossaryTitle)+'</h2><p>'+e(D.learning.ui.glossaryIntro)+'</p></div></div><div class="glossary">'+D.learning.glossary.map(g=>'<details class="glossary-item"><summary>'+e(g.term)+'</summary><p>'+e(g.meaning)+'</p><p class="fineprint"><strong>Eksempel:</strong> '+e(g.example)+'</p></details>').join('')+'</div></section>'
+ +'<section class="subsection"><div class="section-heading"><div><h2>'+e(D.learning.ui.glossaryTitle)+'</h2><p>'+e(D.learning.ui.glossaryIntro)+'</p></div></div><div class="glossary">'+D.learning.glossary.map(g=>'<details class="glossary-item"><summary>'+e(g.term)+'</summary>'+(g.fullName?'<p class="fineprint"><strong>Fullt navn:</strong> '+e(g.fullName)+'</p>':'')+'<p>'+e(g.meaning)+'</p><p class="fineprint"><strong>Eksempel:</strong> '+e(g.example)+'</p></details>').join('')+'</div></section>'
  +'<section class="subsection"><div class="insight-strip"><div><h3>Du kan allerede føre en relevant samtale</h3><p>'+e(b.questions.join(' · '))+'</p></div><a class="btn dark" href="#verktoy/first">Åpne møtemal '+ico('arrow-right')+'</a></div></section>';
 }
 function architecture(D,h,id){

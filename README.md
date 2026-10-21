@@ -142,3 +142,7 @@ Autoritativt manus, formål, scener, lysbildetekster og notater eies av `docs/da
 ## Presenter følger oppgaveinngangene (v0.10.2)
 
 Etter ombyggingen av forsiden i v0.10.1 er de to presentasjonene redigert på nytt, **uten endring av presentasjonsteknikken**. Hovedløpet starter nå med tre faktiske oppgaveinnganger fra forsiden: forberede møte, utforske behov og finne fagstoff. En redigerbar møtebrief-prompt vises som første praktiske gevinst; marked, teknologi og arkitektur er valgfrie støtteveier. Det korte økonomieksempelet følger veien fra «Jeg har fanget opp et behov» gjennom kanonisk eksempel og kvalifisering til den eksisterende prompten «Bygg en behovssamtale» og et mulig neste møte. Hovedløpet har 8 lysbilder (ca. 7 min), og eksempelet 7 lysbilder (ca. 5 min). Fortelling og notater eies fortsatt av `pages.json`.
+
+## v0.10.3 – navigasjon og faglig presisjon
+
+Valgfri «Start her» er flyttet foran promptbiblioteket, navigasjonsstien er klikkbar til foreldrenivå og hjem, og Presenter støtter horisontale sveip i visningen og eksportert HTML. Begrepsforklaringene er gjennomgått, forkortelser viser opprinnelig fullt navn, og datavarehus og lakehouse er skilt. Salgsinnganger og kundedialog har nå et hypotetisk eksempel om lagring, tilgang og datasuverenitet. Se `TERMINOLOGI_REVISJON_2026-10-21.md` for metode og redaksjonelle avgrensninger.
