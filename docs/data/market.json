@@ -90,15 +90,16 @@
       "id": "adoption",
       "title": "KI gir nye bruksområder – og synliggjør gamle dataproblemer",
       "intro": "SSB viser økende KI-bruk i norsk næringsliv. Utviklingen over tid vises i grafen over.",
-      "meaning": "KI kan øke behovet for tilgjengelige, pålitelige data og gode sikkerhetskontroller. Men ikke alle databehov handler om KI.",
-      "question": "Hva ønsker dere å gjøre med KI, og hvilke data må det bygge på?",
+      "meaning": "At flere bruker KI betyr ikke at virksomheten oppnår tilsvarende resultater. Undersøk hvilke arbeidsprosesser som er endret, og hvilke effekter som faktisk er målt.",
+      "question": "Hvilken effekt kan dere dokumentere i den daglige arbeidsprosessen – utover at KI-verktøyet er tatt i bruk?",
       "sources": [
         "ssb",
-        "digdir"
+        "mckinsey-ai26",
+        "stanford-economy26"
       ],
       "evidence": "statistikk",
-      "checked": "2026-10-14",
-      "reviewed": "2026-10-14"
+      "checked": "2026-10-21",
+      "reviewed": "2026-10-21"
     }
   ],
   "marketEvents": [
@@ -147,29 +148,31 @@
     {
       "id": "embeddedai",
       "title": "KI bygges inn i dataplattformene",
-      "angle": "Utviklerassistenter og dataagenter fungerer med plattformens data, kontekst og rettigheter.",
+      "angle": "KI støtter stadig flere oppgaver i eksisterende dataplattformer. Men veien fra å stille spørsmål til å gjennomføre kontrollerte handlinger krever prosess- og sikkerhetsdesign.",
       "listen": "Kunden vil utvikle raskere eller gjøre data tilgjengelige for flere.",
       "ask": "Er målgruppen utviklere eller forretningsbrukere, og hvordan skal gevinsten måles?",
       "sources": [
         "coco",
         "genie",
-        "fabriccopilot"
+        "fabriccopilot",
+        "gartner27"
       ],
       "evidence": "assessment",
-      "reviewed": "2026-10-14"
+      "reviewed": "2026-10-21"
     },
     {
       "id": "semantic",
       "title": "Semantisk lag og felles nøkkeltall blir viktigere",
-      "angle": "KI og rapporter må dele definisjoner av omsetning, marginer og kunder.",
+      "angle": "Semantiske modeller sikrer felles måltall. Når KI også skal vurdere eller utføre oppgaver, trengs ofte mer virksomhetskontekst: regler, relasjoner og ansvar.",
       "listen": "Ulike avdelinger eller agenter gir ulike svar.",
-      "ask": "Hvem godkjenner definisjoner, og hvor forvaltes de?",
+      "ask": "Hvilke definisjoner, regler og eiere må være på plass for at både mennesker og KI skal kunne stole på svarene?",
       "sources": [
         "dbtsemantic",
-        "cortexagents"
+        "cortexagents",
+        "gartner-context"
       ],
       "evidence": "assessment",
-      "reviewed": "2026-10-14"
+      "reviewed": "2026-10-21"
     },
     {
       "id": "consolidation",
@@ -188,29 +191,30 @@
     {
       "id": "cost",
       "title": "FinOps, KI-forbruk og gevinst",
-      "angle": "Beregning, lagring og KI-funksjoner prises på ulike måter.",
+      "angle": "Modellbruk, vedlikehold, datakvalitet, kontroll og endrede arbeidsprosesser påvirker totaløkonomien. Utbredelse av KI er ikke dokumentasjon på realisert gevinst.",
       "listen": "Kostnadene øker mens gevinstene er uklare.",
-      "ask": "Hva er total kostnad per brukstilfelle og hvordan følges den opp?",
+      "ask": "Hvilket forretningsmål endres, hva er kostnadene over tid, og når bør tiltaket avsluttes?",
       "sources": [
-        "geniecode",
+        "mckinsey-ai26",
+        "gartner27",
         "fabriccopilot"
       ],
       "evidence": "assessment",
-      "reviewed": "2026-10-14"
+      "reviewed": "2026-10-21"
     },
     {
       "id": "governance",
       "title": "Tillit, kvalitet og tilgangsstyring",
-      "angle": "Selvbetjent KI øker behov for dataeierskap, datalinje og testing av svar.",
+      "angle": "KI som bare svarer, og KI som utfører handlinger, krever ulik kontroll. Tilganger, godkjenninger, evaluering og sporbarhet må fungere også under kjøring.",
       "listen": "Forretningen ønsker frie spørsmål, mens IT er bekymret for kontroll.",
-      "ask": "Hvordan tester dere at svaret er riktig og tillatt?",
+      "ask": "Hvem kan godkjenne en handling, og hvordan oppdages og stanses feil?",
       "sources": [
-        "cortexagents",
-        "genie",
+        "nist-agent-identity26",
+        "gartner27",
         "fabricagent"
       ],
       "evidence": "assessment",
-      "reviewed": "2026-10-14"
+      "reviewed": "2026-10-21"
     },
     {
       "id": "openness",
@@ -245,5 +249,89 @@
     ],
     "reviewed": "2026-10-14",
     "visibility": "presented"
-  }
+  },
+  "emergingSignals": [
+    {
+      "id": "world-models",
+      "title": "Verdensmodeller og fysisk KI",
+      "stage": "Tidlig anvendelse",
+      "summary": "Modeller trenes til å forstå og simulere fysiske situasjoner. Roboter, industrielle sensorer og autonome systemer er mulige bruksområder.",
+      "whyFollow": "Kan endre hvordan produksjon, logistikk og vedlikehold testes før tiltak gjennomføres.",
+      "uncertainty": "Resultater i kontrollerte miljøer kan ikke uten videre overføres til virkelig drift. Databehov, sikkerhet og kostnad er uavklart.",
+      "watch": "Se etter uavhengig dokumenterte resultater fra produksjonsmiljøer, ikke bare demonstrasjoner.",
+      "relatedRoute": "forretning/sektor-industri",
+      "sources": [
+        "gartner27",
+        "nvidia-cosmos26",
+        "stanford-performance26"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-21"
+    },
+    {
+      "id": "quantitative-models",
+      "title": "Kvantitative KI-modeller og simulering",
+      "stage": "Begrep og marked i utvikling",
+      "summary": "Gartner peker på modeller utviklet for tall, prognoser og simulering fremfor generering av tekst.",
+      "whyFollow": "Økt oppmerksomhet om etterprøvbar beregning kan styrke behovet for statistikk, modellering og optimalisering.",
+      "uncertainty": "Numeriske modeller og simuleringer er etablerte fagområder. Det er uklart hvor mye som faktisk er ny teknologi og når dette gir bedre resultater enn dagens metoder.",
+      "watch": "Se etter publiserte sammenligninger med klassisk statistikk, optimeringsmetoder og eksisterende ML.",
+      "relatedRoute": "kompetanse",
+      "sources": [
+        "gartner27",
+        "stanford-performance26"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-21"
+    },
+    {
+      "id": "speech-reasoning",
+      "title": "Tale som arbeidsflate for KI",
+      "stage": "Tidlig virksomhetsbruk",
+      "summary": "Talesystemer utvikles fra transkripsjon og enkle kommandoer mot samtaler som tar hensyn til intensjon, kontekst og neste handling.",
+      "whyFollow": "Kan påvirke kundeservice, saksbehandling, tilgjengelighet og hvilke data som må kunne brukes i sanntid.",
+      "uncertainty": "Språkforståelse, lydkvalitet, personvern, feilhandlinger og menneskelig overtakelse må testes i reelle prosesser.",
+      "watch": "Følg målte løsningstider, feilrater, norsk språkstøtte og håndtering av vanskelige samtaler.",
+      "relatedRoute": "forretning",
+      "sources": [
+        "gartner27",
+        "stanford-performance26"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-21"
+    },
+    {
+      "id": "coding-harness",
+      "title": "Utviklingsagenter med kontrollrammer",
+      "stage": "Rask utvikling, ujevn modenhet",
+      "summary": "Autonome utviklingsagenter kan planlegge, endre og teste programvare. En kontrollramme begrenser tilgang, styrer kvalitetssikring og gjør arbeid etterprøvbart.",
+      "whyFollow": "Kan endre data engineering og programvareleveranser, samtidig som kravene til tester og ansvar øker.",
+      "uncertainty": "Høy aktivitet og rask kodeproduksjon er ikke det samme som sikker, vedlikeholdbar eller korrekt programvare.",
+      "watch": "Se etter robuste tester, godkjenning før produksjon og måling av hele leveransens kvalitet og kostnad.",
+      "relatedRoute": "arkitektur/ai-in-development",
+      "sources": [
+        "gartner27",
+        "nist-agent-identity26",
+        "stanford-performance26"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-21"
+    },
+    {
+      "id": "global-model-landscape",
+      "title": "Et mer globalt modelløkosystem",
+      "stage": "Pågående markedsendring",
+      "summary": "Ytelsen til ledende modeller nærmer seg hverandre, med konkurranse og utvikling på tvers av regioner og leverandører.",
+      "whyFollow": "Bedre valgmuligheter kan påvirke kostnad, språkstøtte, spesialisering, tilgjengelighet og leverandørbinding.",
+      "uncertainty": "Resultater på tester gir ikke alene grunnlag for å konkludere om sikkerhet, lokal databehandling, rettigheter eller kostnad i kundens løsning.",
+      "watch": "Sammenlign dokumentert oppgaveløsning, totalpris, datavilkår og portabilitet – ikke bare topplister.",
+      "relatedRoute": "teknologi",
+      "sources": [
+        "stanford-performance26",
+        "stanford-economy26"
+      ],
+      "evidence": "assessment",
+      "reviewed": "2026-10-21"
+    }
+  ]
 }
