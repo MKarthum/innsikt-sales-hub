@@ -121,3 +121,13 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 - Hvert lysbilde skal ha et nyttig presentatørnotat: konkret muntlig forklaring, relevant eksempel, faglig forbehold ved behov og en overgang eller et diskusjonsspørsmål. «Oppsummer kort» og «spør kunden» er ikke tilstrekkelige notater.
 - Hold synlige budskap korte nok for framføring, men behold substansen i notatene og i kanoniske fagkilder. Ikke bruk komprimering som visker ut usikkerhet, årsaksforhold eller konkrete beslutninger.
 - Fortellingen, lysbildenes innhold og notater eies av `docs/data/pages.json`. Ikke flytt fagtekst inn i JS/CSS eller lag parallelle kopier av allerede kanonisk innhold.
+
+## Historien før lysbildene – Presenter (v0.9.9)
+
+- Før nye lysbilder skrives: fastsett faktisk målgruppe, bruksform, hva presentasjonen **ikke** er, det sentrale spørsmålet, en konflikt/usikkerhet, et vendepunkt og en avslutning. Dette lagres på presentasjonen i `pages.json.presentationDecks[...].narrative`, ikke bare i en prompt eller samtale.
+- Skriv og kvalitetssikre dramaturgien som sekvensielle `narrative.beats` før du lager lysbilder. Hvert lysbilde skal peke på ett `beat`, ha en `delivery` (fortelling, øvelse, oppsummering eller verktøy) og en synlig, dataeid `cue` som tydelig skiller fiktivt case fra deltakeroppgaver.
+- Et gjennomgående eksempel må introduseres med rolle, kontekst, observasjon og usikkerhet. Ikke presenter løsning, piloter eller hypoteser som faktiske funn i åpningsscenen. Opplysning som ikke er bekreftet i et fiktivt scenario, skal beskrives som antakelse.
+- En intern fasilitert workshop er **ikke** en ferdig kundepresentasjon. På første lysbilde skal det fremgå hvem som er deltakere, hva de skal gjøre, om caset er fiktivt og hva det kan gjenbrukes til. Marker de faktiske deltakerøvelsene og krav til utbytte på egne lysbilder. Referanser til «kundecase» må aldri kunne mistolkes som reelle leveranser.
+- Presentatørnotater må gi muntlig innledning, kontekst, veiledning for øvelser, tidsstyring ved behov, faglige forbehold og en meningsfull overgang til neste scene. Ikke la overgang bestå kun av et generisk spørsmål.
+- `caseView: situation` på en `sector-case`-slide viser bare det kanoniske symptomgrunnlaget fra `sales.json`; spørsmål og foreslått pilot kommer senere hvis historien krever det. Visningskoden skal aldri eie innholdet.
+- Behold fast 16:9 og den eksisterende visningsarkitekturen. Test faktisk lysbildevisning, også eksport, mobil, desktop og at verken sceneskiller eller caseinnhold klippes.

@@ -71,12 +71,23 @@ const ds=new Set(learning.diagrams.map(x=>x.id)),bs=new Set(sales.businessSignal
 if(!pages.presentationDecks||Object.keys(pages.presentationDecks).length<3)fail('Mangler tre presentasjonsløp');
 for(const [key,d] of Object.entries(pages.presentationDecks||{})){
  if(!str(d.label)||!d.slides?.length)fail('Presentasjonsløp mangler '+key);
+ const story=d.narrative;
+ if(!str(d.audience)||!str(d.intro)||!story||!str(story.mode)||!str(story.use)||!str(story.centralQuestion)||!str(story.turn)||!str(story.resolution))fail('Presenter mangler målgruppe, format eller fortellingsgrunnlag: '+key);
+ const beatIds=Array.isArray(story?.beats)?story.beats.map(b=>b.id):[];
+ if(!beatIds.length||beatIds.some(id=>!str(id))||new Set(beatIds).size!==beatIds.length||story.beats.some(b=>!str(b.function)))fail('Presenter mangler planlagt fortellingskurve: '+key);
+ if(key==='sales'&&(story.mode!=='facilitated-internal-workshop'||d.slides.filter(s=>s.delivery==='exercise').length!==3))fail('Salgsworkshop må ha tydelig formål og tre øvelser');
+ let previousBeat=-1;
  for(const x of d.slides||[]){
   if(!str(x.title)||!['intro','diagram','metric','case','sector-case','bullets','takeaway','prompt'].includes(x.type))fail('Ugyldig slide '+key);
   if(x.diagram&&!ds.has(x.diagram))fail('Ukjent diagram i presentasjon '+x.diagram);
   if(x.business&&!bs.has(x.business))fail('Ukjent kundesignal i presentasjon '+x.business);
   if(x.type==='sector-case'&&!sales.industryUseCases.some(c=>c.id===x.industryCase))fail('Ukjent bransjecase i presentasjon '+x.industryCase);
   if(x.type==='prompt'&&!read('prompts').items.some(p=>p.id===x.promptId))fail('Ukjent presentasjonsprompt '+x.promptId);
+  if(!str(x.cue)||!str(x.beat)||!['tell','exercise','debrief','tool'].includes(x.delivery))fail('Presenter mangler synlig rolle eller dramaturgisk plassering: '+key+' / '+x.title);
+  const currentBeat=beatIds.indexOf(x.beat);
+  if(currentBeat<0||currentBeat<previousBeat)fail('Presenter følger ikke fortellingens rekkefølge: '+key+' / '+x.title);
+  previousBeat=currentBeat;
+  if(x.caseView&&!(x.type==='sector-case'&&x.caseView==='situation'))fail('Ugyldig trinnvis case-visning: '+key+' / '+x.title);
   if(typeof x.note!=='string'||x.note.length<300)fail('Presenter trenger faglig presentatørnotat: '+key+' / '+x.title);
   if(x!==d.slides.at(-1)&&typeof x.note==='string'&&!x.note.includes('Overgang:'))fail('Presenter mangler overgang: '+key+' / '+x.title);
   if(x.bullets?.length>3)fail('For mye tekst i Presenter: '+key+' / '+x.title);
