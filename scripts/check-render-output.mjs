@@ -25,7 +25,7 @@ const setup=[
 '   oversikt:overview,guide,forretning:business,muligheter:plays,kundedialog:dialogue,',
 '   marked:market,kompetanse:competence,arkitektur:()=>architecture(),',
 '   teknologi:technology,ai:aiProducts,bransje:industry,',
-'   verktoy:()=>toolkit(),prompter:()=>prompts(),horisont:horizon,kilder:sources,utvikling:dev',
+'   verktoy:()=>toolkit(),prompter:()=>prompts(),horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev',
 ' }))add(name,fn);',
 " D.plays.forEach(x=>add('muligheter/'+x.id,()=>playDetail(x)));",
 " D.businessSignals.forEach(x=>add('forretning/'+x.id,()=>businessDetail(x)));",
