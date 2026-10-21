@@ -27,7 +27,8 @@
     "kilder": "Kilder",
     "utvikling": "Videreutvikling",
     "prompter": "Prompter for salg",
-    "horisont": "I grenselandet"
+    "horisont": "I grenselandet",
+    "trendradar": "Trendradar"
   },
   "headers": {
     "FORRETNINGSBEHOV": {
@@ -107,6 +108,11 @@
       "eyebrow": "FRIVILLIG FORDYPNING · UNDER UTVIKLING",
       "title": "I grenselandet mellom data og KI",
       "intro": "Noen av teknologiene får mer til felles. Andre løser forskjellige problemer. Her skiller vi det som finnes i dag, fra leverandørretninger og mulige fremtidige utviklingsløp."
+    },
+    "TRENDRADAR": {
+      "eyebrow": "TRENDER UNDER OBSERVASJON",
+      "title": "Utviklingstrekk verdt å følge",
+      "intro": "En kuratert radar for teknologi og markedssignaler som kan bli relevante, men som ennå ikke er klare salgsinnganger eller anbefalte investeringer."
     }
   },
   "home": {
@@ -692,6 +698,19 @@
     "journey": "Fra forretningsproblem til tverrfaglig leveranse",
     "qualification": "Før leveransevalg",
     "maturity": "Ikke anta et modenhetsgap",
-    "example": "Illustrativ samtaleinngang"
+    "example": "Illustrativ samtaleinngang",
+    "maturityStepsTitle": "Fra innsikt til mulig handling"
+  },
+  "trendRadarUi": {
+    "introTitle": "Tidlige signaler – ikke ferdige anbefalinger",
+    "introText": "Her samler vi et lite utvalg utviklingstrekk utenfor dagens kjerneinnhold. Vurderingene er midlertidige og oppdateres eller fjernes når dokumentasjonen endrer seg.",
+    "stageLabel": "Modenhetsvurdering",
+    "relevanceLabel": "Hvorfor følge med?",
+    "uncertaintyLabel": "Hva vet vi ikke?",
+    "watchLabel": "Hva bør vi følge med på?",
+    "relatedLabel": "Se relevant kjerneinnhold",
+    "reviewedLabel": "Vurdert",
+    "methodTitle": "Når flyttes et signal ut av radaren?",
+    "methodText": "Et signal blir del av kjerneinnholdet først når det endrer et konkret kundebehov, et arkitekturvalg, en arbeidsprosess eller et kompetansebehov. Hvis nytten uteblir, arkiveres signalet. Kilder viser grunnlaget, ikke dokumentert kundegevinst."
   }
 }
