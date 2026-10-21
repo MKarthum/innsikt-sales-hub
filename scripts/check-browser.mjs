@@ -190,7 +190,7 @@ try {
    for(let index=0;index<count;index++){
     const note=await page.locator('#slide-speaker-notes').innerText();
     assert.ok(note.length>320,label+': substans i notat '+deck+'/'+index);
-    assert.ok(/Overgang:/.test(note),label+': fortellingsbro i notat '+deck+'/'+index);
+    if(index<count-1)assert.ok(/Overgang:/.test(note),label+': fortellingsbro i notat '+deck+'/'+index);
     if(index<count-1)await page.locator('#slide-next').click();
    }
   }
