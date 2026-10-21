@@ -33,7 +33,7 @@ Hjelpe førstelinjeselgere med å forstå markedet, gjenkjenne behov hos forretn
 - **Start her:** et kort grunnkurs med eksempler og ordforklaringer.
 - **Data og KI i praksis:** fire generiske arkitekturskisser om rapportering, KI på strukturerte data, KI-assistert utvikling og dokumentbasert KI.
 - **Verktøykasse:** fire kopierbare maler for kundedialog, mulighetskvalifisering, KI-vurdering og overlevering. Ingen person- eller kundedata lagres av malene.
-- **Presenter:** tre gjennomarbeidede løp for introduksjon, salgsworkshop og dataplattform/KI. Med presentatørnotater og kildehenvisninger.
+- **Presenter:** to redaksjonelle løp: en gjennomgang av selve Innsikt-løsningen og et kort, illustrativt eksempel fra «Forretningsbehov». Med gjennomarbeidet fortelling og presentatørnotater.
 
 ## Kjør lokalt
 
@@ -107,7 +107,7 @@ Bransjeinformasjon og caser eies av `sales.json.industrySectors`, `sales.json.in
 
 ## Presenter (v0.9.4)
 
-Fire presentasjonsløp: en egen gjennomgang av Innsikt-portalen, introduksjon, salgsworkshop og Data/KI. Presenter har en stabil 16:9-visning, kontrastjusterte kort og presentatørnotater utenfor selve lysbildet. Salgsworkshopen er **inspirasjon, ikke kundetilpasset presentasjon**. Salgs- og teknologiløpene avsluttes med en kopierbar, kanonisk `deck-outline`-prompt fra promptbiblioteket.
+Historisk v0.9.4 hadde fire løp, inkludert salgsworkshop og Data/KI. Disse er siden konsolidert i v0.10.0 til to tydelige formål: produktdemonstrasjon og kort illustrativt innholdseksempel. Presenter har fast 16:9-visning og notater utenfor lysbildet. Tilpasningsprompten finnes fortsatt i promptbiblioteket, men vises ikke som en løsrevet avslutning i presentasjonene.
 
 Hvert løp kan lastes ned som selvstendig HTML-presentasjon uten runtimeavhengigheter, eller åpnes for utskrift/«Lagre som PDF» i nettleseren. Dette er ikke en PowerPoint-fil og er ikke ferdig formgitt kundemateriell. Redigerbar PPTX er registrert i backlog B-25. Innholds-, kilde- og releaseversjoner følger JSON-kontrakten. Se også `INTERNAL_MIGRATION.md` for senere Webstep/Artifacts-vurdering.
 
@@ -129,3 +129,12 @@ Der nettleseren støtter Fullscreen API, brukes ekte nettleserfullskjerm. Hvis d
 - **Arkitektur nedenfra og opp**: `learning.json.diagrams[id=ai-on-data]` beskriver data → kontekst → analyse/KI → organisasjon, med `direction: up`. CSS/JS kan rendere modellen ulikt, men får ikke eie fagtekst eller trinnrekkefølge.
 - **Gjenbruk uten layout**: `market.json`, `learning.json`, `horizon.json`, `sales.json` og `pages.json` er innholds- og komposisjonskilder. En fremtidig Webstep-artefakt skal kunne lese disse filene uten å kopiere HTML, CSS eller dagens visningskomponenter. Se `CONTENT_CONTRACT.md`.
 - Et nytt signal skal bare innarbeides i kjerneinnholdet dersom det gir en dokumenterbar endring i kundebehov, prosess, arkitekturvalg eller kompetansebehov. Ellers oppdateres eller fjernes det ved redaksjonell gjennomgang.
+
+## To tydelige Presenter-fortellinger (v0.10.0)
+
+Den aktive Presenter-flaten har **to** løp, begge skrevet som selvstendige fortellinger før de ble delt i lysbilder:
+
+1. **Presenter Innsikt (7 min, 8 lysbilder):** Hvorfor løsningen finnes, hvilke spørsmål den hjelper med, hvordan Marked, Trendradar, Forretningsbehov, Salgsinnganger og fagstoff inngår i en sammenhengende forberedelse, og hvor grensene går. Bruk denne når selve portalen skal vises frem.
+2. **Eksempel fra Innsikt (4 min, 6 lysbilder):** Et fiktivt økonomibehov fra den kanoniske samlingen `sales.json.businessSignals[id=okonomi]`. Historien går fra symptom via mulige forklaringer til et relevant neste steg. Eksempelet er ikke en kundereferanse, teknisk løsningsskisse eller treningsworkshop.
+
+Autoritativt manus, formål, scener, lysbildetekster og notater eies av `docs/data/pages.json.presentationDecks`. Faglige innholdspåstander gjenbrukes fra rett dataeier. Tidligere introduksjons-, salgsworkshop- og teknologiløp er fjernet fra aktivt innhold for å unngå overlappende og fragmenterte fortellinger. Prinsipparkitekturer finnes fortsatt under `Arkitektur`. Testene må følge faktisk relevant innhold – de skal ikke gjøre historiene avhengige av tilfeldige diagramskisser.

@@ -64,3 +64,7 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 - `pages.json` eier radarens header, etiketter og sidetekst. Visningskode velger bare hvilke felter som vises. Dette er ikke redaksjonell eller semantisk autoritet.
 - `learning.json.diagrams[].steps[]` er ordnet fra datagrunnlag mot organisasjon; `direction: up` uttrykker den tilsiktede faglige avhengigheten. En Webstep-artefakt trenger ikke den eksisterende HTML/CSS/JS-layouten for å vise eller omforme modellen.
 - Nye grensesnitt skal konsumere autoritative JSON-filer, bevare ID-er, datoer, kildehenvisninger, kunnskapsstatus og `$content`-oppløsning der slike referanser brukes. Presentasjonslogikk er fritt utskiftbar; innholdet er ikke det.
+
+## Presenter – semantisk gjenbruk etter v0.10.0
+
+Gjeldende Presenter inneholder ett løp som forklarer løsningen og ett kort illustrativt forretningsbehov. `pages.json` eier manus, rekkefølge, situasjonsramme og forklarende lysbildetekst; `sales.json` eier det kanoniske økonomieksempelet, og `sales.json.sharedGuidance` eier gjenbrukt kundedialogveiledning. Å endre et begrep i ordlisten skal oppdatere de visningene som faktisk bruker begrepet, men skal ikke tvinge det inn i Presenter av hensyn til en foreldet test. Referanser og felles fakta kontrolleres fortsatt ved endring.

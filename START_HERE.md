@@ -57,7 +57,7 @@ node --check docs/assets/horizon.js
 node scripts/check.mjs
 ```
 
-Skriptet kjører offentlig-innhold, dataintegritet, innholdsstil og releasekontroll separat. GitHub Actions kjører de samme kontrollene ved push/PR. Test også filtrering, søk, redigering, kopiering og tilbakestilling av prompter, startkurset, arkitekturlenker, kopiering av maler, alle tre presentasjonsløp med notater, søk, filtrering, detaljsider, feedback, mobil og desktop.
+Skriptet kjører offentlig-innhold, dataintegritet, innholdsstil og releasekontroll separat. GitHub Actions kjører de samme kontrollene ved push/PR. Test også filtrering, søk, redigering, kopiering og tilbakestilling av prompter, startkurset, arkitekturlenker, kopiering av maler, begge gjeldende presentasjonsløp med notater, søk, filtrering, detaljsider, feedback, mobil og desktop.
 
 Ved hver publisert endring: oppdater `docs/data/site.json.version` og dato. CSS/JS-referansene i `docs/index.html` skal bruke samme versjon. Samle flerfilendringer i én atomisk commit/PR, ikke publiser mellomtrinn som krever hverandre.
 
@@ -131,3 +131,11 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 - Presentatørnotater må gi muntlig innledning, kontekst, veiledning for øvelser, tidsstyring ved behov, faglige forbehold og en meningsfull overgang til neste scene. Ikke la overgang bestå kun av et generisk spørsmål.
 - `caseView: situation` på en `sector-case`-slide viser bare det kanoniske symptomgrunnlaget fra `sales.json`; spørsmål og foreslått pilot kommer senere hvis historien krever det. Visningskoden skal aldri eie innholdet.
 - Behold fast 16:9 og den eksisterende visningsarkitekturen. Test faktisk lysbildevisning, også eksport, mobil, desktop og at verken sceneskiller eller caseinnhold klippes.
+
+## Presenter – gjeldende redaksjonell beslutning (v0.10.0)
+
+Presenter skal ha **to separate og supplerende fortellinger**, ikke en katalog over portalfunksjoner eller et repeterende fagkurs: `portal` forklarer løsningen, og `sales` demonstrerer kort ett reelt innholdselement i et tydelig fiktivt eksempel. Eldre regler og historiske beskrivelser av fire løp og fasilitert workshop gjelder ikke den aktive presentasjonen. Ikke gjeninnfør egne teknologipresentasjoner eller lange workshoper bare fordi data finnes tilgjengelig.
+
+Skriv først den selvstendige historien i `presentationDecks[id].narrative.story`, med målgruppe, starttilstand, hvorfor den skal bry seg, utvikling, vendepunkt og avslutning. Først etter gjennomlesning alene (uten slides) deles den i scener og lysbilder. Hvert bilde må følge av forrige. En innholdsside, statistikk eller arkitekturskisse er ikke et argument for et lysbilde i seg selv. Vis tekniske prinsipper på Arkitektur-siden når de ikke er nødvendige for fortellingen.
+
+Notatene skal være **et faktisk sammenhengende talemanus**, med naturlig overgang og konkrete demonstrasjonsvalg – ikke bare en detaljert liste med presentatørinstruksjoner. Presentasjonens JSON gir tekst, scenerekkefølge, datakoblinger og manus. Visningskode må aldri overta redaksjonell autoritet. Gjenbruk kanoniske data der faglig innhold allerede er definert, og la kontrolltester verifisere aktuell historiekobling fremfor å kreve et bestemt tilfeldig begrep på en tilfeldig slide.

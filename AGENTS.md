@@ -35,7 +35,7 @@ Innholdet skal fortsatt kunne være offentlig. Interne data vurderes først ette
 
 ## Ulike brukernivåer
 
-«Start her» gir grunnleggende introduksjon som kun leses ved behov. Det er ikke en obligatorisk velkomstskjerm. Erfarne brukere skal raskt finne arkitektur, teknologier, salgsinnganger og kopierbare maler. Arkitekturskisser og praktiske maler eies av `learning.json`. Nye presentasjonsløp eies av `pages.json` og skal være datadrevne.
+«Start her» gir grunnleggende introduksjon som kun leses ved behov. Det er ikke en obligatorisk velkomstskjerm. Erfarne brukere skal raskt finne arkitektur, teknologier, salgsinnganger og kopierbare maler. Arkitekturskisser og praktiske maler eies av `learning.json`. De to gjeldende presentasjonsløpene (`portal` og `sales`) eies av `pages.json` og skal være datadrevne.
 
 
 ## Promptbibliotek
@@ -92,3 +92,7 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 ## Separasjon mellom innhold og layout – Trendradar v0.9.7
 
 `docs/data/market.json.emergingSignals` er eneste kilde for radarens signaler, og `docs/data/pages.json` eier sideunike etiketter og titler. `site.js` er kun en generisk visningsadapter. `learning.json` eier verdiarkitekturens faglige trinn og semantiske retning (opp mot organisasjonen). En Webstep-artefakt kan bruke en annen layout og fortsatt benytte samme innholdsdata. Endringer i design må aldri flytte innhold til HTML/JS/CSS. Unngå kopier av radarstoff i det modne markedssignalsregisteret.
+
+## Presenter v0.10.0 – gjeldende formål
+
+Kun to aktive fortellinger: produktdemonstrasjon og kort, selvstendig eksempel. Et tidligere teknologiløp eller fasilitert salgsworkshop er ikke et påbud for fremtidig innhold. `pages.json.presentationDecks[].narrative.story` skal uttrykke en komplett og forståelig historie før lysbilder skapes. Ikke gjenta irrelevante diagrammer for å tilfredsstille tidligere testinstrumentering. Kvalifisering, kildekritikk og faglig forsiktighet bevares.

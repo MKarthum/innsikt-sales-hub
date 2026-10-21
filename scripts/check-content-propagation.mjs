@@ -15,7 +15,7 @@ globalThis.__views=()=>{
  const basics=guide(),depth=horizon(),home=overview();
  const slideBody={innerHTML:''},searchBody={innerHTML:''};
  globalThis.document={getElementById:id=>id==='slide-body'?slideBody:id==='search-results'?searchBody:{textContent:'',disabled:false},querySelectorAll:()=>[]};
- selectedDeck='technical';slide=2;showSlide();
+ selectedDeck='portal';slide=4;showSlide();
  searchResults('dataplattform');
  return {guide:basics,horizon:depth,presenter:slideBody.innerHTML,search:searchBody.innerHTML,home};
 };
@@ -29,16 +29,26 @@ function render(data){
  return vm.runInContext('__views()',x,{timeout:3000});
 }
 const old=render(raw);
-const changed=JSON.parse(JSON.stringify(raw));
-const term=changed.learning.glossary.find(x=>x.id==='dataplattform');
+// Begrepsdefinisjoner må fortsatt oppdatere sine reelle konsumenter,
+// men et lysbilde skal ikke tvinges til å vise en dataplattformskisse bare for testens skyld.
+const changedGlossary=JSON.parse(JSON.stringify(raw));
+const term=changedGlossary.learning.glossary.find(x=>x.id==='dataplattform');
 if(!term)throw Error('Mangler kanonisk dataplattform-ID');
-const marker='Entydig testmarkør: kanonisk begrepsendring 2026.';
-term.meaning=marker;
-const next=render(changed);
-for(const name of ['guide','horizon','presenter','search']){
- if(next[name]===old[name])throw Error(name+' reagerer ikke på én kanonisk endring');
- if(!next[name].includes(marker))throw Error(name+' bruker ikke endret kanonisk tekst');
- if(old[name].includes(marker))throw Error(name+' hadde testmarkør før endring');
+const glossaryMarker='Entydig testmarkør: kanonisk begrepsendring 2026.';
+term.meaning=glossaryMarker;
+const glossaryNext=render(changedGlossary);
+for(const name of ['guide','horizon','search']){
+ if(glossaryNext[name]===old[name]||!glossaryNext[name].includes(glossaryMarker))throw Error(name+' reagerer ikke på begrepsendringen');
 }
-if(old.home!==next.home)throw Error('Endringen påvirker en urelatert visning');
-console.log('PASS – ett kanonisk begrep oppdaterer Start her, fordypning, Presenter og søk (fire visninger) uten flere tekstkopier');
+if(glossaryNext.presenter!==old.presenter)throw Error('Lysbildet skal ikke få påtvunget et irrelevant begrep');
+if(glossaryNext.home!==old.home)throw Error('Begrepsendringen påvirker en urelatert visning');
+// Presenter skal derimot følge den kanoniske kundedialogveiledningen som naturlig brukes i historien.
+const changedGuidance=JSON.parse(JSON.stringify(raw));
+const guidance=changedGuidance.sharedGuidance.find(x=>x.id==='customer-first');
+if(!guidance)throw Error('Mangler kanonisk kundedialogveiledning');
+const guidanceMarker='Entydig testmarkør: kundedialogendring 2026.';
+guidance.variants.normal=guidanceMarker;
+const guidanceNext=render(changedGuidance);
+if(guidanceNext.presenter===old.presenter||!guidanceNext.presenter.includes(guidanceMarker))throw Error('Presenter bruker ikke oppdatert kanonisk kundedialog');
+if(guidanceNext.guide!==old.guide||guidanceNext.horizon!==old.horizon)throw Error('Kundedialogendring påvirker urelatert fordypning');
+console.log('PASS – kanoniske begreper følger relevante konsumenter, mens Presenter følger relevant kundedialoginnhold');
