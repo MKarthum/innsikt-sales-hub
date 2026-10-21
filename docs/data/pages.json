@@ -260,8 +260,8 @@
   "presentationDecks": {
     "portal": {
       "label": "Slik bruker du Innsikt · 8 min",
-      "audience": "Demonstrasjon av den åpne løsningen",
-      "intro": "En fortelling om én kundesamtale: fra en løs idé om KI til et bedre, faglig begrunnet neste steg. Ikke en produktomvisning.",
+      "audience": "Kolleger og ledere som vil forstå formålet med Innsikt-portalen.",
+      "intro": "Demonstrasjon av selve portalen for kolleger og ledere. Én fiktiv kundesamtale viser hvorfor og når ulike deler av arbeidsflaten brukes; ikke et salgskurs eller en kundeleveranse.",
       "slides": [
         {
           "type": "intro",
@@ -331,12 +331,37 @@
           ],
           "note": "Oppsummer historien i én setning: Vi begynte med «mer KI», men endte med et konkret økonomiproblem og et bedre spørsmål til riktig person. Foreslå at publikum prøver den samme metoden i neste kundemøte. Presiser at portalen er offentlig beta med illustrative salgsinnganger: Ingen dokumenterte Webstep-leveranser, intern kapasitet eller kundefakta ligger her. Avslutt gjerne med å åpne portalen og be publikum nevne et eget problem de vil slå opp, men ikke begynn en ny omvisning."
         }
-      ]
+      ],
+      "narrative": {
+        "mode": "portal-demonstration",
+        "use": "Kan fremføres som en kort selvstendig demonstrasjon, med valgfri navigasjon i portalen etterpå.",
+        "centralQuestion": "Hvordan hjelper portalen oss fra et løst markedssignal til en relevant kundedialog?",
+        "turn": "Et hypotetisk KI-ønske blir til et konkret beslutningsproblem.",
+        "resolution": "Publikum forstår når og hvorfor de kan bruke portalen; ikke bare hvilke sider den har.",
+        "beats": [
+          {
+            "id": "promise",
+            "function": "Etabler hva portalen skal hjelpe med – og at kundedialogen er fiktiv."
+          },
+          {
+            "id": "journey",
+            "function": "Vis hvordan et signal blir et problem og et faglig neste steg."
+          },
+          {
+            "id": "tool",
+            "function": "Knytt portalens funksjoner til et konkret behov i historien."
+          },
+          {
+            "id": "finish",
+            "function": "Avslutt med en enkel bruksmåte."
+          }
+        ]
+      }
     },
     "intro": {
       "label": "Introduksjon · 10 min",
-      "audience": "Faglig introduksjon til Innsikt",
-      "intro": "Én historie om uenige tall og beslutninger som venter. Viser hvorfor data, analyse og KI må knyttes til virksomhetens faktiske arbeid.",
+      "audience": "Kundeansvarlige og kolleger som ønsker en faglig inngang til innsikt, data og KI.",
+      "intro": "Kort faglig introduksjon, ikke kundetilpasset presentasjon. Et fiktivt økonomieksempel illustrerer forskjellen på rapporter, beslutninger og teknologivalg.",
       "slides": [
         {
           "type": "intro",
@@ -408,12 +433,37 @@
           ],
           "note": "Lukk sirkelen til åpningsscenen: Målet var ikke å lage enda en rapport, men å la møtet handle om hva virksomheten skal gjøre. Gjenta at dette kan ende i datakvalitet, modellering, BI, prosessendring, automatisering eller KI – og at det ikke er bestemt på forhånd. Still gjerne ett siste spørsmål: «Hvilket beslutningsproblem hos en kunde kjenner dere igjen?» Dette åpner for en faglig samtale, ikke et produktpitch. For konkrete oppdrag må referanser, leveranseevne og forslag kvalitetssikres separat."
         }
-      ]
+      ],
+      "narrative": {
+        "mode": "educational-talk",
+        "use": "Kan brukes som intern innføring og tilpasses i samarbeid med fagmiljøet før eventuell kundebruk.",
+        "centralQuestion": "Hvorfor fører ikke mer data automatisk til bedre beslutninger?",
+        "turn": "Det tilsynelatende rapportproblemet viser seg å kunne handle om definisjoner og beslutninger.",
+        "resolution": "Verdien ligger i å støtte en bestemt beslutning, ikke å bygge mer teknologi.",
+        "beats": [
+          {
+            "id": "question",
+            "function": "Sett scene og eksempelsituasjon."
+          },
+          {
+            "id": "reframe",
+            "function": "Undersøk mulige årsaker, eierskap og beslutning."
+          },
+          {
+            "id": "principle",
+            "function": "Forklar hvordan data, analyse og KI kan støtte beslutningen."
+          },
+          {
+            "id": "finish",
+            "function": "Forankre ett anvendbart prinsipp."
+          }
+        ]
+      }
     },
     "sales": {
       "label": "Salgsworkshop · 30 min",
-      "audience": "Illustrativ salgsworkshop – ikke kundereferanse",
-      "intro": "Følg ett fiktivt luftfartsscenario fra uklart KI-ønske til en testbar hypotese, eller en begrunnet beslutning om å stoppe.",
+      "audience": "Internt: kundeansvarlige, rådgivere og fagkonsulenter som trener på kvalifisering.",
+      "intro": "Fasilitert intern workshop. Ett tydelig fiktivt luftfartseksempel utvikler seg fra en vag KI-forespørsel til testbare hypoteser og et mulig neste møte. Eksempelet diskuteres i øvelser og skal ikke brukes som ferdig kundepresentasjon.",
       "slides": [
         {
           "type": "intro",
@@ -532,12 +582,45 @@
           "promptId": "deck-outline",
           "note": "Vis at prompten bare gir et førsteutkast. Den kan hjelpe med å lage en struktur med problem, konsekvens, undersøkelse og neste steg. Den kan ikke verifisere at et kundecase er ekte, at målt effekt finnes eller at vi har kapasiteten som beskrives. Be brukeren erstatte den generiske luftfartshistorien med en godkjent, kunderelevant problemstilling og sørge for at et menneske kvalitetssikrer alt før bruk. Del aldri konfidensielle kundeopplysninger via denne offentlige portalen."
         }
-      ]
+      ],
+      "narrative": {
+        "mode": "facilitated-internal-workshop",
+        "use": "Lederen forteller kundehistorien, stopper ved navngitte øvelser og samler svarene før neste del. 30 minutter. Gjenbruk kvalifiseringsmetoden – ikke det fiktive caset – i kundemøter.",
+        "centralQuestion": "Hvordan går vi fra «vi vil bruke KI» til et tydelig, kvalifisert neste steg?",
+        "turn": "Når vi undersøker hendelsesdata, blir det klart at både datakvalitet og reelle flaskehalser må være hypoteser inntil de er testet.",
+        "resolution": "Et avgrenset undersøkelsesmøte med rett eier og fagperson, eller en begrunnet beslutning om å ikke gå videre.",
+        "beats": [
+          {
+            "id": "contract",
+            "function": "Fortell publikum hvem de er, hva de skal gjøre, at caset er oppdiktet og hva øvelsen gir."
+          },
+          {
+            "id": "encounter",
+            "function": "Etabler kundemøtet og den observerte friksjonen uten å late som vi vet årsaken."
+          },
+          {
+            "id": "discovery",
+            "function": "La deltakerne velge spørsmål om konsekvens, eier og grunnlag."
+          },
+          {
+            "id": "complication",
+            "function": "Vis en ny antakelse som gjør det opprinnelige KI-ønsket usikkert, og la gruppen velge hva som må undersøkes."
+          },
+          {
+            "id": "choice",
+            "function": "Arbeid fram et kontrollert neste steg, avgrensning og kriterier for å gå videre eller stoppe."
+          },
+          {
+            "id": "transfer",
+            "function": "Oppsummer hva deltakerne konkret kan ta med til sitt neste kundemøte."
+          }
+        ]
+      }
     },
     "technical": {
       "label": "Data og KI · 20 min",
-      "audience": "Faglig prinsippgjennomgang – ikke løsningsdesign",
-      "intro": "Fra beslutningsbehov til datagrunnlag, arkitekturalternativer og en pilot som kan etterprøves. Ikke en katalog over KI-arkitekturer.",
+      "audience": "Data-/KI-fagpersoner, arkitekter og kundeansvarlige som skal forstå sentrale designvalg.",
+      "intro": "Faglig prinsippgjennomgang med et hypotetisk økonomibehov og et separat dokumenteksempel. Ikke arkitekturspesifikasjon, kundereferanse eller ferdig salgsdeck.",
       "slides": [
         {
           "type": "intro",
@@ -632,7 +715,32 @@
           "promptId": "deck-outline",
           "note": "Dette er ikke siste steg i et teknisk designløp, bare et redaksjonelt arbeidsverktøy. Vis hvordan en konkret kundekontekst kan gi et bedre presentasjonsutkast, men si tydelig at generert innhold må etterprøves og vurderes mot interne standarder, sikkerhet og arkitekturkrav. Ikke påstå at løsningen har integrasjoner mot kundens data eller Websteps interne systemer. Bruk bare godkjente data og verktøy når utkastet senere flyttes til intern arbeidsflate."
         }
-      ]
+      ],
+      "narrative": {
+        "mode": "technical-briefing",
+        "use": "Internt faglig samtalegrunnlag. Kan inngå i kundedialog først etter at eksempler, krav og arkitektur er kvalitetssikret for den kunden.",
+        "centralQuestion": "Hvordan velger vi et tilstrekkelig, etterprøvbart tiltak – med eller uten KI?",
+        "turn": "Valget mellom strukturerte tall, dokumenter og språkmodellstyre svar avhenger av hva brukeren skal oppnå.",
+        "resolution": "Valg av minste forsvarlige løsning, med datagrunnlag, tilgang, evaluering og avklart pilot.",
+        "beats": [
+          {
+            "id": "mandate",
+            "function": "Definer hvem som skal ta en beslutning og hvorfor teknologi er sekundært."
+          },
+          {
+            "id": "fork",
+            "function": "Skil strukturerte data fra dokumentbaserte spørsmål og vurder om KI er nødvendig."
+          },
+          {
+            "id": "controls",
+            "function": "Vis hva som må kunne styres og testes før løsning velges."
+          },
+          {
+            "id": "finish",
+            "function": "Avslutt med en begrunnet pilot-/arkitekturbeslutning, ikke en teknologikatalog."
+          }
+        ]
+      }
     }
   },
   "marketIntro": {
