@@ -70,6 +70,7 @@ const caseHtml=new Map(entries.filter(x=>x.name.startsWith('forretning/case-')).
 for(const item of sales.industryUseCases){
  const html=caseHtml.get('forretning/case-'+item.id);
  if(!html||!html.includes(item.title)||!html.includes(item.pilot)||!html.includes(item.dataHypothesis))errors.push('Manglende kanonisk caseinnhold: '+item.id);
+ if(item.maturitySteps?.length)for(const step of item.maturitySteps)if(!html?.includes(step.description))errors.push('Manglende modenhetstrinn: '+item.id+'/'+step.label);
 }
 for(const sector of sales.industrySectors){
  const html=entries.find(x=>x.name==='forretning/sektor-'+sector.id)?.html;
