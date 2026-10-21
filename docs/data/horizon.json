@@ -1,12 +1,12 @@
 {
   "meta": {
-    "reviewed": "2026-10-14",
+    "reviewed": "2026-10-21",
     "edition": "0.1.0",
     "editorialScope": "Spekulasjon er merket som hypotese. Alt i JSON er offentlig tilgjengelig selv om det ikke vises i grensesnittet."
   },
   "intro": {
     "title": "Løsningene overlapper – men løser ikke nødvendigvis samme problem",
-    "lead": "Dataplattformen gjør data tilgjengelige, styrte og anvendelige. En kunnskapsgraf kan beskrive sammenhenger og forretningskontekst. Noen løsninger kombinerer dette med KI, men det betyr ikke at alt bør bygges om eller samles i én plattform.",
+    "lead": "Dataplattformen gir tilgang til kvalitetssikrede data. Semantikk, relasjoner, kunnskap og regler kan tilføre virksomhetskontekst. Analyse og KI kan utnytte denne konteksten, men teknologien bør velges ut fra hvilke beslutninger og arbeidsprosesser som skal forbedres.",
     "readHint": "Denne siden er fordypning, ikke en anbefaling om nye verktøy til alle kunder."
   },
   "evidenceLabels": {
@@ -24,11 +24,13 @@
       "semantisk-modell",
       "ontologi"
     ],
-    "outcome": "En dataplattform kan levere kvalitetssikrede ordre- og kundedata. En graf og ontologi kan tilføre eksplisitte relasjoner og begreper som KI og andre systemer kan bruke. Ikke alle oppgaver krever grafteknologi.",
+    "outcome": "Dataplattformen kan levere kontrollerte data; semantiske modeller kan definere måltall; kunnskapsgrafer og andre tjenester kan beskrive relasjoner. Skal KI utføre handlinger, må også fullmakter, regler og sporbarhet ivaretas. Dette krever ikke nødvendigvis én ny felles plattform.",
     "diagramId": "ai-on-data",
     "sourceIds": [
       "fabricIQ",
-      "agent-foundation"
+      "agent-foundation",
+      "gartner-context",
+      "nist-agent-identity26"
     ]
   },
   "chapters": [
@@ -51,6 +53,31 @@
       "relatedLinks": [
         {
           "label": "Se grunnarkitektur for KI på data",
+          "route": "arkitektur/ai-on-data"
+        }
+      ]
+    },
+    {
+      "id": "context-platforms",
+      "title": "KI trenger virksomhetskontekst – men ikke alltid en ny plattform",
+      "evidence": "hypothesis",
+      "status": "Ny markedsretning · 2026, ingen felles standardarkitektur",
+      "summary": "Gartner bruker begrepet AI Context Platforms om løsninger som gjør virksomhetens kunnskap styrt og maskinlesbar for KI-agenter. Dette omfatter mer enn KPI-definisjoner: relasjoner, regler, opphav og autorisasjon blir viktige når systemer skal handle.",
+      "interpretation": "Behovet for kontekst er reelt. Men det er foreløpig ikke grunnlag for å hevde at alle kunder trenger et universelt semantisk lag eller én separat kontekstplattform. Undersøk først hva eksisterende plattform, metadata, integrasjoner og tilgangsstyring allerede løser.",
+      "customerQuestion": "Hva må en KI-løsning forstå og ha lov til å gjøre, utover å lese data og forklare tall?",
+      "sourceIds": [
+        "gartner-context",
+        "gartner27",
+        "nist-agent-identity26"
+      ],
+      "conceptIds": [
+        "virksomhetskontekst",
+        "semantisk-modell",
+        "datastyring"
+      ],
+      "relatedLinks": [
+        {
+          "label": "Se verdikjeden fra data til organisasjon",
           "route": "arkitektur/ai-on-data"
         }
       ]
@@ -109,10 +136,10 @@
   "questions": {
     "title": "Fire spørsmål som tåler teknologiskifte",
     "items": [
-      "Hva er virksomhetens autoritative kilder, begreper og regler?",
-      "Hvilke spørsmål eller oppgaver skal brukeren faktisk løse?",
-      "Hvilken sikkerhet, tilgangskontroll, sporbarhet og kvalitet kreves?",
-      "Kan vi videreutvikle det kunden har, før vi bygger en helt ny parallell kunnskapsbase?"
+      "Hvilke data, begreper og regler er autoritative – og hvem eier dem?",
+      "Hvilken beslutning eller oppgave skal forbedres, og hvordan måler vi effekten?",
+      "Hva kan løsningen lese, anbefale eller utføre – og hvem godkjenner handlingene?",
+      "Kan eksisterende plattformer og rettighetsmodeller gjenbrukes før ny infrastruktur bygges?"
     ]
   },
   "lenses": {
