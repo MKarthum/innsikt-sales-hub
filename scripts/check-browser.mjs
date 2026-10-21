@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.9',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.10.0',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -62,27 +62,26 @@ try {
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#search-input').count(),0,'lukke søk');
   await page.locator('#present-button').click();
-  assert.equal(await page.locator('[data-deck]').count(),4,'Presenter-løp');
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Demonstrasjon: Slik hjelper Innsikt'),'demonstrasjonsløp er startpunkt');
-  for(const deck of ['portal','intro','sales','technical']) {
+  assert.equal(await page.locator('[data-deck]').count(),2,'To selvstendige Presenter-løp');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt gjør fagkunnskap nyttig'),label+': løsningen presenteres først');
+  for(const deck of ['portal','sales']) {
    await page.locator('[data-deck="'+deck+'"]').click();
    assert.ok((await page.locator('#slide-body').innerText()).length>15,'Presenter '+deck);
    await page.locator('#slide-next').click();
    assert.ok((await page.locator('#slide-counter').innerText()).startsWith('2 av'),'neste lysbilde '+deck);
   }
-  // Salgsworkshop: publikumsavtale, fiktiv situasjon og reelle øvelsesgrenser.
+  // Eksempelet skal gjenbruke et kanonisk forretningsbehov, ikke være en kundereferanse.
   await page.locator('[data-deck="sales"]').click();
-  const workshopOpening=await page.locator('#slide-body').innerText();
-  assert.ok(workshopOpening.includes('For kundeansvarlige')&&workshopOpening.includes('fiktivt luftfartscase'),label+': målgruppe og format på første slide');
+  const exampleOpening=await page.locator('#slide-body').innerText();
+  assert.ok(exampleOpening.includes('Situasjonen er fiktiv'),label+': eksempel tydelig merket');
   await page.locator('#slide-next').click();
-  const fictionalScene=await page.locator('#slide-body').innerText();
-  assert.ok(fictionalScene.includes('FIKTIV KUNDESITUASJON'),label+': case er merket fiktivt');
-  assert.ok(!fictionalScene.includes('Mål et konkret bakkeforløp'),label+': pilot avsløres ikke i oppsettet');
+  const exampleContent=await page.locator('#slide-body').innerText();
+  assert.ok(exampleContent.includes('månedsavslutning')&&exampleContent.includes('Økonomilederen'),label+': reelt innhold fra forretningsbehov');
   await page.locator('#slide-next').click();
-  const exercise=await page.locator('#slide-body').innerText();
-  assert.ok(exercise.includes('DELTAKERØVELSE 1')&&exercise.includes('I par, 3 minutter'),label+': tydelig overgang til deltakeroppgave');
+  const explanation=await page.locator('#slide-body').innerText();
+  assert.ok(explanation.includes('Ulike tall kan ha ulike forklaringer'),label+': årsaker vurderes etter symptomet');
   // Alle lysbilder beholder samme 16:9-flate på hver skjermstørrelse.
-  for(const deck of ['portal','intro','sales','technical']){
+  for(const deck of ['portal','sales']){
    await page.locator('[data-deck="'+deck+'"]').click();
    const count=await page.locator('#slide-counter').innerText();
    const total=Number(count.split(' av ')[1]);
@@ -99,20 +98,13 @@ try {
     assert.ok(measures.overflowY<=3&&measures.overflowX<=3,label+': slide-overflyt '+deck+' '+i+' '+JSON.stringify(measures));
     if(i<total-1)await page.locator('#slide-next').click();
    }
-   if(deck==='sales'||deck==='technical'){
-    const prompt=page.locator('[data-deck-prompt]');
-    await prompt.waitFor();
-    await prompt.click();
-    const copiedPrompt=await page.evaluate(()=>navigator.clipboard.readText());
-    assert.ok(copiedPrompt.includes('Målgruppe: [MÅLGRUPPE]'),label+': kanonisk presentasjonsprompt '+deck);
-   }
   }
   // Slide, modal og navigasjonskontroller skal være synlige uten scrolling i dialogen.
   const viewports=[{width,height},{width:1280,height:720},{width:390,height:667},{width:844,height:390}];
   for(const viewport of viewports){
    await page.setViewportSize(viewport);
    await page.waitForTimeout(100);
-   for(const deck of ['portal','intro','sales','technical']){
+   for(const deck of ['portal','sales']){
     await page.locator('[data-deck="'+deck+'"]').click();
     const measurements=await page.evaluate(()=>{
      const modal=document.getElementById('present-modal'),stage=document.getElementById('present-stage');
@@ -183,9 +175,9 @@ try {
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.9.9')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.10.0')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
-  assert.ok(exported.includes('Demonstrasjon: Slik hjelper Innsikt')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
+  assert.ok(exported.includes('Innsikt gjør fagkunnskap nyttig')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,8,'alle portal-slides er eksportert');
   const popupPromise=context.waitForEvent('page');
   await page.locator('#deck-print').click();
@@ -195,7 +187,7 @@ try {
   await printed.close();
   await page.locator('#speaker-toggle').check();
   // Kontroller at notatene faktisk inneholder forklaring, eksempel og en bro videre.
-  for(const deck of ['portal','intro','sales','technical']){
+  for(const deck of ['portal','sales']){
    await page.locator('[data-deck="'+deck+'"]').click();
    const count=Number((await page.locator('#slide-counter').innerText()).split(' av ')[1]);
    for(let index=0;index<count;index++){
