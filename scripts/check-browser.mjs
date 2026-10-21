@@ -15,7 +15,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.7',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.9.8',label+': versjon');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
    await page.waitForFunction(id=>location.hash==='#'+id,route);
@@ -172,17 +172,28 @@ try {
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.9.7')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes('0.9.8')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes('Innsikt – fra markedssignal')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
-  assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,7,'alle portal-slides er eksportert');
+  assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,8,'alle portal-slides er eksportert');
   const popupPromise=context.waitForEvent('page');
   await page.locator('#deck-print').click();
   const printed=await popupPromise;
-  await printed.waitForFunction(()=>document.querySelectorAll('.export-slide').length===7);
+  await printed.waitForFunction(()=>document.querySelectorAll('.export-slide').length===8);
   assert.ok((await printed.locator('#export-print').count())===1,'utskriftsvisning har PDF-knapp');
   await printed.close();
   await page.locator('#speaker-toggle').check();
+  // Kontroller at notatene faktisk inneholder forklaring, eksempel og en bro videre.
+  for(const deck of ['portal','intro','sales','technical']){
+   await page.locator('[data-deck="'+deck+'"]').click();
+   const count=Number((await page.locator('#slide-counter').innerText()).split(' av ')[1]);
+   for(let index=0;index<count;index++){
+    const note=await page.locator('#slide-speaker-notes').innerText();
+    assert.ok(note.length>320,label+': substans i notat '+deck+'/'+index);
+    if(index<count-1)assert.ok(/Overgang:/.test(note),label+': fortellingsbro i notat '+deck+'/'+index);
+    if(index<count-1)await page.locator('#slide-next').click();
+   }
+  }
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#present-modal').count(),0,'lukke Presenter');
   // Popover testes i faktiske DOM-visninger på både mobil og desktop.

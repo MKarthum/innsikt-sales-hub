@@ -77,6 +77,9 @@ for(const [key,d] of Object.entries(pages.presentationDecks||{})){
   if(x.business&&!bs.has(x.business))fail('Ukjent kundesignal i presentasjon '+x.business);
   if(x.type==='sector-case'&&!sales.industryUseCases.some(c=>c.id===x.industryCase))fail('Ukjent bransjecase i presentasjon '+x.industryCase);
   if(x.type==='prompt'&&!read('prompts').items.some(p=>p.id===x.promptId))fail('Ukjent presentasjonsprompt '+x.promptId);
+  if(typeof x.note!=='string'||x.note.length<300)fail('Presenter trenger faglig presentatørnotat: '+key+' / '+x.title);
+  if(x!==d.slides.at(-1)&&typeof x.note==='string'&&!x.note.includes('Overgang:'))fail('Presenter mangler overgang: '+key+' / '+x.title);
+  if(x.bullets?.length>3)fail('For mye tekst i Presenter: '+key+' / '+x.title);
   if(x.sources)refs(x.sources,'Slide '+x.title);
  }
 }

@@ -111,3 +111,13 @@ Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til inter
 - `learning.json.diagrams[id=ai-on-data]` har `direction: up` og semantisk rekkefølge fra datagrunnlag til organisasjonen. Visningskomponenter kan presentere trinnene nedenfra og opp, men aldri eie eller duplisere fagteksten.
 - Datamodellen skal kunne leses av et helt annet grensesnitt i Webstep. Ingen innholdslogikk, databeslutninger, forbehold, kildegrunnlag eller sidetitler skal være avhengig av `site.js`, `learning.js` eller CSS. De er kun adaptere til den nåværende statiske portalen.
 - Beslutning om å løfte et signal inn i kjerneinnholdet tas redaksjonelt og krever dokumentert relevans for kundens problem, prosess, arkitektur eller kompetanse. Flytt/oppdater hos kanonisk dataeier og fjern radaroppføringen ved overlapp.
+
+## Redaksjonell standard for Presenter (v0.9.8)
+
+- Hvert presentasjonsløp skal ha én tydelig målgruppe, ett hovedspørsmål og én sammenhengende fortelling: situasjon/spenning → konsekvens → undersøkelse og alternativer → beslutning/neste steg.
+- La lysbildetitler formidle en påstand, konflikt eller innsikt, ikke bare navngi et tema. Hvert lysbilde skal flytte argumentasjonen framover; fjern lysbilder som bare demonstrerer at et diagram eller produkt finnes.
+- Bruk ett gjennomgående, tydelig illustrativt eksempel i workshopløp framfor å hoppe mellom sektorer. Ikke fabrikkér effekttall eller kundereferanser.
+- Arkitekturskisser skal bare brukes når de svarer på et konkret spørsmål i fortellingen. De er ikke selvforklarende og skal ha faglige begrensninger i presentatørnotatene. Bevar 16:9-format og eksisterende teknisk presentasjonsflate.
+- Hvert lysbilde skal ha et nyttig presentatørnotat: konkret muntlig forklaring, relevant eksempel, faglig forbehold ved behov og en overgang eller et diskusjonsspørsmål. «Oppsummer kort» og «spør kunden» er ikke tilstrekkelige notater.
+- Hold synlige budskap korte nok for framføring, men behold substansen i notatene og i kanoniske fagkilder. Ikke bruk komprimering som visker ut usikkerhet, årsaksforhold eller konkrete beslutninger.
+- Fortellingen, lysbildenes innhold og notater eies av `docs/data/pages.json`. Ikke flytt fagtekst inn i JS/CSS eller lag parallelle kopier av allerede kanonisk innhold.

@@ -15,7 +15,7 @@ globalThis.__views=()=>{
  const basics=guide(),depth=horizon(),home=overview();
  const slideBody={innerHTML:''},searchBody={innerHTML:''};
  globalThis.document={getElementById:id=>id==='slide-body'?slideBody:id==='search-results'?searchBody:{textContent:'',disabled:false},querySelectorAll:()=>[]};
- selectedDeck='technical';slide=1;showSlide();
+ selectedDeck='technical';slide=2;showSlide();
  searchResults('dataplattform');
  return {guide:basics,horizon:depth,presenter:slideBody.innerHTML,search:searchBody.innerHTML,home};
 };
