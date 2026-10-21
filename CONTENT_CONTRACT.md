@@ -56,3 +56,11 @@ Faguttrykk og forkortelser som kan være ukjente for målgruppen, bør forklares
 Gjenbruk `docs/assets/glossary.js` både i oversikt, detaljvisninger og dynamisk innhold etter hash-navigasjon. Marker selektivt; ikke alle forekomster, vanlige ord eller produktnavn. Bevar alltid det synlige begrepet og den opprinnelige faglige betydningen, kilder, forbehold og skillet mellom fakta, leverandørpåstander og vurderinger. Fjern kun overflødige parentesdefinisjoner hvis substansen beholdes.
 
 Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til interaktive begreper. Popupen skal fungere på mobil og desktop, kunne brukes med tastatur, lukkes via Escape og uteklikk, føre fokus hensiktsmessig og holdes innenfor skjermen. Oppdater eksisterende innholds- og nettlesertester ved endringer.
+
+
+## Trendradar og flerkanals publisering – v0.9.7
+
+- `market.json.emergingSignals[]` er en selvstendig, kanonisk samling for usikre og tidlige signaler. Hvert objekt har stabil ID, redaksjonell vurdering, modenhet, begrunnelse, usikkerhet, observasjonspunkt, `relatedRoute`, `sources[]` og `reviewed`. Ingen radarsignaler skal kopieres til `marketSignals[]` eller `horizon.chapters[]`.
+- `pages.json` eier radarens header, etiketter og sidetekst. Visningskode velger bare hvilke felter som vises. Dette er ikke redaksjonell eller semantisk autoritet.
+- `learning.json.diagrams[].steps[]` er ordnet fra datagrunnlag mot organisasjon; `direction: up` uttrykker den tilsiktede faglige avhengigheten. En Webstep-artefakt trenger ikke den eksisterende HTML/CSS/JS-layouten for å vise eller omforme modellen.
+- Nye grensesnitt skal konsumere autoritative JSON-filer, bevare ID-er, datoer, kildehenvisninger, kunnskapsstatus og `$content`-oppløsning der slike referanser brukes. Presentasjonslogikk er fritt utskiftbar; innholdet er ikke det.
