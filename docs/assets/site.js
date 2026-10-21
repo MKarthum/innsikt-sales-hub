@@ -223,7 +223,7 @@ let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null;
 function presentationSlides(){return D.pages.presentationDecks[selectedDeck]?.slides||[]}
 function slideMarkup(s,index,deckId,notes=false){
  const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
- let v='<div class="slide-eyebrow">INNSIKT · '+esc(deck.label.toUpperCase())+' · '+(index+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
+ let v='<div class="slide-eyebrow">'+esc(s.cue||deck.label.toUpperCase())+' · '+(index+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
  if(s.type==='metric'){
   const a=D.stats.ki.at(-1);
   v+='<div class="slide-metric"><b>'+esc(a.value)+' %</b><span>av norske foretak med minst ti sysselsatte bruker KI i '+esc(a.year)+'</span></div>';
@@ -236,7 +236,7 @@ function slideMarkup(s,index,deckId,notes=false){
  }
  if(s.type==='sector-case'){
   const c=D.industryUseCases.find(x=>x.id===s.industryCase);
-  if(c)v+='<div class="slide-case"><strong>'+esc(c.title)+'</strong><p>'+esc(c.symptom)+'</p><ul>'+c.questions.slice(0,2).map(q=>'<li>'+esc(q)+'</li>').join('')+'</ul><p>'+esc(c.pilot)+'</p></div>';
+  if(c)v+='<div class="slide-case"><strong>'+esc(c.title)+'</strong><p>'+esc(c.symptom)+'</p>'+(s.caseView==='situation'?'':'<ul>'+c.questions.slice(0,2).map(q=>'<li>'+esc(q)+'</li>').join('')+'</ul><p>'+esc(c.pilot)+'</p>')+'</div>';
  }
  if(s.type==='case'){
   const c=D.businessSignals.find(x=>x.id===s.business);
