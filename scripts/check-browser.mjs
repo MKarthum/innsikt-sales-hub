@@ -66,6 +66,7 @@ try {
   const original=await page.locator('#prompt-editor').inputValue();
   assert.ok(original.includes('Bruk bare offentlig tilgjengelige'),'felles kildeinstruks i redigerbar prompt');
   await page.locator('#prompt-editor').fill('MIDLERTIDIG TEST');
+  page.once('dialog',dialog=>dialog.accept());
   await page.locator('[data-prompt-reset]').click();
   assert.equal(await page.locator('#prompt-editor').inputValue(),original,'prompt tilbakestilling');
   await page.locator('[data-prompt-copy]').click();

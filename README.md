@@ -146,3 +146,7 @@ Etter ombyggingen av forsiden i v0.10.1 er de to presentasjonene redigert på ny
 ## v0.10.3 – navigasjon og faglig presisjon
 
 Valgfri «Start her» er flyttet foran promptbiblioteket, navigasjonsstien er klikkbar til foreldrenivå og hjem, og Presenter støtter horisontale sveip i visningen og eksportert HTML. Begrepsforklaringene er gjennomgått, forkortelser viser opprinnelig fullt navn, og datavarehus og lakehouse er skilt. Salgsinnganger og kundedialog har nå et hypotetisk eksempel om lagring, tilgang og datasuverenitet. Se `TERMINOLOGI_REVISJON_2026-10-21.md` for metode og redaksjonelle avgrensninger.
+
+## Promptvariabler
+
+Promptbiblioteket har en felles variabelkontekst som fylles inn på den aktuelle prompten, med samlet oversikt under «Alle variabler». Se [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) for utvidelse, alias, datasikkerhet og opprydding. Nettsiden lagrer ikke konfidensielle kundeopplysninger.
