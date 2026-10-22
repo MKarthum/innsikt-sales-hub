@@ -234,7 +234,7 @@ try {
   const downloadPromise=page.waitForEvent('download');
   await page.locator('#deck-download').click();
   const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes('0.10.4')&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
+  assert.ok(download.suggestedFilename().includes(expectedVersion)&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes('Innsikt hjelper oss fra usikkerhet')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,8,'alle portal-slides er eksportert');
