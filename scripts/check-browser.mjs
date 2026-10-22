@@ -1,7 +1,9 @@
 /* Reelle Chromium-røykprøver for beta. Kjør etter at lokal HTTP-server er startet. */
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
+const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
 const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
@@ -15,7 +17,7 @@ try {
   page.on('console',msg=>{if(msg.type()==='error')failures.push('Konsoll: '+msg.text())});
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
-  assert.equal((await page.locator('#version-label').innerText()).trim(),'0.10.4',label+': versjon');
+  assert.equal((await page.locator('#version-label').innerText()).trim(),expectedVersion,label+': versjon');
   assert.equal(await page.locator('.home-task').count(),3,label+': rask oppgavestart');
   assert.equal(await page.locator('#main .prompt-card').count(),3,label+': fremhevede prompter');
   for (const route of [...pages,...details]) {
