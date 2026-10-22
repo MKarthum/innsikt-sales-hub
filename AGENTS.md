@@ -40,7 +40,7 @@ Innholdet skal fortsatt kunne være offentlig. Interne data vurderes først ette
 
 ## Regler for felles promptvariabler – varig kontrakt
 
-Les [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) ved hver endring i `prompts.json`, promptvisning eller tilknyttede tester. Variabler, aliaser, grupper, sikkerhetsklassifisering og alle UI-tekster eies av `prompts.json`. En ny prompt må bruke deklarerte variabler; kolliderende aliaser, ukjente plassholdere og variabler uten aktiv tilknytning skal stoppe bygg. Ikke flytt brukerverdier til offentlig repo, Git-historikk, URL eller server. Test både lokal gjenbruk og opprydding i foreldreløse verdier. Bevar skillet mellom felles variabler, redigert prompttekst og nullstilling.
+Les [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) og [PROMPT_WORKFLOW.md](PROMPT_WORKFLOW.md) ved hver endring i `prompts.json`, promptvisning eller tilknyttede tester. Variabler, aliaser, grupper, sikkerhetsklassifisering og alle UI-tekster eies av `prompts.json`. En ny prompt må bruke deklarerte variabler; kolliderende aliaser, ukjente plassholdere og variabler uten aktiv tilknytning skal stoppe bygg. Ikke flytt brukerverdier til offentlig repo, Git-historikk, URL eller server. Test både lokal gjenbruk og opprydding i foreldreløse verdier. Bevar skillet mellom felles variabler, redigert prompttekst og nullstilling.
 
 ## Promptbibliotek
 

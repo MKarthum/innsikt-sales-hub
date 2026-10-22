@@ -12,7 +12,7 @@ Gjelder alle endringer i Innsikt. Les sammen med `START_HERE.md`, `AGENTS.md`, `
 
 ## Autoritet for variabler i prompter
 
-`prompts.json.variables` er kanonisk variabelregister, `variableGroups` eier gruppering, og `page.variableUi` eier brukerrettet UI-tekst. De brukes på promptdetaljer og oversikten «Alle variabler», uavhengig av visningsadapter. `items[].placeholders` beskriver hvilke aliaser fra registeret som brukes av den aktuelle prompten. Ingen dupliserte navn, ubrukte register-ID-er eller semantisk tvetydige aliaser. Personopplysninger og interne kundedata skal ikke lagres i offentlig portal. Test og utvidelsesregler finnes i [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md).
+`prompts.json.variables` er kanonisk variabelregister, `variableGroups` eier gruppering, og `page.variableUi` eier brukerrettet UI-tekst. De brukes på promptdetaljer og oversikten «Alle variabler», uavhengig av visningsadapter. `items[].placeholders` beskriver hvilke aliaser fra registeret som brukes av den aktuelle prompten. `items[].contextVariables` binder valgfri felles kundekontekst. `choiceGroups` og `outputSettings` er autoritative for valgbaserte instruksjonsblokker, `items[].formats` begrenser formatvalg, og `page.primaryIds` styrer hvilke oppgaver som fremheves først. Ingen dupliserte navn, ubrukte register-ID-er eller semantisk tvetydige aliaser. Personopplysninger og interne kundedata skal ikke lagres i offentlig portal. Test og utvidelsesregler finnes i [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md).
 
 ## Referanser som faktisk er implementert
 

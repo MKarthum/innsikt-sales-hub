@@ -10,7 +10,7 @@ Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent doku
 
 ## Prompter for salg
 
-Et nytt offentlig promptbibliotek med 14 redigerbare, kopierbare instrukser i fem kategorier: forstå kunden, forberede møte, finne kompetanse, lage salgsmateriell og følge opp. Alle inneholder kontekst, ønsket utdata, usikkerhet/kildekrav og menneskelig kontroll. Enkelte maler er merket for anonymisert bruk før intern flytting. **Ingen CRM- eller Drive-tilkobling finnes i denne versjonen.**
+Et offentlig oppgavebasert promptbibliotek med 15 kopierbare grunnmaler og enkle valg for situasjon, svarnivå, format og valgfri kontekstoverlevering, i fem kategorier: forstå kunden, forberede møte, finne kompetanse, lage salgsmateriell og følge opp. Alle inneholder kontekst, ønsket utdata, usikkerhet/kildekrav og menneskelig kontroll. Enkelte maler er merket for anonymisert bruk før intern flytting. **Ingen CRM- eller Drive-tilkobling finnes i denne versjonen.**
 
 - Prompter eies av `docs/data/prompts.json`. Felles kildeinstruksjoner eies av `prompts.rules` og settes sammen med `promptParts`. UI i `docs/assets/prompts.js`.
 - Tekst i redigeringsfeltet forblir i brukerens nettleser mens siden er åpen; den lagres ikke og sendes ikke av portalen.
@@ -149,4 +149,4 @@ Valgfri «Start her» er flyttet foran promptbiblioteket, navigasjonsstien er kl
 
 ## Promptvariabler
 
-Promptbiblioteket har en felles variabelkontekst som fylles inn på den aktuelle prompten, med samlet oversikt under «Alle variabler». Se [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) for utvidelse, alias, datasikkerhet og opprydding. Nettsiden lagrer ikke konfidensielle kundeopplysninger.
+Promptbiblioteket har en felles variabelkontekst som fylles inn på den aktuelle prompten, med samlet oversikt under «Alle variabler». Se [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) for utvidelse, alias, datasikkerhet og opprydding og [PROMPT_WORKFLOW.md](PROMPT_WORKFLOW.md) for oppgavemodell, situasjonsvalg, kundeanalyse og svarformat. Nettsiden lagrer ikke konfidensielle kundeopplysninger.

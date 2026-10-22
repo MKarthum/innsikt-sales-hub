@@ -222,5 +222,13 @@
     "status": "åpen",
     "priority": "middels",
     "why": "Kontroller feltmengde per prompt, reell nytte og faglig betydning av aliaser i anonymiserte brukertester."
+  },
+  {
+    "id": "B-29",
+    "title": "Prøve oppgavebaserte prompter med selgere",
+    "area": "Brukerinnsikt",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "Verifiser hastighet til riktig oppgave, relevans i Innsikt-rettet kundeanalyse, kontaktsituasjoner, valgbasert tilpasning og kopiering av kort kontekst mellom eksterne KI-kjøringer. Bruk bare anonymiserte og offentlige eksempler; mål faktisk nytte, ikke antall prompter."
   }
 ]

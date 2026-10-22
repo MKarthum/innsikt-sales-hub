@@ -60,13 +60,14 @@ try {
   assert.equal(await page.locator('.diagram-flow-up').evaluate(el=>getComputedStyle(el).flexDirection),'column-reverse',label+': diagram leses nedenfra og opp');
   await page.evaluate(()=>{location.hash='#prompter'});await page.locator('.prompt-featured').waitFor();
   assert.equal(await page.locator('.prompt-featured .prompt-card').count(),3,label+': tre promptforslag');
-  assert.equal(await page.locator('#main .prompt-card').count(),14,label+': alle prompter uten duplikater');
+  assert.equal(await page.locator('#main .prompt-card').count(),15,label+': alle oppgaver, også de bak utvidet visning, uten duplikater');
   await page.evaluate(()=>{location.hash='#muligheter/rapportering'});await page.locator('.related-prompt a[href="#prompter/discovery"]').waitFor();
   await page.evaluate(()=>{location.hash='#forretning/okonomi'});await page.locator('.related-prompt a[href="#prompter/opportunity-map"]').waitFor();
   await page.evaluate(()=>{location.hash='#prompter/account-research'});
-  await page.locator('#prompt-editor').waitFor();
+  await page.locator('#prompt-editor').waitFor({state:'attached'});
   const original=await page.locator('#prompt-editor').inputValue();
   assert.ok(original.includes('Bruk bare offentlig tilgjengelige'),'felles kildeinstruks i redigerbar prompt');
+  await page.locator('#prompt-advanced summary').click();
   await page.locator('#prompt-editor').fill('MIDLERTIDIG TEST');
   page.once('dialog',dialog=>dialog.accept());
   await page.locator('[data-prompt-reset]').click();
@@ -291,7 +292,7 @@ try {
   await page.waitForFunction(()=>location.hash==='#teknologi'&&document.querySelector('.tech-item'));
   assert.equal(await page.locator('#innsikt-glossary-popover').count(),0,label+': popup ryddet ved hash-navigasjon');
   await page.evaluate(()=>{location.hash='#prompter/account-research'});
-  await page.locator('#prompt-editor').waitFor();
+  await page.locator('#prompt-editor').waitFor({state:'attached'});
   assert.equal(await page.locator('#prompt-editor .glossary-trigger').count(),0,label+': redigerbare prompter urørt');
   await page.evaluate(()=>{location.hash='#oversikt'});
   const widthCheck=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,window:innerWidth}));

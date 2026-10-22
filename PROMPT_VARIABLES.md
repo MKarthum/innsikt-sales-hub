@@ -1,18 +1,18 @@
 # Promptbibliotek: variabler og videreutvikling
 
-Dette dokumentet er bindende ved endring av prompter, plassholdere, variabler og prompt-UI. Les også `START_HERE.md`, `AGENTS.md`, `CONTENT_CONTRACT.md` og `OPEN_DATA_POLICY.md`.
+Dette dokumentet er bindende ved endring av prompter, plassholdere, variabler og prompt-UI. Les også `PROMPT_WORKFLOW.md`, `START_HERE.md`, `AGENTS.md`, `CONTENT_CONTRACT.md` og `OPEN_DATA_POLICY.md`.
 
 ## Én eier og én betydning
 
-- `docs/data/prompts.json` eier hele promptbiblioteket: `items`, `rules`, `variables`, `variableGroups` og `page.variableUi`. Det skal ikke finnes en parallell variabelliste eller brukerrettede etiketter i JavaScript, HTML eller CSS.
+- `docs/data/prompts.json` eier hele promptbiblioteket: `items`, `rules`, `variables`, `variableGroups`, `choiceGroups`, `outputSettings` og `page.variableUi`. Det skal ikke finnes en parallell variabelliste eller brukerrettede etiketter i JavaScript, HTML eller CSS.
 - Hver semantiske variabel har stabil, unik `id` med store bokstaver, for eksempel `KUNDENAVN`. `aliases` kan omfatte `KUNDE`, men bare når de faktisk betyr det samme. Ikke slå sammen nærliggende begreper som `TIDSVINDU` og `VARIGHET`, eller `PROBLEM` og `SYMTOM`, uten en eksplisitt faglig begrunnelse.
 - Alle plassholdere i `items[].prompt` eller sammensatt `promptParts` må forekomme **én gang** i `items[].placeholders` og kunne løses via `variables[].id` eller et entydig alias. Det er bare felter deklarert for den aktuelle prompten som erstattes.
 - `variables[].label`, `group`, `hint`, `multiline`, `retention` og `maxLength` gjør det mulig å rendere både promptfelt og samlet oversikt uten spesialtilfeller.
-- `prompts.rules` og `promptParts` bevarer tidligere komposisjonskontrakt. Malen skal være selvstendig også når ingen felt er fylt ut. Den ferdige promptteksten må ikke antas å være resultat av en KI-kjøring.
+- `items[].contextVariables` brukes for valgfri felles kundekontekst uten plassholder i hovedinstruksjonen. `choiceGroups` og `outputSettings` eier alle valgbaserte instruksjonsblokker. `prompts.rules` og `promptParts` bevarer tidligere komposisjonskontrakt. Malen skal være selvstendig også når ingen felt er fylt ut. Den ferdige promptteksten må ikke antas å være resultat av en KI-kjøring.
 
 ## Livsløp og opprydding
 
-1. Før en ny prompt legges til: kontroller om tilsvarende oppgave allerede finnes, og forbedre den eksisterende før ny opprettes. Kontroller rolle, tiltenkt anvendelse, nødvendig input, konkret output, kontrollpunkter, faglig nøkternhet og kildedisiplin.
+1. Før en ny prompt legges til: kontroller om tilsvarende oppgave allerede finnes, og forbedre den eksisterende før ny opprettes. Kontroller rolle, tiltenkt anvendelse, nødvendig input, konkret output, kontrollpunkter, faglig nøkternhet og kildedisiplin. Lag et radiovalg i eksisterende oppgave når bare vinkelen varierer. Antall prompter er ikke et kvalitetsmål.
 2. Definer eller gjenbruk kanoniske variable **før** nye plassholdere introduseres. Legg kun til alias når lik betydning er dokumenterbar. Bruk alltid stabile ID-er i lagring og koblinger, aldri sidetittel eller plassholderens tekst som lagringsnøkkel.
 3. Kontroller at hver definert variabel brukes av minst én aktiv prompt. Bygget skal stoppe ved ukjente plassholdere, kolliderende aliaser, dupliserte ID-er eller variabler uten aktive brukere.
 4. Ved sletting av en prompt: sjekk alle tilhørende variabler. Fjern de som ikke brukes andre steder. Hvis en bruker fortsatt har en verdi lagret under en eldre ID, skal denne vises som foreldreløs på «Alle variabler», med mulighet for sletting. Ikke slett ukjente lagrede nøkler automatisk uten at brukeren kan se dem.
@@ -37,6 +37,10 @@ Dette dokumentet er bindende ved endring av prompter, plassholdere, variabler og
 ## Obligatorisk test før publisering
 
 - Kjør `node scripts/check.mjs`, inkludert `check-prompt-context.mjs` og dataintegritet. Kontroller samme ID på tvers av prompter, alias, tomme felt, enkeltreset, totalreset, sessionStorage-oppfriskning, memory-only, foreldreløse felt, HTML-escaping, og kopiering.
-- Kjør `node scripts/check-browser.mjs` med lokal HTTP-server og kontroller mobil og desktop samt manuell editor-endring mot feltoppdatering.
+- Kjør `node scripts/check-prompt-browser.mjs` og `node scripts/check-browser.mjs` med lokal HTTP-server og kontroller mobil og desktop samt manuell editor-endring mot feltoppdatering.
 - Inspiser at samlet oversikt ikke fører til unødig visuelt støy på vanlige promptdetaljer. Kontroller tastatur og fokus, mobil og ingen horisontal overflyt.
 - Oppdater `docs/data/site.json.version`, assetversjoner i `docs/index.html`, faglige regler og eventuell backlog. Publiser kun én samlet, testet release.
+
+## Valg og kontekstoverlevering
+
+Se [PROMPT_WORKFLOW.md](PROMPT_WORKFLOW.md) for produktkontrakt. Alle radiovalg og tilhørende instruksjoner vedlikeholdes i `prompts.json`; de må ha reell semantisk betydning. Formater er bestillinger til eksternt KI-verktøy, ikke filgenerering i portalen. `KUNDEKONTEKST` er felles, memory-only og valgfri per oppgave. Kort kontekst til neste prompt følger alle maler som standard, men kan slås av. Full prompttekst er tilgjengelig bak en avansert, redigerbar visning. Test kopiering og bytte av valg uten å miste manuelle endringer.

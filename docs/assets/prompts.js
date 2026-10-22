@@ -13,37 +13,64 @@ function variableField(x,p,e,ico,linked=false){
  +(linked&&x.usedBy.length?'<div class="prompt-var-links">'+e(ui.usedBy)+' '+x.usedBy.map(y=>'<a href="#prompter/'+e(y.id)+'">'+e(y.title)+'</a>').join(' · ')+'</div>':'')
  +'</div>';
 }
+function choiceField(item,p,key,e){
+ const ctx=context(),g=key==='depth'||key==='format'?p.outputSettings[key]:p.choiceGroups[key];
+ if(!g)return '';
+ const choices=ctx.options(item,key);
+ return '<fieldset class="prompt-choice-field"><legend>'+e(g.label)+'</legend>'
+  +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')
+  +'<div class="prompt-choice-options">'+choices.map(o=>{
+   const checked=ctx.getChoice(item,key)===o.id;
+   return '<label class="prompt-choice-option"><input type="radio" name="prompt-choice-'+e(key)+'" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" value="'+e(o.id)+'" '+(checked?'checked':'')+'><span>'+e(o.label)+'</span></label>';
+  }).join('')+'</div></fieldset>';
+}
 function library(d,h,category){
-const {esc:e,ico,sourceLinks}=h,p=d.prompts;
-const featured=p.page.featuredIds.map(id=>p.items.find(x=>x.id===id)).filter(Boolean);
-const rows=category==='Alle'?p.items.filter(x=>!p.page.featuredIds.includes(x.id)):p.items.filter(x=>x.category===category);
-return '<header class="page-header"><div class="eyebrow">'+e(p.page.eyebrow)+'</div><h1 class="page-title">'+e(p.page.title)+'</h1><p class="page-desc">'+e(p.page.intro)+'</p></header>'
-+'<div class="prompt-safety"><span class="prompt-safety-icon">'+ico('shield')+'</span><p>'+e(p.page.publicWarning)+'</p></div>'
-+toolbar(p.page,e,ico)
-+(category==='Alle'?'<section class="subsection prompt-featured"><div class="section-heading"><div><h2>'+e(p.page.featuredTitle)+'</h2><p>'+e(p.page.featuredIntro)+'</p></div></div><div class="prompt-grid">'+featured.map(x=>card(x,e)).join('')+'</div></section>':'')
-+'<section class="subsection"><div class="section-heading"><div><h2>'+(category==='Alle'?e(p.page.moreTitle):e(category))+'</h2><p>'+e(p.page.useHint)+'</p></div></div><div class="filters" role="group" aria-label="Filtrer prompter">'+[p.page.allLabel,...p.categories].map(x=>'<button type="button" class="filter '+(x===category?'active':'')+'" aria-pressed="'+(x===category)+'" data-prompt-filter="'+e(x)+'">'+e(x)+'</button>').join('')+'</div><div class="prompt-grid">'+rows.map(x=>card(x,e)).join('')+'</div></section>'
-+'<details class="prompt-howto"><summary>'+e(p.page.usageTitle)+' '+ico('chevron-down')+'</summary><ol>'+p.page.usageSteps.map(x=>'<li>'+e(x)+'</li>').join('')+'</ol></details>'
-+'<section class="subsection"><div class="prompt-next-stage"><div><h3>'+e(p.page.internalTitle)+'</h3><p>'+e(p.page.internalBody)+'</p></div><span class="prompt-private-icon">'+ico('lock')+'</span></div>'+sourceLinks(p.sourceIds,d)+'</section>';
+ const {esc:e,ico,sourceLinks}=h,p=d.prompts,ui=p.page.variableUi;
+ const featured=p.page.featuredIds.map(id=>p.items.find(x=>x.id===id)).filter(Boolean);
+ const primary=p.page.primaryIds.map(id=>p.items.find(x=>x.id===id)).filter(Boolean);
+ const standard=primary.filter(x=>!p.page.featuredIds.includes(x.id));
+ const others=p.items.filter(x=>!p.page.primaryIds.includes(x.id));
+ const filtered=p.items.filter(x=>x.category===category);
+ const section=(title,intro,items)=>!items.length?'':'<section class="subsection"><div class="section-heading"><div><h2>'+e(title)+'</h2><p>'+e(intro)+'</p></div></div><div class="prompt-grid">'+items.map(x=>card(x,e)).join('')+'</div></section>';
+ return '<header class="page-header"><div class="eyebrow">'+e(p.page.eyebrow)+'</div><h1 class="page-title">'+e(p.page.title)+'</h1><p class="page-desc">'+e(p.page.intro)+'</p></header>'
+ +'<div class="prompt-safety"><span class="prompt-safety-icon">'+ico('shield')+'</span><p>'+e(p.page.publicWarning)+'</p></div>'
+ +toolbar(p.page,e,ico)
+ +'<div class="filters" role="group" aria-label="Filtrer oppgaver">'+[p.page.allLabel,...p.categories].map(x=>'<button type="button" class="filter '+(x===category?'active':'')+'" aria-pressed="'+(x===category)+'" data-prompt-filter="'+e(x)+'">'+e(x)+'</button>').join('')+'</div>'
+ +(category==='Alle'?'<div class="prompt-featured">'+section(p.page.featuredTitle,p.page.featuredIntro,featured)+'</div>'+section(p.page.primaryTitle,p.page.primaryIntro,standard)
+  +'<details class="prompt-more-tasks"><summary>'+e(ui.moreTasksLabel)+' ('+others.length+') '+ico('chevron-down')+'</summary><p>'+e(ui.moreTasksDescription)+'</p><div class="prompt-grid">'+others.map(x=>card(x,e)).join('')+'</div></details>'
+  :section(category,p.page.useHint,filtered))
+ +'<details class="prompt-howto"><summary>'+e(p.page.usageTitle)+' '+ico('chevron-down')+'</summary><ol>'+p.page.usageSteps.map(x=>'<li>'+e(x)+'</li>').join('')+'</ol></details>'
+ +'<section class="subsection"><div class="prompt-next-stage"><div><h3>'+e(p.page.internalTitle)+'</h3><p>'+e(p.page.internalBody)+'</p></div><span class="prompt-private-icon">'+ico('lock')+'</span></div>'+sourceLinks(p.sourceIds,d)+'</section>';
 }
 function detail(d,h,id){
  const {esc:e,ico}=h,x=d.prompts.items.find(t=>t.id===id);
  if(!x)return library(d,h,'Alle');
- const p=d.prompts.page,ui=p.variableUi;
- const used=context().entries().filter(v=>x.placeholders.some(n=>n===v.id||(v.aliases||[]).includes(n)));
- const text=context().compose(x.prompt,x.placeholders);
+ const p=d.prompts.page,ui=p.variableUi,ctx=context();
+ const used=ctx.entries().filter(v=>x.placeholders.some(n=>n===v.id||(v.aliases||[]).includes(n))&&v.id!=='KUNDEKONTEKST');
+ const shared=ctx.entries().find(v=>v.id==='KUNDEKONTEKST');
+ const hasContext=(x.contextVariables||[]).includes('KUNDEKONTEKST')&&shared;
+ const prompt=ctx.composeTask(x,d.prompts);
+ const checkbox=(key,label,description)=>'<label class="prompt-checkbox"><input type="checkbox" data-prompt-toggle="'+e(key)+'" data-prompt-item="'+e(x.id)+'" '+(ctx.getChoice(x,key)?'checked':'')+'><span><strong>'+e(label)+'</strong><small>'+e(description)+'</small></span></label>';
  return '<a href="#prompter" class="back-link">'+ico('arrow-left')+' '+e(ui.allPrompts)+'</a>'
  +'<header class="page-header prompt-detail-head"><div class="eyebrow">'+e(x.category)+' · '+e(x.audience)+'</div><h1 class="page-title">'+e(x.title)+'</h1><p class="page-desc">'+e(x.summary)+'</p></header>'
  +'<div class="prompt-detail-layout"><section class="prompt-main-panel"><div class="prompt-edit-head"><div><h2>'+e(ui.fieldsTitle)+'</h2><p>'+e(ui.fieldsIntro)+'</p></div><a class="prompt-overview-link" href="#prompter/variabler">'+e(ui.openOverview)+' →</a></div>'
  +'<div class="prompt-var-grid">'+used.map(v=>variableField(v,p,e,ico)).join('')+'</div>'
- +'<div class="prompt-editor-section"><h2>'+e(ui.editorTitle)+'</h2><p class="fineprint">'+e(p.editorHelp)+'</p>'
- +'<label class="input-label" for="prompt-editor">'+e(ui.editorLabel)+'</label><textarea id="prompt-editor" class="prompt-editor" spellcheck="true">'+e(text)+'</textarea>'
+ +'<div class="prompt-options"><h2>'+e(ui.choicesTitle)+'</h2>'
+ +(x.choiceGroups||[]).map(k=>choiceField(x,d.prompts,k,e)).join('')
+ +choiceField(x,d.prompts,'depth',e)+choiceField(x,d.prompts,'format',e)
+ +'<p class="prompt-format-notice">'+e(ui.formatNotice)+'</p>'
+ +checkbox('handoff',ui.handoffLabel,ui.handoffDescription)
+ +(hasContext?checkbox('context',ui.contextInclude,ui.contextNote):'')
+ +'</div>'
+ +(hasContext?'<details class="prompt-context-more"><summary>'+e(ui.contextTitle)+' '+ico('chevron-down')+'</summary><p class="fineprint">'+e(ui.contextNote)+'</p>'+variableField(shared,p,e,ico)+'</details>':'')
+ +'<div class="prompt-primary-copy"><button type="button" class="btn dark" data-prompt-copy="'+e(x.id)+'">'+ico('copy')+' '+e(p.copyLabel)+'</button><span>'+e(ui.copyReady)+'</span></div>'
+ +'<details class="prompt-advanced" id="prompt-advanced"><summary>'+e(ui.advancedTitle)+' '+ico('chevron-down')+'</summary><p class="fineprint">'+e(ui.advancedIntro)+'</p><label class="input-label" for="prompt-editor">'+e(ui.editorLabel)+'</label>'
+ +'<textarea id="prompt-editor" class="prompt-editor" spellcheck="true">'+e(prompt)+'</textarea>'
  +'<div id="prompt-editor-status" class="prompt-editor-status" role="status" aria-live="polite"></div>'
- +'<div class="prompt-actions"><button type="button" class="btn dark" data-prompt-copy="'+e(x.id)+'">'+ico('copy')+' '+e(p.copyLabel)+'</button><button type="button" class="btn subtle" data-prompt-reset="'+e(x.id)+'">'+ico('refresh')+' '+e(p.resetLabel)+'</button></div></div>'
+ +'<div class="prompt-actions"><button type="button" class="btn subtle" data-prompt-reset="'+e(x.id)+'">'+ico('refresh')+' '+e(p.resetLabel)+'</button></div></details>'
  +'<div class="prompt-safety-inline">'+ico('shield')+' '+e(p.publicWarning)+'</div></section>'
- +'<aside class="prompt-side-panel"><div class="panel"><h3>'+e(ui.whenTitle)+'</h3><p>'+e(x.when)+'</p><h3>'+e(ui.beforeTitle)+'</h3><ul>'+x.before.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul>'
- +'<p class="fineprint">'+e(x.sourceMode==='approved-internal'?ui.internalCaution:ui.publicCaution)+'</p></div>'
- +'<div class="panel"><h3>'+e(p.reviewTitle)+'</h3><ul>'+x.review.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul></div>'
- +'</aside></div>'
+ +'<aside class="prompt-side-panel"><div class="panel"><h3>'+e(ui.whenTitle)+'</h3><p>'+e(x.when)+'</p><h3>'+e(ui.beforeTitle)+'</h3><ul>'+x.before.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul><p class="fineprint">'+e(x.sourceMode==='approved-internal'?ui.internalCaution:ui.publicCaution)+'</p></div>'
+ +'<div class="panel"><h3>'+e(p.reviewTitle)+'</h3><ul>'+x.review.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul></div></aside></div>'
  +'<section class="subsection"><div class="insight-strip"><div><h3>'+e(ui.nextTitle)+'</h3><p>'+e(p.nextStepHint)+'</p></div><a href="#forretning" class="btn dark">'+e(ui.nextAction)+' '+ico('arrow-right')+'</a></div></section>';
 }
 function overview(d,h){

@@ -142,16 +142,32 @@ for(const v of prompts.variables||[]){
 }
 const usedVariables=new Set();
 for(const t of prompts.items){
- for(const n of t.placeholders){
-  if(!aliasToId.has(n))fail('Plassholder uten variabeldefinisjon '+n+' i '+t.id);
+ for(const n of [...t.placeholders,...(t.contextVariables||[])]){
+  if(!aliasToId.has(n))fail('Plassholder eller kontekst uten variabeldefinisjon '+n+' i '+t.id);
   else usedVariables.add(aliasToId.get(n));
  }
 }
+if(!prompts.outputSettings?.depth?.options?.length||!prompts.outputSettings?.format?.options?.length||!str(prompts.outputSettings?.handoff?.instruction))fail('Manglende globale valg eller kontekstoverlevering');
+const choiceGroups=prompts.choiceGroups||{},allFormatIds=new Set(prompts.outputSettings.format.options.map(o=>o.id));
+for(const [id,g] of Object.entries({...choiceGroups,depth:prompts.outputSettings.depth,format:prompts.outputSettings.format})){
+ if(!str(g.label)||!Array.isArray(g.options)||g.options.length<2)fail('Ufullstendig valggruppe '+id);
+ const optionIds=new Set();
+ for(const o of g.options){if(!str(o.id)||optionIds.has(o.id)||!str(o.label)||!str(o.instruction))fail('Ugyldig valgalternativ '+id+'/'+o.id);optionIds.add(o.id)}
+}
+for(const t of prompts.items){
+ if(!Array.isArray(t.choiceGroups)||!Array.isArray(t.contextVariables)||!Array.isArray(t.formats)||!t.formats.length)fail('Prompt uten variantkontrakt '+t.id);
+ if(new Set(t.choiceGroups).size!==t.choiceGroups.length)fail('Dupliserte valggrupper '+t.id);
+ for(const key of t.choiceGroups)if(!choiceGroups[key])fail('Ukjent valggruppe '+key+' i '+t.id);
+ for(const f of t.formats)if(!allFormatIds.has(f))fail('Ukjent svarformat '+f+' i '+t.id);
+ if(!t.contextVariables.includes('KUNDEKONTEKST'))fail('Mangler felles kundekontekst i '+t.id);
+}
+const primary=prompts.page.primaryIds||[],featured=prompts.page.featuredIds||[];
+if(new Set(primary).size!==primary.length||primary.length<4||primary.some(id=>!prompts.items.some(x=>x.id===id))||featured.some(id=>!primary.includes(id)))fail('Ugyldig oppgaveprioritering for promptbiblioteket');
 for(const id of variables.keys())if(!usedVariables.has(id))fail('Død variabel i registeret: '+id+' (fjern den eller knytt den til en aktiv prompt)');
 if(!fs.existsSync('docs/assets/prompt-context.js')||!html.includes('prompt-context.js?v='+site.version))fail('Manglende versjonert kontekstmodul');
 if(html.indexOf('prompt-context.js?v='+site.version)>html.indexOf('prompts.js?v='+site.version))fail('Kontekstmodul må lastes før promptvisning');
 
-if(prompts.items.length<12)fail('For få promptmaler');
+// Antall prompter er ikke et kvalitetskriterium – kvalitet og bruksoppgaver vurderes redaksjonelt.
 refs(prompts.sourceIds,'Promptveiledning');
 if(!fs.existsSync('docs/assets/prompts.js'))fail('Promptvisning mangler');
 const pageHtml=fs.readFileSync('docs/index.html','utf8');
