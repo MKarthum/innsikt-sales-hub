@@ -57,6 +57,10 @@ function detail(d,h,id){
  const firmalayout=d.prompts.outputSettings.organizationTemplates;
  const formatSubChoice='<div class="prompt-format-subchoice" data-prompt-format-subchoice'+(ctx.supportsOrganizationTemplates(x,d.prompts)?'':' hidden')+'>'
   +checkbox('organizationTemplates',firmalayout.label,firmalayout.hint)+'</div>';
+ const cv=x.cvOutput,cvExtra=cv?'<div class="prompt-cv-options" data-prompt-cv-options'+(ctx.isCvDraft(x)?'':' hidden')+'>'
+  +choiceField({...x,choiceGroups:[...x.choiceGroups,cv.lengthGroup]},d.prompts,cv.lengthGroup,e)
+  +checkbox('clientTemplate',cv.template.label,cv.template.hint)+'</div>':'';
+
 
  return '<a href="#prompter" class="back-link">'+ico('arrow-left')+' '+e(ui.allPrompts)+'</a>'
  +'<header class="page-header prompt-detail-head"><div class="eyebrow">'+e(x.category)+' · '+e(x.audience)+'</div><h1 class="page-title">'+e(x.title)+'</h1><p class="page-desc">'+e(x.summary)+'</p></header>'
@@ -68,7 +72,7 @@ function detail(d,h,id){
  +'</div></details></aside><section class="prompt-main-panel"><div class="prompt-edit-head"><div><h2>'+e(ui.fieldsTitle)+'</h2><p>'+e(ui.fieldsIntro)+'</p></div><a class="prompt-overview-link" href="#prompter/variabler">'+e(ui.openOverview)+' →</a></div>'
  +'<div class="prompt-var-grid">'+used.map(v=>variableField(v,p,e,ico)).join('')+'</div>'
  +'<div class="prompt-options"><h2>'+e(ui.choicesTitle)+'</h2>'
- +(x.choiceGroups||[]).map(k=>choiceField(x,d.prompts,k,e)).join('')
+ +(x.choiceGroups||[]).map(k=>choiceField(x,d.prompts,k,e)).join('')+cvExtra
  +choiceField(x,d.prompts,'depth',e)+choiceField(x,d.prompts,'format',e)+formatSubChoice
  +'<p class="prompt-format-notice">'+e(ui.formatNotice)+'</p>'
  +checkbox('handoff',ui.handoffLabel,ui.handoffDescription)

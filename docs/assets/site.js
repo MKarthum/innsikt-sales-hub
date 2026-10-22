@@ -394,6 +394,17 @@ function refreshPromptLive(item){
   const description=document.createElement('p');description.textContent=b.instruction;
   line.append(title,description);host.append(line);
  }
+ if(item.cvOutput){
+  const cvExtra=document.querySelector('[data-prompt-cv-options]');
+  if(cvExtra)cvExtra.hidden=!ctx.isCvDraft(item);
+  const allowed=new Set(ctx.options(item,'format').map(x=>x.id));
+  const selected=ctx.getChoice(item,'format');
+  document.querySelectorAll('[data-prompt-choice="format"]').forEach(input=>{
+   const parent=input.closest('.prompt-choice-option');
+   if(parent)parent.hidden=!allowed.has(input.value);
+   input.checked=input.value===selected;
+  });
+ }
  const subChoice=document.querySelector('[data-prompt-format-subchoice]');
  if(subChoice)subChoice.hidden=!ctx.supportsOrganizationTemplates(item,D.prompts);
  const dirty=document.getElementById('prompt-preview-dirty'),editor=document.getElementById('prompt-editor');

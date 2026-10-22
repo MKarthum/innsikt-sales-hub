@@ -90,3 +90,8 @@ prompts.json eier outputSettings.organizationTemplates: etikett, hjelpetekst, gy
 ## Unngå duplisert promptveiledning (v0.11.6)
 
 Valgbeskrivelsene vises samlet i én forhåndsvisning, ikke i tillegg under hvert radiovalg. prompts.json er fortsatt eneste eier av instruksjonstekst, UI-etiketter, oppgavespesifikke tips og kontrollpunkter. Frontend viser data uten å lagre en kopi av teksten. Den sekundære veiledningen er en lukket details-seksjon i samme naturlig scrollende høyrekolonne; ikke sticky og uten interne rullefelt.
+
+
+## Betinget CV-produksjon i promptbiblioteket (v0.11.7)
+
+prompts.json kan definere et cvOutput-objekt på en oppgave: modeGroup/draftValue, reviewFormats/draftFormats, lengthGroup og datastyrt template.label/hint/instruction. Renderermodulene skal aldri eie den redaksjonelle matchprompten eller malinstruksjonen. En analyse gir bare ren tekst/Markdown. CV-utkast åpner Word/PDF, lengde og eventuell påkrevd kundemal; påkrevd kundemal overstyrer general firmamal. Manglende kildefiler håndteres av instruksen til KI, ikke ved fiktiv innlesning i portalen.

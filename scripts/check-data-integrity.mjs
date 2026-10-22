@@ -165,6 +165,15 @@ for(const [id,g] of Object.entries({...choiceGroups,depth:prompts.outputSettings
 }
 for(const t of prompts.items){
  if(!Array.isArray(t.choiceGroups)||!Array.isArray(t.contextVariables)||!Array.isArray(t.formats)||!t.formats.length)fail('Prompt uten variantkontrakt '+t.id);
+ if(t.cvOutput){
+  const c=t.cvOutput;
+  if(!str(c.modeGroup)||!str(c.draftValue)||!str(c.lengthGroup)||!choiceGroups[c.modeGroup]||!choiceGroups[c.lengthGroup]||!t.choiceGroups.includes(c.modeGroup))fail('Ufullstendig CV-resultatvalg i '+t.id);
+  if(!choiceGroups[c.modeGroup].options.some(o=>o.id===c.draftValue))fail('Ukjent CV-utkastvalg i '+t.id);
+  if(!Array.isArray(c.reviewFormats)||!Array.isArray(c.draftFormats)||!c.reviewFormats.length||!c.draftFormats.length||c.reviewFormats.some(k=>!t.formats.includes(k))||c.draftFormats.some(k=>!t.formats.includes(k)))fail('Ugyldig formatgrense for CV '+t.id);
+  if(c.reviewFormats.some(k=>!['plain','markdown'].includes(k))||c.draftFormats.some(k=>!['word','pdf'].includes(k)))fail('CV-vurdering og CV-fil må ha separate formatvalg');
+  if(!str(c.template?.label)||!str(c.template?.hint)||!str(c.template?.instruction))fail('CV-kravmal mangler datakontrakt');
+ }
+
  if(!Array.isArray(t.optionalPlaceholders)||!Array.isArray(t.essentialPlaceholders))fail('Manglende kontrakt for valgfrie og nødvendige opplysninger i '+t.id);
  if(new Set(t.optionalPlaceholders).size!==t.optionalPlaceholders.length||new Set(t.essentialPlaceholders).size!==t.essentialPlaceholders.length)fail('Duplisert inputfelt '+t.id);
  if(t.optionalPlaceholders.some(n=>!t.placeholders.includes(n))||t.essentialPlaceholders.some(n=>!t.placeholders.includes(n)))fail('Ukjent optional/essential input '+t.id);

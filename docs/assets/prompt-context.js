@@ -55,26 +55,35 @@ function compose(prompt,placeholders){
 function setting(item,key){
  if(key==='depth'||key==='format')return promptData?.outputSettings?.[key];
  if(key==='handoff'||key==='context'||key==='organizationTemplates')return promptData?.outputSettings?.[key];
+ if(key==='clientTemplate')return item.cvOutput?.template;
+ if(key===item.cvOutput?.lengthGroup)return promptData?.choiceGroups?.[key];
  if(!(item.choiceGroups||[]).includes(key))return null;
  return promptData?.choiceGroups?.[key];
 }
 function options(item,key){
  const group=setting(item,key);
  if(!Array.isArray(group?.options))return [];
- return key==='format'?group.options.filter(o=>(item.formats||[]).includes(o.id)):group.options;
+ if(key==='format'){
+  const allowed=item.cvOutput?(isCvDraft(item)?item.cvOutput.draftFormats:item.cvOutput.reviewFormats):item.formats||[];
+  return group.options.filter(o=>allowed.includes(o.id));
+ }
+ return group.options;
 }
 function getChoice(item,key){
- if(key==='handoff'||key==='context'||key==='organizationTemplates')return choices.has(item.id+':'+key)?choices.get(item.id+':'+key):true;
+ if(key==='handoff'||key==='context'||key==='organizationTemplates'||key==='clientTemplate')return choices.has(item.id+':'+key)?choices.get(item.id+':'+key):key!=='clientTemplate';
  const opts=options(item,key);
  const current=choices.get(item.id+':'+key);
  return opts.some(o=>o.id===current)?current:(key==='depth'?'useful':(opts[0]?.id||''));
 }
 function setChoice(item,key,value){
- if(key==='handoff'||key==='context'||key==='organizationTemplates'){choices.set(item.id+':'+key,value===true);return}
+ if(key==='handoff'||key==='context'||key==='organizationTemplates'||key==='clientTemplate'){choices.set(item.id+':'+key,value===true);return}
  if(options(item,key).some(o=>o.id===value))choices.set(item.id+':'+key,value);
 }
+function isCvDraft(item){
+ return !!item.cvOutput&&getChoice(item,item.cvOutput.modeGroup)===item.cvOutput.draftValue;
+}
 function supportsOrganizationTemplates(item,prompts=promptData){
- return !!prompts?.outputSettings?.organizationTemplates?.formats?.includes(getChoice(item,'format'));
+ return !!prompts?.outputSettings?.organizationTemplates?.formats?.includes(getChoice(item,'format'))&&!(isCvDraft(item)&&getChoice(item,'clientTemplate'));
 }
 function renderTaskInput(item){
  // Editorially controlled optional spans are fully removed when a field is empty.
@@ -91,9 +100,17 @@ function selectedBlocks(item,prompts=promptData){
   const o=selected(key),g=prompts.choiceGroups[key];
   if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings.groupPrefix+' – '+g.label});
  }
+ if(isCvDraft(item)){
+  const key=item.cvOutput.lengthGroup,o=selected(key),g=prompts.choiceGroups[key];
+  if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings.groupPrefix+' – '+g.label});
+ }
  for(const key of ['depth','format']){
   const o=selected(key),g=prompts.outputSettings[key];
   if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings[key+'Prefix']});
+ }
+ if(isCvDraft(item)&&getChoice(item,'clientTemplate')){
+  const t=item.cvOutput.template;
+  blocks.push({key:'clientTemplate',label:t.label,option:t.label,instruction:t.instruction,prefix:t.label});
  }
  const design=prompts.outputSettings.organizationTemplates;
  if(design&&supportsOrganizationTemplates(item,prompts)&&getChoice(item,'organizationTemplates')){
@@ -128,5 +145,5 @@ function entries(){
  return all;
 }
 const orphanCount=()=>entries().filter(x=>!x.usedBy.length).length;
-window.InnsiktPromptContext={configure,get,set,clear,clearAll,compose,composeTask,selectedBlocks,supportsOrganizationTemplates,renderTaskInput,options,getChoice,setChoice,usage,entries,orphanCount,storageKey:STORAGE_KEY};
+window.InnsiktPromptContext={configure,get,set,clear,clearAll,compose,composeTask,selectedBlocks,isCvDraft,supportsOrganizationTemplates,renderTaskInput,options,getChoice,setChoice,usage,entries,orphanCount,storageKey:STORAGE_KEY};
 })();

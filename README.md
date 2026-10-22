@@ -164,3 +164,8 @@ Tomme valgfrie felt forsvinner fra den kopierte prompten sammen med tilhørende 
 ## Strammere promptopplevelse (v0.11.6)
 
 Radiovalgene er ryddet for doble forklaringer; den samlede forhåndsvisningen er nå eneste sted som viser full instruksjon fra valgene. Den oppdateres fortsatt direkte. Høyrekolonnen ruller naturlig i stedet for at én boks legger seg over en annen. «Tips og kvalitetssjekk» er en diskret, valgfri seksjon. Forberedelsestips og kontroller er kortet ned på tvers av de 15 oppgavene, mens tittel og ingress forklarer når oppgaven er relevant.
+
+
+## CV opp mot kundeforespørsel (v0.11.7)
+
+Egen prioritert prompt for kritisk vurdering av dokumentert CV mot kundens «må»- og «bør»-krav, med kvalitativ anbefaling og kildebelegg fremfor poengscore. Brukeren kan velge «Kun vurdering» eller «Vurdering + spisset CV»; kun CV-utkast åpner Word/PDF, lengde og krav om vedlagt kundemal. Kundens mal går foran firmamal. Et annet, generelt prompt for kompetanseavklaring er fortsatt tilgjengelig under de spesialiserte oppgavene. Kilder leses av det godkjente KI-verktøyet fra vedlegg eller tilkoblede dokumentkilder; det offentlige nettstedet håndterer ikke CV-filer. Se PROMPT_WORKFLOW.md.

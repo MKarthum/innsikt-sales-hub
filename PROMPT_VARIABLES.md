@@ -53,3 +53,8 @@ MØTEFORMÅL brukes bare når oppgaven handler om et møte. ANALYSESPØRSMÅL br
 ## Valgfrie felter (v0.11.5)
 
 {{?VAR}}... [VAR] ...{{/VAR}} angir en dataeid valgfri frase, inkludert skilletegn og ledetekst. Komposisjonen fjerner hele frasen når VAR er tom; ikke bytt ut tomt felt med «Ikke valgt» eller en rå plassholder. Alle deklarerte variabler i en aktiv prompt skal ligge i nøyaktig én slik frase; datavalideringen stopper ved duplisering, feil id eller ubalanserte markører. Feltaliaset må være registrert. essentialPlaceholders kan brukes for å be om nødvendig input (f.eks. kundenavn i kildebasert analyse) uten å finne på identiteten.
+
+
+## CV-sammenligning (v0.11.7)
+
+CV_KONSULENTNAVN og CV_FORESPØRSEL er kun frivillige hjelpedata for eksternt, godkjent KI-verktøy og skal ha retention: memory. Den faktiske CV-en og fullstendig forespørsel legges ved i KI-samtalen eller leses fra de kildene verktøyet er autorisert for. Portalen utfører ingen opplasting, dokumentsøk, kandidatmatching eller lagring av CV. Ikke legg personidentifiserende opplysninger eller fortrolige kundekrav i en åpen KI-tjeneste.

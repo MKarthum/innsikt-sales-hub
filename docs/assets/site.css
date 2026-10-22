@@ -632,3 +632,10 @@ textarea.prompt-var-input{min-height:78px}
 .prompt-format-subchoice .prompt-checkbox{padding:6px 0}
 .prompt-format-subchoice .prompt-checkbox strong{font-size:12px}
 .prompt-format-subchoice .prompt-checkbox small{font-size:11px}
+
+/* Kun når CV skal skrives: to relevante justeringer fremfor et helt CV-system. */
+.prompt-cv-options{margin:3px 0 17px;padding:12px 14px;background:#f8fbf9;border-left:2px solid #bddbd1;border-radius:0 9px 9px 0}
+.prompt-cv-options[hidden],.prompt-choice-option[hidden]{display:none}
+.prompt-cv-options .prompt-choice-field{margin-bottom:9px}
+.prompt-cv-options .prompt-checkbox{padding:5px 0}
+.prompt-cv-options .prompt-checkbox small{max-width:45ch}
