@@ -24,6 +24,30 @@ assert.equal(ctx.orphanCount(),0,'variabelregisteret skal ikke inneholde døde v
 const research=data.items.find(x=>x.id==='account-research');
 const prep=data.items.find(x=>x.id==='meeting-prep');
 assert.ok(research&&prep);
+
+assert.deepEqual(research.placeholders,['KUNDENAVN','BRANSJE','ANALYSESPØRSMÅL'],'kundeanalyse må være uavhengig av møte');
+assert.ok(!research.prompt.includes('[MØTEFORMÅL]'),'kundeanalyse må ikke forutsette møte');
+const deck=data.items.find(x=>x.id==='deck-outline');
+assert.ok(deck.placeholders.includes('FORMIDLINGSFORMÅL')&&!deck.placeholders.includes('MØTEFORMÅL'),'presentasjon må ha eget formidlingsformål');
+const followup=data.items.find(x=>x.id==='followup');
+assert.ok(followup.choiceGroups.includes('followupChannel'),'oppfølging må støtte valg av kanal');
+ctx.setChoice(followup,'followupChannel','phone');
+assert.ok(ctx.composeTask(followup,data).includes('muntlig samtaleåpning'),'telefonoppfølging må ikke bli en e-post');
+ctx.setChoice(followup,'followupChannel','email');
+
+assert.ok(followup.placeholders.includes('OPPFØLGINGSGRUNNLAG')&&!followup.placeholders.includes('GODKJENT_OPPSUMMERING'),'oppfølging er bredere enn møtereferat');
+const choices=ctx.selectedBlocks(research,data);
+assert.equal(choices.find(x=>x.key==='depth').option,'Praktisk','standardnivå skal være tydelig');
+assert.equal(choices.find(x=>x.key==='researchFocus').option,'Helhetlig Innsikt-profil');
+for(const item of data.items){
+ assert.ok(item.category&&data.categories.includes(item.category));
+ assert.ok(item.when.length>15&&item.summary.length>25);
+ assert.ok(item.review.length>=2,'alle oppgaver skal ha relevante kontrollpunkter');
+ for(const block of ctx.selectedBlocks(item,data)){
+  assert.ok(ctx.composeTask(item,data).includes(block.instruction),'forhåndsvisning og kopiert instruks må bruke samme tekst');
+ }
+}
+
 assert.ok(data.items.some(x=>x.id==='contact-prep'),'kontaktforberedelse skal finnes');
 const contact=data.items.find(x=>x.id==='contact-prep');
 assert.equal(ctx.getChoice(research,'depth'),'useful','arbeidsklart nivå som standard');
@@ -98,4 +122,9 @@ assert.ok(html.includes('data-context-var="BRANSJE"'));
 assert.ok(html.includes('data-prompt-choice="researchFocus"'));
 assert.ok(html.includes('data-prompt-toggle="handoff"'));
 assert.ok(html.includes('prompt-advanced'),'avansert fulltekst skal være tilgjengelig');
+assert.ok(html.includes('id="prompt-preview-lines"'),'levende forhåndsvisning skal vises før fulltekst');
+assert.ok(html.includes('data-prompt-reveal'),'hele prompten skal være tilgjengelig via tydelig handling');
+assert.ok(html.indexOf('prompt-live-panel')<html.indexOf('prompt-main-panel'),'mobil skal vise levende resultat før feltene');
+assert.ok(html.includes('data-prompt-impact="researchFocus"'),'instruksjonseffekt vises ved radiovalg');
+
 console.log('PASS – alias, gjenbruk, lagringsgrenser, oppfriskning, enkelt-/totalreset, orphan-opprydding og HTML-escaping');

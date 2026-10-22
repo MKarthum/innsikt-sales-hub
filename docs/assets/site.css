@@ -557,3 +557,55 @@ textarea.prompt-var-input{min-height:78px}
  .prompt-primary-copy>.btn{align-self:flex-start}
  .prompt-advanced .prompt-editor{min-height:280px}
 }
+
+/* Levende instruksjonsoversikt ved siden av valg (før valg på mobil). */
+.prompt-detail-layout{
+ display:grid;
+ grid-template-columns:minmax(0,1.7fr) minmax(230px,1fr);
+ grid-template-areas:"main live" "main side";
+ align-items:start;
+ gap:16px;
+}
+.prompt-main-panel{grid-area:main}
+.prompt-side-panel{grid-area:side}
+.prompt-live-panel{
+ grid-area:live;
+ position:sticky;
+ top:14px;
+ min-width:0;
+ background:#fff;
+ border:1px solid #cfdedc;
+ border-radius:15px;
+ padding:17px;
+ box-shadow:0 4px 20px rgba(27,70,66,.05);
+}
+.prompt-live-panel h2{font-size:15px;margin:0 0 6px;color:#204f46}
+.prompt-preview-intro{font-size:11px;line-height:1.55;color:#5a7975;margin:0 0 13px}
+.prompt-preview-lines{
+ display:grid;gap:11px;
+ max-height:325px;
+ overflow:auto;
+ border-block:1px solid #e5eeea;
+ padding:12px 1px;
+ overscroll-behavior:contain;
+}
+.prompt-preview-line{min-width:0}
+.prompt-preview-line strong{font-size:12px;color:#195f50;line-height:1.35;display:block;margin-bottom:3px}
+.prompt-preview-line p{font-size:11px;color:#435f5c;line-height:1.55;margin:0;overflow-wrap:anywhere}
+.prompt-preview-meta{display:flex;flex-wrap:wrap;gap:6px 13px;padding:11px 0;color:#657873;font-size:10px}
+.prompt-preview-meta strong{color:#27584f}
+.prompt-preview-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:5px}
+.prompt-preview-actions .btn{font-size:11px!important;line-height:1.4;min-height:34px}
+.prompt-preview-dirty:not([hidden]){font-size:11px;line-height:1.55;color:#835920;border-left:3px solid #a58a56;padding-left:9px;margin:4px 0 10px}
+.prompt-choice-impact{margin:8px 0 0;color:#506e68;font-size:11px;line-height:1.55;padding-left:10px;border-left:2px solid #c6d9d4}
+.prompt-live-panel:focus-within{border-color:#8bbfb1}
+@media (max-width:1080px){
+ .prompt-detail-layout{grid-template-columns:minmax(0,1.4fr) minmax(220px,1fr)}
+}
+@media(max-width:760px){
+ .prompt-detail-layout{display:flex;flex-direction:column;align-items:stretch}
+ .prompt-live-panel,.prompt-main-panel,.prompt-side-panel{width:100%}
+ .prompt-live-panel{position:static;padding:14px}
+ .prompt-preview-lines{max-height:185px;grid-template-columns:1fr}
+ .prompt-preview-actions .btn{min-height:38px}
+}

@@ -123,7 +123,7 @@ try {
   // Eksempelløpet må peke til en faktisk tilgjengelig, kanonisk prompt.
   await page.locator('#slide-next').click();
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Bygg en behovssamtale'),label+': prompt som eksisterer i biblioteket');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Forbered en behovssamtale'),label+': prompt som eksisterer i biblioteket');
   // Alle lysbilder beholder samme 16:9-flate på hver skjermstørrelse.
   for(const deck of ['portal','sales']){
    await page.locator('[data-deck="'+deck+'"]').click();

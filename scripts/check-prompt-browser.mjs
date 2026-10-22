@@ -15,8 +15,14 @@ try{
   };
   await page.goto(base+'#prompter/account-research',{waitUntil:'networkidle'});
   await page.locator('#prompt-editor').waitFor({state:'attached'});
+  assert.ok(await page.locator('#prompt-preview-lines .prompt-preview-line').count()>=3,label+': synlig instruksjonsoversikt');
+  assert.equal(await page.locator('#prompt-advanced').evaluate(el=>el.open),false,label+': avansert redigering kan være lukket');
+  assert.ok((await page.locator('[data-prompt-impact="researchFocus"]').innerText()).includes('Prioriter'),label+': valgets instruksjon er synlig ved kontrollen');
+
   const cust=page.locator('[data-context-var="KUNDENAVN"]');
   await cust.fill('Eksempelbedriften AS');
+  assert.ok((await page.locator('#prompt-preview-filled').innerText()).includes('1 / 3'),label+': utfylte felt oppdateres umiddelbart');
+
   await page.locator('[data-context-var="BRANSJE"]').fill('Energi');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('Eksempelbedriften AS'),label+': prompt utfylt');
   await navigate('prompter/meeting-prep');
@@ -26,15 +32,21 @@ try{
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('Utforske muligheter'),label+': felles mål');
   await page.locator('#prompt-advanced summary').click();
   await page.locator('#prompt-editor').fill('Min manuelle tilpasning');
+  assert.equal(await page.locator('#prompt-preview-dirty').isVisible(),true,label+': bruker ser at valgene ikke overstyrer manuell tekst');
+
   await page.locator('[data-context-var="KUNDENAVN"]').fill('Byttet navn');
   assert.equal(await page.locator('#prompt-editor').inputValue(),'Min manuelle tilpasning',label+': fritekst beholdes');
   assert.ok((await page.locator('#prompt-editor-status').innerText()).includes('manuelt redigert'),label+': tydelig status');
   page.once('dialog',d=>d.accept());
   await page.locator('[data-prompt-reset]').click();
+  assert.equal(await page.locator('#prompt-preview-dirty').isVisible(),false,label+': reset kobler valgene til editoren igjen');
+
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('Byttet navn'),label+': gjenoppbygg');
   await page.locator('[data-prompt-copy]').click();
   const copied=await page.evaluate(()=>navigator.clipboard.readText());
   assert.ok(copied.includes('Byttet navn'),label+': kopiering bruker aktive variabler');
+  await page.locator('[data-prompt-reveal]').click();
+  assert.equal(await page.locator('#prompt-advanced').evaluate(el=>el.open),true,label+': se fulltekst åpner avansert visning');
   await navigate('prompter/contact-prep');
   await page.locator('#prompt-editor').waitFor({state:'attached'});
   assert.equal(await page.locator('[data-prompt-choice="contactSituation"][value="first"]').isChecked(),true,label+': riktig standardkontakt');
@@ -55,6 +67,9 @@ try{
   await navigate('prompter/account-research');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('valgt Snowflake'),label+': kontekst gjenbrukes i neste prompt');
   await page.locator('[data-prompt-choice="researchFocus"][value="technology"]').check({force:true});
+  assert.ok((await page.locator('#prompt-preview-lines').innerText()).includes('Teknologi og KI'),label+': forhåndsvisningen reagerer direkte på valg');
+  assert.ok((await page.locator('[data-prompt-impact="researchFocus"]').innerText()).includes('dataplattformer'),label+': tekst under valget er lik komposisjonen');
+
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('dataplattformer'),label+': bransjefokus endrer analyse');
   await page.locator('[data-prompt-choice="format"][value="slides"]').check({force:true});
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('presentasjonsdisposisjon'),label+': presentasjon er outputvalg');
@@ -69,6 +84,10 @@ try{
   assert.equal(await page.locator('.prompt-more-tasks').count(),1,label+': avanserte oppgaver er tilgjengelige uten å dominere');
   await page.locator('.prompt-more-tasks summary').click();
   assert.ok(await page.locator('.prompt-more-tasks .prompt-card').count()>3,label+': andre oppgaver vises ved behov');
+  await navigate('prompter/followup');
+  await page.locator('[data-prompt-choice="followupChannel"][value="phone"]').check({force:true});
+  assert.ok((await page.locator('#prompt-preview-lines').innerText()).includes('Telefon'),label+': oppfølging kan være telefon');
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('muntlig samtaleåpning'),label+': kanalvalg endrer oppfølging');
   await navigate('prompter/discovery');
   await page.locator('[data-context-var="KUNDENS_UTSAGN"]').fill('Kun anonymisert testtekst');
   const stored=await page.evaluate(()=>sessionStorage.getItem('innsikt-prompt-context-v1'));

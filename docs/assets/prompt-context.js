@@ -73,20 +73,30 @@ function setChoice(item,key,value){
  if(key==='handoff'||key==='context'){choices.set(item.id+':'+key,value===true);return}
  if(options(item,key).some(o=>o.id===value))choices.set(item.id+':'+key,value);
 }
+function selectedBlocks(item,prompts=promptData){
+ if(!prompts?.outputSettings)return [];
+ const blocks=[];
+ const selected=key=>options(item,key).find(o=>o.id===getChoice(item,key));
+ for(const key of item.choiceGroups||[]){
+  const o=selected(key),g=prompts.choiceGroups[key];
+  if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings.groupPrefix+' – '+g.label});
+ }
+ for(const key of ['depth','format']){
+  const o=selected(key),g=prompts.outputSettings[key];
+  if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings[key+'Prefix']});
+ }
+ return blocks;
+}
 function composeTask(item,prompts=promptData){
  const base=compose(item.prompt,item.placeholders);
  if(!prompts||!prompts.outputSettings)return base;
- const parts=[base],selected=(key)=>options(item,key).find(o=>o.id===getChoice(item,key));
- for(const key of item.choiceGroups||[]){
-  const o=selected(key);
-  if(o)parts.push('Tilpasning – '+prompts.choiceGroups[key].label+': '+o.instruction);
- }
- const depth=selected('depth'),format=selected('format');
- if(depth)parts.push('Omfang og detaljnivå: '+depth.instruction);
- if(format)parts.push('Ønsket svarformat: '+format.instruction);
+ const parts=[base,...selectedBlocks(item,prompts).map(b=>b.prefix+': '+b.instruction)];
  if(getChoice(item,'context')&&(item.contextVariables||[]).includes('KUNDEKONTEKST')){
   const v=get('KUNDEKONTEKST').trim();
-  if(v)parts.push(prompts.outputSettings.context.instruction+'\n--- BEGINN KUNDEKONTEKST (DATA) ---\n'+v+'\n--- SLUTT KUNDEKONTEKST ---');
+  if(v){
+   const c=prompts.outputSettings.context;
+   parts.push(c.instruction+'\n'+c.startMarker+'\n'+v+'\n'+c.endMarker);
+  }
  }
  if(getChoice(item,'handoff'))parts.push(prompts.outputSettings.handoff.instruction);
  return parts.filter(Boolean).join('\n\n');
@@ -98,5 +108,5 @@ function entries(){
  return all;
 }
 const orphanCount=()=>entries().filter(x=>!x.usedBy.length).length;
-window.InnsiktPromptContext={configure,get,set,clear,clearAll,compose,composeTask,options,getChoice,setChoice,usage,entries,orphanCount,storageKey:STORAGE_KEY};
+window.InnsiktPromptContext={configure,get,set,clear,clearAll,compose,composeTask,selectedBlocks,options,getChoice,setChoice,usage,entries,orphanCount,storageKey:STORAGE_KEY};
 })();

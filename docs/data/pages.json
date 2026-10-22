@@ -374,7 +374,7 @@
           "title": "En møtebrief kan være første nyttige resultat",
           "bullets": [
             "Velg «Lag en møtebrief» på forsiden.",
-            "Åpne «Møtebrief på én side» og tilpass feltene.",
+            "Åpne «Forbered et kundemøte» og tilpass feltene.",
             "Kopier til godkjent KI-verktøy og kontroller utkastet."
           ],
           "note": "Demonstrer fra «Oversikt»: Velg «Lag en møtebrief», som går til #prompter/meeting-prep. Vis at prompten kan redigeres før den kopieres. Den skal gi en kort agenda, relevante spørsmål og et tydelig neste steg. Den kjøres ikke inne i portalen. Dette gir umiddelbar nytte, men er ikke en automatisk kundebeskrivelse eller et ferdig kvalitetssikret råd. Hvis opplysninger mangler, bruk «ukjent» heller enn å finne på fakta. Bruk bare opplysninger godkjent for det valgte KI-verktøyet; ingen fortrolige kundedata i den offentlige portalen. Overgang: Ikke alle starter med et booket møte. Noen har bare fanget opp et problem hos kunden.",
@@ -461,7 +461,7 @@
         "centralQuestion": "Hva kan brukeren finne når en kunde beskriver et problem, og hva kan brukeren gjøre med det?",
         "turn": "Et rapporteringsproblem gir flere mulige forklaringer – derfor trenger vi spørsmål, ikke et ferdig teknologiforslag.",
         "resolution": "Brukeren ser veien fra Forretningsbehov via en ferdig prompt til et mulig oppfølgingsmøte.",
-        "story": "På Innsikts nye forside har brukeren et valg: «Jeg har fanget opp et behov». Ved å velge dette åpnes Forretningsbehov. Vi følger ett fiktivt, men eksisterende innholdselement: en økonomileder sier at månedsrapporteringen tar lang tid og at avdelingene viser ulike tall. Vi starter med symptomet, ikke løsningen, og undersøker tre mulige årsaker uten å late som noen av dem er bekreftet. Derfra blir det klart hvilke spørsmål en kundeansvarlig bør stille videre. Den neste naturlige handlingen er å bruke den eksisterende redigerbare prompten «Bygg en behovssamtale» til å gjøre disse spørsmålene til et nyttig møteutkast. Til slutt foreslår vi et avgrenset møte med økonomiansvarlig og relevant fagkompetanse for å forstå én rapporteringsflyt. Dette er ikke en dokumentert kundereferanse, men et konkret bilde av hvordan to deler av portalen sammen gir brukeren nytte.",
+        "story": "På Innsikts nye forside har brukeren et valg: «Jeg har fanget opp et behov». Ved å velge dette åpnes Forretningsbehov. Vi følger ett fiktivt, men eksisterende innholdselement: en økonomileder sier at månedsrapporteringen tar lang tid og at avdelingene viser ulike tall. Vi starter med symptomet, ikke løsningen, og undersøker tre mulige årsaker uten å late som noen av dem er bekreftet. Derfra blir det klart hvilke spørsmål en kundeansvarlig bør stille videre. Den neste naturlige handlingen er å bruke den eksisterende redigerbare prompten «Forbered en behovssamtale» til å gjøre disse spørsmålene til et nyttig møteutkast. Til slutt foreslår vi et avgrenset møte med økonomiansvarlig og relevant fagkompetanse for å forstå én rapporteringsflyt. Dette er ikke en dokumentert kundereferanse, men et konkret bilde av hvordan to deler av portalen sammen gir brukeren nytte.",
         "beats": [
           {
             "id": "scene",
@@ -532,11 +532,11 @@
           "cue": "FRA SPØRSMÅL TIL VERKTØY",
           "title": "En ferdig prompt hjelper oss å forberede samtalen",
           "bullets": [
-            "Åpne «Prompter for salg» → «Bygg en behovssamtale».",
+            "Åpne «Prompter for salg» → «Forbered en behovssamtale».",
             "Bruk et generisk eller anonymisert kundesignal.",
             "Tilpass, kopier og kvalitetssikre spørsmålene."
           ],
-          "note": "Dette er koblingen til den oppgaveorienterte forsiden. Prompten «Bygg en behovssamtale» finnes på #prompter/discovery og er blant de fremhevede promptene. Den lager et utkast til spørsmål og mulig neste steg ut fra et uklart signal. Vis gjerne den reelle prompten, at teksten kan redigeres, og at den kopieres til et godkjent KI-verktøy fremfor å kjøres i portalen. Ikke lim inn konfidensielle kundesitater eller anta at et generert svar er sant. Dette gir likevel en umiddelbart nyttig måte å forberede neste møte på. Overgang: Hva skal vi bruke utkastet til?",
+          "note": "Dette er koblingen til den oppgaveorienterte forsiden. Prompten «Forbered en behovssamtale» finnes på #prompter/discovery og er blant de tilgjengelige oppgavene i biblioteket. Den lager et utkast til spørsmål og mulig neste steg ut fra et uklart signal. Vis gjerne den reelle prompten, at teksten kan redigeres, og at den kopieres til et godkjent KI-verktøy fremfor å kjøres i portalen. Ikke lim inn konfidensielle kundesitater eller anta at et generert svar er sant. Dette gir likevel en umiddelbart nyttig måte å forberede neste møte på. Overgang: Hva skal vi bruke utkastet til?",
           "delivery": "tell"
         },
         {
@@ -562,7 +562,7 @@
             "En ferdig prompt gjorde spørsmålene lettere å forberede.",
             "Vi fikk et kvalifisert neste møte, ikke en ferdig diagnose."
           ],
-          "note": "Avslutt med to konkrete steder i portalen, ikke en ny forelesning: «Det vi nettopp viste, finnes der: et illustrativt økonomibehov under Forretningsbehov og prompten ‘Bygg en behovssamtale’ i promptbiblioteket.» Det er ikke en kundereferanse og heller ikke en påstand om resultatet av et virkelig prosjekt. Poenget er at faglig innhold og praktiske verktøy nå henger sammen slik at brukeren kan gå fra et signal til en mer meningsfull handling. For et faktisk oppdrag må kundens fakta og faglige behov kontrolleres separat. Avslutt her.",
+          "note": "Avslutt med to konkrete steder i portalen, ikke en ny forelesning: «Det vi nettopp viste, finnes der: et illustrativt økonomibehov under Forretningsbehov og prompten ‘Forbered en behovssamtale’ i promptbiblioteket.» Det er ikke en kundereferanse og heller ikke en påstand om resultatet av et virkelig prosjekt. Poenget er at faglig innhold og praktiske verktøy nå henger sammen slik at brukeren kan gå fra et signal til en mer meningsfull handling. For et faktisk oppdrag må kundens fakta og faglige behov kontrolleres separat. Avslutt her.",
           "delivery": "tell"
         }
       ]

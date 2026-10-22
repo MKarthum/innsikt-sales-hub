@@ -44,3 +44,7 @@ Dette dokumentet er bindende ved endring av prompter, plassholdere, variabler og
 ## Valg og kontekstoverlevering
 
 Se [PROMPT_WORKFLOW.md](PROMPT_WORKFLOW.md) for produktkontrakt. Alle radiovalg og tilhørende instruksjoner vedlikeholdes i `prompts.json`; de må ha reell semantisk betydning. Formater er bestillinger til eksternt KI-verktøy, ikke filgenerering i portalen. `KUNDEKONTEKST` er felles, memory-only og valgfri per oppgave. Kort kontekst til neste prompt følger alle maler som standard, men kan slås av. Full prompttekst er tilgjengelig bak en avansert, redigerbar visning. Test kopiering og bytte av valg uten å miste manuelle endringer.
+
+## Oppgavesemantikk og synlig forhåndsvisning
+
+MØTEFORMÅL brukes bare når oppgaven handler om et møte. ANALYSESPØRSMÅL brukes for kundeanalyse, FORMIDLINGSFORMÅL for presentasjon og OPPFØLGINGSGRUNNLAG for generell kundeoppfølging. Dette er forskjellige betydninger, ikke aliaser. Rike fritekstfelt er memory-only. Forhåndsvisningen skal vise de samme valgte instruksjonene som prompten, ikke egen markeds- eller hjelpetekst.

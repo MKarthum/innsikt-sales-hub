@@ -12,7 +12,7 @@ Gjelder alle endringer i Innsikt. Les sammen med `START_HERE.md`, `AGENTS.md`, `
 
 ## Autoritet for variabler i prompter
 
-`prompts.json.variables` er kanonisk variabelregister, `variableGroups` eier gruppering, og `page.variableUi` eier brukerrettet UI-tekst. De brukes på promptdetaljer og oversikten «Alle variabler», uavhengig av visningsadapter. `items[].placeholders` beskriver hvilke aliaser fra registeret som brukes av den aktuelle prompten. `items[].contextVariables` binder valgfri felles kundekontekst. `choiceGroups` og `outputSettings` er autoritative for valgbaserte instruksjonsblokker, `items[].formats` begrenser formatvalg, og `page.primaryIds` styrer hvilke oppgaver som fremheves først. Ingen dupliserte navn, ubrukte register-ID-er eller semantisk tvetydige aliaser. Personopplysninger og interne kundedata skal ikke lagres i offentlig portal. Test og utvidelsesregler finnes i [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md).
+`prompts.json.variables` er kanonisk variabelregister, `variableGroups` eier gruppering, og `page.variableUi` eier brukerrettet UI-tekst. De brukes på promptdetaljer og oversikten «Alle variabler», uavhengig av visningsadapter. `items[].placeholders` beskriver hvilke aliaser fra registeret som brukes av den aktuelle prompten. `items[].contextVariables` binder valgfri felles kundekontekst. `choiceGroups` og `outputSettings` er autoritative for valgbaserte instruksjonsblokker, overskrifter og markører, `items[].formats` begrenser formatvalg, og `page.primaryIds` styrer hvilke oppgaver som fremheves først. Ingen dupliserte navn, ubrukte register-ID-er eller semantisk tvetydige aliaser. Personopplysninger og interne kundedata skal ikke lagres i offentlig portal. Test og utvidelsesregler finnes i [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md).
 
 ## Referanser som faktisk er implementert
 
@@ -76,3 +76,7 @@ Gjeldende Presenter inneholder ett løp som forklarer løsningen og ett kort ill
 ## Begrepspresisjon og forkortelser (v0.10.3)
 
 `learning.json.glossary` eier kanonisk `term`, `meaning`, `example` og valgfri `fullName` for forkortelser. `fullName` viser hva bokstavene står for og erstatter ikke den norske forklaringen. Bruk begreps-ID-er i alle visninger; ikke legg parallelle tekststrenger i popup eller grunnkurs. Eksempler skal vise begrepets spesifikke funksjon og avgrense det fra beslektede arkitekturbegreper. Nye fagkilder legges til i `sources.json`.
+
+## Promptvisning (v0.11.2)
+
+InnsiktPromptContext.composeTask() bygger den faktiske prompten. selectedBlocks() leverer de samme valgte instruksjonene strukturert til levende forhåndsvisning og hjelp under radioknappene. Visningsmodulene får ingen egen tekstkilde. Alle labels og meldinger eies av prompts.json. Endringer må testes for komposisjon, kopiering, manuelle overstyringer, mobil og desktop. Se PROMPT_EDITORIAL_AUDIT_2026-10-22.md.

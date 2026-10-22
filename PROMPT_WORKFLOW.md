@@ -41,3 +41,11 @@ Offentlig nettsted har ikke innlogging, CRM, KI-integrasjon eller serverlagring.
 Test alle nye/reviderte oppgaver i Hurtig/Praktisk/Grundig, flere varianter, med og uten kundekontekst, med/uten handoff, med alle støttede svarformater, og på mobil/desktop. En manuelt redigert prompt må ikke overskrives stille når radiovalg endres. Kjør `node scripts/check.mjs` og nettlesertestene mot lokal HTTP-server eller gjennom CI.
 
 Ut over grønne tester må selgere og fagmiljø validere navigasjonshastighet og om svarene faktisk er bedre enn en improvisert generell prompt. Ikke la teknisk fleksibilitet erstatte produktkvalitet.
+
+## Synlig komposisjon, ikke parallelt innhold
+
+Alle oppgaver viser en kompakt, levende oversikt over faktisk valgte instruksjonsblokker før full prompttekst må åpnes. På desktop står den ved siden av feltene; på mobil før feltene. Radiovalg skal oppdatere oversikten og instruksjonsteksten under hvert valg. Dette er bare visning, ikke en ny datakilde: InnsiktPromptContext.selectedBlocks() og composeTask() bruker de samme blokkene i prompts.json.
+
+Alle nye brukervendte tekster — hjelpetekster, meldinger ved kopiering, labels, komposisjonsoverskrifter og markører — skal eies av docs/data/prompts.json. Ikke hardkod formuleringer i prompts.js, site.js eller CSS. Dersom full prompttekst er manuelt endret, skal den synlige forhåndsvisningen varsle at radiovalg ikke styrer teksten som kopieres før tilbakestilling.
+
+Kundeanalyse krever ikke møteformål; presentasjon trenger formidlingsformål; oppfølging kan skje uten et møte. Ved navneendring kontroller alle henvisninger i pages.json, Presenter og søk. Gjennomgangen er dokumentert i PROMPT_EDITORIAL_AUDIT_2026-10-22.md.

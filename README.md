@@ -141,7 +141,7 @@ Autoritativt manus, formål, scener, lysbildetekster og notater eies av `docs/da
 
 ## Presenter følger oppgaveinngangene (v0.10.2)
 
-Etter ombyggingen av forsiden i v0.10.1 er de to presentasjonene redigert på nytt, **uten endring av presentasjonsteknikken**. Hovedløpet starter nå med tre faktiske oppgaveinnganger fra forsiden: forberede møte, utforske behov og finne fagstoff. En redigerbar møtebrief-prompt vises som første praktiske gevinst; marked, teknologi og arkitektur er valgfrie støtteveier. Det korte økonomieksempelet følger veien fra «Jeg har fanget opp et behov» gjennom kanonisk eksempel og kvalifisering til den eksisterende prompten «Bygg en behovssamtale» og et mulig neste møte. Hovedløpet har 8 lysbilder (ca. 7 min), og eksempelet 7 lysbilder (ca. 5 min). Fortelling og notater eies fortsatt av `pages.json`.
+Etter ombyggingen av forsiden i v0.10.1 er de to presentasjonene redigert på nytt, **uten endring av presentasjonsteknikken**. Hovedløpet starter nå med tre faktiske oppgaveinnganger fra forsiden: forberede møte, utforske behov og finne fagstoff. En redigerbar møtebrief-prompt vises som første praktiske gevinst; marked, teknologi og arkitektur er valgfrie støtteveier. Det korte økonomieksempelet følger veien fra «Jeg har fanget opp et behov» gjennom kanonisk eksempel og kvalifisering til den eksisterende prompten «Forbered en behovssamtale» og et mulig neste møte. Hovedløpet har 8 lysbilder (ca. 7 min), og eksempelet 7 lysbilder (ca. 5 min). Fortelling og notater eies fortsatt av `pages.json`.
 
 ## v0.10.3 – navigasjon og faglig presisjon
 
@@ -150,3 +150,7 @@ Valgfri «Start her» er flyttet foran promptbiblioteket, navigasjonsstien er kl
 ## Promptvariabler
 
 Promptbiblioteket har en felles variabelkontekst som fylles inn på den aktuelle prompten, med samlet oversikt under «Alle variabler». Se [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) for utvidelse, alias, datasikkerhet og opprydding og [PROMPT_WORKFLOW.md](PROMPT_WORKFLOW.md) for oppgavemodell, situasjonsvalg, kundeanalyse og svarformat. Nettsiden lagrer ikke konfidensielle kundeopplysninger.
+
+## Promptbibliotek v0.11.2: revisjon og levende forhåndsvisning
+
+Alle 15 promptoppgaver er kontrollert for salgssituasjon, mål, relevante opplysninger, forståelige etiketter og kildekrav. Kundeanalysen er uavhengig av et møte, presentasjoner har formidlingsformål, oppfølging har eget grunnlag og kanalvalg, og oppgavene er gruppert mer logisk. En levende forhåndsvisning viser instruksjonene som legges til av radiovalg; hele promptteksten kan fortsatt redigeres. Se PROMPT_EDITORIAL_AUDIT_2026-10-22.md og PROMPT_WORKFLOW.md.
