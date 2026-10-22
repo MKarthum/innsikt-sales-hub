@@ -159,3 +159,8 @@ Alle 15 promptoppgaver er kontrollert for salgssituasjon, mål, relevante opplys
 ## Promptvalgene i v0.11.5
 
 Tomme valgfrie felt forsvinner fra den kopierte prompten sammen med tilhørende feltetikett; opplysninger som er nødvendige for kildebasert analyse blir etterspurt, ikke gjettet. Ved filformatene presentasjon, Word og PDF vises et diskret, forhåndsvalgt «Bruk firmamaler». Dette ber det eksterne KI-verktøyet bruke tilgjengelige virksomhetsmaler eller designferdigheter, men garanterer ikke tilgang. Undervalget kan slås av og forsvinner fra prompten når det ikke gjelder. Se PROMPT_WORKFLOW.md og CONTENT_CONTRACT.md.
+
+
+## Strammere promptopplevelse (v0.11.6)
+
+Radiovalgene er ryddet for doble forklaringer; den samlede forhåndsvisningen er nå eneste sted som viser full instruksjon fra valgene. Den oppdateres fortsatt direkte. Høyrekolonnen ruller naturlig i stedet for at én boks legger seg over en annen. «Tips og kvalitetssjekk» er en diskret, valgfri seksjon. Forberedelsestips og kontroller er kortet ned på tvers av de 15 oppgavene, mens tittel og ingress forklarer når oppgaven er relevant.

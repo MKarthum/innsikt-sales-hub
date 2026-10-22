@@ -21,7 +21,27 @@ try{
   assert.equal(await page.locator('.prompt-preview-meta').count(),0,label+': ingen redundant statuslinje');
   assert.ok(await page.locator('.prompt-advanced + .prompt-primary-copy [data-prompt-copy]').count()===1,label+': kopiering ligger etter valg og fulltekst');
   assert.equal(await page.locator('#prompt-advanced').evaluate(el=>el.open),false,label+': avansert redigering kan være lukket');
-  assert.ok((await page.locator('[data-prompt-impact="researchFocus"]').innerText()).includes('Prioriter'),label+': valgets instruksjon er synlig ved kontrollen');
+  assert.equal(await page.locator('.prompt-choice-impact').count(),0,label+': ingen dobbeltforklaringer under radioknapper');
+  const guide=page.locator('.prompt-guide-details');
+  assert.equal(await guide.count(),1,label+': én samlet veiledning, ikke to separate bokser');
+  assert.equal(await guide.evaluate(el=>el.open),false,label+': kvalitetssjekk er progressiv');
+  assert.equal(await page.locator('.prompt-side-panel').isVisible(),false,label+': tips skjules inntil de åpnes');
+  await guide.locator('summary').click();
+  assert.equal(await page.locator('.prompt-side-panel').isVisible(),true,label+': tips kan åpnes');
+  assert.ok((await page.locator('.prompt-side-panel').innerText()).includes('Sjekk resultatet'),label+': konkrete kontrollpunkter tilgjengelige');
+  assert.equal(await page.locator('.prompt-side-panel').getByText('Når er denne nyttig?').count(),0,label+': headerinformasjonen skal ikke gjentas');
+  const positions=await page.evaluate(()=>{
+    const preview=document.querySelector('.prompt-live-panel'),guide=document.querySelector('.prompt-guide-details'),side=document.querySelector('.prompt-detail-aside'),main=document.querySelector('.prompt-main-panel');
+    const p=preview.getBoundingClientRect(),g=guide.getBoundingClientRect(),s=side.getBoundingClientRect(),m=main.getBoundingClientRect();
+    return {position:getComputedStyle(preview).position,overflow:getComputedStyle(document.querySelector('.prompt-preview-lines')).overflowY,guideBelow:g.top>=p.bottom-2,previewBeforeForm:p.top<m.top,guideAndPreviewSameCol:Math.abs(p.left-g.left)<3,rightOfForm:s.left>m.left+30};
+  });
+  assert.equal(positions.position,'static',label+': forklaringen skal ikke overlappe annet innhold ved scrolling');
+  assert.equal(positions.overflow,'visible',label+': ingen sekundær scrollbar i forklaringen');
+  assert.equal(positions.guideBelow,true,label+': veiledning skal ligge under forhåndsvisningen');
+  if(label==='desktop')assert.equal(positions.guideAndPreviewSameCol,true,label+': én kolonne på desktop');
+  if(label==='mobil')assert.equal(positions.previewBeforeForm,true,label+': mobil viser forklaring før valg');
+  await guide.locator('summary').click();
+
   const templateChoice=page.locator('[data-prompt-toggle="organizationTemplates"]');
   const templateSubchoice=page.locator('[data-prompt-format-subchoice]');
   assert.equal(await templateSubchoice.isVisible(),false,label+': firmamaler skjult ved ren tekst');
@@ -85,7 +105,7 @@ try{
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('valgt Snowflake'),label+': kontekst gjenbrukes i neste prompt');
   await page.locator('[data-prompt-choice="researchFocus"][value="technology"]').check();
   assert.ok((await page.locator('#prompt-preview-lines').innerText()).includes('Teknologi og KI'),label+': forhåndsvisningen reagerer direkte på valg');
-  assert.ok((await page.locator('[data-prompt-impact="researchFocus"]').innerText()).includes('dataplattformer'),label+': tekst under valget er lik komposisjonen');
+  assert.ok((await page.locator('#prompt-preview-lines').innerText()).includes('dataplattformer'),label+': bare samlet forklaring reagerer på valget');
 
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('dataplattformer'),label+': bransjefokus endrer analyse');
   await page.locator('[data-prompt-choice="format"][value="slides"]').check();

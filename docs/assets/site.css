@@ -558,20 +558,25 @@ textarea.prompt-var-input{min-height:78px}
  .prompt-advanced .prompt-editor{min-height:280px}
 }
 
-/* Levende instruksjonsoversikt ved siden av valg (før valg på mobil). */
+/* Oppgavepanelene har én naturlig høyrekolonne. Ingen overlapp eller egen scrollbar. */
 .prompt-detail-layout{
  display:grid;
- grid-template-columns:minmax(0,1.7fr) minmax(230px,1fr);
- grid-template-areas:"main live" "main side";
+ grid-template-columns:minmax(0,1.7fr) minmax(250px,1fr);
+ grid-template-areas:"main aside";
  align-items:start;
  gap:16px;
 }
-.prompt-main-panel{grid-area:main}
-.prompt-side-panel{grid-area:side}
+.prompt-main-panel{grid-area:main;min-width:0}
+.prompt-detail-aside{
+ grid-area:aside;
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ gap:12px;
+ align-self:start;
+}
 .prompt-live-panel{
- grid-area:live;
- position:sticky;
- top:14px;
+ position:static;
  min-width:0;
  background:#fff;
  border:1px solid #cfdedc;
@@ -580,29 +585,45 @@ textarea.prompt-var-input{min-height:78px}
  box-shadow:0 4px 20px rgba(27,70,66,.05);
 }
 .prompt-live-panel h2{font-size:15px;margin:0 0 6px;color:#204f46}
-.prompt-preview-intro{font-size:11px;line-height:1.55;color:#5a7975;margin:0 0 13px}
+.prompt-preview-intro{font-size:11px;line-height:1.5;color:#5a7975;margin:0 0 11px}
 .prompt-preview-lines{
- display:grid;gap:11px;
- max-height:325px;
- overflow:auto;
- border-block:1px solid #e5eeea;
- padding:12px 1px;
- overscroll-behavior:contain;
+ display:grid;
+ gap:11px;
+ border-top:1px solid #e5eeea;
+ padding:12px 1px 0;
 }
 .prompt-preview-line{min-width:0}
 .prompt-preview-line strong{font-size:12px;color:#195f50;line-height:1.35;display:block;margin-bottom:3px}
 .prompt-preview-line p{font-size:11px;color:#435f5c;line-height:1.55;margin:0;overflow-wrap:anywhere}
-.prompt-preview-dirty:not([hidden]){font-size:11px;line-height:1.55;color:#835920;border-left:3px solid #a58a56;padding-left:9px;margin:4px 0 10px}
-.prompt-choice-impact{margin:8px 0 0;color:#506e68;font-size:11px;line-height:1.55;padding-left:10px;border-left:2px solid #c6d9d4}
-.prompt-live-panel:focus-within{border-color:#8bbfb1}
-@media (max-width:1080px){
- .prompt-detail-layout{grid-template-columns:minmax(0,1.4fr) minmax(220px,1fr)}
+.prompt-preview-dirty:not([hidden]){font-size:11px;line-height:1.55;color:#835920;border-left:3px solid #a58a56;padding-left:9px;margin:10px 0 0}
+.prompt-guide-details{
+ border:1px solid #dbe8e4;
+ border-radius:12px;
+ padding:12px 14px;
+ background:#fff;
+}
+.prompt-guide-details>summary{cursor:pointer;font-weight:700;font-size:12px;color:#235850}
+.prompt-guide-details>summary:focus-visible{outline:2px solid #268b72;outline-offset:3px;border-radius:3px}
+.prompt-guide-details[open]{background:#fcfefc}
+.prompt-guide-details .prompt-side-panel{display:block;padding-top:15px}
+.prompt-guide-details h3{font-size:12px;margin:0 0 6px;color:#2a5650}
+.prompt-guide-details h3:not(:first-child){margin:15px 0 6px}
+.prompt-guide-details ul{margin:0;padding-left:19px}
+.prompt-guide-details li{font-size:11px;line-height:1.6;color:#4b6c65;margin:0 0 5px}
+.prompt-guide-caution{font-size:11px;line-height:1.6;color:#655d48;margin:12px 0 0;padding-top:10px;border-top:1px solid #e2e8e3}
+@media(max-width:1080px){
+ .prompt-detail-layout{grid-template-columns:minmax(0,1.4fr) minmax(230px,1fr)}
 }
 @media(max-width:760px){
  .prompt-detail-layout{display:flex;flex-direction:column;align-items:stretch}
- .prompt-live-panel,.prompt-main-panel,.prompt-side-panel{width:100%}
- .prompt-live-panel{position:static;padding:14px}
- .prompt-preview-lines{max-height:185px;grid-template-columns:1fr}
+ .prompt-detail-aside,.prompt-main-panel{width:100%;min-width:0}
+ .prompt-detail-aside{order:0}
+ .prompt-main-panel{order:1}
+ .prompt-live-panel{padding:14px}
+ .prompt-guide-details{padding:10px 14px}
+}
+@media(prefers-reduced-motion:reduce){
+ .prompt-guide-details{scroll-behavior:auto}
 }
 
 /* Subvalg følger dokumentformatet, men er ikke et eget toppnivåvalg. */

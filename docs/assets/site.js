@@ -393,8 +393,6 @@ function refreshPromptLive(item){
   const title=document.createElement('strong');title.textContent=b.option;
   const description=document.createElement('p');description.textContent=b.instruction;
   line.append(title,description);host.append(line);
-  const impact=document.querySelector('[data-prompt-impact="'+b.key+'"]');
-  if(impact)impact.textContent=b.instruction;
  }
  const subChoice=document.querySelector('[data-prompt-format-subchoice]');
  if(subChoice)subChoice.hidden=!ctx.supportsOrganizationTemplates(item,D.prompts);

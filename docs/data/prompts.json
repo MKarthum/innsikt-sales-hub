@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.4.0",
+    "version": "1.5.0",
     "reviewed": "2026-10-22",
     "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
   },
@@ -22,7 +22,7 @@
     "internalTitle": "Når portalen flyttes internt",
     "internalBody": "Da kan vi bygge på med virksomhetsgodkjente datakilder og arbeidsflyter: kundeinformasjon fra CRM/HubSpot, dokumenter fra Google Drive og kompetanseprofiler som brukeren har tilgang til. Slike koblinger må følge identitet, rettigheter og sikkerhetskrav; ingen tokens eller CRM-data skal legges i en offentlig statisk nettside.",
     "editorHelp": "Teksten kan fortsatt redigeres. Endringer i fritekst lagres ikke. Tilbakestill tekst bygger prompten fra malen og aktive variabler.",
-    "reviewTitle": "Kontroller før du bruker resultatet",
+    "reviewTitle": "Sjekk resultatet",
     "copyLabel": "Kopier prompt",
     "resetLabel": "Tilbakestill tekst",
     "allLabel": "Alle",
@@ -47,10 +47,8 @@
       "clearOne": "Nullstill",
       "editorTitle": "Prompten",
       "editorLabel": "Redigerbar prompttekst",
-      "whenTitle": "Når er denne nyttig?",
-      "beforeTitle": "Hva bør du ha klart?",
+      "beforeTitle": "Før du starter",
       "internalCaution": "Bruk bare anonymiserte eller offentlig godkjente opplysninger inntil løsningen er flyttet og tilgangsstyrt.",
-      "publicCaution": "Kan brukes med offentlig tilgjengelige eller generiske opplysninger.",
       "nextTitle": "Vil du videre etter svaret?",
       "nextAction": "Se forretningsbehov",
       "overviewEyebrow": "FELLES KONTEKST",
@@ -88,7 +86,7 @@
       "formatNotice": "Formatet er en bestilling til KI-verktøyet. Eventuelle filer og firmamaler avhenger av hvilke funksjoner og ressurser verktøyet har tilgang til.",
       "copyReady": "Kopier den tilpassede prompten til KI-verktøyet du bruker.",
       "previewTitle": "Slik påvirker valgene prompten",
-      "previewIntro": "Utdrag fra instruksjonene som legges til. De oppdateres når du velger noe annet.",
+      "previewIntro": "Oppdateres når du endrer valgene.",
       "previewDirty": "Du har redigert fullteksten manuelt. Valgene vises her, men teksten som kopieres følger de manuelle endringene til du tilbakestiller.",
       "previewDefault": "Valgene du gjør, endrer teksten som kopieres.",
       "copySuccess": "Prompten er kopiert.",
@@ -98,7 +96,8 @@
       "deckCopyFailure": "Nettleseren blokkerte kopiering.",
       "templateChoiceNote": "Bare for dokumenter og presentasjoner",
       "templateDisabledNote": "Denne innstillingen gjelder ikke ren tekst eller Markdown.",
-      "fieldOptionalHint": "La feltet stå tomt om det ikke er relevant – da utelates hele opplysningen fra prompten."
+      "fieldOptionalHint": "La feltet stå tomt om det ikke er relevant – da utelates hele opplysningen fra prompten.",
+      "guideToggle": "Tips og kvalitetssjekk"
     },
     "primaryIds": [
       "account-research",
@@ -141,13 +140,12 @@
         "ANALYSESPØRSMÅL"
       ],
       "before": [
-        "Finn riktig virksomhetsnavn. Bransje og egne spørsmål er valgfrie.",
-        "Bruk et KI-verktøy med nettilgang, eller legg ved offentlige kilder i KI-samtalen."
+        "Bruk et entydig virksomhetsnavn, særlig ved like selskapsnavn.",
+        "Velg et KI-verktøy med nettsøk, eller legg ved åpne kilder."
       ],
       "review": [
-        "Sjekk at selskapet er riktig identifisert, og at sentrale kilder har dato og lenke.",
-        "Skill verifiserte teknologivalg fra markedsgjetning, eldre planer og hypoteser.",
-        "Bruk mulige behov som samtaleinnganger – ikke som bekreftede oppdrag."
+        "Kontroller at kildene gjelder riktig virksomhet og faktisk dokumenterer teknologivalgene.",
+        "Skill bekreftede funn fra hypoteser om mulige behov."
       ],
       "priority": 1,
       "reviewed": "2026-10-14",
@@ -190,8 +188,8 @@
       "audience": "Salg og kundeansvarlige · 5 min",
       "when": "Når du vil ta kontakt med en person eller virksomhet med en troverdig og relevant inngang.",
       "before": [
-        "Et virksomhetsnavn eller en rolle holder for å starte. Legg til et tema hvis du har det.",
-        "Bruk bare reelle henvisninger og offentlige eller anonymiserte opplysninger."
+        "Velg kanal og kontaktsituasjon. Oppgi gjerne rolle eller et konkret tema.",
+        "Henvis bare til personer og tidligere dialog som faktisk finnes."
       ],
       "placeholders": [
         "KUNDENAVN",
@@ -202,9 +200,8 @@
       "sourceMode": "public",
       "priority": 1,
       "review": [
-        "Høres henvendelsen naturlig ut i valgt kanal, og passer den mottakerens rolle?",
-        "Er henvisninger og eventuelle teknologipåstander riktige?",
-        "Be om videre dialog uten å fremstille et behov eller en relasjon som bekreftet."
+        "Sjekk at meldingen passer mottakeren og høres naturlig ut.",
+        "Fjern påstander om kundens behov eller relasjonen som du ikke kan bekrefte."
       ],
       "choiceGroups": [
         "contactSituation",
@@ -239,13 +236,12 @@
         "MÅL"
       ],
       "before": [
-        "Oppgi gjerne hvem du skal møte, møtets formål og varighet. Det går også fint å starte uten dette.",
-        "Ta bare med tidligere avklaringer som er offentlige eller anonymiserte."
+        "Tenk gjennom hvem du skal møte og hva du ønsker å forstå.",
+        "Angi varighet hvis du vil ha en konkret tidsplan."
       ],
       "review": [
-        "Prioriter spørsmålene som passer møtet og den rollen du møter.",
-        "Kontroller varighet, formål og eventuelle faktapåstander.",
-        "Bruk guiden som støtte for samtalen, ikke et manus som må følges."
+        "Velg ut spørsmålene som passer samtalen; bruk ikke guiden som et manus.",
+        "Kontroller agendaen mot faktisk møtetid og deltakernes roller."
       ],
       "priority": 2,
       "reviewed": "2026-10-21",
@@ -291,12 +287,11 @@
         "KUNDETYPE"
       ],
       "before": [
-        "Velg en tydelig bransje og kundetype."
+        "Velg en konkret bransje. Beskriv virksomhetstypen hvis du vil avgrense analysen."
       ],
       "review": [
-        "Skill bransjetypiske eksempler fra dokumenterte fakta om en bestemt kunde.",
-        "Vurder om foreslåtte signaler kan undersøkes med åpne spørsmål.",
-        "Prioriter reelle forretningsproblemer fremfor teknologimote."
+        "Se på signalene som samtalehypoteser, ikke dokumenterte kjøpsbehov.",
+        "Kontroller at eksemplene er relevante for bransjen."
       ],
       "priority": 2,
       "reviewed": "2026-10-14",
@@ -340,13 +335,12 @@
         "BRANSJE"
       ],
       "before": [
-        "Bruk generiske utsagn, ikke fortrolige sitater fra identifiserbare kunder."
+        "Beskriv signalet eller utfordringen med generelle, anonymiserte ord."
       ],
       "prompt": "Hjelp meg å forberede en naturlig behovssamtale om data, analyse og KI.\n{{?KUNDENS_UTSAGN}}Kundens utsagn i anonymisert form: [KUNDENS_UTSAGN].{{/KUNDENS_UTSAGN}}\n{{?BRANSJE}}Bransje: [BRANSJE].{{/BRANSJE}}\nIkke anta at kunden trenger en bestemt teknologi eller ekstern hjelp.\nSvar med:\nA. Tre mulige underliggende årsaker, merket som hypoteser. Ta med en mulig organisatorisk eller prosessuell årsak.\nB. Et kort sett prioriterte åpne spørsmål i naturlig rekkefølge: problem, konsekvens, dagens praksis, data, ansvar og beslutning. Gi korte oppfølgingsspørsmål der det er relevant.\nC. Hva som kan indikere behov for dataplattform, analyse eller KI, og hva som taler mot en teknisk leveranse.\nD. Når en fagspesialist bør involveres og hvilke tre opplysninger vedkommende trenger.\nE. En kort oppsummering jeg kan bruke i møtet uten å love en løsning.\nBruk klart norsk. Ikke dikt opp kundefakta. Hvis signalet er uklart, gi anvendelige spørsmål med forbehold.",
       "review": [
-        "Bruk kundens egne ord som utgangspunkt, men ikke la én uttalelse bli en konklusjon.",
-        "Spør først om problemet, konsekvensene og dagens praksis; teknologi kommer etterpå.",
-        "Avklar hva som eventuelt tilsier at vi bør involvere fagmiljøet."
+        "Utforsk problem og konsekvens før du foreslår teknologi.",
+        "Bruk kundens egne utsagn som utgangspunkt, ikke som bevis på årsaken."
       ],
       "priority": 2,
       "reviewed": "2026-10-21",
@@ -382,14 +376,12 @@
         "KOMPETANSEPROFILER"
       ],
       "before": [
-        "Beskriv behovet anonymisert. Kompetansebeskrivelser er valgfrie.",
-        "Interne CV-er og persondata må ikke legges i den offentlige portalen."
+        "Beskriv behovet uten kundesensitive detaljer. Godkjente, anonymiserte kompetansebeskrivelser er valgfrie."
       ],
       "prompt": "Du er en faglig bemanningsrådgiver for dataplattform, analyse og KI.\n{{?BEHOVSBESKRIVELSE}}Behov (anonymisert): [BEHOVSBESKRIVELSE]{{/BEHOVSBESKRIVELSE}}\n{{?KOMPETANSEPROFILER}}Tilgjengelige anonymiserte/godkjente kompetansebeskrivelser: [KOMPETANSEPROFILER]{{/KOMPETANSEPROFILER}}\nHvis profilene ikke er gitt, IKKE finn på kandidater. Foreslå i stedet hvilke roller og kompetanser som bør undersøkes.\nLag:\n1. En oppsummering av forretningsproblemet, ønsket leveranse og manglende opplysninger.\n2. Must-have og nice-to-have-kompetanse (begrunn hver).\n3. Relevant rollemiks: f.eks. data engineer, analytiker/BI, dataarkitekt, KI-spesialist – bare hvis behovet tilsier det.\n4. En etterprøvbar vurderingsmatrise hvis godkjente profiler faktisk er oppgitt, med evidens og usikkerhet.\n5. Tre avklaringsspørsmål til fagmiljø og kunde.\nIkke påstå at noen er tilgjengelige, sertifisert, klarert eller har levert et kundecase uten kilde. Ikke inkluder personopplysninger eller interne CV-er i en ikke-godkjent KI-tjeneste.",
       "review": [
-        "Skiller svaret mellom kritisk kompetanse og det som bare er en fordel?",
-        "Knytter rollemiksen seg til kundens behov fremfor standardteam?",
-        "Verifiser faktiske profiler, kapasitet og sikkerhetskrav i godkjente interne systemer."
+        "Skill nødvendig kompetanse fra ønskelig erfaring.",
+        "Verifiser faktiske profiler og tilgjengelighet i godkjente interne systemer."
       ],
       "priority": 1,
       "reviewed": "2026-10-14",
@@ -424,13 +416,12 @@
         "TIDSVINDU"
       ],
       "before": [
-        "Bruk anonymisert beskrivelse av situasjonen."
+        "Beskriv et konkret kundesignal eller ønsket forbedring, uten fortrolige opplysninger."
       ],
       "prompt": "Vurder om følgende anonymiserte situasjon kan være et relevant konsulentoppdrag:\n{{?SYMTOM}}Symptom: [SYMTOM].{{/SYMTOM}}\n{{?ØNSKET_FORBEDRING}}Ønsket forbedring: [ØNSKET_FORBEDRING].{{/ØNSKET_FORBEDRING}}\n{{?TIDSVINDU}}Tidsvindu: [TIDSVINDU].{{/TIDSVINDU}}\nDu er erfaren, skeptisk faglig rådgiver innen dataplattform, dataintegrasjon, datakvalitet, analyse, BI og KI.\nGi en strukturert vurdering med:\n- Verdien kunden ønsker, og hva som ikke er avklart.\n- et lite antall plausible leveransehypoteser (f.eks. kartlegging, datakvalitetsforbedring, analysemodell, avgrenset KI-utprøving) og deres forutsetninger.\n- Hvem hos kunden som bør delta.\n- Et mulig lite første steg med tydelig leveranse og beslutningspunkt.\n- Tydelige signaler som taler MOT at vi bør gå videre nå.\n- Et kort forslag til intern overlevering uten kundespesifikke detaljer.\nIkke foreslå plattform, pris eller teknologi før problemet og dagens oppsett er forstått.",
       "review": [
-        "Er ønsket forbedring og verdi faktiske kundeutsagn eller foreløpige hypoteser?",
-        "Er roller, forutsetninger og mulige neste steg realistiske?",
-        "Er det også gode grunner til å ikke gå videre?"
+        "Skill behov som kunden har bekreftet fra mulige leveransehypoteser.",
+        "Vurder også om det er klokere å ikke gå videre."
       ],
       "priority": 2,
       "reviewed": "2026-10-14",
@@ -469,14 +460,12 @@
         "DATAKILDER"
       ],
       "before": [
-        "Beskriv ønsket effekt og mulige datakilder kun på generelt nivå.",
-        "Ikke del kundedata, tilgangsdetaljer eller intern arkitektur i offentlig KI."
+        "Beskriv brukstilfelle og mål. Datakilder kan angis på overordnet nivå."
       ],
       "prompt": "Du skal hjelpe meg å skissere en kort konsept-/pilotfase, ikke et bindende tilbud.\n{{?BRUKSTILFELLE}}Brukstilfelle: [BRUKSTILFELLE].{{/BRUKSTILFELLE}}\n{{?FORRETNINGSVERDI}}Ønsket forretningsverdi: [FORRETNINGSVERDI].{{/FORRETNINGSVERDI}}\n{{?DATAKILDER}}Mulige datakilder (på generelt nivå): [DATAKILDER].{{/DATAKILDER}}\nLag en anbefaling som inneholder: avgrenset problem, hypoteser, antakelser om datatilgang, konkrete kvalitets- og effektmål, risiko (personvern, sikkerhet, datakvalitet, KI-feil og kostnad), nødvendig kompetanse, milepæler, stoppkriterier og forventet beslutning etter piloten.\nSkille tydelig mellom demo, pilot og produksjon. Ikke skriv at tiltaket er gjennomførbart før relevante fagfolk har bekreftet forutsetningene.\nLag til slutt en 60-sekunders forklaring for ikke-teknisk leder.",
       "review": [
-        "Er mål, målemetode, ressursbruk og stoppkriterier tydelige?",
-        "Er risiko og datatilgang reelle forbehold, ikke antatte avklarte forhold?",
-        "Er dette en pilot – ikke et skjult tilbud eller produksjonsløfte?"
+        "Se etter målbare kriterier, stoppunkter og avhengigheter.",
+        "En pilotskisse er ikke en bekreftet leveranse eller et tilbud."
       ],
       "priority": 2,
       "reviewed": "2026-10-14",
@@ -515,13 +504,13 @@
         "DELTAKERE"
       ],
       "before": [
-        "Avklar om workshopen skal kartlegge behov eller ta tekniske beslutninger."
+        "Bestem om dere primært skal utforske behov eller forberede en beslutning.",
+        "Oppgi roller og varighet hvis agendaen skal tidfestes."
       ],
       "prompt": "Lag et praktisk workshop-opplegg om data, analyse eller KI.\n{{?TEMA}}Tema: [TEMA].{{/TEMA}}\n{{?DELTAKERE}}Deltakerroller: [DELTAKERE].{{/DELTAKERE}}\n{{?VARIGHET}}Varighet: [VARIGHET].{{/VARIGHET}}\nFormålet er å forstå forretningsbehov, datagrunnlag og mulige tiltak – ikke å selge et bestemt verktøy.\nTa med: mål og forventet beslutning, kort forarbeid, agenda med tidsblokker, to oppgaver som får frem brukerbehov, konkrete spørsmål om kvalitet/tilgang/eierskap, forslag til oppsummering og hvordan vi avgrenser ett realistisk neste steg.\nBruk et språk som økonomi, drift og IT forstår. Forklar fagbegreper kort. Marker antakelser.\nLever en agenda som kan sendes i invitasjonen og et eget fasilitatornotat.",
       "review": [
-        "Stemmer agenda og tidsblokker med tilgjengelig tid og deltakere?",
-        "Gir aktivitetene et konkret resultat som kan brukes videre?",
-        "Er skillet mellom kartlegging og beslutning tydelig?"
+        "Sjekk at tidsblokkene passer varigheten.",
+        "Pass på at workshopen gir konkrete avklaringer og eiere av neste steg."
       ],
       "priority": 2,
       "reviewed": "2026-10-14",
@@ -561,13 +550,12 @@
         "ANTALL_LYSBILDER"
       ],
       "before": [
-        "Bruk kun offentlig godkjente kundereferanser og fakta.",
-        "Ikke la KI lage udokumenterte suksesshistorier eller tall."
+        "Velg målgruppe og hva presentasjonen skal oppnå.",
+        "Bruk bare dokumenterbare eksempler og tall."
       ],
       "review": [
-        "Har hvert lysbilde et tydelig budskap for målgruppen?",
-        "Kontroller dokumentasjon, kilder og eventuelle eksempler.",
-        "Avslutt med et relevant spørsmål eller neste steg, ikke en automatisk salgspitch."
+        "Har hvert lysbilde et tydelig budskap og en relevant visualisering?",
+        "Kontroller tall, referanser og kildegrunnlag før deling."
       ],
       "priority": 1,
       "reviewed": "2026-10-14",
@@ -614,13 +602,12 @@
         "MULIG_TILTAK"
       ],
       "before": [
-        "Bruk anonymisert utfordring og uforpliktende tiltak."
+        "Oppgi hvilken beslutning eller avklaring notatet skal støtte."
       ],
       "prompt": "Skriv et klart, beslutningsrettet notat, normalt inntil én side til en leder uten datateknisk bakgrunn.\n{{?FORRETNINGSUTFORDRING}}Situasjon: [FORRETNINGSUTFORDRING].{{/FORRETNINGSUTFORDRING}}\n{{?MULIG_TILTAK}}Mulig tilnærming: [MULIG_TILTAK].{{/MULIG_TILTAK}}\nStruktur: hvorfor dette er viktig for virksomheten; hvordan data og analyse kan bidra; hvilke forutsetninger og usikkerheter som finnes; hva en liten avklaring kan gi; hvilket beslutningspunkt som følger.\nIngen produktnavn med mindre det er nødvendig for forståelsen.\nVær konkret og nøktern, uten overdreven KI-retorikk, påstander om gevinst eller oppdiktede referansecaser.\nAvslutt med sentrale spørsmål ledelsen bør stille før de velger tiltak. Tilpass detaljer og kontrollpunkter til valgt svarnivå uten å miste den korte hovedfortellingen.",
       "review": [
-        "Kommer forretningsspørsmålet tydelig frem før teknologien?",
-        "Skiller notatet mellom dokumenterte effekter, ønsket effekt og risiko?",
-        "Kan en leder faktisk bruke dette til å bestemme en relevant neste avklaring?"
+        "Kommer forretningsutfordringen frem før teknologien?",
+        "Skill mulige gevinster fra dokumenterte effekter og forutsetninger."
       ],
       "priority": 2,
       "reviewed": "2026-10-14",
@@ -657,14 +644,13 @@
         "MOTTAKERROLLE"
       ],
       "before": [
-        "Gi bare en offentlig delbar eller anonymisert bakgrunn for oppfølgingen.",
-        "Marker hva som faktisk er avtalt, og hva du ønsker å foreslå."
+        "Velg hva du følger opp og hvilken kanal du vil bruke.",
+        "Skill klart mellom noe som er avtalt, og noe du ønsker å foreslå."
       ],
       "prompt": "Du er en erfaren konsulentselger som følger opp kunder på en saklig, varm og profesjonell måte.\n{{?MOTTAKERROLLE}}Mottakerrolle: [MOTTAKERROLLE].{{/MOTTAKERROLLE}}\n{{?OPPFØLGINGSGRUNNLAG}}Godkjent/anonymisert bakgrunn: [OPPFØLGINGSGRUNNLAG].{{/OPPFØLGINGSGRUNNLAG}}\n{{?NESTE_STEG}}Ønsket eller avtalt neste steg: [NESTE_STEG].{{/NESTE_STEG}}\nFormuler en kort, relevant oppfølging tilpasset situasjonen og valgt kanal. Presenter bare opplysninger og avtaler brukeren faktisk har oppgitt. Dersom neste steg ikke er avtalt, skal teksten tydelig foreslå det i stedet for å fremstille det som bestemt. Ikke lov leveranseevne, pris eller kapasitet. Skriv naturlig norsk uten salgsfloskler eller pågående tone.\nLever et konkret utkast tilpasset valgt kanal, klart for menneskelig kvalitetssikring. Hvis viktig grunnlag mangler, merk det kort og lag likevel et brukbart utkast uten å dikte opp detaljer. Avslutt hoveddelen med de viktigste fakta brukeren må kontrollere før sending.",
       "review": [
-        "Er det tydelig hva som faktisk ble avtalt, og hva som bare foreslås?",
-        "Kontroller mottaker, eventuelle tidspunkt og faktisk oppfølgingsbehov.",
-        "Sjekk at tonen er imøtekommende og at teksten ikke legger ord i kundens munn."
+        "Kontroller mottaker, fakta og eventuelle tidspunkter.",
+        "Sjekk at tonen er naturlig og at nye avtaler ikke fremstilles som inngått."
       ],
       "priority": 2,
       "reviewed": "2026-10-14",
@@ -699,13 +685,12 @@
         "INNVENDING"
       ],
       "before": [
-        "Beskriv innvendingen uten identifiserbare forhold."
+        "Beskriv innvendingen uten identifiserende eller fortrolige detaljer."
       ],
       "prompt": "Spill rollen som en erfaren, skeptisk beslutningstaker hos en kunde.\n{{?INNVENDING}}Innvending: [INNVENDING].{{/INNVENDING}} Bruk eventuell relevant, generisk kundekontekst som bakgrunn.\nHjelp meg å forstå hva innvendingen kan bety. Lag:\n- mulige alternative tolkninger av kundens bekymring;\n- noen prioriterte oppklarende spørsmål som ikke virker defensive;\n- nøkterne svarforslag som er åpne om usikkerhet;\n- ett scenario der kunden faktisk har rett og vi ikke bør presse på;\n- en anbefaling om relevant fagperson og naturlig neste steg.\nFokus: konsulentkompetanse innen data, analyse og KI. Ikke lov konkrete resultater, priser, partnerrabatter eller umiddelbar kapasitet.",
       "review": [
-        "Har du forsøkt å forstå bekymringen før du argumenterer?",
-        "Er svarene ærlige om usikkerhet og mulige gode grunner til å si nei?",
-        "Vurder om kunden heller trenger en ny avklaring enn et motargument."
+        "Undersøk bekymringen før du velger argumenter.",
+        "Ta høyde for at kunden kan ha gode grunner til å si nei."
       ],
       "priority": 2,
       "reviewed": "2026-10-14",
@@ -738,14 +723,12 @@
         "STATUS"
       ],
       "before": [
-        "Ikke legg avtaler, pipeline eller interne partnervilkår inn i offentlig KI.",
-        "Registrering og partnerprosesser må bekreftes internt."
+        "Beskriv teknologien og behovet generelt, uten partnervilkår eller interne kundedata."
       ],
       "prompt": "Lag et nøytralt grunnlag for en mulig dialog med relevant teknologipartner.\n{{?KUNDEBEHOV}}Anonymisert kundebehov: [KUNDEBEHOV].{{/KUNDEBEHOV}}\n{{?PLATTFORM}}Plattform nevnt: [PLATTFORM].{{/PLATTFORM}}\n{{?STATUS}}Status: [STATUS].{{/STATUS}}\nBeskriv: hva behovet gjelder, hvilke fakta som må bekreftes om plattform og kundens planer, hvilke kompetansebehov som kan være aktuelle, hvilken rolle samarbeid med en partner potensielt kan ha, og hvilke spørsmål salg må stille internt FØR registrering eller kontakt.\nIkke hev at vi har bestemte avtaler, rabatter, referanser, partnernivå, kapasitet eller rett til registrering. Oppfordre til å følge godkjent intern partnerprosess.\nGi et utkast til en kort intern forespørsel uten kundenavn eller konfidensielle detaljer.",
       "review": [
-        "Kontroller at plattform og status faktisk er oppgitt, ikke antatt.",
-        "Verifiser partnerprosesser og rettigheter i godkjent internt system.",
-        "Ikke formidle finansiering, rabatter eller tilgang som ikke er bekreftet."
+        "Undersøk hva som faktisk er kjent om teknologien og situasjonen.",
+        "Verifiser partnerrettigheter, prosess og vilkår internt før videre kontakt."
       ],
       "priority": 2,
       "reviewed": "2026-10-14",
@@ -780,13 +763,12 @@
         "GRUNNLAG"
       ],
       "before": [
-        "Bruk anonymisert eller offentlig kjent grunnlag."
+        "Formuler hypotesen og hvilket grunnlag du faktisk har."
       ],
       "prompt": "Vær en kritisk fag- og salgsreviewer.\n{{?HYPOTESE}}Hypotese: [HYPOTESE].{{/HYPOTESE}}\n{{?GRUNNLAG}}Oppgitt, offentlig eller anonymisert grunnlag: [GRUNNLAG].{{/GRUNNLAG}}\nSe etter ubegrunnede antagelser om teknologi, KI-behov, markedet og vår leveranseevne.\nSvar med:\n1. Hva som er faktagrunnlag og hva som er antatt.\n2. Plausible alternative forklaringer på kundeproblemet.\n3. De viktigste hullene vi bør undersøke.\n4. En enklere leveranse som kan være bedre enn den foreslåtte.\n5. Spørsmål som kan avkrefte hypotesen.\n6. En forbedret, kort anbefaling uten udokumenterte løfter.\nHvis grunnlaget er utilstrekkelig, si det tydelig og ikke forsøk å «redde» hypotesen.",
       "review": [
-        "Finner vurderingen faktiske svakheter, ikke bare hypotetisk kritikk?",
-        "Skill dokumenterte forhold, antakelser og alternative forklaringer.",
-        "Ta høyde for at riktig konklusjon kan være å ikke gå videre."
+        "Let etter manglende bevis og alternative forklaringer.",
+        "Aksepter at den beste konklusjonen kan være å ikke gå videre."
       ],
       "priority": 2,
       "reviewed": "2026-10-21",

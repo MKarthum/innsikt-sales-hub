@@ -172,6 +172,10 @@ assert.equal((html.match(/data-prompt-copy=/g)||[]).length,1,'kopierknappen finn
 assert.ok(html.indexOf('prompt-advanced')<html.indexOf('prompt-primary-copy'),'kopier skal ligge etter hele oppgavekonfigurasjonen');
 assert.ok(!html.includes('prompt-preview-filled'),'ingen redundant utfyllingsteller');
 assert.ok(html.indexOf('prompt-live-panel')<html.indexOf('prompt-main-panel'),'mobil skal vise levende resultat før feltene');
-assert.ok(html.includes('data-prompt-impact="researchFocus"'),'instruksjonseffekt vises ved radiovalg');
+assert.ok(!html.includes('prompt-choice-impact'),'radiovalget skal ikke gjenta forklaringsteksten under knappene');
+assert.ok(html.includes('prompt-detail-aside'),'forhåndsvisning og hjelpetekster må dele samme kolonne');
+assert.ok(html.includes('prompt-guide-details'),'kvalitetssjekken er tilgjengelig ved behov');
+assert.ok(!html.includes(data.page.variableUi.whenTitle),'detaljsiden skal ikke gjenta oppgavens bruksformål');
+assert.equal((html.match(/data-preview-key=/g)||[]).length,3,'samlet forklaring viser fagfokus og svarnivå + format uten duplisering av innhold');
 
 console.log('PASS – alias, gjenbruk, lagringsgrenser, oppfriskning, enkelt-/totalreset, orphan-opprydding og HTML-escaping');

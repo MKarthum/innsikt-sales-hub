@@ -85,3 +85,8 @@ InnsiktPromptContext.composeTask() bygger den faktiske prompten. selectedBlocks(
 ## Valgfrie firmamaler og felter (v0.11.5)
 
 prompts.json eier outputSettings.organizationTemplates: etikett, hjelpetekst, gyldige formater og hele malinstruksjonen. Checkboxen vises bare for disse formatene, og instruksjonen blir utelatt når den ikke er relevant eller velges bort. optionalPlaceholders og betinget inline-tekst eier tomfelt-policyen. Separasjonen mellom data, komposisjonsmotor og presentasjon er uendret. En malinstruksjon er en forespørsel til et eksternt KI-verktøy, ikke en garanti for intern maltilgang.
+
+
+## Unngå duplisert promptveiledning (v0.11.6)
+
+Valgbeskrivelsene vises samlet i én forhåndsvisning, ikke i tillegg under hvert radiovalg. prompts.json er fortsatt eneste eier av instruksjonstekst, UI-etiketter, oppgavespesifikke tips og kontrollpunkter. Frontend viser data uten å lagre en kopi av teksten. Den sekundære veiledningen er en lukket details-seksjon i samme naturlig scrollende høyrekolonne; ikke sticky og uten interne rullefelt.

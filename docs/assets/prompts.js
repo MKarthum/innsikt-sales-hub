@@ -22,7 +22,7 @@ function choiceField(item,p,key,e){
   +'<div class="prompt-choice-options">'+choices.map(o=>{
    const checked=ctx.getChoice(item,key)===o.id;
    return '<label class="prompt-choice-option"><input type="radio" name="prompt-choice-'+e(key)+'" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" value="'+e(o.id)+'" '+(checked?'checked':'')+'><span>'+e(o.label)+'</span></label>';
-  }).join('')+'</div><p class="prompt-choice-impact" data-prompt-impact="'+e(key)+'">'+e(choices.find(o=>o.id===ctx.getChoice(item,key))?.instruction||'')+'</p></fieldset>';
+  }).join('')+'</div></fieldset>';
 }
 function library(d,h,category){
  const {esc:e,ico,sourceLinks}=h,p=d.prompts,ui=p.page.variableUi;
@@ -60,7 +60,12 @@ function detail(d,h,id){
 
  return '<a href="#prompter" class="back-link">'+ico('arrow-left')+' '+e(ui.allPrompts)+'</a>'
  +'<header class="page-header prompt-detail-head"><div class="eyebrow">'+e(x.category)+' · '+e(x.audience)+'</div><h1 class="page-title">'+e(x.title)+'</h1><p class="page-desc">'+e(x.summary)+'</p></header>'
- +'<div class="prompt-detail-layout">'+preview+'<section class="prompt-main-panel"><div class="prompt-edit-head"><div><h2>'+e(ui.fieldsTitle)+'</h2><p>'+e(ui.fieldsIntro)+'</p></div><a class="prompt-overview-link" href="#prompter/variabler">'+e(ui.openOverview)+' →</a></div>'
+ +'<div class="prompt-detail-layout"><aside class="prompt-detail-aside">'+preview
+ +'<details class="prompt-guide-details"><summary>'+e(ui.guideToggle)+'</summary>'
+ +'<div class="prompt-side-panel"><h3>'+e(ui.beforeTitle)+'</h3><ul>'+x.before.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul>'
+ +'<h3>'+e(p.reviewTitle)+'</h3><ul>'+x.review.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul>'
+ +(x.sourceMode==='approved-internal'?'<p class="prompt-guide-caution">'+e(ui.internalCaution)+'</p>':'')
+ +'</div></details></aside><section class="prompt-main-panel"><div class="prompt-edit-head"><div><h2>'+e(ui.fieldsTitle)+'</h2><p>'+e(ui.fieldsIntro)+'</p></div><a class="prompt-overview-link" href="#prompter/variabler">'+e(ui.openOverview)+' →</a></div>'
  +'<div class="prompt-var-grid">'+used.map(v=>variableField(v,p,e,ico)).join('')+'</div>'
  +'<div class="prompt-options"><h2>'+e(ui.choicesTitle)+'</h2>'
  +(x.choiceGroups||[]).map(k=>choiceField(x,d.prompts,k,e)).join('')
@@ -76,8 +81,7 @@ function detail(d,h,id){
  +'<div class="prompt-actions"><button type="button" class="btn subtle" data-prompt-reset="'+e(x.id)+'">'+ico('refresh')+' '+e(p.resetLabel)+'</button></div></details>'
  +'<div class="prompt-primary-copy"><button type="button" class="btn dark" data-prompt-copy="'+e(x.id)+'">'+ico('copy')+' '+e(p.copyLabel)+'</button><span>'+e(ui.copyReady)+'</span></div>'
  +'<div class="prompt-safety-inline">'+ico('shield')+' '+e(p.publicWarning)+'</div></section>'
- +'<aside class="prompt-side-panel"><div class="panel"><h3>'+e(ui.whenTitle)+'</h3><p>'+e(x.when)+'</p><h3>'+e(ui.beforeTitle)+'</h3><ul>'+x.before.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul><p class="fineprint">'+e(x.sourceMode==='approved-internal'?ui.internalCaution:ui.publicCaution)+'</p></div>'
- +'<div class="panel"><h3>'+e(p.reviewTitle)+'</h3><ul>'+x.review.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul></div></aside></div>'
+ +'</div>'
  +'<section class="subsection"><div class="insight-strip"><div><h3>'+e(ui.nextTitle)+'</h3><p>'+e(p.nextStepHint)+'</p></div><a href="#forretning" class="btn dark">'+e(ui.nextAction)+' '+ico('arrow-right')+'</a></div></section>';
 }
 function overview(d,h){
