@@ -90,3 +90,7 @@ Brukeren kan fremdeles velge globalt Hurtig/Praktisk/Grundig, men dette bestemme
 ## CV-modus og formater (v0.11.8)
 
 CV-vurdering har standardvalget choiceDefaults.handoff=false for kort og relevant vurdering. Dynamiske Word/PDF-formater må være rendret i DOM fra starten, men skjult når kun vurdering er valgt. Ved bytte til CV-utkast skal formatene vises og automatisk velges uten full ny rendering; ved bytte tilbake gjenopprettes tekst- og Markdown-valgene. Browserregresjonene verifiserer begge retninger.
+
+## Utvidbare regresjonstester (v0.11.9)
+
+Antall oppgavekort i den fullstendige oversikten kontrolleres mot faktiske oppgaver i prompts.json, ikke mot et hardkodet antall. Dette skal fremdeles oppdage utilsiktede duplikater, men godta nye bevisst publiserte oppgaver. Nettleserkjøringen kontrollerer både promptbiblioteket og alle øvrige sider på mobil og desktop.

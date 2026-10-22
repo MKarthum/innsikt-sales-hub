@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
+const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8')).items.length;
 const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
@@ -61,7 +62,7 @@ try {
   await page.evaluate(()=>{location.hash='#prompter'});await page.locator('.prompt-primary').waitFor();
   assert.equal(await page.locator('.prompt-primary .prompt-card').count(),7,label+': syv prioriterte oppgaver i én samlet seksjon');
   assert.equal(await page.locator('.prompt-featured').count(),0,label+': ingen kunstig oppdeling av vanlige oppgaver');
-  assert.equal(await page.locator('#main .prompt-card').count(),15,label+': alle oppgaver, også de bak utvidet visning, uten duplikater');
+  assert.equal(await page.locator('#main .prompt-card').count(),expectedPromptCount,label+': alle oppgaver, også de bak utvidet visning, uten duplikater');
   await page.evaluate(()=>{location.hash='#muligheter/rapportering'});await page.locator('.related-prompt a[href="#prompter/discovery"]').waitFor();
   await page.evaluate(()=>{location.hash='#forretning/okonomi'});await page.locator('.related-prompt a[href="#prompter/opportunity-map"]').waitFor();
   await page.evaluate(()=>{location.hash='#prompter/account-research'});
