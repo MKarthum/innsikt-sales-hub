@@ -150,7 +150,7 @@ for(const t of prompts.items){
 if(!prompts.outputSettings?.depth?.options?.length||!prompts.outputSettings?.format?.options?.length||!str(prompts.outputSettings?.handoff?.instruction))fail('Manglende globale valg eller kontekstoverlevering');
 for(const key of ['groupPrefix','depthPrefix','formatPrefix'])if(!str(prompts.outputSettings[key]))fail('Tekstblokk mangler kanonisk overskrift: '+key);
 for(const key of ['startMarker','endMarker'])if(!str(prompts.outputSettings.context?.[key]))fail('Mangler kanonisk kontekstmarkør: '+key);
-for(const key of ['previewTitle','previewIntro','previewAction','previewFull','previewFields','previewDirty','previewContext','previewContextOn','previewContextOff','previewContextEmpty','previewHandoff','previewHandoffOn','previewHandoffOff','copySuccess','copyFailure','copyUnsupported'])if(!str(prompts.page.variableUi?.[key]))fail('Tekst for promptforhåndsvisning mangler: '+key);
+for(const key of ['previewTitle','previewIntro','previewDirty','copySuccess','copyFailure','copyUnsupported'])if(!str(prompts.page.variableUi?.[key]))fail('Tekst for promptforhåndsvisning mangler: '+key);
 if(!str(prompts.page.cardLinkLabel)||!str(prompts.page.filterAriaLabel))fail('Oppgavekort mangler dataeid grensesnittstekst');
 const choiceGroups=prompts.choiceGroups||{},allFormatIds=new Set(prompts.outputSettings.format.options.map(o=>o.id));
 for(const [id,g] of Object.entries({...choiceGroups,depth:prompts.outputSettings.depth,format:prompts.outputSettings.format})){

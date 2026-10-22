@@ -385,7 +385,7 @@ function rebuildPromptEditor(item,ask){
 function refreshPromptLive(item){
  const host=document.getElementById('prompt-preview-lines');
  if(!host||!item)return;
- const ctx=window.InnsiktPromptContext,ui=D.prompts.page.variableUi;
+ const ctx=window.InnsiktPromptContext;
  host.replaceChildren();
  for(const b of ctx.selectedBlocks(item,D.prompts)){
   const line=document.createElement('div');line.className='prompt-preview-line';line.dataset.previewKey=b.key;
@@ -395,10 +395,6 @@ function refreshPromptLive(item){
   const impact=document.querySelector('[data-prompt-impact="'+b.key+'"]');
   if(impact)impact.textContent=b.instruction;
  }
- const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value};
- set('prompt-preview-filled',item.placeholders.filter(name=>ctx.get(name).trim()).length+' / '+item.placeholders.length);
- set('prompt-preview-handoff',ctx.getChoice(item,'handoff')?ui.previewHandoffOn:ui.previewHandoffOff);
- set('prompt-preview-context',!ctx.get('KUNDEKONTEKST').trim()?ui.previewContextEmpty:ctx.getChoice(item,'context')?ui.previewContextOn:ui.previewContextOff);
  const dirty=document.getElementById('prompt-preview-dirty'),editor=document.getElementById('prompt-editor');
  if(dirty)dirty.hidden=editor?.dataset.dirty!=='true';
 }
@@ -456,7 +452,6 @@ function initEvents(){document.addEventListener('fullscreenchange',presenterFull
 if(pf){promptFilter=pf.dataset.promptFilter;render();return}
 const pc=e.target.closest('[data-prompt-copy]');
 if(pc){const editor=document.getElementById('prompt-editor');if(editor){if(!navigator.clipboard?.writeText){toast(D.prompts.page.variableUi.copyUnsupported);return}navigator.clipboard.writeText(editor.value).then(()=>toast(D.prompts.page.variableUi.copySuccess)).catch(()=>toast(D.prompts.page.variableUi.copyFailure));}return}
-if(e.target.closest('[data-prompt-reveal]')){const details=document.getElementById('prompt-advanced');if(details){details.open=true;details.scrollIntoView({behavior:'smooth',block:'start'})}return}
 const pr=e.target.closest('[data-prompt-reset]');
 if(pr){const item=D.prompts.items.find(x=>x.id===pr.dataset.promptReset),editor=document.getElementById('prompt-editor');if(item&&editor){rebuildPromptEditor(item,true)}return}
 if(e.target.closest('#present-fullscreen-toggle')){togglePresenterFullscreen();return}if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;render();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}if(e.target.closest('#slide-next')){slide=Math.min(slide+1,presentationSlides().length-1);showSlide();return}if(e.target.closest('#slide-prev')){slide=Math.max(slide-1,0);showSlide();return}if(e.target.closest('#reset-qualify')){selectedChecklist.clear();render();return}const scen=e.target.closest('[data-scenario]');if(scen){scenarioIndex=Number(scen.dataset.scenario);render();return}if(e.target.closest('[data-search-select]')){closeModal();return}if(e.target.closest('[data-dismiss]')&&(e.target.matches('.overlay')||e.target.closest('.modal-close'))){closeModal();return}if(e.target.closest('#menu-toggle')){let bar=document.getElementById('sidebar');const open=bar.classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(open));return}});document.addEventListener('change',e=>{

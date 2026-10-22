@@ -123,7 +123,9 @@ assert.ok(html.includes('data-prompt-choice="researchFocus"'));
 assert.ok(html.includes('data-prompt-toggle="handoff"'));
 assert.ok(html.includes('prompt-advanced'),'avansert fulltekst skal være tilgjengelig');
 assert.ok(html.includes('id="prompt-preview-lines"'),'levende forhåndsvisning skal vises før fulltekst');
-assert.ok(html.includes('data-prompt-reveal'),'hele prompten skal være tilgjengelig via tydelig handling');
+assert.equal((html.match(/data-prompt-copy=/g)||[]).length,1,'kopierknappen finnes bare ved enden av oppgaveflyten');
+assert.ok(html.indexOf('prompt-advanced')<html.indexOf('prompt-primary-copy'),'kopier skal ligge etter hele oppgavekonfigurasjonen');
+assert.ok(!html.includes('prompt-preview-filled'),'ingen redundant utfyllingsteller');
 assert.ok(html.indexOf('prompt-live-panel')<html.indexOf('prompt-main-panel'),'mobil skal vise levende resultat før feltene');
 assert.ok(html.includes('data-prompt-impact="researchFocus"'),'instruksjonseffekt vises ved radiovalg');
 

@@ -49,14 +49,10 @@ function detail(d,h,id){
  const hasContext=(x.contextVariables||[]).includes('KUNDEKONTEKST')&&shared;
  const prompt=ctx.composeTask(x,d.prompts),blocks=ctx.selectedBlocks(x,d.prompts);
  const previewRow=b=>'<div class="prompt-preview-line" data-preview-key="'+e(b.key)+'"><strong>'+e(b.option)+'</strong><p>'+e(b.instruction)+'</p></div>';
- const filled=x.placeholders.filter(name=>ctx.get(name).trim()).length;
  const preview='<section class="prompt-live-panel" aria-label="'+e(ui.previewTitle)+'"><h2>'+e(ui.previewTitle)+'</h2><p class="prompt-preview-intro">'+e(ui.previewIntro)+'</p>'
   +'<div class="prompt-preview-lines" id="prompt-preview-lines" aria-live="polite">'+blocks.map(previewRow).join('')+'</div>'
-  +'<div class="prompt-preview-meta"><span>'+e(ui.previewFields)+': <strong id="prompt-preview-filled">'+filled+' / '+x.placeholders.length+'</strong></span>'
-  +'<span>'+e(ui.previewHandoff)+': <strong id="prompt-preview-handoff">'+e(ctx.getChoice(x,'handoff')?ui.previewHandoffOn:ui.previewHandoffOff)+'</strong></span>'
-  +'<span>'+e(ui.previewContext)+': <strong id="prompt-preview-context">'+e(!ctx.get('KUNDEKONTEKST').trim()?ui.previewContextEmpty:ctx.getChoice(x,'context')?ui.previewContextOn:ui.previewContextOff)+'</strong></span></div>'
   +'<p class="prompt-preview-dirty" id="prompt-preview-dirty" hidden>'+e(ui.previewDirty)+'</p>'
-  +'<div class="prompt-preview-actions"><button type="button" class="btn dark" data-prompt-copy="'+e(x.id)+'">'+ico('copy')+' '+e(ui.previewAction)+'</button><button type="button" class="btn subtle" data-prompt-reveal>'+e(ui.previewFull)+'</button></div></section>';
+  +'</section>';
  const checkbox=(key,label,description)=>'<label class="prompt-checkbox"><input type="checkbox" data-prompt-toggle="'+e(key)+'" data-prompt-item="'+e(x.id)+'" '+(ctx.getChoice(x,key)?'checked':'')+'><span><strong>'+e(label)+'</strong><small>'+e(description)+'</small></span></label>';
  return '<a href="#prompter" class="back-link">'+ico('arrow-left')+' '+e(ui.allPrompts)+'</a>'
  +'<header class="page-header prompt-detail-head"><div class="eyebrow">'+e(x.category)+' · '+e(x.audience)+'</div><h1 class="page-title">'+e(x.title)+'</h1><p class="page-desc">'+e(x.summary)+'</p></header>'
@@ -74,6 +70,7 @@ function detail(d,h,id){
  +'<textarea id="prompt-editor" class="prompt-editor" spellcheck="true">'+e(prompt)+'</textarea>'
  +'<div id="prompt-editor-status" class="prompt-editor-status" role="status" aria-live="polite"></div>'
  +'<div class="prompt-actions"><button type="button" class="btn subtle" data-prompt-reset="'+e(x.id)+'">'+ico('refresh')+' '+e(p.resetLabel)+'</button></div></details>'
+ +'<div class="prompt-primary-copy"><button type="button" class="btn dark" data-prompt-copy="'+e(x.id)+'">'+ico('copy')+' '+e(p.copyLabel)+'</button><span>'+e(ui.copyReady)+'</span></div>'
  +'<div class="prompt-safety-inline">'+ico('shield')+' '+e(p.publicWarning)+'</div></section>'
  +'<aside class="prompt-side-panel"><div class="panel"><h3>'+e(ui.whenTitle)+'</h3><p>'+e(x.when)+'</p><h3>'+e(ui.beforeTitle)+'</h3><ul>'+x.before.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul><p class="fineprint">'+e(x.sourceMode==='approved-internal'?ui.internalCaution:ui.publicCaution)+'</p></div>'
  +'<div class="panel"><h3>'+e(p.reviewTitle)+'</h3><ul>'+x.review.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul></div></aside></div>'

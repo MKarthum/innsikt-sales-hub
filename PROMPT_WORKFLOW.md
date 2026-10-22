@@ -49,3 +49,7 @@ Alle oppgaver viser en kompakt, levende oversikt over faktisk valgte instruksjon
 Alle nye brukervendte tekster — hjelpetekster, meldinger ved kopiering, labels, komposisjonsoverskrifter og markører — skal eies av docs/data/prompts.json. Ikke hardkod formuleringer i prompts.js, site.js eller CSS. Dersom full prompttekst er manuelt endret, skal den synlige forhåndsvisningen varsle at radiovalg ikke styrer teksten som kopieres før tilbakestilling.
 
 Kundeanalyse krever ikke møteformål; presentasjon trenger formidlingsformål; oppfølging kan skje uten et møte. Ved navneendring kontroller alle henvisninger i pages.json, Presenter og søk. Gjennomgangen er dokumentert i PROMPT_EDITORIAL_AUDIT_2026-10-22.md.
+
+## Regresjonsregel for handlinger (v0.11.3)
+
+Den levende forhåndsvisningen skal vise **instruksjonene som endres**, ikke kopierhandling, utfyllingsteller eller ekstra statuser som allerede vises i skjemafeltene. Det skal være én kopierknapp per oppgave, plassert **etter** valgene og den valgfrie redigerbare fullteksten, slik at brukeren først konfigurerer og eventuelt redigerer, og deretter kopierer. Test både den reelle rekkefølgen i DOM og at kopiering fortsatt følger manuelt redigert tekst.

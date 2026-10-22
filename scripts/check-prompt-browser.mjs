@@ -16,12 +16,16 @@ try{
   await page.goto(base+'#prompter/account-research',{waitUntil:'networkidle'});
   await page.locator('#prompt-editor').waitFor({state:'attached'});
   assert.ok(await page.locator('#prompt-preview-lines .prompt-preview-line').count()>=3,label+': synlig instruksjonsoversikt');
+  assert.equal(await page.locator('.prompt-live-panel [data-prompt-copy]').count(),0,label+': ingen kopierknapp i forhåndsvisningen');
+  assert.equal(await page.locator('#main [data-prompt-copy]').count(),1,label+': bare én kopierknapp');
+  assert.equal(await page.locator('.prompt-preview-meta').count(),0,label+': ingen redundant statuslinje');
+  assert.ok(await page.locator('.prompt-advanced + .prompt-primary-copy [data-prompt-copy]').count()===1,label+': kopiering ligger etter valg og fulltekst');
   assert.equal(await page.locator('#prompt-advanced').evaluate(el=>el.open),false,label+': avansert redigering kan være lukket');
   assert.ok((await page.locator('[data-prompt-impact="researchFocus"]').innerText()).includes('Prioriter'),label+': valgets instruksjon er synlig ved kontrollen');
 
   const cust=page.locator('[data-context-var="KUNDENAVN"]');
   await cust.fill('Eksempelbedriften AS');
-  assert.ok((await page.locator('#prompt-preview-filled').innerText()).includes('1 / 3'),label+': utfylte felt oppdateres umiddelbart');
+  assert.equal(await page.locator('#prompt-preview-filled').count(),0,label+': ingen overflødig feltteller');
 
   await page.locator('[data-context-var="BRANSJE"]').fill('Energi');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('Eksempelbedriften AS'),label+': prompt utfylt');
@@ -45,8 +49,6 @@ try{
   await page.locator('[data-prompt-copy]').click();
   const copied=await page.evaluate(()=>navigator.clipboard.readText());
   assert.ok(copied.includes('Byttet navn'),label+': kopiering bruker aktive variabler');
-  await page.locator('[data-prompt-reveal]').click();
-  assert.equal(await page.locator('#prompt-advanced').evaluate(el=>el.open),true,label+': se fulltekst åpner avansert visning');
   await navigate('prompter/contact-prep');
   await page.locator('#prompt-editor').waitFor({state:'attached'});
   assert.equal(await page.locator('[data-prompt-choice="contactSituation"][value="first"]').isChecked(),true,label+': riktig standardkontakt');
