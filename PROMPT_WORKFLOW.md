@@ -53,3 +53,7 @@ Kundeanalyse krever ikke møteformål; presentasjon trenger formidlingsformål; 
 ## Regresjonsregel for handlinger (v0.11.3)
 
 Den levende forhåndsvisningen skal vise **instruksjonene som endres**, ikke kopierhandling, utfyllingsteller eller ekstra statuser som allerede vises i skjemafeltene. Det skal være én kopierknapp per oppgave, plassert **etter** valgene og den valgfrie redigerbare fullteksten, slik at brukeren først konfigurerer og eventuelt redigerer, og deretter kopierer. Test både den reelle rekkefølgen i DOM og at kopiering fortsatt følger manuelt redigert tekst.
+
+## Klikkflate og naturlig samspill (v0.11.4)
+
+Radiovalg må ha en reell fokus- og klikkflate som dekker hele den synlige etiketten. Testene skal bruke vanlig check() uten tvang av skjulte elementer, på både mobil og desktop. Dette forhindrer at visuelt synlige filtervalg er vanskelige å aktivere fra tastatur eller automatisering.

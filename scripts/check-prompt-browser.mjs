@@ -52,11 +52,11 @@ try{
   await navigate('prompter/contact-prep');
   await page.locator('#prompt-editor').waitFor({state:'attached'});
   assert.equal(await page.locator('[data-prompt-choice="contactSituation"][value="first"]').isChecked(),true,label+': riktig standardkontakt');
-  await page.locator('[data-prompt-choice="contactSituation"][value="referral"]').check({force:true});
-  await page.locator('[data-prompt-choice="contactChannel"][value="email"]').check({force:true});
+  await page.locator('[data-prompt-choice="contactSituation"][value="referral"]').check();
+  await page.locator('[data-prompt-choice="contactChannel"][value="email"]').check();
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('faktisk introduksjon'),label+': situasjon endrer prompt');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('e-postutkast'),label+': kanal endrer prompt');
-  await page.locator('[data-prompt-choice="depth"][value="deep"]').check({force:true});
+  await page.locator('[data-prompt-choice="depth"][value="deep"]').check();
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('grundig, strukturert'),label+': dybde endrer prompt');
   assert.equal(await page.locator('[data-prompt-choice="format"][value="slides"]').count(),0,label+': irrelevant presentasjonsformat er ikke tilgjengelig');
   await page.locator('[data-prompt-toggle="handoff"]').uncheck();
@@ -68,12 +68,12 @@ try{
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('valgt Snowflake'),label+': felles kontekst følger prompt');
   await navigate('prompter/account-research');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('valgt Snowflake'),label+': kontekst gjenbrukes i neste prompt');
-  await page.locator('[data-prompt-choice="researchFocus"][value="technology"]').check({force:true});
+  await page.locator('[data-prompt-choice="researchFocus"][value="technology"]').check();
   assert.ok((await page.locator('#prompt-preview-lines').innerText()).includes('Teknologi og KI'),label+': forhåndsvisningen reagerer direkte på valg');
   assert.ok((await page.locator('[data-prompt-impact="researchFocus"]').innerText()).includes('dataplattformer'),label+': tekst under valget er lik komposisjonen');
 
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('dataplattformer'),label+': bransjefokus endrer analyse');
-  await page.locator('[data-prompt-choice="format"][value="slides"]').check({force:true});
+  await page.locator('[data-prompt-choice="format"][value="slides"]').check();
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('presentasjonsdisposisjon'),label+': presentasjon er outputvalg');
   await page.locator('[data-prompt-toggle="context"]').uncheck();
   assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('valgt Snowflake'),label+': kontekst kan slås av');
@@ -87,7 +87,7 @@ try{
   await page.locator('.prompt-more-tasks summary').click();
   assert.ok(await page.locator('.prompt-more-tasks .prompt-card').count()>3,label+': andre oppgaver vises ved behov');
   await navigate('prompter/followup');
-  await page.locator('[data-prompt-choice="followupChannel"][value="phone"]').check({force:true});
+  await page.locator('[data-prompt-choice="followupChannel"][value="phone"]').check();
   assert.ok((await page.locator('#prompt-preview-lines').innerText()).includes('Telefon'),label+': oppfølging kan være telefon');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('muntlig samtaleåpning'),label+': kanalvalg endrer oppfølging');
   await navigate('prompter/discovery');
