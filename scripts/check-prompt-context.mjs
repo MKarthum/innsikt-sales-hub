@@ -103,6 +103,8 @@ assert.ok(cv.prompt.includes('vedlagt i denne KI-samtalen')&&cv.prompt.includes(
 assert.ok(cv.prompt.includes('dokumentert')&&cv.prompt.includes('ikke anbefalt')===false&&cv.prompt.includes('ikke bør foreslås'),'kritisk vurdering uten salgsbias');
 assert.ok(cv.prompt.includes('Ikke bruk numerisk score eller kunstig prosentandel'),'CV-vurdering skal avstå fra kvantifisering');
 assert.equal(ctx.getChoice(cv,'cvDeliverable'),'review');
+assert.equal(ctx.getChoice(cv,'handoff'),false,'CV-vurdering skal være konsis som standard');
+
 assert.equal(ctx.getChoice(cv,'format'),'plain','CV analyseres i ren tekst som default');
 assert.equal(ctx.isCvDraft(cv),false);
 assert.deepEqual(Array.from(ctx.options(cv,'format'),o=>o.id),['plain','markdown']);

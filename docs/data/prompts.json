@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.6.0",
+    "version": "1.6.1",
     "reviewed": "2026-10-22",
     "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
   },
@@ -421,6 +421,9 @@
           "hint": "Huk av bare når malen skal legges ved eller er tilgjengelig i KI-verktøyet. Kundens krav går foran firmamal.",
           "instruction": "Kunden har en påkrevd CV-mal. Finn den faktisk vedlagte eller ellers godkjent tilgjengelige malfilen og følg dens struktur, obligatoriske felter og format før du produserer CV. Prioriter kundens mal over eventuelle egne firmamaler. Dersom malen mangler, si at den må legges ved; ikke dikt opp et layout eller påstå at kundens mal ble fulgt. Avklar konflikt mellom sidetall og påkrevd mal før filen ferdigstilles."
         }
+      },
+      "choiceDefaults": {
+        "handoff": false
       }
     },
     {

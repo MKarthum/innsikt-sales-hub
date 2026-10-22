@@ -144,6 +144,8 @@ try{
   await navigate('prompter/cv-request-match');
   await page.locator('#prompt-editor').waitFor({state:'attached'});
   assert.equal(await page.locator('[data-prompt-choice="cvDeliverable"][value="review"]').isChecked(),true,label+': kritisk vurdering som standard');
+  assert.equal(await page.locator('[data-prompt-toggle="handoff"]').isChecked(),false,label+': ingen ekstra konteksthale på CV-vurdering som standard');
+  assert.equal(await page.locator('[data-prompt-choice="format"]').count(),4,label+': begge modus formater finnes i DOM');
   assert.equal(await page.locator('[data-prompt-cv-options]').isVisible(),false,label+': ingen CV-produksjonsvalg ved ren analyse');
   assert.equal(await page.locator('[data-prompt-choice="format"][value="plain"]').isChecked(),true,label+': kort ren tekst som standard');
   assert.equal(await page.locator('[data-prompt-choice="format"][value="word"]').isVisible(),false,label+': Word skjult inntil utkast velges');

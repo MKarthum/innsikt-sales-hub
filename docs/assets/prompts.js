@@ -16,12 +16,15 @@ function variableField(x,p,e,ico,linked=false){
 function choiceField(item,p,key,e){
  const ctx=context(),g=key==='depth'||key==='format'?p.outputSettings[key]:p.choiceGroups[key];
  if(!g)return '';
- const choices=ctx.options(item,key);
+ const validOptions=ctx.options(item,key);
+ // Alle tillatte formater finnes i DOM; utilgjengelige er skjult.
+ const choices=key==='format'&&item.cvOutput?g.options.filter(o=>item.formats.includes(o.id)):validOptions;
+ const allowed=new Set(validOptions.map(o=>o.id));
  return '<fieldset class="prompt-choice-field"><legend>'+e(g.label)+'</legend>'
   +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')
   +'<div class="prompt-choice-options">'+choices.map(o=>{
    const checked=ctx.getChoice(item,key)===o.id;
-   return '<label class="prompt-choice-option"><input type="radio" name="prompt-choice-'+e(key)+'" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" value="'+e(o.id)+'" '+(checked?'checked':'')+'><span>'+e(o.label)+'</span></label>';
+   return '<label class="prompt-choice-option"'+(allowed.has(o.id)?'':' hidden')+'><input type="radio" name="prompt-choice-'+e(key)+'" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" value="'+e(o.id)+'" '+(checked?'checked':'')+'><span>'+e(o.label)+'</span></label>';
   }).join('')+'</div></fieldset>';
 }
 function library(d,h,category){

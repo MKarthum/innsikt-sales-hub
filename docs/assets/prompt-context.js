@@ -70,7 +70,7 @@ function options(item,key){
  return group.options;
 }
 function getChoice(item,key){
- if(key==='handoff'||key==='context'||key==='organizationTemplates'||key==='clientTemplate')return choices.has(item.id+':'+key)?choices.get(item.id+':'+key):key!=='clientTemplate';
+ if(key==='handoff'||key==='context'||key==='organizationTemplates'||key==='clientTemplate')return choices.has(item.id+':'+key)?choices.get(item.id+':'+key):(item.choiceDefaults?.[key]??key!=='clientTemplate');
  const opts=options(item,key);
  const current=choices.get(item.id+':'+key);
  return opts.some(o=>o.id===current)?current:(key==='depth'?'useful':(opts[0]?.id||''));

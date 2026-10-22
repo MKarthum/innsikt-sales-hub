@@ -86,3 +86,7 @@ Standard er **«Kun vurdering»**, med kvalitativ, etterprøvbar konklusjon og k
 Valget **«Vurdering + spisset CV»** aktiverer kun da omfanget på CV (etter relevans, ca. 2–3 eller 4–5 sider), en valgfri hake for en **påkrevd kundemal** og formatene Word/PDF. Kun vurdering bruker ren tekst/Markdown. Kundens mal går foran firmamal og undertrykker derfor denne instruksjonen og visningen mens haken står på. Kundens mal må faktisk være vedlagt/tilgjengelig i KI-verktøyet; den offentlige portalen har ingen innsendingsfunksjon. Hvis kildegrunnlag eller mal mangler, skal verktøyet etterspørre dette og ikke skrive en oppdiktet CV.
 
 Brukeren kan fremdeles velge globalt Hurtig/Praktisk/Grundig, men dette bestemmer **lengden på vurderingen**, ikke sidetallet på CV-utkastet. Motstridende formater skal ikke vises. Full prompttekst, kopierknapp etter valg, konseptuell personverngense, dataeierskap i prompts.json og mobiltilpasning skal bevares. Browserregresjonene skal teste modusbytte, formatbytte, malprioritet, lengdevalg, kopiering og at memory-only-variabler ikke lagres.
+
+## CV-modus og formater (v0.11.8)
+
+CV-vurdering har standardvalget choiceDefaults.handoff=false for kort og relevant vurdering. Dynamiske Word/PDF-formater må være rendret i DOM fra starten, men skjult når kun vurdering er valgt. Ved bytte til CV-utkast skal formatene vises og automatisk velges uten full ny rendering; ved bytte tilbake gjenopprettes tekst- og Markdown-valgene. Browserregresjonene verifiserer begge retninger.
