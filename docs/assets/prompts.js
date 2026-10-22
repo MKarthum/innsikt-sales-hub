@@ -48,19 +48,23 @@ function detail(d,h,id){
  const shared=ctx.entries().find(v=>v.id==='KUNDEKONTEKST');
  const hasContext=(x.contextVariables||[]).includes('KUNDEKONTEKST')&&shared;
  const prompt=ctx.composeTask(x,d.prompts),blocks=ctx.selectedBlocks(x,d.prompts);
- const previewRow=b=>'<div class="prompt-preview-line" data-preview-key="'+e(b.key)+'"><strong>'+e(b.option)+'</strong><p>'+e(b.instruction)+'</p></div>';
+ const previewRow=b=>b.key==='organizationTemplates'?'':'<div class="prompt-preview-line" data-preview-key="'+e(b.key)+'"><strong>'+e(b.option)+'</strong><p>'+e(b.instruction)+'</p></div>';
  const preview='<section class="prompt-live-panel" aria-label="'+e(ui.previewTitle)+'"><h2>'+e(ui.previewTitle)+'</h2><p class="prompt-preview-intro">'+e(ui.previewIntro)+'</p>'
   +'<div class="prompt-preview-lines" id="prompt-preview-lines" aria-live="polite">'+blocks.map(previewRow).join('')+'</div>'
   +'<p class="prompt-preview-dirty" id="prompt-preview-dirty" hidden>'+e(ui.previewDirty)+'</p>'
   +'</section>';
  const checkbox=(key,label,description)=>'<label class="prompt-checkbox"><input type="checkbox" data-prompt-toggle="'+e(key)+'" data-prompt-item="'+e(x.id)+'" '+(ctx.getChoice(x,key)?'checked':'')+'><span><strong>'+e(label)+'</strong><small>'+e(description)+'</small></span></label>';
+ const firmalayout=d.prompts.outputSettings.organizationTemplates;
+ const formatSubChoice='<div class="prompt-format-subchoice" data-prompt-format-subchoice'+(ctx.supportsOrganizationTemplates(x,d.prompts)?'':' hidden')+'>'
+  +checkbox('organizationTemplates',firmalayout.label,firmalayout.hint)+'</div>';
+
  return '<a href="#prompter" class="back-link">'+ico('arrow-left')+' '+e(ui.allPrompts)+'</a>'
  +'<header class="page-header prompt-detail-head"><div class="eyebrow">'+e(x.category)+' · '+e(x.audience)+'</div><h1 class="page-title">'+e(x.title)+'</h1><p class="page-desc">'+e(x.summary)+'</p></header>'
  +'<div class="prompt-detail-layout">'+preview+'<section class="prompt-main-panel"><div class="prompt-edit-head"><div><h2>'+e(ui.fieldsTitle)+'</h2><p>'+e(ui.fieldsIntro)+'</p></div><a class="prompt-overview-link" href="#prompter/variabler">'+e(ui.openOverview)+' →</a></div>'
  +'<div class="prompt-var-grid">'+used.map(v=>variableField(v,p,e,ico)).join('')+'</div>'
  +'<div class="prompt-options"><h2>'+e(ui.choicesTitle)+'</h2>'
  +(x.choiceGroups||[]).map(k=>choiceField(x,d.prompts,k,e)).join('')
- +choiceField(x,d.prompts,'depth',e)+choiceField(x,d.prompts,'format',e)
+ +choiceField(x,d.prompts,'depth',e)+choiceField(x,d.prompts,'format',e)+formatSubChoice
  +'<p class="prompt-format-notice">'+e(ui.formatNotice)+'</p>'
  +checkbox('handoff',ui.handoffLabel,ui.handoffDescription)
  +(hasContext?checkbox('context',ui.contextInclude,ui.contextNote):'')

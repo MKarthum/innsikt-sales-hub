@@ -48,6 +48,51 @@ for(const item of data.items){
  }
 }
 
+// Valgfrie felter fjerner hele den aktuelle tekstbiten, og ikke bare plassholderen.
+for(const item of data.items){
+ for(const name of item.placeholders)ctx.clear(name);
+ const composed=ctx.composeTask(item,data),base=ctx.renderTaskInput(item);
+ assert.ok(!base.includes('{{?')&&!base.includes('{{/'),'betingede markører skal aldri kopieres for '+item.id);
+ for(const id of item.placeholders){
+  assert.ok(!base.includes('['+id+']'),'tomt felt skal ikke stå som rå plassholder: '+item.id+'/'+id);
+ }
+ assert.ok(!base.includes('Spesifikke spørsmål eller prioriteringer:'),'tomt analysespørsmål skal utelates');
+ if(item.essentialPlaceholders.length)assert.ok(composed.includes('Be kort om den'),'nødvendig, manglende informasjon må etterspørres');
+ const id=item.placeholders[0];
+ if(id){
+  ctx.set(id,'Offentlig eksempelverdi');
+  const withOne=ctx.renderTaskInput(item);
+  assert.ok(withOne.includes('Offentlig eksempelverdi'),'utfylt felt må være med');
+  ctx.clear(id);
+ }
+}
+const baseResearch=ctx.composeTask(research,data);
+assert.ok(!baseResearch.includes('ANALYSESPØRSMÅL')&&!baseResearch.includes('bransjekontekst'),'uten ekstra input skal frasen fjernes fullstendig');
+ctx.set('KUNDENAVN','Eksempelselskapet AS');
+ctx.set('ANALYSESPØRSMÅL','KI-strategi');
+assert.ok(ctx.composeTask(research,data).includes('Spesifikke spørsmål eller prioriteringer: KI-strategi'));
+ctx.clear('ANALYSESPØRSMÅL');
+ctx.clear('KUNDENAVN');
+const org=data.outputSettings.organizationTemplates;
+assert.deepEqual(org.formats,['slides','word','pdf']);
+assert.equal(ctx.supportsOrganizationTemplates(research,data),false,'ren tekst skal ikke ha firmamalvalg');
+assert.ok(!ctx.composeTask(research,data).includes(org.instruction),'ingen malinstruks i ren tekst');
+ctx.setChoice(research,'format','slides');
+assert.equal(ctx.getChoice(research,'organizationTemplates'),true,'firmamaler skal være på som standard ved filformat');
+assert.equal(ctx.supportsOrganizationTemplates(research,data),true);
+assert.ok(ctx.composeTask(research,data).includes(org.instruction),'tilgjengelige firmamaler etterspørres i filformat');
+assert.ok(ctx.selectedBlocks(research,data).some(x=>x.key==='organizationTemplates'),'forhåndsvisning følger kopiert prompt');
+ctx.setChoice(research,'organizationTemplates',false);
+assert.ok(!ctx.composeTask(research,data).includes(org.instruction),'avhakingen må fjerne instruksjonen helt');
+assert.ok(!ctx.selectedBlocks(research,data).some(x=>x.key==='organizationTemplates'),'forhåndsvisning fjerner instruksjonen');
+ctx.setChoice(research,'format','markdown');
+assert.equal(ctx.supportsOrganizationTemplates(research,data),false);
+assert.ok(!ctx.composeTask(research,data).includes(org.instruction),'Markdown skal ikke arve firmamal-instruksjon');
+ctx.setChoice(research,'format','word');
+assert.equal(ctx.getChoice(research,'organizationTemplates'),false,'bevisst avhaking beholdes ved formatbytte');
+ctx.setChoice(research,'organizationTemplates',true);
+assert.ok(ctx.composeTask(research,data).includes(org.instruction));
+ctx.setChoice(research,'format','plain');
 assert.ok(data.items.some(x=>x.id==='contact-prep'),'kontaktforberedelse skal finnes');
 const contact=data.items.find(x=>x.id==='contact-prep');
 assert.equal(ctx.getChoice(research,'depth'),'useful','arbeidsklart nivå som standard');

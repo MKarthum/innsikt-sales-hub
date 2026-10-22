@@ -154,3 +154,8 @@ Promptbiblioteket har en felles variabelkontekst som fylles inn på den aktuelle
 ## Promptbibliotek v0.11.2: revisjon og levende forhåndsvisning
 
 Alle 15 promptoppgaver er kontrollert for salgssituasjon, mål, relevante opplysninger, forståelige etiketter og kildekrav. Kundeanalysen er uavhengig av et møte, presentasjoner har formidlingsformål, oppfølging har eget grunnlag og kanalvalg, og oppgavene er gruppert mer logisk. En levende forhåndsvisning viser instruksjonene som legges til av radiovalg; hele promptteksten kan fortsatt redigeres. Se PROMPT_EDITORIAL_AUDIT_2026-10-22.md og PROMPT_WORKFLOW.md.
+
+
+## Promptvalgene i v0.11.5
+
+Tomme valgfrie felt forsvinner fra den kopierte prompten sammen med tilhørende feltetikett; opplysninger som er nødvendige for kildebasert analyse blir etterspurt, ikke gjettet. Ved filformatene presentasjon, Word og PDF vises et diskret, forhåndsvalgt «Bruk firmamaler». Dette ber det eksterne KI-verktøyet bruke tilgjengelige virksomhetsmaler eller designferdigheter, men garanterer ikke tilgang. Undervalget kan slås av og forsvinner fra prompten når det ikke gjelder. Se PROMPT_WORKFLOW.md og CONTENT_CONTRACT.md.

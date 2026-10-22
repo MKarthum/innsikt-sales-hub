@@ -80,3 +80,8 @@ Gjeldende Presenter inneholder ett løp som forklarer løsningen og ett kort ill
 ## Promptvisning (v0.11.2)
 
 InnsiktPromptContext.composeTask() bygger den faktiske prompten. selectedBlocks() leverer de samme valgte instruksjonene strukturert til levende forhåndsvisning og hjelp under radioknappene. Visningsmodulene får ingen egen tekstkilde. Alle labels og meldinger eies av prompts.json. Endringer må testes for komposisjon, kopiering, manuelle overstyringer, mobil og desktop. Se PROMPT_EDITORIAL_AUDIT_2026-10-22.md.
+
+
+## Valgfrie firmamaler og felter (v0.11.5)
+
+prompts.json eier outputSettings.organizationTemplates: etikett, hjelpetekst, gyldige formater og hele malinstruksjonen. Checkboxen vises bare for disse formatene, og instruksjonen blir utelatt når den ikke er relevant eller velges bort. optionalPlaceholders og betinget inline-tekst eier tomfelt-policyen. Separasjonen mellom data, komposisjonsmotor og presentasjon er uendret. En malinstruksjon er en forespørsel til et eksternt KI-verktøy, ikke en garanti for intern maltilgang.

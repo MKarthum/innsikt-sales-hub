@@ -57,3 +57,12 @@ Den levende forhåndsvisningen skal vise **instruksjonene som endres**, ikke kop
 ## Klikkflate og naturlig samspill (v0.11.4)
 
 Radiovalg må ha en reell fokus- og klikkflate som dekker hele den synlige etiketten. Testene skal bruke vanlig check() uten tvang av skjulte elementer, på både mobil og desktop. Dette forhindrer at visuelt synlige filtervalg er vanskelige å aktivere fra tastatur eller automatisering.
+
+
+## Betingede variabelfelt og firmamaler (v0.11.5)
+
+Prompter skal ikke sende uutfylte felt som rå plassholdere eller formuleringer som «Ikke valgt». Alle 15 oppgavene har betingede tekstbiter i docs/data/prompts.json: {{?VARIABEL}}Etikett: [VARIABEL].{{/VARIABEL}}. Motoren tar med hele tekstbiten bare når verdien finnes. Ingen spesialtilfeller eller formuleringsregler i frontend-JavaScript. optionalPlaceholders er den dataeide kontrakten. essentialPlaceholders angir felt som trengs for konkret analyse; ved tomt felt brukes missingEssentialInstruction fra datakilden for å be om nødvendig input uten gjetning.
+
+«Bruk firmamaler» er et subvalg under svarformat, ikke en selvstendig innstilling. Det vises bare for slides, word og pdf (fra outputSettings.organizationTemplates.formats), er aktivt som standard når passende format velges, og kan slås av per oppgave. En eksplisitt avhaking skal respekteres også etter formatbytte, men malinstruksjonen skal kun legges inn når både filformat og avkrysning gjelder. Ren tekst og Markdown skal aldri inneholde instruksjonen. Instruksjonen nevner ikke interne navn eller hemmelige detaljer; den ber eksternt KI-verktøy se etter og bruke tilgjengelige organisasjonsmaler, designressurser og ferdigheter (skills). En prompt kan ikke garantere at et eksternt KI-verktøy har eller aktiverer en ferdighet.
+
+Innhold/visning er strengt separert: etikettnavn, hjelpetekst, formater, betingelser og instruksjoner eies av prompts.json; prompt-context.js utfører generiske betingelser og komposisjon; prompts.js og site.js viser subvalg, mens CSS styrer plassering. Enhetstester kontrollerer betingede felter. Nettlesertester kontrollerer formatvalg, standardavkrysning, avhaking, formatbytte, kopitekst og mobil/desktop.

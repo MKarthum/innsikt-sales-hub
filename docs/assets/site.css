@@ -604,3 +604,10 @@ textarea.prompt-var-input{min-height:78px}
  .prompt-live-panel{position:static;padding:14px}
  .prompt-preview-lines{max-height:185px;grid-template-columns:1fr}
 }
+
+/* Subvalg følger dokumentformatet, men er ikke et eget toppnivåvalg. */
+.prompt-format-subchoice{margin:-7px 0 16px 13px;padding:4px 11px;border-left:2px solid #cbded8;background:#fafdfb;border-radius:0 8px 8px 0}
+.prompt-format-subchoice[hidden]{display:none}
+.prompt-format-subchoice .prompt-checkbox{padding:6px 0}
+.prompt-format-subchoice .prompt-checkbox strong{font-size:12px}
+.prompt-format-subchoice .prompt-checkbox small{font-size:11px}

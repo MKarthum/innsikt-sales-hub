@@ -54,7 +54,7 @@ function compose(prompt,placeholders){
 }
 function setting(item,key){
  if(key==='depth'||key==='format')return promptData?.outputSettings?.[key];
- if(key==='handoff'||key==='context')return promptData?.outputSettings?.[key];
+ if(key==='handoff'||key==='context'||key==='organizationTemplates')return promptData?.outputSettings?.[key];
  if(!(item.choiceGroups||[]).includes(key))return null;
  return promptData?.choiceGroups?.[key];
 }
@@ -64,14 +64,24 @@ function options(item,key){
  return key==='format'?group.options.filter(o=>(item.formats||[]).includes(o.id)):group.options;
 }
 function getChoice(item,key){
- if(key==='handoff'||key==='context')return choices.has(item.id+':'+key)?choices.get(item.id+':'+key):true;
+ if(key==='handoff'||key==='context'||key==='organizationTemplates')return choices.has(item.id+':'+key)?choices.get(item.id+':'+key):true;
  const opts=options(item,key);
  const current=choices.get(item.id+':'+key);
  return opts.some(o=>o.id===current)?current:(key==='depth'?'useful':(opts[0]?.id||''));
 }
 function setChoice(item,key,value){
- if(key==='handoff'||key==='context'){choices.set(item.id+':'+key,value===true);return}
+ if(key==='handoff'||key==='context'||key==='organizationTemplates'){choices.set(item.id+':'+key,value===true);return}
  if(options(item,key).some(o=>o.id===value))choices.set(item.id+':'+key,value);
+}
+function supportsOrganizationTemplates(item,prompts=promptData){
+ return !!prompts?.outputSettings?.organizationTemplates?.formats?.includes(getChoice(item,'format'));
+}
+function renderTaskInput(item){
+ // Editorially controlled optional spans are fully removed when a field is empty.
+ // This also removes their labels; the copied prompt never contains an empty placeholder.
+ const conditional=/\{\{\?([A-ZÆØÅ][A-ZÆØÅ0-9_]*)\}\}([\s\S]*?)\{\{\/\1\}\}/g;
+ const expanded=String(item.prompt||'').replace(conditional,(_,id,block)=>get(id).trim()?block:'');
+ return compose(expanded,item.placeholders).replace(/\n[ \t]*\n[ \t]*\n+/g,'\n\n').replace(/[ \t]+\n/g,'\n').trim();
 }
 function selectedBlocks(item,prompts=promptData){
  if(!prompts?.outputSettings)return [];
@@ -85,12 +95,22 @@ function selectedBlocks(item,prompts=promptData){
   const o=selected(key),g=prompts.outputSettings[key];
   if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings[key+'Prefix']});
  }
+ const design=prompts.outputSettings.organizationTemplates;
+ if(design&&supportsOrganizationTemplates(item,prompts)&&getChoice(item,'organizationTemplates')){
+  blocks.push({key:'organizationTemplates',label:design.label,option:design.label,instruction:design.instruction,prefix:design.label});
+ }
  return blocks;
 }
 function composeTask(item,prompts=promptData){
- const base=compose(item.prompt,item.placeholders);
+ const base=renderTaskInput(item);
  if(!prompts||!prompts.outputSettings)return base;
- const parts=[base,...selectedBlocks(item,prompts).map(b=>b.prefix+': '+b.instruction)];
+ const parts=[base];
+ const absent=(item.essentialPlaceholders||[]).filter(id=>!get(id).trim());
+ if(absent.length){
+  const labels=absent.map(id=>byId.get(canonical(id))?.label||id);
+  parts.push(prompts.outputSettings.missingEssentialInstruction.replace('{fields}',labels.join(', ')));
+ }
+ parts.push(...selectedBlocks(item,prompts).map(b=>b.prefix+': '+b.instruction));
  if(getChoice(item,'context')&&(item.contextVariables||[]).includes('KUNDEKONTEKST')){
   const v=get('KUNDEKONTEKST').trim();
   if(v){
@@ -108,5 +128,5 @@ function entries(){
  return all;
 }
 const orphanCount=()=>entries().filter(x=>!x.usedBy.length).length;
-window.InnsiktPromptContext={configure,get,set,clear,clearAll,compose,composeTask,selectedBlocks,options,getChoice,setChoice,usage,entries,orphanCount,storageKey:STORAGE_KEY};
+window.InnsiktPromptContext={configure,get,set,clear,clearAll,compose,composeTask,selectedBlocks,supportsOrganizationTemplates,renderTaskInput,options,getChoice,setChoice,usage,entries,orphanCount,storageKey:STORAGE_KEY};
 })();

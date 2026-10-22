@@ -388,6 +388,7 @@ function refreshPromptLive(item){
  const ctx=window.InnsiktPromptContext;
  host.replaceChildren();
  for(const b of ctx.selectedBlocks(item,D.prompts)){
+  if(b.key==='organizationTemplates')continue;
   const line=document.createElement('div');line.className='prompt-preview-line';line.dataset.previewKey=b.key;
   const title=document.createElement('strong');title.textContent=b.option;
   const description=document.createElement('p');description.textContent=b.instruction;
@@ -395,6 +396,8 @@ function refreshPromptLive(item){
   const impact=document.querySelector('[data-prompt-impact="'+b.key+'"]');
   if(impact)impact.textContent=b.instruction;
  }
+ const subChoice=document.querySelector('[data-prompt-format-subchoice]');
+ if(subChoice)subChoice.hidden=!ctx.supportsOrganizationTemplates(item,D.prompts);
  const dirty=document.getElementById('prompt-preview-dirty'),editor=document.getElementById('prompt-editor');
  if(dirty)dirty.hidden=editor?.dataset.dirty!=='true';
 }

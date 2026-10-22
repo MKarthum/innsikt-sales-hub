@@ -22,9 +22,24 @@ try{
   assert.ok(await page.locator('.prompt-advanced + .prompt-primary-copy [data-prompt-copy]').count()===1,label+': kopiering ligger etter valg og fulltekst');
   assert.equal(await page.locator('#prompt-advanced').evaluate(el=>el.open),false,label+': avansert redigering kan være lukket');
   assert.ok((await page.locator('[data-prompt-impact="researchFocus"]').innerText()).includes('Prioriter'),label+': valgets instruksjon er synlig ved kontrollen');
+  const templateChoice=page.locator('[data-prompt-toggle="organizationTemplates"]');
+  const templateSubchoice=page.locator('[data-prompt-format-subchoice]');
+  assert.equal(await templateSubchoice.isVisible(),false,label+': firmamaler skjult ved ren tekst');
+  assert.equal(await templateChoice.isChecked(),true,label+': firmamaler er forhåndsvalgt før et filformat velges');
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': ingen skjult firmamalinstruks ved ren tekst');
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('[ANALYSESPØRSMÅL]'),label+': tom valgfri variabel skal ikke stå som plassholder');
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('Spesifikke spørsmål eller prioriteringer:'),label+': tilhørende frase utelates når feltet er tomt');
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('Be kort om den'),label+': manglende selskapsnavn skal etterspørres, ikke oppfinnes');
+  await page.locator('[data-context-var="ANALYSESPØRSMÅL"]').fill('Kjente dataplattformvalg');
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('Spesifikke spørsmål eller prioriteringer: Kjente dataplattformvalg'),label+': valgfri frase vises når utfylt');
+  await page.locator('[data-context-var="ANALYSESPØRSMÅL"]').fill('');
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('Spesifikke spørsmål eller prioriteringer:'),label+': valgfri frase fjernes ved tømming');
+
 
   const cust=page.locator('[data-context-var="KUNDENAVN"]');
   await cust.fill('Eksempelbedriften AS');
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('Be kort om den'),label+': selskapsnavn fjerner behovet for avklaringsspørsmål');
+
   assert.equal(await page.locator('#prompt-preview-filled').count(),0,label+': ingen overflødig feltteller');
 
   await page.locator('[data-context-var="BRANSJE"]').fill('Energi');
@@ -74,6 +89,24 @@ try{
 
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('dataplattformer'),label+': bransjefokus endrer analyse');
   await page.locator('[data-prompt-choice="format"][value="slides"]').check();
+  assert.equal(await templateSubchoice.isVisible(),true,label+': firmamaler vises bare etter valg av filformat');
+  assert.equal(await templateChoice.isChecked(),true,label+': firmamaler er på som standard');
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': dokumentformat ber om organisasjonens tilgjengelige maler');
+  await templateChoice.uncheck();
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': teksten fjernes når firmamaler skrus av');
+  await page.locator('[data-prompt-choice="format"][value="markdown"]').check();
+  assert.equal(await templateSubchoice.isVisible(),false,label+': firmamalvalget forsvinner ved Markdown');
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': ingen malinstruks ved Markdown');
+  await page.locator('[data-prompt-choice="format"][value="pdf"]').check();
+  assert.equal(await templateSubchoice.isVisible(),true,label+': firmamaler gjelder også PDF');
+  assert.equal(await templateChoice.isChecked(),false,label+': bevisst avhaking bevares');
+  await templateChoice.check();
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': avhuking legger instruksen til igjen');
+  await page.locator('[data-prompt-choice="format"][value="word"]').check();
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': firmamaler gjelder også Word');
+  await page.locator('[data-prompt-choice="format"][value="slides"]').check();
+  assert.equal((await page.locator('#prompt-preview-lines').innerText()).includes('Bruk firmamaler'),false,label+': diskret firmamalvalg dobbelvises ikke i forhåndsvisningen');
+
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('presentasjonsdisposisjon'),label+': presentasjon er outputvalg');
   await page.locator('[data-prompt-toggle="context"]').uncheck();
   assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('valgt Snowflake'),label+': kontekst kan slås av');

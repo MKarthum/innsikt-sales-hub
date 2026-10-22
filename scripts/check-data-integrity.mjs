@@ -148,6 +148,11 @@ for(const t of prompts.items){
  }
 }
 if(!prompts.outputSettings?.depth?.options?.length||!prompts.outputSettings?.format?.options?.length||!str(prompts.outputSettings?.handoff?.instruction))fail('Manglende globale valg eller kontekstoverlevering');
+const design=prompts.outputSettings.organizationTemplates;
+if(!design||!str(design.label)||!str(design.hint)||!str(design.instruction)||!Array.isArray(design.formats)||!design.formats.length)fail('Mangler valgfritt firmamalsystem');
+if(design.formats.some(id=>!['slides','pdf','word'].includes(id)))fail('Firmamaler må bare gjelde dokumenter og presentasjoner');
+if(!str(prompts.outputSettings.missingEssentialInstruction)||!prompts.outputSettings.missingEssentialInstruction.includes('{fields}'))fail('Mangler generisk instruks om nødvendige opplysninger');
+
 for(const key of ['groupPrefix','depthPrefix','formatPrefix'])if(!str(prompts.outputSettings[key]))fail('Tekstblokk mangler kanonisk overskrift: '+key);
 for(const key of ['startMarker','endMarker'])if(!str(prompts.outputSettings.context?.[key]))fail('Mangler kanonisk kontekstmarkør: '+key);
 for(const key of ['previewTitle','previewIntro','previewDirty','copySuccess','copyFailure','copyUnsupported'])if(!str(prompts.page.variableUi?.[key]))fail('Tekst for promptforhåndsvisning mangler: '+key);
@@ -160,6 +165,16 @@ for(const [id,g] of Object.entries({...choiceGroups,depth:prompts.outputSettings
 }
 for(const t of prompts.items){
  if(!Array.isArray(t.choiceGroups)||!Array.isArray(t.contextVariables)||!Array.isArray(t.formats)||!t.formats.length)fail('Prompt uten variantkontrakt '+t.id);
+ if(!Array.isArray(t.optionalPlaceholders)||!Array.isArray(t.essentialPlaceholders))fail('Manglende kontrakt for valgfrie og nødvendige opplysninger i '+t.id);
+ if(new Set(t.optionalPlaceholders).size!==t.optionalPlaceholders.length||new Set(t.essentialPlaceholders).size!==t.essentialPlaceholders.length)fail('Duplisert inputfelt '+t.id);
+ if(t.optionalPlaceholders.some(n=>!t.placeholders.includes(n))||t.essentialPlaceholders.some(n=>!t.placeholders.includes(n)))fail('Ukjent optional/essential input '+t.id);
+ const optionalSpans=[...t.prompt.matchAll(/\{\{\?([A-ZÆØÅ][A-ZÆØÅ0-9_]*)\}\}([\s\S]*?)\{\{\/\1\}\}/g)];
+ const actualIds=optionalSpans.map(m=>m[1]);
+ if(t.placeholders.length!==actualIds.length||t.placeholders.some(n=>actualIds.filter(k=>k===n).length!==1))fail('Alle inputfelt må være én unik betinget blokk: '+t.id);
+ if(optionalSpans.some(m=>!m[2].includes('['+m[1]+']')))fail('Betinget felt uten egen verdi '+t.id);
+ const withoutSpans=t.prompt.replace(/\{\{\?([A-ZÆØÅ][A-ZÆØÅ0-9_]*)\}\}[\s\S]*?\{\{\/\1\}\}/g,'');
+ if(withoutSpans.includes('{{?')||withoutSpans.includes('{{/'))fail('Ubalansert betinget felt '+t.id);
+
  if(new Set(t.choiceGroups).size!==t.choiceGroups.length)fail('Dupliserte valggrupper '+t.id);
  for(const key of t.choiceGroups)if(!choiceGroups[key])fail('Ukjent valggruppe '+key+' i '+t.id);
  for(const f of t.formats)if(!allFormatIds.has(f))fail('Ukjent svarformat '+f+' i '+t.id);
