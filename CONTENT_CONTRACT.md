@@ -10,6 +10,10 @@ Gjelder alle endringer i Innsikt. Les sammen med `START_HERE.md`, `AGENTS.md`, `
 - `pages.json` eier rekkefølge, komposisjon, sidetitler og unike presentasjonsnotater. `horizon.json` eier original analyse og hypoteser, ikke nye kopier av ordliste, produktegenskaper eller markedsfakta.
 - Alt i dette offentlige repoet og Git-historikken er offentlig; `visibility: "not-presented"` hindrer bare visning, ikke innsyn. Ikke lagre noe konfidensielt der.
 
+## Autoritet for variabler i prompter
+
+`prompts.json.variables` er kanonisk variabelregister, `variableGroups` eier gruppering, og `page.variableUi` eier brukerrettet UI-tekst. De brukes på promptdetaljer og oversikten «Alle variabler», uavhengig av visningsadapter. `items[].placeholders` beskriver hvilke aliaser fra registeret som brukes av den aktuelle prompten. Ingen dupliserte navn, ubrukte register-ID-er eller semantisk tvetydige aliaser. Personopplysninger og interne kundedata skal ikke lagres i offentlig portal. Test og utvidelsesregler finnes i [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md).
+
 ## Referanser som faktisk er implementert
 
 En referanse er et JSON-objekt: `{ "$content": "glossary:dataplattform", "variant": "normal" }`.

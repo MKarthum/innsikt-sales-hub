@@ -125,6 +125,32 @@ for(const t of prompts.items){
  const used=[...t.prompt.matchAll(/\[([A-ZÆØÅ][A-ZÆØÅ0-9_]+)\]/g)].map(x=>x[1]);
  for(const field of used)if(!t.placeholders.includes(field)&&field!=='MÅ UNDERSØKES')fail('Ukjent promptfelt '+field+' i '+t.id);
 }
+
+if(!Array.isArray(prompts.variableGroups)||!prompts.variableGroups.length)fail('Mangler variabelgrupper');
+if(!prompts.page.variableUi||!str(prompts.page.variableUi.privacyNotice))fail('Mangler tekst og personvernsinformasjon for variabler');
+if(!Array.isArray(prompts.variables)||!prompts.variables.length)fail('Mangler kanonisk variabelregister');
+const groups=new Set((prompts.variableGroups||[]).map(x=>x.id)), variables=new Map(),aliasToId=new Map();
+for(const v of prompts.variables||[]){
+ if(!str(v.id)||!/^[A-ZÆØÅ][A-ZÆØÅ0-9_]*$/.test(v.id)||variables.has(v.id))fail('Ugyldig eller duplisert variabel-ID '+v.id);
+ variables.set(v.id,v);
+ if(!str(v.label)||!groups.has(v.group)||!['session','memory'].includes(v.retention))fail('Ufullstendig variabel '+v.id);
+ if(!Number.isInteger(v.maxLength)||v.maxLength<1||v.maxLength>4000)fail('Ugyldig maksimal tekstlengde '+v.id);
+ for(const name of [v.id,...(v.aliases||[])]){
+  if(!/^[A-ZÆØÅ][A-ZÆØÅ0-9_]*$/.test(name)||aliasToId.has(name))fail('Ugyldig eller kolliderende variabelalias '+name);
+  aliasToId.set(name,v.id);
+ }
+}
+const usedVariables=new Set();
+for(const t of prompts.items){
+ for(const n of t.placeholders){
+  if(!aliasToId.has(n))fail('Plassholder uten variabeldefinisjon '+n+' i '+t.id);
+  else usedVariables.add(aliasToId.get(n));
+ }
+}
+for(const id of variables.keys())if(!usedVariables.has(id))fail('Død variabel i registeret: '+id+' (fjern den eller knytt den til en aktiv prompt)');
+if(!fs.existsSync('docs/assets/prompt-context.js')||!html.includes('prompt-context.js?v='+site.version))fail('Manglende versjonert kontekstmodul');
+if(html.indexOf('prompt-context.js?v='+site.version)>html.indexOf('prompts.js?v='+site.version))fail('Kontekstmodul må lastes før promptvisning');
+
 if(prompts.items.length<12)fail('For få promptmaler');
 refs(prompts.sourceIds,'Promptveiledning');
 if(!fs.existsSync('docs/assets/prompts.js'))fail('Promptvisning mangler');

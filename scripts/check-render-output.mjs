@@ -34,6 +34,7 @@ const setup=[
 " D.learning.diagrams.forEach(x=>add('arkitektur/'+x.id,()=>architecture(x.id)));",
 " D.learning.templates.forEach(x=>add('verktoy/'+x.id,()=>toolkit(x.id)));",
 " D.prompts.items.forEach(x=>add('prompter/'+x.id,()=>prompts(x.id)));",
+" add('prompter/variabler',()=>prompts('variabler'));",
 ' const slideBody={innerHTML:""};',
 ' globalThis.document={',
 "   getElementById:(id)=>id==='slide-body'?slideBody:{textContent:'',disabled:false},",
@@ -59,6 +60,8 @@ const sandbox={
 };
 vm.createContext(sandbox);
 vm.runInContext(read('docs/assets/learning.js'),sandbox,{timeout:3000,filename:'learning.js'});
+vm.runInContext(read('docs/assets/prompt-context.js'),sandbox,{timeout:3000,filename:'prompt-context.js'});
+sandbox.window.InnsiktPromptContext.configure(fixture.prompts);
 vm.runInContext(read('docs/assets/prompts.js'),sandbox,{timeout:3000,filename:'prompts.js'});
 vm.runInContext(read('docs/assets/horizon.js'),sandbox,{timeout:3000,filename:'horizon.js'});
 vm.runInContext(instrumented,sandbox,{timeout:3000,filename:'site.js'});

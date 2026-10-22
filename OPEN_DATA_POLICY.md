@@ -30,6 +30,10 @@ Etter flytting kan interne data bare legges til etter godkjent klassifisering, t
 Maler og generiske skisser er kun pedagogiske startpunkter. De skal ikke lagre kundedata i denne åpne nettsiden. Virkelige kundeopplysninger skal håndteres i godkjente interne systemer etter en eventuell overføring.
 
 
+## Midlertidige variabler i nettleseren
+
+Promptvariabler lagres aldri på GitHub eller av en ekstern server. Små, offentlig delbare verdier med eksplisitt `retention: session` kan ligge i fanens `sessionStorage` til fanen lukkes. Øvrige redigerbare kontekstfelt brukes bare i sidens minne og slettes ved oppfriskning. Ingen av formene er en godkjent plass for konfidensiell kundeinformasjon. Brukeren kan nullstille én eller alle variabler, og utgåtte lagrede ID-er synliggjøres for opprydding. Se [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md).
+
 ## Generiske KI-prompter
 
 Promptbiblioteket er offentlig og gir bare kopierbare instruksjoner, ikke tilgang til systemer eller data. Ingen hemmelige nøkler, direkte CRM-forespørsler eller sensitive eksempler skal inn i versjonsstyringen. Redigering i nettleseren lagres ikke og sendes ikke av portalen. Brukeren må selv velge en godkjent KI-tjeneste og passe på hvilke opplysninger som limes inn.

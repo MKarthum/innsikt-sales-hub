@@ -214,5 +214,13 @@
     "status": "åpen",
     "priority": "høy",
     "why": "Kjør representative, offentlig delbare scenarioer med relevante godkjente KI-modeller. Vurder konkrete svar, faktagrunnlag, kildebruk og nytte før biblioteket utvides."
+  },
+  {
+    "id": "B-28",
+    "title": "Evaluere variabelfeltene ved videre utvidelser av promptbiblioteket",
+    "area": "Prompter",
+    "status": "åpen",
+    "priority": "middels",
+    "why": "Kontroller feltmengde per prompt, reell nytte og faglig betydning av aliaser i anonymiserte brukertester."
   }
 ]

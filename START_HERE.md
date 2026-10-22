@@ -12,6 +12,10 @@ Arbeidsinstruks for mennesker, ChatGPT, Claude Code og Gemini. **Hent alltid sis
 
 Tidligere samtaler er kun spor til mulige behov. **Repoets gjeldende `main` er autoritativ.**
 
+## Ved endring av prompter
+
+Les [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) før endring av promptbiblioteket. Nye prompter skal kobles til eksisterende stabile variabler der betydningen er den samme. Nytt felt krever definisjon, begrunnelse for lagringstype, test for bruk og oppdatering av aliaser/visning. Kontroller felles verdi på tvers av prompter, oversikten over alle variabler og lagrings-/slettelogikken på mobil og desktop.
+
 ## Kanoniske dataeiere
 
 - `site.json`: versjon, publiseringsdato og siste faglige gjennomgang.

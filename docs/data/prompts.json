@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "1.0.0",
-    "reviewed": "2026-10-14",
+    "version": "1.1.0",
+    "reviewed": "2026-10-22",
     "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
   },
   "page": {
@@ -14,14 +14,14 @@
     },
     "usageTitle": "Slik bruker du promptene",
     "usageSteps": [
-      "Velg en oppgave og les hvilke opplysninger du trenger.",
-      "Kopier eller juster teksten. Bytt ut feltene i [KLAMMER].",
-      "Kjør prompten i et KI-verktøy som er godkjent for informasjonen.",
+      "Velg en oppgave og fyll inn de relevante variabelfeltene.",
+      "Gjenbruk felles verdier i andre prompter. La ukjente felt stå som plassholdere.",
+      "Les gjennom og rediger hele prompten ved behov, og kopier til et godkjent KI-verktøy.",
       "Kontroller fakta, kilder og forslag før du bruker resultatet."
     ],
     "internalTitle": "Når portalen flyttes internt",
     "internalBody": "Da kan vi bygge på med virksomhetsgodkjente datakilder og arbeidsflyter: kundeinformasjon fra CRM/HubSpot, dokumenter fra Google Drive og kompetanseprofiler som brukeren har tilgang til. Slike koblinger må følge identitet, rettigheter og sikkerhetskrav; ingen tokens eller CRM-data skal legges i en offentlig statisk nettside.",
-    "editorHelp": "Rediger prompten her før kopiering. Endringene sendes ingen steder og lagres ikke av portalen.",
+    "editorHelp": "Teksten kan fortsatt redigeres. Endringer i fritekst lagres ikke. Tilbakestill tekst bygger prompten fra malen og aktive variabler.",
     "reviewTitle": "Kontroller før du bruker resultatet",
     "copyLabel": "Kopier prompt",
     "resetLabel": "Tilbakestill tekst",
@@ -35,7 +35,49 @@
       "discovery",
       "account-research"
     ],
-    "moreTitle": "Flere prompter"
+    "moreTitle": "Flere prompter",
+    "variableUi": {
+      "toolbarTitle": "Kontekst som følger deg mellom prompter",
+      "toolbarDescription": "Fyll inn verdier på en promptside. Gjenbruk og nullstill dem her ved behov.",
+      "openOverview": "Alle variabler",
+      "allPrompts": "Alle prompter",
+      "fieldsTitle": "Fyll inn relevante felter",
+      "fieldsIntro": "Verdiene gjenbrukes automatisk i andre prompter som bruker samme variabel.",
+      "emptyHint": "Ikke utfylt",
+      "sessionHint": "Huskes ved oppfriskning i denne fanen",
+      "memoryHint": "Bare mens siden er åpen",
+      "clearOne": "Nullstill",
+      "editorTitle": "Prompten",
+      "editorLabel": "Redigerbar prompttekst",
+      "whenTitle": "Når passer den?",
+      "beforeTitle": "Ha dette klart",
+      "internalCaution": "Bruk bare anonymiserte eller offentlig godkjente opplysninger inntil løsningen er flyttet og tilgangsstyrt.",
+      "publicCaution": "Kan brukes med offentlig tilgjengelige eller generiske opplysninger.",
+      "nextTitle": "Vil du videre etter svaret?",
+      "nextAction": "Se forretningsbehov",
+      "overviewEyebrow": "FELLES KONTEXT",
+      "overviewTitle": "Alle promptvariabler",
+      "overviewIntro": "Samlet oversikt, særlig nyttig for å forberede flere prompter og rydde i verdier som ikke lenger brukes.",
+      "privacyNotice": "Denne offentlige portalen er ikke godkjent for fortrolig kundeinformasjon. Bare generelle/offentlige felter huskes ved oppfriskning i fanen. Andre felt holdes kun i sidens minne. Ingen variabler sendes til en server.",
+      "variableCount": "Variabler",
+      "filledCount": "Utfylt",
+      "unusedCount": "Uten tilknytning",
+      "clearAll": "Nullstill alle variabler",
+      "confirmClearAll": "Nullstille alle utfylte variabler? Dette kan ikke angres.",
+      "confirmRebuild": "Du har redigert promptteksten. Vil du erstatte disse endringene med malen og gjeldende variabler?",
+      "dirtyWarning": "Promptteksten er manuelt redigert. Endringer i feltene endrer ikke teksten før du velger «Tilbakestill tekst».",
+      "cleanMessage": "Promptteksten er oppdatert med gjeldende variabler.",
+      "resetMessage": "Promptteksten er gjenoppbygd fra malen med gjeldende variabler.",
+      "clearedMessage": "Variabelen er nullstilt.",
+      "allClearedMessage": "Alle variabler er nullstilt.",
+      "unusedTitle": "Variabler uten aktive prompter",
+      "unusedIntro": "Verdier med utgått ID vises her for opprydding. Variabler i definisjonene uten bruk skal dessuten fanges opp av publiseringstestene.",
+      "orphanDescription": "Lagret under en eldre variabel-ID. Brukes ikke av noen nåværende prompt. Nullstill den hvis den ikke trengs.",
+      "unusedDefined": "Variabelen er ikke tilknyttet en aktiv prompt. Fjern eller koble den i datakilden.",
+      "noUnused": "Alle registrerte variabler er i bruk, og ingen utgåtte lagrede variabler er funnet.",
+      "usedBy": "Brukes i:",
+      "storageUnavailable": "Nettleseren tillater ikke midlertidig lagring. Verdiene er bare tilgjengelige til siden lukkes."
+    }
   },
   "categories": [
     "Forstå kunden",
@@ -448,6 +490,333 @@
       ],
       "reviewed": "2026-10-14",
       "visibility": "presented"
+    }
+  ],
+  "variableGroups": [
+    {
+      "id": "meeting",
+      "label": "Kunde og møte",
+      "description": "Opplysninger som går igjen i møteforberedelser og kundearbeid."
+    },
+    {
+      "id": "needs",
+      "label": "Behov og dialog",
+      "description": "Problem, situasjon og spørsmål som skal undersøkes."
+    },
+    {
+      "id": "delivery",
+      "label": "Opplegg og leveranse",
+      "description": "Rammer, muligheter og forutsetninger for videre arbeid."
+    },
+    {
+      "id": "communication",
+      "label": "Innhold og oppfølging",
+      "description": "Målgrupper, sammendrag og oppfølging."
+    }
+  ],
+  "variables": [
+    {
+      "id": "KUNDENAVN",
+      "label": "Kundenavn",
+      "group": "meeting",
+      "hint": "Kundens offentlige navn",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180,
+      "aliases": [
+        "KUNDE"
+      ]
+    },
+    {
+      "id": "BRANSJE",
+      "label": "Bransje",
+      "group": "meeting",
+      "hint": "Eksempel: energi, finans eller handel",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "MØTEFORMÅL",
+      "label": "Møteformål",
+      "group": "meeting",
+      "hint": "Hva skal møtet oppnå?",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180,
+      "aliases": [
+        "MÅL"
+      ]
+    },
+    {
+      "id": "ROLLE",
+      "label": "Deltakerrolle",
+      "group": "meeting",
+      "hint": "Hvilken rolle møter du?",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "MØTELENGDE",
+      "label": "Møtelengde",
+      "group": "meeting",
+      "hint": "Eksempel: 45 minutter",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "KUNDETYPE",
+      "label": "Kundetype",
+      "group": "meeting",
+      "hint": "Eksempel: mellomstor virksomhet",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "KUNDENS_UTSAGN",
+      "label": "Kundens utsagn (anonymisert)",
+      "group": "needs",
+      "hint": "Beskriv uten navn eller andre sensitive opplysninger",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "BEHOVSBESKRIVELSE",
+      "label": "Behov (anonymisert)",
+      "group": "needs",
+      "hint": "Beskriv behovet på generelt nivå",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "SYMTOM",
+      "label": "Symptom",
+      "group": "needs",
+      "hint": "Hva er observert?",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "ØNSKET_FORBEDRING",
+      "label": "Ønsket forbedring",
+      "group": "needs",
+      "hint": "Hva bør bli bedre?",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "BRUKSTILFELLE",
+      "label": "Brukstilfelle",
+      "group": "needs",
+      "hint": "Beskriv et generelt eller godkjent eksempel",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "FORRETNINGSUTFORDRING",
+      "label": "Forretningsutfordring",
+      "group": "needs",
+      "hint": "Beskriv utfordringen",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "KUNDEBEHOV",
+      "label": "Kundebehov (anonymisert)",
+      "group": "needs",
+      "hint": "Beskriv uten fortrolige opplysninger",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "KUNDEKONTEKST",
+      "label": "Kundekontekst (generisk)",
+      "group": "needs",
+      "hint": "Legg inn anonymisert kontekst",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "PROBLEM",
+      "label": "Problemstilling",
+      "group": "needs",
+      "hint": "Hva skal belyses?",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "INNVENDING",
+      "label": "Innvending",
+      "group": "needs",
+      "hint": "Hva er innvendingen?",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "HYPOTESE",
+      "label": "Hypotese",
+      "group": "needs",
+      "hint": "Hva ønsker du å utfordre?",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "GRUNNLAG",
+      "label": "Grunnlag",
+      "group": "needs",
+      "hint": "Kun offentlig/godkjent grunnlag",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "FORRETNINGSVERDI",
+      "label": "Ønsket forretningsverdi",
+      "group": "delivery",
+      "hint": "Hvilken verdi undersøkes?",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "DATAKILDER",
+      "label": "Mulige datakilder",
+      "group": "delivery",
+      "hint": "Oppgi bare typer datakilder",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "KOMPETANSEPROFILER",
+      "label": "Kompetanseprofiler (anonymisert)",
+      "group": "delivery",
+      "hint": "Ikke bruk interne personopplysninger",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "TIDSVINDU",
+      "label": "Tidsvindu",
+      "group": "delivery",
+      "hint": "Eksempel: neste kvartal",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "PLATTFORM",
+      "label": "Plattform",
+      "group": "delivery",
+      "hint": "Eksempel: Snowflake eller Fabric",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "STATUS",
+      "label": "Status",
+      "group": "delivery",
+      "hint": "Kun offentlig eller generell status",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "MULIG_TILTAK",
+      "label": "Mulig tiltak",
+      "group": "delivery",
+      "hint": "Beskriv en mulig tilnærming",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "TEMA",
+      "label": "Tema",
+      "group": "delivery",
+      "hint": "Eksempel: datakvalitet",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "VARIGHET",
+      "label": "Varighet",
+      "group": "delivery",
+      "hint": "Eksempel: 2 timer",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "DELTAKERE",
+      "label": "Deltakerroller",
+      "group": "delivery",
+      "hint": "Beskriv roller, ikke navn",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "ANTALL_LYSBILDER",
+      "label": "Maksimalt antall lysbilder",
+      "group": "communication",
+      "hint": "Eksempel: 6",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "MÅLGRUPPE",
+      "label": "Målgruppe",
+      "group": "communication",
+      "hint": "Eksempel: virksomhetsledelsen",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
+    },
+    {
+      "id": "GODKJENT_OPPSUMMERING",
+      "label": "Godkjent møteoppsummering",
+      "group": "communication",
+      "hint": "Kun godkjent og anonymisert tekst",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "NESTE_STEG",
+      "label": "Avtalt neste steg",
+      "group": "communication",
+      "hint": "Oppsummer uten fortrolige opplysninger",
+      "multiline": true,
+      "retention": "memory",
+      "maxLength": 2000
+    },
+    {
+      "id": "MOTTAKERROLLE",
+      "label": "Mottakerrolle",
+      "group": "communication",
+      "hint": "Eksempel: økonomisjef",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
     }
   ]
 }

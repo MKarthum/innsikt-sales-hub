@@ -1,0 +1,67 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const data=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8'));
+const compile=item=>item.prompt||item.promptParts.map(part=>{
+ if(typeof part==='string')return part;
+ const id=part.$content.split(':')[1];
+ return data.rules.find(rule=>rule.id===id)?.text||'';
+}).join('');
+for(const item of data.items)item.prompt=compile(item);
+const storage=new Map();
+const sessionStorage={
+ getItem:k=>storage.get(k)||null,
+ setItem:(k,v)=>storage.set(k,v),
+ removeItem:k=>storage.delete(k)
+};
+const sandbox={window:{},sessionStorage};
+vm.createContext(sandbox);
+vm.runInContext(fs.readFileSync('docs/assets/prompt-context.js','utf8'),sandbox,{filename:'prompt-context.js'});
+const ctx=sandbox.window.InnsiktPromptContext;
+ctx.configure(data);
+assert.equal(ctx.entries().length,33);
+assert.equal(ctx.orphanCount(),0,'variabelregisteret skal ikke inneholde døde variabler');
+const research=data.items.find(x=>x.id==='account-research');
+const prep=data.items.find(x=>x.id==='meeting-prep');
+assert.ok(research&&prep);
+ctx.set('KUNDE','Eksempelbedriften AS');
+assert.equal(ctx.get('KUNDENAVN'),'Eksempelbedriften AS','alias deler verdi');
+assert.ok(ctx.compose(research.prompt,research.placeholders).includes('Eksempelbedriften AS'));
+assert.ok(ctx.compose(prep.prompt,prep.placeholders).includes('Eksempelbedriften AS'));
+ctx.set('MØTEFORMÅL','Test $& dollar');
+assert.ok(ctx.compose(prep.prompt,prep.placeholders).includes('Test $& dollar'),'variabelverdi må ikke tolkes som regex-erstatning');
+ctx.set('BRANSJE','Energi');
+assert.equal(JSON.parse(storage.get(ctx.storageKey)).BRANSJE,'Energi');
+const testLabel=data.variables.find(x=>x.id==='BRANSJE');
+assert.ok(ctx.usage(testLabel.id).length>=2);
+ctx.set('KUNDENS_UTSAGN','Anonymisert, potensielt sensitivt');
+assert.equal(JSON.parse(storage.get(ctx.storageKey)).KUNDENS_UTSAGN,undefined,'sensitive fritekstverdier må aldri persisteres');
+assert.ok(ctx.get('KUNDENS_UTSAGN'));
+ctx.configure(data);
+assert.equal(ctx.get('KUNDENS_UTSAGN'),'','minnefelt må falle bort ved oppfriskning');
+assert.equal(ctx.get('BRANSJE'),'Energi','generisk felt skal overleve oppfriskning');
+ctx.clear('KUNDE');
+assert.equal(ctx.get('KUNDENAVN'),'');
+assert.equal(ctx.get('MØTEFORMÅL'),'Test $& dollar','enkeltreset skal beholde andre felter');
+const saved=JSON.parse(storage.get(ctx.storageKey));
+saved.FJERNET_VARIABEL='Utdatert';
+storage.set(ctx.storageKey,JSON.stringify(saved));
+ctx.configure(data);
+assert.equal(ctx.orphanCount(),1,'gamle verdier må kunne identifiseres');
+assert.equal(ctx.entries().find(x=>x.id==='FJERNET_VARIABEL').orphan,true);
+ctx.clear('FJERNET_VARIABEL');
+assert.equal(ctx.orphanCount(),0,'gammel verdi må kunne slettes');
+ctx.clearAll();
+assert.equal(ctx.entries().filter(x=>x.value.trim()).length,0);
+assert.equal(storage.has(ctx.storageKey),false,'alle lagrede verdier må slettes');
+ctx.set('BRANSJE','<img src=x onerror=alert(1)>');
+const output=ctx.compose(research.prompt,research.placeholders);
+assert.ok(output.includes('<img'), 'ren komposisjon skal bevare bokstavelig verdi');
+const htmlSandbox={window:{InnsiktPromptContext:ctx}};
+vm.runInNewContext(fs.readFileSync('docs/assets/prompts.js','utf8'),htmlSandbox,{filename:'prompts.js'});
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const html=htmlSandbox.window.InnsiktPrompts.detail({prompts:data},{esc,ico:()=>'',sourceLinks:()=>''},'account-research');
+assert.ok(html.includes('&lt;img src=x'), 'redigerbar prompt må escape brukerinnhold i HTML');
+assert.ok(!html.includes('<img src=x'), 'brukerinput må ikke injisere HTML');
+assert.ok(html.includes('data-context-var="BRANSJE"'));
+console.log('PASS – alias, gjenbruk, lagringsgrenser, oppfriskning, enkelt-/totalreset, orphan-opprydding og HTML-escaping');
