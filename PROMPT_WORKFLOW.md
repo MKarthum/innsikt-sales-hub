@@ -10,7 +10,7 @@ Kontakt omfatter første henvendelse, nye personer hos eksisterende kunder, refe
 
 ## Oppgaver fremfor mange promptkort
 
-På `#prompter` vises syv prioriterte oppgaver, hvorav tre fremheves; øvrige oppgaver ligger under «Vis flere oppgaver» og via kategorifilter. Antall oppgaver er ikke et kvalitetsmål. Lag en ny oppgave først når det er forskjellig formål eller resultat, ikke bare ny situasjon; tilføy ellers en redaksjonelt vedlikeholdt variant.
+På `#prompter` vises syv prioriterte oppgaver samlet under «Velg en oppgave», uten en kunstig intern rangering. Forsiden kan vise tre snarveier til disse. Øvrige oppgaver ligger under «Vis flere oppgaver» og via kategorifilter. Antall oppgaver er ikke et kvalitetsmål. Lag en ny oppgave først når det er forskjellig formål eller resultat, ikke bare ny situasjon; tilføy ellers en redaksjonelt vedlikeholdt variant.
 
 Prioriterte innganger: Innsikt-rettet kundeanalyse, kundekontakt, møteforberedelse, behovssamtale, mulighetskvalifisering, kundeoppfølging og kompetanseavklaring. Spesialiserte prompter (pilot, workshop, presentasjon, notat, partnerdialog, kritisk vurdering) finnes fortsatt.
 

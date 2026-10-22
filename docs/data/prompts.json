@@ -26,8 +26,6 @@
     "copyLabel": "Kopier prompt",
     "resetLabel": "Tilbakestill tekst",
     "allLabel": "Alle",
-    "featuredTitle": "Vanlige oppgaver",
-    "featuredIntro": "Start med én oppgave. Varianter og ønsket svar tilpasses inne på oppgavesiden.",
     "useHint": "Velg oppgave. Du kan endre teksten før kopiering.",
     "nextStepHint": "Bruk svaret til å avklare nye spørsmål, ikke til å erstatte kundedialogen eller faglig vurdering.",
     "featuredIds": [
@@ -99,8 +97,8 @@
       "followup",
       "consultant-match"
     ],
-    "primaryTitle": "Andre vanlige oppgaver",
-    "primaryIntro": "Flere trinn i kundedialog og salgsarbeid."
+    "primaryTitle": "Velg en oppgave",
+    "primaryIntro": "Finn raskt det du trenger hjelp til. Situasjon, detaljnivå og format velger du inne på oppgaven."
   },
   "categories": [
     "Forstå kunden",

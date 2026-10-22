@@ -26,9 +26,7 @@ function choiceField(item,p,key,e){
 }
 function library(d,h,category){
  const {esc:e,ico,sourceLinks}=h,p=d.prompts,ui=p.page.variableUi;
- const featured=p.page.featuredIds.map(id=>p.items.find(x=>x.id===id)).filter(Boolean);
  const primary=p.page.primaryIds.map(id=>p.items.find(x=>x.id===id)).filter(Boolean);
- const standard=primary.filter(x=>!p.page.featuredIds.includes(x.id));
  const others=p.items.filter(x=>!p.page.primaryIds.includes(x.id));
  const filtered=p.items.filter(x=>x.category===category);
  const section=(title,intro,items)=>!items.length?'':'<section class="subsection"><div class="section-heading"><div><h2>'+e(title)+'</h2><p>'+e(intro)+'</p></div></div><div class="prompt-grid">'+items.map(x=>card(x,e)).join('')+'</div></section>';
@@ -36,7 +34,7 @@ function library(d,h,category){
  +'<div class="prompt-safety"><span class="prompt-safety-icon">'+ico('shield')+'</span><p>'+e(p.page.publicWarning)+'</p></div>'
  +toolbar(p.page,e,ico)
  +'<div class="filters" role="group" aria-label="Filtrer oppgaver">'+[p.page.allLabel,...p.categories].map(x=>'<button type="button" class="filter '+(x===category?'active':'')+'" aria-pressed="'+(x===category)+'" data-prompt-filter="'+e(x)+'">'+e(x)+'</button>').join('')+'</div>'
- +(category==='Alle'?'<div class="prompt-featured">'+section(p.page.featuredTitle,p.page.featuredIntro,featured)+'</div>'+section(p.page.primaryTitle,p.page.primaryIntro,standard)
+ +(category==='Alle'?'<div class="prompt-primary">'+section(p.page.primaryTitle,p.page.primaryIntro,primary)+'</div>'
   +'<details class="prompt-more-tasks"><summary>'+e(ui.moreTasksLabel)+' ('+others.length+') '+ico('chevron-down')+'</summary><p>'+e(ui.moreTasksDescription)+'</p><div class="prompt-grid">'+others.map(x=>card(x,e)).join('')+'</div></details>'
   :section(category,p.page.useHint,filtered))
  +'<details class="prompt-howto"><summary>'+e(p.page.usageTitle)+' '+ico('chevron-down')+'</summary><ol>'+p.page.usageSteps.map(x=>'<li>'+e(x)+'</li>').join('')+'</ol></details>'

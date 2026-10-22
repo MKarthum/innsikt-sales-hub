@@ -58,8 +58,9 @@ try {
   await page.evaluate(()=>{location.hash='#arkitektur/ai-on-data'});
   await page.locator('.diagram-flow-up').waitFor();
   assert.equal(await page.locator('.diagram-flow-up').evaluate(el=>getComputedStyle(el).flexDirection),'column-reverse',label+': diagram leses nedenfra og opp');
-  await page.evaluate(()=>{location.hash='#prompter'});await page.locator('.prompt-featured').waitFor();
-  assert.equal(await page.locator('.prompt-featured .prompt-card').count(),3,label+': tre promptforslag');
+  await page.evaluate(()=>{location.hash='#prompter'});await page.locator('.prompt-primary').waitFor();
+  assert.equal(await page.locator('.prompt-primary .prompt-card').count(),7,label+': syv prioriterte oppgaver i én samlet seksjon');
+  assert.equal(await page.locator('.prompt-featured').count(),0,label+': ingen kunstig oppdeling av vanlige oppgaver');
   assert.equal(await page.locator('#main .prompt-card').count(),15,label+': alle oppgaver, også de bak utvidet visning, uten duplikater');
   await page.evaluate(()=>{location.hash='#muligheter/rapportering'});await page.locator('.related-prompt a[href="#prompter/discovery"]').waitFor();
   await page.evaluate(()=>{location.hash='#forretning/okonomi'});await page.locator('.related-prompt a[href="#prompter/opportunity-map"]').waitFor();
