@@ -7,3 +7,5 @@ For seksjon/id må navigasjonsstien vise Innsikt / (lenke til seksjon) / (korrek
 En ugyldig ID må gi forståelig tilbakevei, ikke en falsk detaljsti.
 
 Ny detaljtype må ha Chromium-test for detalj -> foreldreside -> hjem. scripts/check-navigation-browser.mjs går gjennom samtlige lysbildedetaljer og utvalgte andre detaljtyper; scripts/check-browser.mjs beholder regresjonstesten.
+
+Utgåtte lysbilde-ID-er er eksplisitt registrert i pages.json.retiredSlideRedirects. Et objekt som er erstattet eller trukket tilbake må enten ha gyldig redirect eller en bevisst tombstone. Test gamle direktelenker; ikke la de falle ned i generell ikke-funnet-visning uten vurdering.

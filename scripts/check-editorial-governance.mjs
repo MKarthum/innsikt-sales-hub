@@ -44,6 +44,11 @@ for(const id of ['market-why-now','market-three-forces','market-customer-pressur
  const slide=slides.find(s=>s.id===id);
  assert.ok(slide&&slide.sourceIds.length,'2026 market claim lacks source: '+id);
 }
+const redirects=read('pages').retiredSlideRedirects||{};
+for(const [oldId,newId] of Object.entries(redirects)){
+ assert.ok(!ids.has(oldId),'Retired object still active: '+oldId);
+ assert.ok(ids.has(newId),'Retired deep link has no valid destination: '+oldId);
+}
 const notes=fs.readFileSync('SLIDE_EDITORIAL_AUDIT_2026-10-24.md','utf8');
 for(const s of slides)assert.ok(notes.includes('| '+s.id+' |'),'Audit omits '+s.id);
 for(const needle of ['## Vedlikeholdsporter for navigasjon','Navigasjonskontrakt','Fortelling før deck','Lysbilde før dekor']){

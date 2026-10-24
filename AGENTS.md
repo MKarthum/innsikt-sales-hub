@@ -18,6 +18,7 @@ Start alltid med `START_HERE.md`. Les siste `main`, og bruk repoet – aldri gam
 
 ## Vedlikeholdsporter for navigasjon, historier og lysbilder
 
+- **Objektlivssyklus:** Fjernes et lysbilde fra aktivt bibliotek, må eventuell gammel direktelenke få en validert redirect til et nytt relevant objekt. Ikke bryt etablerte ID-er i stillhet.
 - **Navigasjonskontrakt:** For hver ny detaljrute seksjon/id: klikkbar foreldreside seksjon, korrekt objektstittel, nøyaktig én aria-current=page og fungerende tilbakevei. Entitetsoppslag og Chromium-test må oppdateres samlet. Se NAVIGATION_CONTRACT.md.
 - **Fortelling før deck:** En ny presentasjon trenger selvstendig publikum, spørsmål, dramaturgisk vending, ønsket handling og relevante kilder. Piloter, forkortelser og alternative rekkefølger av samme lysbilder er ikke automatisk egne historier. Se STORY_EDITORIAL_CONTRACT.md.
 - **Lysbilde før dekor:** Ett nytt poeng per bilde. Foretrekk meningsbærende figurer fra visual-assets.json og kildebelagte påstander. Gjenbruk byggeklosser, men tving ikke faglig ulike arkitekturer inn i samme figur.

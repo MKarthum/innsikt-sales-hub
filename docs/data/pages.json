@@ -949,5 +949,9 @@
     "origin": "Opphav",
     "rights": "Bruksrettigheter",
     "empty": "Ingen ressurser"
+  },
+  "retiredSlideRedirects": {
+    "portal-summary": "portal-outcome",
+    "sales-summary": "seller-specialist"
   }
 }

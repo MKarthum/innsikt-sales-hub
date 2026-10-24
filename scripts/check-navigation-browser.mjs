@@ -22,6 +22,12 @@ try{
    assert.equal((await page.locator('#crumb [aria-current="page"]').innerText()).trim(),slide.title);
    assert.equal(await page.locator('#crumb').getAttribute('aria-current'),null);
   }
+  for(const [oldId,newId] of Object.entries({'portal-summary':'portal-outcome','sales-summary':'seller-specialist'})){
+   await page.evaluate(id=>location.hash='#lysbilder/'+id,oldId);
+   await page.waitForFunction(newId=>location.hash==='#lysbilder/'+newId&&!!document.querySelector('#crumb a[href="#lysbilder"]'),newId);
+  }
+  await page.evaluate(id=>location.hash='#lysbilder/'+id,library[0].id);
+  await page.waitForFunction(id=>location.hash==='#lysbilder/'+id&&!!document.querySelector('#crumb a[href="#lysbilder"]'),library[0].id);
   // Navigation must work via real click on both devices, not just hash assignment.
   await page.locator('#crumb a[href="#lysbilder"]').click();
   await page.waitForFunction(()=>location.hash==='#lysbilder'&&document.querySelector('#crumb')?.getAttribute('aria-current')==='page');
