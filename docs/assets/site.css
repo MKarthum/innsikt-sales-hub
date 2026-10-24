@@ -664,3 +664,7 @@ textarea.prompt-var-input{min-height:78px}
 .slide-library-usage{border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:16px;margin:0 0 12px}
 .slide-library-usage p{white-space:pre-wrap;font-size:12px;line-height:1.65;color:var(--muted)}
 @media(max-width:760px){.slide-library-info{grid-template-columns:1fr}}
+
+/* Make parent-level breadcrumb navigation discoverable and keyboard-accessible. */
+.breadcrumb-trail a{color:var(--teal);font-weight:650;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
+.breadcrumb-trail a:hover,.breadcrumb-trail a:focus-visible{text-decoration-color:currentColor}
