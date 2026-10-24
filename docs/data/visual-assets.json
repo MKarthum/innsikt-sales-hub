@@ -337,6 +337,96 @@
       "termsUrl": "https://www.databricks.com/",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
       "sha256": "0071359e3ffa197a94604f087fbc8a5fa547723fb0962f581f1682c7b49f0a24"
+    },
+    {
+      "id": "market-signal",
+      "label": "Market signal",
+      "category": "original-figure",
+      "path": "assets/library/original/market-signal.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "77b7e29afab428ed96ca07de1f58995e929447ae0ae0bfbda044c722ccce432f"
+    },
+    {
+      "id": "business-decision",
+      "label": "Business decision",
+      "category": "original-figure",
+      "path": "assets/library/original/business-decision.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "314bdd8dfded69589313f1f20d24c403fb52bcdb1807236a4a7b6c066e2a30b6"
+    },
+    {
+      "id": "data-semantic",
+      "label": "Data semantic",
+      "category": "original-figure",
+      "path": "assets/library/original/data-semantic.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "e89a1b60d60a50516b435508c81bde5a44d7527330b04790beb9dd00001af68c"
+    },
+    {
+      "id": "ai-agent",
+      "label": "Ai agent",
+      "category": "original-figure",
+      "path": "assets/library/original/ai-agent.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "8e0355c87b740c0d1c2685d3e7a083daf0581088b1508ba937222ef1fec4037b"
+    },
+    {
+      "id": "governance-shield",
+      "label": "Governance shield",
+      "category": "original-figure",
+      "path": "assets/library/original/governance-shield.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "1d4c949cd31e39faec58d0d762a4a82a8217475801cfe353c476c56dbcd8d872"
+    },
+    {
+      "id": "value-compass",
+      "label": "Value compass",
+      "category": "original-figure",
+      "path": "assets/library/original/value-compass.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "9cac203c96e95a63664d34bffae44d21eae7bc4dc4f4996ee65a62919db1a07b"
+    },
+    {
+      "id": "customer-dialogue",
+      "label": "Customer dialogue",
+      "category": "original-figure",
+      "path": "assets/library/original/customer-dialogue.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "bb8a2d300e74ccf65bafcadab3aeeb570959c4d8997f42dd6138da537018be8b"
+    },
+    {
+      "id": "delivery-loop",
+      "label": "Delivery loop",
+      "category": "original-figure",
+      "path": "assets/library/original/delivery-loop.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "4e531a0d5ac11b4702d5051856ff8e32d0a3981a02a10cc2010915769ec55845"
+    },
+    {
+      "id": "product-map",
+      "label": "Product map",
+      "category": "original-figure",
+      "path": "assets/library/original/product-map.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "39bbf35de91a9ea0cde3e16ff56c877540594608f6816630ac49218e5b128388"
+    },
+    {
+      "id": "verified-analysis",
+      "label": "Verified analysis",
+      "category": "original-figure",
+      "path": "assets/library/original/verified-analysis.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
+      "sha256": "84617457512591b8bea0ef0aafcdc7ac60526a41a623ebbcc50d6e7853cab2fe"
     }
   ]
 }

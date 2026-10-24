@@ -5,6 +5,8 @@ import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
 const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8')).items.length;
+const expectedSlideCount=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.length;
+const expectedDeckCount=Object.keys(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks).length;
 const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','lysbilder','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
@@ -110,7 +112,7 @@ try {
   // Bibliotek: enhetlig ID, detaljvisning, kildepolicy og direkte åpning.
   await page.evaluate(()=>{location.hash='#lysbilder'});
   await page.locator('.slide-library-card').first().waitFor();
-  assert.equal(await page.locator('.slide-library-card').count(),36,label+': 36 selvstendige lysbilder');
+  assert.equal(await page.locator('.slide-library-card').count(),expectedSlideCount,label+': alle selvstendige lysbilder');
   await page.locator('.slide-library-card[href="#lysbilder/portal-opening"]').click();
   await page.locator('.slide-library-detail-stage .present-frame').waitFor();
   assert.equal(await page.locator('.slide-library-detail-stage .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
@@ -130,7 +132,7 @@ try {
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#present-modal').count(),0,label+': tilbake til bibliotek etter Presenter');
   await page.locator('#present-button').click();
-  assert.equal(await page.locator('[data-deck]').count(),8,'Åtte komponerbare Presenter-løp');
+  assert.equal(await page.locator('[data-deck]').count(),expectedDeckCount,'Alle kuraterte Presenter-løp');
   assert.ok((await page.locator('#slide-body').innerText()).includes('Tenk om virksomheten din fikk'),label+': Hvorfor Innsikt starter som hovedfortelling');
   for(const deck of ['portal','sales']) {
    await page.locator('[data-deck="'+deck+'"]').click();
@@ -277,11 +279,11 @@ try {
   assert.ok(download.suggestedFilename().includes(expectedVersion)&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes('Innsikt hjelper oss fra usikkerhet')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
-  assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,8,'alle portal-slides er eksportert');
+  assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,7,'alle portal-slides er eksportert');
   const popupPromise=context.waitForEvent('page');
   await page.locator('#deck-print').click();
   const printed=await popupPromise;
-  await printed.waitForFunction(()=>document.querySelectorAll('.export-slide').length===8);
+  await printed.waitForFunction(()=>document.querySelectorAll('.export-slide').length===7);
   assert.ok((await printed.locator('#export-print').count())===1,'utskriftsvisning har PDF-knapp');
   await printed.close();
   await page.locator('#speaker-toggle').check();

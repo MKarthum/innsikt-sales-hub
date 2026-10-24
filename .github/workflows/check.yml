@@ -52,6 +52,8 @@ jobs:
       - name: Kontroller visuell presentasjon og lag skjermbilder
         if: always()
         run: node scripts/check-visual-pilot.mjs
+      - name: Kontroller navigasjonskontrakt for alle detaljruter
+        run: node scripts/check-navigation-browser.mjs
       - name: Kontroller arkitekturdiagrammer og ressursbibliotek
         run: node scripts/check-architecture-browser.mjs
       - name: Kontroller palettvalg, eksport og beskyttet innhold

@@ -263,3 +263,15 @@
  #present-modal .present-footer{margin-top:2px}
  #present-modal .present-export-controls{margin-top:2px;padding-top:2px}
 }
+
+/* Semantic asset layer: same original SVG in all stories, no duplicate one-off drawing.
+   Logo/figure backgrounds are intentionally neutral so strokes remain readable in both themes. */
+.v3-impact-figure{width:17cqw;height:17cqw;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);object-fit:contain;padding:3.8cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 50%,transparent);border-radius:50%;background:#f7faf9;box-shadow:0 .8cqw 5cqw color-mix(in srgb,var(--pres-accent) 18%,transparent)}
+.v2-list-copy:has(.v3-list-icon){display:flex;align-items:center;gap:1.25cqw}
+.v3-list-icon{width:4.5cqw;height:4.5cqw;object-fit:contain;padding:.65cqw;background:#f7faf9;border-radius:1cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 28%,transparent);flex:none}
+.v3-list-text{display:grid;gap:.55cqw;min-width:0}
+.v3-road-top{display:flex;align-items:center;gap:2.1cqw;min-height:8.25cqw}
+.v3-road-icon{width:5.1cqw;height:5.1cqw;flex:0 0 auto;object-fit:contain;padding:.9cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 25%,transparent);border-radius:.85cqw;background:#f7faf9}
+.v3-domain-icon{width:7.7cqw;height:6.5cqw;object-fit:contain;align-self:flex-start;padding:1cqw;background:#f7faf9;border-radius:1cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 28%,transparent)}
+.v3-portal-icon{width:11cqw;height:11cqw;object-fit:contain;padding:2.25cqw;background:#f7faf9;border-radius:2cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 30%,transparent);align-self:center}
+@media(prefers-reduced-motion:reduce){.v3-impact-figure,.v3-list-icon,.v3-road-icon,.v3-domain-icon,.v3-portal-icon{transition:none}}
