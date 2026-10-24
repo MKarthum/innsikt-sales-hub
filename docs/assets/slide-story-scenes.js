@@ -7,6 +7,14 @@ function render(slide,{v,top,title,escs,assetImage,block}){
  const heading='<div class="v5-heading">'+title+'</div>';
  const icon=(id,cls='v5-icon')=>assetImage(id,cls);
  switch(v.layout){
+ case 'discovery-dialogue': {
+  return block('special v5-special v9-dialogue',top+heading
+   +'<section class="v9-dialogue-signal"><div><small>'+escs(v.exampleLabel)+'</small><span>'+escs(v.signalLabel)+'</span></div><blockquote>'+escs(v.signal)+'</blockquote></section>'
+   +'<div class="v9-dialogue-head" aria-hidden="true"><small>'+escs(v.questionLabel)+'</small><small>'+escs(v.answerLabel)+'</small><small>'+escs(v.insightLabel)+'</small></div>'
+   +'<ol class="v9-dialogue-rows">'+v.clarifications.map(x=>'<li><section class="v9-dialogue-question"><strong>'+escs(x.question)+'</strong></section><section class="v9-dialogue-answer"><blockquote>'+escs(x.answer)+'</blockquote></section><section class="v9-dialogue-insight"><strong>'+escs(x.insight)+'</strong></section></li>').join('')+'</ol>'
+   +'<section class="v9-dialogue-next"><div><small>'+escs(v.nextLabel)+'</small><strong>'+escs(v.nextAction)+'</strong></div><p>'+escs(v.guardrail)+'</p></section>'
+   +footer(v.conclusion));
+ }
  case 'controlled-comparison': {
   const option=(x,cls)=>section('v8-compare-option '+cls,
    '<small>'+escs(x.label)+'</small><h3>'+escs(x.title)+'</h3><p>'+escs(x.detail)+'</p>'

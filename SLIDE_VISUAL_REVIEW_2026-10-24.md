@@ -39,7 +39,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | insight-three-disciplines | Innsikt er mer enn én teknologi. | Data, analyse og KI skaper mer verdi i sammenheng | Tre faglige områder står separat med en felles, synlig konklusjon |
 | risk-and-trust | Kontroll må passe til risikoen. | Kontrollen må stå i forhold til konsekvensen av feil | Tre faglige områder står separat med en felles, synlig konklusjon |
 | seller-signals | Lytt etter behov – ikke teknologinavn. | Kundens frustrasjon sier mer enn teknologinavnet | Lar kundens egne ord stå synlig med forklarende spørsmål |
-| seller-better-questions | Tre spørsmål åpner riktig samtale. | Tre spørsmål gir et bedre første kundemøte | Gjør de tre spørsmålene til hovedinnhold, ikke marginal liste |
+| seller-better-questions | Tre svar gir grunnlag for en avgrenset undersøkelse, ikke et teknologivalg. | Tre spørsmål gjør et kundesignal mulig å følge opp | Fiktivt kundesitat → tre horisontale spørsmål/svar/utledninger → neste steg med synlig forbehold |
 | seller-specialist | Du trenger ikke svaret i første møte. | Selgeren må forstå behovet – ikke velge teknologien | Forteller et konkret før-til-etter-resonnement i stedet for dekorative ringer |
 | portal-purpose | Fra faglig forståelse til neste kundesamtale. | Portalen gir en vei fra kundesignal til neste steg | Beholder portalbroen, men bruker en presis og lesbar konklusjon |
 | architecture-conceptual | Konseptuell dataplattform | Dataplattformen binder kilder og bruk sammen | Behovstilpasset teknisk diagram, ikke en generisk kortscene |
@@ -93,3 +93,7 @@ Se [SLIDE_QUALITY_REVIEW_V016.md](SLIDE_QUALITY_REVIEW_V016.md) for visuell gjen
 ## Oppfølging v0.17.0
 
 Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md). Fire prioriterte komposisjoner er omarbeidet fra faktisk rendring. Mørk ikonkontrast ble korrigert etter manuell kontroll. Gjenværende arbeid er rangert slik at nye iterasjoner kan være selektive.
+
+## Oppfølging 25.10.2026 – seller-better-questions
+
+Tidligere: tre separate spørsmålskort uten kundesvar eller tydelig neste handling. Ny scene: ett tydelig merket fiktivt kundesignal, tre sammenstilte spørsmål/svar/utledninger og avgrenset oppfølging uten teknologivalg. Metodekildene underbygger spørsmål og måling, ikke eksempelet eller en effektpåstand. Visuell aksept i begge temaer, mobil og eksport krever faktisk rendering og kontroll før merge.
