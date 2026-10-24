@@ -28,7 +28,7 @@ try{
  await page.locator('[data-slide-filter="story"]').selectOption('innsikt');
  assert.equal(await page.locator('.slide-library-card').count(),decks.innsikt.slides.length,'Historiefilter');
  await page.locator('[data-slide-reset]').click();
- await page.locator('[data-slide-search]').fill('usikkerhet');
+ await page.locator('[data-slide-search]').fill('analytikere');
  assert.ok(await page.locator('.slide-library-card').count()>0,'Tekstsøk');
  await page.locator('[data-slide-reset]').click();
  await page.locator('#present-button').click();
