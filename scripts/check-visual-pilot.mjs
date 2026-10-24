@@ -1,8 +1,10 @@
-/* Browser-rendered visual review; screenshots accompany the PR as a CI artifact. */
+/* Representative visual regression checks drawn from the curated main story; full library is tested separately. */
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {chromium} from 'playwright';
 const output='artifacts/visual-pilot';
+const library=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items;
+const decks=JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks;
 fs.mkdirSync(output,{recursive:true});
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const errors=[];
@@ -13,24 +15,24 @@ try{
  await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
  await page.evaluate(()=>{location.hash='#lysbilder'});
  await page.locator('.slide-library-card').first().waitFor();
- assert.equal(await page.locator('.slide-library-card').count(),39,'39 selvstendige lysbilder');
+ assert.equal(await page.locator('.slide-library-card').count(),library.length,'Alle selvstendige lysbilder');
  await page.screenshot({path:output+'/library-desktop.png',fullPage:false});
  await page.locator('[data-slide-filter="topic"]').selectOption('KI og kapasitet');
  assert.equal(await page.locator('.slide-library-card').count(),4,'Temafilter');
  await page.locator('[data-slide-filter="topic"]').selectOption('all');
  await page.locator('[data-slide-scope="shared"]').click();
- assert.equal(await page.locator('.slide-library-card').count(),24,'Delbare slides');
+ assert.equal(await page.locator('.slide-library-card').count(),library.filter(s=>s.scope==='shared').length,'Delbare slides');
  await page.locator('[data-slide-scope="story"]').click();
- assert.equal(await page.locator('.slide-library-card').count(),12,'Historiespesifikke slides');
+ assert.equal(await page.locator('.slide-library-card').count(),library.filter(s=>s.scope==='story').length,'Historiespesifikke slides');
  await page.locator('[data-slide-reset]').click();
- await page.locator('[data-slide-filter="story"]').selectOption('analytikere');
- assert.equal(await page.locator('.slide-library-card').count(),3,'Historiefilter');
+ await page.locator('[data-slide-filter="story"]').selectOption('innsikt');
+ assert.equal(await page.locator('.slide-library-card').count(),decks.innsikt.slides.length,'Historiefilter');
  await page.locator('[data-slide-reset]').click();
  await page.locator('[data-slide-search]').fill('usikkerhet');
  assert.ok(await page.locator('.slide-library-card').count()>0,'Tekstsøk');
  await page.locator('[data-slide-reset]').click();
  await page.locator('#present-button').click();
- await page.locator('[data-deck="analytikere"]').click();
+ await page.locator('[data-deck="innsikt"]').click();
  for(let index=1;index<=3;index++){
   const slide=page.locator('#slide-body');
   await slide.locator('.story-scene').waitFor();
@@ -41,7 +43,7 @@ try{
   });
   assert.ok(Math.abs(metrics.width/metrics.height-16/9)<.02,'Stabilt format '+index);
   assert.ok(metrics.overflowX<=3&&metrics.overflowY<=3,'Ingen avklipping '+index+': '+JSON.stringify(metrics));
-  const artwork=await slide.locator('.story-scene svg').first().evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height}});
+  const artwork=await slide.locator('.story-scene svg, .story-scene img').first().evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height}});
   assert.ok(artwork.width>150&&artwork.height>100,'Illustrasjonen må være synlig og stor: '+index+' '+JSON.stringify(artwork));
   await slide.screenshot({path:output+'/slide-'+index+'.png'});
   if(index<3)await page.locator('#slide-next').click();
