@@ -35,6 +35,9 @@ const setup=[
 " D.learning.templates.forEach(x=>add('verktoy/'+x.id,()=>toolkit(x.id)));",
 " D.prompts.items.forEach(x=>add('prompter/'+x.id,()=>prompts(x.id)));",
 " D.slides.items.forEach(x=>add('lysbilder/'+x.id,()=>slideLibraryPage(x.id)));",
+" D.scenarios.forEach(x=>{add('kundedialog/tren-'+x.id,()=>dialogue('tren-'+x.id));add('kundedialog/kunde-'+x.id,()=>dialogue('kunde-'+x.id));add('kundedialog/evaluer-'+x.id,()=>dialogue('evaluer-'+x.id));});",
+" add('kundedialog/trening',()=>dialogue('trening'));",
+" add('kundedialog/stotte',()=>dialogue('stotte'));",
 " add('prompter/variabler',()=>prompts('variabler'));",
 ' const slideBody={innerHTML:""};',
 ' globalThis.document={',
@@ -71,6 +74,7 @@ vm.runInContext(read('docs/assets/vendor-architectures.js'),sandbox,{timeout:300
 vm.runInContext(read('docs/assets/architecture-visuals.js'),sandbox,{timeout:3000,filename:'architecture-visuals.js'});
 vm.runInContext(read('docs/assets/slide-story-scenes.js'),sandbox,{timeout:3000,filename:'slide-story-scenes.js'});
 vm.runInContext(read('docs/assets/slide-visuals.js'),sandbox,{timeout:3000,filename:'slide-visuals.js'});
+vm.runInContext(read('docs/assets/dialogue.js'),sandbox,{timeout:3000,filename:'dialogue.js'});
 vm.runInContext(instrumented,sandbox,{timeout:3000,filename:'site.js'});
 let entries;
 try {entries=vm.runInContext('__renderAll()',sandbox,{timeout:8000});}

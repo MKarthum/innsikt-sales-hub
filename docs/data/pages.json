@@ -49,9 +49,9 @@
       "intro": "Situasjoner fra både forretning og teknologi som kan gi behov for ekstern kompetanse. Bruk spørsmålene til å forstå behovet, ikke til å presse frem en bestemt løsning."
     },
     "KUNDEDIALOG": {
-      "eyebrow": "KUNDEDIALOG",
-      "title": "Tren på å oppdage det som ligger bak",
-      "intro": "Selgeren trenger ikke være teknisk ekspert. Målet er å forstå hvorfor kunden trenger hjelp, og hva som er et relevant neste steg."
+      "eyebrow": "KUNDEDIALOG · PRAKTISK HJELP",
+      "title": "Bli bedre i kundesamtalen",
+      "intro": "Tren med en kollega på 15 minutter, eller finn konkrete spørsmål før et kundemøte. Begynn med kundens situasjon – ikke et ferdig løsningsforslag."
     },
     "KOMPETANSE": {
       "eyebrow": "KOMPETANSE",
@@ -238,6 +238,14 @@
         "description": "Finn forklaringer, arkitekturprinsipper og teknisk bakgrunn.",
         "route": "#arkitektur",
         "action": "Se faglig fordypning"
+      },
+      {
+        "id": "practice",
+        "icon": "users",
+        "title": "Jeg vil trene med en kollega",
+        "description": "Spill selger og kunde. Bruk 15 minutter på én realistisk behovssamtale.",
+        "route": "#kundedialog/trening",
+        "action": "Velg en øvelse"
       }
     ],
     "advancedLinks": [
@@ -266,7 +274,15 @@
     ],
     "good": "Godt belyst – oppsummer behovet og avtal neste steg.",
     "partial": "Flere dimensjoner er belyst. Finn ut hva som fortsatt mangler.",
-    "start": "Bruk spørsmålene som støtte. Det er ingen formell score eller salgsgaranti."
+    "start": "Bruk spørsmålene som støtte. Det er ingen formell score eller salgsgaranti.",
+    "followUps": [
+      "Hva skjer i dag, og hvilken situasjon gjør det til et problem?",
+      "Hvilken beslutning eller prosess påvirkes – og hva ville et bedre resultat bety?",
+      "Hvem kjenner problemet i praksis, og hvem eier prioriteringen eller beslutningen?",
+      "Hva gjør dette aktuelt nå, og finnes det en frist eller et pågående initiativ?",
+      "Hva har dere prøvd, og hva mangler av tid, kapasitet eller fagkompetanse?",
+      "Hva trenger vi å avklare, og hvem bør delta i en kort neste samtale?"
+    ]
   },
   "copy": {
     "marketIndustriesTitle": "Store forskjeller mellom bransjer",
@@ -953,5 +969,113 @@
   "retiredSlideRedirects": {
     "portal-summary": "portal-outcome",
     "sales-summary": "seller-specialist"
+  },
+  "dialogueUi": {
+    "hub": {
+      "trainingTitle": "Tren sammen",
+      "trainingDesc": "To personer. Ett fiktivt kundemøte. Tydelige rollekort og felles refleksjon på 15 minutter.",
+      "trainingAction": "Start en øvelse",
+      "supportTitle": "Forbered samtale",
+      "supportDesc": "Seks konkrete utforskende spørsmål og veien videre – uten rollespill.",
+      "supportAction": "Finn samtalestøtte",
+      "publicNote": "Alle scenarioene er oppdiktede. Ikke skriv inn faktiske kundeopplysninger i den offentlige løsningen."
+    },
+    "training": {
+      "title": "Velg en samtale å øve på",
+      "intro": "Én er selger, én spiller kunde. Velg en situasjon; begge leser kun sitt rollekort. Snakk sammen uten å lese av spørsmål, og vurder deretter hva dere faktisk fant ut.",
+      "steps": [
+        {
+          "time": "2 min",
+          "title": "Forbered",
+          "description": "Fordel roller og les hvert deres kort."
+        },
+        {
+          "time": "8 min",
+          "title": "Snakk",
+          "description": "Selgeren utforsker behovet. Kunden svarer naturlig."
+        },
+        {
+          "time": "5 min",
+          "title": "Reflekter",
+          "description": "Avdekk hva som kom frem, og prøv én bedre oppfølging."
+        }
+      ],
+      "choose": "Åpne øvelse",
+      "levels": {
+        "start": "Kom i gang",
+        "videre": "Viderekommen",
+        "avansert": "Krevende"
+      },
+      "objectiveLabel": "Dette trener dere på",
+      "fiction": "Fiktiv situasjon · ingen ekte kunder"
+    },
+    "seller": {
+      "eyebrow": "ROLLEKORT · SELGER",
+      "heading": "Din oppgave",
+      "situationLabel": "Det vet du før møtet",
+      "goalLabel": "Treningsmål",
+      "instruction": "Utforsk situasjonen uten å hoppe til teknologi eller tilbud. Du skal ikke finne én fasit, men forstå om og hvordan det er nyttig å gå videre.",
+      "customerLink": "Vis kundens rollekort",
+      "share": "Kopier lenke til kundens kort",
+      "shareSuccess": "Lenke kopiert",
+      "shareFailure": "Kunne ikke kopiere. Del nettleserlenken manuelt.",
+      "oneScreen": "Én skjerm? La kunden lese sitt kort først, og gå så tilbake hit. Rollekortene er separate visninger, men ikke hemmelig eller tilgangsbeskyttet.",
+      "start": "Begynn samtalen",
+      "startHint": "Legg vekk skjermen og gjennomfør samtalen. Gå til refleksjon etterpå.",
+      "review": "Gå til felles evaluering"
+    },
+    "customer": {
+      "eyebrow": "ROLLEKORT · KUNDE",
+      "heading": "Din rolle",
+      "situationLabel": "Dette vet du om situasjonen",
+      "openingLabel": "Dette kan du åpne med",
+      "revealLabel": "Fortell mer når selgeren utforsker",
+      "behaviorLabel": "Slik spiller du rollen",
+      "uncertaintyLabel": "Ikke bestem løsningen på forhånd",
+      "instruction": "Du skal være en troverdig samtalepartner. Svar naturlig, og la opplysningene komme frem når samtalen gir grunn til det – ikke hold dem kunstig tilbake.",
+      "back": "Til selgerens kort",
+      "review": "Evaluer sammen"
+    },
+    "review": {
+      "eyebrow": "FELLES REFLEKSJON · ETTER SAMTALEN",
+      "heading": "Hva fant dere faktisk ut?",
+      "intro": "La selgeren oppsummere først. Kunden fyller deretter inn hva som var viktig, men som ikke kom frem. Se på forslagene til slutt – ikke bruk dem som fasit.",
+      "questions": [
+        "Hva lærte dere om det egentlige problemet?",
+        "Hvilke antakelser ble undersøkt, og hvilke ble stående?",
+        "Hva ville du spurt om dersom dere hadde to minutter til?"
+      ],
+      "lookFor": "Sjekk samtalen sammen",
+      "hidden": "Dette visste kunden – kom det frem?",
+      "examples": "Mulige oppfølgingsspørsmål",
+      "shortcut": "Dette ville vært en snarvei",
+      "next": "Et naturlig neste steg",
+      "retry": "Prøv én ny oppfølging",
+      "repeat": "Øv på nytt med samme scenario",
+      "another": "Velg en annen øvelse",
+      "reveal": "Vis kundens bakgrunn og læringspunkter",
+      "customerReminder": "Spør kunden hva du ikke fikk vite før dere åpner fasiten.",
+      "playLink": "Se relevant salgsinngang"
+    },
+    "support": {
+      "eyebrow": "SAMTALESTØTTE",
+      "heading": "Gode spørsmål før kundemøtet",
+      "intro": "Bruk spørsmålene som en fleksibel huskeliste, ikke som et intervju som må gjennom alle punktene. Finn det som er viktig i akkurat denne samtalen.",
+      "question": "Spør gjerne",
+      "brief": "Lag en møtebrief",
+      "briefDesc": "Trenger du agenda og tilpassede spørsmål? Bruk den eksisterende møtebrief-prompten.",
+      "plays": "Utforsk en salgsinngang",
+      "playsDesc": "Har du hørt et konkret signal? Åpne relevant salgsinngang for mer spesifikke spørsmål.",
+      "needs": "Utforsk forretningsbehov",
+      "needsDesc": "Når samtalen starter hos forretningen – ikke i IT.",
+      "startTraining": "Vil du øve først?",
+      "startTrainingDesc": "Ta én 15-minutters øvelse med en kollega.",
+      "startTrainingAction": "Gå til samtaletrening",
+      "caution": "Det er ikke et mål å krysse av alle punktene. Oppsummer hva du har forstått, avtal gjerne hvem som bør involveres, og vær åpen om hva som fortsatt er uklart."
+    },
+    "backHub": "Kundedialog",
+    "backTraining": "Alle øvelser",
+    "notFound": "Fant ikke denne øvelsen",
+    "notFoundDesc": "Lenken kan være utdatert. Velg en av de tilgjengelige øvelsene."
   }
 }
