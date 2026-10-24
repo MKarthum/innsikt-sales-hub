@@ -95,7 +95,7 @@ try {
   // Bibliotek: enhetlig ID, detaljvisning, kildepolicy og direkte åpning.
   await page.evaluate(()=>{location.hash='#lysbilder'});
   await page.locator('.slide-library-card').first().waitFor();
-  assert.equal(await page.locator('.slide-library-card').count(),15,label+': 15 migrerte lysbilder');
+  assert.equal(await page.locator('.slide-library-card').count(),18,label+': 18 selvstendige lysbilder');
   await page.locator('.slide-library-card[href="#lysbilder/portal-opening"]').click();
   await page.locator('.slide-library-preview .present-frame').waitFor();
   assert.equal(await page.locator('.slide-library-preview .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
