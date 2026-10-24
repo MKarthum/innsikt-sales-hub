@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "portal-opening",
+      "scope": "story",
+      "storyId": "portal",
+      "tone": "strong",
+      "type": "intro",
+      "cue": "VIS FREM LØSNINGEN",
+      "title": "Innsikt hjelper oss fra usikkerhet til en bedre kundesamtale",
+      "body": "Et arbeidsverktøy for kundeansvarlige og fagpersoner: finn en relevant oppgave, bruk innholdet og kom videre.",
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "portal-three-ways",
+      "scope": "story",
+      "storyId": "portal",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "VELG DET DU SKAL GJØRE",
+      "title": "Tre vanlige oppgaver gir tre naturlige startpunkter",
+      "bullets": [
+        "Forberede kundemøte → møtebrief og ferdige prompter.",
+        "Fanget opp et behov → problemer og avklaringsspørsmål.",
+        "Forstå et fagtema → forklaringer og fordypning."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "portal-meeting-brief",
+      "scope": "story",
+      "storyId": "portal",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "FRA FORSIDE TIL VERKTØY",
+      "title": "En møtebrief kan være første nyttige resultat",
+      "bullets": [
+        "Velg «Lag en møtebrief» på forsiden.",
+        "Åpne «Forbered et kundemøte» og tilpass feltene.",
+        "Kopier til godkjent KI-verktøy og kontroller utkastet."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "portal-customer-signal",
+      "scope": "story",
+      "storyId": "portal",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "NÅR KUNDEN HAR ET PROBLEM",
+      "title": "Et kundesignal blir nyttig når vi finner de riktige spørsmålene",
+      "body": {
+        "$content": "guidance:customer-first",
+        "variant": "normal"
+      },
+      "bullets": [
+        "«Forretningsbehov» viser situasjoner, roller og spørsmål.",
+        "«Salgsinnganger» peker mot mulige faglige spor.",
+        "«Kundedialog» trener oss på å se bak første bestilling."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "portal-learning",
+      "scope": "story",
+      "storyId": "portal",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "FAGLIG FORDYPNING VED BEHOV",
+      "title": "Fagstoffet er der når spørsmålet blir mer krevende",
+      "bullets": [
+        "«Start her» gir en valgfri innføring for nye kolleger.",
+        "«Data og KI i praksis» forklarer sammenhenger og arkitektur.",
+        "Teknologikart og KI-oversikter gir videre fordypning."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "portal-market",
+      "scope": "story",
+      "storyId": "portal",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "MARKED SOM STØTTE",
+      "title": "Markedet gir kontekst når vi trenger den",
+      "bullets": [
+        "«Marked og trender» gir kilder og utviklingstrekk.",
+        "«Trendradar» skiller tidlige signaler fra etablerte forhold.",
+        "Ingen av delene beviser kundens behov eller et oppdrag."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "portal-outcome",
+      "scope": "story",
+      "storyId": "portal",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "FRA INNSIKT TIL HANDLING",
+      "title": "Målet er noe du kan bruke i neste samtale",
+      "bullets": [
+        "Et møtedokument eller en relevant prompt som utgangspunkt.",
+        "Bedre spørsmål om problem, konsekvens og ansvar.",
+        "Et neste steg med tilgang til riktig fagkompetanse."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "portal-summary",
+      "scope": "story",
+      "storyId": "portal",
+      "tone": "strong",
+      "type": "takeaway",
+      "cue": "OPPSUMMERING",
+      "title": "Innsikt gjør oss bedre forberedt – ikke automatisk sikre",
+      "bullets": [
+        "Start med oppgaven, ikke med hele kunnskapsbasen.",
+        "Bruk prompter, spørsmål og fordypning etter behov.",
+        "Kontroller fakta og forankre neste steg hos kunde og fagmiljø."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "sales-opening",
+      "scope": "story",
+      "storyId": "sales",
+      "tone": "strong",
+      "type": "intro",
+      "cue": "ET KONKRET EKSEMPEL",
+      "title": "Kunden sier at tallene ikke stemmer. Hva gjør vi nå?",
+      "body": "Et fiktivt eksempel fra «Forretningsbehov». Vi skal ikke diagnostisere kunden, men forberede en bedre samtale.",
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "sales-finance-case",
+      "scope": "story",
+      "storyId": "sales",
+      "tone": "strong",
+      "type": "case",
+      "cue": "FRA «FORRETNINGSBEHOV»",
+      "title": "«Vi bruker flere dager på månedsavslutning»",
+      "business": "okonomi",
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "sales-hypotheses",
+      "scope": "story",
+      "storyId": "sales",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "IKKE VELG LØSNING ENNÅ",
+      "title": "Symptomet kan ha flere ulike årsaker",
+      "bullets": [
+        "Avdelinger kan definere samme nøkkeltall forskjellig.",
+        "Data kan samles inn og avstemmes manuelt.",
+        "Rapporteringen kan komme for sent til beslutningen."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "sales-questions",
+      "scope": "story",
+      "storyId": "sales",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "KVALIFISER BEHOVET",
+      "title": "Tre spørsmål gjør neste møte bedre",
+      "bullets": [
+        "Hvilken beslutning blir forsinket eller svekket?",
+        "Hvor oppstår forskjellene, og hvem eier definisjonene?",
+        "Hva må vi undersøke før vi anbefaler et tiltak?"
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "sales-discovery-prompt",
+      "scope": "story",
+      "storyId": "sales",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "FRA SPØRSMÅL TIL VERKTØY",
+      "title": "En ferdig prompt hjelper oss å forberede samtalen",
+      "bullets": [
+        "Åpne «Prompter for salg» → «Forbered en behovssamtale».",
+        "Bruk et generisk eller anonymisert kundesignal.",
+        "Tilpass, kopier og kvalitetssikre spørsmålene."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "sales-next-step",
+      "scope": "story",
+      "storyId": "sales",
+      "tone": "strong",
+      "type": "bullets",
+      "cue": "ET MULIG RESULTAT",
+      "title": "Vi kan foreslå en avgrenset avklaring – ikke et IT-prosjekt",
+      "bullets": [
+        "Inviter økonomiansvarlig og relevant data-/analysekompetanse.",
+        "Undersøk én rapporteringsflyt og definisjonene bak.",
+        "Vurder først deretter om videre arbeid er nødvendig."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    },
+    {
+      "id": "sales-summary",
+      "scope": "story",
+      "storyId": "sales",
+      "tone": "strong",
+      "type": "takeaway",
+      "cue": "DERFOR ER DET NYTTIG",
+      "title": "Først et behov. Så bedre spørsmål. Deretter et neste steg.",
+      "bullets": [
+        "«Forretningsbehov» ga oss et gjenkjennelig symptom.",
+        "En ferdig prompt gjorde spørsmålene lettere å forberede.",
+        "Vi fikk et kvalifisert neste møte, ikke en ferdig diagnose."
+      ],
+      "sourceIds": [],
+      "speakerBase": ""
+    }
+  ]
+}

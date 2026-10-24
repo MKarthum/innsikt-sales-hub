@@ -19,7 +19,8 @@ Les [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) og [PROMPT_WORKFLOW.md](PROMPT_WO
 ## Kanoniske dataeiere
 
 - `site.json`: versjon, publiseringsdato og siste faglige gjennomgang.
-- `pages.json`: sidetitler, overskrifter, generelt sidebudskap, kvalifiseringsspørsmål og presentasjon.
+- `pages.json`: sidetitler, overskrifter, generelt sidebudskap, kvalifiseringsspørsmål og historier/rekkefølge.
+- `slides.json`: selvstendige lysbilder med stabil ID, scope, presentasjonsinnhold, grunnnotater og egne kildehenvisninger. Se `PRESENTATION_ARCHITECTURE.md`.
 - `sources.json`: felles kilderegister. ID-er refereres av alle domenefiler.
 - `market.json`: SSB-statistikk, trender, oppkjøp og markedssignaler.
 - `sales.json`: salgsinnganger, forretningsbehov, scenarioer, målgrupper og kompetanseområder.

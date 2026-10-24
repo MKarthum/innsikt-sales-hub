@@ -2,9 +2,9 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 const file=n=>fs.readFileSync(n,'utf8');
 const read=n=>JSON.parse(file('docs/data/'+n+'.json'));
-const files=['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon'].map(read);
-const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon]=files;
-const raw={meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon};
+const files=['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides'].map(read);
+const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides]=files;
+const raw={meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides};
 const site= file('docs/assets/site.js');
 const ending=/\binit\(\);\s*\}\)\(\);\s*$/;
 if(!ending.test(site))throw Error('Endret initialisering – oppdater testinstrumentering');
@@ -25,7 +25,8 @@ function render(data){
  vm.createContext(x);
  for(const name of ['content','learning','prompts','horizon'])vm.runInContext(file('docs/assets/'+name+'.js'),x,{filename:name+'.js',timeout:3000});
  x.__fixture=x.window.InnsiktContent.materialize(data);
- vm.runInContext(injected,x,{filename:'site.js',timeout:3000});
+ vm.runInContext(file('docs/assets/slide-model.js'),x,{filename:'slide-model.js',timeout:3000});
+vm.runInContext(injected,x,{filename:'site.js',timeout:3000});
  return vm.runInContext('__views()',x,{timeout:3000});
 }
 const old=render(raw);
