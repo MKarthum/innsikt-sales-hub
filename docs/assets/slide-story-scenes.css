@@ -1,0 +1,101 @@
+/* Semantic, individually selected story diagrams: no text baked into SVGs. */
+.story-scene.v5-special{box-sizing:border-box;display:flex;flex-direction:column;gap:0;padding:4.7% 5.7%;background:var(--pres-bg);color:var(--pres-fg)}
+.v5-special .scene-topline{flex:0 0 auto}
+.v5-heading{flex:0 0 auto;max-width:100%;margin:1.65cqw 0 2.2cqw}
+.v5-heading .v2-headline{font:810 4.15cqw/1.10 var(--font-display);letter-spacing:-.046em;text-wrap:balance;color:var(--pres-fg);max-width:94%}
+.v5-special .v5-footer{box-sizing:border-box;flex:0 0 auto;border-top:1px solid color-mix(in srgb,var(--pres-fg) 20%,transparent);margin:1.3cqw 0 0;padding:1.1cqw 0 .15cqw;font:690 1.62cqw/1.23 var(--font-body);color:var(--pres-muted);min-height:3.8cqw}
+.v5-special small{font:780 1.08cqw/1.18 var(--font-body);letter-spacing:.07em;color:var(--pres-accent)}
+.v5-special .v5-icon,.v5-truth-icon,.v5-gate-icon,.v5-role-icon,.v5-artifact-icon{display:block;object-fit:contain;background:#f5faf8;border-radius:.7cqw;box-sizing:border-box;padding:.5cqw;flex:0 0 auto}
+.v5-special strong,.v5-special h3{color:var(--pres-fg)}
+/* Portal in-context illustration: explicit input, process, output; not a fake UI screenshot. */
+.v5-product-surface{flex:1;min-height:0;border:1px solid color-mix(in srgb,var(--pres-accent) 36%,transparent);border-radius:1.2cqw;background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg));overflow:hidden;display:flex;flex-direction:column}
+.v5-product-browser{height:4.15cqw;display:flex;align-items:center;gap:.62cqw;padding:0 1.8cqw;border-bottom:1px solid color-mix(in srgb,var(--pres-fg) 14%,transparent)}
+.v5-product-browser i{display:block;width:.8cqw;height:.8cqw;border-radius:50%;background:var(--pres-accent);opacity:.5}
+.v5-product-browser strong{font:780 1.35cqw var(--font-body);margin-left:1cqw;color:var(--pres-fg)}
+.v5-product-browser small{margin-left:auto;color:var(--pres-muted);font-size:1.1cqw;letter-spacing:0}
+.v5-product-journey{flex:1;min-height:0;display:grid;grid-template-columns:39% 6% 55%;align-items:center;gap:0;padding:2.8cqw}
+.v5-product-input{box-sizing:border-box;min-height:15cqw;display:flex;flex-direction:column;justify-content:center;gap:1.2cqw;padding:2.2cqw;border-radius:1cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 19%,transparent);background:var(--pres-bg)}
+.v5-product-input strong{font:810 2.75cqw/1.13 var(--font-display);letter-spacing:-.025em}
+.v5-product-connector{font:870 2.8cqw var(--font-display);text-align:center;color:var(--pres-accent)}
+.v5-product-outputs{min-height:0;display:flex;flex-direction:column;gap:.7cqw;padding:1.1cqw 1.4cqw}
+.v5-product-output{display:flex;align-items:center;gap:1.05cqw;background:color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg));border-radius:.7cqw;padding:.65cqw 1.15cqw;flex:1}
+.v5-product-output .v5-icon{width:3.75cqw;height:3.75cqw}
+.v5-product-output strong{font:730 1.85cqw/1.15 var(--font-display)}
+/* Fictional case: quote is the hero, the diagnostic questions are the consequence. */
+.v5-case-layout{flex:1;min-height:0;display:grid;grid-template-columns:54% 43%;gap:3%;align-items:stretch}
+.v5-quote{border-left:.42cqw solid var(--pres-accent);background:color-mix(in srgb,var(--pres-accent) 7%,var(--pres-bg));border-radius:.9cqw;padding:2.8cqw 3cqw;display:flex;flex-direction:column;justify-content:center;gap:2cqw}
+.v5-quote span{font:760 1.3cqw var(--font-body);letter-spacing:.1em;color:var(--pres-accent)}
+.v5-quote blockquote{border:0;padding:0;margin:0;font:820 4.6cqw/1.1 var(--font-display);letter-spacing:-.045em;color:var(--pres-fg);text-wrap:balance}
+.v5-case-questions{display:flex;flex-direction:column;justify-content:center;gap:1.05cqw}
+.v5-case-questions>div{flex:1;min-height:0;display:flex;align-items:center;gap:1.2cqw;padding:.85cqw 1.5cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 14%,transparent);border-radius:.75cqw}
+.v5-case-questions em{font:820 1.55cqw var(--font-body);color:var(--pres-accent);font-style:normal}
+.v5-case-questions strong{font:760 2.15cqw/1.2 var(--font-display)}
+/* Market: non-linear relation: increased capability still requires business understanding. */
+.v5-truths-layout{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:1.4cqw}
+.v5-truth{padding:2.1cqw 2.5cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 14%,transparent);border-radius:1cqw;display:flex;flex-direction:column;justify-content:center;gap:1cqw;min-width:0}
+.v5-truth-0{background:color-mix(in srgb,var(--pres-accent) 11%,var(--pres-bg));border-top:.45cqw solid var(--pres-accent)}
+.v5-truth-1{background:color-mix(in srgb,var(--pres-fg) 4%,var(--pres-bg));border-top:.45cqw solid var(--pres-fg)}
+.v5-truth-icon{width:5.3cqw;height:5.3cqw;margin:.6cqw 0}
+.v5-truth h3{font:800 3.15cqw/1.1 var(--font-display);letter-spacing:-.03em}
+.v5-truth p{font:550 1.75cqw/1.34 var(--font-body);color:var(--pres-muted);max-width:92%}
+/* Capability -> qualification gate. */
+.v5-capacity-layout{flex:1;min-height:0;display:grid;grid-template-columns:56% 41%;gap:3%}
+.v5-capability-list{display:flex;flex-direction:column;gap:.85cqw}
+.v5-capability{display:flex;align-items:center;gap:1.15cqw;flex:1;padding:.9cqw 1.25cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 16%,transparent);border-radius:.8cqw}
+.v5-capability .v5-icon{width:5.1cqw;height:5.1cqw}
+.v5-capability>div{display:flex;flex-direction:column;gap:.35cqw;flex:1}
+.v5-capability strong{font:780 2.25cqw/1.1 var(--font-display)}
+.v5-capability small{font:550 1.48cqw/1.17 var(--font-body);letter-spacing:0;color:var(--pres-muted)}
+.v5-capability>span{font:800 2cqw var(--font-body);color:var(--pres-accent)}
+.v5-gate{display:flex;flex-direction:column;justify-content:center;align-items:start;gap:1.3cqw;padding:2.5cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 45%,transparent);border-radius:1cqw;background:color-mix(in srgb,var(--pres-accent) 10%,var(--pres-bg))}
+.v5-gate-icon{width:7cqw;height:7cqw}
+.v5-gate h3{font:820 3.4cqw/1.13 var(--font-display);letter-spacing:-.04em}
+.v5-gate p{font:550 1.75cqw/1.3 var(--font-body);color:var(--pres-muted)}
+/* Two responsibilities with a tangible handoff. */
+.v5-handoff-flow{display:grid;grid-template-columns:1fr 5cqw 1fr;gap:1cqw;min-height:0;flex:1;align-items:stretch}
+.v5-role{padding:2.15cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 16%,transparent);border-radius:1cqw;display:flex;flex-direction:column;gap:1.2cqw;justify-content:center;background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg))}
+.v5-role:last-child{border-color:color-mix(in srgb,var(--pres-accent) 39%,transparent);background:color-mix(in srgb,var(--pres-accent) 8%,var(--pres-bg))}
+.v5-role-icon{width:5.5cqw;height:5.5cqw}
+.v5-role h3{font:790 3cqw/1.1 var(--font-display)}
+.v5-role p{font:560 1.7cqw/1.25 var(--font-body);color:var(--pres-muted)}
+.v5-handoff-arrow{align-self:center;text-align:center;font:870 3.5cqw var(--font-display);color:var(--pres-accent)}
+.v5-handoff-artifact{border:1px solid color-mix(in srgb,var(--pres-accent) 41%,transparent);border-radius:.7cqw;padding:.75cqw 1.4cqw;min-height:4.3cqw;margin:1cqw auto 0;display:flex;align-items:center;gap:1.2cqw;background:color-mix(in srgb,var(--pres-accent) 7%,var(--pres-bg));max-width:85%}
+.v5-handoff-artifact span{font:680 1.58cqw/1.2 var(--font-body);color:var(--pres-fg)}
+.v5-artifact-icon{width:3cqw;height:3cqw}
+/* Converging market factors to a central question. */
+.v5-convergence-layout{flex:1;min-height:0;display:grid;grid-template-columns:52% 44%;gap:4%}
+.v5-forces{display:flex;flex-direction:column;gap:.65cqw}
+.v5-force{flex:1;display:flex;align-items:center;gap:1.0cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 15%,transparent);border-radius:.8cqw;padding:1cqw 1.2cqw}
+.v5-force .v5-icon{width:4.9cqw;height:4.9cqw}
+.v5-force>div{display:flex;flex-direction:column;gap:.42cqw;flex:1}
+.v5-force strong{font:770 1.98cqw/1.17 var(--font-display)}
+.v5-force span{font:530 1.48cqw/1.2 var(--font-body);color:var(--pres-muted)}
+.v5-force b{font:830 2.3cqw var(--font-display);color:var(--pres-accent)}
+.v5-force-focus{display:flex;flex-direction:column;justify-content:center;gap:2cqw;padding:2.8cqw;background:color-mix(in srgb,var(--pres-accent) 10%,var(--pres-bg));border:1px solid color-mix(in srgb,var(--pres-accent) 46%,transparent);border-radius:1cqw}
+.v5-force-focus h3{font:830 3.75cqw/1.06 var(--font-display);letter-spacing:-.045em}
+.v5-force-focus p{font:550 1.72cqw/1.32 var(--font-body);color:var(--pres-muted)}
+/* Customer language -> diagnostic question, one clear pairing per row. */
+.v5-voices-layout{flex:1;min-height:0;display:flex;flex-direction:column;gap:.55cqw}
+.v5-voice-line{display:grid;grid-template-columns:47% 6% 47%;align-items:stretch;flex:1;min-height:0}
+.v5-voice-quote,.v5-voice-reply{box-sizing:border-box;display:flex;align-items:center;gap:1.2cqw;padding:1cqw 1.6cqw;border-radius:.7cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 17%,transparent)}
+.v5-voice-quote{background:color-mix(in srgb,var(--pres-fg) 4%,var(--pres-bg))}
+.v5-voice-quote .v5-icon{width:4.2cqw;height:4.2cqw}
+.v5-voice-quote>div,.v5-voice-reply{display:flex;flex-direction:column;justify-content:center;gap:.42cqw}
+.v5-voice-line strong{font:780 1.9cqw/1.13 var(--font-display);letter-spacing:-.02em}
+.v5-voice-reply{background:color-mix(in srgb,var(--pres-accent) 8%,var(--pres-bg));border-color:color-mix(in srgb,var(--pres-accent) 30%,transparent)}
+.v5-voice-arrow{font:850 2.25cqw var(--font-display);color:var(--pres-accent);align-self:center;text-align:center}
+/* Symptom and three separately testable causes, not a falsely implied diagnosis. */
+.v5-symptom{border:1px solid color-mix(in srgb,var(--pres-accent) 43%,transparent);border-radius:.75cqw;align-self:center;background:color-mix(in srgb,var(--pres-accent) 10%,var(--pres-bg));padding:1.1cqw 3.7cqw;display:flex;flex-direction:column;gap:.5cqw;text-align:center;min-width:44cqw}
+.v5-symptom strong{font:810 2.35cqw/1.12 var(--font-display)}
+.v5-cause-branch{position:relative;height:4.9cqw;margin:0 13%}
+.v5-cause-branch::before{content:'';position:absolute;left:50%;top:0;width:1px;height:47%;background:var(--pres-accent)}
+.v5-cause-branch::after{content:'';position:absolute;top:45%;left:10%;width:80%;height:1px;background:var(--pres-accent)}
+.v5-cause-branch span{position:absolute;top:45%;height:55%;width:1px;background:var(--pres-accent)}
+.v5-cause-branch span:nth-child(1){left:10%}
+.v5-cause-branch span:nth-child(2){left:50%}
+.v5-cause-branch span:nth-child(3){left:90%}
+.v5-causes-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5cqw}
+.v5-cause{display:flex;flex-direction:column;align-items:start;justify-content:center;gap:.75cqw;min-width:0;border:1px solid color-mix(in srgb,var(--pres-fg) 16%,transparent);border-top:3px solid var(--pres-accent);background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg));padding:1.2cqw 1.6cqw;border-radius:.75cqw}
+.v5-cause .v5-icon{width:4.3cqw;height:4.3cqw}
+.v5-cause h3{font:810 2.12cqw/1.14 var(--font-display);letter-spacing:-.025em}
+.v5-cause p{font:540 1.42cqw/1.18 var(--font-body);color:var(--pres-muted)}

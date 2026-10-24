@@ -19,12 +19,30 @@
         "kicker": "ET VERKTØY FOR KUNDESAMTALEN",
         "support": "Fra et usikkert utgangspunkt til et bedre spørsmål.",
         "figureAssetId": "product-map",
-        "layout": "bridge",
+        "layout": "product-preview",
         "beforeLabel": "Uklart kundesignal",
         "afterLabel": "Spørsmål og møteforberedelse",
         "evidenceLine": "Hva er kundens neste beslutning?",
         "beforeCue": "I DAG",
-        "afterCue": "MED PORTALEN"
+        "afterCue": "MED PORTALEN",
+        "preview": {
+          "context": "Du skal i et kundemøte",
+          "inputLabel": "KUNDESIGNAL",
+          "input": "«Rapporteringen tar for lang tid»",
+          "outputLabel": "INNSIKT HJELPER DEG MED",
+          "outputs": [
+            "Forstå situasjonen",
+            "Forberede spørsmål",
+            "Finne riktig fagstoff"
+          ],
+          "conclusion": "Fra et uklart signal til en forberedt samtale.",
+          "assets": [
+            "business-decision",
+            "customer-dialogue",
+            "product-map"
+          ],
+          "brand": "INNSIKT"
+        }
       }
     },
     {
@@ -276,7 +294,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "ET KONKRET EKSEMPEL",
-      "title": "«Tallene stemmer ikke» er et signal, ikke en IT-bestilling",
+      "title": "Et kundesignal er ikke en IT-bestilling",
       "body": "Et fiktivt eksempel fra «Forretningsbehov». Vi skal ikke diagnostisere kunden, men forberede en bedre samtale.",
       "sourceIds": [],
       "speakerBase": "",
@@ -287,12 +305,21 @@
         "kicker": "FIKTIV KUNDESITUASJON",
         "support": "Et fiktivt eksempel – forstå behovet før vi foreslår løsningen.",
         "figureAssetId": "customer-dialogue",
-        "layout": "bridge",
+        "layout": "case-quote",
         "beforeLabel": "«Tallene stemmer ikke»",
         "afterLabel": "Hva betyr det, for hvem – og hvorfor?",
         "evidenceLine": "Eksemplet er fiktivt.",
         "beforeCue": "KUNDEN SIER",
-        "afterCue": "VI UNDERSØKER"
+        "afterCue": "VI UNDERSØKER",
+        "quote": "«Tallene stemmer ikke»",
+        "subtitle": "Fiktiv kundesituasjon",
+        "questions": [
+          "Hvilke tall?",
+          "Hvem påvirkes?",
+          "Hva er konsekvensen?"
+        ],
+        "conclusion": "Start med tre spørsmål, ikke et produktforslag.",
+        "questionLabel": "FØR VI VELGER LØSNING"
       }
     },
     {
@@ -352,8 +379,12 @@
           "delivery-loop",
           "market-signal"
         ],
-        "layout": "cards",
-        "takeaway": "Dette er mulige forklaringer – ikke en diagnose."
+        "layout": "cause-map",
+        "takeaway": "Dette er mulige forklaringer – ikke en diagnose.",
+        "symptom": "Månedsavslutningen tar for lang tid",
+        "symptomLabel": "OPPLEVD PROBLEM",
+        "causesLabel": "MULIGE ÅRSAKER",
+        "conclusion": "Hypotesene må testes sammen med kunden – vi vet ikke årsaken ennå."
       }
     },
     {
@@ -565,12 +596,33 @@
         "kicker": "HVORFOR NÅ?",
         "support": "Analyser, kode og utforskning kan skje i et helt annet tempo.",
         "figureAssetId": "ai-agent",
-        "layout": "bridge",
+        "layout": "capacity-gate",
         "beforeLabel": "Mer kapasitet",
         "afterLabel": "Større behov for faglig kontroll",
         "evidenceLine": "Analyse · kode · utforskning",
         "beforeCue": "MULIGHET",
-        "afterCue": "FORUTSETNING"
+        "afterCue": "FORUTSETNING",
+        "capabilities": [
+          {
+            "label": "Analyse",
+            "detail": "Utforske data og mønstre",
+            "assetId": "verified-analysis"
+          },
+          {
+            "label": "Kode",
+            "detail": "Utvikle og teste raskere",
+            "assetId": "support-code"
+          },
+          {
+            "label": "Utforskning",
+            "detail": "Prøve flere hypoteser",
+            "assetId": "ai-agent"
+          }
+        ],
+        "gateTitle": "Faglig vurdering",
+        "gateText": "Er problemet riktig forstått, og holder resultatet mål?",
+        "conclusion": "Mer kapasitet er nyttig når kvaliteten følger med.",
+        "gateCue": "AVGJØRENDE KONTROLL"
       },
       "sourceIds": [],
       "speakerBase": "KI gir oss mulighet til å arbeide raskere med informasjon, analyse og kode. Vi bør ikke forveksle dette med at resultatene alltid er riktige, eller at teknologien erstatter fagkompetanse. Poenget er at kapasiteten er reell og bør brukes der den faktisk skaper verdi.",
@@ -792,8 +844,11 @@
           "delivery-loop",
           "ai-agent"
         ],
-        "layout": "voices",
-        "takeaway": "Bak hver formulering ligger et behov vi må undersøke."
+        "layout": "customer-voices",
+        "takeaway": "Bak hver formulering ligger et behov vi må undersøke.",
+        "signalLabel": "KUNDEN SIER",
+        "responseLabel": "VI SPØR",
+        "conclusion": "Et kundesignal er en åpning for en samtale – ikke en teknisk diagnose."
       },
       "sourceIds": [],
       "speakerBase": "Et kundesignal høres sjelden ut som en bestilling på en bestemt dataplattform eller analysemetode. Det kan være frustrasjon over rapportering, tungvinte prosesser eller ønske om å utnytte KI. Oppgaven vår er å forstå hva som faktisk skjer og hvilke mulige konsekvenser det har, ikke å bestemme løsning før vi har undersøkt.",
@@ -845,12 +900,28 @@
         "kicker": "DET ER NOK Å ÅPNE DØREN",
         "support": "Forstå signalet. Still neste spørsmål. Koble på fagmiljøet.",
         "figureAssetId": "customer-dialogue",
-        "layout": "bridge",
+        "layout": "handoff",
         "beforeLabel": "Selgeren avklarer behovet",
         "afterLabel": "Fagmiljøet vurderer løsningene",
         "evidenceLine": "Samarbeid før teknologivalg",
         "beforeCue": "SELGEREN",
-        "afterCue": "FAGMILJØET"
+        "afterCue": "FAGMILJØET",
+        "roles": [
+          {
+            "name": "SELGER",
+            "title": "Avklar behovet",
+            "detail": "Hva vil kunden oppnå, og hva hindrer dem?",
+            "assetId": "customer-dialogue"
+          },
+          {
+            "name": "FAGMILJØ",
+            "title": "Vurder mulighetene",
+            "detail": "Hva bør undersøkes før vi anbefaler tiltak?",
+            "assetId": "data-semantic"
+          }
+        ],
+        "handoff": "Felles grunnlag: behov, konsekvens og neste spørsmål",
+        "conclusion": "God kvalifisering er et resultat i seg selv."
       },
       "sourceIds": [],
       "speakerBase": "En selger trenger ikke velge mellom Snowflake, Fabric, KI-agenter og en mer tradisjonell analyse før første møte er over. En god oppfølging begynner med å tydeliggjøre behov og betydning for virksomheten. Da kan riktig kompetanse involveres og et mulig første tiltak defineres sammen med kunden.",
@@ -1053,12 +1124,27 @@
         "kicker": "ET NYTT HANDLINGSROM",
         "support": "Virksomheter kan gjøre mer med data og KI. Den vanskelige delen er å bruke muligheten riktig.",
         "figureAssetId": "market-signal",
-        "layout": "bridge",
+        "layout": "two-truths",
         "beforeLabel": "Ny KI-kapasitet",
         "afterLabel": "Samme krav til verdi og forståelse",
         "evidenceLine": "Endringen ligger i tempoet – ikke i målet.",
         "beforeCue": "DET NYE",
-        "afterCue": "DET SOM BESTÅR"
+        "afterCue": "DET SOM BESTÅR",
+        "truths": [
+          {
+            "label": "DET SOM ENDRES",
+            "title": "Kapasitet og tempo",
+            "text": "KI gjør analyse, kode og utforskning raskere tilgjengelig.",
+            "assetId": "market-signal"
+          },
+          {
+            "label": "DET SOM BESTÅR",
+            "title": "Behov og forståelse",
+            "text": "Verdien avhenger av riktige spørsmål, datagrunnlag og vurdering.",
+            "assetId": "value-compass"
+          }
+        ],
+        "conclusion": "Mer kraft gir muligheter – ikke automatisk bedre beslutninger."
       }
     },
     {
@@ -1099,7 +1185,14 @@
           "ai-agent",
           "data-semantic",
           "product-map"
-        ]
+        ],
+        "layout": "convergence",
+        "focus": {
+          "label": "SPØRSMÅLET VI TAR MED TIL KUNDEN",
+          "title": "Hvor kan dette gi verdi?",
+          "detail": "Automatisering, bedre forståelse eller enklere tilgang?"
+        },
+        "conclusion": "Trendene er ulike, men må vurderes mot samme kundevirkelighet."
       }
     },
     {
