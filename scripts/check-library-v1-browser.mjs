@@ -64,6 +64,34 @@ try{
  assert.ok(await mobileCard.evaluate(x=>document.activeElement===x),'Mobile focus restored');
  await p.setViewportSize({width:1536,height:1040});
 
+ // Simulate real touch events, not mouse-clicks at a mobile viewport size.
+ const ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:2});
+ const tp=await ctx.newPage();
+ tp.on('pageerror',e=>problems.push('Touch JavaScript: '+e.message));
+ await tp.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
+ await tp.evaluate(()=>location.hash='#lysbilder');
+ await tp.locator('.slide-library-card').first().waitFor();
+ const touchCard=tp.locator('.slide-library-card').first();
+ await touchCard.tap();
+ const touchFull=tp.locator('#slide-library-fullscreen');await touchFull.waitFor();
+ await touchFull.locator('.modal-close').tap();
+ assert.equal(await touchFull.count(),0,'Touch: close button dismisses in one tap');
+ await touchCard.tap();await touchFull.waitFor();
+ // A touch on the slide itself must never dismiss it.
+ const frame=await touchFull.locator('.slide-library-fullscreen-stage').boundingBox();
+ await tp.touchscreen.tap(frame.x+frame.width/2,frame.y+frame.height/2);
+ assert.equal(await touchFull.count(),1,'Touch: slide remains open on internal tap');
+ await tp.touchscreen.tap(18,130);
+ assert.equal(await touchFull.count(),0,'Touch: outside tap closes fullscreen');
+ await tp.locator('#menu-toggle').tap();
+ assert.equal(await tp.locator('#menu-toggle').getAttribute('aria-expanded'),'true');
+ await tp.locator('#sidebar-close').tap();
+ assert.equal(await tp.locator('#menu-toggle').getAttribute('aria-expanded'),'false','Touch: sidebar exit works');
+ await tp.locator('#menu-toggle').tap();
+ await tp.touchscreen.tap(370,280);
+ assert.equal(await tp.locator('#menu-toggle').getAttribute('aria-expanded'),'false','Touch: backdrop closes sidebar');
+ await ctx.close();
+
  const typeSeen=new Set();
  for(const s of items){
   await p.evaluate(id=>location.hash='#lysbilder/'+id,s.id);

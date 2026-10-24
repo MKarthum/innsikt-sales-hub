@@ -375,3 +375,10 @@
 .slide-library-fullscreen-details:focus-visible{
  outline:2px solid #c6e6e2;outline-offset:4px;border-radius:3px
 }
+
+/* Prioriter iOS touchmål og safe-area i den skjermdekkende dialogen. */
+#slide-library-fullscreen .modal-header{z-index:5;top:max(12px,env(safe-area-inset-top,0px) + 10px)}
+#slide-library-fullscreen .modal-close{min-height:44px;min-width:86px;touch-action:manipulation;pointer-events:auto}
+#slide-library-fullscreen .slide-library-fullscreen-content{pointer-events:auto}
+#slide-library-fullscreen .slide-library-fullscreen-stage{pointer-events:auto}
+#slide-library-fullscreen .slide-library-fullscreen-details{bottom:max(12px,env(safe-area-inset-bottom,0px) + 10px);touch-action:manipulation}

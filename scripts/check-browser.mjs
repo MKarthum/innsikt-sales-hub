@@ -69,7 +69,14 @@ try {
   if(label==='mobil') {
    await page.locator('#menu-toggle').click();
    assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true','mobilmeny åpner');
+   await page.locator('#sidebar-close').click();
+   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'false','mobilmeny har egen lukkeknapp');
    await page.locator('#menu-toggle').click();
+   await page.locator('#sidebar-backdrop').click({position:{x:385,y:300},force:true});
+   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'false','trykk utenfor lukker mobilmeny');
+   await page.locator('#menu-toggle').click();
+   await page.keyboard.press('Escape');
+   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'false','Escape lukker mobilmeny');
   }
   await page.evaluate(()=>{location.hash='#trendradar'});
   await page.locator('#radar-world-models').waitFor();
