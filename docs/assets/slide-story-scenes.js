@@ -49,6 +49,31 @@ function render(slide,{v,top,title,escs,assetImage,block}){
    +v.items.map((t,i)=>'<div class="v5-voice-line"><div class="v5-voice-quote">'+icon(v.itemAssetIds[i])+'<div><small>'+escs(v.signalLabel)+'</small><strong>'+escs(t)+'</strong></div></div>'
      +'<span class="v5-voice-arrow" aria-hidden="true">→</span><div class="v5-voice-reply"><small>'+escs(v.responseLabel)+'</small><strong>'+escs(v.detail[i])+'</strong></div></div>').join('')
    +'</div>'+footer(v.conclusion));
+ case 'prompt-example': {
+  return block('special v5-special v6-prompt',top+heading
+   +'<div class="v6-prompt-workbench"><section class="v6-prompt-input"><small>'+escs(v.exampleLabel)+'</small>'
+   +'<blockquote>'+escs(v.example)+'</blockquote><p>'+escs(v.context)+'</p></section>'
+   +'<div class="v6-prompt-transfer"><span aria-hidden="true">→</span><strong>'+escs(v.transfer)+'</strong></div>'
+   +'<section class="v6-prompt-output"><small>'+escs(v.outputLabel)+'</small><ol>'
+   +v.questions.map((q,i)=>'<li><em>'+String(i+1).padStart(2,'0')+'</em><strong>'+escs(q)+'</strong></li>').join('')
+   +'</ol><p class="v6-prompt-review">'+escs(v.review)+'</p></section></div>'+footer(v.conclusion));
+ }
+ case 'risk-ladder': {
+  return block('special v5-special v6-risk',top+heading
+   +'<div class="v6-risk-grid">'+v.levels.map((level,i)=>'<section class="v6-risk-level v6-risk-'+i+'">'
+   +'<small>'+escs(level.label)+'</small><h3>'+escs(level.example)+'</h3>'
+   +'<p>'+escs(level.impact)+'</p><div class="v6-risk-control"><span>'+escs(level.control)+'</span></div></section>').join('')+'</div>'
+   +'<div class="v6-risk-scale"><span>'+escs(v.scaleStart)+'</span><div aria-hidden="true"></div><span>'+escs(v.scaleEnd)+'</span></div>'
+   +footer(v.conclusion));
+ }
+ case 'priority-pathways': {
+  return block('special v5-special v6-priorities',top+heading
+   +'<div class="v6-priority-head"><small>'+escs(v.signalLabel)+'</small><small>'+escs(v.responseLabel)+'</small></div>'
+   +'<div class="v6-priority-rows">'+v.pathways.map((x,i)=>'<div class="v6-priority-row">'
+   +'<div class="v6-priority-signal"><span>0'+(i+1)+'</span><strong>'+escs(x.signal)+'</strong></div>'
+   +'<div class="v6-priority-arrow" aria-hidden="true">→</div><div class="v6-priority-response"><h3>'+escs(x.priority)+'</h3>'
+   +'<p>'+escs(x.action)+'</p></div></div>').join('')+'</div>'+footer(v.conclusion));
+ }
  case 'cause-map':
   return block('special v5-special v5-causes',top+heading
    +'<div class="v5-symptom"><small>'+escs(v.symptomLabel)+'</small><strong>'+escs(v.symptom)+'</strong></div>'

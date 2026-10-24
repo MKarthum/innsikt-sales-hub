@@ -85,3 +85,7 @@ De visuelle svakhetene var repetisjonen av de samme høyrejusterte bro-boksene o
 Alle scenene er parametrisert i slides.json og rendres i slide-story-scenes.js; farger er semantiske CSS-tokens. Ikke legg inn presentasjonsspesifikk tekst i renderer eller bygg nye historier for å få et nytt utseende. Kildene og speaker-notatene er fortsatt eid av det opprinnelige lysbildeobjektet.
 
 Kvalitetsport: node scripts/check-slide-presentation-quality.mjs, Chromium-rendering av samtlige lysbilder i lys/mørk, kontroll av tekstoverløp og separat HTML-eksport.
+
+## Ny selvstendig revisjon v0.16.0
+
+Se [SLIDE_QUALITY_REVIEW_V016.md](SLIDE_QUALITY_REVIEW_V016.md) for visuell gjennomgang, prioritering av 12 risikopunkter, fem begrunnede omarbeidinger, alternative design og gjenstående svakheter. De fem endringene ble rendret og inspisert med faktisk 16:9-skjermbilde; de 39 objektene ble rendret i Chromium med lys/mørk layoutkontroll. Tidligere v0.15-suksesskriterier ble ikke brukt som visuell fasit.
