@@ -32,6 +32,12 @@ function orbits(){
 function render(slide,esc,position={}){
  const v=slide.visual||{},kind=v.scene;
  const counter=String((position.index??0)+1).padStart(2,'0')+' / '+String(position.total??1).padStart(2,'0');
+ const assetImage=(id,cls)=>{
+  if(!id)return '';
+  const asset=window.InnsiktAssets.get(position.assets,id);
+  return '<img class="'+cls+'" src="'+esc(window.InnsiktAssets.src(position.assets,id))+'" alt="" aria-hidden="true" decoding="async" loading="eager">';
+ };
+
  const label='<div class="scene-eyebrow">'+esc(slide.cue||'')+'</div>';
  if(kind==='analyst-grid')return '<div class="story-scene scene-analysts">'
   +'<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>'
@@ -64,12 +70,12 @@ function render(slide,esc,position={}){
   return block('impact',top+'<div class="v2-impact-layout"><div class="v2-impact-main">'
     +'<span class="v2-impact-kicker">'+escs(v.kicker||'')+'</span>'+title
     +'<p class="v2-impact-sub">'+escs(v.support||slide.body||'')+'</p></div>'
-    +'<div class="v2-impact-art" aria-hidden="true"><div class="v2-impact-rings"><i></i><i></i><i></i><i></i></div><span></span><span></span><span></span></div></div>'
+    +'<div class="v2-impact-art" aria-hidden="true"><div class="v2-impact-rings"><i></i><i></i><i></i><i></i></div>'+assetImage(v.figureAssetId,'v3-impact-figure')+'<span></span><span></span><span></span></div></div>'
     +'<div class="v2-footline"><b></b><span>INNSIKT</span></div>');
  }
  if(kind==='list'){
   const items=(v.items||[]).map((item,i)=>'<li class="v2-list-row"><span class="v2-list-no">0'+(i+1)+'</span>'
-   +'<div class="v2-list-copy"><strong>'+escs(item)+'</strong><small>'+escs((v.detail||[])[i]||'')+'</small></div>'
+   +'<div class="v2-list-copy">'+assetImage((v.itemAssetIds||[])[i],'v3-list-icon')+'<div class="v3-list-text"><strong>'+escs(item)+'</strong><small>'+escs((v.detail||[])[i]||'')+'</small></div></div>'
    +'<span class="v2-list-arrow" aria-hidden="true">↗</span></li>').join('');
   return block('list',top+'<div class="v2-list-layout"><div class="v2-list-intro">'+title
    +(slide.body?'<p class="v2-list-summary">'+escs(slide.body)+'</p>':'')
@@ -80,7 +86,7 @@ function render(slide,esc,position={}){
   return block('road',top+'<div class="v2-road-head">'+title+'</div>'
    +'<div class="v2-road-line" aria-hidden="true"></div>'
    +'<div class="v2-road-stages">'+steps.map((name,i)=>
-     '<div class="v2-road-stage"><div class="v2-road-step"><span>0'+(i+1)+'</span></div><strong>'+escs(name)+'</strong></div>').join('')+'</div>'
+     '<div class="v2-road-stage"><div class="v3-road-top"><div class="v2-road-step"><span>0'+(i+1)+'</span></div>'+assetImage((v.stepAssetIds||[])[i],'v3-road-icon')+'</div><strong>'+escs(name)+'</strong></div>').join('')+'</div>'
    +'<p class="v2-road-footer">'+escs(v.hint||'')+'</p>');
  }
  if(kind==='business-case'){
@@ -110,14 +116,14 @@ function render(slide,esc,position={}){
  }
  if(kind==='domains'){
   return block('domains',top+'<div class="v2-domains-head">'+title+'</div><div class="v2-domains-grid">'
-   +(v.items||[]).map((x,i)=>'<div class="v2-domain"><span>0'+(i+1)+'</span><div class="v2-domain-mark" aria-hidden="true"><i></i><i></i><i></i></div>'
+   +(v.items||[]).map((x,i)=>'<div class="v2-domain"><span>0'+(i+1)+'</span>'+(v.itemAssetIds?.[i]?assetImage(v.itemAssetIds[i],'v3-domain-icon'):'<div class="v2-domain-mark" aria-hidden="true"><i></i><i></i><i></i></div>')
     +'<h3>'+escs(x)+'</h3><p>'+escs((v.detail||[])[i]||'')+'</p></div>').join('')+'</div>'
    +'<p class="v2-domains-foot">'+escs(v.footer||'')+'</p>');
  }
  if(kind==='portal'){
   return block('portal',top+'<div class="v2-portal-title">'+title+'</div>'
    +'<div class="v2-portal-window"><div class="v2-portal-browser"><i></i><i></i><i></i><span>INNSIKT / NESTE STEG</span></div>'
-   +'<div class="v2-portal-path">'+(v.steps||[]).map((x,i)=>'<div class="v2-portal-node"><span>0'+(i+1)+'</span><div class="v2-portal-illustration v2-portal-illustration--'+i+'" aria-hidden="true"><i></i><i></i><i></i></div><strong>'+escs(x)+'</strong></div>').join('')+'</div></div>'
+   +'<div class="v2-portal-path">'+(v.steps||[]).map((x,i)=>'<div class="v2-portal-node"><span>0'+(i+1)+'</span>'+assetImage((v.stepAssetIds||[])[i],'v3-portal-icon')+'<strong>'+escs(x)+'</strong></div>').join('')+'</div></div>'
    +'<p class="v2-portal-footer">'+escs(v.footer||'')+'</p>');
  }
 
