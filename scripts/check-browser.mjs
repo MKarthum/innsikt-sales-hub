@@ -100,6 +100,7 @@ try {
   await page.locator('.slide-library-detail-stage .present-frame').waitFor();
   assert.equal(await page.locator('.slide-library-detail-stage .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
   const tonePair=await page.locator('.slide-library-detail-stage .present-frame').evaluate(el=>{
+   el.dataset.tone='strong';
    const strong={bg:getComputedStyle(el).backgroundColor,fg:getComputedStyle(el).color};
    el.dataset.tone='light';
    const light={bg:getComputedStyle(el).backgroundColor,fg:getComputedStyle(el).color};
