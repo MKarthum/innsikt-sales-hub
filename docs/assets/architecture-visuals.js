@@ -3,6 +3,7 @@
 'use strict';
 function render(slide,esc,profile,catalog,position){
  if(!profile)throw Error('Ukjent arkitekturprofil: '+slide.profileId);
+ if(profile.variant)return window.InnsiktVendorArchitecture.render(profile,slide,catalog,esc,position);
  const assets=window.InnsiktAssets;
  const E=x=>esc(String(x??''));
  function icon(id,size='regular'){

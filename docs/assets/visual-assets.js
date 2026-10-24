@@ -9,12 +9,15 @@ function get(catalog,id){
 }
 function src(catalog,id){return './'+get(catalog,id).path;}
 function usedBy(assetId,profiles,slides){
- const ids=new Set((profiles?.profiles||[]).filter(p=>
-  [p.sources,p.consumers,p.support].some(a=>a?.some(x=>x.assetId===assetId))
-  ||p.vendorId===assetId
-  ||p.ingest?.assetId===assetId||p.platform?.assetId===assetId||p.platform?.partnerId===assetId
- ).map(p=>p.id));
+ function hasRef(value){
+  if(Array.isArray(value))return value.some(hasRef);
+  if(value&&typeof value==='object')return value.assetId===assetId||value.vendorId===assetId||value.brand===assetId
+   ||value.lakeAsset===assetId||Object.values(value).some(hasRef);
+  return false;
+ }
+ const ids=new Set((profiles?.profiles||[]).filter(hasRef).map(p=>p.id));
  return (slides?.items||[]).filter(s=>ids.has(s.profileId)).map(s=>({id:s.id,title:s.title}));
 }
+
 window.InnsiktAssets={get,src,usedBy};
 })();
