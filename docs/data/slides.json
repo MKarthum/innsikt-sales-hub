@@ -216,36 +216,35 @@
       "tone": "strong",
       "type": "visual",
       "cue": "MARKED SOM STØTTE",
-      "title": "En trend er bakgrunn – kundens situasjon avgjør",
+      "title": "Markedet gir hypoteser – kundens behov må avklares",
       "bullets": [
-        "«Marked og trender» gir kilder og utviklingstrekk.",
-        "«Trendradar» skiller tidlige signaler fra etablerte forhold.",
-        "Ingen av delene beviser kundens behov eller et oppdrag."
+        "Marked og trender gir dokumentasjon og mulige forklaringer.",
+        "Tidlige signaler må ikke forveksles med etablerte forhold.",
+        "Kundens konkrete situasjon avgjør om det er relevant."
       ],
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Vis hvordan «Marked og trender» bidrar med kilder og hvordan «Trendradar» peker på tidlige, usikre signaler. Dette er to typer informasjon, ikke dokumentasjon på at akkurat denne kunden har et behov. Spør hvordan kunden kjenner situasjonen igjen og hva som er konsekvensen. Portalen gir en kritisk inngang til diskusjonen, ikke en ferdig teknologianbefaling.",
       "topic": "Bruk av portalen",
       "keywords": [],
       "visual": {
-        "scene": "list",
-        "items": [
-          "Hva er dokumentert?",
-          "Hva er et tidlig signal?",
-          "Hva kjenner kunden igjen?"
+        "scene": "impact",
+        "layout": "two-truths",
+        "truths": [
+          {
+            "label": "MARKED OG TRENDER",
+            "title": "Hva observerer vi?",
+            "text": "Kilder og markedssignaler gir mulige forklaringer – ikke en diagnose av kunden.",
+            "assetId": "market-signal"
+          },
+          {
+            "label": "SAMTALEN MED KUNDEN",
+            "title": "Hva gjelder her?",
+            "text": "Undersøk hvilke problemer, konsekvenser og prioriteringer virksomheten faktisk har.",
+            "assetId": "customer-dialogue"
+          }
         ],
-        "detail": [
-          "Markedsdata og kilder",
-          "Hypoteser som må følges opp",
-          "Relevans for denne virksomheten"
-        ],
-        "figureAssetId": "market-signal",
-        "itemAssetIds": [
-          "market-signal",
-          "value-compass",
-          "customer-dialogue"
-        ],
-        "layout": "cards",
-        "takeaway": "Bruk trender for å stille bedre spørsmål, ikke for å konkludere."
+        "conclusion": "Bruk trenden til å stille et bedre kundespørsmål, ikke til å konkludere.",
+        "figureAssetId": "market-signal"
       }
     },
     {
@@ -437,36 +436,32 @@
       "tone": "light",
       "type": "visual",
       "cue": "FRA SPØRSMÅL TIL VERKTØY",
-      "title": "Prompten skal forberede spørsmål – ikke gi diagnosen",
+      "title": "En prompt gir bedre spørsmål – ikke en ferdig diagnose",
       "bullets": [
-        "Åpne «Prompter for salg» → «Forbered en behovssamtale».",
-        "Bruk et generisk eller anonymisert kundesignal.",
-        "Tilpass, kopier og kvalitetssikre spørsmålene."
+        "Et fiktivt kundesignal og relevant, ikke-konfidensiell kontekst brukes som input.",
+        "Bruk en redigerbar prompt og kopier den til et godkjent KI-verktøy.",
+        "Vurder utkastet kritisk – spørsmålene er ikke en diagnose."
       ],
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Dette er en illustrasjon av arbeidsflyten, ikke et faktisk KI-svar eller et kundesitat. Den eksisterende prompten «Forbered en behovssamtale» finnes i portalen; den må kopieres til et godkjent KI-verktøy. Slik kan vi klargjøre mulige oppfølgingsspørsmål. Kontroller alltid relevans, fakta og eventuelle opplysninger før bruk. Vi kan ikke trekke noen konklusjon om årsak på grunnlag av promptutkastet.",
       "topic": "Kundedialog",
       "keywords": [],
       "visual": {
         "scene": "road",
-        "steps": [
-          "Forbered en behovssamtale",
-          "Legg inn kontekst",
-          "Kvalitetssikre"
+        "layout": "prompt-example",
+        "exampleLabel": "FIKTIVT KUNDESIGNAL",
+        "example": "«Månedsavslutningen tar flere dager, og avdelingene viser ulike tall.»",
+        "context": "Tilpass kontekst og spørsmål i «Forbered en behovssamtale».",
+        "transfer": "Kopier til et godkjent KI-verktøy",
+        "outputLabel": "EKSEMPEL PÅ SPØRSMÅL TIL MØTET",
+        "questions": [
+          "Hvor oppstår forsinkelsen?",
+          "Hvilke tall er ulike – og hvorfor?",
+          "Hvem bestemmer definisjonene?"
         ],
-        "hint": "Et utkast som gjør samtalen bedre",
-        "figureAssetId": "ai-agent",
-        "stepAssetIds": [
-          "business-decision",
-          "ai-agent",
-          "verified-analysis"
-        ],
-        "layout": "steps",
-        "stepDetails": [
-          "Velg mal for behovsavklaring",
-          "Gi relevant, lovlig kontekst",
-          "Vurder forslagene før møtet"
-        ]
+        "review": "Kvalitetssikres av selgeren før bruk",
+        "conclusion": "Prompten strukturerer samtalen. Den kan ikke bekrefte årsaken til problemet.",
+        "figureAssetId": "customer-dialogue"
       }
     },
     {
@@ -790,32 +785,40 @@
       "tone": "light",
       "type": "visual",
       "cue": "KVALITET OG FORSTÅELSE",
-      "title": "Kontrollen må stå i forhold til konsekvensen av feil",
+      "title": "Jo større konsekvens av feil, desto viktigere kontroll",
       "visual": {
         "scene": "domains",
-        "items": [
-          "Forstå bruken",
-          "Vurder risiko",
-          "Følg opp"
+        "layout": "risk-ladder",
+        "levels": [
+          {
+            "label": "LAV PÅVIRKNING",
+            "example": "Idéutkast til internt møte",
+            "impact": "Et svakt forslag kan forkastes",
+            "control": "Faglig gjennomlesning"
+          },
+          {
+            "label": "TYDELIG PÅVIRKNING",
+            "example": "Analyse som deles med kunden",
+            "impact": "Feil kan påvirke en beslutning",
+            "control": "Kilder, kvalitetssjekk og ansvar"
+          },
+          {
+            "label": "STOR PÅVIRKNING",
+            "example": "Automatisert beslutningsstøtte",
+            "impact": "Feil kan få alvorlige følger",
+            "control": "Risikovurdering, testing og oppfølging"
+          }
         ],
-        "detail": [
-          "Hvem skal bruke resultatet?",
-          "Data, tilgang og konsekvenser",
-          "Test, lær og ta ansvar"
-        ],
-        "footer": "Jo større konsekvens av feil, desto mer kontroll trengs.",
-        "figureAssetId": "governance-shield",
-        "itemAssetIds": [
-          "customer-dialogue",
-          "governance-shield",
-          "delivery-loop"
-        ]
+        "scaleStart": "Lavere konsekvens",
+        "scaleEnd": "Større konsekvens",
+        "conclusion": "Illustrative situasjoner – vurder faktisk bruk, data og konsekvenser hver gang.",
+        "figureAssetId": "governance-shield"
       },
       "sourceIds": [
         "nist-ai-rmf",
         "oecd-ai-principles"
       ],
-      "speakerBase": "NISTs rammeverk for KI-risiko beskriver styring, kartlegging, måling og håndtering av risiko gjennom livsløpet. OECDs prinsipper understreker blant annet ansvarlighet, transparens og menneskelig kontroll. Her er budskapet praktisk: vi må forstå bruken og konsekvensene og tilpasse tiltakene, heller enn å bruke én universell sjekkliste.",
+      "speakerBase": "Eksemplene viser hvorfor samme KI-løsning kan trenge ulik kontroll i ulike sammenhenger. Konsekvens, sannsynlighet, datagrunnlag, berørte personer og faktisk bruk må vurderes samlet. Dette er ikke en formell risikoklassifisering. NIST AI RMF gir rammeverk for å styre, kartlegge, måle og håndtere risiko. Formålet er proporsjonale kontroller, dokumentert ansvar og løpende oppfølging – ikke å bruke én standardliste ukritisk.",
       "topic": "Kvalitet og forståelse",
       "keywords": []
     },
@@ -1244,7 +1247,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "HVA VI SKAL VÆRE GODE PÅ",
-      "title": "Innsikt bør prioritere data, analyse og KI i samspill",
+      "title": "Kundens problem avgjør hvor vi starter med data, analyse og KI",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1254,29 +1257,34 @@
         "fremtid",
         "trend"
       ],
-      "speakerBase": "Dette er vår strategiske vurdering, ikke en rangering fra Gartner. Innsikt bør være relevant både der kunden trenger en bedre dataplattform, der de trenger bedre beslutningsunderlag, og der KI kan hjelpe i prosessen. Ikke la KI skyve ut data og analyse; se disse kompetansene i sammenheng.",
+      "speakerBase": "Vi anbefaler ikke en bestemt teknologi fra et generelt markedstrendbilde. Kundens utfordring gir et sted å begynne: felles definisjoner, bedre beslutningsgrunnlag eller en konkret oppgave KI kan støtte. Disse illustrative utsagnene er ikke sitater fra kunder. Data, analyse og KI vil ofte inngå i samme løsning. Derfor prioriterer vi bredden og evnen til å koble fagområdene, framfor å gjøre alt til et KI-initiativ. Dette er vår faglige prioritering, ikke en direkte Gartner-rangering.",
       "sourceIds": [
         "gartner-2026-trends"
       ],
       "visual": {
         "scene": "domains",
-        "items": [
-          "Datagrunnlag som kan brukes",
-          "Analyse som fører til valg",
-          "KI med kontrollert verdi"
+        "layout": "priority-pathways",
+        "signalLabel": "ILLUSTRATIVE KUNDESIGNALER",
+        "responseLabel": "FØRSTE FAGLIGE INNGANG",
+        "pathways": [
+          {
+            "signal": "«Avdelingene bruker ulike tall.»",
+            "priority": "Datagrunnlag",
+            "action": "Avklar begreper og dataflyt"
+          },
+          {
+            "signal": "«Vi oppdager avvik for sent.»",
+            "priority": "Analyse og innsikt",
+            "action": "Finn beslutningen som trenger bedre informasjon"
+          },
+          {
+            "signal": "«De samme henvendelsene tar for mye tid.»",
+            "priority": "KI-støttet arbeidsflyt",
+            "action": "Test forslag til svar med kvalitetssjekk"
+          }
         ],
-        "detail": [
-          "Integrasjon, dataflyt, semantikk",
-          "Mål, innsikt og formidling",
-          "Konkrete arbeidsflyter og evaluering"
-        ],
-        "footer": "Vi leverer på tvers av disse – med behovet som utgangspunkt.",
-        "figureAssetId": "value-compass",
-        "itemAssetIds": [
-          "core-storage",
-          "business-decision",
-          "ai-agent"
-        ]
+        "conclusion": "Inngangene er ikke siloer. Ofte trenger kunden flere av dem sammen.",
+        "figureAssetId": "value-compass"
       }
     },
     {
@@ -1285,7 +1293,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "RETNING FREMOVER",
-      "title": "Start avgrenset, mål effekt og bygg videre",
+      "title": "La resultatet av en avgrenset test avgjøre neste steg",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1295,29 +1303,22 @@
         "fremtid",
         "trend"
       ],
-      "speakerBase": "Vår arbeidsmåte skal være pragmatisk: Finn et konkret beslutnings- eller prosessproblem. Avklar datagrunnlag, risiko og beslutningseier. Test et avgrenset tiltak og følg opp effekten. Dette er et prinsipp, ikke et løfte om en bestemt tidsplan eller teknologi.",
+      "speakerBase": "Det avgjørende er ikke hvor mange piloter vi starter, men hva vi lærer av dem. Begynn med et tydelig behov, forventet gevinst og realistiske kriterier for kvalitet, risiko og effekt. Dersom forsøket virker, vurder om det bør utvides. Dersom det ikke gir tydelig verdi, juster tilnærmingen eller avslutt. Dette er en prinsippskisse, ikke et løfte om effekt eller tidsbruk.",
       "sourceIds": [],
       "visual": {
-        "scene": "road",
-        "steps": [
-          "Forstå én beslutning",
-          "Velg minste nyttige tiltak",
-          "Mål og utvid"
-        ],
-        "hint": "Små, kontrollerte fremskritt. Ikke alt på én gang.",
-        "figureAssetId": "delivery-loop",
-        "stepAssetIds": [
-          "customer-dialogue",
-          "verified-analysis",
-          "delivery-loop"
-        ],
-        "layout": "steps",
-        "stepDetails": [
-          "Finn beslutningen som skal bli bedre",
-          "Test med dataene som trengs nå",
-          "Undersøk effekt før større investeringer"
-        ]
-      }
+        "scene": "two-directions",
+        "lead": "Avklar mål og datagrunnlag før forsøket. Vurder effekten mot et konkret behov.",
+        "center": "AVGRENSET TEST",
+        "positive": "Dokumentert nytte",
+        "positiveDetail": "Vurder videre bruk og investering når resultatet holder mål.",
+        "negative": "Ingen tydelig effekt",
+        "negativeDetail": "Juster hypotesen eller stopp. Ikke skaler uten grunnlag."
+      },
+      "bullets": [
+        "Formuler ett konkret problem og en testbar hypotese.",
+        "Avklar mål og rammer med ansvarlige før testing.",
+        "Utvid kun dersom effekt og kvalitet gir grunnlag for det."
+      ]
     }
   ]
 }

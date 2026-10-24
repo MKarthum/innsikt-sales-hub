@@ -477,19 +477,19 @@
           "slideId": "risk-and-trust",
           "beat": "signals",
           "delivery": "tell",
-          "note": "Gjør kontrollbehovet proporsjonalt: ulike arbeidsprosesser trenger ulik kvalitet og oppfølging. Bruk NIST-rammeverket som støtte. Overgang: Hva betyr dette for vår retning? Det avgjørende er hvilke kundebehov som er reelle, og hvordan vi kan levere verdi uten å kreve full perfeksjon først."
+          "note": "Den stigende illustrasjonen viser at et internt idéutkast, en analyse som deles med kunden og automatisert beslutningsstøtte kan kreve ulik oppfølging. Det er situasjon og konsekvens som styrer – ikke at alle løsninger tilhører én fast klasse. Bruk NIST som rammeverk, og gå deretter til spørsmålet om hva vi bør prioritere. Overgang: Hva betyr denne vurderingen for hvor Innsikt skal satse faglig?"
         },
         {
           "slideId": "market-priorities",
           "beat": "direction",
           "delivery": "tell",
-          "note": "Her er vår prioritering: få data til å fungere, gjøre innsikt anvendelig, og bruke KI målrettet. Ikke reduser alle tre til KI. Overgang: Hvordan starter vi i praksis? Det avgjørende er hvilke kundebehov som er reelle, og hvordan vi kan levere verdi uten å kreve full perfeksjon først."
+          "note": "Dette er illustrative kundesignal og vår vurdering av første faglige inngang. Hver rad tar utgangspunkt i et problem, ikke et teknologinavn. Vær tydelig på at data, analyse og KI kan måtte kombineres i samme arbeid. Nå går vi fra prioritering til hvordan vi tar beslutning om videre satsing. Overgang: Hvordan prøver vi en slik prioritering uten å bygge for mye først?"
         },
         {
           "slideId": "market-next-moves",
           "beat": "direction",
           "delivery": "tell",
-          "note": "Ta én beslutning eller prosess, undersøk nødvendige data og risiko, test og lær. Dette er en anbefalt arbeidsmåte, ikke en fasit. Avslutning: Bruk portalen for spørsmål og neste kundemøte. "
+          "note": "Avklar mål, datagrunnlag og kriterier før en avgrenset test. Vi står deretter overfor et reelt valg: gir forsøket dokumentert nytte som begrunner mer innsats, eller bør vi justere eller stoppe? Det er ikke et løfte om effekt. Avslutt med at vi skal prioritere dokumenterte kundebehov og læring, ikke pilotaktivitet for sin egen del."
         }
       ]
     },
@@ -562,7 +562,7 @@
           "slideId": "portal-market",
           "beat": "depth",
           "delivery": "tell",
-          "note": "Forklar hvorfor markedet ikke lenger er starten på den obligatoriske historien. «I noen samtaler kjenner vi allerede kundeproblemet. I andre trenger vi bakgrunn om hva som endrer seg.» Vis gjerne «Marked og trender» under Kundearbeid og hvordan dokumentasjon skiller seg fra vurdering. «Trendradar» finnes i det utvidbare Faglig oppslag, og er bevisst mer usikker. Dette skal ikke bli en nyhetsoppramsing, men en kort forklaring på at portalen også støtter dem som trenger oppdatert, kritisk kontekst. Overgang: Hva sitter jeg faktisk igjen med når jeg har brukt den?"
+          "note": "Markedstrender gir nyttig bakgrunn, ikke bevis for at kunden har det samme problemet. Vis «Marked og trender» når noen trenger kildegrunnlag; «Trendradar» kan vise mer usikre signaler. Skillet i figuren går mellom det vi observerer og det vi må undersøke sammen med kunden. Deretter oppsummerer vi hva brukeren faktisk sitter igjen med. Overgang: Hva tar selgeren med seg videre fra portalen?"
         },
         {
           "slideId": "portal-outcome",
@@ -641,7 +641,7 @@
           "slideId": "sales-discovery-prompt",
           "beat": "prepare",
           "delivery": "tell",
-          "note": "Dette er koblingen til den oppgaveorienterte forsiden. Prompten «Forbered en behovssamtale» finnes på #prompter/discovery og er blant de tilgjengelige oppgavene i biblioteket. Den lager et utkast til spørsmål og mulig neste steg ut fra et uklart signal. Vis gjerne den reelle prompten, at teksten kan redigeres, og at den kopieres til et godkjent KI-verktøy fremfor å kjøres i portalen. Ikke lim inn konfidensielle kundesitater eller anta at et generert svar er sant. Dette gir likevel en umiddelbart nyttig måte å forberede neste møte på. Overgang: Hva skal vi bruke utkastet til?"
+          "note": "Dette bildet er en illustrasjon, ikke skjermbilde av et virkelig KI-svar. Vis hvordan det fiktive rapporteringssignalet kan brukes i den redigerbare prompten «Forbered en behovssamtale». Innholdet kopieres til godkjent KI-verktøy; det kjøres ikke i portalen. La spørsmålene gi struktur, men kontroller dem selv. Deretter kan vi avtale en konkret, avgrenset avklaring. Overgang: Hvordan omsetter vi spørsmålsutkastet til et avgrenset neste møte?"
         },
         {
           "slideId": "sales-next-step",
