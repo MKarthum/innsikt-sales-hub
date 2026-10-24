@@ -72,3 +72,6 @@ INTERNAL_CONTENT_CONTRACT.md beskriver hvordan en separat tilgangsbeskyttet inst
 ## Ressursbibliotek og arkitekturprofiler
 
 Se ARCHITECTURE_ASSETS.md for felles bibliotek over logoer, lisensierte eksterne figurer og egenproduserte SVG-ressurser.
+## Lys og mørk i v0.12.3
+
+Lys er enhetlig standard i både lysbildebibliotek og Presenter, og bevares ved åpning av en historie. Mørk og Fortellingsstyrt kan velges i begge visninger; valget huskes lokalt. Fortellingsstyrt bruker historiebeat, men er ikke skjult standard. De tre leverandørdiagrammene har separate layoutscener; se ARCHITECTURE_ASSETS.md.

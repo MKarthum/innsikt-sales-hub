@@ -24,6 +24,20 @@ const pids=new Set();
 for(const p of profiles.profiles){
  assert.ok(!pids.has(p.id));pids.add(p.id);
  assert.ok(['conceptual','vendor'].includes(p.kind));
+ if(p.kind==='vendor'){
+  assert.ok(['snowflake-hub','fabric-experiences','databricks-medallion'].includes(p.variant),'Distinct vendor scene '+p.id);
+  assert.ok(p.diagram&&Array.isArray(p.diagram.sources)&&p.diagram.outputs.length>=3&&p.diagram.support.length===4);
+  function walkImages(value){
+   if(Array.isArray(value))return value.forEach(walkImages);
+   if(value&&typeof value==='object'){
+    for(const [k,v] of Object.entries(value)){
+     if(['assetId','lakeAsset','brand'].includes(k))assert.ok(ids.has(v),'Unknown nested icon '+v);
+     else walkImages(v);
+    }
+   }
+  }
+  walkImages(p.diagram);
+ }
  assert.ok(p.sources.length>=3&&p.consumers.length>=2&&p.support.length>=3);
  for(const a of [...p.sources,...p.consumers,...p.support])assert.ok(ids.has(a.assetId),'Unknown '+a.assetId);
  for(const id of [p.ingest.assetId,p.platform.assetId,p.platform.partnerId,p.vendorId].filter(Boolean))assert.ok(ids.has(id),'Unknown brand or icon '+id);
@@ -38,4 +52,4 @@ const context={window:{}};vm.runInNewContext(fs.readFileSync('docs/assets/visual
 for(const a of assets.items)assert.ok(context.window.InnsiktAssets.get(assets,a.id));
 const used=context.window.InnsiktAssets.usedBy('snowflake',profiles,slides);assert.deepEqual([...used.map(x=>x.id)],['architecture-snowflake']);
 assert.ok(context.window.InnsiktAssets.usedBy('support-catalog',profiles,slides).length>=6);
-console.log('PASS – 22 sentrale ressurser med opphav, integritet og rettigheter; 6 profiler og 6 gjenbrukbare diagrammer');
+console.log('PASS – '+assets.items.length+' sentrale ressurser med opphav, integritet og rettigheter; 6 profiler og 6 gjenbrukbare diagrammer');
