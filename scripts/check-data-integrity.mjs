@@ -68,6 +68,10 @@ for(const x of learning.diagrams){
 }
 for(const x of learning.templates)if(!str(x.title)||!str(x.purpose)||!str(x.caution)||!x.sections?.length||x.sections.some(s=>!s.questions?.length))fail('Ufullstendig mal '+x.id);
 const ds=new Set(learning.diagrams.map(x=>x.id)),bs=new Set(sales.businessSignals.map(x=>x.id));
+const deployment=read('deployment');
+if(deployment.mode!=='public'||deployment.protectedPresentationContent!==null)fail('GitHub Pages skal være offentlig og uten intern datakilde');
+if(slides.items.some(x=>x.classification==='internal')||Object.values(pages.presentationDecks||{}).some(x=>x.classification==='internal'))
+ fail('Internt lysbilde eller historie må ikke leveres i offentlig repo');
 const slideIds=ids(slides.items,'Lysbildebibliotek'),slidesById=new Map(slides.items.map(x=>[x.id,x]));
 for(const s of slides.items){
  if(!['shared','story'].includes(s.scope))fail('Ugyldig lysbildescope: '+s.id);
@@ -91,6 +95,10 @@ for(const [key,d] of Object.entries(pages.presentationDecks||{})){
  const story=d.narrative;
  if(!str(d.audience)||!str(d.intro)||!story||!str(story.mode)||!str(story.use)||!str(story.centralQuestion)||!str(story.turn)||!str(story.resolution))fail('Presenter mangler fortellingsgrunnlag: '+key);
  const beatIds=Array.isArray(story?.beats)?story.beats.map(b=>b.id):[];
+ const plan=d.visualStyle;
+ if(!plan||!['light','strong'].includes(plan.defaultTone))fail('Historie mangler grunnpalett: '+key);
+ if(!plan?.beats||Object.entries(plan.beats).some(([beat,tone])=>!story.beats.some(x=>x.id===beat)||!['light','strong'].includes(tone)))
+  fail('Ugyldig palett per fortellerdel: '+key);
  if(!beatIds.length||beatIds.some(id=>!str(id))||new Set(beatIds).size!==beatIds.length||story.beats.some(b=>!str(b.function)))fail('Presenter mangler fortellingskurve: '+key);
  if(!str(story.story)||story.story.length<500)fail('Fortellingen må skrives før lysbildene: '+key);
  let prev=-1;

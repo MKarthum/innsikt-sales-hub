@@ -402,7 +402,16 @@
           "delivery": "tell",
           "note": "Avslutt uten å selge teknologien. Portalen gjør det lettere å kjenne igjen behov, forberede spørsmål og finne faglig fordypning når dere trenger den. Den tar ikke samtalen for oss. Nå viser vi hvordan det ser ut i praksis. Avslutning: Gå over til portal-demoen."
         }
-      ]
+      ],
+      "visualStyle": {
+        "defaultTone": "strong",
+        "beats": {
+          "possibility": "strong",
+          "tension": "light",
+          "choices": "light",
+          "resolution": "strong"
+        }
+      }
     },
     "innsikt-kort": {
       "label": "Hvorfor Innsikt? · kortversjon",
@@ -461,7 +470,15 @@
           "delivery": "tell",
           "note": "Avslutt kort: Portalen er ment å støtte en god samtale, ikke erstatte fagfolk eller kundenes egne vurderinger. Åpne gjerne den praktiske demonstrasjonen rett etter dette. Avslutning: Vis ett eksempel fremfor å gå gjennom alle sidene."
         }
-      ]
+      ],
+      "visualStyle": {
+        "defaultTone": "strong",
+        "beats": {
+          "possibility": "strong",
+          "tension": "light",
+          "resolution": "strong"
+        }
+      }
     },
     "fra-ki-til-verdi": {
       "label": "Fra KI til verdi · fordypning",
@@ -542,7 +559,16 @@
           "delivery": "tell",
           "note": "Avslutt med virksomhetens verdi i sentrum. Poenget er bedre innsikt og bedre handling, uavhengig av om første tiltak er datamodellering, en analyse eller et avgrenset KI-bruksområde. Avslutning: Ta dette med inn i den neste kundedialogen."
         }
-      ]
+      ],
+      "visualStyle": {
+        "defaultTone": "strong",
+        "beats": {
+          "possibility": "strong",
+          "tension": "light",
+          "choices": "light",
+          "resolution": "strong"
+        }
+      }
     },
     "kundedialog": {
       "label": "Kjenn igjen muligheten · salg",
@@ -611,7 +637,16 @@
           "delivery": "tell",
           "note": "Ta over til portalen. Den gjør ikke kundeanalysen ferdig, men gir relevant faglig bakgrunn og forslag til gode spørsmål. Velg ett konkret eksempel når du demonstrerer, og stopp når publikum forstår nytten. Avslutning: La portalen være en støtte for den neste samtalen."
         }
-      ]
+      ],
+      "visualStyle": {
+        "defaultTone": "strong",
+        "beats": {
+          "possibility": "light",
+          "tension": "light",
+          "choices": "strong",
+          "resolution": "strong"
+        }
+      }
     },
     "portal": {
       "label": "Presenter Innsikt · 7 min",
@@ -696,7 +731,17 @@
           "delivery": "tell",
           "note": "Lukk sirkelen til åpningen: «Jeg trengte ikke lese alt for å få nytte. Jeg kunne velge min oppgave, ta i bruk en ferdig prompt, finne bedre spørsmål og vite hvor jeg skulle lete videre.» Dette er et offentlig arbeidsgrunnlag, ikke en fullautomatisert rådgiver eller et sted for fortrolige kundedata. En erfaren arkitekt kan hoppe rett til dybde, mens en ny kollega kanskje begynner med møtebriefen. Vi har dermed forklart bruken av løsningen, ikke bare menyen. Nå kan du, dersom du ønsker, vise den andre korte presentasjonen som konkret eksempel på Forretningsbehov."
         }
-      ]
+      ],
+      "visualStyle": {
+        "defaultTone": "strong",
+        "beats": {
+          "challenge": "strong",
+          "quick-win": "light",
+          "qualify": "light",
+          "depth": "light",
+          "outcome": "strong"
+        }
+      }
     },
     "sales": {
       "label": "Eksempel fra Innsikt · 5 min",
@@ -771,7 +816,16 @@
           "delivery": "tell",
           "note": "Avslutt med to konkrete steder i portalen, ikke en ny forelesning: «Det vi nettopp viste, finnes der: et illustrativt økonomibehov under Forretningsbehov og prompten ‘Forbered en behovssamtale’ i promptbiblioteket.» Det er ikke en kundereferanse og heller ikke en påstand om resultatet av et virkelig prosjekt. Poenget er at faglig innhold og praktiske verktøy nå henger sammen slik at brukeren kan gå fra et signal til en mer meningsfull handling. For et faktisk oppdrag må kundens fakta og faglige behov kontrolleres separat. Avslutt her."
         }
-      ]
+      ],
+      "visualStyle": {
+        "defaultTone": "strong",
+        "beats": {
+          "scene": "light",
+          "investigate": "light",
+          "prepare": "strong",
+          "resolution": "strong"
+        }
+      }
     },
     "analytikere": {
       "label": "Tusen nye analytikere · visuell pilot",
@@ -818,7 +872,15 @@
           "delivery": "tell",
           "note": "Her møtes tre deler av Innsikt-faget. Forstå virksomheten: Hvilken utfordring skal løses, og hva må besluttes? Kjenn datagrunnlaget: Hva betyr tallene, hvilke kilder og definisjoner kan vi stole på? Bruk analyse og KI: Hvilke virkemidler hjelper oss å lære, forbedre og handle? Det er ikke en enveiskjede. KI kan også gjøre datagrunnlaget bedre, dokumentere og teste. Og vi skal ikke bygge verdens perfekte plattform før vi begynner. Vi skal skape verdi underveis, med riktig grad av kontroll."
         }
-      ]
+      ],
+      "visualStyle": {
+        "defaultTone": "strong",
+        "beats": {
+          "possibility": "strong",
+          "tension": "light",
+          "resolution": "strong"
+        }
+      }
     }
   },
   "marketIntro": {
@@ -1009,6 +1071,7 @@
       "Fag og verdi",
       "Kundedialog",
       "Bruk av portalen"
-    ]
+    ],
+    "toneInfo": "Biblioteket viser lysbildets egen forhåndsvisning. I Presenter bestemmes fargene av historien eller valgt lys/mørk visning."
   }
 }
