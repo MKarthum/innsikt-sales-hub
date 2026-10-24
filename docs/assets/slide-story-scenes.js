@@ -74,6 +74,37 @@ function render(slide,{v,top,title,escs,assetImage,block}){
    +'<div class="v6-priority-arrow" aria-hidden="true">→</div><div class="v6-priority-response"><h3>'+escs(x.priority)+'</h3>'
    +'<p>'+escs(x.action)+'</p></div></div>').join('')+'</div>'+footer(v.conclusion));
  }
+ case 'meeting-brief': {
+  return block('special v5-special v7-meeting',top+heading
+   +'<div class="v7-meeting-body"><section class="v7-meeting-tool"><div class="v7-meeting-toolbar"><span aria-hidden="true">● ● ●</span><strong>'+escs(v.portalTitle)+'</strong></div>'
+   +'<div class="v7-meeting-fields"><small>'+escs(v.portalLabel)+'</small>'+v.fields.map(f=>'<div><span>'+escs(f.name)+'</span><strong>'+escs(f.value)+'</strong></div>').join('')+'</div></section>'
+   +'<div class="v7-meeting-transfer"><b aria-hidden="true">→</b><strong>'+escs(v.transferLabel)+'</strong></div>'
+   +'<section class="v7-meeting-paper"><small>'+escs(v.briefLabel)+'</small><h3>'+escs(v.briefTitle)+'</h3>'
+   +'<div class="v7-meeting-goal"><span>'+escs(v.agendaLabel)+'</span><strong>'+escs(v.agenda)+'</strong></div>'
+   +'<div class="v7-meeting-questions"><span>'+escs(v.questionLabel)+'</span>'+v.questions.map(q=>'<p>'+escs(q)+'</p>').join('')+'</div>'
+   +'<div class="v7-meeting-reviewed">'+escs(v.review)+'</div></section></div>'+footer(v.conclusion));
+ }
+ case 'conversation-takeaway': {
+  return block('special v5-special v7-outcome',top+heading
+   +'<div class="v7-outcome-focus"><div class="v7-outcome-signal"><small>'+escs(v.signalLabel)+'</small><strong>'+escs(v.signal)+'</strong></div>'
+   +'<div class="v7-outcome-arrow" aria-hidden="true">↓</div><div class="v7-outcome-question"><small>'+escs(v.questionLabel)+'</small><blockquote>'+escs(v.question)+'</blockquote></div>'
+   +'<div class="v7-outcome-action"><small>'+escs(v.nextLabel)+'</small><strong>'+escs(v.nextAction)+'</strong></div></div>'+footer(v.conclusion));
+ }
+ case 'capability-journey': {
+  return block('special v5-special v7-capabilities',top+heading
+   +'<div class="v7-capability-case"><small>'+escs(v.caseLabel)+'</small><strong>'+escs(v.case)+'</strong></div>'
+   +'<div class="v7-capability-path">'+v.stages.map((step,i)=>'<section class="v7-capability-stage">'+icon(step.assetId,'v7-capability-icon')
+   +'<small>'+escs(step.label)+'</small><h3>'+escs(step.title)+'</h3><p>'+escs(step.detail)+'</p></section>'+(i<v.stages.length-1?'<span class="v7-capability-arrow" aria-hidden="true">→</span>':'')).join('')+'</div>'
+   +'<div class="v7-capability-assist"><div><small>'+escs(v.assistLabel)+'</small><p>'+escs(v.assist)+'</p></div><span class="v7-capability-assist-arrow" aria-hidden="true">↑</span></div>'+footer(v.conclusion));
+ }
+ case 'bounded-discovery': {
+  return block('special v5-special v7-discovery',top+heading
+   +'<div class="v7-discovery-flow"><div class="v7-discovery-sources"><small>'+escs(v.sourceTitle)+'</small>'+v.sources.map(t=>'<strong>'+escs(t)+'</strong>').join('')+'</div>'
+   +'<div class="v7-discovery-arrow" aria-hidden="true">→</div><div class="v7-discovery-check"><small>'+escs(v.checkLabel)+'</small><h3>'+escs(v.checkTitle)+'</h3><p>'+escs(v.checkDetail)+'</p></div>'
+   +'<div class="v7-discovery-arrow" aria-hidden="true">→</div><div class="v7-discovery-result"><small>'+escs(v.resultLabel)+'</small><h3>'+escs(v.result)+'</h3></div></div>'
+   +'<div class="v7-discovery-boundary"><section><small>'+escs(v.inScopeLabel)+'</small><strong>'+escs(v.inScope)+'</strong></section>'
+   +'<section><small>'+escs(v.laterLabel)+'</small><strong>'+escs(v.later)+'</strong></section></div>'+footer(v.conclusion));
+ }
  case 'cause-map':
   return block('special v5-special v5-causes',top+heading
    +'<div class="v5-symptom"><small>'+escs(v.symptomLabel)+'</small><strong>'+escs(v.symptom)+'</strong></div>'

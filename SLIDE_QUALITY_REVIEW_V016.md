@@ -37,3 +37,7 @@
 - Fiorella & Mayer (2021), *Principles for Reducing Extraneous Processing in Multimedia Learning*, Cambridge University Press: https://doi.org/10.1017/9781108894333.019
 - Harvard Catalyst, *Slides*: https://catalyst.harvard.edu/writing-communication-center/visualize-science/slides/
 - De enkelte tekniske påstandene fortsetter å eie relevante kilde-ID-er gjennom `slides.json` og `sources.json`. Diagrammene er redaksjonelle illustrasjoner, ikke empiriske datasett.
+
+## Videreføring
+
+Restprioriteringen ovenfor var gjeldende for v0.16.0. Fire av punktene er tatt i [v0.17.0](SLIDE_QUALITY_REVIEW_V017.md), som er autoritativt utgangspunkt for neste visuelle iterasjon.

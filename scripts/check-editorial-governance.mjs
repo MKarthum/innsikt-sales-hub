@@ -28,7 +28,7 @@ for(const [id,a] of Object.entries(decks))for(const [other,b] of Object.entries(
 let figureBacked=0;
 for(const s of slides){
  const v=s.visual||{};
- const figures=[v.figureAssetId,...v.itemAssetIds||[],...v.stepAssetIds||[]].filter(Boolean);
+ const figures=[v.figureAssetId,...v.itemAssetIds||[],...v.stepAssetIds||[],...(v.stages||[]).map(x=>x.assetId)].filter(Boolean);
  for(const asset of figures)assert.ok(assetIds.has(asset),'Broken figure reference '+s.id+'/'+asset);
  if(figures.length)figureBacked++;
  if(s.sourceIds)for(const id of s.sourceIds)assert.ok(sources[id],'Broken source '+s.id+'/'+id);
@@ -38,7 +38,7 @@ for(const s of slides){
  if(v.figureAssetId)assert.ok(['impact','list','road','domains','contrast','definition','portal','loop'].includes(v.scene),'Primary figure must belong to supported scene '+s.id);
  if(s.type==='visual'){
   assert.ok(s.visual&&s.visual.scene,'Slide without visual scene: '+s.id);
-  if(['impact','list','road','domains'].includes(v.scene))assert.ok(figures.length>0,'Visual with no semantic reusable assets: '+s.id);
+  if(['impact','list','road','domains'].includes(v.scene)&&!['meeting-brief','conversation-takeaway','bounded-discovery'].includes(v.layout))assert.ok(figures.length>0,'Visual with no semantic reusable assets: '+s.id);
  }
 }
 for(const id of ['market-why-now','market-three-forces','market-customer-pressure','market-priorities']) {

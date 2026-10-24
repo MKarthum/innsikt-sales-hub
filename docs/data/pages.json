@@ -453,7 +453,7 @@
           "slideId": "insight-three-disciplines",
           "beat": "why",
           "delivery": "tell",
-          "note": "Innsikt handler om data, analyse og KI sammen. Her åpner vi med fagets rolle, ikke leverandørprodukter. Overgang: Markedet gjør dette samspillet viktigere. Det avgjørende er hvilke kundebehov som er reelle, og hvordan vi kan levere verdi uten å kreve full perfeksjon først."
+          "note": "Eksemplet illustrerer samspill, ikke en standardarkitektur: felles definisjoner gir analysen mening, og analysen gir beslutningstaker en retning. KI kan hjelpe underveis med dokumentasjon og kontroll, men er ikke påkrevd og må verifiseres. Overgang: Hvorfor blir denne kombinasjonen særlig relevant nå, når kapasiteten øker?"
         },
         {
           "slideId": "market-why-now",
@@ -544,7 +544,7 @@
           "slideId": "portal-meeting-brief",
           "beat": "quick-win",
           "delivery": "tell",
-          "note": "Demonstrer fra «Oversikt»: Velg «Lag en møtebrief», som går til #prompter/meeting-prep. Vis at prompten kan redigeres før den kopieres. Den skal gi en kort agenda, relevante spørsmål og et tydelig neste steg. Den kjøres ikke inne i portalen. Dette gir umiddelbar nytte, men er ikke en automatisk kundebeskrivelse eller et ferdig kvalitetssikret råd. Hvis opplysninger mangler, bruk «ukjent» heller enn å finne på fakta. Bruk bare opplysninger godkjent for det valgte KI-verktøyet; ingen fortrolige kundedata i den offentlige portalen. Overgang: Ikke alle starter med et booket møte. Noen har bare fanget opp et problem hos kunden."
+          "note": "Følg et fiktivt rapporteringssignal gjennom den faktiske inngangen «Lag en møtebrief». Vis redigerbare felt i #prompter/meeting-prep. Illustrasjonen viser mulig struktur i et møteutkast – ikke et ekte modellresultat. Kopier prompten til et godkjent KI-verktøy; portalen kjører den ikke. Kontroller alltid påstander og opplysninger. Overgang: Hvis du ikke engang har et møte ennå, men bare har hørt om et problem hos kunden, hvor starter du da?"
         },
         {
           "slideId": "portal-customer-signal",
@@ -568,7 +568,7 @@
           "slideId": "portal-outcome",
           "beat": "outcome",
           "delivery": "tell",
-          "note": "Samle den lille historien: «Vi begynte med et kundemøte jeg skulle forberede. Nå kan jeg ha et førsteutkast til møtebrief, skarpere avklaringsspørsmål og en pekepinn på når fagmiljøet bør involveres.» Dette er ikke en obligatorisk lineær reise. Forsiden viser alternative startpunkter, promptbiblioteket gjør en praktisk oppgave rask, mens forretningsbehov og fagstoff gjør oss bedre i samtalen. Ikke påstå at portalen henter fra CRM, interne CV-er eller dokumenter automatisk. Overgang: Dermed er det også viktig å si hva verktøyet ikke skal gjøre for oss."
+          "note": "Dette er historien i ett eksempel: Vi begynte med «rapporteringen tar for lang tid» og avslutter med et relevant spørsmål om konsekvensene. Det finnes ingen bekreftet diagnose, men selgeren er bedre forberedt på å undersøke problemet. Fagmiljøet involveres når det trengs. Overgang: Portalen gjør ikke salgsarbeidet for oss; den gir et bedre grunnlag for samtalen."
         }
       ],
       "visualStyle": {
@@ -647,7 +647,7 @@
           "slideId": "sales-next-step",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Avslutt den tenkte kundehistorien uten å overselge: «Nå kan vi foreslå et kort møte med økonomiansvarlig og relevant fagperson for å forstå én rapporteringsflyt og hvordan tallene defineres.» Det er en mulig avklaring, ikke et løfte om et prosjekt eller en bestemt effekt. Det kan vise seg at utfordringen skyldes prosess eller at problemet ikke rettferdiggjør et oppdrag. Slik viser vi hvordan løsningen kan bidra til et bedre utgangspunkt for en reell faglig vurdering, uten å late som den erstatter den. Overgang: Hva var den konkrete gevinsten for brukeren?"
+          "note": "Vis det avgrensede oppdraget: undersøk ett nøkkeltall for samme periode på tvers av to avdelinger, og avklar forskjeller i definisjon eller dataflyt. Dette er fiktivt og illustrativt, ikke en bekreftet årsak. Teknologi- og plattformvalg er utenfor mandatet nå. Overgang: Hvis avklaringen viser et reelt behov, kan vi sammen vurdere riktig neste tiltak."
         },
         {
           "slideId": "seller-specialist",

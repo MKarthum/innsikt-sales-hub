@@ -230,5 +230,13 @@
     "status": "åpen",
     "priority": "høy",
     "why": "Verifiser hastighet til riktig oppgave, relevans i Innsikt-rettet kundeanalyse, kontaktsituasjoner, valgbasert tilpasning og kopiering av kort kontekst mellom eksterne KI-kjøringer. Bruk bare anonymiserte og offentlige eksempler; mål faktisk nytte, ikke antall prompter."
+  },
+  {
+    "id": "B-30",
+    "title": "Fortsette målrettet visuell revisjon av presentasjonsbiblioteket",
+    "area": "Presenter",
+    "status": "åpen",
+    "priority": "middels",
+    "why": "Se SLIDE_QUALITY_REVIEW_V017.md for rangerte gjenstående svakheter. Prioriter ai-pragmatic, seller-better-questions og portal-learning med faktisk 16:9-inspeksjon; unngå generiske kort og endring av fungerende bilder."
   }
 ]
