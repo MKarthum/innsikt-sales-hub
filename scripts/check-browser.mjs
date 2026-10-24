@@ -6,6 +6,7 @@ const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
 const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8')).items.length;
 const expectedSlideCount=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.length;
+const canonicalSlideTitles=new Map(JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.map(x=>[x.id,x.title]));
 const expectedDeckCount=Object.keys(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks).length;
 const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','lysbilder','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
@@ -40,7 +41,7 @@ try {
    assert.equal(await parent.count(),1,label+': klikkbart bibliotek fra '+slideId);
    assert.equal((await parent.innerText()).trim(),'Lysbildebibliotek',label+': riktig foreldretittel');
    assert.equal(await page.locator('.breadcrumb-trail [aria-current="page"]').count(),1,label+': ett gjeldende nivå');
-   assert.equal((await page.locator('.breadcrumb-trail [aria-current="page"]').innerText()).trim(),JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.find(x=>x.id===slideId).title,label+': lysbildenavn i sti');
+   assert.equal((await page.locator('.breadcrumb-trail [aria-current="page"]').innerText()).trim(),canonicalSlideTitles.get(slideId),label+': lysbildenavn i sti');
    assert.equal(await page.locator('#crumb').getAttribute('aria-current'),null,label+': beholder er ikke gjeldende side');
    await parent.click();
    await page.waitForFunction(()=>location.hash==='#lysbilder'&&document.querySelector('.slide-library-card'));
