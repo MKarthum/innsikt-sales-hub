@@ -1,77 +1,53 @@
-# Presentasjonsarkitektur – første iterasjon (24.10.2026)
+# Presentasjonsarkitektur – gjeldende kontrakt v0.13.0
 
-## Eiendeler og ansvar
-- `docs/data/slides.json`: ett objekt per lysbilde med stabil `id`, `scope` (`shared` eller `story`), valgfri `storyId`, `type`, `tone`, innhold, `speakerBase` og `sourceIds`. Ingen tekniske HTML-fragmenter eller faste fargekoder i objektet.
-- `docs/data/pages.json.presentationDecks`: historier med metadata, narrativ og en ordnet liste `{slideId, beat, delivery, note}`. Her hører de historierelaterte introduksjonene og overgangene hjemme.
-- `docs/assets/slide-model.js`: ren oppslag-/oppløsningslogikk uten DOM eller nettverk. `usage` gjør deling synlig; `resolve` avviser kryssbruk av historiespesifikke lysbilder.
-- `docs/assets/site.js`: presentasjonsviser og bibliotek. Kan åpne et bestemt lysbilde fra biblioteket i sin historie.
-- `docs/assets/site.css`: all visuell styling. `--slide-strong-*` og `--slide-light-*` er par av bakgrunn, tekst, dempet tekst og aksent. Lysbildet velger bare `tone`; ingen lysbildekode kjenner konkret merkevarefarge.
+Dette dokumentet beskriver **nåværende** implementasjon. Historiske iterasjoner er erstattet av denne kontrakten. Bruk også STORY_EDITORIAL_CONTRACT.md, NAVIGATION_CONTRACT.md og SLIDE_EDITORIAL_AUDIT_2026-10-24.md.
 
-## Avgrensninger
-Første migrering beholder alle 15 eksisterende lysbildenes ordlyd, rekkefølge og visningskomponenter. Gamle notater omtaler nesten alltid sin historie, derfor er de flyttet ordrett til plasseringens `note`. `speakerBase` er tomt frem til en faglig, kontekstuavhengig forklaring er redaksjonelt godkjent. Dette hindrer kunstig duplisering og uriktig gjenbruk.
+## Kanoniske nivåer
 
-Kilder skal knyttes til lysbildet i `sourceIds` og vises på biblioteksiden. På selve lysbildet vises de bare ved `sourceDisplay: "required"` – for eksempel ved sitat eller ekstern figur. Ikke legg en universell kildeslide på slutten.
+- docs/data/slides.json: Ett lysbilde per stabil ID. Eier fagtekst, sceneparametere, speakerBase, kilde-ID-er og eventuelle figur-ID-er.
+- docs/data/pages.json.presentationDecks: Kuraterte historier med egen målgruppe, dramaturgi, beats, rekkefølge, overgangsnotater og fargeplan. Ikke dupliser lysbildeinnhold her.
+- docs/data/visual-assets.json og docs/assets/library/: Ett sentralt register over leverandørlogoer, lisensierte eksterne bilder og egne SVG-figurer. Ett asset kan oppdateres uten å redigere alle lysbilder.
+- docs/data/architecture-profiles.json: Konkrete generiske og leverandørspesifikke arkitekturprofiler.
+- docs/assets/slide-model.js: Ren logikk for oppslag, bruk i historier, notes-komposisjon og temavalg.
+- docs/assets/slide-visuals.js og docs/assets/slide-visuals.css: Scenefamilier og elementplassering for redaksjonelle lysbilder. Motivet kommer fra asset-ID.
+- docs/assets/architecture-visuals.js og vendor-architectures.js: Ulike arkitekturscener. Del komponenter der de faktisk er like, men ikke tving leverandørene inn i samme layout.
+- docs/assets/site.js: Library, Presenter, navigasjon og route-handling. Tekster og kilder skal komme fra datafiler.
+- docs/assets/presenter-export.js: HTML/PDF, med lokale figurer innebygd i portable filer.
 
-## Temakontrakt
-Temaverdier skal defineres som *par*, ikke endres uavhengig:
-- `--slide-strong-bg` / `--slide-strong-fg`, sammen med `--slide-strong-muted` / `--slide-strong-accent`
-- `--slide-light-bg` / `--slide-light-fg`, sammen med `--slide-light-muted` / `--slide-light-accent`
-- `--font-body` og `--font-display`
+## Fem distinkte historier
 
-Dersom portalen eller Claude-artefakten bytter merkevare, skal bare disse verdiene overstyres. Bekreft kontrast for tekst, dempet tekst og aksent mot bakgrunnen, samt innebygde underflater. Kjør visuell kontroll på begge toner før publisering. Komponenter som krever egne ikke-semantiske merkefarger bør omskrives til tokens før bred temastøtte loves.
+1. Hvorfor Innsikt? – overordnet faglig sammenheng og motivasjon.
+2. Innsikt, marked og veien videre – markedstrender, behov og strategisk fokus.
+3. Vis løsningen – konkret oppgaveorientert demonstrasjon av portalens verdi.
+4. Kundeeksempel – ett fiktivt problem og kvalifisering før teknologivalg.
+5. Dataarkitektur – valgfri teknisk fordypning, ikke generisk salgsforedrag.
 
-## Neste iterasjoner
-1. Gjør den nye historien «Hvorfor Innsikt?» til egne lysbilder, med storyboard, relevant grafikk og gransket faglig tekst. Behold høyt nivå av redaksjonell frihet i utformingen.
-2. Utvikle et lite antall gjenbrukbare scener (typografi, fullflate, kontrast, dataflyt) og en utvidelsesmulighet for helt spesielle illustrasjoner. Ikke bygg en generell dra-og-slipp-editor.
-3. Forbedre forhåndsvisning og dokumentasjon av «brukes i» for både delte og historiespesifikke lysbilder. Ved en endring av et delt lysbilde må alle brukende historier testes.
-4. Bygg en separat eksportpipeline for PowerPoint som baserer seg på renderte lysbilder og eventuelle fortellernotater. Nettleser er originalen; HTML/PDF-eksport beholdes inntil dette er klart.
-5. Moderniser resten av `site.css` gradvis til semantiske globale designtokens. **Første iterasjon lover ikke at hver eksisterende portal-komponent er fullstendig temauavhengig.**
+De tidligere fire overlappende kortversjonene/pilotene er ikke lenger separate dekk. De gode lysbildene er beholdt som frittstående objekter.
 
-## Kontroller
-`node scripts/check.mjs` inkluderer modellvalidering for bibliotek og historiekoblinger. Test visning i desktop/fullskjerm/mobil før publisering; det er ikke bevist gjennom statiske tester. Eksisterende presentasjonsløp skal ha samme antall lysbilder og notater etter migrering.
+## Innhold og visuell kvalitet
 
-## Iterasjon 2: kuratert bibliotek og visuell pilot (24.10.2026)
+En story er ikke et løp som opprettes fordi biblioteket tilbyr komposisjon. Målgruppe, spørsmål, vendepunkt, effekt og kilder skal begrunne hvert presentasjonsløp. Ikke legg på et nytt løp hvis det bare er en kortere eller omstokket versjon av samme historie.
 
-- De gamle presentasjonsstegene er fortsatt historiespesifikke. Kun tre eksisterende lysbilder med gjenbrukbar kundedialog er foreløpig klassifisert som `shared`. Deling er et redaksjonelt valg, ikke et teknisk krav.
-- `slides.json` eier `topic`, `keywords`, `scope`, `sourceIds`, `speakerBase` og eventuelt `visual.scene` med innholdsparametere. Historier i `pages.json` eier rekkefølge og overgangsnotater.
-- Bibliotekets tema, historietilhørighet, fritekstsøk og scope kan kombineres. Oversikten bruker faktisk lysbilderendering som miniatyr i stedet for typekort.
-- De tre prøvescenene (tusen analytikere, to utfall, samspill) rendres gjennom `slide-visuals.js` og `slide-visuals.css`. Den modulære renderer henter all synlig fagtekst fra datafilene; illustrasjonene tegnes med SVG.
-- Fargene styres av presentasjonens semantiske toner (`strong` og `light`), inkludert `warning`. Ny merkevareprofil kan endre tokenparene uten at illustrasjonskoden omskrives. Standardkontrasten valideres automatisk, men andre merkevarepaletter må gjennomgå egne kontrast- og skjermtester.
-- Ingen generell kildeslide: Kilder eies per lysbilde, er synlige i bibliotekets detaljvisning og vises på selve lysbildet bare ved `sourceDisplay: "required"`.
-- Eksportert HTML får de samme visuelle CSS-reglene som nettstedet; PDF via nettleserens utskrift består. PowerPoint ligger fortsatt utenfor denne iterasjonen.
-- Tre nye lysbilder er en **visuell pilot**, ikke et ferdig foredrag. Foredragsnotatene tilhører historien og inkluderer overganger. De kan erstattes eller utvides enkeltvis.
-- `scripts/check-visual-pilot.mjs` produserer visuelle skjermbilder fra Chromium, og CI bevarer dem som kortlivet artefakt for faktisk designgjennomgang. Skjermbildene er verifikasjon, ikke kanonisk innhold.
+Ett lysbilde skal ha ett hovedbudskap, lettlest komposisjon og relevante notater. Bruk egne SVG-figurer for å løse faktiske forklaringsbehov, ikke bare for å fylle tomrom. For felleslister kan itemAssetIds brukes, for prosesskjeder stepAssetIds, og for sentrale åpninger figureAssetId. Disse må referere et kanonisk objekt med dokumentert opphav og rettigheter.
 
-## Bibliotek v1: komposisjon og visuell kvalitet (24.10.2026)
+Bilder og leverandørlogoer lagres lokalt med rettighetsinformasjon. Eksterne illustrasjoner må ha en gyldig lisens. Leverandørens logo kan identifisere produktet, men bruk betyr ikke partnerskap eller godkjenning. Kilder legges på relevante lysbilder; vises på selve bildet bare om en sitat-/figurkontrakt krever det.
 
-- 30 selvstendige objekt-ID-er, sju historier, fem faglige emner. Historier refererer lysbilde-ID og eier overgangsnotater; grunnforklaring er eid av lysbildet.
-- De opprinnelige portal- og salgsslidene beholder ID, kanoniske lenker og forklaringer, men rendres gjennom samme scenesystem som nye bilder. visual.scene og tilhørende data avgjør grafikken; renderer og CSS er temaavhengige men innholdsuavhengige.
-- Scenefamilier: dramatisk åpningsbilde, forgrening, verdi-orbit, redaksjonell åpning, nummerert problemliste, veivalg, kundesignal, definisjonslinser, kontrast, læringsløkke, fagområder og portalbro.
-- Nye tekster er kvalitative faglige vurderinger/eksempler uten oppdiktede effektmål. Risikosliden knytter bare relevante kilder fra NIST og OECD til seg; ingen universell sluttslide.
-- For redigering: endre docs/data/slides.json for innhold; docs/data/pages.json for historie og overganger; docs/assets/slide-visuals.js og .css for layoutfamilier. Unngå å endre globale farger for å fikse ett lysbilde.
-- Kvalitetsport: statiske eier- og kildetester og reell Chromium-verifikasjon av samtlige lysbilder, med skjermbilder og manuell inspeksjon.
+## Tema og portabilitet
 
-### Manus og to-nivåsnotater
+Lys visning er standard. Presenter og biblioteket bruker ett delt tema-valg, med Mørk eller Fortellingsstyrt som alternativer. Fargene styres med kontrast-par for --pres-* og --slide-*; grafikk og tekst følger de semantiske rollene. Logoer beholder offisielle farger på nøytral flate. Test begge visninger, også i nedlastet HTML/PDF og på mobil.
 
-I biblioteket eier `speakerBase` den selvstendige faglige forklaringen. Hver historieplassering eier bare manusdelen som er spesiell for akkurat denne fortellingen: åpning, rytme og overgang. Presentasjonen setter dem sammen. Kvalitetstesten vurderer totalen (minst 300 tegn), men krever også en selvstendig plasseringstekst; det er ikke et krav om to lange kopier. Hovedfortellingen og tre alternative formater har fått redaksjonelt gjennomgåtte, individuelle overganger.
+Alt offentlig innhold skal være på GitHub Pages uten autentiseringspåstander. Internt materiale hentes kun via separat tilgangsbeskyttet distribusjon i henhold til INTERNAL_CONTENT_CONTRACT.md.
 
-### Visuell gjennomgang
+## Forvaltning og automatiske kvalitetsporter
 
-Etter første fullrendrede bibliotekrunde ble de lengste portal-/salgstitlene strammet inn og portalbroens visuelle symboler styrket. Formålet er å få naturlige linjebrudd og sikre at store interne flater har et kommunikativt tyngdepunkt. CI rendrer hver av de 30 ID-ene og sjekker tekstens grenser i tillegg til ordinære mobil-/presentertester.
+- AGENTS.md og START_HERE.md beskriver arbeidsmåte og ansvar.
+- NAVIGATION_CONTRACT.md er obligatorisk for detaljruter; ingen ny seksjon/id uten klikkbar forelder og nettlesertest.
+- STORY_EDITORIAL_CONTRACT.md beskriver inntakskriteriet for nye historier og kriterier for å avvikle overlapp.
+- SLIDE_EDITORIAL_AUDIT_2026-10-24.md dokumenterer gjennomgang av alle 39 aktive slideobjekter, tilhørende figurer og historietilhørighet.
+- scripts/check-editorial-governance.mjs krever distinkte historier, kildekoblinger, gyldige bilder og oppdatert audit.
+- scripts/check-navigation-browser.mjs tester samtlige lysbildedetaljer på desktop og mobil, pluss andre detaljtyper.
+- scripts/check-library-v1-browser.mjs rendrer alle lysbilder, sjekker tekst- og scenebundethet og beholder bilder til manuell gjennomgang. Nye scener skal tas inn i samme test.
+- scripts/check-architecture-assets.mjs verifiserer opprinnelse, SHA256 og lisens. scripts/check-presentation-mode-browser.mjs tester tema- og eksportlogikken.
+- node scripts/check.mjs er et obligatorisk statisk trinn, men ikke erstatning for Chromium og visuell inspeksjon.
 
-## Fortellingsstyrt presentasjonspalett (24.10.2026)
-
-Tidligere sprang mørk/lys-tonen tilfeldig mellom ulike lysbilder i en historie, fordi tonen lå i lysbildeobjektet. Nå er historienes visualStyle autoritativ for visning: defaultTone + beats (farge per fortellerdel). Mørkt brukes vanligvis som sterk åpning og landing; lysere flater ved utforskning og problemavklaring. Ingen tvunget 1:1-veksling. InnsiktSlides.tone er den felles oppløseren for Presenter, eksport og tester.
-
-Presenter tilbyr i tillegg Fortellingsstyrt (standard), Alltid lys og Alltid mørk. Dette er en presentasjonsinnstilling – ingen duplisering eller modifisering av lysbildeinnhold. Bibliotekets forhåndsvisning fortsetter å bruke lysbildets lokale tone som nøytral redigeringsreferanse.
-
-## Internt innhold
-
-INTERNAL_CONTENT_CONTRACT.md beskriver hvordan en separat tilgangsbeskyttet installasjon kan laste egne historier og lysbilder, samt reserverer typede samlinger for fremtidige interne løsninger og kundehistorier. Det finnes ikke interne kundedata i GitHub Pages. docs/data/deployment.json er låst til offentlig modus i publiseringsvalideringen, og krever beskyttet intern endepunktkonfigurasjon for intern distribusjon.
-
-## Ressursbibliotek og arkitekturprofiler
-
-Se ARCHITECTURE_ASSETS.md for felles bibliotek over logoer, lisensierte eksterne figurer og egenproduserte SVG-ressurser.
-## Lys og mørk i v0.12.3
-
-Lys er enhetlig standard i både lysbildebibliotek og Presenter, og bevares ved åpning av en historie. Mørk og Fortellingsstyrt kan velges i begge visninger; valget huskes lokalt. Fortellingsstyrt bruker historiebeat, men er ikke skjult standard. De tre leverandørdiagrammene har separate layoutscener; se ARCHITECTURE_ASSETS.md.
+Nye lysbilder: endre datafil først, velg eksisterende scene og figur før du legger til ny scene, legg relevante kilder på objektet, dokumenter bruk, kjør tester og se faktisk skjermbilde. Endringer i delte bilder skal testes mot **alle** brukende historier. 
