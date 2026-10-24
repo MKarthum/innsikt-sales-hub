@@ -3,7 +3,7 @@ import vm from 'node:vm';
 const resolverSandbox={window:{}};
 vm.runInNewContext(fs.readFileSync('docs/assets/content.js','utf8'),resolverSandbox);
 const read=n=>JSON.parse(fs.readFileSync('docs/data/'+n+'.json','utf8'));
-const site=read('site'), pages=read('pages'), slides=read('slides'), sources=read('sources'), market=read('market'), sales=read('sales'), tech=read('technologies'), backlog=read('backlog'), learning=read('learning');
+const site=read('site'), pages=read('pages'), slides=read('slides'), architectureProfiles=read('architecture-profiles'), sources=read('sources'), market=read('market'), sales=read('sales'), tech=read('technologies'), backlog=read('backlog'), learning=read('learning');
 const errors=[],fail=x=>errors.push(x),str=x=>typeof x==='string'&&Boolean(x.trim()),ids=(a,name)=>{if(!Array.isArray(a)||!a.length){fail(name+' er tom');return []}const v=a.map(x=>x.id);if(v.some(x=>!str(x)))fail(name+' har manglende ID');if(new Set(v).size!==v.length)fail(name+' har duplikat-ID');return v};
 const date=x=>/^\d{4}-\d{2}-\d{2}$/.test(x||'')&&!Number.isNaN(Date.parse(x));
 const refSource=(id,from)=>{if(!sources[id])fail(from+' peker på ukjent kilde '+id)};
@@ -76,7 +76,8 @@ const slideIds=ids(slides.items,'Lysbildebibliotek'),slidesById=new Map(slides.i
 for(const s of slides.items){
  if(!['shared','story'].includes(s.scope))fail('Ugyldig lysbildescope: '+s.id);
  if(s.scope==='story'&&!pages.presentationDecks[s.storyId])fail('Ukjent lysbildeeier: '+s.id);
- if(!str(s.title)||!str(s.cue)||!['intro','diagram','metric','case','sector-case','bullets','takeaway','prompt','visual'].includes(s.type))fail('Ugyldig lysbilde: '+s.id);
+ if(!str(s.title)||!str(s.cue)||!['intro','diagram','metric','case','sector-case','bullets','takeaway','prompt','visual','architecture'].includes(s.type))fail('Ugyldig lysbilde: '+s.id);
+ if(s.type==='architecture'&&!architectureProfiles.profiles.some(p=>p.id===s.profileId))fail('Ukjent arkitekturprofil: '+s.id);
  if(s.type==='visual'&&(!s.visual||!['analyst-grid','two-directions','value-system','impact','list','road','business-case','definition','contrast','loop','domains','portal'].includes(s.visual.scene)))fail('Ukjent visuell scene: '+s.id);
  if(!s.topic)fail('Lysbilde mangler tema: '+s.id);
  if(s.diagram&&!ds.has(s.diagram))fail('Ukjent diagram i lysbilde '+s.id);

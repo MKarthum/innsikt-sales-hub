@@ -1,0 +1,66 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {chromium} from 'playwright';
+const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+const out='artifacts/architecture';fs.mkdirSync(out,{recursive:true});
+const list=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.filter(x=>x.type==='architecture');
+const catalog=JSON.parse(fs.readFileSync('docs/data/visual-assets.json','utf8'));
+const errors=[];
+try{
+ const page=await browser.newPage({viewport:{width:1512,height:980},deviceScaleFactor:1,acceptDownloads:true});
+ page.on('pageerror',err=>errors.push(err.message));
+ await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
+ await page.evaluate(()=>location.hash='#ressurser');
+ await page.locator('.asset-library-card').first().waitFor();
+ assert.equal(await page.locator('.asset-library-card').count(),catalog.items.length,'Asset gallery renders all assets');
+ assert.equal(await page.locator('.asset-library-section').count(),3,'Separate categories');
+ await page.waitForFunction(()=>[...document.querySelectorAll('.asset-library-thumb img')].every(img=>img.complete&&img.naturalWidth>0));
+ await page.screenshot({path:out+'/asset-library.png',fullPage:false});
+ await page.evaluate(()=>location.hash='#lysbilder');
+ await page.locator('.slide-library-card').first().waitFor();
+ assert.equal(await page.locator('.slide-library-card').count(),36);
+ for(const [i,s] of list.entries()){
+  await page.evaluate(id=>location.hash='#lysbilder/'+id,s.id);
+  await page.waitForFunction(title=>document.querySelector('main h1')?.textContent?.trim()===title,s.title);
+  await page.locator('.slide-library-detail-stage .da-scene').waitFor();
+  const stage=page.locator('.slide-library-detail-stage');
+  await stage.waitFor();
+  const audit=await stage.evaluate(node=>{
+   const scene=node.querySelector('.da-scene');
+   const bounds=scene.getBoundingClientRect();
+   const text=[...scene.querySelectorAll('h2,h3,p,li,strong,.da-col-title,.da-data-tiers span,.da-foundation-title')];
+   const outside=[];
+   for(const el of text){
+    if(!el.textContent?.trim())continue;
+    const r=el.getBoundingClientRect();
+    if(r.width&&r.height&&(r.x<bounds.x-4||r.y<bounds.y-4||r.right>bounds.right+4||r.bottom>bounds.bottom+4))outside.push({text:el.textContent.slice(0,35),x:r.x,y:r.y});
+   }
+   const imageChecks=[...scene.querySelectorAll('img')].map(img=>({name:img.alt,complete:img.complete,width:img.naturalWidth}));
+   return {outside,imageChecks,width:bounds.width,height:bounds.height,foundation:scene.querySelector('.da-foundation')!=null};
+  });
+  assert.equal(audit.outside.length,0,s.id+' text outside '+JSON.stringify(audit.outside));
+  assert.ok(audit.foundation&&audit.imageChecks.length>=10,s.id+' missing shared imagery');
+  await page.waitForFunction(()=>[...document.querySelectorAll('.slide-library-detail-stage .da-scene img')].every(x=>x.complete&&x.naturalWidth>0));
+  await stage.screenshot({path:out+'/'+s.id+'.png'});
+ }
+ await page.locator('#present-button').click();
+ await page.locator('[data-deck="dataarkitektur"]').click();
+ await page.locator('#slide-body .da-scene').waitFor();
+ await page.locator('#present-tone-mode').selectOption('strong');
+ assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'strong');
+ await page.locator('#present-tone-mode').selectOption('light');
+ assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'light');
+ const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#deck-download').click()]);
+ const f=out+'/self-contained-export.html';await download.saveAs(f);
+ const html=fs.readFileSync(f,'utf8');
+ assert.ok(html.includes('data:image/svg+xml'), 'Asset imagery embedded in portable HTML');
+ assert.ok(html.includes('.da-flow'), 'Architecture styles embedded in portable HTML');
+ assert.ok(!html.includes('src="./assets/library/'), 'No broken external image URLs in export');
+ await page.keyboard.press('Escape');
+ await page.setViewportSize({width:390,height:844});
+ await page.evaluate(()=>location.hash='#ressurser');
+ await page.locator('.asset-library-card').first().waitFor();
+ await page.screenshot({path:out+'/asset-library-mobile.png',fullPage:false});
+ assert.deepEqual(errors,[]);
+ console.log('PASS – 22 asset thumbnails, 6 architecture scenes, theme switching, and truly portable HTML export');
+}finally{await browser.close();}

@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "vendor-logo",
+      "label": "Leverandørlogoer"
+    },
+    {
+      "id": "licensed-external",
+      "label": "Eksterne ressurser (lisensiert)"
+    },
+    {
+      "id": "original-figure",
+      "label": "Egne figurer"
+    }
+  ],
+  "items": [
+    {
+      "id": "snowflake",
+      "label": "Snowflake",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/snowflake.svg",
+      "origin": "https://www.snowflake.com/wp-content/themes/snowflake/assets/img/brand-guidelines/logo-sno-blue-example.svg",
+      "rights": "trademark; vendor-defined diagram/educational-use terms",
+      "termsUrl": "https://www.snowflake.com/brand-guidelines/",
+      "notes": "Bruk som identifikasjon; behold originalfarger og klaring",
+      "sha256": "7e536ef4af002f93f226783cfa475f69e84e9c5b2629507752d23c37aad377e2"
+    },
+    {
+      "id": "fabric",
+      "label": "Microsoft Fabric",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/fabric.svg",
+      "origin": "https://raw.githubusercontent.com/microsoft/fabric-samples/main/docs-samples/Icons.zip",
+      "rights": "trademark; vendor-defined diagram/educational-use terms",
+      "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
+      "notes": "Bare arkitektur og opplæring; ingen endringer eller Microsoft-tilknytning",
+      "sha256": "ef80d2edbfc1b045241d2e9550b7930b648d8018e0274116a3df6d6ccf3adbf9"
+    },
+    {
+      "id": "databricks",
+      "label": "Databricks",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/databricks.svg",
+      "origin": "https://www.databricks.com/sites/default/files/2026-05/Databricks-Logo-Icon.svg",
+      "rights": "trademark; vendor-defined diagram/educational-use terms",
+      "termsUrl": "https://brand.databricks.com/databricks-brand-guidelines/welcome",
+      "notes": "Behold originalfarger, proporsjoner og klaring",
+      "sha256": "a28fb11ba8d98ca3138591391ab62c62071d8e0ae2cd5a44b216e9790a42d45a"
+    },
+    {
+      "id": "dbt",
+      "label": "dbt",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/dbt.svg",
+      "origin": "https://raw.githubusercontent.com/dbt-labs/dbt/ec7dee39f793aa4f7dd3dae37282cc87664813e4/etc/dbt-logo-full.svg",
+      "rights": "trademark; vendor-defined diagram/educational-use terms",
+      "termsUrl": "https://www.getdbt.com/dbt-assets/dbt-trademark-guidelines",
+      "notes": "Logo i stack-sammenheng; vis ved siden av andre logoer og oppgi at dbt Labs ikke er tilknyttet",
+      "sha256": "f050a309c3458f4f94c517a5eb9bb4ed58680c3ddcb51c1e3e8e773fe9c5e116"
+    },
+    {
+      "id": "power-bi",
+      "label": "Power BI",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/power-bi.svg",
+      "origin": "https://raw.githubusercontent.com/microsoft/fabric-samples/main/docs-samples/Icons.zip",
+      "rights": "trademark; vendor-defined diagram/educational-use terms",
+      "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
+      "notes": "Bare arkitektur og opplæring; logo skal ikke endres",
+      "sha256": "264abad01f50acaffb697b3ede22215b7d87f387c1af92f0a0b14117d2c2e4f1"
+    },
+    {
+      "id": "data-factory",
+      "label": "Fabric Data Factory",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/data-factory.svg",
+      "origin": "https://raw.githubusercontent.com/microsoft/fabric-samples/main/docs-samples/Icons.zip",
+      "rights": "trademark; vendor-defined diagram/educational-use terms",
+      "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
+      "notes": "Bare arkitektur og opplæring; logo skal ikke endres",
+      "sha256": "40d52c473c9d79d5e3e7d3219660b64704661f673cec805cf17d1d2d9cb503d4"
+    },
+    {
+      "id": "source-erp",
+      "label": "Source erp",
+      "category": "original-figure",
+      "path": "assets/library/original/source-erp.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "fb1e558f4445238969c2270c03b408155639875c2ee6775340a41aba56df0349"
+    },
+    {
+      "id": "source-crm",
+      "label": "Source crm",
+      "category": "original-figure",
+      "path": "assets/library/original/source-crm.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "7dd60871ff123bbddb9e8c5f3a030c23276bb4dbd3a5d58c1e16df14e0e7b181"
+    },
+    {
+      "id": "source-stream",
+      "label": "Source stream",
+      "category": "original-figure",
+      "path": "assets/library/original/source-stream.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "86db0416adeaf11acb14caf6a7ffbe09ef458d869488886d36a94b239b0dfe80"
+    },
+    {
+      "id": "source-api",
+      "label": "Source api",
+      "category": "original-figure",
+      "path": "assets/library/original/source-api.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "3c906657bfe337274983343985d526e775aff0ef249055f348aa9e1df72db209"
+    },
+    {
+      "id": "source-files",
+      "label": "Source files",
+      "category": "original-figure",
+      "path": "assets/library/original/source-files.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "fe92003794e1c16d5e4710f6b546eef1601e860845826a8b331fedb92dafbcb0"
+    },
+    {
+      "id": "consume-report",
+      "label": "Consume report",
+      "category": "original-figure",
+      "path": "assets/library/original/consume-report.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "1a71f4740b7dd7e50dc81fdece9584406e13c7cdbc19010ae5038cf926a5426e"
+    },
+    {
+      "id": "consume-ai",
+      "label": "Consume ai",
+      "category": "original-figure",
+      "path": "assets/library/original/consume-ai.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "779de85ad6b86ab2f15e4442f2b8358f893d063cbcec4882fe05b6ae41f660d8"
+    },
+    {
+      "id": "consume-app",
+      "label": "Consume app",
+      "category": "original-figure",
+      "path": "assets/library/original/consume-app.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "fde624ea470daea3f65881de2b910589563330a7d0420d6f09db2558e3299af3"
+    },
+    {
+      "id": "support-security",
+      "label": "Support security",
+      "category": "original-figure",
+      "path": "assets/library/original/support-security.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "1d4c949cd31e39faec58d0d762a4a82a8217475801cfe353c476c56dbcd8d872"
+    },
+    {
+      "id": "support-observe",
+      "label": "Support observe",
+      "category": "original-figure",
+      "path": "assets/library/original/support-observe.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "8936e217180670c99f78cabeba748adc4f820842d4e67e80095b4fe60aa6e2e9"
+    },
+    {
+      "id": "support-catalog",
+      "label": "Support catalog",
+      "category": "original-figure",
+      "path": "assets/library/original/support-catalog.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "fea7a764584b63080719e733839d3eddb0f2082f3f8eb9c6f05eb1acf8581013"
+    },
+    {
+      "id": "support-jobs",
+      "label": "Support jobs",
+      "category": "original-figure",
+      "path": "assets/library/original/support-jobs.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "69ca9320aae5b8f8e7768b366932a07bd2182ee5f125d8ce455975e532b4f79b"
+    },
+    {
+      "id": "support-code",
+      "label": "Support code",
+      "category": "original-figure",
+      "path": "assets/library/original/support-code.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "76ede3f7ed9da764be139a9e5d552cef11a289f08fcc0399911de760fd87b591"
+    },
+    {
+      "id": "core-storage",
+      "label": "Core storage",
+      "category": "original-figure",
+      "path": "assets/library/original/core-storage.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "233e14766bae0d5809cdbda69ce4ca4fe888bb1143441aed99a6e4983f0f8669"
+    },
+    {
+      "id": "core-transform",
+      "label": "Core transform",
+      "category": "original-figure",
+      "path": "assets/library/original/core-transform.svg",
+      "rights": "Webstep/Innsikt original work",
+      "notes": "Original, self-maintained SVG. Change here to update all consumers.",
+      "sha256": "6a9cf93085b984df9eb7c92b765810f4e4bf050e98c508004090df1e2009e738"
+    },
+    {
+      "id": "tabler-database",
+      "label": "Database (Tabler Icons)",
+      "category": "licensed-external",
+      "path": "assets/library/external/tabler-database.svg",
+      "origin": "https://github.com/tabler/tabler-icons/blob/main/icons/outline/database.svg",
+      "license": "MIT",
+      "termsUrl": "https://github.com/tabler/tabler-icons/blob/main/LICENSE",
+      "notes": "MIT licensed; do not describe as copyright-free.",
+      "sha256": "7cdcca11c1555d48e19c2fcd2fce4420cbec734f3fa3d28274f8167a796ee0d6",
+      "rights": "MIT-lisensiert illustrasjon – kreditér opphav og bevar lisensen"
+    }
+  ]
+}
