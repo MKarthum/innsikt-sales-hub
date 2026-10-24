@@ -289,7 +289,7 @@ function slideLibraryPage(id){
 }
 function presentationSlides(){return window.InnsiktSlides.resolve(D.slides,D.pages.presentationDecks[selectedDeck],selectedDeck)}
 function slideMarkup(s,index,deckId,notes=false){
- if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{index,total:D.pages.presentationDecks[deckId].slides.length});
+ if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{index,total:D.pages.presentationDecks[deckId].slides.length,businessSignals:D.businessSignals});
  const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
  let v='<div class="slide-eyebrow">'+esc(s.cue||deck.label.toUpperCase())+' · '+(index+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
  if(s.type==='metric'){

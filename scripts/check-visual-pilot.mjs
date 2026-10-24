@@ -13,13 +13,13 @@ try{
  await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
  await page.evaluate(()=>{location.hash='#lysbilder'});
  await page.locator('.slide-library-card').first().waitFor();
- assert.equal(await page.locator('.slide-library-card').count(),18,'18 selvstendige lysbilder');
+ assert.equal(await page.locator('.slide-library-card').count(),30,'30 selvstendige lysbilder');
  await page.screenshot({path:output+'/library-desktop.png',fullPage:false});
  await page.locator('[data-slide-filter="topic"]').selectOption('KI og kapasitet');
- assert.equal(await page.locator('.slide-library-card').count(),2,'Temafilter');
+ assert.equal(await page.locator('.slide-library-card').count(),4,'Temafilter');
  await page.locator('[data-slide-filter="topic"]').selectOption('all');
  await page.locator('[data-slide-scope="shared"]').click();
- assert.equal(await page.locator('.slide-library-card').count(),6,'Delbare slides');
+ assert.equal(await page.locator('.slide-library-card').count(),18,'Delbare slides');
  await page.locator('[data-slide-scope="story"]').click();
  assert.equal(await page.locator('.slide-library-card').count(),12,'Historiespesifikke slides');
  await page.locator('[data-slide-reset]').click();

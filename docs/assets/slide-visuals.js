@@ -55,6 +55,72 @@ function render(slide,esc,position={}){
   +'<div class="scene-system-label scene-system-label--left">'+esc(v.data)+'</div>'
   +'<div class="scene-system-label scene-system-label--right">'+esc(v.ai)+'</div>'
   +'</div></div></div>';
+
+ const top='<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>';
+ const escs=x=>esc(String(x??''));
+ const block=(name,inside)=>'<div class="story-scene scene-v2 scene-v2-'+name+'">'+inside+'</div>';
+ const title='<h2 class="v2-headline">'+escs(slide.title)+'</h2>';
+ if(kind==='impact'){
+  return block('impact',top+'<div class="v2-impact-layout"><div class="v2-impact-main">'
+    +'<span class="v2-impact-kicker">'+escs(v.kicker||'')+'</span>'+title
+    +'<p class="v2-impact-sub">'+escs(v.support||slide.body||'')+'</p></div>'
+    +'<div class="v2-impact-art" aria-hidden="true"><div class="v2-impact-rings"><i></i><i></i><i></i><i></i></div><span></span><span></span><span></span></div></div>'
+    +'<div class="v2-footline"><b></b><span>INNSIKT</span></div>');
+ }
+ if(kind==='list'){
+  const items=(v.items||[]).map((item,i)=>'<li class="v2-list-row"><span class="v2-list-no">0'+(i+1)+'</span>'
+   +'<div class="v2-list-copy"><strong>'+escs(item)+'</strong><small>'+escs((v.detail||[])[i]||'')+'</small></div>'
+   +'<span class="v2-list-arrow" aria-hidden="true">↗</span></li>').join('');
+  return block('list',top+'<div class="v2-list-layout"><div class="v2-list-intro">'+title
+   +(slide.body?'<p class="v2-list-summary">'+escs(slide.body)+'</p>':'')
+   +'</div><ol class="v2-list-items">'+items+'</ol></div>');
+ }
+ if(kind==='road'){
+  const steps=v.steps||[];
+  return block('road',top+'<div class="v2-road-head">'+title+'</div>'
+   +'<div class="v2-road-line" aria-hidden="true"></div>'
+   +'<div class="v2-road-stages">'+steps.map((name,i)=>
+     '<div class="v2-road-stage"><div class="v2-road-step"><span>0'+(i+1)+'</span></div><strong>'+escs(name)+'</strong></div>').join('')+'</div>'
+   +'<p class="v2-road-footer">'+escs(v.hint||'')+'</p>');
+ }
+ if(kind==='business-case'){
+  const b=position.businessSignals?.find(b=>b.id===slide.business);
+  return block('business',top+'<div class="v2-business-layout"><div class="v2-business-quote"><span class="v2-quote-mark" aria-hidden="true">“</span><h2>'+escs(b?.says||slide.title)+'</h2><p>'+escs(v.hint||'')+'</p></div>'
+   +'<div class="v2-business-context"><span>'+escs(b?.role||'')+'</span><div class="v2-business-rule"></div>'
+   +'<strong>'+escs(b?.headline||'')+'</strong></div></div>');
+ }
+ if(kind==='definition'){
+  return block('definition',top+'<h2 class="v2-def-title">'+escs(slide.title)+'</h2>'
+   +'<div class="v2-def-main"><div class="v2-def-word">'+escs(v.term)+'</div>'
+   +'<div class="v2-def-lenses">'+(v.roles||[]).map((role,i)=>'<div class="v2-def-lens"><small>'+escs(role)+'</small><strong>'+escs((v.meanings||[])[i])+'</strong></div>').join('')+'</div></div>'
+   +'<p class="v2-def-footer">'+escs(v.takeaway||'')+'</p>');
+ }
+ if(kind==='contrast'){
+  return block('contrast',top+'<div class="v2-contrast-head">'+title+'</div>'
+   +'<div class="v2-contrast-grid"><section class="v2-contrast-side"><span class="v2-contrast-dot"></span><h3>'+escs(v.leftTitle)+'</h3><p>'+escs(v.leftText)+'</p></section>'
+   +'<section class="v2-contrast-side v2-contrast-other"><span class="v2-contrast-dot"></span><h3>'+escs(v.rightTitle)+'</h3><p>'+escs(v.rightText)+'</p></section></div>'
+   +'<div class="v2-contrast-foot"><span>↔</span>'+escs(v.bridge||'')+'</div>');
+ }
+ if(kind==='loop'){
+  return block('loop',top+'<div class="v2-loop-head">'+title+'</div>'
+   +'<div class="v2-loop-canvas"><div class="v2-loop-point v2-loop-left">'+escs(v.left)+'</div>'
+   +'<svg class="v2-loop-path" viewBox="0 0 580 220" aria-hidden="true"><path d="M162 86 C270 -6 415 25 430 84"/><path d="M423 72 L430 84 L414 87"/><path d="M417 143 C315 235 168 195 145 135"/><path d="M143 151 L145 135 L161 144"/></svg>'
+   +'<div class="v2-loop-point v2-loop-right">'+escs(v.right)+'</div>'
+   +'<div class="v2-loop-core">'+escs(v.center)+'</div></div><div class="v2-loop-foot">'+escs(v.foot||'')+'</div>');
+ }
+ if(kind==='domains'){
+  return block('domains',top+'<div class="v2-domains-head">'+title+'</div><div class="v2-domains-grid">'
+   +(v.items||[]).map((x,i)=>'<div class="v2-domain"><span>0'+(i+1)+'</span><div class="v2-domain-mark" aria-hidden="true"><i></i><i></i><i></i></div>'
+    +'<h3>'+escs(x)+'</h3><p>'+escs((v.detail||[])[i]||'')+'</p></div>').join('')+'</div>'
+   +'<p class="v2-domains-foot">'+escs(v.footer||'')+'</p>');
+ }
+ if(kind==='portal'){
+  return block('portal',top+'<div class="v2-portal-title">'+title+'</div>'
+   +'<div class="v2-portal-window"><div class="v2-portal-browser"><i></i><i></i><i></i><span>INNSIKT / NESTE STEG</span></div>'
+   +'<div class="v2-portal-path">'+(v.steps||[]).map((x,i)=>'<div class="v2-portal-node"><span>0'+(i+1)+'</span><strong>'+escs(x)+'</strong></div>').join('')+'</div></div>'
+   +'<p class="v2-portal-footer">'+escs(v.footer||'')+'</p>');
+ }
+
  throw Error('Ukjent visuell scene: '+kind);
 }
 window.InnsiktSlideVisuals={render};

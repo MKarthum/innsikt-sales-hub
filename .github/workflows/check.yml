@@ -48,11 +48,16 @@ jobs:
       - name: Kontroller visuell presentasjon og lag skjermbilder
         if: always()
         run: node scripts/check-visual-pilot.mjs
+      - name: Kontroller og render hele biblioteket
+        if: always()
+        run: node scripts/check-library-v1-browser.mjs
       - name: Behold skjermbilder for designgjennomgang
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: innsikt-visual-pilot
-          path: artifacts/visual-pilot/*.png
+          path: |
+            artifacts/visual-pilot/*.png
+            artifacts/library-v1/*.png
           retention-days: 5
           if-no-files-found: warn

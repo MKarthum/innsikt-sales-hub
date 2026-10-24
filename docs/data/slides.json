@@ -6,21 +6,26 @@
       "scope": "story",
       "storyId": "portal",
       "tone": "strong",
-      "type": "intro",
+      "type": "visual",
       "cue": "VIS FREM LØSNINGEN",
       "title": "Innsikt hjelper oss fra usikkerhet til en bedre kundesamtale",
       "body": "Et arbeidsverktøy for kundeansvarlige og fagpersoner: finn en relevant oppgave, bruk innholdet og kom videre.",
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Bruk av portalen",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "impact",
+        "kicker": "ET VERKTØY FOR KUNDESAMTALEN",
+        "support": "Fra et usikkert utgangspunkt til et bedre spørsmål."
+      }
     },
     {
       "id": "portal-three-ways",
       "scope": "story",
       "storyId": "portal",
-      "tone": "strong",
-      "type": "bullets",
+      "tone": "light",
+      "type": "visual",
       "cue": "VELG DET DU SKAL GJØRE",
       "title": "Tre vanlige oppgaver gir tre naturlige startpunkter",
       "bullets": [
@@ -31,14 +36,27 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Bruk av portalen",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Forberede kundemøte",
+          "Fanget opp et behov",
+          "Forstå et fagtema"
+        ],
+        "detail": [
+          "Lag møtebrief",
+          "Utforsk kundesignaler",
+          "Få faglig oversikt"
+        ]
+      }
     },
     {
       "id": "portal-meeting-brief",
       "scope": "story",
       "storyId": "portal",
       "tone": "strong",
-      "type": "bullets",
+      "type": "visual",
       "cue": "FRA FORSIDE TIL VERKTØY",
       "title": "En møtebrief kan være første nyttige resultat",
       "bullets": [
@@ -49,13 +67,22 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Bruk av portalen",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "road",
+        "steps": [
+          "Velg møtebrief",
+          "Tilpass prompten",
+          "Kontroller svaret"
+        ],
+        "hint": "Fra klikk til et nyttig utkast"
+      }
     },
     {
       "id": "portal-customer-signal",
       "scope": "shared",
-      "tone": "strong",
-      "type": "bullets",
+      "tone": "light",
+      "type": "visual",
       "cue": "NÅR KUNDEN HAR ET PROBLEM",
       "title": "Et kundesignal blir nyttig når vi finner de riktige spørsmålene",
       "body": {
@@ -75,14 +102,27 @@
         "kvalifisering",
         "spørsmål",
         "årsaker"
-      ]
+      ],
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Forretningsbehov",
+          "Salgsinnganger",
+          "Kundedialog"
+        ],
+        "detail": [
+          "Symptom og spørsmål",
+          "Mulige faglige spor",
+          "Lytt bak bestillingen"
+        ]
+      }
     },
     {
       "id": "portal-learning",
       "scope": "story",
       "storyId": "portal",
-      "tone": "strong",
-      "type": "bullets",
+      "tone": "light",
+      "type": "visual",
       "cue": "FAGLIG FORDYPNING VED BEHOV",
       "title": "Fagstoffet er der når spørsmålet blir mer krevende",
       "bullets": [
@@ -93,14 +133,27 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Bruk av portalen",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Start her",
+          "Data og KI i praksis",
+          "Teknologikart"
+        ],
+        "detail": [
+          "Introduksjon",
+          "Sammenhenger og arkitektur",
+          "Fordypning ved behov"
+        ]
+      }
     },
     {
       "id": "portal-market",
       "scope": "story",
       "storyId": "portal",
       "tone": "strong",
-      "type": "bullets",
+      "type": "visual",
       "cue": "MARKED SOM STØTTE",
       "title": "Markedet gir kontekst når vi trenger den",
       "bullets": [
@@ -111,14 +164,27 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Bruk av portalen",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Marked og trender",
+          "Trendradar",
+          "Kundens situasjon"
+        ],
+        "detail": [
+          "Et dokumentert bakteppe",
+          "Tidlige signaler",
+          "Må alltid verifiseres"
+        ]
+      }
     },
     {
       "id": "portal-outcome",
       "scope": "story",
       "storyId": "portal",
-      "tone": "strong",
-      "type": "bullets",
+      "tone": "light",
+      "type": "visual",
       "cue": "FRA INNSIKT TIL HANDLING",
       "title": "Målet er noe du kan bruke i neste samtale",
       "bullets": [
@@ -129,14 +195,23 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Bruk av portalen",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "road",
+        "steps": [
+          "Forstå oppgaven",
+          "Still gode spørsmål",
+          "Finn neste steg"
+        ],
+        "hint": "Målet er handling, ikke flere sider"
+      }
     },
     {
       "id": "portal-summary",
       "scope": "story",
       "storyId": "portal",
       "tone": "strong",
-      "type": "takeaway",
+      "type": "visual",
       "cue": "OPPSUMMERING",
       "title": "Innsikt gjør oss bedre forberedt – ikke automatisk sikre",
       "bullets": [
@@ -147,41 +222,55 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Bruk av portalen",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "impact",
+        "kicker": "TA MED DEG DETTE",
+        "support": "Start med oppgaven. Bruk verktøyet. Sjekk premissene."
+      }
     },
     {
       "id": "sales-opening",
       "scope": "story",
       "storyId": "sales",
-      "tone": "strong",
-      "type": "intro",
+      "tone": "light",
+      "type": "visual",
       "cue": "ET KONKRET EKSEMPEL",
       "title": "Kunden sier at tallene ikke stemmer. Hva gjør vi nå?",
       "body": "Et fiktivt eksempel fra «Forretningsbehov». Vi skal ikke diagnostisere kunden, men forberede en bedre samtale.",
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Kundedialog",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "impact",
+        "kicker": "FIKTIV KUNDESITUASJON",
+        "support": "Et fiktivt eksempel – forstå behovet før vi foreslår løsningen."
+      }
     },
     {
       "id": "sales-finance-case",
       "scope": "story",
       "storyId": "sales",
       "tone": "strong",
-      "type": "case",
+      "type": "visual",
       "cue": "FRA «FORRETNINGSBEHOV»",
       "title": "«Vi bruker flere dager på månedsavslutning»",
       "business": "okonomi",
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Kundedialog",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "business-case",
+        "hint": "En kundesituasjon. Ikke en diagnose."
+      }
     },
     {
       "id": "sales-hypotheses",
       "scope": "shared",
-      "tone": "strong",
-      "type": "bullets",
+      "tone": "light",
+      "type": "visual",
       "cue": "IKKE VELG LØSNING ENNÅ",
       "title": "Symptomet kan ha flere ulike årsaker",
       "bullets": [
@@ -197,13 +286,26 @@
         "kvalifisering",
         "spørsmål",
         "årsaker"
-      ]
+      ],
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Ulike definisjoner",
+          "Manuelle prosesser",
+          "For sene tall"
+        ],
+        "detail": [
+          "Samme nøkkeltall, ulik betydning",
+          "Avstemming tar tid",
+          "Beslutninger må vente"
+        ]
+      }
     },
     {
       "id": "sales-questions",
       "scope": "shared",
       "tone": "strong",
-      "type": "bullets",
+      "type": "visual",
       "cue": "KVALIFISER BEHOVET",
       "title": "Tre spørsmål gjør neste møte bedre",
       "bullets": [
@@ -219,14 +321,27 @@
         "kvalifisering",
         "spørsmål",
         "årsaker"
-      ]
+      ],
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Konsekvens",
+          "Årsak",
+          "Ansvar"
+        ],
+        "detail": [
+          "Hva stopper opp?",
+          "Hvor oppstår avviket?",
+          "Hvem eier definisjonene?"
+        ]
+      }
     },
     {
       "id": "sales-discovery-prompt",
       "scope": "story",
       "storyId": "sales",
-      "tone": "strong",
-      "type": "bullets",
+      "tone": "light",
+      "type": "visual",
       "cue": "FRA SPØRSMÅL TIL VERKTØY",
       "title": "En ferdig prompt hjelper oss å forberede samtalen",
       "bullets": [
@@ -237,14 +352,23 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Kundedialog",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "road",
+        "steps": [
+          "Forbered en behovssamtale",
+          "Legg inn kontekst",
+          "Kvalitetssikre"
+        ],
+        "hint": "Et utkast som gjør samtalen bedre"
+      }
     },
     {
       "id": "sales-next-step",
       "scope": "story",
       "storyId": "sales",
       "tone": "strong",
-      "type": "bullets",
+      "type": "visual",
       "cue": "ET MULIG RESULTAT",
       "title": "Vi kan foreslå en avgrenset avklaring – ikke et IT-prosjekt",
       "bullets": [
@@ -255,14 +379,23 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Kundedialog",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "road",
+        "steps": [
+          "Én rapporteringsflyt",
+          "Riktige deltakere",
+          "Avgrenset avklaring"
+        ],
+        "hint": "Ikke foreslå et stort prosjekt for tidlig"
+      }
     },
     {
       "id": "sales-summary",
       "scope": "story",
       "storyId": "sales",
-      "tone": "strong",
-      "type": "takeaway",
+      "tone": "light",
+      "type": "visual",
       "cue": "DERFOR ER DET NYTTIG",
       "title": "Først et behov. Så bedre spørsmål. Deretter et neste steg.",
       "bullets": [
@@ -273,7 +406,12 @@
       "sourceIds": [],
       "speakerBase": "",
       "topic": "Kundedialog",
-      "keywords": []
+      "keywords": [],
+      "visual": {
+        "scene": "impact",
+        "kicker": "FRA SIGNAL TIL HANDLING",
+        "support": "Først et behov. Så bedre spørsmål. Deretter neste steg."
+      }
     },
     {
       "id": "ai-thousand-analysts",
@@ -350,6 +488,273 @@
       },
       "speakerBase": "Innsikt-faget kombinerer forståelse av virksomhetens behov med dataarbeid, analyse og KI. Dette er ikke en lineær sjekkliste: KI kan også forbedre datagrunnlaget. Riktig omfang og kontroll avhenger av risiko og faktisk behov.",
       "sourceIds": []
+    },
+    {
+      "id": "ai-capacity-now",
+      "scope": "shared",
+      "tone": "strong",
+      "type": "visual",
+      "cue": "KI OG KAPASITET",
+      "title": "Ny kapasitet. Nye muligheter.",
+      "visual": {
+        "scene": "impact",
+        "kicker": "HVORFOR NÅ?",
+        "support": "Analyser, kode og utforskning kan skje i et helt annet tempo."
+      },
+      "sourceIds": [],
+      "speakerBase": "KI gir oss mulighet til å arbeide raskere med informasjon, analyse og kode. Vi bør ikke forveksle dette med at resultatene alltid er riktige, eller at teknologien erstatter fagkompetanse. Poenget er at kapasiteten er reell og bør brukes der den faktisk skaper verdi.",
+      "topic": "KI og kapasitet",
+      "keywords": []
+    },
+    {
+      "id": "data-meaning-customer",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "KVALITET OG FORSTÅELSE",
+      "title": "Hva betyr egentlig «kunde»?",
+      "visual": {
+        "scene": "definition",
+        "term": "KUNDE",
+        "roles": [
+          "Salg",
+          "Økonomi",
+          "Kundeservice"
+        ],
+        "meanings": [
+          "Kundeforholdet",
+          "Fakturamottakeren",
+          "Personen som bruker tjenesten"
+        ],
+        "takeaway": "Samme ord. Tre logiske perspektiver."
+      },
+      "sourceIds": [],
+      "speakerBase": "Kunde er et illustrerende eksempel: Tre deler av virksomheten kan bruke samme ord om forskjellige ting, uten at noen tar feil. Når vi skal analysere data på tvers, må vi forstå definisjonen og situasjonen. Løsningen kan være begrepsavklaring, modellering eller enklere endringer – ikke nødvendigvis en ny plattform.",
+      "topic": "Kvalitet og forståelse",
+      "keywords": []
+    },
+    {
+      "id": "ai-good-vs-fast",
+      "scope": "shared",
+      "tone": "strong",
+      "type": "visual",
+      "cue": "KVALITET OG FORSTÅELSE",
+      "title": "Et overbevisende svar kan fortsatt være feil.",
+      "visual": {
+        "scene": "contrast",
+        "leftTitle": "Ser riktig ut",
+        "leftText": "Et raskt, velformulert svar",
+        "rightTitle": "Holder mål",
+        "rightText": "Riktig premiss, data og tolkning",
+        "bridge": "Forskjellen ligger i forståelsen"
+      },
+      "sourceIds": [],
+      "speakerBase": "Et polert svar er ikke nødvendigvis et godt beslutningsgrunnlag. Datagrunnlaget kan være ufullstendig, begreper kan tolkes feil eller svaret kan løse feil problem. Vi trenger derfor evnen til å teste antakelser, stille oppfølgingsspørsmål og bruke faglig skjønn. KI er et hjelpemiddel også i denne kvalitetssikringen.",
+      "topic": "Kvalitet og forståelse",
+      "keywords": []
+    },
+    {
+      "id": "ai-two-extremes",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "FAG OG VERDI",
+      "title": "Vi må unngå to ytterpunkter.",
+      "visual": {
+        "scene": "contrast",
+        "leftTitle": "«Bare bruk KI»",
+        "leftText": "Raskt svar – uklart grunnlag",
+        "rightTitle": "«Fiks alt først»",
+        "rightText": "Perfekt plattform – ingen verdi ennå",
+        "bridge": "Behovet avgjør riktig startpunkt"
+      },
+      "sourceIds": [],
+      "speakerBase": "Det er lett å gjøre diskusjonen for svart-hvitt: Enten tror vi at KI alene løser alt, eller at alt datagrunnlag må være perfekt før vi kan begynne. Begge tilnærmingene kan bli kostbare og trege. Det riktige omfanget av dataarbeid, analyse, plattform og KI avhenger av hva virksomheten ønsker å oppnå og hvilken risiko som er akseptabel.",
+      "topic": "Fag og verdi",
+      "keywords": []
+    },
+    {
+      "id": "ai-pragmatic",
+      "scope": "shared",
+      "tone": "strong",
+      "type": "visual",
+      "cue": "FAG OG VERDI",
+      "title": "Skap verdi underveis.",
+      "visual": {
+        "scene": "road",
+        "steps": [
+          "Velg ett behov",
+          "Test med riktige data",
+          "Lær – og bygg videre"
+        ],
+        "hint": "Et konkret resultat før neste store plan"
+      },
+      "sourceIds": [],
+      "speakerBase": "Start med et avgrenset behov som betyr noe for virksomheten. Finn datagrunnlaget som faktisk trengs og avklar kvalitet, sikkerhet og ansvar for nettopp dette formålet. Test om tiltaket gir verdi. Bygg videre eller endre kurs basert på det dere lærer. Dette betyr ikke at kvalitet er valgfritt; innsatsen skal være proporsjonal med risiko.",
+      "topic": "Fag og verdi",
+      "keywords": []
+    },
+    {
+      "id": "ai-improve-data",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "KI OG KAPASITET",
+      "title": "KI kan også forbedre datagrunnlaget.",
+      "visual": {
+        "scene": "loop",
+        "left": "Data og kontekst",
+        "right": "Analyse og KI",
+        "center": "LÆRING",
+        "foot": "Dokumenter · test · forbedre"
+      },
+      "sourceIds": [],
+      "speakerBase": "Det er feil å tenke at data må ryddes helt ferdig før KI kan bidra. KI kan støtte koding, dokumentasjon, dataprofilering og kvalitetskontroll når mennesker vurderer og verifiserer resultatene. Slik kan bruk og datagrunnlag forbedres sammen. Verktøy, tilgang og kontroll må tilpasses de faktiske dataene og arbeidsoppgavene.",
+      "topic": "KI og kapasitet",
+      "keywords": []
+    },
+    {
+      "id": "insight-three-disciplines",
+      "scope": "shared",
+      "tone": "strong",
+      "type": "visual",
+      "cue": "FAG OG VERDI",
+      "title": "Innsikt er mer enn én teknologi.",
+      "visual": {
+        "scene": "domains",
+        "items": [
+          "Data og plattform",
+          "Analyse og innsikt",
+          "KI og automatisering"
+        ],
+        "detail": [
+          "Tilgjengelig og forståelig data",
+          "Mønstre, mål og beslutninger",
+          "Nye måter å utforske og handle på"
+        ],
+        "footer": "Sammenhengene betyr mer enn verktøynavnene."
+      },
+      "sourceIds": [],
+      "speakerBase": "Innsikt er et fagområde der vi setter tilgjengelige og forståelige data i arbeid for bedre forståelse og beslutninger. Dataplattformer kan være viktige, men ikke alltid det første tiltaket. Analyse og formidling hjelper oss å skape mening. KI åpner nye muligheter, men bygger fortsatt på kontekst, kompetanse og vurdering.",
+      "topic": "Fag og verdi",
+      "keywords": []
+    },
+    {
+      "id": "risk-and-trust",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "KVALITET OG FORSTÅELSE",
+      "title": "Kontroll må passe til risikoen.",
+      "visual": {
+        "scene": "domains",
+        "items": [
+          "Forstå bruken",
+          "Vurder risiko",
+          "Følg opp"
+        ],
+        "detail": [
+          "Hvem skal bruke resultatet?",
+          "Data, tilgang og konsekvenser",
+          "Test, lær og ta ansvar"
+        ],
+        "footer": "Styring er kontinuerlig – ikke en engangsport."
+      },
+      "sourceIds": [
+        "nist-ai-rmf",
+        "oecd-ai-principles"
+      ],
+      "speakerBase": "NISTs rammeverk for KI-risiko beskriver styring, kartlegging, måling og håndtering av risiko gjennom livsløpet. OECDs prinsipper understreker blant annet ansvarlighet, transparens og menneskelig kontroll. Her er budskapet praktisk: vi må forstå bruken og konsekvensene og tilpasse tiltakene, heller enn å bruke én universell sjekkliste.",
+      "topic": "Kvalitet og forståelse",
+      "keywords": []
+    },
+    {
+      "id": "seller-signals",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "KUNDEDIALOG",
+      "title": "Lytt etter behov – ikke teknologinavn.",
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Tallene stemmer ikke",
+          "Vi bruker for lang tid",
+          "Vi ønsker å bruke KI"
+        ],
+        "detail": [
+          "Ulike definisjoner eller kvalitet?",
+          "Manuelle steg eller flaskehalser?",
+          "Hvilken verdi skal skapes?"
+        ]
+      },
+      "sourceIds": [],
+      "speakerBase": "Et kundesignal høres sjelden ut som en bestilling på en bestemt dataplattform eller analysemetode. Det kan være frustrasjon over rapportering, tungvinte prosesser eller ønske om å utnytte KI. Oppgaven vår er å forstå hva som faktisk skjer og hvilke mulige konsekvenser det har, ikke å bestemme løsning før vi har undersøkt.",
+      "topic": "Kundedialog",
+      "keywords": []
+    },
+    {
+      "id": "seller-better-questions",
+      "scope": "shared",
+      "tone": "strong",
+      "type": "visual",
+      "cue": "KUNDEDIALOG",
+      "title": "Tre spørsmål åpner riktig samtale.",
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Hva vil dere forbedre?",
+          "Hva bygger dere på?",
+          "Hvordan vet vi at det virker?"
+        ],
+        "detail": [
+          "Beslutning eller prosess",
+          "Data, eierskap og kontekst",
+          "Effekt, kvalitet og ansvar"
+        ]
+      },
+      "sourceIds": [],
+      "speakerBase": "Disse spørsmålene er ikke en universell intervjuguide, men et naturlig utgangspunkt. Spør først hva virksomheten prøver å oppnå, deretter hvilke data og prosesser arbeidet bygger på, og til slutt hva et godt resultat ville være. Målet er å kunne gå videre sammen med kunden og riktig fagkompetanse.",
+      "topic": "Kundedialog",
+      "keywords": []
+    },
+    {
+      "id": "seller-specialist",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "KUNDEDIALOG",
+      "title": "Du trenger ikke svaret i første møte.",
+      "visual": {
+        "scene": "impact",
+        "kicker": "DET ER NOK Å ÅPNE DØREN",
+        "support": "Forstå signalet. Still neste spørsmål. Koble på fagmiljøet."
+      },
+      "sourceIds": [],
+      "speakerBase": "En selger trenger ikke velge mellom Snowflake, Fabric, KI-agenter og en mer tradisjonell analyse før første møte er over. En god oppfølging begynner med å tydeliggjøre behov og betydning for virksomheten. Da kan riktig kompetanse involveres og et mulig første tiltak defineres sammen med kunden.",
+      "topic": "Kundedialog",
+      "keywords": []
+    },
+    {
+      "id": "portal-purpose",
+      "scope": "shared",
+      "tone": "strong",
+      "type": "visual",
+      "cue": "BRUK AV PORTALEN",
+      "title": "Fra faglig forståelse til neste kundesamtale.",
+      "visual": {
+        "scene": "portal",
+        "steps": [
+          "Gjenkjenn behovet",
+          "Finn gode spørsmål",
+          "Forbered neste steg"
+        ],
+        "footer": "Innsikt-portalen hjelper deg videre – uten å velge løsningen for kunden."
+      },
+      "sourceIds": [],
+      "speakerBase": "Portalen er laget for å gi nye og erfarne selgere støtte i det øyeblikket de trenger den. Når vi kjenner igjen et kundebehov, kan vi hente relevant forklaring, formulere kvalifiserende spørsmål og forberede en god samtale. Den erstatter verken kundedialogen eller ekspertene; den hjelper oss å komme bedre forberedt til begge.",
+      "topic": "Bruk av portalen",
+      "keywords": []
     }
   ]
 }

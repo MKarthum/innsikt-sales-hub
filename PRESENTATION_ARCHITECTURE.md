@@ -41,3 +41,12 @@ Dersom portalen eller Claude-artefakten bytter merkevare, skal bare disse verdie
 - Eksportert HTML får de samme visuelle CSS-reglene som nettstedet; PDF via nettleserens utskrift består. PowerPoint ligger fortsatt utenfor denne iterasjonen.
 - Tre nye lysbilder er en **visuell pilot**, ikke et ferdig foredrag. Foredragsnotatene tilhører historien og inkluderer overganger. De kan erstattes eller utvides enkeltvis.
 - `scripts/check-visual-pilot.mjs` produserer visuelle skjermbilder fra Chromium, og CI bevarer dem som kortlivet artefakt for faktisk designgjennomgang. Skjermbildene er verifikasjon, ikke kanonisk innhold.
+
+## Bibliotek v1: komposisjon og visuell kvalitet (24.10.2026)
+
+- 30 selvstendige objekt-ID-er, sju historier, fem faglige emner. Historier refererer lysbilde-ID og eier overgangsnotater; grunnforklaring er eid av lysbildet.
+- De opprinnelige portal- og salgsslidene beholder ID, kanoniske lenker og forklaringer, men rendres gjennom samme scenesystem som nye bilder. visual.scene og tilhørende data avgjør grafikken; renderer og CSS er temaavhengige men innholdsuavhengige.
+- Scenefamilier: dramatisk åpningsbilde, forgrening, verdi-orbit, redaksjonell åpning, nummerert problemliste, veivalg, kundesignal, definisjonslinser, kontrast, læringsløkke, fagområder og portalbro.
+- Nye tekster er kvalitative faglige vurderinger/eksempler uten oppdiktede effektmål. Risikosliden knytter bare relevante kilder fra NIST og OECD til seg; ingen universell sluttslide.
+- For redigering: endre docs/data/slides.json for innhold; docs/data/pages.json for historie og overganger; docs/assets/slide-visuals.js og .css for layoutfamilier. Unngå å endre globale farger for å fikse ett lysbilde.
+- Kvalitetsport: statiske eier- og kildetester og reell Chromium-verifikasjon av samtlige lysbilder, med skjermbilder og manuell inspeksjon.
