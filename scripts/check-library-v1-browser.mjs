@@ -111,6 +111,14 @@ try{
   const stage=p.locator('.slide-library-detail-stage');
   const scene=stage.locator('.story-scene');
   assert.equal(await scene.count(),1,'Custom scene for '+s.id);
+   if(s.id==='seller-better-questions'){
+    assert.equal(await stage.locator('.v9-dialogue-signal blockquote').count(),1,'Fictional customer signal is prominent');
+    assert.ok((await stage.locator('.v9-dialogue-signal').innerText()).includes('FIKTIVT EKSEMPEL'),'Fictional label is visible');
+    assert.equal(await stage.locator('.v9-dialogue-rows li').count(),3,'Three question/answer/inference rows');
+    assert.equal(await stage.locator('.v9-dialogue-rows li section').count(),9,'Each row keeps the three semantic roles');
+    assert.ok((await stage.locator('.v9-dialogue-next').innerText()).includes('Årsak og løsning er fortsatt ukjent'),'Next action retains uncertainty');
+    assert.ok((await stage.locator('.v9-dialogue-next').innerText()).includes('prosesseier og dataansvarlig'),'Next step is a bounded investigation');
+   }
    if(s.id==='ai-pragmatic'){
     assert.equal(await stage.locator('.v8-compare-option').count(),2,'Comparison keeps two equally visible methods');
     assert.equal(await stage.locator('.v8-compare-baseline .v8-compare-flow li').count(),3,'Baseline shows the real human workflow');
