@@ -127,7 +127,7 @@ try {
   assert.notEqual(tonePair.strong.bg,tonePair.light.bg,label+': tema endrer bakgrunn');
   assert.notEqual(tonePair.strong.fg,tonePair.light.fg,label+': tema endrer tilhørende tekstfarge');
   await page.locator('[data-slide-open][data-deck-open="portal"]').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt hjelper oss fra usikkerhet'),label+': åpne bestemt lysbilde fra biblioteket');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-opening')),label+': åpne bestemt lysbilde fra biblioteket');
   await page.locator('#speaker-toggle').check();
   assert.ok((await page.locator('#slide-speaker-notes').innerText()).includes('Overgang:'),label+': storiespesifikke notater følger lysbildet');
   await page.keyboard.press('Escape');
