@@ -26,6 +26,8 @@ Start alltid med `START_HERE.md`. Les siste `main`, og bruk repoet – aldri gam
 - **Delte objekter:** Ved endring av et delt lysbilde må alle brukende historier, notater, begge toner, mobil og eksport testes. Vurder også konsekvensen av felles figurer.
 - **Release-port:** Alle JS-, innholds-, kilde- og rutekontrakter samt Chromium-kontroll av samtlige lysbilder må være grønne før merge. Suppler med faktisk visuell vurdering. Oppdater SLIDE_EDITORIAL_AUDIT_2026-10-24.md ved vesentlig redigering. Testrutiner skal lese antall lysbilder/historier fra kanoniske data; ikke hardkode dagens antall som om utvidelser er forbudt.
 
+**Visuell revisjon:** Endringer i lysbilder må møte kvalitetspunktene i SLIDE_VISUAL_REVIEW_2026-10-24.md: påstandsbasert tittel, visuell forklaring, lesbarhet, begge toner og eventuell endring i flere historier. Flytt dybde til notater fremfor mikrotekst. Nye scenevarianter får dataeid innhold, statisk kontrakt og Chromium-test.
+
 ## Kontroller
 
 ```sh

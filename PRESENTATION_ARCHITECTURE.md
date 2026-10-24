@@ -51,3 +51,7 @@ Alt offentlig innhold skal være på GitHub Pages uten autentiseringspåstander.
 - node scripts/check.mjs er et obligatorisk statisk trinn, men ikke erstatning for Chromium og visuell inspeksjon.
 
 Nye lysbilder: endre datafil først, velg eksisterende scene og figur før du legger til ny scene, legg relevante kilder på objektet, dokumenter bruk, kjør tester og se faktisk skjermbilde. Endringer i delte bilder skal testes mot **alle** brukende historier. 
+
+## Visuell revisjon v0.14.0
+
+Se SLIDE_VISUAL_REVIEW_2026-10-24.md for individuell evaluering og begrunnelse for 39 lysbilder. Det visuelle oppsettet velges etter budskap (valg, spørsmål, kundestemmer, trinn eller hovedresonnement), mens kilde-, tema-, scene- og objektsystemene beholdes.
