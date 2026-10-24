@@ -18,12 +18,12 @@ try{
  await page.screenshot({path:out+'/asset-library.png',fullPage:false});
  await page.evaluate(()=>location.hash='#lysbilder');
  await page.locator('.slide-library-card').first().waitFor();
- assert.equal(await page.locator('.slide-library-card').count(),36);
+ assert.equal(await page.locator('.slide-library-card').count(),39);
  assert.equal(await page.locator('#library-tone-mode').inputValue(),'light');
  await page.locator('#library-tone-mode').selectOption('strong');
- assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"strong\"]').count(),36);
+ assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"strong\"]').count(),39);
  await page.locator('#library-tone-mode').selectOption('light');
- assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"light\"]').count(),36);
+ assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"light\"]').count(),39);
  for(const [i,s] of list.entries()){
   await page.evaluate(id=>location.hash='#lysbilder/'+id,s.id);
   await page.waitForFunction(title=>document.querySelector('main h1')?.textContent?.trim()===title,s.title);

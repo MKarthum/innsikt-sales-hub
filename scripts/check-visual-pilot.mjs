@@ -13,7 +13,7 @@ try{
  await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
  await page.evaluate(()=>{location.hash='#lysbilder'});
  await page.locator('.slide-library-card').first().waitFor();
- assert.equal(await page.locator('.slide-library-card').count(),36,'36 selvstendige lysbilder');
+ assert.equal(await page.locator('.slide-library-card').count(),39,'39 selvstendige lysbilder');
  await page.screenshot({path:output+'/library-desktop.png',fullPage:false});
  await page.locator('[data-slide-filter="topic"]').selectOption('KI og kapasitet');
  assert.equal(await page.locator('.slide-library-card').count(),4,'Temafilter');
