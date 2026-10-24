@@ -69,6 +69,7 @@ vm.runInContext(read('docs/assets/slide-model.js'),sandbox,{timeout:3000,filenam
 vm.runInContext(read('docs/assets/visual-assets.js'),sandbox,{timeout:3000,filename:'visual-assets.js'});
 vm.runInContext(read('docs/assets/vendor-architectures.js'),sandbox,{timeout:3000,filename:'vendor-architectures.js'});
 vm.runInContext(read('docs/assets/architecture-visuals.js'),sandbox,{timeout:3000,filename:'architecture-visuals.js'});
+vm.runInContext(read('docs/assets/slide-story-scenes.js'),sandbox,{timeout:3000,filename:'slide-story-scenes.js'});
 vm.runInContext(read('docs/assets/slide-visuals.js'),sandbox,{timeout:3000,filename:'slide-visuals.js'});
 vm.runInContext(instrumented,sandbox,{timeout:3000,filename:'site.js'});
 let entries;

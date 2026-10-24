@@ -66,3 +66,22 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 - scripts/check-slide-presentation-quality.mjs validerer hvert objekt og påbudsfrie komposisjonskontrakter.
 - scripts/check-library-v1-browser.mjs tester 16:9-rendering og klipping av alle lysbilder, også i mørk palett.
 - Kvalitetssikring omfatter manuell kontroll av faktisk skjermbilde. Statisk test alene er ikke en visuell godkjenning.
+
+## Selektiv oppfølging v0.15.0 – åtte svakeste komposisjoner
+
+De visuelle svakhetene var repetisjonen av de samme høyrejusterte bro-boksene og tre identiske kort, ikke mangel på flere lysbilder. Vi har derfor beholdt 39 slideobjekter, fem historier og alle eksisterende ID-er.
+
+| Lysbilde | Tidligere svakhet | Ny visuell forklaring |
+|---|---|---|
+| portal-opening | To tekstbokser beskrev portalen uten å vise hvordan den brukes | Illustrativ inngang fra kundesignal til møteforberedelse og fagstoff, med mini-portal i kontekst |
+| sales-opening | Kundesituasjonen så ut som teknisk handoff | Stor fiktiv kundereplikk og tre konkrete avklaringsspørsmål |
+| market-why-now | Det nye og det som består var bare en pil | To balanserte argumentfelt viser endret kapasitet og varig behov for forståelse |
+| ai-capacity-now | Gjentok før/etter-oppsettet uten å vise oppgaver | Tre konkrete KI-arbeidsområder møtes i en tydelig vurderingsport |
+| seller-specialist | Aktørroller var to passive bokser | Synlig samspill mellom selger og fagmiljø, med konkret overlevering |
+| market-three-forces | Tre likestilte kort skjulte hvorfor trendene er relevante | Tre ulike markedssignaler leder til ett kundespørsmål |
+| seller-signals | Kundens egne ord var plassert som generiske listepunkter | Hvert kundesitat kobles synlig til et oppfølgingsspørsmål |
+| sales-hypotheses | Tre kort kunne oppfattes som diagnose | Ett opplevd symptom forgrenes til tre hypoteser som må testes |
+
+Alle scenene er parametrisert i slides.json og rendres i slide-story-scenes.js; farger er semantiske CSS-tokens. Ikke legg inn presentasjonsspesifikk tekst i renderer eller bygg nye historier for å få et nytt utseende. Kildene og speaker-notatene er fortsatt eid av det opprinnelige lysbildeobjektet.
+
+Kvalitetsport: node scripts/check-slide-presentation-quality.mjs, Chromium-rendering av samtlige lysbilder i lys/mørk, kontroll av tekstoverløp og separat HTML-eksport.
