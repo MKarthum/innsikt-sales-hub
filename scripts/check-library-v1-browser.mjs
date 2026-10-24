@@ -40,11 +40,18 @@ try{
  assert.equal(await full.count(),0,'Escape exits fullscreen');
  assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Exit returns to details');
  assert.ok(await opener.evaluate(x=>document.activeElement===x),'Focus returns to detail-page preview');
+ // Safari may emit a late compatibility click directed at the exposed preview.
+ await opener.evaluate(x=>x.click());
+ assert.equal(await full.count(),0,'Late click after Escape must not reopen');
+ await p.waitForTimeout(950);
  await opener.focus();
  await p.keyboard.press('Enter');
  await full.waitFor();
  await full.locator('.modal-close').click();
  assert.equal(await full.count(),0,'Explicit close button works');
+ await opener.evaluate(x=>x.click());
+ assert.equal(await full.count(),0,'Late click after button close does not reopen');
+ await p.waitForTimeout(950);
  await p.setViewportSize({width:390,height:844});
  await opener.click();
  await full.waitFor();
@@ -56,6 +63,7 @@ try{
  });
  assert.ok(mobile.stageLeft>=0&&mobile.stageRight<=mobile.innerWidth+1,'Fullscreen stage fits mobile viewport');
  assert.ok(mobile.closeTop>=0&&mobile.closeRight<=mobile.innerWidth+1,'Exit button fits mobile viewport');
+ assert.ok(mobile.closeTop>mobile.stageHeight,'Mobile exit stays below the stage instead of covering slide content');
  assert.ok(Math.abs(mobile.stageWidth/mobile.stageHeight-16/9)<0.02,'Mobile fullscreen slide remains 16:9');
  await full.screenshot({path:out+'/fullscreen-mobile.png'});
  await full.locator('.modal-close').click();
@@ -77,6 +85,9 @@ try{
  await tp.waitForTimeout(150);
  assert.equal(await touchFull.count(),0,'Touch close stays dismissed after compatibility click');
  assert.ok(await tp.locator('.slide-library-info').isVisible(),'Touch returns to details');
+ await touchOpener.evaluate(x=>x.click());
+ assert.equal(await touchFull.count(),0,'Delayed touch compatibility click does not reopen');
+ await tp.waitForTimeout(950);
  await touchOpener.tap();await touchFull.waitFor();
  const frame=await touchFull.locator('.slide-library-fullscreen-stage').boundingBox();
  await tp.touchscreen.tap(frame.x+frame.width/2,frame.y+frame.height/2);

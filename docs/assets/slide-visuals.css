@@ -387,3 +387,19 @@
 .slide-library-detail-open{cursor:zoom-in}
 .slide-library-detail-open:hover,.slide-library-detail-open:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 .slide-library-fullscreen-hint{font:650 12px var(--font-body);color:var(--muted);margin:-16px 0 25px;max-width:960px;text-align:right}
+
+/* Stable hit targets for iPhone safe areas and embedded Safari viewports. */
+#slide-library-fullscreen .modal-header{
+  top:auto;bottom:max(15px,env(safe-area-inset-bottom,0px) + 15px);
+  right:max(14px,env(safe-area-inset-right,0px) + 14px);
+  z-index:20;pointer-events:auto;
+}
+#slide-library-fullscreen .modal-close{
+  min-height:52px;min-width:104px;touch-action:manipulation;
+  font:800 15px var(--font-body);background:#214e60;
+  border:2px solid #b5d4db;box-shadow:0 4px 25px #0008;
+}
+.slide-library-fullscreen-content{padding-bottom:84px}
+.slide-library-fullscreen-stage{
+ width:min(calc(100vw - 24px),calc((100dvh - 150px) * 16 / 9))
+}
