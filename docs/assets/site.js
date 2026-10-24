@@ -378,31 +378,47 @@ function syncPresenterFullscreen(active){
 function exitPresenterFullscreen(){
  const modal=document.getElementById('present-modal');
  if(!modal)return;
- // CSS-basert fullskjerm fungerer også der Fullscreen API mangler (blant annet på enkelte iOS-nettlesere).
+ // Lagre brukerens intensjon før browserens asynkrone fullscreenchange-hendelser.
+ modal.dataset.fullscreenIntent='off';
  syncPresenterFullscreen(false);
- if(document.fullscreenElement===modal)document.exitFullscreen().catch(()=>{});
+ if(document.fullscreenElement===modal){
+  document.exitFullscreen().catch(()=>{}).finally(()=>{
+   if(modal.isConnected&&modal.dataset.fullscreenIntent==='off')syncPresenterFullscreen(false);
+  });
+ }
 }
 async function togglePresenterFullscreen(){
  const modal=document.getElementById('present-modal');if(!modal)return;
  if(isPresenterFullscreen()){exitPresenterFullscreen();return}
- // Vis hele skjermen også om Fullscreen API er sperret eller ikke implementert.
+ modal.dataset.fullscreenIntent='on';
  syncPresenterFullscreen(true);
  if(typeof modal.requestFullscreen==='function'){
-  try{await modal.requestFullscreen()}catch{/* Behold CSS-helskjerm som fallback. */}
+  try{
+   await modal.requestFullscreen();
+   // Brukeren kan ha forlatt fullskjerm mens forespørselen var under behandling.
+   if(modal.dataset.fullscreenIntent==='off'&&document.fullscreenElement===modal){
+    await document.exitFullscreen().catch(()=>{});
+   }
+  }catch{/* Behold CSS-helskjerm som fallback. */}
  }
  fitPresentationSlide();
 }
 function presenterFullscreenChanged(){
  const modal=document.getElementById('present-modal');
  if(!modal)return;
- // Hvis brukeren avslutter native fullskjerm med Esc, skal Presenter fortsatt være åpen.
- if(document.fullscreenElement!==modal&&modal.classList.contains('presenter-fullscreen')&&
-    modal.dataset.nativeFullscreen==='true'){
-  modal.dataset.nativeFullscreen='false';
-  syncPresenterFullscreen(false);
- }else if(document.fullscreenElement===modal){
+ if(document.fullscreenElement===modal){
+  // Ikke la en forsinket fullscreenchange-hendelse overstyre avslutt-knappen.
+  if(modal.dataset.fullscreenIntent==='off'){
+   document.exitFullscreen().catch(()=>{});
+   return;
+  }
   modal.dataset.nativeFullscreen='true';
   syncPresenterFullscreen(true);
+ }else if(modal.dataset.nativeFullscreen==='true'){
+  // Esc kan avslutte nettleserens native fullskjerm uten å lukke Presenter.
+  modal.dataset.nativeFullscreen='false';
+  modal.dataset.fullscreenIntent='off';
+  syncPresenterFullscreen(false);
  }
 }
 function enablePresenterSwipe(){
