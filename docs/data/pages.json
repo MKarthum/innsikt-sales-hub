@@ -553,61 +553,61 @@
           "slideId": "ai-thousand-analysts",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Vi begynner her: På bildet «Tenk om virksomheten din fikk tusen nye analytikere i morgen.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Ny kapasitet. Nye muligheter.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Begynn rolig og la spørsmålet henge: Tenk om virksomheten fikk tusen nye analytikere i morgen. Ikke besvar det for tidlig. De kan arbeide med analyser og kode, men hva ville dere satt dem til? Fortell at dette er et bilde på kapasitet, ikke et anslag på erstattede ansatte. Overgang: Ny kapasitet. Nye muligheter."
         },
         {
           "slideId": "ai-capacity-now",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: Tenk om virksomheten din fikk tusen nye analytikere i morgen.. På bildet «Ny kapasitet. Nye muligheter.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Du kan skalere innsikt. Du kan også skalere feil.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Her ønsker jeg først begeistringen, ikke forbeholdene. Vi kan utforske mer, få hjelp til kode og analyse og teste ideer raskere enn før. Samtidig er ikke et raskt svar det samme som et riktig svar. Spør hva det faktisk kan gjøre mulig hos kunden. Overgang: Samme kraft kan også gi feil."
         },
         {
           "slideId": "ai-two-directions",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: Ny kapasitet. Nye muligheter.. På bildet «Du kan skalere innsikt. Du kan også skalere feil.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Hva betyr egentlig «kunde»?. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Vend fortellingen fra ren kapasitet til kvalitet: Dette er ikke to ulike teknologier, men to retninger for samme kapasitet. Den kan forsterke innsikt, eller produsere feil og svake svar enda fortere. Vær konkret, ikke dramatisk. Overgang: Hvor kommer egentlig forståelsen fra?"
         },
         {
           "slideId": "data-meaning-customer",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: Du kan skalere innsikt. Du kan også skalere feil.. På bildet «Hva betyr egentlig «kunde»?» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Vi må unngå to ytterpunkter.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Bruk «kunde» som et hverdagslig eksempel, ikke en komplisert datamodell. Salg, økonomi og kundeservice kan alle mene noe fornuftig med ordet, men betydningen varierer. Da hjelper ikke flere analyser alene. Overgang: Her går diskusjonen ofte i to ytterpunkter."
         },
         {
           "slideId": "ai-two-extremes",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: Hva betyr egentlig «kunde»?. På bildet «Vi må unngå to ytterpunkter.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Skap verdi underveis.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Presiser min nyanse: Jeg irriterer meg over at dette fremstilles svart-hvitt. Vi skal verken sette KI på alt ukritisk eller kreve en komplett dataplattform før vi gjør noe som helst. Det kommer an på behovet og risikoen. Overgang: Hva gjør vi i praksis?"
         },
         {
           "slideId": "ai-pragmatic",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: Vi må unngå to ytterpunkter.. På bildet «Skap verdi underveis.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: KI kan også forbedre datagrunnlaget.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Foreslå en mer nyttig arbeidstakt: Ta utgangspunkt i én beslutning, én prosess eller ett problem. Finn dataene som trengs, test og lær. Sikkerhet og kvalitet er ikke valgfrie, men innsatsen må være riktig for oppgaven. Overgang: Og KI kan hjelpe oss med selve grunnlaget."
         },
         {
           "slideId": "ai-improve-data",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: Skap verdi underveis.. På bildet «KI kan også forbedre datagrunnlaget.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Kapasitet alene skaper ikke verdi.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Dette er en viktig nyanse. Data og KI står ikke i hver sin ende av et samlebånd. Vi kan bruke KI til å utforske, dokumentere og teste data mens vi utvikler løsningene. Samtidig verifiserer vi resultatene. Det skaper en læringssløyfe. Overgang: Nå kan vi samle fagområdene."
         },
         {
           "slideId": "ai-value-in-context",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: KI kan også forbedre datagrunnlaget.. På bildet «Kapasitet alene skaper ikke verdi.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Tre spørsmål åpner riktig samtale.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Her lander fagligheten. Vi trenger forretningsforståelse, relevant og forståelig data, analyse og god bruk av KI. Det er ikke én bestemt plattform vi selger. Målet er å hjelpe virksomheten å forstå mer og handle bedre. Overgang: Hva betyr dette for dem som møter kundene?"
         },
         {
           "slideId": "seller-better-questions",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: Kapasitet alene skaper ikke verdi.. På bildet «Tre spørsmål åpner riktig samtale.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Fra faglig forståelse til neste kundesamtale.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Snakk direkte til selgerne. Dere trenger ikke være arkitekter eller analytikere for å bidra. Det holder å gjenkjenne et signal og være trygg på tre spørsmål: Hva vil kunden forbedre, hva bygger de på, og hvordan vet de at det virker? Overgang: Derfor finnes et verktøy som hjelper dere."
         },
         {
           "slideId": "portal-purpose",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Dette er hovedfortellingen der publikum skal kjenne mulighetene og forstå balansen i Innsikt-faget. Sett dette opp mot forrige hovedpoeng: Tre spørsmål åpner riktig samtale.. På bildet «Fra faglig forståelse til neste kundesamtale.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Avslutning: Oppsummer hva publikum nå har grunnlag for å spørre om i neste møte."
+          "note": "Avslutt uten å selge teknologien. Portalen gjør det lettere å kjenne igjen behov, forberede spørsmål og finne faglig fordypning når dere trenger den. Den tar ikke samtalen for oss. Nå viser vi hvordan det ser ut i praksis. Avslutning: Gå over til portal-demoen."
         }
       ]
     },
@@ -642,31 +642,31 @@
           "slideId": "ai-thousand-analysts",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "Vi har kort tid. Prioriter det enkle tankebildet og la spørsmålene lande før dere går videre. Vi begynner her: På bildet «Tenk om virksomheten din fikk tusen nye analytikere i morgen.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Du kan skalere innsikt. Du kan også skalere feil.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Still åpningsspørsmålet og la det stå litt. Ikke gå gjennom en lang liste av KI-egenskaper: Poenget er at vi har fått en mye større kapasitet til å arbeide med kunnskap, kode og analyse. Dette er et bilde på potensialet. Overgang: Kapasitet har også en annen side."
         },
         {
           "slideId": "ai-two-directions",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Vi har kort tid. Prioriter det enkle tankebildet og la spørsmålene lande før dere går videre. Sett dette opp mot forrige hovedpoeng: Tenk om virksomheten din fikk tusen nye analytikere i morgen.. På bildet «Du kan skalere innsikt. Du kan også skalere feil.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Kapasitet alene skaper ikke verdi.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Vis begge utfall uten å gjøre KI til skurken. God kontekst og riktig forståelse gir nye muligheter; feil premisser kan gi svært raske, overbevisende feil. Vi kan skalere kvalitet og misforståelser med samme teknologi. Overgang: Derfor handler dette om hele Innsikt-faget."
         },
         {
           "slideId": "ai-value-in-context",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Vi har kort tid. Prioriter det enkle tankebildet og la spørsmålene lande før dere går videre. Sett dette opp mot forrige hovedpoeng: Du kan skalere innsikt. Du kan også skalere feil.. På bildet «Kapasitet alene skaper ikke verdi.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Tre spørsmål åpner riktig samtale.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Én setning er viktigst: Kapasitet alene skaper ikke verdi. Virksomhetens behov, dataene og hvordan vi analyserer og bruker KI må henge sammen. Vi velger ikke verktøy før vi kjenner problemet. Overgang: Dette skal selgerne bruke på en enkel måte."
         },
         {
           "slideId": "seller-better-questions",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Vi har kort tid. Prioriter det enkle tankebildet og la spørsmålene lande før dere går videre. Sett dette opp mot forrige hovedpoeng: Kapasitet alene skaper ikke verdi.. På bildet «Tre spørsmål åpner riktig samtale.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Fra faglig forståelse til neste kundesamtale.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Hold selgerperspektivet konkret. Det er ikke nødvendig å kjenne teknologien i detalj; det viktigste er å stille spørsmål som bringer kunden nærmere en nyttig avklaring. Unngå å gjøre spørsmålene til et tungt skjema. Overgang: Verktøyet hjelper oss med akkurat det."
         },
         {
           "slideId": "portal-purpose",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Vi har kort tid. Prioriter det enkle tankebildet og la spørsmålene lande før dere går videre. Sett dette opp mot forrige hovedpoeng: Tre spørsmål åpner riktig samtale.. På bildet «Fra faglig forståelse til neste kundesamtale.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Avslutning: Oppsummer hva publikum nå har grunnlag for å spørre om i neste møte."
+          "note": "Avslutt kort: Portalen er ment å støtte en god samtale, ikke erstatte fagfolk eller kundenes egne vurderinger. Åpne gjerne den praktiske demonstrasjonen rett etter dette. Avslutning: Vis ett eksempel fremfor å gå gjennom alle sidene."
         }
       ]
     },
@@ -705,49 +705,49 @@
           "slideId": "ai-capacity-now",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "Dette er en faglig fordypning. Inviter til nyanser om datakontekst, risikonivå og faktisk verdi. Vi begynner her: På bildet «Ny kapasitet. Nye muligheter.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Et overbevisende svar kan fortsatt være feil.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Start med mulighetene: Den samme organisasjonen kan nå prøve ut flere analyser og ideer på kortere tid. Be publikummet tenke på en beslutning som i dag går for sakte. Ikke fremstill automatisering som et mål i seg selv. Overgang: Raskt er ikke automatisk riktig."
         },
         {
           "slideId": "ai-good-vs-fast",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Dette er en faglig fordypning. Inviter til nyanser om datakontekst, risikonivå og faktisk verdi. Sett dette opp mot forrige hovedpoeng: Ny kapasitet. Nye muligheter.. På bildet «Et overbevisende svar kan fortsatt være feil.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Hva betyr egentlig «kunde»?. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Dette er et kvalitetspoeng, ikke et anti-KI-poeng. Et svar kan være velformulert, men ta utgangspunkt i feil kunde, tidsperiode eller begrep. Derfor må vi kunne etterprøve forutsetningene. Overgang: Et ord illustrerer problemet godt."
         },
         {
           "slideId": "data-meaning-customer",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Dette er en faglig fordypning. Inviter til nyanser om datakontekst, risikonivå og faktisk verdi. Sett dette opp mot forrige hovedpoeng: Et overbevisende svar kan fortsatt være feil.. På bildet «Hva betyr egentlig «kunde»?» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Kontroll må passe til risikoen.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Forklar «kunde» med de tre perspektivene. Den samme informasjonen kan brukes til ulike formål, og da trenger vi forretningskontekst. Det kan løses på flere nivåer, fra enkel avklaring til bedre modellering. Overgang: Kontrollbehovet må også vurderes."
         },
         {
           "slideId": "risk-and-trust",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er en faglig fordypning. Inviter til nyanser om datakontekst, risikonivå og faktisk verdi. Sett dette opp mot forrige hovedpoeng: Hva betyr egentlig «kunde»?. På bildet «Kontroll må passe til risikoen.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: KI kan også forbedre datagrunnlaget.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Knytt dette til risiko. NIST og OECD gir rammer for at ansvar, transparens og kontroll må følges opp over tid. Vi skal verken ignorere risikoen eller bruke samme kontrollmekanisme i alle små forsøk. Overgang: KI kan også bidra i datakvalitetsarbeidet."
         },
         {
           "slideId": "ai-improve-data",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er en faglig fordypning. Inviter til nyanser om datakontekst, risikonivå og faktisk verdi. Sett dette opp mot forrige hovedpoeng: Kontroll må passe til risikoen.. På bildet «KI kan også forbedre datagrunnlaget.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Skap verdi underveis.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Dra frem samspillet: KI kan støtte dokumentasjon, testing og utforsking av datagrunnlaget. Det betyr ikke automatisk at modellene er riktige; kontrollen må fortsatt være der. Datagrunnlag og løsning kan utvikles sammen. Overgang: Hvordan starter vi da klokt?"
         },
         {
           "slideId": "ai-pragmatic",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er en faglig fordypning. Inviter til nyanser om datakontekst, risikonivå og faktisk verdi. Sett dette opp mot forrige hovedpoeng: KI kan også forbedre datagrunnlaget.. På bildet «Skap verdi underveis.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Innsikt er mer enn én teknologi.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Gjør det praktisk: Velg et konkret behov, finn relevante data, definer nødvendig kvalitet og test. Lær av resultatet før dere skalerer. Det er ikke det samme som å nedprioritere sikkerhet. Overgang: Se hvordan Innsikt-faget dekker helheten."
         },
         {
           "slideId": "insight-three-disciplines",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Dette er en faglig fordypning. Inviter til nyanser om datakontekst, risikonivå og faktisk verdi. Sett dette opp mot forrige hovedpoeng: Skap verdi underveis.. På bildet «Innsikt er mer enn én teknologi.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Kapasitet alene skaper ikke verdi.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Se de tre fagområdene samlet. Data og plattform, analyse og formidling, KI og automatisering er ulike kompetanser som virker sammen. Ikke gjør dette til tre siloer eller tre produkter. Overgang: Hva er det vi til slutt prøver å oppnå?"
         },
         {
           "slideId": "ai-value-in-context",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Dette er en faglig fordypning. Inviter til nyanser om datakontekst, risikonivå og faktisk verdi. Sett dette opp mot forrige hovedpoeng: Innsikt er mer enn én teknologi.. På bildet «Kapasitet alene skaper ikke verdi.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Avslutning: Oppsummer hva publikum nå har grunnlag for å spørre om i neste møte."
+          "note": "Avslutt med virksomhetens verdi i sentrum. Poenget er bedre innsikt og bedre handling, uavhengig av om første tiltak er datamodellering, en analyse eller et avgrenset KI-bruksområde. Avslutning: Ta dette med inn i den neste kundedialogen."
         }
       ]
     },
@@ -786,37 +786,37 @@
           "slideId": "seller-signals",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "Dette er en salgsnær historie. Fokuser på hva en kundeansvarlig bør høre, undersøke og følge opp. Vi begynner her: På bildet «Lytt etter behov – ikke teknologinavn.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Symptomet kan ha flere ulike årsaker. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Innled med et gjenkjennelig signal. Mange kunder forteller oss om dårlige tall, tidkrevende rapporter eller ambisjoner om KI, ikke om en bestemt løsning. Her starter vi med å lytte etter hva de vil oppnå. Overgang: Det samme symptomet kan bety forskjellige ting."
         },
         {
           "slideId": "sales-hypotheses",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Dette er en salgsnær historie. Fokuser på hva en kundeansvarlig bør høre, undersøke og følge opp. Sett dette opp mot forrige hovedpoeng: Lytt etter behov – ikke teknologinavn.. På bildet «Symptomet kan ha flere ulike årsaker» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Tre spørsmål gjør neste møte bedre. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Dra frem alternative forklaringer uten å avgjøre hvilken som stemmer. Ulike definisjoner, manuelle avstemminger og forsinkede tall er mulige årsaker, ikke en diagnose. Legg vekt på at kunden kjenner prosessen best. Overgang: Det gir oss noe konkret å spørre om."
         },
         {
           "slideId": "sales-questions",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Dette er en salgsnær historie. Fokuser på hva en kundeansvarlig bør høre, undersøke og følge opp. Sett dette opp mot forrige hovedpoeng: Symptomet kan ha flere ulike årsaker. På bildet «Tre spørsmål gjør neste møte bedre» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Tre spørsmål åpner riktig samtale.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Bruk spørsmålene som et første sett med avklaringer. Hvilken beslutning påvirkes, hvor oppstår problemet, og hvem vet hva tallene betyr? Ikke press frem et svar på alle spørsmål i første møte. Overgang: Vi kan forenkle dette enda mer for selgeren."
         },
         {
           "slideId": "seller-better-questions",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er en salgsnær historie. Fokuser på hva en kundeansvarlig bør høre, undersøke og følge opp. Sett dette opp mot forrige hovedpoeng: Tre spørsmål gjør neste møte bedre. På bildet «Tre spørsmål åpner riktig samtale.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Du trenger ikke svaret i første møte.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Vis hvordan spørsmålene kan samles til en enkel samtalestart. Vi skal ikke lære salgsapparatet et teknisk kurs, men gjøre det lettere å oppdage relevante muligheter og vite når neste steg er fornuftig. Overgang: Ingen behøver være ekspert på alt her."
         },
         {
           "slideId": "seller-specialist",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Dette er en salgsnær historie. Fokuser på hva en kundeansvarlig bør høre, undersøke og følge opp. Sett dette opp mot forrige hovedpoeng: Tre spørsmål åpner riktig samtale.. På bildet «Du trenger ikke svaret i første møte.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Overgang: Fra faglig forståelse til neste kundesamtale.. La dette komme naturlig uten å gjenta hele forrige forklaring."
+          "note": "Trygg selgeren på at første møte ikke skal ende med et teknologivalg. Lytt, konkretiser og avtal en oppfølging med riktig kompetanse. Det skaper mer troverdighet enn å love en plattformløsning for tidlig. Overgang: Vi har et verktøy som hjelper oss å forberede det."
         },
         {
           "slideId": "portal-purpose",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Dette er en salgsnær historie. Fokuser på hva en kundeansvarlig bør høre, undersøke og følge opp. Sett dette opp mot forrige hovedpoeng: Du trenger ikke svaret i første møte.. På bildet «Fra faglig forståelse til neste kundesamtale.» er oppgaven å skape forståelse, ikke å lese ordene som står på skjermen. Bruk kort tid på selve motivet, og fortell med dine egne ord hva dette gjør mulig for kunden eller hvorfor det bør undersøkes nærmere. Avslutning: Oppsummer hva publikum nå har grunnlag for å spørre om i neste møte."
+          "note": "Ta over til portalen. Den gjør ikke kundeanalysen ferdig, men gir relevant faglig bakgrunn og forslag til gode spørsmål. Velg ett konkret eksempel når du demonstrerer, og stopp når publikum forstår nytten. Avslutning: La portalen være en støtte for den neste samtalen."
         }
       ]
     }

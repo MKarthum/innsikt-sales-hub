@@ -117,7 +117,7 @@ function render(slide,esc,position={}){
  if(kind==='portal'){
   return block('portal',top+'<div class="v2-portal-title">'+title+'</div>'
    +'<div class="v2-portal-window"><div class="v2-portal-browser"><i></i><i></i><i></i><span>INNSIKT / NESTE STEG</span></div>'
-   +'<div class="v2-portal-path">'+(v.steps||[]).map((x,i)=>'<div class="v2-portal-node"><span>0'+(i+1)+'</span><strong>'+escs(x)+'</strong></div>').join('')+'</div></div>'
+   +'<div class="v2-portal-path">'+(v.steps||[]).map((x,i)=>'<div class="v2-portal-node"><span>0'+(i+1)+'</span><div class="v2-portal-illustration v2-portal-illustration--'+i+'" aria-hidden="true"><i></i><i></i><i></i></div><strong>'+escs(x)+'</strong></div>').join('')+'</div></div>'
    +'<p class="v2-portal-footer">'+escs(v.footer||'')+'</p>');
  }
 

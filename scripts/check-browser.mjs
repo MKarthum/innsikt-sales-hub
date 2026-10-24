@@ -125,13 +125,13 @@ try {
   // Hovedfortellingen skal følge de samme oppgavene som den nye forsiden.
   await page.locator('[data-deck="portal"]').click();
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Tre vanlige oppgaver'),label+': oppgaver kommer før fagkatalog');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Tre veier inn i Innsikt'),label+': oppgaver kommer før fagkatalog');
   await page.locator('#slide-next').click();
   assert.ok((await page.locator('#slide-body').innerText()).includes('En møtebrief kan være første nyttige resultat'),label+': klar første nytte');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Et kundesignal blir nyttig'),label+': kundebehov er neste alternativ');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Fra kundesignal til gode spørsmål'),label+': kundebehov er neste alternativ');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Fagstoffet er der'),label+': fagdybde kommer når nødvendig');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Fagstoff når du trenger det'),label+': fagdybde kommer når nødvendig');
   // Eksempelet skal gjenbruke et kanonisk forretningsbehov, ikke være en kundereferanse.
   await page.locator('[data-deck="sales"]').click();
   const exampleOpening=await page.locator('#slide-body').innerText();
@@ -141,7 +141,7 @@ try {
   assert.ok(exampleContent.includes('månedsavslutning')&&exampleContent.includes('Vi bruker flere dager'),label+': kanonisk forretningsbehov i eksempel');
   await page.locator('#slide-next').click();
   const explanation=await page.locator('#slide-body').innerText();
-  assert.ok(explanation.includes('Symptomet kan ha flere ulike årsaker'),label+': årsaker vurderes etter symptomet');
+  assert.ok(explanation.includes('Et symptom kan ha flere årsaker'),label+': årsaker vurderes etter symptomet');
   // Eksempelløpet må peke til en faktisk tilgjengelig, kanonisk prompt.
   await page.locator('#slide-next').click();
   await page.locator('#slide-next').click();

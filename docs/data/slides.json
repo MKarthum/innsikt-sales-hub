@@ -27,7 +27,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "VELG DET DU SKAL GJØRE",
-      "title": "Tre vanlige oppgaver gir tre naturlige startpunkter",
+      "title": "Tre veier inn i Innsikt",
       "bullets": [
         "Forberede kundemøte → møtebrief og ferdige prompter.",
         "Fanget opp et behov → problemer og avklaringsspørsmål.",
@@ -84,7 +84,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "NÅR KUNDEN HAR ET PROBLEM",
-      "title": "Et kundesignal blir nyttig når vi finner de riktige spørsmålene",
+      "title": "Fra kundesignal til gode spørsmål",
       "body": {
         "$content": "guidance:customer-first",
         "variant": "normal"
@@ -95,7 +95,7 @@
         "«Kundedialog» trener oss på å se bak første bestilling."
       ],
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Et kundesignal beskriver et opplevd problem, ikke en verifisert teknisk årsak. Vi må forstå situasjonen, konsekvensen og hvem som er berørt før vi anbefaler løsninger. Fagmiljøet kan bidra til å avklare datagrunnlag og mulige tiltak.",
       "topic": "Kundedialog",
       "keywords": [
         "behov",
@@ -124,7 +124,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "FAGLIG FORDYPNING VED BEHOV",
-      "title": "Fagstoffet er der når spørsmålet blir mer krevende",
+      "title": "Fagstoff når du trenger det",
       "bullets": [
         "«Start her» gir en valgfri innføring for nye kolleger.",
         "«Data og KI i praksis» forklarer sammenhenger og arkitektur.",
@@ -155,7 +155,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "MARKED SOM STØTTE",
-      "title": "Markedet gir kontekst når vi trenger den",
+      "title": "Markedet gir nyttig kontekst",
       "bullets": [
         "«Marked og trender» gir kilder og utviklingstrekk.",
         "«Trendradar» skiller tidlige signaler fra etablerte forhold.",
@@ -186,7 +186,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "FRA INNSIKT TIL HANDLING",
-      "title": "Målet er noe du kan bruke i neste samtale",
+      "title": "Målet er neste gode samtale",
       "bullets": [
         "Et møtedokument eller en relevant prompt som utgangspunkt.",
         "Bedre spørsmål om problem, konsekvens og ansvar.",
@@ -272,14 +272,14 @@
       "tone": "light",
       "type": "visual",
       "cue": "IKKE VELG LØSNING ENNÅ",
-      "title": "Symptomet kan ha flere ulike årsaker",
+      "title": "Et symptom kan ha flere årsaker",
       "bullets": [
         "Avdelinger kan definere samme nøkkeltall forskjellig.",
         "Data kan samles inn og avstemmes manuelt.",
         "Rapporteringen kan komme for sent til beslutningen."
       ],
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Når månedsrapporteringen tar tid, kan årsaken ligge i ulike nøkkeltall, mange manuelle trinn, uklart ansvar eller en kombinasjon. Disse er hypoteser til undersøkelse, ikke en diagnose av kunden. Begynn med å forstå hvor det faktisk stopper opp.",
       "topic": "Kundedialog",
       "keywords": [
         "behov",
@@ -307,14 +307,14 @@
       "tone": "strong",
       "type": "visual",
       "cue": "KVALIFISER BEHOVET",
-      "title": "Tre spørsmål gjør neste møte bedre",
+      "title": "Tre spørsmål før vi foreslår noe",
       "bullets": [
         "Hvilken beslutning blir forsinket eller svekket?",
         "Hvor oppstår forskjellene, og hvem eier definisjonene?",
         "Hva må vi undersøke før vi anbefaler et tiltak?"
       ],
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Før vi anbefaler teknologi, bør vi undersøke hvilken beslutning som påvirkes, hvor uenigheten oppstår og hvem som kjenner dataene. Spørsmålene gir retning for en avgrenset avklaring og gjør det lettere å koble inn riktig fagkompetanse.",
       "topic": "Kundedialog",
       "keywords": [
         "behov",

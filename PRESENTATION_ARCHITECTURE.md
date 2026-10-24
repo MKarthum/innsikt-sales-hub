@@ -50,3 +50,11 @@ Dersom portalen eller Claude-artefakten bytter merkevare, skal bare disse verdie
 - Nye tekster er kvalitative faglige vurderinger/eksempler uten oppdiktede effektmål. Risikosliden knytter bare relevante kilder fra NIST og OECD til seg; ingen universell sluttslide.
 - For redigering: endre docs/data/slides.json for innhold; docs/data/pages.json for historie og overganger; docs/assets/slide-visuals.js og .css for layoutfamilier. Unngå å endre globale farger for å fikse ett lysbilde.
 - Kvalitetsport: statiske eier- og kildetester og reell Chromium-verifikasjon av samtlige lysbilder, med skjermbilder og manuell inspeksjon.
+
+### Manus og to-nivåsnotater
+
+I biblioteket eier `speakerBase` den selvstendige faglige forklaringen. Hver historieplassering eier bare manusdelen som er spesiell for akkurat denne fortellingen: åpning, rytme og overgang. Presentasjonen setter dem sammen. Kvalitetstesten vurderer totalen (minst 300 tegn), men krever også en selvstendig plasseringstekst; det er ikke et krav om to lange kopier. Hovedfortellingen og tre alternative formater har fått redaksjonelt gjennomgåtte, individuelle overganger.
+
+### Visuell gjennomgang
+
+Etter første fullrendrede bibliotekrunde ble de lengste portal-/salgstitlene strammet inn og portalbroens visuelle symboler styrket. Formålet er å få naturlige linjebrudd og sikre at store interne flater har et kommunikativt tyngdepunkt. CI rendrer hver av de 30 ID-ene og sjekker tekstens grenser i tillegg til ordinære mobil-/presentertester.

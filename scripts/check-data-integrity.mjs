@@ -100,7 +100,7 @@ for(const [key,d] of Object.entries(pages.presentationDecks||{})){
   if(x?.scope==='story'&&x.storyId!==key)fail('Historiespesifikt lysbilde gjenbrukt: '+key+'/'+x.id);
   if(!str(placement.beat)||!beatIds.includes(placement.beat)||!['tell','debrief'].includes(placement.delivery))fail('Ugyldig plassering: '+key+'/'+placement.slideId);
   const at=beatIds.indexOf(placement.beat);if(at<prev)fail('Feil dramaturgisk rekkefølge: '+key);prev=at;
-  if(!str(placement.note)||placement.note.length<300)fail('Mangler historiespesifikke notater: '+key+'/'+placement.slideId);
+  if(!str(placement.note)||placement.note.length<110||(placement.note.length+(x?.speakerBase?.length||0)<300))fail('Mangler sammensatte foredragsnotater: '+key+'/'+placement.slideId);
   if(placement!==d.slides.at(-1)&&!placement.note.includes('Overgang:'))fail('Mangler overgang: '+key+'/'+placement.slideId);
  }
 }
