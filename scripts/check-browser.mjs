@@ -144,13 +144,13 @@ try {
   // Hovedfortellingen skal følge de samme oppgavene som den nye forsiden.
   await page.locator('[data-deck="portal"]').click();
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Tre veier inn i Innsikt'),label+': oppgaver kommer før fagkatalog');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-three-ways')),label+': oppgaver kommer før fagkatalog');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('En møtebrief kan være første nyttige resultat'),label+': klar første nytte');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-meeting-brief')),label+': klar første nytte');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Fra kundesignal til gode spørsmål'),label+': kundebehov er neste alternativ');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-customer-signal')),label+': kundebehov er neste alternativ');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Fagstoff når du trenger det'),label+': fagdybde kommer når nødvendig');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-learning')),label+': fagdybde kommer når nødvendig');
   // Eksempelet skal gjenbruke et kanonisk forretningsbehov, ikke være en kundereferanse.
   await page.locator('[data-deck="sales"]').click();
   const exampleOpening=await page.locator('#slide-body').innerText();
