@@ -8,7 +8,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "VIS FREM LØSNINGEN",
-      "title": "Innsikt hjelper oss fra usikkerhet til en bedre kundesamtale",
+      "title": "Innsikt gjør neste kundesamtale enklere å forberede",
       "body": "Et arbeidsverktøy for kundeansvarlige og fagpersoner: finn en relevant oppgave, bruk innholdet og kom videre.",
       "sourceIds": [],
       "speakerBase": "",
@@ -18,7 +18,11 @@
         "scene": "impact",
         "kicker": "ET VERKTØY FOR KUNDESAMTALEN",
         "support": "Fra et usikkert utgangspunkt til et bedre spørsmål.",
-        "figureAssetId": "product-map"
+        "figureAssetId": "product-map",
+        "layout": "bridge",
+        "beforeLabel": "Uklart kundesignal",
+        "afterLabel": "Spørsmål og møteforberedelse",
+        "evidenceLine": "Hva er kundens neste beslutning?"
       }
     },
     {
@@ -28,7 +32,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "VELG DET DU SKAL GJØRE",
-      "title": "Tre veier inn i Innsikt",
+      "title": "Start med oppgaven – ikke med teknologien",
       "bullets": [
         "Forberede kundemøte → møtebrief og ferdige prompter.",
         "Fanget opp et behov → problemer og avklaringsspørsmål.",
@@ -41,21 +45,23 @@
       "visual": {
         "scene": "list",
         "items": [
-          "Forberede kundemøte",
-          "Fanget opp et behov",
-          "Forstå et fagtema"
+          "Jeg skal i kundemøte",
+          "Jeg har fanget opp et behov",
+          "Jeg vil forstå et fagtema"
         ],
         "detail": [
-          "Lag møtebrief",
-          "Utforsk kundesignaler",
-          "Få faglig oversikt"
+          "Lag en møtebrief og spørsmål",
+          "Utforsk mulige forklaringer",
+          "Finn det du trenger å vite"
         ],
         "figureAssetId": "product-map",
         "itemAssetIds": [
           "business-decision",
           "market-signal",
           "data-semantic"
-        ]
+        ],
+        "layout": "cards",
+        "takeaway": "Du trenger bare å kjenne oppgaven du står i."
       }
     },
     {
@@ -65,7 +71,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "FRA FORSIDE TIL VERKTØY",
-      "title": "En møtebrief kan være første nyttige resultat",
+      "title": "En nyttig møtebrief krever tre enkle grep",
       "bullets": [
         "Velg «Lag en møtebrief» på forsiden.",
         "Åpne «Forbered et kundemøte» og tilpass feltene.",
@@ -88,6 +94,12 @@
           "business-decision",
           "ai-agent",
           "verified-analysis"
+        ],
+        "layout": "steps",
+        "stepDetails": [
+          "Velg relevant oppgave i portalen",
+          "Beskriv kunde, situasjon og mål",
+          "Kontroller fakta og hull før bruk"
         ]
       }
     },
@@ -97,7 +109,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "NÅR KUNDEN HAR ET PROBLEM",
-      "title": "Fra kundesignal til gode spørsmål",
+      "title": "Et kundesignal er starten på en undersøkelse",
       "body": {
         "$content": "guidance:customer-first",
         "variant": "normal"
@@ -119,21 +131,23 @@
       "visual": {
         "scene": "list",
         "items": [
-          "Forretningsbehov",
-          "Salgsinnganger",
-          "Kundedialog"
+          "Beskriv symptomet",
+          "Finn mulige faglige spor",
+          "Formuler neste spørsmål"
         ],
         "detail": [
-          "Symptom og spørsmål",
-          "Mulige faglige spor",
-          "Lytt bak bestillingen"
+          "Hva opplever kunden?",
+          "Hva kan ligge bak?",
+          "Hva må vi undersøke først?"
         ],
         "figureAssetId": "customer-dialogue",
         "itemAssetIds": [
           "customer-dialogue",
           "market-signal",
           "value-compass"
-        ]
+        ],
+        "layout": "path",
+        "takeaway": "Vi vet hva kunden opplever. Årsaken må fortsatt undersøkes."
       }
     },
     {
@@ -143,7 +157,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "FAGLIG FORDYPNING VED BEHOV",
-      "title": "Fagstoff når du trenger det",
+      "title": "Du trenger ikke kunne alt for å stille neste spørsmål",
       "bullets": [
         "«Start her» gir en valgfri innføring for nye kolleger.",
         "«Data og KI i praksis» forklarer sammenhenger og arkitektur.",
@@ -157,20 +171,22 @@
         "scene": "list",
         "items": [
           "Start her",
-          "Data og KI i praksis",
-          "Teknologikart"
+          "Se sammenhengene",
+          "Gå i dybden"
         ],
         "detail": [
-          "Introduksjon",
-          "Sammenhenger og arkitektur",
-          "Fordypning ved behov"
+          "Kort faglig innføring",
+          "Datagrunnlag, analyse og KI",
+          "Teknologier og metoder ved behov"
         ],
         "figureAssetId": "data-semantic",
         "itemAssetIds": [
           "product-map",
           "data-semantic",
           "core-storage"
-        ]
+        ],
+        "layout": "cards",
+        "takeaway": "Finn oversikten først; gå i dybden når spørsmålet krever det."
       }
     },
     {
@@ -180,7 +196,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "MARKED SOM STØTTE",
-      "title": "Markedet gir nyttig kontekst",
+      "title": "En trend er bakgrunn – kundens situasjon avgjør",
       "bullets": [
         "«Marked og trender» gir kilder og utviklingstrekk.",
         "«Trendradar» skiller tidlige signaler fra etablerte forhold.",
@@ -193,21 +209,23 @@
       "visual": {
         "scene": "list",
         "items": [
-          "Marked og trender",
-          "Trendradar",
-          "Kundens situasjon"
+          "Hva er dokumentert?",
+          "Hva er et tidlig signal?",
+          "Hva kjenner kunden igjen?"
         ],
         "detail": [
-          "Et dokumentert bakteppe",
-          "Tidlige signaler",
-          "Må alltid verifiseres"
+          "Markedsdata og kilder",
+          "Hypoteser som må følges opp",
+          "Relevans for denne virksomheten"
         ],
         "figureAssetId": "market-signal",
         "itemAssetIds": [
           "market-signal",
           "value-compass",
           "customer-dialogue"
-        ]
+        ],
+        "layout": "cards",
+        "takeaway": "Bruk trender for å stille bedre spørsmål, ikke for å konkludere."
       }
     },
     {
@@ -217,7 +235,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "FRA INNSIKT TIL HANDLING",
-      "title": "Målet er neste gode samtale",
+      "title": "Det viktigste resultatet er neste gode samtale",
       "bullets": [
         "Et møtedokument eller en relevant prompt som utgangspunkt.",
         "Bedre spørsmål om problem, konsekvens og ansvar.",
@@ -240,6 +258,12 @@
           "customer-dialogue",
           "verified-analysis",
           "value-compass"
+        ],
+        "layout": "steps",
+        "stepDetails": [
+          "Hva skal kunden få til?",
+          "Hva trenger vi å undersøke?",
+          "Hvem tar samtalen videre?"
         ]
       }
     },
@@ -250,7 +274,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "ET KONKRET EKSEMPEL",
-      "title": "Kunden sier at tallene ikke stemmer. Hva gjør vi nå?",
+      "title": "«Tallene stemmer ikke» er et signal, ikke en IT-bestilling",
       "body": "Et fiktivt eksempel fra «Forretningsbehov». Vi skal ikke diagnostisere kunden, men forberede en bedre samtale.",
       "sourceIds": [],
       "speakerBase": "",
@@ -260,7 +284,11 @@
         "scene": "impact",
         "kicker": "FIKTIV KUNDESITUASJON",
         "support": "Et fiktivt eksempel – forstå behovet før vi foreslår løsningen.",
-        "figureAssetId": "customer-dialogue"
+        "figureAssetId": "customer-dialogue",
+        "layout": "bridge",
+        "beforeLabel": "«Tallene stemmer ikke»",
+        "afterLabel": "Hva betyr det, for hvem – og hvorfor?",
+        "evidenceLine": "Eksemplet er fiktivt."
       }
     },
     {
@@ -278,7 +306,7 @@
       "keywords": [],
       "visual": {
         "scene": "business-case",
-        "hint": "En kundesituasjon. Ikke en diagnose."
+        "hint": "Fiktiv kundesituasjon: kartlegg årsak før tiltak."
       }
     },
     {
@@ -287,7 +315,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "IKKE VELG LØSNING ENNÅ",
-      "title": "Et symptom kan ha flere årsaker",
+      "title": "Én rapporteringsutfordring kan ha flere årsaker",
       "bullets": [
         "Avdelinger kan definere samme nøkkeltall forskjellig.",
         "Data kan samles inn og avstemmes manuelt.",
@@ -306,20 +334,22 @@
         "scene": "list",
         "items": [
           "Ulike definisjoner",
-          "Manuelle prosesser",
-          "For sene tall"
+          "Manuelle avstemminger",
+          "Forsinket informasjon"
         ],
         "detail": [
-          "Samme nøkkeltall, ulik betydning",
-          "Avstemming tar tid",
-          "Beslutninger må vente"
+          "Samme mål, ulike beregninger",
+          "Arbeid som må gjentas",
+          "Data blir tilgjengelige for sent"
         ],
         "figureAssetId": "verified-analysis",
         "itemAssetIds": [
           "data-semantic",
           "delivery-loop",
           "market-signal"
-        ]
+        ],
+        "layout": "cards",
+        "takeaway": "Dette er mulige forklaringer – ikke en diagnose."
       }
     },
     {
@@ -328,7 +358,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "KVALIFISER BEHOVET",
-      "title": "Tre spørsmål før vi foreslår noe",
+      "title": "Tre spørsmål avklarer hva som faktisk stopper opp",
       "bullets": [
         "Hvilken beslutning blir forsinket eller svekket?",
         "Hvor oppstår forskjellene, og hvem eier definisjonene?",
@@ -346,21 +376,23 @@
       "visual": {
         "scene": "list",
         "items": [
-          "Konsekvens",
-          "Årsak",
-          "Ansvar"
+          "Hva er konsekvensen?",
+          "Hvor oppstår avviket?",
+          "Hvem eier tallene?"
         ],
         "detail": [
-          "Hva stopper opp?",
-          "Hvor oppstår avviket?",
-          "Hvem eier definisjonene?"
+          "Hvilken beslutning blir vanskelig?",
+          "I hvilken rapport eller prosess?",
+          "Hvem kan avklare definisjonene?"
         ],
         "figureAssetId": "customer-dialogue",
         "itemAssetIds": [
           "business-decision",
           "verified-analysis",
           "customer-dialogue"
-        ]
+        ],
+        "layout": "questions",
+        "takeaway": "Avklar konsekvens, mulig årsak og eierskap før tiltak."
       }
     },
     {
@@ -370,7 +402,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "FRA SPØRSMÅL TIL VERKTØY",
-      "title": "En ferdig prompt hjelper oss å forberede samtalen",
+      "title": "Prompten skal forberede spørsmål – ikke gi diagnosen",
       "bullets": [
         "Åpne «Prompter for salg» → «Forbered en behovssamtale».",
         "Bruk et generisk eller anonymisert kundesignal.",
@@ -393,6 +425,12 @@
           "business-decision",
           "ai-agent",
           "verified-analysis"
+        ],
+        "layout": "steps",
+        "stepDetails": [
+          "Velg mal for behovsavklaring",
+          "Gi relevant, lovlig kontekst",
+          "Vurder forslagene før møtet"
         ]
       }
     },
@@ -403,7 +441,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "ET MULIG RESULTAT",
-      "title": "Vi kan foreslå en avgrenset avklaring – ikke et IT-prosjekt",
+      "title": "Første steg kan være en avgrenset avklaring",
       "bullets": [
         "Inviter økonomiansvarlig og relevant data-/analysekompetanse.",
         "Undersøk én rapporteringsflyt og definisjonene bak.",
@@ -426,6 +464,12 @@
           "market-signal",
           "customer-dialogue",
           "delivery-loop"
+        ],
+        "layout": "steps",
+        "stepDetails": [
+          "Velg ett nøkkeltall eller én rapport",
+          "Samle fag og forretning rundt bordet",
+          "Kartlegg avvik og aktuelle tiltak"
         ]
       }
     },
@@ -470,9 +514,9 @@
         "scene": "two-directions",
         "lead": "Den samme kapasiteten kan ta oss i to retninger.",
         "positive": "Bedre innsikt",
-        "positiveDetail": "Raskere analyser. Flere muligheter. Bedre beslutningsgrunnlag.",
+        "positiveDetail": "Raskere utforskning med kvalitetssikret grunnlag.",
         "negative": "Flere feil",
-        "negativeDetail": "Usikre tall. Feil premisser. Overbevisende, men svake svar.",
+        "negativeDetail": "Flere overbevisende svar bygget på feil premisser.",
         "center": "KAPASITET"
       },
       "speakerBase": "KI øker kapasiteten til analyse og produksjon. Hvor nyttig resultatet blir, avhenger blant annet av problemforståelse, datagrunnlag og kvalitetskontroll. Dette er en faglig vurdering, ikke et dokumentert effektmål.",
@@ -492,15 +536,15 @@
       "type": "visual",
       "tone": "strong",
       "cue": "HVORFOR INNSIKT?",
-      "title": "Kapasitet alene skaper ikke verdi.",
+      "title": "KI-kapasitet trenger behov, datagrunnlag og vurdering",
       "visual": {
         "scene": "value-system",
-        "lead": "Det avgjørende er hvordan vi setter kraften i arbeid.",
+        "lead": "Det er samspillet som gjør kapasiteten nyttig.",
         "core": "VERDI",
         "business": "Forstå behovet",
         "data": "Kjenn datagrunnlaget",
         "ai": "Bruk analyse og KI",
-        "footer": "Skap verdi underveis – uten å kreve perfeksjon først."
+        "footer": "Forstå problemet. Kjenn dataene. Bruk analyse og KI klokt."
       },
       "speakerBase": "Innsikt-faget kombinerer forståelse av virksomhetens behov med dataarbeid, analyse og KI. Dette er ikke en lineær sjekkliste: KI kan også forbedre datagrunnlaget. Riktig omfang og kontroll avhenger av risiko og faktisk behov.",
       "sourceIds": []
@@ -511,12 +555,16 @@
       "tone": "strong",
       "type": "visual",
       "cue": "KI OG KAPASITET",
-      "title": "Ny kapasitet. Nye muligheter.",
+      "title": "KI gjør analyse, kode og utforskning mer tilgjengelig",
       "visual": {
         "scene": "impact",
         "kicker": "HVORFOR NÅ?",
         "support": "Analyser, kode og utforskning kan skje i et helt annet tempo.",
-        "figureAssetId": "ai-agent"
+        "figureAssetId": "ai-agent",
+        "layout": "bridge",
+        "beforeLabel": "Mer kapasitet",
+        "afterLabel": "Større behov for faglig kontroll",
+        "evidenceLine": "Analyse · kode · utforskning"
       },
       "sourceIds": [],
       "speakerBase": "KI gir oss mulighet til å arbeide raskere med informasjon, analyse og kode. Vi bør ikke forveksle dette med at resultatene alltid er riktige, eller at teknologien erstatter fagkompetanse. Poenget er at kapasiteten er reell og bør brukes der den faktisk skaper verdi.",
@@ -529,7 +577,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "KVALITET OG FORSTÅELSE",
-      "title": "Hva betyr egentlig «kunde»?",
+      "title": "«Kunde» betyr ikke nødvendigvis det samme for alle",
       "visual": {
         "scene": "definition",
         "term": "KUNDE",
@@ -543,7 +591,7 @@
           "Fakturamottakeren",
           "Personen som bruker tjenesten"
         ],
-        "takeaway": "Samme ord. Tre logiske perspektiver.",
+        "takeaway": "Felles begreper må avklares før vi sammenligner tall eller spør KI.",
         "figureAssetId": "data-semantic"
       },
       "sourceIds": [],
@@ -557,14 +605,14 @@
       "tone": "strong",
       "type": "visual",
       "cue": "KVALITET OG FORSTÅELSE",
-      "title": "Et overbevisende svar kan fortsatt være feil.",
+      "title": "Et velformulert svar kan bygge på feil premisser",
       "visual": {
         "scene": "contrast",
         "leftTitle": "Ser riktig ut",
         "leftText": "Et raskt, velformulert svar",
         "rightTitle": "Holder mål",
         "rightText": "Riktig premiss, data og tolkning",
-        "bridge": "Forskjellen ligger i forståelsen",
+        "bridge": "Test premisser og datagrunnlag før du handler på svaret.",
         "figureAssetId": "verified-analysis"
       },
       "sourceIds": [],
@@ -578,14 +626,14 @@
       "tone": "light",
       "type": "visual",
       "cue": "FAG OG VERDI",
-      "title": "Vi må unngå to ytterpunkter.",
+      "title": "Verken «bare KI» eller «fiks alt først» er en strategi",
       "visual": {
         "scene": "contrast",
         "leftTitle": "«Bare bruk KI»",
         "leftText": "Raskt svar – uklart grunnlag",
         "rightTitle": "«Fiks alt først»",
         "rightText": "Perfekt plattform – ingen verdi ennå",
-        "bridge": "Behovet avgjør riktig startpunkt",
+        "bridge": "Start med det kunden trenger, og bygg kvalitet underveis.",
         "figureAssetId": "value-compass"
       },
       "sourceIds": [],
@@ -599,7 +647,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "FAG OG VERDI",
-      "title": "Skap verdi underveis.",
+      "title": "Start med ett behov, test og bygg videre",
       "visual": {
         "scene": "road",
         "steps": [
@@ -613,6 +661,12 @@
           "value-compass",
           "verified-analysis",
           "delivery-loop"
+        ],
+        "layout": "steps",
+        "stepDetails": [
+          "Start der verdien kan vises",
+          "Avklar kvalitet og risiko for formålet",
+          "Bruk resultatet til å velge neste steg"
         ]
       },
       "sourceIds": [],
@@ -626,13 +680,13 @@
       "tone": "light",
       "type": "visual",
       "cue": "KI OG KAPASITET",
-      "title": "KI kan også forbedre datagrunnlaget.",
+      "title": "KI kan også hjelpe oss å forbedre dataene",
       "visual": {
         "scene": "loop",
         "left": "Data og kontekst",
         "right": "Analyse og KI",
         "center": "LÆRING",
-        "foot": "Dokumenter · test · forbedre",
+        "foot": "KI kan støtte dokumentasjon og kvalitetssjekk – menneskene verifiserer.",
         "figureAssetId": "delivery-loop"
       },
       "sourceIds": [],
@@ -646,7 +700,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "FAG OG VERDI",
-      "title": "Innsikt er mer enn én teknologi.",
+      "title": "Data, analyse og KI skaper mer verdi i sammenheng",
       "visual": {
         "scene": "domains",
         "items": [
@@ -659,7 +713,7 @@
           "Mønstre, mål og beslutninger",
           "Nye måter å utforske og handle på"
         ],
-        "footer": "Sammenhengene betyr mer enn verktøynavnene.",
+        "footer": "Sterkest når vi forstår hvordan de henger sammen.",
         "figureAssetId": "data-semantic",
         "itemAssetIds": [
           "core-storage",
@@ -678,7 +732,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "KVALITET OG FORSTÅELSE",
-      "title": "Kontroll må passe til risikoen.",
+      "title": "Kontrollen må stå i forhold til konsekvensen av feil",
       "visual": {
         "scene": "domains",
         "items": [
@@ -691,7 +745,7 @@
           "Data, tilgang og konsekvenser",
           "Test, lær og ta ansvar"
         ],
-        "footer": "Styring er kontinuerlig – ikke en engangsport.",
+        "footer": "Jo større konsekvens av feil, desto mer kontroll trengs.",
         "figureAssetId": "governance-shield",
         "itemAssetIds": [
           "customer-dialogue",
@@ -713,25 +767,27 @@
       "tone": "light",
       "type": "visual",
       "cue": "KUNDEDIALOG",
-      "title": "Lytt etter behov – ikke teknologinavn.",
+      "title": "Kundens frustrasjon sier mer enn teknologinavnet",
       "visual": {
         "scene": "list",
         "items": [
-          "Tallene stemmer ikke",
-          "Vi bruker for lang tid",
-          "Vi ønsker å bruke KI"
+          "«Tallene stemmer ikke»",
+          "«Vi bruker for lang tid»",
+          "«Vi ønsker å bruke KI»"
         ],
         "detail": [
-          "Ulike definisjoner eller kvalitet?",
-          "Manuelle steg eller flaskehalser?",
-          "Hvilken verdi skal skapes?"
+          "Hva er uenigheten?",
+          "Hvor stopper arbeidet opp?",
+          "Hvilken oppgave skal bli bedre?"
         ],
         "figureAssetId": "market-signal",
         "itemAssetIds": [
           "verified-analysis",
           "delivery-loop",
           "ai-agent"
-        ]
+        ],
+        "layout": "voices",
+        "takeaway": "Bak hver formulering ligger et behov vi må undersøke."
       },
       "sourceIds": [],
       "speakerBase": "Et kundesignal høres sjelden ut som en bestilling på en bestemt dataplattform eller analysemetode. Det kan være frustrasjon over rapportering, tungvinte prosesser eller ønske om å utnytte KI. Oppgaven vår er å forstå hva som faktisk skjer og hvilke mulige konsekvenser det har, ikke å bestemme løsning før vi har undersøkt.",
@@ -744,25 +800,27 @@
       "tone": "strong",
       "type": "visual",
       "cue": "KUNDEDIALOG",
-      "title": "Tre spørsmål åpner riktig samtale.",
+      "title": "Tre spørsmål gir et bedre første kundemøte",
       "visual": {
         "scene": "list",
         "items": [
-          "Hva vil dere forbedre?",
-          "Hva bygger dere på?",
-          "Hvordan vet vi at det virker?"
+          "Hva skal bli bedre?",
+          "Hva bygger arbeidet på?",
+          "Hvordan måler vi effekt?"
         ],
         "detail": [
-          "Beslutning eller prosess",
-          "Data, eierskap og kontekst",
-          "Effekt, kvalitet og ansvar"
+          "En beslutning eller arbeidsflyt",
+          "Data, eierskap og sammenheng",
+          "Kvalitet og forretningsverdi"
         ],
         "figureAssetId": "customer-dialogue",
         "itemAssetIds": [
           "business-decision",
           "data-semantic",
           "verified-analysis"
-        ]
+        ],
+        "layout": "questions",
+        "takeaway": "Behov → datagrunnlag → hvordan vi ser at det virker."
       },
       "sourceIds": [],
       "speakerBase": "Disse spørsmålene er ikke en universell intervjuguide, men et naturlig utgangspunkt. Spør først hva virksomheten prøver å oppnå, deretter hvilke data og prosesser arbeidet bygger på, og til slutt hva et godt resultat ville være. Målet er å kunne gå videre sammen med kunden og riktig fagkompetanse.",
@@ -775,12 +833,16 @@
       "tone": "light",
       "type": "visual",
       "cue": "KUNDEDIALOG",
-      "title": "Du trenger ikke svaret i første møte.",
+      "title": "Selgeren må forstå behovet – ikke velge teknologien",
       "visual": {
         "scene": "impact",
         "kicker": "DET ER NOK Å ÅPNE DØREN",
         "support": "Forstå signalet. Still neste spørsmål. Koble på fagmiljøet.",
-        "figureAssetId": "customer-dialogue"
+        "figureAssetId": "customer-dialogue",
+        "layout": "bridge",
+        "beforeLabel": "Selgeren avklarer behovet",
+        "afterLabel": "Fagmiljøet vurderer løsningene",
+        "evidenceLine": "Samarbeid før teknologivalg"
       },
       "sourceIds": [],
       "speakerBase": "En selger trenger ikke velge mellom Snowflake, Fabric, KI-agenter og en mer tradisjonell analyse før første møte er over. En god oppfølging begynner med å tydeliggjøre behov og betydning for virksomheten. Da kan riktig kompetanse involveres og et mulig første tiltak defineres sammen med kunden.",
@@ -793,7 +855,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "BRUK AV PORTALEN",
-      "title": "Fra faglig forståelse til neste kundesamtale.",
+      "title": "Portalen gir en vei fra kundesignal til neste steg",
       "visual": {
         "scene": "portal",
         "steps": [
@@ -801,7 +863,7 @@
           "Finn gode spørsmål",
           "Forbered neste steg"
         ],
-        "footer": "Innsikt-portalen hjelper deg videre – uten å velge løsningen for kunden.",
+        "footer": "Finn neste gode spørsmål. Ikke selg teknologien før behovet er forstått.",
         "figureAssetId": "product-map",
         "stepAssetIds": [
           "market-signal",
@@ -820,7 +882,7 @@
       "tone": "light",
       "type": "architecture",
       "cue": "DATAARKITEKTUR",
-      "title": "Konseptuell dataplattform",
+      "title": "Dataplattformen binder kilder og bruk sammen",
       "profileId": "conceptual",
       "topic": "Dataarkitektur",
       "keywords": [
@@ -843,7 +905,7 @@
       "tone": "light",
       "type": "architecture",
       "cue": "DATAARKITEKTUR",
-      "title": "Typisk moderne dataarkitektur",
+      "title": "Moderne dataflyt støtter batch, strømmer og KI",
       "profileId": "modern",
       "topic": "Dataarkitektur",
       "keywords": [
@@ -866,7 +928,7 @@
       "tone": "light",
       "type": "architecture",
       "cue": "DATAARKITEKTUR",
-      "title": "KI på et styrt datagrunnlag",
+      "title": "KI og BI trenger forståelige og tilgjengelige data",
       "profileId": "ai-on-data",
       "topic": "Dataarkitektur",
       "keywords": [
@@ -889,7 +951,7 @@
       "tone": "light",
       "type": "architecture",
       "cue": "DATAARKITEKTUR",
-      "title": "Snowflake + dbt: en mulig datastack",
+      "title": "Snowflake deler data til rapporter, apper og KI",
       "profileId": "snowflake",
       "topic": "Dataarkitektur",
       "keywords": [
@@ -914,7 +976,7 @@
       "tone": "light",
       "type": "architecture",
       "cue": "DATAARKITEKTUR",
-      "title": "Microsoft Fabric: integrert plattform",
+      "title": "Fabric samler arbeidsflater rundt OneLake",
       "profileId": "fabric",
       "topic": "Dataarkitektur",
       "keywords": [
@@ -939,7 +1001,7 @@
       "tone": "light",
       "type": "architecture",
       "cue": "DATAARKITEKTUR",
-      "title": "Databricks: data, analyse og KI",
+      "title": "Databricks bruker lakehouse-data til BI og KI",
       "profileId": "databricks",
       "topic": "Dataarkitektur",
       "keywords": [
@@ -963,7 +1025,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "ET NYTT HANDLINGSROM",
-      "title": "Markedet flytter seg raskt – men behovene består",
+      "title": "KI endrer tempoet – behovet for forståelse består",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -982,7 +1044,11 @@
         "scene": "impact",
         "kicker": "ET NYTT HANDLINGSROM",
         "support": "Virksomheter kan gjøre mer med data og KI. Den vanskelige delen er å bruke muligheten riktig.",
-        "figureAssetId": "market-signal"
+        "figureAssetId": "market-signal",
+        "layout": "bridge",
+        "beforeLabel": "Ny KI-kapasitet",
+        "afterLabel": "Samme krav til verdi og forståelse",
+        "evidenceLine": "Endringen ligger i tempoet – ikke i målet."
       }
     },
     {
@@ -991,7 +1057,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "DET VI SER I MARKEDET",
-      "title": "Tre krefter endrer data- og KI-markedet",
+      "title": "Agenter, semantikk og plattformer nærmer seg hverandre",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1017,7 +1083,7 @@
           "Begreper og tilgang blir viktigere",
           "Data, analyse og KI overlapper mer"
         ],
-        "footer": "Retning og behov må verifiseres for hver kunde.",
+        "footer": "Dette er retninger å undersøke, ikke krav til alle kunder.",
         "figureAssetId": "market-signal",
         "itemAssetIds": [
           "ai-agent",
@@ -1032,7 +1098,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "LYTT ETTER SIGNALENE",
-      "title": "Markedsnyheten blir først relevant hos kunden",
+      "title": "En trend blir relevant når den møter et kundebehov",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1050,21 +1116,23 @@
       "visual": {
         "scene": "list",
         "items": [
-          "Resultater tar for lang tid",
-          "Data henger ikke sammen",
-          "KI er vanskelig å bruke trygt"
+          "«Rapportene kommer for sent»",
+          "«Tallene henger ikke sammen»",
+          "«Kan vi stole på KI-svaret?»"
         ],
         "detail": [
-          "Beslutninger, rapportering, prosesser",
-          "Kilder, definisjoner, eierskap",
-          "Tilgang, kontroll, reell nytte"
+          "Tid, arbeidsflyt og beslutninger",
+          "Begreper, kilder og eierskap",
+          "Tilgang, risiko og kontroll"
         ],
         "figureAssetId": "customer-dialogue",
         "itemAssetIds": [
           "delivery-loop",
           "data-semantic",
           "governance-shield"
-        ]
+        ],
+        "layout": "voices",
+        "takeaway": "Markedssignalet er bare nyttig når kunden kjenner seg igjen."
       }
     },
     {
@@ -1073,7 +1141,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "HVA VI SKAL VÆRE GODE PÅ",
-      "title": "Tre faglige prioriteringer som henger sammen",
+      "title": "Innsikt bør prioritere data, analyse og KI i samspill",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1099,7 +1167,7 @@
           "Mål, innsikt og formidling",
           "Konkrete arbeidsflyter og evaluering"
         ],
-        "footer": "Retning og behov må verifiseres for hver kunde.",
+        "footer": "Vi leverer på tvers av disse – med behovet som utgangspunkt.",
         "figureAssetId": "value-compass",
         "itemAssetIds": [
           "core-storage",
@@ -1114,7 +1182,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "RETNING FREMOVER",
-      "title": "Begynn med behovet. Lær. Utvid ved verdi.",
+      "title": "Start avgrenset, mål effekt og bygg videre",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1139,6 +1207,12 @@
           "customer-dialogue",
           "verified-analysis",
           "delivery-loop"
+        ],
+        "layout": "steps",
+        "stepDetails": [
+          "Finn beslutningen som skal bli bedre",
+          "Test med dataene som trengs nå",
+          "Undersøk effekt før større investeringer"
         ]
       }
     }

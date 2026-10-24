@@ -275,3 +275,57 @@
 .v3-domain-icon{width:7.7cqw;height:6.5cqw;object-fit:contain;align-self:flex-start;padding:1cqw;background:#f7faf9;border-radius:1cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 28%,transparent)}
 .v3-portal-icon{width:11cqw;height:11cqw;object-fit:contain;padding:2.25cqw;background:#f7faf9;border-radius:2cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 30%,transparent);align-self:center}
 @media(prefers-reduced-motion:reduce){.v3-impact-figure,.v3-list-icon,.v3-road-icon,.v3-domain-icon,.v3-portal-icon{transition:none}}
+
+
+/* Narrative v2: the visual arrangement follows what each slide explains.
+   All text is data-owned; all illustrations use central asset IDs. */
+.story-scene.v4-bridge,.story-scene.v4-list,.story-scene.v4-road{padding:4.8% 5.5%;gap:0}
+.v4-bridge-main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,56%) minmax(0,44%);gap:3cqw;align-items:center}
+.v4-bridge-copy{min-width:0}
+.v4-bridge-copy .v2-headline{font:790 4.45cqw/1.10 var(--font-display);letter-spacing:-.048em;max-width:100%;text-wrap:balance;margin:1.3cqw 0 1.7cqw}
+.v4-bridge-intro{color:var(--pres-muted);font:540 1.8cqw/1.35 var(--font-body);max-width:36cqw}
+.v4-bridge-visual{display:flex;min-width:0;flex-direction:column;align-items:stretch;justify-content:center;gap:.45cqw;padding:1.3cqw 0}
+.v4-bridge-card{box-sizing:border-box;border:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent);background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg));border-radius:1cqw;min-height:8.7cqw;padding:1.1cqw 1.8cqw;display:flex;flex-direction:column;justify-content:center;gap:.65cqw}
+.v4-bridge-card small{font:820 1.0cqw/1.15 var(--font-body);color:var(--pres-muted);letter-spacing:.09em}
+.v4-bridge-card strong{font:790 2.25cqw/1.15 var(--font-display);color:var(--pres-fg);letter-spacing:-.02em}
+.v4-bridge-after{border-color:color-mix(in srgb,var(--pres-accent) 52%,transparent);background:color-mix(in srgb,var(--pres-accent) 8%,var(--pres-bg));position:relative;padding-right:7.6cqw}
+.v4-bridge-after strong{max-width:100%}
+.v4-bridge-icon{position:absolute;right:1.2cqw;bottom:1.6cqw;width:5cqw;height:5cqw;border-radius:1cqw;object-fit:contain;background:#f8fbf9;padding:1cqw}
+.v4-bridge-arrow{font:900 2.8cqw/1 var(--font-display);color:var(--pres-accent);height:2.4cqw;text-align:center}
+.v4-bridge-bottom{border-top:1px solid color-mix(in srgb,var(--pres-fg) 20%,transparent);padding-top:1.1cqw;font:670 1.45cqw/1.25 var(--font-body);color:var(--pres-muted);min-height:3.5cqw}
+.v4-list-heading{flex:0 0 auto;padding:1.1cqw 0 2.7cqw;max-width:95%}
+.v4-list-heading .v2-headline{font:820 4.6cqw/1.12 var(--font-display);letter-spacing:-.045em;text-wrap:balance}
+.v4-list-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.55cqw;flex:1;min-height:0;padding:0;margin:0}
+.v4-list-card{box-sizing:border-box;display:flex;flex-direction:column;min-width:0;padding:1.9cqw 1.9cqw 2.2cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 13%,transparent);border-top:3px solid var(--pres-accent);border-radius:.9cqw;background:color-mix(in srgb,var(--pres-accent) 5%,var(--pres-bg))}
+.v4-list-card-top{display:flex;align-items:center;justify-content:space-between;min-height:5.6cqw;margin-bottom:1cqw}
+.v4-list-index{font:800 1.28cqw var(--font-body);letter-spacing:.05em;color:var(--pres-accent)}
+.v4-list-icon{width:5.8cqw;height:5.8cqw;box-sizing:border-box;padding:.95cqw;object-fit:contain;background:#f7faf9;border-radius:1cqw}
+.v4-list-card h3{font:790 2.6cqw/1.14 var(--font-display);color:var(--pres-fg);letter-spacing:-.035em;overflow-wrap:break-word;text-wrap:balance;margin:0 0 1cqw}
+.v4-list-card p{font:560 1.65cqw/1.34 var(--font-body);color:var(--pres-muted);margin:0}
+.v4-list-takeaway{display:flex;align-items:center;gap:1cqw;padding:1.3cqw 0 0;margin:0;min-height:5cqw;font:700 1.62cqw/1.2 var(--font-body);color:var(--pres-fg)}
+.v4-list-takeaway span{color:var(--pres-accent);font-size:2.2cqw}
+.v4-list--voices .v4-list-card{border-top-color:color-mix(in srgb,var(--pres-warning) 38%,var(--pres-accent));background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg))}
+.v4-list--voices .v4-list-card h3::before{content:'“';color:var(--pres-accent);font-size:3.3cqw;line-height:.7;display:block;margin-bottom:.6cqw}
+.v4-list--questions .v4-list-card{background:color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg))}
+.v4-list--questions .v4-list-card h3{font-size:2.75cqw}
+.v4-list--path .v4-list-card:not(:last-child){position:relative}
+.v4-list--path .v4-list-card:not(:last-child)::after{content:'→';position:absolute;right:-1.52cqw;top:44%;font:900 2.1cqw var(--font-display);color:var(--pres-accent);z-index:2}
+.v4-road-head{flex:0 0 auto;padding:1.25cqw 0 2.8cqw;max-width:90%}
+.v4-road-head .v2-headline{font:810 4.65cqw/1.1 var(--font-display);letter-spacing:-.045em;text-wrap:balance}
+.v4-road-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2cqw;list-style:none;margin:0;padding:0;flex:1;min-height:0}
+.v4-road-card{border-radius:1cqw;box-sizing:border-box;background:color-mix(in srgb,var(--pres-accent) 5%,var(--pres-bg));border:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent);min-width:0;display:flex;flex-direction:column;padding:1.5cqw 1.8cqw 1.9cqw;gap:1cqw;position:relative}
+.v4-road-card:not(:last-child)::after{content:'→';position:absolute;right:-2.1cqw;top:48%;z-index:2;color:var(--pres-accent);font:900 3cqw var(--font-display)}
+.v4-road-card-top{display:flex;align-items:center;justify-content:space-between;min-height:5.8cqw}
+.v4-road-no{font:800 2.2cqw/1 var(--font-display);color:var(--pres-accent)}
+.v4-road-icon{box-sizing:border-box;width:5.8cqw;height:5.8cqw;object-fit:contain;padding:.95cqw;background:#f7faf9;border-radius:1cqw}
+.v4-road-card strong{font:780 2.45cqw/1.12 var(--font-display);color:var(--pres-fg);letter-spacing:-.03em;text-wrap:balance}
+.v4-road-card p{font:550 1.58cqw/1.32 var(--font-body);color:var(--pres-muted);margin:0}
+.v4-road-footer{border-top:1px solid color-mix(in srgb,var(--pres-fg) 22%,transparent);margin:1.6cqw 0 0;padding-top:1cqw;min-height:4.4cqw;font:680 1.55cqw var(--font-body);color:var(--pres-muted)}
+/* Avoid tiny details on the established scene families. */
+.scene-v2-domains .v2-domain p{font-size:1.75cqw;line-height:1.3}
+.scene-v2-domains .v2-domain h3{font-size:2.56cqw}
+.v2-domain{padding:2.3cqw;gap:1.6cqw}
+.scene-v2-contrast .v2-contrast-side p{font-size:1.85cqw}
+.scene-v2-contrast .v2-contrast-side h3{font-size:3.45cqw}
+.scene-v2-definition .v2-def-title{margin:2.5% 0 0;font-size:4.35cqw}
+.v2-def-lens strong{font-size:2.12cqw}
