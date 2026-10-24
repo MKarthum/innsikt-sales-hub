@@ -6,6 +6,7 @@ const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
 const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8')).items.length;
 const expectedSlideCount=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.length;
+const canonicalSlideTitles=new Map(JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.map(x=>[x.id,x.title]));
 const expectedDeckCount=Object.keys(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks).length;
 const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','lysbilder','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
@@ -33,14 +34,14 @@ try {
    assert.ok(!/\$\{[^{}]+\}/.test(html),label+': rå uttrykk '+route);
   }
   // Lysbildedetaljer må vise klikkbart bibliotek og navn på objektet.
-  for(const [slideId,slideTitle] of [['portal-opening','Innsikt hjelper oss fra usikkerhet til en bedre kundesamtale'],['architecture-snowflake','Snowflake + dbt: en mulig datastack']]){
+  for(const slideId of ['portal-opening','architecture-snowflake']){
    await page.evaluate(id=>{location.hash='#lysbilder/'+id},slideId);
    await page.waitForFunction(id=>location.hash==='#lysbilder/'+id&&document.querySelector('.breadcrumb-trail a[href="#lysbilder"]'),slideId);
    const parent=page.locator('.breadcrumb-trail a[href="#lysbilder"]');
    assert.equal(await parent.count(),1,label+': klikkbart bibliotek fra '+slideId);
    assert.equal((await parent.innerText()).trim(),'Lysbildebibliotek',label+': riktig foreldretittel');
    assert.equal(await page.locator('.breadcrumb-trail [aria-current="page"]').count(),1,label+': ett gjeldende nivå');
-   assert.equal((await page.locator('.breadcrumb-trail [aria-current="page"]').innerText()).trim(),slideTitle,label+': lysbildenavn i sti');
+   assert.equal((await page.locator('.breadcrumb-trail [aria-current="page"]').innerText()).trim(),canonicalSlideTitles.get(slideId),label+': lysbildenavn i sti');
    assert.equal(await page.locator('#crumb').getAttribute('aria-current'),null,label+': beholder er ikke gjeldende side');
    await parent.click();
    await page.waitForFunction(()=>location.hash==='#lysbilder'&&document.querySelector('.slide-library-card'));
@@ -126,7 +127,7 @@ try {
   assert.notEqual(tonePair.strong.bg,tonePair.light.bg,label+': tema endrer bakgrunn');
   assert.notEqual(tonePair.strong.fg,tonePair.light.fg,label+': tema endrer tilhørende tekstfarge');
   await page.locator('[data-slide-open][data-deck-open="portal"]').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt hjelper oss fra usikkerhet'),label+': åpne bestemt lysbilde fra biblioteket');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-opening')),label+': åpne bestemt lysbilde fra biblioteket');
   await page.locator('#speaker-toggle').check();
   assert.ok((await page.locator('#slide-speaker-notes').innerText()).includes('Overgang:'),label+': storiespesifikke notater følger lysbildet');
   await page.keyboard.press('Escape');
@@ -143,13 +144,13 @@ try {
   // Hovedfortellingen skal følge de samme oppgavene som den nye forsiden.
   await page.locator('[data-deck="portal"]').click();
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Tre veier inn i Innsikt'),label+': oppgaver kommer før fagkatalog');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-three-ways')),label+': oppgaver kommer før fagkatalog');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('En møtebrief kan være første nyttige resultat'),label+': klar første nytte');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-meeting-brief')),label+': klar første nytte');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Fra kundesignal til gode spørsmål'),label+': kundebehov er neste alternativ');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-customer-signal')),label+': kundebehov er neste alternativ');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Fagstoff når du trenger det'),label+': fagdybde kommer når nødvendig');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-learning')),label+': fagdybde kommer når nødvendig');
   // Eksempelet skal gjenbruke et kanonisk forretningsbehov, ikke være en kundereferanse.
   await page.locator('[data-deck="sales"]').click();
   const exampleOpening=await page.locator('#slide-body').innerText();
@@ -159,7 +160,7 @@ try {
   assert.ok(exampleContent.includes('månedsavslutning')&&exampleContent.includes('Vi bruker flere dager'),label+': kanonisk forretningsbehov i eksempel');
   await page.locator('#slide-next').click();
   const explanation=await page.locator('#slide-body').innerText();
-  assert.ok(explanation.includes('Et symptom kan ha flere årsaker'),label+': årsaker vurderes etter symptomet');
+  assert.ok(explanation.includes(canonicalSlideTitles.get('sales-hypotheses')),label+': årsaker vurderes etter symptomet');
   // Eksempelløpet må peke til en faktisk tilgjengelig, kanonisk prompt.
   await page.locator('#slide-next').click();
   await page.locator('#slide-next').click();
@@ -278,7 +279,7 @@ try {
   const download=await downloadPromise;
   assert.ok(download.suggestedFilename().includes(expectedVersion)&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
-  assert.ok(exported.includes('Innsikt hjelper oss fra usikkerhet')&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
+  assert.ok(exported.includes(canonicalSlideTitles.get('portal-opening'))&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,7,'alle portal-slides er eksportert');
   const popupPromise=context.waitForEvent('page');
   await page.locator('#deck-print').click();

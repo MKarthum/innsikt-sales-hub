@@ -67,6 +67,15 @@ function render(slide,esc,position={}){
  const block=(name,inside)=>'<div class="story-scene scene-v2 scene-v2-'+name+'">'+inside+'</div>';
  const title='<h2 class="v2-headline">'+escs(slide.title)+'</h2>';
  if(kind==='impact'){
+  if(v.layout==='bridge')return block('impact v4-bridge',top
+    +'<div class="v4-bridge-main"><div class="v4-bridge-copy">'+(v.kicker&&v.kicker!==slide.cue?'<span class="v2-impact-kicker">'+escs(v.kicker)+'</span>':'')
+    +title+'<p class="v4-bridge-intro">'+escs(v.support||'')+'</p></div>'
+    +'<div class="v4-bridge-visual">'
+    +'<div class="v4-bridge-card v4-bridge-before"><small>'+escs(v.beforeCue||'UTGANGSPUNKT')+'</small><strong>'+escs(v.beforeLabel)+'</strong></div>'
+    +'<div class="v4-bridge-arrow" aria-hidden="true">↓</div>'
+    +'<div class="v4-bridge-card v4-bridge-after"><small>'+escs(v.afterCue||'NESTE STEG')+'</small>'
+    +assetImage(v.figureAssetId,'v4-bridge-icon')+'<strong>'+escs(v.afterLabel)+'</strong></div></div></div>'
+    +'<p class="v4-bridge-bottom">'+escs(v.evidenceLine||'')+'</p>');
   return block('impact',top+'<div class="v2-impact-layout"><div class="v2-impact-main">'
     +'<span class="v2-impact-kicker">'+escs(v.kicker||'')+'</span>'+title
     +'<p class="v2-impact-sub">'+escs(v.support||slide.body||'')+'</p></div>'
@@ -74,6 +83,16 @@ function render(slide,esc,position={}){
     +'<div class="v2-footline"><b></b><span>INNSIKT</span></div>');
  }
  if(kind==='list'){
+  if(['cards','voices','questions','path'].includes(v.layout)){
+   const items=(v.items||[]).map((item,i)=>'<li class="v4-list-card">'
+    +'<div class="v4-list-card-top"><span class="v4-list-index">0'+(i+1)+'</span>'
+    +assetImage((v.itemAssetIds||[])[i],'v4-list-icon')+'</div>'
+    +'<h3>'+escs(item)+'</h3><p>'+escs((v.detail||[])[i]||'')+'</p></li>').join('');
+   return block('list v4-list v4-list--'+v.layout,top
+    +'<div class="v4-list-heading">'+title+'</div>'
+    +'<ol class="v4-list-grid">'+items+'</ol>'
+    +'<p class="v4-list-takeaway"><span aria-hidden="true">↳</span> '+escs(slide.body||v.takeaway||'')+'</p>');
+  }
   const items=(v.items||[]).map((item,i)=>'<li class="v2-list-row"><span class="v2-list-no">0'+(i+1)+'</span>'
    +'<div class="v2-list-copy">'+assetImage((v.itemAssetIds||[])[i],'v3-list-icon')+'<div class="v3-list-text"><strong>'+escs(item)+'</strong><small>'+escs((v.detail||[])[i]||'')+'</small></div></div>'
    +'<span class="v2-list-arrow" aria-hidden="true">↗</span></li>').join('');
@@ -83,6 +102,14 @@ function render(slide,esc,position={}){
  }
  if(kind==='road'){
   const steps=v.steps||[];
+  if(v.layout==='steps')return block('road v4-road',top
+   +'<div class="v4-road-head">'+title+'</div>'
+   +'<ol class="v4-road-grid">'+steps.map((name,i)=>'<li class="v4-road-card">'
+    +'<div class="v4-road-card-top"><span class="v4-road-no">0'+(i+1)+'</span>'
+    +assetImage((v.stepAssetIds||[])[i],'v4-road-icon')+'</div>'
+    +'<strong>'+escs(name)+'</strong>'
+    +'<p>'+escs((v.stepDetails||[])[i]||'')+'</p></li>').join('')+'</ol>'
+   +'<p class="v4-road-footer">'+escs(v.hint||'')+'</p>');
   return block('road',top+'<div class="v2-road-head">'+title+'</div>'
    +'<div class="v2-road-line" aria-hidden="true"></div>'
    +'<div class="v2-road-stages">'+steps.map((name,i)=>

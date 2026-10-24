@@ -5,7 +5,7 @@
       "id": "conceptual",
       "kind": "conceptual",
       "eyebrow": "TEKNOLOGINØYTRAL MODELL",
-      "label": "Fra kilder til bruk",
+      "label": "Dataplattformen binder kilder og bruk sammen",
       "intro": "En dataplattform kobler sammen kilder, bearbeiding og anvendelse.",
       "sources": [
         {
@@ -83,7 +83,7 @@
       "id": "modern",
       "kind": "conceptual",
       "eyebrow": "REFERANSEMØNSTER",
-      "label": "En moderne, modulær arkitektur",
+      "label": "Moderne dataflyt støtter batch, strømmer og KI",
       "intro": "Eksempel på en typisk flyt. Omfang og verktøy varierer med behovet.",
       "sources": [
         {
@@ -161,7 +161,7 @@
       "id": "ai-on-data",
       "kind": "conceptual",
       "eyebrow": "DATA + KI",
-      "label": "KI trenger forståelig og tilgjengelig data",
+      "label": "KI og BI trenger forståelige og tilgjengelige data",
       "intro": "Rapportering og KI kan bygge på det samme styrte datagrunnlaget.",
       "sources": [
         {
@@ -240,7 +240,7 @@
       "kind": "vendor",
       "vendorId": "snowflake",
       "eyebrow": "EKSEMPEL · SNOWFLAKE",
-      "label": "Snowflake: delte data, flere bruksflater",
+      "label": "Snowflake deler data til rapporter, apper og KI",
       "intro": "Eksempel: kunde- og transaksjonsdata til styringsinformasjon, intern app og KI.",
       "sources": [
         {
@@ -417,7 +417,7 @@
       "kind": "vendor",
       "vendorId": "fabric",
       "eyebrow": "EKSEMPEL · MICROSOFT FABRIC",
-      "label": "Fabric: flere arbeidsflater over OneLake",
+      "label": "Fabric samler arbeidsflater rundt OneLake",
       "intro": "Eksempel: transaksjoner og sanntidshendelser gir ulike veier til analyse og handling.",
       "sources": [
         {
@@ -584,7 +584,7 @@
       "kind": "vendor",
       "vendorId": "databricks",
       "eyebrow": "EKSEMPEL · DATABRICKS",
-      "label": "Databricks: lakehouse med to konsumløp",
+      "label": "Databricks bruker lakehouse-data til BI og KI",
       "intro": "Eksempel: batch og hendelser foredles før BI og applikasjoner / modeller bruker dataene.",
       "sources": [
         {

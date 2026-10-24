@@ -22,7 +22,7 @@ try{
   const stage=p.locator('.slide-library-detail-stage');
   const scene=stage.locator('.story-scene');
   assert.equal(await scene.count(),1,'Custom scene for '+s.id);
-  const audit=await stage.evaluate(node=>{
+  const inspect=async()=>stage.evaluate(node=>{
    const root=node.querySelector('.story-scene'),r=root.getBoundingClientRect();
    const matches=[...root.querySelectorAll('h2,h3,p,small,strong')].filter(x=>x.textContent?.trim());
    const outside=[],clip=[];
@@ -33,10 +33,20 @@ try{
    }
    return {outside,clip,scene:{width:r.width,height:r.height},title:matches[0]?.textContent};
   });
+  const audit=await inspect();
   if(audit.outside.length||audit.clip.length)problems.push(s.id+' layout '+JSON.stringify(audit));
   const token=(s.visual?.scene||'visual').replace(/[^a-z]/g,'-');
   const filename=out+'/'+s.id+'.png';
   await stage.screenshot({path:filename});
+  // Both palettes are inspected for every single slide, not just scene demos.
+  await p.locator('#library-tone-mode').selectOption('strong');
+  assert.equal(await stage.locator('.present-frame').getAttribute('data-tone'),'strong');
+  const darkAudit=await inspect();
+  if(darkAudit.outside.length||darkAudit.clip.length)problems.push(s.id+' dark layout '+JSON.stringify(darkAudit));
+  if(['portal-opening','portal-three-ways','sales-questions','ai-thousand-analysts','architecture-snowflake','market-three-forces'].includes(s.id))
+   await stage.screenshot({path:out+'/'+s.id+'-dark.png'});
+  await p.locator('#library-tone-mode').selectOption('light');
+
   typeSeen.add(token);
  }
  await p.setViewportSize({width:390,height:844});
