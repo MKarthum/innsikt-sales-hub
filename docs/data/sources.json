@@ -601,5 +601,26 @@
     "url": "https://docs.databricks.com/aws/en/data-governance/unity-catalog/",
     "type": "official documentation",
     "checked": "2026-10-24"
+  },
+  "gartner-2026-trends": {
+    "title": "Gartner Identifies the Top Trends for Data and Analytics",
+    "publisher": "Gartner",
+    "url": "https://www.gartner.com/en/newsroom/press-releases/2026-06-16-gartner-identifies-the-top-trends-for-data-and-analytics",
+    "type": "datert faglig trendanalyse",
+    "checked": "2026-10-24"
+  },
+  "microsoft-wti-2026": {
+    "title": "2026 Work Trend Index: Agents, human agency and opportunity",
+    "publisher": "Microsoft WorkLab",
+    "url": "https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization",
+    "type": "leverandørundersøkelse",
+    "checked": "2026-10-24"
+  },
+  "deloitte-ai-2026": {
+    "title": "The State of AI in the Enterprise – 2026",
+    "publisher": "Deloitte",
+    "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html",
+    "type": "konsulentrapport / undersøkelse",
+    "checked": "2026-10-24"
   }
 }
