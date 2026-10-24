@@ -51,6 +51,7 @@ try{
  await page.locator('.slide-library-detail-stage .story-scene').waitFor();
  await page.locator('.slide-library-detail-stage').screenshot({path:output+'/slide-detail.png'});
  await page.setViewportSize({width:390,height:844});
+ await page.waitForTimeout(350); // Let sidebar transition settle before capture.
  await page.evaluate(()=>location.hash='#lysbilder');
  await page.locator('.slide-library-card').first().waitFor();
  await page.screenshot({path:output+'/library-mobile.png',fullPage:false});
