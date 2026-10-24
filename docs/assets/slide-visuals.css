@@ -105,3 +105,6 @@
 #present-modal .present-rich .story-scene .scene-duality-intro h2,.export-slide .story-scene .scene-duality-intro h2{font-size:4.45cqw}
 #present-modal .present-rich .story-scene .scene-system-story h2,.export-slide .story-scene .scene-system-story h2{font-size:5.15cqw}
 #present-modal .present-rich .story-scene .scene-duality-outcomes h3,.export-slide .story-scene .scene-duality-outcomes h3{font-size:3cqw}
+
+/* Overstyr portalens generelle ikonregel (svg[aria-hidden]) kun for sceneillustrasjoner. */
+.story-scene svg.visual-people,.story-scene svg.visual-branch,.story-scene svg.visual-orbits{display:block;width:100%;height:100%}
