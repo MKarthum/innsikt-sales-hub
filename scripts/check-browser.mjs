@@ -95,7 +95,7 @@ try {
   // Bibliotek: enhetlig ID, detaljvisning, kildepolicy og direkte åpning.
   await page.evaluate(()=>{location.hash='#lysbilder'});
   await page.locator('.slide-library-card').first().waitFor();
-  assert.equal(await page.locator('.slide-library-card').count(),18,label+': 18 selvstendige lysbilder');
+  assert.equal(await page.locator('.slide-library-card').count(),30,label+': 30 selvstendige lysbilder');
   await page.locator('.slide-library-card[href="#lysbilder/portal-opening"]').click();
   await page.locator('.slide-library-detail-stage .present-frame').waitFor();
   assert.equal(await page.locator('.slide-library-detail-stage .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
@@ -114,8 +114,8 @@ try {
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#present-modal').count(),0,label+': tilbake til bibliotek etter Presenter');
   await page.locator('#present-button').click();
-  assert.equal(await page.locator('[data-deck]').count(),3,'Tre selvstendige Presenter-løp');
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt hjelper oss fra usikkerhet'),label+': løsningen presenteres først');
+  assert.equal(await page.locator('[data-deck]').count(),7,'Syv komponerbare Presenter-løp');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Tenk om virksomheten din fikk'),label+': Hvorfor Innsikt starter som hovedfortelling');
   for(const deck of ['portal','sales']) {
    await page.locator('[data-deck="'+deck+'"]').click();
    assert.ok((await page.locator('#slide-body').innerText()).length>15,'Presenter '+deck);
@@ -125,13 +125,13 @@ try {
   // Hovedfortellingen skal følge de samme oppgavene som den nye forsiden.
   await page.locator('[data-deck="portal"]').click();
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Tre vanlige oppgaver'),label+': oppgaver kommer før fagkatalog');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Tre veier inn i Innsikt'),label+': oppgaver kommer før fagkatalog');
   await page.locator('#slide-next').click();
   assert.ok((await page.locator('#slide-body').innerText()).includes('En møtebrief kan være første nyttige resultat'),label+': klar første nytte');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Et kundesignal blir nyttig'),label+': kundebehov er neste alternativ');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Fra kundesignal til gode spørsmål'),label+': kundebehov er neste alternativ');
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes('Fagstoffet er der'),label+': fagdybde kommer når nødvendig');
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Fagstoff når du trenger det'),label+': fagdybde kommer når nødvendig');
   // Eksempelet skal gjenbruke et kanonisk forretningsbehov, ikke være en kundereferanse.
   await page.locator('[data-deck="sales"]').click();
   const exampleOpening=await page.locator('#slide-body').innerText();
@@ -141,7 +141,7 @@ try {
   assert.ok(exampleContent.includes('månedsavslutning')&&exampleContent.includes('Vi bruker flere dager'),label+': kanonisk forretningsbehov i eksempel');
   await page.locator('#slide-next').click();
   const explanation=await page.locator('#slide-body').innerText();
-  assert.ok(explanation.includes('Symptomet kan ha flere ulike årsaker'),label+': årsaker vurderes etter symptomet');
+  assert.ok(explanation.includes('Et symptom kan ha flere årsaker'),label+': årsaker vurderes etter symptomet');
   // Eksempelløpet må peke til en faktisk tilgjengelig, kanonisk prompt.
   await page.locator('#slide-next').click();
   await page.locator('#slide-next').click();

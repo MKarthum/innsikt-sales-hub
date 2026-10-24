@@ -73,7 +73,7 @@ for(const s of slides.items){
  if(!['shared','story'].includes(s.scope))fail('Ugyldig lysbildescope: '+s.id);
  if(s.scope==='story'&&!pages.presentationDecks[s.storyId])fail('Ukjent lysbildeeier: '+s.id);
  if(!str(s.title)||!str(s.cue)||!['intro','diagram','metric','case','sector-case','bullets','takeaway','prompt','visual'].includes(s.type))fail('Ugyldig lysbilde: '+s.id);
- if(s.type==='visual'&&(!s.visual||!['analyst-grid','two-directions','value-system'].includes(s.visual.scene)))fail('Ukjent visuell scene: '+s.id);
+ if(s.type==='visual'&&(!s.visual||!['analyst-grid','two-directions','value-system','impact','list','road','business-case','definition','contrast','loop','domains','portal'].includes(s.visual.scene)))fail('Ukjent visuell scene: '+s.id);
  if(!s.topic)fail('Lysbilde mangler tema: '+s.id);
  if(s.diagram&&!ds.has(s.diagram))fail('Ukjent diagram i lysbilde '+s.id);
  if(s.business&&!bs.has(s.business))fail('Ukjent kundesignal i lysbilde '+s.id);
@@ -100,7 +100,7 @@ for(const [key,d] of Object.entries(pages.presentationDecks||{})){
   if(x?.scope==='story'&&x.storyId!==key)fail('Historiespesifikt lysbilde gjenbrukt: '+key+'/'+x.id);
   if(!str(placement.beat)||!beatIds.includes(placement.beat)||!['tell','debrief'].includes(placement.delivery))fail('Ugyldig plassering: '+key+'/'+placement.slideId);
   const at=beatIds.indexOf(placement.beat);if(at<prev)fail('Feil dramaturgisk rekkefølge: '+key);prev=at;
-  if(!str(placement.note)||placement.note.length<300)fail('Mangler historiespesifikke notater: '+key+'/'+placement.slideId);
+  if(!str(placement.note)||placement.note.length<110||(placement.note.length+(x?.speakerBase?.length||0)<300))fail('Mangler sammensatte foredragsnotater: '+key+'/'+placement.slideId);
   if(placement!==d.slides.at(-1)&&!placement.note.includes('Overgang:'))fail('Mangler overgang: '+key+'/'+placement.slideId);
  }
 }

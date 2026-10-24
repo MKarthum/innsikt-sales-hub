@@ -26,6 +26,7 @@ function render(data){
  for(const name of ['content','learning','prompts','horizon'])vm.runInContext(file('docs/assets/'+name+'.js'),x,{filename:name+'.js',timeout:3000});
  x.__fixture=x.window.InnsiktContent.materialize(data);
  vm.runInContext(file('docs/assets/slide-model.js'),x,{filename:'slide-model.js',timeout:3000});
+ vm.runInContext(file('docs/assets/slide-visuals.js'),x,{filename:'slide-visuals.js',timeout:3000});
 vm.runInContext(injected,x,{filename:'site.js',timeout:3000});
  return vm.runInContext('__views()',x,{timeout:3000});
 }

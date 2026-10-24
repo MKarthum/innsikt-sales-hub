@@ -289,7 +289,7 @@ function slideLibraryPage(id){
 }
 function presentationSlides(){return window.InnsiktSlides.resolve(D.slides,D.pages.presentationDecks[selectedDeck],selectedDeck)}
 function slideMarkup(s,index,deckId,notes=false){
- if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{index,total:D.pages.presentationDecks[deckId].slides.length});
+ if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{index,total:D.pages.presentationDecks[deckId].slides.length,businessSignals:D.businessSignals});
  const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
  let v='<div class="slide-eyebrow">'+esc(s.cue||deck.label.toUpperCase())+' · '+(index+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
  if(s.type==='metric'){
@@ -423,7 +423,7 @@ function exportPresentation(mode){
  },mode).then(()=>{if(mode==='html')toast('Presentasjonen er lastet ned som HTML.');})
  .catch(e=>toast('Kunne ikke eksportere: '+e.message));
 }
-function presentation(deckId='portal',initialSlide=0){
+function presentation(deckId='innsikt',initialSlide=0){
  selectedDeck=deckId;slide=Math.max(0,Math.min(initialSlide,presentationSlides().length-1));showSpeakerNotes=false;
  const choices=Object.entries(D.pages.presentationDecks).map(([id,d])=>
   '<button class="deck-option '+(id===selectedDeck?'active':'')+'" type="button" data-deck="'+esc(id)+'" aria-pressed="'+(id===selectedDeck)+'">'+esc(d.label)+'</button>'

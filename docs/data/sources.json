@@ -508,5 +508,21 @@
     "url": "https://csrc.nist.gov/glossary/term/red_teaming",
     "type": "offentlig terminologi",
     "checked": "2026-10-21"
+  },
+  "nist-ai-rmf": {
+    "title": "NIST – Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+    "publisher": "National Institute of Standards and Technology",
+    "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+    "type": "offentlig rammeverk",
+    "published": "2023-01-26",
+    "checked": "2026-10-24"
+  },
+  "oecd-ai-principles": {
+    "title": "OECD AI Principles (updated 2024)",
+    "publisher": "OECD",
+    "url": "https://www.oecd.org/en/topics/ai-principles.html",
+    "type": "internasjonale prinsipper",
+    "published": "2024-05-03",
+    "checked": "2026-10-24"
   }
 }
