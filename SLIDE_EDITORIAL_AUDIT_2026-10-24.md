@@ -6,7 +6,7 @@
 | portal-three-ways | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | portal | Kontroller semantikk, linjebrudd og begge paletter |
 | portal-meeting-brief | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | portal | Kontroller semantikk, linjebrudd og begge paletter |
 | portal-customer-signal | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | portal | Kontroller semantikk, linjebrudd og begge paletter |
-| portal-learning | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | portal | Kontroller semantikk, linjebrudd og begge paletter |
+| portal-learning | Fiktivt selgerspørsmål → ett kanonisk RAG-oppslag → to avklaringsspørsmål; ingen kopierte definisjoner eller dekorative figur-ID-er | portal | Kontroller 16:9, begge paletter, mobil og eksport; ingen kundediagnose |
 | portal-market | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | portal | Kontroller semantikk, linjebrudd og begge paletter |
 | portal-outcome | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | portal | Kontroller semantikk, linjebrudd og begge paletter |
 | sales-opening | Kort hovedpoeng med relevant sentral figur; 1 gjenbrukte figur-ID-er | sales | Kontroller linjebrudd og bildebalanse |

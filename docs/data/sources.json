@@ -636,5 +636,13 @@
     "url": "https://www.nngroup.com/articles/interview-facilitation-mistakes/",
     "type": "faglig metodeartikkel",
     "checked": "2026-10-25"
+  },
+  "ms-rag-overview": {
+    "title": "Retrieval-augmented generation (RAG) in Azure AI Search",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview",
+    "type": "leverandørdokumentasjon",
+    "published": "2026-08-04",
+    "checked": "2026-10-25"
   }
 }

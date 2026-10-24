@@ -66,7 +66,7 @@ function render(slide,esc,position={}){
  const escs=x=>esc(String(x??''));
  const block=(name,inside)=>'<div class="story-scene scene-v2 scene-v2-'+name+'">'+inside+'</div>';
  const title='<h2 class="v2-headline">'+escs(slide.title)+'</h2>';
- const special=window.InnsiktStoryScenes.render(slide,{v,top,title,escs,assetImage,block});
+ const special=window.InnsiktStoryScenes.render(slide,{v,top,title,escs,assetImage,block,diagram:position.diagrams?.find(d=>d.id===v.diagramId)});
  if(special)return special;
  if(kind==='impact'){
   if(v.layout==='bridge')return block('impact v4-bridge',top

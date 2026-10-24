@@ -188,36 +188,26 @@
       "tone": "light",
       "type": "visual",
       "cue": "FAGLIG FORDYPNING VED BEHOV",
-      "title": "Du trenger ikke kunne alt for å stille neste spørsmål",
-      "bullets": [
-        "«Start her» gir en valgfri innføring for nye kolleger.",
-        "«Data og KI i praksis» forklarer sammenhenger og arkitektur.",
-        "Teknologikart og KI-oversikter gir videre fordypning."
+      "title": "Ett fagoppslag gir to bedre spørsmål om KI på dokumenter",
+      "sourceIds": [
+        "ms-rag-overview",
+        "privacy"
       ],
-      "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Dette er en fiktiv selgersituasjon, ikke en kundereferanse. En kunde spør om KI kan finne svar i interne rutiner. Åpne det faktiske oppslaget «Data og KI i praksis» → «KI på dokumenter og fritekst» (#arkitektur/rag). Der ser vi at relevante og oppdaterte dokumenter, søk, kildegrunnlag og tilgang må vurderes. Vi trenger ikke velge en leverandør eller tegne en komplett løsning. Ta med de to spørsmålene som allerede står på oppslagssiden: «Hvilke dokumenter skal være fasit?» og «Hvordan sikrer dere oppdatering og tilgang?» Spørsmålene avklarer forutsetninger, ikke om løsningen vil fungere. Vi vet fortsatt ikke hvilke dokumenter kunden har, hvem som kan se dem, om personopplysninger inngår eller om KI er riktig tiltak. Microsoft-dokumentasjonen beskriver et mulig mønster for kildebaserte svar og tilgangsstyring; Datatilsynet belyser personvern. Ingen av kildene dokumenterer en kundeløsning eller lovet effekt. «Start her» er valgfritt; dette oppslaget kan brukes direkte. Overgang: Marked og trender kan gi kontekst, men heller ikke de erstatter kundens svar.",
       "topic": "Bruk av portalen",
       "keywords": [],
       "visual": {
-        "scene": "list",
-        "items": [
-          "Start her",
-          "Se sammenhengene",
-          "Gå i dybden"
-        ],
-        "detail": [
-          "Kort faglig innføring",
-          "Datagrunnlag, analyse og KI",
-          "Teknologier og metoder ved behov"
-        ],
-        "figureAssetId": "data-semantic",
-        "itemAssetIds": [
-          "product-map",
-          "data-semantic",
-          "core-storage"
-        ],
-        "layout": "cards",
-        "takeaway": "Finn oversikten først; gå i dybden når spørsmålet krever det."
+        "scene": "road",
+        "layout": "knowledge-lookup",
+        "exampleLabel": "FIKTIVT SPØRSMÅL FRA SELGER",
+        "question": "«Kunden vil bruke KI til å finne svar i interne rutiner. Hva bør jeg avklare?»",
+        "lookupLabel": "OPPSLAG I PORTALEN",
+        "lookupSection": "Data og KI i praksis",
+        "diagramId": "rag",
+        "questionsLabel": "TO SPØRSMÅL Å TA MED",
+        "guardrailLabel": "DETTE VET VI IKKE",
+        "guardrail": "Om dokumentene er egnede, tilgangen riktig eller KI er rett tiltak.",
+        "conclusion": "Oppslaget gir spørsmål til kunden – ikke en ferdig arkitektur."
       }
     },
     {
