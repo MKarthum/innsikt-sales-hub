@@ -24,7 +24,7 @@ try{
   }
   // Navigation must work via real click on both devices, not just hash assignment.
   await page.locator('#crumb a[href="#lysbilder"]').click();
-  await page.waitForFunction(()=>location.hash==='#lysbilder');
+  await page.waitForFunction(()=>location.hash==='#lysbilder'&&document.querySelector('#crumb')?.getAttribute('aria-current')==='page');
   assert.equal(await page.locator('#crumb').getAttribute('aria-current'),'page');
   await page.locator('.breadcrumb-project[href="#oversikt"]').click();
   await page.waitForFunction(()=>location.hash==='#oversikt');
