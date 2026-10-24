@@ -24,7 +24,7 @@ Start alltid med `START_HERE.md`. Les siste `main`, og bruk repoet – aldri gam
 - **Lysbilde før dekor:** Ett nytt poeng per bilde. Foretrekk meningsbærende figurer fra visual-assets.json og kildebelagte påstander. Gjenbruk byggeklosser, men tving ikke faglig ulike arkitekturer inn i samme figur.
 - **Kilde og rettighet:** Hvert lysbilde eier egne kilder. Figurens lisens og proveniens ligger sentralt. En leverandørlogo er et varemerke, ikke et fritt bilde.
 - **Delte objekter:** Ved endring av et delt lysbilde må alle brukende historier, notater, begge toner, mobil og eksport testes. Vurder også konsekvensen av felles figurer.
-- **Release-port:** Alle JS-, innholds-, kilde- og rutekontrakter samt Chromium-kontroll av samtlige lysbilder må være grønne før merge. Suppler med faktisk visuell vurdering. Oppdater SLIDE_EDITORIAL_AUDIT_2026-10-24.md ved vesentlig redigering.
+- **Release-port:** Alle JS-, innholds-, kilde- og rutekontrakter samt Chromium-kontroll av samtlige lysbilder må være grønne før merge. Suppler med faktisk visuell vurdering. Oppdater SLIDE_EDITORIAL_AUDIT_2026-10-24.md ved vesentlig redigering. Testrutiner skal lese antall lysbilder/historier fra kanoniske data; ikke hardkode dagens antall som om utvidelser er forbudt.
 
 ## Kontroller
 

@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import {chromium} from 'playwright';
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const out='artifacts/architecture';fs.mkdirSync(out,{recursive:true});
-const list=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.filter(x=>x.type==='architecture');
+const allSlides=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items;
+const list=allSlides.filter(x=>x.type==='architecture');
 const catalog=JSON.parse(fs.readFileSync('docs/data/visual-assets.json','utf8'));
 const errors=[];
 try{
@@ -18,10 +19,10 @@ try{
  await page.screenshot({path:out+'/asset-library.png',fullPage:false});
  await page.evaluate(()=>location.hash='#lysbilder');
  await page.locator('.slide-library-card').first().waitFor();
- assert.equal(await page.locator('.slide-library-card').count(),39);
+ assert.equal(await page.locator('.slide-library-card').count(),allSlides.length);
  assert.equal(await page.locator('#library-tone-mode').inputValue(),'light');
  await page.locator('#library-tone-mode').selectOption('strong');
- assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"strong\"]').count(),39);
+ assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"strong\"]').count(),allSlides.length);
  await page.locator('#library-tone-mode').selectOption('light');
  assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"light\"]').count(),39);
  for(const [i,s] of list.entries()){

@@ -22,7 +22,7 @@ try{
    assert.equal((await page.locator('#crumb [aria-current="page"]').innerText()).trim(),slide.title);
    assert.equal(await page.locator('#crumb').getAttribute('aria-current'),null);
   }
-  for(const [oldId,newId] of Object.entries({'portal-summary':'portal-outcome','sales-summary':'seller-specialist'})){
+  for(const [oldId,newId] of Object.entries(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).retiredSlideRedirects||{})){
    await page.evaluate(id=>location.hash='#lysbilder/'+id,oldId);
    await page.waitForFunction(newId=>location.hash==='#lysbilder/'+newId&&!!document.querySelector('#crumb a[href="#lysbilder"]'),newId);
   }
