@@ -48,3 +48,12 @@
 - Nye markedsslides skiller analytikerkilder fra vår egen tolkning; ingen oppdiktede lønnsomhets- eller effektmål.
 - Flere eksisterende bilder har fått meningsbærende ikoner fra felles assetregister; arkitekturdiagrammene forblir forskjellige.
 - Portalfortellingen må fremføres sammen med en faktisk produktdemo; statiske slides alene er ingen skjermopplæring.
+
+## Oppfølging v0.17.0 – endrede objekter
+
+- `portal-meeting-brief`: Illustrativ portal/prompt → ekstern KI → kontrollert møtebrief; kilden er ikke en faktisk KI-generering.
+- `portal-outcome`: Ett konkret spørsmål avslutter historien i stedet for en generell trestegsprosess.
+- `insight-three-disciplines`: Relevant data → analyse → beslutning, med KI som mulig støtte, ikke en obligatorisk lineær leveranse.
+- `sales-next-step`: Avgrenset fiktiv undersøkelse av ett nøkkeltall med eksplisitt utenfor-scope.
+
+Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md) for 16:9-kontroll, bevisst tilbakeholdenhet og restprioriteringer.

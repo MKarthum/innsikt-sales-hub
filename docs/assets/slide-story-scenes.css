@@ -138,3 +138,67 @@
 .v6-priority-response{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:.35cqw;background:color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg));border-color:color-mix(in srgb,var(--pres-accent) 34%,transparent)}
 .v6-priority-response h3{font:790 2.3cqw/1.12 var(--font-display)}
 .v6-priority-response p{font:550 1.55cqw/1.17 var(--font-body);color:var(--pres-muted);margin:0}
+
+/* v0.17.0 – distinct purpose-led scenes. All colors use the shared presentation roles. */
+.v7-meeting-body{min-height:0;flex:1;display:grid;grid-template-columns:37% 11% 52%;align-items:stretch}
+.v7-meeting-tool,.v7-meeting-paper{min-width:0;display:flex;flex-direction:column;border:1px solid color-mix(in srgb,var(--pres-fg) 19%,transparent);border-radius:.8cqw;overflow:hidden}
+.v7-meeting-tool{background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg))}
+.v7-meeting-toolbar{min-height:4cqw;display:flex;align-items:center;gap:1cqw;padding:0 1.4cqw;border-bottom:1px solid color-mix(in srgb,var(--pres-fg) 17%,transparent);font:750 1.3cqw var(--font-body)}
+.v7-meeting-toolbar>span{font-size:1cqw;color:var(--pres-accent);letter-spacing:.12em}
+.v7-meeting-fields{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:.75cqw;padding:1.35cqw}
+.v7-meeting-fields>div{display:flex;flex-direction:column;gap:.35cqw;padding:.6cqw 1cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 14%,transparent);border-radius:.45cqw;background:var(--pres-bg)}
+.v7-meeting-fields span,.v7-meeting-goal span,.v7-meeting-questions span{font:760 1.12cqw/1.1 var(--font-body);letter-spacing:.04em;color:var(--pres-accent)}
+.v7-meeting-fields strong{font:720 1.67cqw/1.18 var(--font-display)}
+.v7-meeting-transfer{min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1cqw;color:var(--pres-accent);text-align:center}
+.v7-meeting-transfer b{font:850 3.3cqw var(--font-display)}
+.v7-meeting-transfer strong{font:740 1.35cqw/1.17 var(--font-body);max-width:9.8cqw;color:var(--pres-muted)}
+.v7-meeting-paper{background:color-mix(in srgb,var(--pres-accent) 6%,var(--pres-bg));border-color:color-mix(in srgb,var(--pres-accent) 39%,transparent);padding:1.25cqw 1.8cqw;gap:.7cqw;justify-content:center}
+.v7-meeting-paper>h3{font:840 2.8cqw/1.1 var(--font-display);letter-spacing:-.035em}
+.v7-meeting-goal{display:flex;flex-direction:column;gap:.4cqw}
+.v7-meeting-goal strong{font:750 1.83cqw/1.2 var(--font-display)}
+.v7-meeting-questions{display:flex;flex-direction:column;gap:.48cqw;border-top:1px solid color-mix(in srgb,var(--pres-fg) 17%,transparent);padding-top:.7cqw}
+.v7-meeting-questions p{font:720 1.74cqw/1.16 var(--font-display);margin:0;padding-left:1cqw;border-left:.22cqw solid var(--pres-accent);color:var(--pres-fg)}
+.v7-meeting-reviewed{align-self:flex-start;font:740 1.16cqw/1.17 var(--font-body);color:var(--pres-fg);background:color-mix(in srgb,var(--pres-accent) 14%,var(--pres-bg));border-radius:.4cqw;padding:.55cqw .8cqw}
+
+/* Closing scene: one memorable question, not another three-card process. */
+.v7-outcome-focus{flex:1;min-height:0;display:flex;flex-direction:column;gap:1.1cqw;align-items:stretch}
+.v7-outcome-signal{display:flex;align-items:center;gap:2cqw;min-height:4.9cqw;padding:1cqw 1.8cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent);border-radius:.55cqw;background:color-mix(in srgb,var(--pres-fg) 4%,var(--pres-bg))}
+.v7-outcome-signal strong{font:720 2cqw/1.14 var(--font-display)}
+.v7-outcome-arrow{text-align:center;height:1.8cqw;line-height:1.5cqw;font:850 2cqw var(--font-display);color:var(--pres-accent)}
+.v7-outcome-question{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:1cqw;padding:1.2cqw 2.6cqw 1.5cqw;border-left:.6cqw solid var(--pres-accent);border-radius:.5cqw;background:color-mix(in srgb,var(--pres-accent) 11%,var(--pres-bg))}
+.v7-outcome-question blockquote{margin:0;padding:0;border:0;font:830 3.35cqw/1.1 var(--font-display);letter-spacing:-.04em;color:var(--pres-fg);text-wrap:balance}
+.v7-outcome-action{display:flex;gap:1.2cqw;align-items:center;padding:0 1.7cqw;min-height:4.6cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 20%,transparent);border-radius:.55cqw}
+.v7-outcome-action strong{font:700 1.72cqw/1.15 var(--font-display)}
+
+/* Core competency proposition: a decision-producing flow with optional KI support. */
+.v7-capability-case{display:flex;align-items:center;gap:1.8cqw;flex:0 0 auto;padding:.65cqw 1.35cqw;border-left:.35cqw solid var(--pres-accent);background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg));margin-bottom:1.05cqw}
+.v7-capability-case strong{font:740 1.82cqw/1.13 var(--font-display)}
+.v7-capability-path{flex:1;min-height:0;display:grid;grid-template-columns:30% 5% 30% 5% 30%;align-items:stretch}
+.v7-capability-stage{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:.6cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 19%,transparent);border-radius:.8cqw;padding:1.3cqw 1.5cqw;background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg))}
+.v7-capability-stage:last-of-type{background:color-mix(in srgb,var(--pres-accent) 12%,var(--pres-bg));border-color:color-mix(in srgb,var(--pres-accent) 40%,transparent)}
+.v7-capability-icon{display:block;width:4.05cqw;height:4.05cqw;object-fit:contain;background:color-mix(in srgb,var(--pres-accent) 12%,var(--pres-bg));padding:.65cqw;border-radius:.6cqw}
+.v7-capability-stage h3{font:820 2.24cqw/1.1 var(--font-display);letter-spacing:-.035em}
+.v7-capability-stage p{font:540 1.58cqw/1.23 var(--font-body);margin:0;color:var(--pres-muted)}
+.v7-capability-arrow{align-self:center;text-align:center;font:870 2.6cqw var(--font-display);color:var(--pres-accent)}
+.v7-capability-assist{display:flex;align-items:center;gap:1cqw;border:1px dashed color-mix(in srgb,var(--pres-accent) 52%,transparent);border-radius:.65cqw;background:color-mix(in srgb,var(--pres-accent) 6%,var(--pres-bg));padding:.6cqw 1.2cqw;max-width:61%;margin:1cqw 0 0 1.6cqw;position:relative}
+.v7-capability-assist>div{display:flex;flex-direction:column;gap:.25cqw}
+.v7-capability-assist p{font:610 1.53cqw/1.15 var(--font-body);color:var(--pres-fg);margin:0}
+.v7-capability-assist-arrow{font:820 1.85cqw var(--font-display);color:var(--pres-accent)}
+
+/* Scoped discovery: sources → compare meaning → usable finding, with excluded project scope. */
+.v7-discovery-flow{flex:1;min-height:0;display:grid;grid-template-columns:27% 6% 30% 6% 31%;align-items:stretch}
+.v7-discovery-sources,.v7-discovery-check,.v7-discovery-result{min-width:0;border:1px solid color-mix(in srgb,var(--pres-fg) 20%,transparent);border-radius:.75cqw;display:flex;flex-direction:column;justify-content:center;gap:1.05cqw;padding:1.5cqw}
+.v7-discovery-sources{background:color-mix(in srgb,var(--pres-fg) 4%,var(--pres-bg))}
+.v7-discovery-sources strong{padding:.85cqw 1cqw;border-left:.25cqw solid var(--pres-accent);background:var(--pres-bg);font:770 1.96cqw/1.13 var(--font-display)}
+.v7-discovery-check{background:color-mix(in srgb,var(--pres-accent) 8%,var(--pres-bg));border-color:color-mix(in srgb,var(--pres-accent) 34%,transparent)}
+.v7-discovery-check h3,.v7-discovery-result h3{font:820 2.28cqw/1.13 var(--font-display);letter-spacing:-.03em}
+.v7-discovery-check p{font:590 1.56cqw/1.21 var(--font-body);color:var(--pres-muted);margin:0}
+.v7-discovery-result{background:color-mix(in srgb,var(--pres-accent) 13%,var(--pres-bg));border-color:color-mix(in srgb,var(--pres-accent) 40%,transparent)}
+.v7-discovery-arrow{align-self:center;text-align:center;font:870 2.7cqw var(--font-display);color:var(--pres-accent)}
+.v7-discovery-boundary{display:grid;grid-template-columns:1fr 1fr;gap:1.1cqw;margin-top:1cqw;flex:0 0 auto}
+.v7-discovery-boundary section{display:flex;align-items:center;gap:1.2cqw;min-width:0;padding:1.15cqw 1.35cqw;border-radius:.58cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 37%,transparent);background:color-mix(in srgb,var(--pres-accent) 7%,var(--pres-bg))}
+.v7-discovery-boundary section:last-child{border-color:color-mix(in srgb,var(--pres-fg) 23%,transparent);background:color-mix(in srgb,var(--pres-fg) 4%,var(--pres-bg))}
+.v7-discovery-boundary strong{font:720 1.56cqw/1.2 var(--font-display)}
+/* Original, monochrome explanatory icons follow the foreground tone rather than a fixed brand green. */
+.v7-capability-icon{background:transparent;filter:grayscale(1) brightness(0)}
+.present-frame[data-tone="strong"] .v7-capability-icon{filter:grayscale(1) brightness(0) invert(1)}

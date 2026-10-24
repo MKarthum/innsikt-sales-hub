@@ -58,3 +58,7 @@ Se SLIDE_VISUAL_REVIEW_2026-10-24.md for individuell evaluering og begrunnelse f
 ## 0.15.0: spesialiserte forklaringsscener
 
 Åtte svake lysbilder bruker slide-story-scenes.js med egen modul og CSS. Komposisjonene har dataeid forklaringsinnhold, samme semantiske temaroller og samme eksportvei som de øvrige lysbildene. Se individuell vurdering i SLIDE_VISUAL_REVIEW_2026-10-24.md.
+
+## 0.17.0: konkretisering av gjenstående generiske kort
+
+Fire lysbilder fikk spesialiserte, dataeide forklaringsscener for møtebrief, konkret kundespørsmål, fagsamspill og avgrenset avklaring. Figurreferanser skal bare eksistere når figuren brukes. Kontrakttesten tillater meningsbærende typografi/diagram uten dekorative ikoner og verifiserer også `stages[].assetId`. Se SLIDE_QUALITY_REVIEW_V017.md.

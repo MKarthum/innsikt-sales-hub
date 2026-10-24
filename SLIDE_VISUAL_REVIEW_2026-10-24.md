@@ -89,3 +89,7 @@ Kvalitetsport: node scripts/check-slide-presentation-quality.mjs, Chromium-rende
 ## Ny selvstendig revisjon v0.16.0
 
 Se [SLIDE_QUALITY_REVIEW_V016.md](SLIDE_QUALITY_REVIEW_V016.md) for visuell gjennomgang, prioritering av 12 risikopunkter, fem begrunnede omarbeidinger, alternative design og gjenstående svakheter. De fem endringene ble rendret og inspisert med faktisk 16:9-skjermbilde; de 39 objektene ble rendret i Chromium med lys/mørk layoutkontroll. Tidligere v0.15-suksesskriterier ble ikke brukt som visuell fasit.
+
+## Oppfølging v0.17.0
+
+Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md). Fire prioriterte komposisjoner er omarbeidet fra faktisk rendring. Mørk ikonkontrast ble korrigert etter manuell kontroll. Gjenværende arbeid er rangert slik at nye iterasjoner kan være selektive.

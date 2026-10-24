@@ -91,36 +91,47 @@
       "tone": "strong",
       "type": "visual",
       "cue": "FRA FORSIDE TIL VERKTØY",
-      "title": "En nyttig møtebrief krever tre enkle grep",
+      "title": "En møtebrief begynner med kontekst – og ender med spørsmål",
       "bullets": [
-        "Velg «Lag en møtebrief» på forsiden.",
-        "Åpne «Forbered et kundemøte» og tilpass feltene.",
-        "Kopier til godkjent KI-verktøy og kontroller utkastet."
+        "Velg «Lag en møtebrief» og tilpass prompten med lovlig kontekst.",
+        "Kopier til et godkjent KI-verktøy. Portalen genererer ikke svar.",
+        "Kontroller utkastet og avklar hva du fortsatt ikke vet."
       ],
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Dette er et fiktivt illustrativt utdrag, ikke et faktisk svar fra en KI-modell eller et eksempel fra en virkelig kunde. Åpne «Lag en møtebrief» i portalen (#prompter/meeting-prep). Tilpass feltene med kjent kontekst, og marker det som er ukjent; del ingen fortrolige opplysninger med den åpne portalen. Kopier prompten til et godkjent KI-verktøy utenfor portalen. Vurder så møtemålet og spørsmålene i utkastet kritisk. Den faglige verdien ligger i forberedelsen og kvalitetssikringen, ikke i at en modell har svart.",
       "topic": "Bruk av portalen",
       "keywords": [],
       "visual": {
         "scene": "road",
-        "steps": [
-          "Velg møtebrief",
-          "Tilpass prompten",
-          "Kontroller svaret"
+        "layout": "meeting-brief",
+        "portalLabel": "I PORTALEN: FORBERED PROMPT",
+        "portalTitle": "Lag en møtebrief",
+        "fields": [
+          {
+            "name": "Situasjon",
+            "value": "Rapporteringen tar for lang tid"
+          },
+          {
+            "name": "Møtets mål",
+            "value": "Forstå konsekvenser og flaskehalser"
+          },
+          {
+            "name": "Uavklart",
+            "value": "Årsak og ansvar"
+          }
         ],
-        "hint": "Fra klikk til et nyttig utkast",
-        "figureAssetId": "delivery-loop",
-        "stepAssetIds": [
-          "business-decision",
-          "ai-agent",
-          "verified-analysis"
+        "transferLabel": "Kopier til godkjent KI-verktøy",
+        "briefLabel": "ILLUSTRATIVT MØTEUTKAST – MÅ KONTROLLERES",
+        "briefTitle": "Møtebrief",
+        "agendaLabel": "MÅL MED MØTET",
+        "agenda": "Forstå hva som forsinkes og hvorfor det er viktig.",
+        "questionLabel": "TO SPØRSMÅL Å TA MED",
+        "questions": [
+          "Hvilke beslutninger blir forsinket?",
+          "Hvor i prosessen oppstår ventetiden?"
         ],
-        "layout": "steps",
-        "stepDetails": [
-          "Velg relevant oppgave i portalen",
-          "Beskriv kunde, situasjon og mål",
-          "Kontroller fakta og hull før bruk"
-        ]
+        "review": "Selgeren kvalitetssikrer før bruk",
+        "conclusion": "Fra en tilpasset prompt til et kontrollert møteutkast – ikke en automatisk kundediagnose."
       }
     },
     {
@@ -254,36 +265,26 @@
       "tone": "light",
       "type": "visual",
       "cue": "FRA INNSIKT TIL HANDLING",
-      "title": "Det viktigste resultatet er neste gode samtale",
+      "title": "Ta med ett bedre spørsmål inn i neste kundemøte",
       "bullets": [
-        "Et møtedokument eller en relevant prompt som utgangspunkt.",
-        "Bedre spørsmål om problem, konsekvens og ansvar.",
-        "Et neste steg med tilgang til riktig fagkompetanse."
+        "Vi kjenner kundens signal, men ikke årsaken.",
+        "Vi stiller et konkret spørsmål om konsekvensen.",
+        "Vi avtaler hvem som kan bidra til neste avklaring."
       ],
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Avslutt med et konkret eksempel på nytten, ikke en ny omvisning i funksjoner. I det illustrative eksemplet sier kunden at rapporteringen tar for lang tid. Portalen kan hjelpe oss å forberede neste spørsmål: hvilken beslutning påvirkes? Svaret må komme fra kunden. Først deretter kan vi avklare relevant eier og hente inn fagkompetanse ved behov. Dette er ingen automatisk CRM-integrasjon og ingen ferdig diagnose. Overgang: Verktøyet gjør oss bedre forberedt, men det er fortsatt vi som må føre samtalen.",
       "topic": "Bruk av portalen",
       "keywords": [],
       "visual": {
         "scene": "road",
-        "steps": [
-          "Forstå oppgaven",
-          "Still gode spørsmål",
-          "Finn neste steg"
-        ],
-        "hint": "Målet er handling, ikke flere sider",
-        "figureAssetId": "value-compass",
-        "stepAssetIds": [
-          "customer-dialogue",
-          "verified-analysis",
-          "value-compass"
-        ],
-        "layout": "steps",
-        "stepDetails": [
-          "Hva skal kunden få til?",
-          "Hva trenger vi å undersøke?",
-          "Hvem tar samtalen videre?"
-        ]
+        "layout": "conversation-takeaway",
+        "signalLabel": "KUNDENS SIGNAL",
+        "signal": "«Rapporteringen tar for lang tid.»",
+        "questionLabel": "SPØRSMÅLET DU TAR MED",
+        "question": "Hvilken beslutning blir vanskelig når rapporten kommer sent?",
+        "nextLabel": "NESTE HANDLING",
+        "nextAction": "Avklar hvem som eier prosessen og hva som bør undersøkes.",
+        "conclusion": "Vi vet ennå ikke årsaken. Målet er en bedre samtale, ikke et ferdig løsningsforslag."
       }
     },
     {
@@ -471,36 +472,35 @@
       "tone": "strong",
       "type": "visual",
       "cue": "ET MULIG RESULTAT",
-      "title": "Første steg kan være en avgrenset avklaring",
+      "title": "Avklar ett konkret avvik før dere velger løsning",
       "bullets": [
-        "Inviter økonomiansvarlig og relevant data-/analysekompetanse.",
-        "Undersøk én rapporteringsflyt og definisjonene bak.",
-        "Vurder først deretter om videre arbeid er nødvendig."
+        "Undersøk det samme nøkkeltallet i to avdelinger i den fiktive situasjonen.",
+        "Avklar hvordan tallet er definert og hvor forskjellen oppstår.",
+        "Utsett prosjekt- og teknologivalg til problemet er forstått."
       ],
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Dette er et avgrensningsforslag for det fiktive økonomieksemplet, ikke en diagnose og heller ikke et ekte kundenavn. Be økonomi-/forretningseier og relevant datakompetanse gå gjennom samme nøkkeltall og periode hos to avdelinger. Finn først ut om definisjonen og dataflyten er like. Resultatet kan være et bedre spørsmål, en korrigert definisjon eller et nytt behov for undersøkelse. Ikke selg et stort plattformprosjekt før dere vet om det trengs. Overgang: Den nyttige første leveransen kan være en avklaring, ikke en ferdig løsning.",
       "topic": "Kundedialog",
       "keywords": [],
       "visual": {
         "scene": "road",
-        "steps": [
-          "Én rapporteringsflyt",
-          "Riktige deltakere",
-          "Avgrenset avklaring"
+        "layout": "bounded-discovery",
+        "caseLabel": "FIKTIVT EKSEMPEL: ULIKE TALL",
+        "sourceTitle": "SAMME NØKKELTALL",
+        "sources": [
+          "Avdeling A",
+          "Avdeling B"
         ],
-        "hint": "Ikke foreslå et stort prosjekt for tidlig",
-        "figureAssetId": "delivery-loop",
-        "stepAssetIds": [
-          "market-signal",
-          "customer-dialogue",
-          "delivery-loop"
-        ],
-        "layout": "steps",
-        "stepDetails": [
-          "Velg ett nøkkeltall eller én rapport",
-          "Samle fag og forretning rundt bordet",
-          "Kartlegg avvik og aktuelle tiltak"
-        ]
+        "checkLabel": "UNDERSØK",
+        "checkTitle": "Definisjon og dataflyt",
+        "checkDetail": "Hvor oppstår forskjellen?",
+        "resultLabel": "MÅL FOR AVKLARINGEN",
+        "result": "Et avgrenset, etterprøvbart funn",
+        "inScopeLabel": "INNENFOR NÅ",
+        "inScope": "Ett tall, én periode, ansvarlige fagpersoner",
+        "laterLabel": "UTSETTES",
+        "later": "Valg av plattform og et større prosjekt",
+        "conclusion": "Første leveranse kan være en avklart årsak – eller en presis hypotese som må testes."
       }
     },
     {
@@ -753,31 +753,45 @@
       "tone": "strong",
       "type": "visual",
       "cue": "FAG OG VERDI",
-      "title": "Data, analyse og KI skaper mer verdi i sammenheng",
+      "title": "Data og analyse gir retning – KI kan forsterke arbeidet",
       "visual": {
         "scene": "domains",
-        "items": [
-          "Data og plattform",
-          "Analyse og innsikt",
-          "KI og automatisering"
+        "layout": "capability-journey",
+        "caseLabel": "ILLUSTRATIVT KUNDEBEHOV",
+        "case": "Avdelingene rapporterer ulike tall.",
+        "stages": [
+          {
+            "label": "DATA OG PLATTFORM",
+            "title": "Felles grunnlag",
+            "detail": "Avklar kilder og definisjoner",
+            "assetId": "core-storage"
+          },
+          {
+            "label": "ANALYSE",
+            "title": "Forstå avviket",
+            "detail": "Finn hvor tallene spriker",
+            "assetId": "verified-analysis"
+          },
+          {
+            "label": "BESLUTNING",
+            "title": "Velg tiltak",
+            "detail": "Ansvarlig leder prioriterer",
+            "assetId": "business-decision"
+          }
         ],
-        "detail": [
-          "Tilgjengelig og forståelig data",
-          "Mønstre, mål og beslutninger",
-          "Nye måter å utforske og handle på"
-        ],
-        "footer": "Sterkest når vi forstår hvordan de henger sammen.",
-        "figureAssetId": "data-semantic",
-        "itemAssetIds": [
-          "core-storage",
-          "verified-analysis",
-          "ai-agent"
-        ]
+        "assistLabel": "KI KAN BISTÅ UNDERVEIS",
+        "assist": "Foreslå dokumentasjon og tester – menneskene verifiserer.",
+        "conclusion": "Ulike behov krever ulik kombinasjon. KI er en mulig støtte, ikke et obligatorisk sluttsteg."
       },
       "sourceIds": [],
-      "speakerBase": "Innsikt er et fagområde der vi setter tilgjengelige og forståelige data i arbeid for bedre forståelse og beslutninger. Dataplattformer kan være viktige, men ikke alltid det første tiltaket. Analyse og formidling hjelper oss å skape mening. KI åpner nye muligheter, men bygger fortsatt på kontekst, kompetanse og vurdering.",
+      "speakerBase": "Bruk et illustrativt eksempel på tall som spriker mellom avdelinger. Dataarbeidet handler om å avklare definisjonene og kildene. Analyse hjelper oss å se hvor og hvorfor tallene varierer. Det gir grunnlag for menneskelige valg. KI kan bistå med dokumentasjon, datatester eller utforsking, men er ikke obligatorisk, og resultatene må kontrolleres. Dermed er data, analyse og KI ikke tre isolerte produkter – og vi trenger ikke presse alle inn i enhver løsning. Overgang: Dette samspillet blir stadig mer relevant når teknologi og kundekrav endrer seg.",
       "topic": "Fag og verdi",
-      "keywords": []
+      "keywords": [],
+      "bullets": [
+        "Felles begreper og relevante data gir et grunnlag vi kan forstå.",
+        "Analyse hjelper oss å forklare avvik og prioritere tiltak.",
+        "KI kan støtte utvalgte oppgaver, men resultatene må verifiseres."
+      ]
     },
     {
       "id": "risk-and-trust",
