@@ -30,6 +30,21 @@ try {
    assert.ok(!html.includes('Kunne ikke laste nettsidens data'),label+': feilside '+route);
    assert.ok(!/\$\{[^{}]+\}/.test(html),label+': rå uttrykk '+route);
   }
+  // Lysbildedetaljer må vise klikkbart bibliotek og navn på objektet.
+  for(const [slideId,slideTitle] of [['portal-opening','Innsikt hjelper oss fra usikkerhet til en bedre kundesamtale'],['architecture-snowflake','Snowflake + dbt: en mulig datastack']]){
+   await page.evaluate(id=>{location.hash='#lysbilder/'+id},slideId);
+   await page.waitForFunction(id=>location.hash==='#lysbilder/'+id&&document.querySelector('.breadcrumb-trail a[href="#lysbilder"]'),slideId);
+   const parent=page.locator('.breadcrumb-trail a[href="#lysbilder"]');
+   assert.equal(await parent.count(),1,label+': klikkbart bibliotek fra '+slideId);
+   assert.equal((await parent.innerText()).trim(),'Lysbildebibliotek',label+': riktig foreldretittel');
+   assert.equal(await page.locator('.breadcrumb-trail [aria-current="page"]').count(),1,label+': ett gjeldende nivå');
+   assert.equal((await page.locator('.breadcrumb-trail [aria-current="page"]').innerText()).trim(),slideTitle,label+': lysbildenavn i sti');
+   assert.equal(await page.locator('#crumb').getAttribute('aria-current'),null,label+': beholder er ikke gjeldende side');
+   await parent.click();
+   await page.waitForFunction(()=>location.hash==='#lysbilder'&&document.querySelector('.slide-library-card'));
+   assert.equal(await page.locator('.breadcrumb-trail a[href="#lysbilder"]').count(),0,label+': foreldrenivå er sluttpunkt');
+   assert.equal(await page.locator('#crumb').getAttribute('aria-current'),'page',label+': biblioteket er gjeldende side');
+  }
   // Foreldrenivå og hjem skal kunne åpnes fra navigasjonsstien.
   await page.evaluate(()=>{location.hash='#muligheter/datasuverenitet'});
   await page.locator('#main .detail-banner').waitFor();
