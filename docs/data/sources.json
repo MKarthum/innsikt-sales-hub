@@ -566,5 +566,40 @@
     "url": "https://docs.databricks.com/aws/en/lakehouse-architecture/scope",
     "type": "official architecture documentation",
     "checked": "2026-10-24"
+  },
+  "snowflake-streamlit": {
+    "title": "Streamlit in Snowflake – overview",
+    "publisher": "Snowflake",
+    "url": "https://docs.snowflake.com/en/developer-guide/streamlit/about-streamlit",
+    "type": "official documentation",
+    "checked": "2026-10-24"
+  },
+  "snowflake-dynamic": {
+    "title": "Dynamic Tables",
+    "publisher": "Snowflake",
+    "url": "https://docs.snowflake.com/en/user-guide/dynamic-tables-about",
+    "type": "official documentation",
+    "checked": "2026-10-24"
+  },
+  "fabric-rti": {
+    "title": "Real-Time Intelligence",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/real-time-intelligence/overview",
+    "type": "official documentation",
+    "checked": "2026-10-24"
+  },
+  "fabric-icons": {
+    "title": "Fabric product icon usage",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
+    "type": "official documentation",
+    "checked": "2026-10-24"
+  },
+  "databricks-unity": {
+    "title": "Unity Catalog",
+    "publisher": "Databricks",
+    "url": "https://docs.databricks.com/aws/en/data-governance/unity-catalog/",
+    "type": "official documentation",
+    "checked": "2026-10-24"
   }
 }

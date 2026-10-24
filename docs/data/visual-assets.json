@@ -227,6 +227,116 @@
       "notes": "MIT licensed; do not describe as copyright-free.",
       "sha256": "7cdcca11c1555d48e19c2fcd2fce4420cbec734f3fa3d28274f8167a796ee0d6",
       "rights": "MIT-lisensiert illustrasjon – kreditér opphav og bevar lisensen"
+    },
+    {
+      "id": "fabric-onelake",
+      "label": "Fabric Onelake",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/fabric-onelake.svg",
+      "origin": "https://raw.githubusercontent.com/microsoft/fabric-samples/main/docs-samples/Icons.zip",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "23fe33bcc61e703f655ac98753512a780bc2ff71d157d6c25682841ed9b6a825"
+    },
+    {
+      "id": "fabric-rti",
+      "label": "Fabric Rti",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/fabric-rti.svg",
+      "origin": "https://raw.githubusercontent.com/microsoft/fabric-samples/main/docs-samples/Icons.zip",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "c6aaaf246fb0a611339e9317789d413183267a412f94f7a6fdc8c09c435334fb"
+    },
+    {
+      "id": "fabric-warehouse",
+      "label": "Fabric Warehouse",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/fabric-warehouse.svg",
+      "origin": "https://raw.githubusercontent.com/microsoft/fabric-samples/main/docs-samples/Icons.zip",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "738fe66a28684cc58e9c5e211e04774e037cababaef4704f17af136cb5f1edff"
+    },
+    {
+      "id": "streamlit",
+      "label": "Streamlit",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/streamlit.svg",
+      "origin": "https://streamlit.io/images/brand/streamlit-mark-color.svg",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://streamlit.io/brand",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "6470810ccb123fd5e4d22ec2a351de7ff79e831645be563fc4a3fb60f05a66b8"
+    },
+    {
+      "id": "db-lakeflow",
+      "label": "Databricks Lakeflow",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/db-lakeflow.svg",
+      "origin": "https://www.databricks.com/sites/default/files/2026-01/icon-lakeflow.svg",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://www.databricks.com/",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "0da4ab13021c0e807d69d0cf0995aba96767af1409dfd2c34eb112306d3fdf92"
+    },
+    {
+      "id": "db-unity-catalog",
+      "label": "Databricks Unity Catalog",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/db-unity-catalog.svg",
+      "origin": "https://www.databricks.com/sites/default/files/2026-01/icon-unity-catalog.svg",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://www.databricks.com/",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "73ddeca1fe34a22aff33dad0fa3da8c35f17841715db4fe9e9f218e29fad7f0b"
+    },
+    {
+      "id": "db-mosaic-ai",
+      "label": "Databricks Mosaic AI",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/db-mosaic-ai.svg",
+      "origin": "https://www.databricks.com/sites/default/files/2026-01/icon-mosaic-ai-bricks.svg",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://www.databricks.com/",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "22178f022ef601b44f9415d172209d317e8cb361d076451ed5a802e0ebce7553"
+    },
+    {
+      "id": "db-genie",
+      "label": "Databricks AI/BI Genie",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/db-genie.svg",
+      "origin": "https://www.databricks.com/sites/default/files/2026-05/icon-genie.svg",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://www.databricks.com/",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "907a2543cf2831421de1bfb19f4afb392d98527c90b9ee7b66d900b7c63db832"
+    },
+    {
+      "id": "db-delta-lake",
+      "label": "Delta Lake",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/db-delta-lake.svg",
+      "origin": "https://www.databricks.com/sites/default/files/2023-03/logo-color-delta-lake.svg",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://www.databricks.com/",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "40dbf63766892f7a46fb99987363b1fb3af04c8f51c4b3b88aaa0b69b6f5fc52"
+    },
+    {
+      "id": "db-mlflow",
+      "label": "MLflow",
+      "category": "vendor-logo",
+      "path": "assets/library/vendor/db-mlflow.svg",
+      "origin": "https://www.databricks.com/sites/default/files/2023-03/logo-color-mlflow.svg",
+      "rights": "trademark; vendor-approved reference diagram or educational use only",
+      "termsUrl": "https://www.databricks.com/",
+      "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
+      "sha256": "0071359e3ffa197a94604f087fbc8a5fa547723fb0962f581f1682c7b49f0a24"
     }
   ]
 }

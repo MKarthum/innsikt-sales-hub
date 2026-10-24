@@ -27,6 +27,7 @@ function render(data){
  x.__fixture=x.window.InnsiktContent.materialize(data);
  vm.runInContext(file('docs/assets/slide-model.js'),x,{filename:'slide-model.js',timeout:3000});
  vm.runInContext(file('docs/assets/visual-assets.js'),x,{filename:'visual-assets.js',timeout:3000});
+ vm.runInContext(file('docs/assets/vendor-architectures.js'),x,{filename:'vendor-architectures.js',timeout:3000});
  vm.runInContext(file('docs/assets/architecture-visuals.js'),x,{filename:'architecture-visuals.js',timeout:3000});
  vm.runInContext(file('docs/assets/slide-visuals.js'),x,{filename:'slide-visuals.js',timeout:3000});
 vm.runInContext(injected,x,{filename:'site.js',timeout:3000});

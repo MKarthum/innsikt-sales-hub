@@ -9,7 +9,10 @@ try{
  await page.goto(url,{waitUntil:'networkidle'});
  await page.locator('#present-button').click();
  await page.locator('#present-tone-mode').waitFor();
- assert.equal(await page.locator('#present-tone-mode').inputValue(),'story','Default is story-led');
+ assert.equal(await page.locator('#present-tone-mode').inputValue(),'light','Unified default is light');
+ assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'light','First slide is light');
+ await page.locator('#present-tone-mode').selectOption('story');
+ assert.equal(await page.locator('#present-tone-mode').inputValue(),'story','Story mode is explicit opt-in');
  assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'strong');
  for(let i=0;i<2;i++)await page.locator('#slide-next').click();
  assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'light','First narrative beat change');

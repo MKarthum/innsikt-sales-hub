@@ -153,3 +153,4 @@ Når produktets førsteside, oppgavekort eller prioriterte funksjoner endres, m�
 - Presentasjonsvisningen velger farger per fortellerdel, eller kan tvinges lys/mørk i Presenter. Interne historier og kundecaser må følge INTERNAL_CONTENT_CONTRACT.md; legg aldri interne innholdsdata i dette offentlige repoet.
 
 - Ressursbibliotek og arkitekturprofiler: ARCHITECTURE_ASSETS.md. Bruk sentral asset-ID, aldri kopier logoer inn i lysbildedata.
+- I v0.12.3 er Lys standard i lysbildebibliotek og Presenter, med ett delt visningsvalg (Lys / Mørk / Fortellingsstyrt). Leverandørdiagrammer deler ikoner og data, men ikke en fast komposisjon.

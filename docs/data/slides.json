@@ -842,10 +842,12 @@
         "KI",
         "snowflake"
       ],
-      "speakerBase": "Dette illustrerer Snowflake med typiske innlastingsmekanismer som Snowpipe, modellering gjennom dbt eller andre Snowflake-funksjoner, servering gjennom SQL og visninger, og konsum i BI, apper eller Cortex. dbt er valgfritt og representerer én variant av arkitekturen.",
+      "speakerBase": "Dette er én mulig arkitektur for kunde- og transaksjonsdata. Kilder kan lastes med Snowpipe og streaming, eller deles direkte. Snowflake står i midten som datagrunnlag med SQL, Snowpark og Dynamic Tables. dbt er vist som et alternativ for å bygge modeller og teste dem; den er ikke obligatorisk. Til høyre skiller vi tre faktiske bruksflater: Streamlit in Snowflake for en intern applikasjon, Power BI for rapporter og Cortex AI for KI-assistert analyse. Alle komponentene trenger tilgangsstyring, katalog og kostkontroll. Historien er at valg av inntak, modellering og konsum avhenger av kunden – ikke at vi anbefaler alt samtidig.",
       "sourceIds": [
         "architecture-snowflake",
-        "architecture-dbt"
+        "architecture-dbt",
+        "snowflake-streamlit",
+        "snowflake-dynamic"
       ]
     },
     {
@@ -865,10 +867,12 @@
         "KI",
         "fabric"
       ],
-      "speakerBase": "Fabric samler dataflyt, lakehouse/warehouse, semantiske modeller, Power BI og KI i samme økosystem gjennom OneLake. Diagrammet viser en vanlig variant, ikke at alle tjenester må brukes eller at data alltid må kopieres.",
+      "speakerBase": "Fabric skiller seg fra en vanlig femtrinnspipeline. OneLake er det felles logiske datagrunnlaget. Over dette finnes flere Fabric-arbeidsflater som Data Factory for innhenting, Real-Time Intelligence for hendelser, Lakehouse for Spark og notebooks og Warehouse for SQL. Konsum omfatter semantiske modeller i Power BI og muligheter for agenter og sanntidsvarsling. Det er ikke et lineært samlebånd, og ikke alle data må flyttes eller alle tjenestene tas i bruk. Skill mellom dataflyt, beregning og de ulike brukssituasjonene.",
       "sourceIds": [
         "architecture-fabric",
-        "architecture-fabric-lifecycle"
+        "architecture-fabric-lifecycle",
+        "fabric-rti",
+        "fabric-icons"
       ]
     },
     {
@@ -888,10 +892,11 @@
         "KI",
         "databricks"
       ],
-      "speakerBase": "Databricks-varianten viser Lakeflow for innhenting, Delta-lakehouse og medallion-lag, SQL og modell-/KI-servering, konsum til AI/BI eller apper og støtte fra Unity Catalog og MLflow. Tjenestene varierer med sky og kundenes behov.",
+      "speakerBase": "Illustrer Lakeflow som typisk inntak av batch og strømmer, og Delta Lake med Bronze, Silver og Gold som datakvalitets- og modningsmønster. Fra det samme datagrunnlaget går det ulike veier: Databricks SQL til analyse og BI, eller Mosaic AI til maskinlæring, modeller og agenter. AI/BI Genie, eksterne dashboards og Databricks Apps kan være konsumenter. Unity Catalog styrer tilgang og metadata på tvers, Lakeflow Jobs og MLflow bidrar i drift og modeller. Medallion er vanlig, men ikke obligatorisk i alle scenarier.",
       "sourceIds": [
         "architecture-databricks",
-        "architecture-databricks-scope"
+        "architecture-databricks-scope",
+        "databricks-unity"
       ]
     }
   ]

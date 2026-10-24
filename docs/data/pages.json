@@ -1147,7 +1147,12 @@
       "Kundedialog",
       "Bruk av portalen"
     ],
-    "toneInfo": "Biblioteket viser lysbildets egen forhåndsvisning. I Presenter bestemmes fargene av historien eller valgt lys/mørk visning."
+    "toneInfo": "Samme fargevalg gjelder i biblioteket, Presenter og nedlastinger. Fortellingsstyrt følger en historie; et delt lysbilde kan dermed variere etter hvor det brukes.",
+    "toneLabel": "Visningsstil",
+    "toneLight": "Lys (standard)",
+    "toneDark": "Mørk",
+    "toneStory": "Fortellingsstyrt",
+    "toneHelp": "Lys er standard. Fortellingsstyrt veksler bare når historien skifter del."
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",

@@ -39,3 +39,13 @@ Leverandørarkitekturene er våre egne forenklede diagrammer og er ikke kopierte
 Legg til ny ressurs med unik ID, en dokumentert origin, rights, termsUrl/license og sha256. Lokal sti kan være SVG, PNG, JPG eller WebP i en godkjent ressurstype. Lag ny profil før du vurderer ny renderer. Nye figurelementer oppdateres i originalfilen, ikke i hvert lysbilde.
 
 Kilde- og varemerkerettigheter må kontrolleres ved bruk av nye ressurser. Interne ressurser må fortsatt distribueres kun via beskyttet intern løsning.
+
+## Andre iterasjon: tre selvstendige leverandørscener
+
+- Snowflake: datamiljø med inntak, delt datagrunnlag, modellering med dbt, Dynamic Tables eller Snowpark og tre forskjellige bruksflater, inkludert Streamlit in Snowflake.
+- Fabric: ulike arbeidsflater over OneLake – Data Factory, sanntidsintelligens, Lakehouse og Warehouse – med Power BI, data agents og Activator som mulige anvendelser.
+- Databricks: Lakeflow-innhenting, Delta med Bronze–Silver–Gold og separate løp til Databricks SQL og Mosaic AI, forbruk gjennom Genie, BI og Apps.
+
+Dette er tre separate komposisjoner i `vendor-architectures.js`/`.css`. De gjenbruker små byggesteiner, men ikke en felles femkolonners layout. Underproduktikoner fra leverandørenes egne kilder ligger som egne registrerte assets. Ikke alle tjenester er obligatoriske, og eksemplene er ikke uttømmende.
+
+**Fargeprinsipp:** Lys er standard for hele biblioteket, Presenter og eksport. Valget kan endres til Mørk eller Fortellingsstyrt både fra biblioteket og Presenter, og lagres som en lokal visningspreferanse. Fortellingsstyrt følger historiens kapittelfarger; delbare lysbilder har derfor ikke én universell historie-tone. Alle renderer-komponenter bruker semantiske fargetokens; ekte logoer beholder originalfarge.

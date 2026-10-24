@@ -19,16 +19,23 @@ try{
  await page.evaluate(()=>location.hash='#lysbilder');
  await page.locator('.slide-library-card').first().waitFor();
  assert.equal(await page.locator('.slide-library-card').count(),36);
+ assert.equal(await page.locator('#library-tone-mode').inputValue(),'light');
+ await page.locator('#library-tone-mode').selectOption('strong');
+ assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"strong\"]').count(),36);
+ await page.locator('#library-tone-mode').selectOption('light');
+ assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"light\"]').count(),36);
  for(const [i,s] of list.entries()){
   await page.evaluate(id=>location.hash='#lysbilder/'+id,s.id);
   await page.waitForFunction(title=>document.querySelector('main h1')?.textContent?.trim()===title,s.title);
-  await page.locator('.slide-library-detail-stage .da-scene').waitFor();
+  await page.locator('.slide-library-detail-stage .da-scene, .slide-library-detail-stage .vp-scene').waitFor();
   const stage=page.locator('.slide-library-detail-stage');
   await stage.waitFor();
+  assert.equal(await page.locator('#library-tone-mode').inputValue(),'light');
+  assert.equal(await stage.locator('.present-frame').getAttribute('data-tone'),'light');
   const audit=await stage.evaluate(node=>{
-   const scene=node.querySelector('.da-scene');
+   const scene=node.querySelector('.da-scene, .vp-scene');
    const bounds=scene.getBoundingClientRect();
-   const text=[...scene.querySelectorAll('h2,h3,p,li,strong,.da-col-title,.da-data-tiers span,.da-foundation-title')];
+   const text=[...scene.querySelectorAll('h2,h3,p,li,strong,.da-col-title,.da-data-tiers span,.da-foundation-title,.vp-atom-label span,.vp-tier small,.vp-section-label')];
    const outside=[];
    for(const el of text){
     if(!el.textContent?.trim())continue;
@@ -36,14 +43,22 @@ try{
     if(r.width&&r.height&&(r.x<bounds.x-4||r.y<bounds.y-4||r.right>bounds.right+4||r.bottom>bounds.bottom+4))outside.push({text:el.textContent.slice(0,35),x:r.x,y:r.y});
    }
    const imageChecks=[...scene.querySelectorAll('img')].map(img=>({name:img.alt,complete:img.complete,width:img.naturalWidth}));
-   return {outside,imageChecks,width:bounds.width,height:bounds.height,foundation:scene.querySelector('.da-foundation')!=null};
+   return {outside,imageChecks,width:bounds.width,height:bounds.height,foundation:scene.querySelector('.da-foundation,.vp-support')!=null};
   });
   assert.equal(audit.outside.length,0,s.id+' text outside '+JSON.stringify(audit.outside));
   assert.ok(audit.foundation&&audit.imageChecks.length>=10,s.id+' missing shared imagery');
-  await page.waitForFunction(()=>[...document.querySelectorAll('.slide-library-detail-stage .da-scene img')].every(x=>x.complete&&x.naturalWidth>0));
+  await page.waitForFunction(()=>[...document.querySelectorAll('.slide-library-detail-stage .da-scene img, .slide-library-detail-stage .vp-scene img')].every(x=>x.complete&&x.naturalWidth>0));
+  if(s.profileId==='snowflake')assert.equal(await stage.locator('.vp-snow-shell').count(),1,'Snowflake hub layout');
+  if(s.profileId==='fabric')assert.equal(await stage.locator('.vp-fabric-lake').count(),1,'Fabric OneLake-led layout');
+  if(s.profileId==='databricks')assert.equal(await stage.locator('.vp-medallion').count(),1,'Databricks medallion layout');
   await stage.screenshot({path:out+'/'+s.id+'.png'});
  }
+ await page.locator('#library-tone-mode').selectOption('strong');
+ await page.locator('.slide-library-detail-stage .present-frame[data-tone="strong"]').waitFor();
+ await page.locator('.slide-library-detail-stage').screenshot({path:out+'/architecture-databricks-dark.png'});
+ await page.locator('#library-tone-mode').selectOption('light');
  await page.locator('#present-button').click();
+ assert.equal(await page.locator('#present-tone-mode').inputValue(),'light','Presenter shares library mode');
  await page.locator('[data-deck="dataarkitektur"]').click();
  await page.locator('#slide-body .da-scene').waitFor();
  await page.locator('#present-tone-mode').selectOption('strong');
@@ -54,7 +69,7 @@ try{
  const f=out+'/self-contained-export.html';await download.saveAs(f);
  const html=fs.readFileSync(f,'utf8');
  assert.ok(html.includes('data:image/svg+xml'), 'Asset imagery embedded in portable HTML');
- assert.ok(html.includes('.da-flow'), 'Architecture styles embedded in portable HTML');
+ assert.ok(html.includes('.da-flow')&&html.includes('.vp-flow'), 'Both generic and vendor architecture styles embedded in portable HTML');
  assert.ok(!html.includes('src="./assets/library/'), 'No broken external image URLs in export');
  await page.keyboard.press('Escape');
  await page.setViewportSize({width:390,height:844});
@@ -62,5 +77,5 @@ try{
  await page.locator('.asset-library-card').first().waitFor();
  await page.screenshot({path:out+'/asset-library-mobile.png',fullPage:false});
  assert.deepEqual(errors,[]);
- console.log('PASS – 22 asset thumbnails, 6 architecture scenes, theme switching, and truly portable HTML export');
+ console.log('PASS – '+catalog.items.length+' asset thumbnails, 6 architecture scenes, theme switching, and truly portable HTML export');
 }finally{await browser.close();}
