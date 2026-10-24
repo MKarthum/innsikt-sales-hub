@@ -14,6 +14,56 @@ try{
  await p.locator('.slide-library-card').first().waitFor();
  assert.equal(await p.locator('.slide-library-card').count(),items.length,'Complete library');
  await p.screenshot({path:out+'/library.png',fullPage:false});
+ // Clicking a card is a focused, screen-filling preview; the card's link remains
+ // available for deep links/new tabs. Closing must preserve filter/scroll state.
+ const card=p.locator('.slide-library-card').first();
+ const slideId=await card.getAttribute('data-slide-fullscreen-open');
+ assert.ok(slideId,'Cards expose stable slide IDs for fullscreen viewing');
+ const originalHash=await p.evaluate(()=>location.hash);
+ await card.click();
+ const full=p.locator('#slide-library-fullscreen');
+ await full.waitFor();
+ assert.equal(await p.evaluate(()=>location.hash),originalHash,'Opening does not replace the library route');
+ assert.equal(await full.locator('.present-frame').getAttribute('data-library-slide-id'),slideId);
+ assert.ok(await full.locator('.modal-close').isVisible(),'Exit remains visible');
+ const geometry=await full.evaluate(el=>{
+  const r=el.getBoundingClientRect(),slide=el.querySelector('.slide-library-fullscreen-stage').getBoundingClientRect();
+  return {dialog:{left:r.left,right:r.right,top:r.top,bottom:r.bottom},slide:{width:slide.width,height:slide.height,left:slide.left,right:slide.right}};
+ });
+ assert.ok(Math.abs(geometry.slide.width/geometry.slide.height-16/9)<0.02,'Fullscreen slide retains 16:9 ratio');
+ assert.ok(geometry.slide.left>=0&&geometry.slide.right<=1536,'Fullscreen stage fits desktop');
+ await full.screenshot({path:out+'/fullscreen-desktop.png'});
+ await p.keyboard.press('Escape');
+ await assert.equal(await full.count(),0,'Escape exits fullscreen in one action');
+ assert.equal(await p.evaluate(()=>location.hash),originalHash,'Exiting preserves library route');
+ assert.ok(await card.evaluate(x=>document.activeElement===x),'Focus returns to the selected card');
+
+ await card.click();
+ await full.locator('[data-slide-fullscreen-details]').click();
+ await p.locator('.slide-library-detail-stage').waitFor();
+ assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Details link preserves the existing slide route');
+ await p.evaluate(()=>location.hash='#lysbilder');
+ await p.locator('.slide-library-card').first().waitFor();
+
+ await p.setViewportSize({width:390,height:844});
+ const mobileCard=p.locator('.slide-library-card').first();
+ await mobileCard.click();
+ await full.waitFor();
+ const mobile=await full.evaluate(el=>{
+  const body=el.querySelector('.slide-library-fullscreen-stage').getBoundingClientRect();
+  const close=el.querySelector('.modal-close').getBoundingClientRect();
+  return {stageLeft:body.left,stageRight:body.right,stageWidth:body.width,stageHeight:body.height,
+    closeTop:close.top,closeRight:close.right,innerWidth:window.innerWidth};
+ });
+ assert.ok(mobile.stageLeft>=0&&mobile.stageRight<=mobile.innerWidth+1,'Fullscreen stage fits mobile viewport');
+ assert.ok(mobile.closeTop>=0&&mobile.closeRight<=mobile.innerWidth+1,'Exit button fits mobile viewport');
+ assert.ok(Math.abs(mobile.stageWidth/mobile.stageHeight-16/9)<0.02,'Mobile fullscreen slide remains 16:9');
+ await full.screenshot({path:out+'/fullscreen-mobile.png'});
+ await full.locator('.modal-close').click();
+ assert.equal(await full.count(),0,'Explicit exit button closes mobile fullscreen');
+ assert.ok(await mobileCard.evaluate(x=>document.activeElement===x),'Mobile focus restored');
+ await p.setViewportSize({width:1536,height:1040});
+
  const typeSeen=new Set();
  for(const s of items){
   await p.evaluate(id=>location.hash='#lysbilder/'+id,s.id);
