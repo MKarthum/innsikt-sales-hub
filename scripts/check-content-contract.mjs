@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 const read=n=>JSON.parse(fs.readFileSync('docs/data/'+n+'.json','utf8'));
-const raw={meta:read('site'),pages:read('pages'),sources:read('sources'),...read('market'),...read('sales'),...read('technologies'),backlog:read('backlog'),learning:read('learning'),prompts:read('prompts'),horizon:read('horizon')};
+const raw={meta:read('site'),pages:read('pages'),sources:read('sources'),...read('market'),...read('sales'),...read('technologies'),backlog:read('backlog'),learning:read('learning'),prompts:read('prompts'),horizon:read('horizon'),slides:read('slides')};
 const source=fs.readFileSync('docs/assets/content.js','utf8');
 const box={window:{}};vm.runInNewContext(source,box);
 let materialized;
@@ -45,8 +45,8 @@ for(const item of raw.prompts.items){
  if(item.promptParts&&item.prompt)fail('Duplisert lagring av sammensatt prompt: '+item.id);
  if(!has(materialized.prompts.items.find(x=>x.id===item.id)?.prompt))fail('Prompt kan ikke komponeres: '+item.id);
 }
-for(const [name,content] of Object.entries(materialized.pages.presentationDecks))for(const slide of content.slides){
- if(typeof slide.body==='object'||typeof slide.note==='object'||slide.bullets?.some(b=>typeof b!=='string'))fail('Uoppløst slide '+name);
+for(const slide of materialized.slides.items){
+ if(typeof slide.body==='object'||typeof slide.note==='object'||slide.bullets?.some(b=>typeof b!=='string'))fail('Uoppløst slide '+slide.id);
 }
 for(const item of raw.learning.glossary){if(!has(item.meaning)||!has(item.term))fail('Begrep uten definisjon '+item.id);}
 if(!raw.horizon.notPublished.every(x=>x.visibility==='not-presented'))fail('Fordypningens usynlige innhold uten markering');
@@ -70,7 +70,7 @@ function inspectCopies(value,where){
  if(previous)fail('Uavhengig tekstkopi (80+ tegn): '+previous+' og '+where);
  else copies.set(normalized,where);
 }
-for(const name of ['learning','sales','market','technologies','pages','prompts','horizon'])inspectCopies(read(name),'docs/data/'+name+'.json');
+for(const name of ['learning','sales','market','technologies','pages','prompts','horizon','slides'])inspectCopies(read(name),'docs/data/'+name+'.json');
 
 if(!fs.readFileSync('docs/index.html','utf8').includes('content.js?v='+raw.meta.version))fail('Innholdsløser er ikke koblet til nettsiden');
 if(errors.length){console.error('FAIL – innholdskontrakt:\n'+errors.join('\n'));process.exit(1)}

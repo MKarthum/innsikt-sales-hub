@@ -3,11 +3,11 @@ import vm from 'node:vm';
 
 const read=(path)=>fs.readFileSync(path,'utf8');
 const json=(name)=>JSON.parse(read('docs/data/'+name+'.json'));
-const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon]=
-  ['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon'].map(json);
+const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides]=
+  ['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides'].map(json);
 const resolverSandbox={window:{}};
 vm.runInNewContext(read('docs/assets/content.js'),resolverSandbox,{filename:'content.js'});
-const fixture=resolverSandbox.window.InnsiktContent.materialize({meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon});
+const fixture=resolverSandbox.window.InnsiktContent.materialize({meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides});
 
 const source=read('docs/assets/site.js');
 const ending=/\binit\(\);\s*\}\)\(\);\s*$/;
@@ -25,7 +25,7 @@ const setup=[
 '   oversikt:overview,guide,forretning:business,muligheter:plays,kundedialog:dialogue,',
 '   marked:market,kompetanse:competence,arkitektur:()=>architecture(),',
 '   teknologi:technology,ai:aiProducts,bransje:industry,',
-'   verktoy:()=>toolkit(),prompter:()=>prompts(),horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev',
+'   verktoy:()=>toolkit(),prompter:()=>prompts(),lysbilder:()=>slideLibraryPage(),horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev',
 ' }))add(name,fn);',
 " D.plays.forEach(x=>add('muligheter/'+x.id,()=>playDetail(x)));",
 " D.businessSignals.forEach(x=>add('forretning/'+x.id,()=>businessDetail(x)));",
@@ -34,6 +34,7 @@ const setup=[
 " D.learning.diagrams.forEach(x=>add('arkitektur/'+x.id,()=>architecture(x.id)));",
 " D.learning.templates.forEach(x=>add('verktoy/'+x.id,()=>toolkit(x.id)));",
 " D.prompts.items.forEach(x=>add('prompter/'+x.id,()=>prompts(x.id)));",
+" D.slides.items.forEach(x=>add('lysbilder/'+x.id,()=>slideLibraryPage(x.id)));",
 " add('prompter/variabler',()=>prompts('variabler'));",
 ' const slideBody={innerHTML:""};',
 ' globalThis.document={',
@@ -64,6 +65,7 @@ vm.runInContext(read('docs/assets/prompt-context.js'),sandbox,{timeout:3000,file
 sandbox.window.InnsiktPromptContext.configure(fixture.prompts);
 vm.runInContext(read('docs/assets/prompts.js'),sandbox,{timeout:3000,filename:'prompts.js'});
 vm.runInContext(read('docs/assets/horizon.js'),sandbox,{timeout:3000,filename:'horizon.js'});
+vm.runInContext(read('docs/assets/slide-model.js'),sandbox,{timeout:3000,filename:'slide-model.js'});
 vm.runInContext(instrumented,sandbox,{timeout:3000,filename:'site.js'});
 let entries;
 try {entries=vm.runInContext('__renderAll()',sandbox,{timeout:8000});}

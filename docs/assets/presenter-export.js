@@ -46,7 +46,7 @@ function build(data,stylesheet){
  return '<!doctype html><html lang="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+safe(data.label)+' · Innsikt v'+safe(data.version)+'</title><style>'+style+'\n'+extraCss+'</style></head><body class="export-document">'
  +'<nav class="export-toolbar" aria-label="Presentasjonskontroller"><strong>'+safe(data.label)+' · v'+safe(data.version)+'</strong><div><button type="button" id="export-prev">Forrige</button> <span id="export-counter"></span> <button type="button" id="export-next">Neste</button> <button type="button" id="export-print">Skriv ut / PDF</button></div></nav>'
  +'<main class="export-list"><p class="export-meta">'+safe(data.notice)+'</p>'
- +data.slides.map(html=>'<section class="present-frame present-rich export-slide">'+html+'</section>').join('')
+ +data.slides.map((html,i)=>'<section class="present-frame present-rich export-slide" data-tone="'+safe(data.tones?.[i]||'strong')+'">'+html+'</section>').join('')
  +'</main><script>'+script.replaceAll('</script','<\\/script')+'</script></body></html>';
 }
 async function exportDeck(data,mode='html'){

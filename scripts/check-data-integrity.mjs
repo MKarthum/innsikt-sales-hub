@@ -3,7 +3,7 @@ import vm from 'node:vm';
 const resolverSandbox={window:{}};
 vm.runInNewContext(fs.readFileSync('docs/assets/content.js','utf8'),resolverSandbox);
 const read=n=>JSON.parse(fs.readFileSync('docs/data/'+n+'.json','utf8'));
-const site=read('site'), pages=read('pages'), sources=read('sources'), market=read('market'), sales=read('sales'), tech=read('technologies'), backlog=read('backlog'), learning=read('learning');
+const site=read('site'), pages=read('pages'), slides=read('slides'), sources=read('sources'), market=read('market'), sales=read('sales'), tech=read('technologies'), backlog=read('backlog'), learning=read('learning');
 const errors=[],fail=x=>errors.push(x),str=x=>typeof x==='string'&&Boolean(x.trim()),ids=(a,name)=>{if(!Array.isArray(a)||!a.length){fail(name+' er tom');return []}const v=a.map(x=>x.id);if(v.some(x=>!str(x)))fail(name+' har manglende ID');if(new Set(v).size!==v.length)fail(name+' har duplikat-ID');return v};
 const date=x=>/^\d{4}-\d{2}-\d{2}$/.test(x||'')&&!Number.isNaN(Date.parse(x));
 const refSource=(id,from)=>{if(!sources[id])fail(from+' peker på ukjent kilde '+id)};
@@ -68,33 +68,38 @@ for(const x of learning.diagrams){
 }
 for(const x of learning.templates)if(!str(x.title)||!str(x.purpose)||!str(x.caution)||!x.sections?.length||x.sections.some(s=>!s.questions?.length))fail('Ufullstendig mal '+x.id);
 const ds=new Set(learning.diagrams.map(x=>x.id)),bs=new Set(sales.businessSignals.map(x=>x.id));
-if(!pages.presentationDecks||Object.keys(pages.presentationDecks).sort().join(',')!=='portal,sales')fail('Presenter skal ha ett løsningsløp og ett kort innholdseksempel');
+const slideIds=ids(slides.items,'Lysbildebibliotek'),slidesById=new Map(slides.items.map(x=>[x.id,x]));
+for(const s of slides.items){
+ if(!['shared','story'].includes(s.scope))fail('Ugyldig lysbildescope: '+s.id);
+ if(s.scope==='story'&&!pages.presentationDecks[s.storyId])fail('Ukjent lysbildeeier: '+s.id);
+ if(!str(s.title)||!str(s.cue)||!['intro','diagram','metric','case','sector-case','bullets','takeaway','prompt'].includes(s.type))fail('Ugyldig lysbilde: '+s.id);
+ if(s.diagram&&!ds.has(s.diagram))fail('Ukjent diagram i lysbilde '+s.id);
+ if(s.business&&!bs.has(s.business))fail('Ukjent kundesignal i lysbilde '+s.id);
+ if(s.type==='sector-case'&&!sales.industryUseCases.some(c=>c.id===s.industryCase))fail('Ukjent bransjecase i lysbilde '+s.id);
+ if(s.type==='prompt'&&!read('prompts').items.some(p=>p.id===s.promptId))fail('Ukjent prompt i lysbilde '+s.id);
+ if(s.bullets?.length>3)fail('For mye tekst i lysbilde '+s.id);
+ if(s.sourceIds?.length)s.sourceIds.forEach(id=>refSource(id,'Lysbilde '+s.id));
+ if(s.sourceDisplay&&s.sourceDisplay!=='required')fail('Ukjent kildemarkering: '+s.id);
+ if(s.tone&&!['strong','light'].includes(s.tone))fail('Ukjent fargetone: '+s.id);
+ if(typeof s.speakerBase!=='string')fail('Mangler grunnnotat: '+s.id);
+}
+if(!pages.presentationDecks?.portal||!pages.presentationDecks?.sales)fail('Presenter må inneholde eksisterende historier');
 for(const [key,d] of Object.entries(pages.presentationDecks||{})){
  if(!str(d.label)||!d.slides?.length)fail('Presentasjonsløp mangler '+key);
  const story=d.narrative;
- if(!str(d.audience)||!str(d.intro)||!story||!str(story.mode)||!str(story.use)||!str(story.centralQuestion)||!str(story.turn)||!str(story.resolution))fail('Presenter mangler målgruppe, format eller fortellingsgrunnlag: '+key);
+ if(!str(d.audience)||!str(d.intro)||!story||!str(story.mode)||!str(story.use)||!str(story.centralQuestion)||!str(story.turn)||!str(story.resolution))fail('Presenter mangler fortellingsgrunnlag: '+key);
  const beatIds=Array.isArray(story?.beats)?story.beats.map(b=>b.id):[];
- if(!beatIds.length||beatIds.some(id=>!str(id))||new Set(beatIds).size!==beatIds.length||story.beats.some(b=>!str(b.function)))fail('Presenter mangler planlagt fortellingskurve: '+key);
- if(!str(story.story)||story.story.length<500)fail('Fortellingen må være skrevet før lysbildene: '+key);
- if(key==='portal'&&story.mode!=='product-demonstration')fail('Første presentasjon må forklare selve løsningen');
- if(key==='sales'&&(story.mode!=='illustrative-content-example'||d.slides.length>7||d.slides.some(x=>x.delivery==='exercise')))fail('Andre presentasjon må være ett kort, selvstendig eksempel uten workshop');
- let previousBeat=-1;
- for(const x of d.slides||[]){
-  if(!str(x.title)||!['intro','diagram','metric','case','sector-case','bullets','takeaway','prompt'].includes(x.type))fail('Ugyldig slide '+key);
-  if(x.diagram&&!ds.has(x.diagram))fail('Ukjent diagram i presentasjon '+x.diagram);
-  if(x.business&&!bs.has(x.business))fail('Ukjent kundesignal i presentasjon '+x.business);
-  if(x.type==='sector-case'&&!sales.industryUseCases.some(c=>c.id===x.industryCase))fail('Ukjent bransjecase i presentasjon '+x.industryCase);
-  if(x.type==='prompt'&&!read('prompts').items.some(p=>p.id===x.promptId))fail('Ukjent presentasjonsprompt '+x.promptId);
-  if(!str(x.cue)||!str(x.beat)||!['tell','debrief'].includes(x.delivery))fail('Presenter mangler synlig rolle eller dramaturgisk plassering: '+key+' / '+x.title);
-  const currentBeat=beatIds.indexOf(x.beat);
-  if(currentBeat<0||currentBeat<previousBeat)fail('Presenter følger ikke fortellingens rekkefølge: '+key+' / '+x.title);
-  previousBeat=currentBeat;
-  if(x.caseView&&!(x.type==='sector-case'&&x.caseView==='situation'))fail('Ugyldig trinnvis case-visning: '+key+' / '+x.title);
-  if(typeof x.note!=='string'||x.note.length<300)fail('Presenter trenger faglig presentatørnotat: '+key+' / '+x.title);
-  if(x!==d.slides.at(-1)&&typeof x.note==='string'&&!x.note.includes('Overgang:'))fail('Presenter mangler overgang: '+key+' / '+x.title);
-  if(x.bullets?.length>3)fail('For mye tekst i Presenter: '+key+' / '+x.title);
-  if(/nedenfra og opp|opp-ned|KI på egne data/.test(x.title))fail('Presenter skal ikke bruke intern diagramsjargong som fortellertittel: '+x.title);
-  if(x.sources)refs(x.sources,'Slide '+x.title);
+ if(!beatIds.length||beatIds.some(id=>!str(id))||new Set(beatIds).size!==beatIds.length||story.beats.some(b=>!str(b.function)))fail('Presenter mangler fortellingskurve: '+key);
+ if(!str(story.story)||story.story.length<500)fail('Fortellingen må skrives før lysbildene: '+key);
+ let prev=-1;
+ for(const placement of d.slides){
+  const x=slidesById.get(placement.slideId);
+  if(!x)fail('Historie peker på ukjent lysbilde: '+key+'/'+placement.slideId);
+  if(x?.scope==='story'&&x.storyId!==key)fail('Historiespesifikt lysbilde gjenbrukt: '+key+'/'+x.id);
+  if(!str(placement.beat)||!beatIds.includes(placement.beat)||!['tell','debrief'].includes(placement.delivery))fail('Ugyldig plassering: '+key+'/'+placement.slideId);
+  const at=beatIds.indexOf(placement.beat);if(at<prev)fail('Feil dramaturgisk rekkefølge: '+key);prev=at;
+  if(!str(placement.note)||placement.note.length<300)fail('Mangler historiespesifikke notater: '+key+'/'+placement.slideId);
+  if(placement!==d.slides.at(-1)&&!placement.note.includes('Overgang:'))fail('Mangler overgang: '+key+'/'+placement.slideId);
  }
 }
 for(const file of ['docs/index.html','docs/assets/site.js','docs/assets/learning.js','docs/assets/presenter-export.js','docs/assets/site.css'])if(!fs.existsSync(file))fail('Mangler fil '+file);
