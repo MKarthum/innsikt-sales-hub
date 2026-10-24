@@ -198,14 +198,10 @@ function setMobileMenuOpen(open,{restoreFocus=false}={}){
  if(open)document.getElementById('sidebar-close')?.focus({preventScroll:true});
  else if(restoreFocus)toggle.focus({preventScroll:true});
 }
-function dismissLibraryFullscreenTarget(target){
- const overlay=document.querySelector('.slide-library-fullscreen-overlay');
- if(!overlay||!overlay.contains(target))return false;
- // The 16:9 scene itself and the link to its notes are the only non-dismiss areas.
- return !target.closest('.slide-library-fullscreen-stage,[data-slide-fullscreen-details]');
-}
 function closeModal(){
-  const returnFocus=document.getElementById('slide-library-fullscreen')?libraryFullscreenOpener:null;
+  const isLibraryFullscreen=!!document.getElementById('slide-library-fullscreen');
+  if(isLibraryFullscreen)fullscreenOpenGuardUntil=performance.now()+900;
+  const returnFocus=isLibraryFullscreen?libraryFullscreenOpener:null;
   libraryFullscreenOpener=null;
   presenterResizeObserver?.disconnect();presenterResizeObserver=null;
   if(document.fullscreenElement===document.getElementById('present-modal'))document.exitFullscreen().catch(()=>{});
@@ -243,7 +239,7 @@ function saveFeedback(){const t=document.getElementById('feedback-note')?.value.
 function exportFeedback(){const txt='# Innspill – Innsikt\n\n'+notes.map((n,i)=>`## ${i+1}. ${n.page} (${n.date})\n\n${n.text}\n`).join('\n');const b=new Blob([txt],{type:'text/markdown;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='innsikt-innspill.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Eksportert som Markdown.')}
 let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null,presentationThemeMode=(()=>{try{const value=localStorage.getItem('innsikt-presentation-tone');return ['light','strong','story'].includes(value)?value:'light'}catch{return 'light'}})();
 let libraryFilters={query:'',topic:'all',story:'all',scope:'all'},libraryFullscreenOpener=null;
-let fullscreenTouchStart=null,fullscreenGhostTap=null;
+let fullscreenOpenGuardUntil=0;
 function libraryTone(s,deckId){
  return window.InnsiktSlides.tone(s,D.pages.presentationDecks[deckId],presentationThemeMode);
 }
@@ -307,7 +303,7 @@ function slideLibraryResults(){
 }
 function openLibrarySlideFullscreen(id,opener){
  const s=D.slides.items.find(x=>x.id===id);
- if(!s)return;
+ if(!s||performance.now()<fullscreenOpenGuardUntil)return;
  const used=window.InnsiktSlides.usage(D.slides,D.pages.presentationDecks,s.id);
  const deckId=used[0]?.deckId||Object.keys(D.pages.presentationDecks)[0];
  const index=used[0]?.index||0;
@@ -317,7 +313,35 @@ function openLibrarySlideFullscreen(id,opener){
   +'<div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(deckId)+'" data-tone="'+esc(libraryTone(s,deckId))+'">'
   +slideMarkup(s,index,deckId)+'</div></div></div>';
  modal(s.title,content,true,'slide-library-fullscreen');
- document.querySelector('#overlay-root .overlay')?.classList.add('slide-library-fullscreen-overlay');
+ const overlay=document.querySelector('#overlay-root .overlay');
+ overlay?.classList.add('slide-library-fullscreen-overlay');
+ // Install real, direct event listeners rather than relying on document click
+ // delegation after iOS Safari transforms and retargets touch events.
+ const close=overlay?.querySelector('#slide-library-fullscreen .modal-close');
+ let dismissing=false;
+ const dismiss=(event,fromTouch=false)=>{
+  if(dismissing)return;
+  dismissing=true;
+  event?.preventDefault();
+  event?.stopImmediatePropagation();
+  // On touchend, keep the overlay mounted for the rest of the gesture.
+  // This prevents the same touch from hitting a newly exposed underlying slide.
+  if(fromTouch){
+   fullscreenOpenGuardUntil=performance.now()+900;
+   libraryFullscreenOpener=null; // Don't focus a new touch target beneath the finger.
+   window.setTimeout(closeModal,0);
+  }else closeModal();
+ };
+ close?.addEventListener('click',e=>dismiss(e));
+ close?.addEventListener('touchend',e=>dismiss(e,true),{passive:false});
+ overlay?.addEventListener('click',e=>{
+  if(e.target.closest('.slide-library-fullscreen-stage,.modal-close'))return;
+  dismiss(e);
+ });
+ overlay?.addEventListener('touchend',e=>{
+  if(e.target.closest('.slide-library-fullscreen-stage,.modal-close'))return;
+  dismiss(e,true);
+ },{passive:false});
  fitLibraryPreviews();
 }
 function updateSlideLibrary(){
@@ -671,41 +695,9 @@ function initPromptContextEvents(){
 }
 function initEvents(){
  document.addEventListener('fullscreenchange',presenterFullscreenChanged);
- // Never remove the overlay during pointerup: on iOS Safari the subsequent
- // synthetic click can then hit (and activate) the library card underneath.
- // Cancelling touchend suppresses that click. Mouse and keyboard keep click.
- document.addEventListener('touchstart',e=>{
-  fullscreenTouchStart=null;
-  if(!document.getElementById('slide-library-fullscreen')||e.touches.length!==1)return;
-  fullscreenTouchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
- },{capture:true,passive:true});
- document.addEventListener('touchend',e=>{
-  const start=fullscreenTouchStart;fullscreenTouchStart=null;
-  if(!start||e.changedTouches.length!==1||!document.getElementById('slide-library-fullscreen'))return;
-  const touch=e.changedTouches[0],distance=Math.hypot(touch.clientX-start.x,touch.clientY-start.y);
-  if(distance>18)return; // Dragging/scrolling is not a dismiss tap.
-  const hit=document.elementFromPoint(touch.clientX,touch.clientY);
-  if(!hit||!dismissLibraryFullscreenTarget(hit))return;
-  // On touch devices, close only after completing the gesture, and cancel
-  // compatibility mouse/click events before removing the dialog from the DOM.
-  if(e.cancelable)e.preventDefault();
-  e.stopImmediatePropagation();
-  fullscreenGhostTap={x:touch.clientX,y:touch.clientY,at:performance.now()};
-  closeModal();
- },{capture:true,passive:false});
+ // Fullscreen has its own direct handlers, installed on the dialog. This
+ // global handler must not alter the DOM mid-touch and risk a Safari ghost click.
  document.addEventListener('click',e=>{
-  // Defensive fallback for WebViews that ignore cancelled compatibility clicks.
-  // Consume only the click at the just-dismissed touch position, not later taps.
-  const ghost=fullscreenGhostTap;
-  if(ghost){
-   fullscreenGhostTap=null;
-   if(performance.now()-ghost.at<650&&Math.hypot(e.clientX-ghost.x,e.clientY-ghost.y)<22){
-    e.preventDefault();e.stopImmediatePropagation();return;
-   }
-  }
-  if(dismissLibraryFullscreenTarget(e.target)){
-   e.preventDefault();closeModal();return;
-  }
   if(e.target.closest('#sidebar-close,#sidebar-backdrop')){
    setMobileMenuOpen(false,{restoreFocus:true});return;
   }
