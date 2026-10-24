@@ -5,7 +5,7 @@ import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
 const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8')).items.length;
-const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','kilder','utvikling','prompter','horisont','trendradar'];
+const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','lysbilder','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const problems=[];
@@ -92,6 +92,27 @@ try {
   assert.ok(await page.locator('.result-item').count()>0,'søk på begrep');
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#search-input').count(),0,'lukke søk');
+  // Bibliotek: enhetlig ID, detaljvisning, kildepolicy og direkte åpning.
+  await page.evaluate(()=>{location.hash='#lysbilder'});
+  await page.locator('.slide-library-card').first().waitFor();
+  assert.equal(await page.locator('.slide-library-card').count(),15,label+': 15 migrerte lysbilder');
+  await page.locator('.slide-library-card[href="#lysbilder/portal-opening"]').click();
+  await page.locator('.slide-library-preview .present-frame').waitFor();
+  assert.equal(await page.locator('.slide-library-preview .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
+  const tonePair=await page.locator('.slide-library-preview .present-frame').evaluate(el=>{
+   const strong={bg:getComputedStyle(el).backgroundColor,fg:getComputedStyle(el).color};
+   el.dataset.tone='light';
+   const light={bg:getComputedStyle(el).backgroundColor,fg:getComputedStyle(el).color};
+   return {strong,light};
+  });
+  assert.notEqual(tonePair.strong.bg,tonePair.light.bg,label+': tema endrer bakgrunn');
+  assert.notEqual(tonePair.strong.fg,tonePair.light.fg,label+': tema endrer tilhørende tekstfarge');
+  await page.locator('[data-slide-open][data-deck-open="portal"]').click();
+  assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt hjelper oss fra usikkerhet'),label+': åpne bestemt lysbilde fra biblioteket');
+  await page.locator('#speaker-toggle').check();
+  assert.ok((await page.locator('#slide-speaker-notes').innerText()).includes('Overgang:'),label+': storiespesifikke notater følger lysbildet');
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('#present-modal').count(),0,label+': tilbake til bibliotek etter Presenter');
   await page.locator('#present-button').click();
   assert.equal(await page.locator('[data-deck]').count(),2,'To selvstendige Presenter-løp');
   assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt hjelper oss fra usikkerhet'),label+': løsningen presenteres først');
