@@ -69,3 +69,8 @@
 .library-tone-field select{appearance:auto;background:var(--surface);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:7px 30px 7px 10px;font:650 13px var(--font-body);max-width:220px}
 #present-modal .present-display-options .library-tone-field{margin:0;font-size:11px}
 #present-modal .present-display-options .library-tone-field select{font-size:11px;padding:4px 8px}
+
+/* Keep direction legible without forcing distinct platforms into identical lanes. */
+.vp-snow-sources,.vp-snow-shell,.vp-fabric-sources,.vp-fabric-shell,.vp-db-sources,.vp-db-ingest,.vp-db-lake,.vp-db-workloads{position:relative}
+.vp-snow-sources::after,.vp-snow-shell::after,.vp-fabric-sources::after,.vp-fabric-shell::after,.vp-db-sources::after,.vp-db-ingest::after,.vp-db-lake::after,.vp-db-workloads::after{content:'›';position:absolute;z-index:3;right:-1.12cqw;top:52%;transform:translate(32%,-50%);font:850 1.8cqw/1 var(--font-display);color:var(--pres-accent);pointer-events:none}
+.vp-db-lake::after{right:-1.0cqw}

@@ -53,6 +53,10 @@ try{
   if(s.profileId==='databricks')assert.equal(await stage.locator('.vp-medallion').count(),1,'Databricks medallion layout');
   await stage.screenshot({path:out+'/'+s.id+'.png'});
  }
+ await page.locator('#library-tone-mode').selectOption('strong');
+ await page.locator('.slide-library-detail-stage .present-frame[data-tone="strong"]').waitFor();
+ await page.locator('.slide-library-detail-stage').screenshot({path:out+'/architecture-databricks-dark.png'});
+ await page.locator('#library-tone-mode').selectOption('light');
  await page.locator('#present-button').click();
  assert.equal(await page.locator('#present-tone-mode').inputValue(),'light','Presenter shares library mode');
  await page.locator('[data-deck="dataarkitektur"]').click();
