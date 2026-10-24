@@ -100,6 +100,12 @@ try{
   const stage=p.locator('.slide-library-detail-stage');
   const scene=stage.locator('.story-scene');
   assert.equal(await scene.count(),1,'Custom scene for '+s.id);
+  if(s.id==='ai-pragmatic'){
+   assert.equal(await stage.locator('.v8-compare-option').count(),2,'Comparison keeps two equally visible methods');
+   assert.equal(await stage.locator('.v8-compare-metrics strong').count(),2,'Comparison shows two common measures');
+   assert.ok((await stage.locator('.v8-compare-boundary').innerText()).includes('ingen automatisk videresending'),'Comparison states explicit control boundary');
+   assert.ok((await stage.locator('.v8-compare-trial').innerText()).includes('Medarbeider vurderer'),'KI remains a proposal with human review');
+  }
   const inspect=async()=>stage.evaluate(node=>{
    const root=node.querySelector('.story-scene'),r=root.getBoundingClientRect();
    const matches=[...root.querySelectorAll('h2,h3,p,small,strong')].filter(x=>x.textContent?.trim());

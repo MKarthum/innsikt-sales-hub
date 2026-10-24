@@ -202,3 +202,24 @@
 /* Original, monochrome explanatory icons follow the foreground tone rather than a fixed brand green. */
 .v7-capability-icon{background:transparent;filter:grayscale(1) brightness(0)}
 .present-frame[data-tone="strong"] .v7-capability-icon{filter:grayscale(1) brightness(0) invert(1)}
+
+/* v0.17.3: A bounded comparison, not a three-step process. All content is data-owned. */
+.v8-comparison .v5-heading{margin:1.1cqw 0 1.45cqw}
+.v8-comparison .v5-heading .v2-headline{font-size:3.65cqw;line-height:1.08;max-width:100%}
+.v8-compare-context{display:grid;grid-template-columns:54% 44%;gap:2%;align-items:center;flex:0 0 auto;min-height:6.1cqw;padding:0 0 1.15cqw}
+.v8-compare-context>div{display:flex;flex-direction:column;gap:.55cqw}
+.v8-compare-context p{margin:0;font:600 1.62cqw/1.2 var(--font-body);color:var(--pres-muted)}
+.v8-compare-context>strong{font:810 2.45cqw/1.14 var(--font-display);letter-spacing:-.025em;color:var(--pres-fg)}
+.v8-compare-options{display:grid;grid-template-columns:1fr 1fr;gap:1.45cqw;flex:1 1 auto;min-height:0;position:relative}
+.v8-compare-option{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:.8cqw;padding:1.55cqw 2.15cqw;border-radius:.8cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 24%,transparent);background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg))}
+.v8-compare-trial{border-color:color-mix(in srgb,var(--pres-accent) 55%,transparent);background:color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg))}
+.v8-compare-option h3{font:810 2.8cqw/1.1 var(--font-display);letter-spacing:-.035em;margin:0}
+.v8-compare-option p{font:560 1.63cqw/1.24 var(--font-body);color:var(--pres-muted);margin:0}
+.v8-compare-metrics{display:grid;grid-template-columns:18% 82%;align-items:center;gap:0;margin-top:.95cqw;padding:1.0cqw 1.6cqw;border-radius:.65cqw;background:color-mix(in srgb,var(--pres-accent) 12%,var(--pres-bg));border:1px solid color-mix(in srgb,var(--pres-accent) 34%,transparent);flex:0 0 auto}
+.v8-compare-metrics>div{display:grid;grid-template-columns:1fr 1fr;gap:1cqw}
+.v8-compare-metrics strong{font:780 1.85cqw/1.12 var(--font-display);color:var(--pres-fg)}
+.v8-compare-boundary{display:grid;grid-template-columns:45% 53%;gap:2%;align-items:center;flex:0 0 auto;margin-top:.9cqw}
+.v8-compare-boundary>p{margin:0;padding:1.1cqw 1.4cqw;border-left:.42cqw solid var(--pres-accent);font:710 1.49cqw/1.23 var(--font-body);color:var(--pres-fg);background:color-mix(in srgb,var(--pres-fg) 4%,var(--pres-bg))}
+.v8-compare-boundary>div{display:flex;flex-direction:column;gap:.45cqw}
+.v8-compare-boundary strong{font:750 1.66cqw/1.19 var(--font-display);color:var(--pres-fg)}
+.v8-comparison .v5-footer{margin-top:.9cqw;padding-top:.75cqw;min-height:3cqw;font-size:1.5cqw}

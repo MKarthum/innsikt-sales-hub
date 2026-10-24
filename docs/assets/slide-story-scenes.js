@@ -7,6 +7,18 @@ function render(slide,{v,top,title,escs,assetImage,block}){
  const heading='<div class="v5-heading">'+title+'</div>';
  const icon=(id,cls='v5-icon')=>assetImage(id,cls);
  switch(v.layout){
+ case 'controlled-comparison': {
+  const option=(x,cls)=>section('v8-compare-option '+cls,
+   '<small>'+escs(x.label)+'</small><h3>'+escs(x.title)+'</h3><p>'+escs(x.detail)+'</p>');
+  return block('special v5-special v8-comparison',top+heading
+   +'<div class="v8-compare-context"><div><small>'+escs(v.exampleLabel)+'</small><p>'+escs(v.problem)+'</p></div>'
+   +'<strong>'+escs(v.hypothesis)+'</strong></div>'
+   +'<div class="v8-compare-options">'+option(v.baseline,'v8-compare-baseline')+option(v.trial,'v8-compare-trial')+'</div>'
+   +'<div class="v8-compare-metrics"><small>'+escs(v.measureLabel)+'</small><div>'
+   +v.measures.map(x=>'<strong>'+escs(x)+'</strong>').join('')+'</div></div>'
+   +'<div class="v8-compare-boundary"><p>'+escs(v.guardrail)+'</p><div><small>'+escs(v.decisionLabel)+'</small>'
+   +'<strong>'+escs(v.decision)+'</strong></div></div>'+footer(v.conclusion));
+ }
  case 'product-preview': {
   const x=v.preview;
   return block('special v5-special v5-product',top+heading

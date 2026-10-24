@@ -34,7 +34,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | data-meaning-customer | Hva betyr egentlig «kunde»? | «Kunde» betyr ikke nødvendigvis det samme for alle | Lar ulike forretningsdefinisjoner stå synlig mot samme begrep |
 | ai-good-vs-fast | Et overbevisende svar kan fortsatt være feil. | Et velformulert svar kan bygge på feil premisser | To muligheter vises side ved side og broen mellom dem presiseres |
 | ai-two-extremes | Vi må unngå to ytterpunkter. | Verken «bare KI» eller «fiks alt først» er en strategi | To muligheter vises side ved side og broen mellom dem presiseres |
-| ai-pragmatic | Skap verdi underveis. | Start med ett behov, test og bygg videre | Viser hvert handlingstrinn og hvorfor det gjøres |
+| ai-pragmatic | Avgrens testen før du investerer. | Test én oppgave før du bygger en stor løsning | Sammenligner manuell sortering og KI-forslag på samme mål, med menneskelig kontroll og beslutningsport |
 | ai-improve-data | KI kan også forbedre datagrunnlaget. | KI kan også hjelpe oss å forbedre dataene | Gjentatt forbedring vises som sløyfe fremfor sjekkliste |
 | insight-three-disciplines | Innsikt er mer enn én teknologi. | Data, analyse og KI skaper mer verdi i sammenheng | Tre faglige områder står separat med en felles, synlig konklusjon |
 | risk-and-trust | Kontroll må passe til risikoen. | Kontrollen må stå i forhold til konsekvensen av feil | Tre faglige områder står separat med en felles, synlig konklusjon |
