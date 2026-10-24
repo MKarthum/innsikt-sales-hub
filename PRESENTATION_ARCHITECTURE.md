@@ -62,3 +62,7 @@ Se SLIDE_VISUAL_REVIEW_2026-10-24.md for individuell evaluering og begrunnelse f
 ## 0.17.0: konkretisering av gjenstående generiske kort
 
 Fire lysbilder fikk spesialiserte, dataeide forklaringsscener for møtebrief, konkret kundespørsmål, fagsamspill og avgrenset avklaring. Figurreferanser skal bare eksistere når figuren brukes. Kontrakttesten tillater meningsbærende typografi/diagram uten dekorative ikoner og verifiserer også `stages[].assetId`. Se SLIDE_QUALITY_REVIEW_V017.md.
+
+## Bibliotekskort i skjermdekkende visning (v0.17.1)
+
+Et vanlig klikk på et lysbildekort viser det eksisterende kanoniske 16:9-lysbildeobjektet i en skjermdekkende dialog, uten å endre URL eller bibliotekets filtre. Knappen «Lukk», Escape og klikk på bakgrunnen returnerer fokus til det valgte kortet. «Notater og kilder» åpner den eksisterende detaljruten for direkte lenking. Kortets opprinnelige `href` beholdes som semantisk fallback, samt for åpning i ny fane med modifikasjonstaster. Ingen innholdskopi eller egen renderer.
