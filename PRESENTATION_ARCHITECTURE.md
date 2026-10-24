@@ -58,3 +58,13 @@ I biblioteket eier `speakerBase` den selvstendige faglige forklaringen. Hver his
 ### Visuell gjennomgang
 
 Etter første fullrendrede bibliotekrunde ble de lengste portal-/salgstitlene strammet inn og portalbroens visuelle symboler styrket. Formålet er å få naturlige linjebrudd og sikre at store interne flater har et kommunikativt tyngdepunkt. CI rendrer hver av de 30 ID-ene og sjekker tekstens grenser i tillegg til ordinære mobil-/presentertester.
+
+## Fortellingsstyrt presentasjonspalett (24.10.2026)
+
+Tidligere sprang mørk/lys-tonen tilfeldig mellom ulike lysbilder i en historie, fordi tonen lå i lysbildeobjektet. Nå er historienes visualStyle autoritativ for visning: defaultTone + beats (farge per fortellerdel). Mørkt brukes vanligvis som sterk åpning og landing; lysere flater ved utforskning og problemavklaring. Ingen tvunget 1:1-veksling. InnsiktSlides.tone er den felles oppløseren for Presenter, eksport og tester.
+
+Presenter tilbyr i tillegg Fortellingsstyrt (standard), Alltid lys og Alltid mørk. Dette er en presentasjonsinnstilling – ingen duplisering eller modifisering av lysbildeinnhold. Bibliotekets forhåndsvisning fortsetter å bruke lysbildets lokale tone som nøytral redigeringsreferanse.
+
+## Internt innhold
+
+INTERNAL_CONTENT_CONTRACT.md beskriver hvordan en separat tilgangsbeskyttet installasjon kan laste egne historier og lysbilder, samt reserverer typede samlinger for fremtidige interne løsninger og kundehistorier. Det finnes ikke interne kundedata i GitHub Pages. docs/data/deployment.json er låst til offentlig modus i publiseringsvalideringen, og krever beskyttet intern endepunktkonfigurasjon for intern distribusjon.

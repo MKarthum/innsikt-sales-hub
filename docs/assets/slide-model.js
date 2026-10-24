@@ -21,5 +21,10 @@ function resolve(library,deck,deckId){
   return {...slide,...entry,note:composeNotes(slide.speakerBase,entry)};
  });
 }
-window.InnsiktSlides={lookup,usage,resolve,composeNotes};
+function tone(slide,deck,mode='story'){
+ if(mode==='light'||mode==='strong')return mode;
+ if(mode!=='story')throw Error('Ukjent presentasjonsvisning: '+mode);
+ return deck?.visualStyle?.beats?.[slide.beat]||deck?.visualStyle?.defaultTone||slide.tone||'strong';
+}
+window.InnsiktSlides={lookup,usage,resolve,composeNotes,tone};
 })();

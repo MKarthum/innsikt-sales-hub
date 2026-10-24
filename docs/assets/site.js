@@ -211,7 +211,7 @@ function searchResults(q){const needle=q.toLocaleLowerCase('no').trim();let a=[.
 function feedback(){modal('Gi innspill til neste versjon',`<p class="fineprint">${esc(D.pages.copy.feedbackModalNotice)}</p><label class="input-label" for="feedback-note">Hva bør endres eller undersøkes?</label><textarea class="input" id="feedback-note" placeholder="Eksempel: Spørsmål 3 i salgsinngang 2 er for teknisk. Foreslå et enklere alternativ."></textarea><div class="detail-actions"><span class="fineprint">Side: ${esc(names[current])}</span><button class="btn dark" id="save-feedback">Lagre lokalt ${ico('check')}</button></div>`);document.getElementById('feedback-note').focus()}
 function saveFeedback(){const t=document.getElementById('feedback-note')?.value.trim();if(!t){toast('Skriv et innspill først.');return}notes.push({page:names[current],text:t,date:new Date().toISOString().slice(0,10)});try{localStorage.setItem('innsikt-feedback-v1',JSON.stringify(notes))}catch{toast('Lagring er blokkert i nettleseren. Kopier innspillet manuelt.');return}closeModal();toast('Innspillet er lagret lokalt. Eksporter før du bytter enhet.');if(current==='utvikling')render()}
 function exportFeedback(){const txt='# Innspill – Innsikt\n\n'+notes.map((n,i)=>`## ${i+1}. ${n.page} (${n.date})\n\n${n.text}\n`).join('\n');const b=new Blob([txt],{type:'text/markdown;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='innsikt-innspill.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Eksportert som Markdown.')}
-let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null;
+let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null,presentationThemeMode='story';
 let libraryFilters={query:'',topic:'all',story:'all',scope:'all'};
 function fitLibraryPreviews(){
  if(typeof document==='undefined'||!document.querySelectorAll)return;
@@ -243,7 +243,7 @@ function slideLibraryResults(){
     const deckId=used[0]?.deckId||'portal',idx=used[0]?.index||0;
     return '<a class="slide-library-card" href="#lysbilder/'+esc(s.id)+'">'
     +'<div class="slide-library-tile" data-slide-preview><div class="slide-library-mini"><div class="present-frame present-rich" data-tone="'+esc(s.tone||'strong')+'">'+slideMarkup(s,idx,deckId)+'</div></div></div>'
-    +'<div class="slide-library-card-body"><strong>'+esc(s.title)+'</strong><span class="slide-library-card-tag">'+esc(s.scope==='shared'?ui.sharedLabel:ui.storyLabel)+'</span>'
+    +'<div class="slide-library-card-body"><strong>'+esc(s.title)+'</strong><span class="slide-library-card-tag">'+(s.classification==='internal'?'Internt · ':'')+esc(s.scope==='shared'?ui.sharedLabel:ui.storyLabel)+'</span>'
     +'<small>'+esc(ui.useLabel)+': '+used.length+' · '+esc(s.id)+'</small></div></a>';
    }).join('')+'</div></section>';
  }).join('');
@@ -281,8 +281,8 @@ function slideLibraryPage(id){
  const uses=used.map(u=>'<section class="slide-library-usage"><strong>'+esc(u.deckLabel)+'</strong>'
    +'<p>'+esc(u.note)+'</p><button class="btn subtle" type="button" data-slide-open="'+esc(s.id)+'" data-deck-open="'+esc(u.deckId)+'">'+esc(ui.openLabel)+' '+ico('arrow-right')+'</button></section>').join('');
  return '<a class="text-link" href="#lysbilder">'+ico('arrow-left')+' '+esc(ui.returnLabel)+'</a>'
-   +hdr(ui.eyebrow,s.title,s.id+' · '+(s.topic||''))
-   +'<div class="slide-library-detail-stage" data-slide-preview><div class="present-frame present-rich" data-tone="'+esc(s.tone||'strong')+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
+   +hdr(ui.eyebrow,s.title,(s.classification==='internal'?'INTERNT · ':'')+s.id+' · '+(s.topic||''))
+   +'<p class="slide-library-tone-note">'+esc(ui.toneInfo)+'</p>'+'<div class="slide-library-detail-stage" data-slide-preview><div class="present-frame present-rich" data-tone="'+esc(s.tone||'strong')+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
    +'<div class="slide-library-info"><section><h2>'+esc(ui.speakerLabel)+'</h2>'+(note||'<p class="fineprint">Se notatene i historiene nedenfor.</p>')
    +'<h2>'+esc(ui.sourceLabel)+'</h2>'+sources+'</section>'
    +'<section><h2>'+esc(ui.useLabel)+'</h2>'+(uses||'<p class="fineprint">Ikke brukt i noen historie ennå.</p>')+'</section></div>';
@@ -392,17 +392,18 @@ function enablePresenterSwipe(){
 function showSlide(){
  const slides=presentationSlides(),s=slides[slide];if(!s)return;
  const frame=document.getElementById('slide-body');
- if(frame.setAttribute)frame.setAttribute('data-tone',s.tone||'strong');
+ if(frame.setAttribute)frame.setAttribute('data-tone',window.InnsiktSlides.tone(s,D.pages.presentationDecks[selectedDeck],presentationThemeMode));
  frame.innerHTML=slideMarkup(s,slide,selectedDeck);
  window.InnsiktGlossary?.enhance(document.getElementById('slide-body'));
  document.getElementById('slide-counter').textContent=(slide+1)+' av '+slides.length;
  document.getElementById('slide-prev').disabled=slide===0;
  document.getElementById('slide-next').disabled=slide===slides.length-1;
  const hint=document.getElementById('deck-context');
- if(hint)hint.textContent=D.pages.presentationDecks[selectedDeck].intro||'';
+ if(hint){const deck=D.pages.presentationDecks[selectedDeck];hint.textContent=(deck.classification==='internal'?'INTERNT · ':'')+(deck.intro||'');}
  const note=document.getElementById('slide-speaker-notes');
  if(note)note.innerHTML=showSpeakerNotes&&s.note?'<strong>Presentatørnotat</strong><p>'+esc(s.note)+'</p>':'';
  if(note)note.hidden=!showSpeakerNotes||!s.note;
+ const themeSelector=document.getElementById('present-tone-mode');if(themeSelector)themeSelector.value=presentationThemeMode;
  document.querySelectorAll('[data-deck]').forEach(b=>{
   b.classList.toggle('active',b.dataset.deck===selectedDeck);
   b.setAttribute('aria-pressed',String(b.dataset.deck===selectedDeck));
@@ -416,19 +417,25 @@ function copyDeckPrompt(id){
 }
 function exportPresentation(mode){
  const deck=D.pages.presentationDecks[selectedDeck];
+ if(deck.classification==='internal'&&!window.confirm('Internt innhold: Eksporten kan deles utenfor den beskyttede løsningen. Lagre og del bare etter virksomhetens retningslinjer. Vil du fortsette?'))return;
+
  return window.InnsiktPresenterExport.exportDeck({
   id:selectedDeck,label:deck.label,notice:deck.intro||'',version:D.meta.version,
   slides:presentationSlides().map((s,i)=>slideMarkup(s,i,selectedDeck)),
-  tones:presentationSlides().map(s=>s.tone||'strong')
+  tones:presentationSlides().map(s=>window.InnsiktSlides.tone(s,deck,presentationThemeMode)),
+  classification:deck.classification==='internal'?'internal':'public'
  },mode).then(()=>{if(mode==='html')toast('Presentasjonen er lastet ned som HTML.');})
  .catch(e=>toast('Kunne ikke eksportere: '+e.message));
 }
 function presentation(deckId='innsikt',initialSlide=0){
- selectedDeck=deckId;slide=Math.max(0,Math.min(initialSlide,presentationSlides().length-1));showSpeakerNotes=false;
+ selectedDeck=deckId;slide=Math.max(0,Math.min(initialSlide,presentationSlides().length-1));showSpeakerNotes=false;presentationThemeMode='story';
  const choices=Object.entries(D.pages.presentationDecks).map(([id,d])=>
-  '<button class="deck-option '+(id===selectedDeck?'active':'')+'" type="button" data-deck="'+esc(id)+'" aria-pressed="'+(id===selectedDeck)+'">'+esc(d.label)+'</button>'
+  '<button class="deck-option '+(id===selectedDeck?'active':'')+'" type="button" data-deck="'+esc(id)+'" aria-pressed="'+(id===selectedDeck)+'">'+(d.classification==='internal'?'Internt · ':'')+esc(d.label)+'</button>'
  ).join('');
  const markup='<div class="deck-controls" role="group" aria-label="Velg presentasjonsløp">'+choices+'</div>'
+  +'<div class="present-display-options"><label for="present-tone-mode">Fargevisning</label><select id="present-tone-mode" aria-label="Velg fargevisning">'
+  +'<option value="story">Fortellingsstyrt</option><option value="light">Alltid lys</option><option value="strong">Alltid mørk</option></select>'
+  +'<span>Fortellingsstyrt skifter ved kapitteloverganger.</span></div>'
   +'<p id="deck-context" class="deck-context"></p>'
   +'<div class="present-stage" id="present-stage"><div class="present-frame present-rich" id="slide-body" aria-live="polite"></div></div>'
   +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev" aria-label="Forrige lysbilde">'+ico('arrow-left')+' <span>Forrige</span></button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next" aria-label="Neste lysbilde"><span>Neste</span> '+ico('arrow-right')+'</button><button class="btn subtle" type="button" id="present-fullscreen-toggle" aria-label="Vis i fullskjerm" aria-pressed="false" title="Vis i fullskjerm">'+ico('maximize')+' <span>Fullskjerm</span></button></div>'
@@ -503,7 +510,11 @@ function refreshPromptFromContext(){
 }
 function initPromptContextEvents(){
  document.addEventListener('input',e=>{if(e.target.matches?.('[data-slide-search]')){libraryFilters.query=e.target.value;updateSlideLibrary()}});
- document.addEventListener('change',e=>{const select=e.target.closest?.('[data-slide-filter]');if(select){libraryFilters[select.dataset.slideFilter]=select.value;updateSlideLibrary()}});
+ document.addEventListener('change',e=>{
+  if(e.target.id==='present-tone-mode'){presentationThemeMode=e.target.value;showSlide();return;}
+  const select=e.target.closest?.('[data-slide-filter]');
+  if(select){libraryFilters[select.dataset.slideFilter]=select.value;updateSlideLibrary();}
+ });
  document.addEventListener('input',e=>{
   const field=e.target.closest('[data-context-var]');
   if(field){
@@ -563,6 +574,12 @@ if(toggled){
  return;
 }
 if(e.target.matches('#speaker-toggle')){showSpeakerNotes=e.target.checked;showSlide();return}if(e.target.matches('[data-qualify]')){let id=Number(e.target.dataset.qualify);if(e.target.checked)selectedChecklist.add(id);else selectedChecklist.delete(id);document.getElementById('qualify-progress').style.width=(selectedChecklist.size/qualification().length*100)+'%';document.getElementById('progress-count').textContent=selectedChecklist.size+' av 6 belyst';document.getElementById('qualify-message').textContent=qualificationMessage()}});document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!document.querySelector('.overlay'))search()}});window.addEventListener('hashchange',render)}
-async function init(){document.querySelectorAll('[data-icon]').forEach(x=>x.innerHTML=ico(x.dataset.icon));try{const namesOfFiles=['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides'];const files=await Promise.all(namesOfFiles.map(async name=>{const response=await fetch('./data/'+name+'.json',{cache:'no-store'});if(!response.ok)throw new Error(name+': HTTP '+response.status);return response.json()}));const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides]=files;D=window.InnsiktContent.materialize({meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides});names=D.pages.navigation;document.querySelectorAll('[data-nav-label]').forEach(el=>{el.textContent=names[el.dataset.navLabel]||''});document.querySelectorAll('[data-nav-group]').forEach(el=>el.textContent=D.pages.navigationGroups[el.dataset.navGroup]||'');document.getElementById('sidebar-notice').textContent=D.pages.site.publicNotice;document.getElementById('version-label').textContent=D.meta.version;document.getElementById('footer-status').textContent='Oppdatert '+D.meta.released;document.getElementById('backlog-count').textContent=D.backlog.filter(x=>x.status!=='lukket').length;window.InnsiktPromptContext.configure(D.prompts);initEvents();initPromptContextEvents();enablePresenterSwipe();window.InnsiktGlossary?.init(D.learning.glossary);render()}catch(e){document.getElementById('main').innerHTML=`<section class="panel"><h1>Kunne ikke laste nettsidens data</h1><p>Start en lokal webserver i prosjektmappen, for eksempel <code>python3 -m http.server 8000</code>. Åpne deretter <code>http://localhost:8000/docs/</code>.</p><p class="fineprint">${esc(e.message)}</p></section>`;console.error(e)}}
+async function init(){document.querySelectorAll('[data-icon]').forEach(x=>x.innerHTML=ico(x.dataset.icon));try{const namesOfFiles=['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides'];const files=await Promise.all(namesOfFiles.map(async name=>{const response=await fetch('./data/'+name+'.json',{cache:'no-store'});if(!response.ok)throw new Error(name+': HTTP '+response.status);return response.json()}));const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides]=files;
+ const deploymentResponse=await fetch('./data/deployment.json',{cache:'no-store'});
+ if(!deploymentResponse.ok)throw Error('Mangler distribusjonskonfigurasjon');
+ const deployment=await deploymentResponse.json();
+ const protectedContent=await window.InnsiktPresentationContent.load(deployment);
+ const raw={meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides};
+ D=window.InnsiktContent.materialize(window.InnsiktPresentationContent.combine(raw,protectedContent));names=D.pages.navigation;document.querySelectorAll('[data-nav-label]').forEach(el=>{el.textContent=names[el.dataset.navLabel]||''});document.querySelectorAll('[data-nav-group]').forEach(el=>el.textContent=D.pages.navigationGroups[el.dataset.navGroup]||'');document.getElementById('sidebar-notice').textContent=protectedContent?'Intern arbeidsflate – vis og del bare innenfor godkjente områder.':D.pages.site.publicNotice;document.getElementById('version-label').textContent=D.meta.version;document.getElementById('footer-status').textContent='Oppdatert '+D.meta.released;document.getElementById('backlog-count').textContent=D.backlog.filter(x=>x.status!=='lukket').length;window.InnsiktPromptContext.configure(D.prompts);initEvents();initPromptContextEvents();enablePresenterSwipe();window.InnsiktGlossary?.init(D.learning.glossary);render()}catch(e){document.getElementById('main').innerHTML=`<section class="panel"><h1>Kunne ikke laste nettsidens data</h1><p>Start en lokal webserver i prosjektmappen, for eksempel <code>python3 -m http.server 8000</code>. Åpne deretter <code>http://localhost:8000/docs/</code>.</p><p class="fineprint">${esc(e.message)}</p></section>`;console.error(e)}}
 init();
 })();
