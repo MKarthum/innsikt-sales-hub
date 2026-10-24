@@ -66,3 +66,7 @@ Fire lysbilder fikk spesialiserte, dataeide forklaringsscener for møtebrief, ko
 ## Bibliotekskort i skjermdekkende visning (v0.17.1)
 
 Et vanlig klikk på et lysbildekort viser det eksisterende kanoniske 16:9-lysbildeobjektet i en skjermdekkende dialog, uten å endre URL eller bibliotekets filtre. Knappen «Lukk», Escape og klikk på bakgrunnen returnerer fokus til det valgte kortet. «Notater og kilder» åpner den eksisterende detaljruten for direkte lenking. Kortets opprinnelige `href` beholdes som semantisk fallback, samt for åpning i ny fane med modifikasjonstaster. Ingen innholdskopi eller egen renderer.
+
+## 0.17.2 – mobil lukking
+
+Bibliotekets skjermdekkende visning lukkes på touch-`pointerup` ved trykk utenfor 16:9-flaten eller på «Lukk», med `click` og Escape som alternativer. Det gir én entydig lukkemekanisme selv der mobil Safari ikke leverer forventet syntetisk click. Dette påvirker ikke lenken til notater/kilder. Mobilens hovedmeny har egen tilgjengelig lukkeknapp, et backdrop med trykk-utenfor og Escape, med fokus tilbake til menyknappen.

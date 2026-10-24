@@ -668,3 +668,17 @@ textarea.prompt-var-input{min-height:78px}
 /* Make parent-level breadcrumb navigation discoverable and keyboard-accessible. */
 .breadcrumb-trail a{color:var(--teal);font-weight:650;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
 .breadcrumb-trail a:hover,.breadcrumb-trail a:focus-visible{text-decoration-color:currentColor}
+
+/* Mobilnavigasjon: egen lukkehandling og en tappbar bakgrunn. */
+.sidebar-close,.sidebar-backdrop{display:none}
+@media(max-width:820px){
+ .sidebar-close{position:absolute;top:16px;right:12px;display:flex;align-items:center;gap:6px;
+  min-height:44px;padding:8px 11px;border:1px solid #4b7680;border-radius:9px;
+  color:#effafb;background:#204653;font:700 12px var(--font-body);z-index:2;touch-action:manipulation}
+ .sidebar-close svg{width:17px;height:17px}
+ .sidebar-backdrop{position:fixed;inset:0;z-index:35;display:block;background:#061b2d99;
+  border:0;border-radius:0;margin:0;padding:0;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s,visibility .18s}
+ .sidebar-backdrop.open{visibility:visible;opacity:1;pointer-events:auto}
+ .sidebar{z-index:40}
+}
+@media(prefers-reduced-motion:reduce){.sidebar-backdrop{transition:none}}
