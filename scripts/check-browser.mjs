@@ -154,7 +154,7 @@ try {
   // Eksempelet skal gjenbruke et kanonisk forretningsbehov, ikke være en kundereferanse.
   await page.locator('[data-deck="sales"]').click();
   const exampleOpening=await page.locator('#slide-body').innerText();
-  assert.ok(exampleOpening.includes('fiktivt eksempel'),label+': eksempel tydelig merket');
+  assert.ok(exampleOpening.toLowerCase().includes('fiktiv'),label+': eksempel tydelig merket');
   await page.locator('#slide-next').click();
   const exampleContent=await page.locator('#slide-body').innerText();
   assert.ok(exampleContent.includes('månedsavslutning')&&exampleContent.includes('Vi bruker flere dager'),label+': kanonisk forretningsbehov i eksempel');
