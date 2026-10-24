@@ -160,7 +160,7 @@ try {
   assert.ok(exampleContent.includes('månedsavslutning')&&exampleContent.includes('Vi bruker flere dager'),label+': kanonisk forretningsbehov i eksempel');
   await page.locator('#slide-next').click();
   const explanation=await page.locator('#slide-body').innerText();
-  assert.ok(explanation.includes('Et symptom kan ha flere årsaker'),label+': årsaker vurderes etter symptomet');
+  assert.ok(explanation.includes(canonicalSlideTitles.get('sales-hypotheses')),label+': årsaker vurderes etter symptomet');
   // Eksempelløpet må peke til en faktisk tilgjengelig, kanonisk prompt.
   await page.locator('#slide-next').click();
   await page.locator('#slide-next').click();
