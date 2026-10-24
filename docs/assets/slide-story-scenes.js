@@ -9,7 +9,10 @@ function render(slide,{v,top,title,escs,assetImage,block}){
  switch(v.layout){
  case 'controlled-comparison': {
   const option=(x,cls)=>section('v8-compare-option '+cls,
-   '<small>'+escs(x.label)+'</small><h3>'+escs(x.title)+'</h3><p>'+escs(x.detail)+'</p>');
+   '<small>'+escs(x.label)+'</small><h3>'+escs(x.title)+'</h3><p>'+escs(x.detail)+'</p>'
+   +'<ol class="v8-compare-flow" aria-label="Arbeidsflyt">'
+   +x.flow.map((step,i)=>'<li'+(cls==='v8-compare-trial'&&i===2?' class="v8-compare-human"':'')+'>'+escs(step)+'</li>').join('')
+   +'</ol>');
   return block('special v5-special v8-comparison',top+heading
    +'<div class="v8-compare-context"><div><small>'+escs(v.exampleLabel)+'</small><p>'+escs(v.problem)+'</p></div>'
    +'<strong>'+escs(v.hypothesis)+'</strong></div>'

@@ -710,16 +710,18 @@
         "baseline": {
           "label": "DAGENS ARBEID",
           "title": "Medarbeider sorterer",
-          "detail": "Mål riktige valg og tidsbruk."
+          "detail": "Registrer valg og tidsbruk.",
+          "flow": ["Henvendelse", "Medarbeider velger", "Valgt team"]
         },
         "trial": {
           "label": "AVGRENSET TEST",
           "title": "KI foreslår team",
-          "detail": "Medarbeider vurderer hvert forslag."
+          "detail": "Medarbeider vurderer hvert forslag.",
+          "flow": ["Henvendelse", "KI foreslår", "Medarbeider avgjør", "Valgt team"]
         },
         "measureLabel": "SAMMENLIGN",
         "measures": [
-          "Riktig team",
+          "Treff mot avtalt fasit",
           "Tid per henvendelse"
         ],
         "guardrail": "Kun godkjente testdata · ingen automatisk videresending",

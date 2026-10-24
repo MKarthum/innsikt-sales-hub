@@ -223,3 +223,18 @@
 .v8-compare-boundary>div{display:flex;flex-direction:column;gap:.45cqw}
 .v8-compare-boundary strong{font:750 1.66cqw/1.19 var(--font-display);color:var(--pres-fg)}
 .v8-comparison .v5-footer{margin-top:.9cqw;padding-top:.75cqw;min-height:3cqw;font-size:1.5cqw}
+
+/* Show the actual work difference; cards are not decorative containers. */
+.v8-compare-option{justify-content:flex-start;gap:.7cqw;padding-top:1.5cqw}
+.v8-compare-flow{list-style:none;display:flex;gap:.8cqw;align-items:stretch;
+ padding:0;margin:auto 0 0;min-height:5.5cqw}
+.v8-compare-flow li{position:relative;display:flex;align-items:center;justify-content:center;
+ flex:1 1 0;min-width:0;text-align:center;padding:.65cqw .3cqw;
+ font:720 1.34cqw/1.18 var(--font-body);color:var(--pres-fg);
+ border-radius:.5cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 22%,transparent);
+ background:color-mix(in srgb,var(--pres-bg) 90%,var(--pres-fg))}
+.v8-compare-flow li:not(:last-child)::after{content:"›";position:absolute;
+ left:calc(100% + .15cqw);top:50%;transform:translateY(-50%);
+ font:900 1.8cqw/1 var(--font-display);color:var(--pres-accent)}
+.v8-compare-flow .v8-compare-human{border-color:var(--pres-accent);
+ background:color-mix(in srgb,var(--pres-accent) 18%,var(--pres-bg))}

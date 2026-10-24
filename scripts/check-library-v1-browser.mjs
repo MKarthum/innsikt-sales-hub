@@ -102,6 +102,9 @@ try{
   assert.equal(await scene.count(),1,'Custom scene for '+s.id);
   if(s.id==='ai-pragmatic'){
    assert.equal(await stage.locator('.v8-compare-option').count(),2,'Comparison keeps two equally visible methods');
+   assert.equal(await stage.locator('.v8-compare-baseline .v8-compare-flow li').count(),3,'Baseline shows the real human workflow');
+   assert.equal(await stage.locator('.v8-compare-trial .v8-compare-flow li').count(),4,'Trial makes the human decision visible');
+   assert.ok((await stage.locator('.v8-compare-human').innerText()).includes('Medarbeider avgjør'),'Human remains decision-maker');
    assert.equal(await stage.locator('.v8-compare-metrics strong').count(),2,'Comparison shows two common measures');
    assert.ok((await stage.locator('.v8-compare-boundary').innerText()).includes('ingen automatisk videresending'),'Comparison states explicit control boundary');
    assert.ok((await stage.locator('.v8-compare-trial').innerText()).includes('Medarbeider vurderer'),'KI remains a proposal with human review');
