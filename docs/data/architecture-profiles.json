@@ -240,8 +240,8 @@
       "kind": "vendor",
       "vendorId": "snowflake",
       "eyebrow": "EKSEMPEL · SNOWFLAKE",
-      "label": "Snowflake + dbt: typisk datastack",
-      "intro": "Representative byggeklosser, ikke en anbefalt fasit for alle kunder.",
+      "label": "Snowflake: delte data, flere bruksflater",
+      "intro": "Eksempel: kunde- og transaksjonsdata til styringsinformasjon, intern app og KI.",
       "sources": [
         {
           "label": "ERP / økonomi",
@@ -314,15 +314,111 @@
         }
       ],
       "footer": "dbt er en valgfri modelleringskomponent; Dynamic Tables og Snowpark er andre muligheter.",
-      "brandNotice": "dbt™ og dbt-logoen er varemerker til dbt Labs, Inc. Ingen tilknytning."
+      "brandNotice": "dbt™ og dbt-logoen er varemerker til dbt Labs, Inc. Ingen tilknytning.",
+      "variant": "snowflake-hub",
+      "diagram": {
+        "sourceTitle": "VIRKSOMHETSDATA",
+        "sources": [
+          {
+            "label": "ERP / finans",
+            "assetId": "source-erp"
+          },
+          {
+            "label": "CRM / kunde",
+            "assetId": "source-crm"
+          },
+          {
+            "label": "Event / SaaS",
+            "assetId": "source-stream"
+          }
+        ],
+        "brand": "snowflake",
+        "workspaceTitle": "SNOWFLAKE DATA CLOUD",
+        "ingestTitle": "Inntak og deling",
+        "ingest": [
+          {
+            "label": "Snowpipe",
+            "sub": "Batch / filer",
+            "assetId": "source-files"
+          },
+          {
+            "label": "Streaming",
+            "sub": "Hendelser",
+            "assetId": "source-stream"
+          },
+          {
+            "label": "Shares / Openflow",
+            "sub": "Tilgang / flyt",
+            "assetId": "source-api"
+          }
+        ],
+        "coreTitle": "Felles datagrunnlag",
+        "coreText": "Raw → curated → marts",
+        "transformTitle": "Modellering og behandling",
+        "transform": [
+          {
+            "label": "dbt",
+            "sub": "SQL-modeller og tester",
+            "assetId": "dbt"
+          },
+          {
+            "label": "Dynamic Tables",
+            "sub": "Deklarative oppdateringer",
+            "assetId": "core-transform"
+          },
+          {
+            "label": "Snowpark",
+            "sub": "Python / SQL",
+            "assetId": "support-code"
+          }
+        ],
+        "outputTitle": "BRUKSFLATER",
+        "outputs": [
+          {
+            "label": "Streamlit",
+            "sub": "Intern datapp",
+            "assetId": "streamlit"
+          },
+          {
+            "label": "Power BI / BI",
+            "sub": "Rapporter",
+            "assetId": "power-bi"
+          },
+          {
+            "label": "Cortex AI",
+            "sub": "Assistert innsikt",
+            "assetId": "consume-ai"
+          }
+        ],
+        "supportTitle": "Tverrgående ansvar",
+        "support": [
+          {
+            "label": "Horizon / RBAC",
+            "assetId": "support-security"
+          },
+          {
+            "label": "Katalog og lineage",
+            "assetId": "support-catalog"
+          },
+          {
+            "label": "Tasks / CI-CD",
+            "assetId": "support-jobs"
+          },
+          {
+            "label": "Cost & monitoring",
+            "assetId": "support-observe"
+          }
+        ],
+        "foot": "dbt, Streamlit og Cortex er eksempler på mulige komponenter – ikke obligatoriske deler av hver løsning."
+      }
     },
     {
       "id": "fabric",
       "kind": "vendor",
       "vendorId": "fabric",
       "eyebrow": "EKSEMPEL · MICROSOFT FABRIC",
-      "label": "Fabric: integrert data- og analyseflyt",
-      "intro": "OneLake knytter sammen flere arbeidsflater og analysebehov.",
+      "label": "Fabric: flere arbeidsflater over OneLake",
+      "intro": "Eksempel: transaksjoner og sanntidshendelser gir ulike veier til analyse og handling.",
       "sources": [
         {
           "label": "ERP / økonomi",
@@ -394,15 +490,102 @@
           "assetId": "support-observe"
         }
       ],
-      "footer": "Fabric er integrert, men valg av Lakehouse, Warehouse og KI avhenger av oppgaven."
+      "footer": "Fabric er integrert, men valg av Lakehouse, Warehouse og KI avhenger av oppgaven.",
+      "variant": "fabric-experiences",
+      "diagram": {
+        "sourceTitle": "KILDER",
+        "sources": [
+          {
+            "label": "ERP / CRM",
+            "assetId": "source-erp"
+          },
+          {
+            "label": "SQL / filer",
+            "assetId": "tabler-database"
+          },
+          {
+            "label": "Hendelser",
+            "assetId": "source-stream"
+          }
+        ],
+        "brand": "fabric",
+        "platformTitle": "MICROSOFT FABRIC",
+        "topTitle": "Inntak og sanntid",
+        "ingest": [
+          {
+            "label": "Data Factory",
+            "sub": "Pipelines / Dataflows",
+            "assetId": "data-factory"
+          },
+          {
+            "label": "Real-Time Intelligence",
+            "sub": "Eventstream / Eventhouse",
+            "assetId": "fabric-rti"
+          }
+        ],
+        "workloadTitle": "Beregning og modellering",
+        "workloads": [
+          {
+            "label": "Lakehouse",
+            "sub": "Spark / notebooks",
+            "assetId": "fabric"
+          },
+          {
+            "label": "Warehouse",
+            "sub": "T-SQL / modeller",
+            "assetId": "fabric-warehouse"
+          }
+        ],
+        "lakeTitle": "OneLake",
+        "lakeDescription": "Felles logisk datagrunnlag · shortcuts / Delta",
+        "lakeAsset": "fabric-onelake",
+        "outputTitle": "KONSUM & HANDLING",
+        "outputs": [
+          {
+            "label": "Power BI",
+            "sub": "Semantikk / rapporter",
+            "assetId": "power-bi"
+          },
+          {
+            "label": "Data agents",
+            "sub": "Spørsmål på data",
+            "assetId": "consume-ai"
+          },
+          {
+            "label": "Activator",
+            "sub": "Varsler / handling",
+            "assetId": "fabric-rti"
+          }
+        ],
+        "supportTitle": "Felles tjenestelag",
+        "support": [
+          {
+            "label": "Entra / RBAC",
+            "assetId": "support-security"
+          },
+          {
+            "label": "OneLake Catalog",
+            "assetId": "support-catalog"
+          },
+          {
+            "label": "Deployment pipelines",
+            "assetId": "support-jobs"
+          },
+          {
+            "label": "Monitoring",
+            "assetId": "support-observe"
+          }
+        ],
+        "foot": "Ikke alle Fabric-produkter må brukes; sanntidssporet og analysearbeidsflatene løser forskjellige behov."
+      }
     },
     {
       "id": "databricks",
       "kind": "vendor",
       "vendorId": "databricks",
       "eyebrow": "EKSEMPEL · DATABRICKS",
-      "label": "Databricks: lakehouse til BI og KI",
-      "intro": "Felles styring av databehandling, analyse og modeller.",
+      "label": "Databricks: lakehouse med to konsumløp",
+      "intro": "Eksempel: batch og hendelser foredles før BI og applikasjoner / modeller bruker dataene.",
       "sources": [
         {
           "label": "ERP / økonomi",
@@ -473,7 +656,106 @@
           "assetId": "support-observe"
         }
       ],
-      "footer": "Et eksempel: Databricks kan også kobles til eksterne BI-verktøy og datakilder."
+      "footer": "Et eksempel: Databricks kan også kobles til eksterne BI-verktøy og datakilder.",
+      "variant": "databricks-medallion",
+      "diagram": {
+        "sourceTitle": "KILDER",
+        "sources": [
+          {
+            "label": "SaaS / database",
+            "assetId": "source-crm"
+          },
+          {
+            "label": "Filer / IoT",
+            "assetId": "source-files"
+          },
+          {
+            "label": "Streaming",
+            "assetId": "source-stream"
+          }
+        ],
+        "brand": "databricks",
+        "ingestTitle": "Inntak",
+        "ingest": [
+          {
+            "label": "Lakeflow Connect",
+            "sub": "Kilder og CDC",
+            "assetId": "db-lakeflow"
+          },
+          {
+            "label": "Auto Loader",
+            "sub": "Filer / hendelser",
+            "assetId": "source-files"
+          }
+        ],
+        "lakeTitle": "DELTA LAKEHOUSE",
+        "lakeAsset": "db-delta-lake",
+        "tiers": [
+          {
+            "label": "Bronze",
+            "sub": "Rådata"
+          },
+          {
+            "label": "Silver",
+            "sub": "Kvalitet"
+          },
+          {
+            "label": "Gold",
+            "sub": "Dataprodukter"
+          }
+        ],
+        "workloadTitle": "Spørring og KI",
+        "workloads": [
+          {
+            "label": "Databricks SQL",
+            "sub": "Warehouse / SQL",
+            "assetId": "tabler-database"
+          },
+          {
+            "label": "Mosaic AI",
+            "sub": "ML / agent / serving",
+            "assetId": "db-mosaic-ai"
+          }
+        ],
+        "outputTitle": "BRUKSFLATER",
+        "outputs": [
+          {
+            "label": "AI/BI Genie",
+            "sub": "Analyse / spørsmål",
+            "assetId": "db-genie"
+          },
+          {
+            "label": "Ekstern BI",
+            "sub": "Dashboards",
+            "assetId": "consume-report"
+          },
+          {
+            "label": "Databricks Apps",
+            "sub": "Data- og KI-apper",
+            "assetId": "consume-app"
+          }
+        ],
+        "supportTitle": "Governing & operating",
+        "support": [
+          {
+            "label": "Unity Catalog",
+            "assetId": "db-unity-catalog"
+          },
+          {
+            "label": "Lakeflow Jobs",
+            "assetId": "db-lakeflow"
+          },
+          {
+            "label": "MLflow",
+            "assetId": "db-mlflow"
+          },
+          {
+            "label": "Observability",
+            "assetId": "support-observe"
+          }
+        ],
+        "foot": "Databricks på ulike skyer kan kobles til mange eksterne tjenester. To konsumløp er illustrasjoner, ikke et krav."
+      }
     }
   ]
 }
