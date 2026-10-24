@@ -114,7 +114,7 @@ try {
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#present-modal').count(),0,label+': tilbake til bibliotek etter Presenter');
   await page.locator('#present-button').click();
-  assert.equal(await page.locator('[data-deck]').count(),2,'To selvstendige Presenter-løp');
+  assert.equal(await page.locator('[data-deck]').count(),3,'Tre selvstendige Presenter-løp');
   assert.ok((await page.locator('#slide-body').innerText()).includes('Innsikt hjelper oss fra usikkerhet'),label+': løsningen presenteres først');
   for(const deck of ['portal','sales']) {
    await page.locator('[data-deck="'+deck+'"]').click();

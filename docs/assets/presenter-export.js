@@ -58,7 +58,9 @@ async function exportDeck(data,mode='html'){
  try{
   const response=await fetch('./assets/site.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!response.ok)throw Error('Kunne ikke hente presentasjonsstil');
-  const html=build(data,await response.text());
+  const visuals=await fetch('./assets/slide-visuals.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
+  if(!visuals.ok)throw Error('Kunne ikke hente lysbildestil');
+  const html=build(data,(await response.text())+'\n'+(await visuals.text()));
   if(mode==='print'){win.document.open();win.document.write(html);win.document.close();win.focus();return;}
   const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
   const link=document.createElement('a');link.href=url;link.download='innsikt-'+data.id+'-v'+data.version+'.html';

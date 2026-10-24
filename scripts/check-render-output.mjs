@@ -66,6 +66,7 @@ sandbox.window.InnsiktPromptContext.configure(fixture.prompts);
 vm.runInContext(read('docs/assets/prompts.js'),sandbox,{timeout:3000,filename:'prompts.js'});
 vm.runInContext(read('docs/assets/horizon.js'),sandbox,{timeout:3000,filename:'horizon.js'});
 vm.runInContext(read('docs/assets/slide-model.js'),sandbox,{timeout:3000,filename:'slide-model.js'});
+vm.runInContext(read('docs/assets/slide-visuals.js'),sandbox,{timeout:3000,filename:'slide-visuals.js'});
 vm.runInContext(instrumented,sandbox,{timeout:3000,filename:'site.js'});
 let entries;
 try {entries=vm.runInContext('__renderAll()',sandbox,{timeout:8000});}

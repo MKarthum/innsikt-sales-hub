@@ -470,6 +470,53 @@
           "note": "Avslutt med to konkrete steder i portalen, ikke en ny forelesning: «Det vi nettopp viste, finnes der: et illustrativt økonomibehov under Forretningsbehov og prompten ‘Forbered en behovssamtale’ i promptbiblioteket.» Det er ikke en kundereferanse og heller ikke en påstand om resultatet av et virkelig prosjekt. Poenget er at faglig innhold og praktiske verktøy nå henger sammen slik at brukeren kan gå fra et signal til en mer meningsfull handling. For et faktisk oppdrag må kundens fakta og faglige behov kontrolleres separat. Avslutt her."
         }
       ]
+    },
+    "analytikere": {
+      "label": "Tusen nye analytikere · visuell pilot",
+      "audience": "Selgere og fagpersoner uten krav om teknisk bakgrunn.",
+      "intro": "Tre gjennomarbeidede prøvelysbilder. Ikke den ferdige femminuttersfortellingen.",
+      "narrative": {
+        "mode": "visual-story-pilot",
+        "use": "Test historiefortelling og presentasjonsdesign før den fullstendige Innsikt-introduksjonen.",
+        "centralQuestion": "Hva betyr KI-kapasiteten for virksomheten, og hvorfor blir Innsikt-faget viktig?",
+        "turn": "Kapasitet kan gi både mer innsikt og risiko for å skalere feil.",
+        "resolution": "Verdien avhenger av samspill mellom behov, data, analyse og KI med pragmatisk fremdrift.",
+        "story": "Åpningen er et tankeeksperiment: Tenk om virksomheten fikk tusen nye analytikere i morgen. KI gjør at kapasiteten til å analysere, produsere og utforske øker kraftig. Det åpner først for muligheter, ikke frykt. Deretter introduserer vi kontrasten: Kapasiteten kan gi bedre innsikt, men også langt raskere og mer overbevisende feil dersom premisser eller datagrunnlag er svakt. Til slutt viser vi bredden i Innsikt-faget. Forretningsforståelse, data, analyse og KI virker sammen, og KI kan også bidra til å forbedre selve datagrunnlaget. Ikke alt må være perfekt før vi leverer verdi, men kritiske kvalitets- og risikokrav må ivaretas. Dette er en prøve på tre visuelt gjennomarbeidede lysbilder; historien skal senere utvides og kvalitetssikres som helhet.",
+        "beats": [
+          {
+            "id": "possibility",
+            "function": "Åpne med dramatisk økt kapasitet."
+          },
+          {
+            "id": "tension",
+            "function": "Vis kapasiteten til å skalere både innsikt og feil."
+          },
+          {
+            "id": "resolution",
+            "function": "Vis verdi som samspill."
+          }
+        ]
+      },
+      "slides": [
+        {
+          "slideId": "ai-thousand-analysts",
+          "beat": "possibility",
+          "delivery": "tell",
+          "note": "La det første bildet stå noen sekunder. «Tenk om virksomheten din fikk tusen nye analytikere i morgen.» Hva ville du satt dem til? Hvilke muligheter ville åpnet seg? KI gir oss nå en helt annen produksjonskapasitet enn før. Det betyr ikke at KI tilsvarer tusen mennesker. Tallet er et fortellergrep for å få oss til å kjenne på hvor stor endringen er. Dette er først og fremst en fantastisk mulighet. Overgang: Men ny kapasitet gjør ikke alle resultatene gode."
+        },
+        {
+          "slideId": "ai-two-directions",
+          "beat": "tension",
+          "delivery": "tell",
+          "note": "Den samme kraften kan trekke i to retninger. Med god forståelse av behovet og et relevant datagrunnlag kan vi analysere mer og raskere. Men dersom premissene er feil, kan KI også produsere overbevisende svar som ser riktige ut, uten at de holder mål. Da skalerer vi ikke bare arbeidsmengden, men også feilene. Dette er ikke et argument for å vente til alt er perfekt, eller for å unngå KI. Vi må bruke kapasiteten med omtanke. Overgang: Så hva trenger vi for å få nytten ut av dette?"
+        },
+        {
+          "slideId": "ai-value-in-context",
+          "beat": "resolution",
+          "delivery": "tell",
+          "note": "Her møtes tre deler av Innsikt-faget. Forstå virksomheten: Hvilken utfordring skal løses, og hva må besluttes? Kjenn datagrunnlaget: Hva betyr tallene, hvilke kilder og definisjoner kan vi stole på? Bruk analyse og KI: Hvilke virkemidler hjelper oss å lære, forbedre og handle? Det er ikke en enveiskjede. KI kan også gjøre datagrunnlaget bedre, dokumentere og teste. Og vi skal ikke bygge verdens perfekte plattform før vi begynner. Vi skal skape verdi underveis, med riktig grad av kontroll."
+        }
+      ]
     }
   },
   "marketIntro": {
@@ -631,7 +678,7 @@
   "slideLibraryUi": {
     "eyebrow": "Presenter",
     "title": "Lysbildebibliotek",
-    "intro": "Hvert lysbilde er et eget objekt. Se hvilke historier det brukes i, les faglig forklaring og kilder, og åpne det direkte i Presenter.",
+    "intro": "Finn selvstendige lysbilder etter tema, deling og historie. Åpne et lysbilde for fagnotater, kilder og bruk.",
     "useLabel": "Brukes i",
     "sourceLabel": "Kilder for lysbildet",
     "speakerLabel": "Faglig forklaring",
@@ -640,6 +687,25 @@
     "storyLabel": "Historiespesifikt",
     "openLabel": "Åpne i Presenter",
     "noSources": "Ingen eksterne kilder knyttet til dette lysbildet.",
-    "returnLabel": "Til biblioteket"
+    "returnLabel": "Til biblioteket",
+    "searchPlaceholder": "Søk etter budskap, tema eller ID …",
+    "allTopics": "Alle temaer",
+    "allStories": "Alle historier",
+    "allScopes": "Alle lysbilder",
+    "sharedCount": "Delbare",
+    "storyCount": "Kun én historie",
+    "filterTitle": "Utforsk biblioteket",
+    "resultsLabel": "lysbilder",
+    "empty": "Ingen lysbilder samsvarer med filtrene.",
+    "clearFilters": "Nullstill filtre",
+    "topicLabel": "Tema",
+    "storyFilterLabel": "Historie",
+    "scopeFilterLabel": "Bruk",
+    "topicOrder": [
+      "KI og kapasitet",
+      "Fag og verdi",
+      "Kundedialog",
+      "Bruk av portalen"
+    ]
   }
 }

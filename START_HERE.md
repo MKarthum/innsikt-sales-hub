@@ -21,6 +21,7 @@ Les [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) og [PROMPT_WORKFLOW.md](PROMPT_WO
 - `site.json`: versjon, publiseringsdato og siste faglige gjennomgang.
 - `pages.json`: sidetitler, overskrifter, generelt sidebudskap, kvalifiseringsspørsmål og historier/rekkefølge.
 - `slides.json`: selvstendige lysbilder med stabil ID, scope, presentasjonsinnhold, grunnnotater og egne kildehenvisninger. Se `PRESENTATION_ARCHITECTURE.md`.
+- Lysbilder med `type: visual` består av innhold i `slides.json`, rendering i `docs/assets/slide-visuals.js` og semantisk styling i `docs/assets/slide-visuals.css`. Ikke kopier tekst og merkefarger inn i SVG-koden.
 - `sources.json`: felles kilderegister. ID-er refereres av alle domenefiler.
 - `market.json`: SSB-statistikk, trender, oppkjøp og markedssignaler.
 - `sales.json`: salgsinnganger, forretningsbehov, scenarioer, målgrupper og kompetanseområder.
