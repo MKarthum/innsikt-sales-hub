@@ -243,6 +243,7 @@ function saveFeedback(){const t=document.getElementById('feedback-note')?.value.
 function exportFeedback(){const txt='# Innspill – Innsikt\n\n'+notes.map((n,i)=>`## ${i+1}. ${n.page} (${n.date})\n\n${n.text}\n`).join('\n');const b=new Blob([txt],{type:'text/markdown;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='innsikt-innspill.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Eksportert som Markdown.')}
 let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null,presentationThemeMode=(()=>{try{const value=localStorage.getItem('innsikt-presentation-tone');return ['light','strong','story'].includes(value)?value:'light'}catch{return 'light'}})();
 let libraryFilters={query:'',topic:'all',story:'all',scope:'all'},libraryFullscreenOpener=null;
+let fullscreenTouchStart=null,fullscreenGhostTap=null;
 function libraryTone(s,deckId){
  return window.InnsiktSlides.tone(s,D.pages.presentationDecks[deckId],presentationThemeMode);
 }
@@ -297,7 +298,7 @@ function slideLibraryResults(){
    +slides.map(s=>{
     const used=window.InnsiktSlides.usage(D.slides,decks,s.id);
     const deckId=used[0]?.deckId||'portal',idx=used[0]?.index||0;
-    return '<a class="slide-library-card" data-slide-fullscreen-open="'+esc(s.id)+'" href="#lysbilder/'+esc(s.id)+'" aria-label="Vis '+esc(s.title)+' i fullskjerm">'
+    return '<a class="slide-library-card" href="#lysbilder/'+esc(s.id)+'" aria-label="Åpne detaljer for '+esc(s.title)+'">'
     +'<div class="slide-library-tile" data-slide-preview><div class="slide-library-mini"><div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(deckId)+'" data-tone="'+esc(libraryTone(s,deckId))+'">'+slideMarkup(s,idx,deckId)+'</div></div></div>'
     +'<div class="slide-library-card-body"><strong>'+esc(s.title)+'</strong><span class="slide-library-card-tag">'+(s.classification==='internal'?'Internt · ':'')+esc(s.scope==='shared'?ui.sharedLabel:ui.storyLabel)+'</span>'
     +'<small>'+esc(ui.useLabel)+': '+used.length+' · '+esc(s.id)+'</small></div></a>';
@@ -314,8 +315,7 @@ function openLibrarySlideFullscreen(id,opener){
  const content='<div class="slide-library-fullscreen-content">'
   +'<div class="slide-library-detail-stage slide-library-fullscreen-stage" data-slide-preview>'
   +'<div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(deckId)+'" data-tone="'+esc(libraryTone(s,deckId))+'">'
-  +slideMarkup(s,index,deckId)+'</div></div></div>'
-  +'<a class="slide-library-fullscreen-details" data-slide-fullscreen-details href="#lysbilder/'+esc(s.id)+'">Notater og kilder</a>';
+  +slideMarkup(s,index,deckId)+'</div></div></div>';
  modal(s.title,content,true,'slide-library-fullscreen');
  document.querySelector('#overlay-root .overlay')?.classList.add('slide-library-fullscreen-overlay');
  fitLibraryPreviews();
@@ -380,7 +380,8 @@ function slideLibraryPage(id){
    +'<p>'+esc(u.note)+'</p><button class="btn subtle" type="button" data-slide-open="'+esc(s.id)+'" data-deck-open="'+esc(u.deckId)+'">'+esc(ui.openLabel)+' '+ico('arrow-right')+'</button></section>').join('');
  return libraryTabs('slides')+'<a class="text-link" href="#lysbilder">'+ico('arrow-left')+' '+esc(ui.returnLabel)+'</a>'
    +hdr(ui.eyebrow,s.title,(s.classification==='internal'?'INTERNT · ':'')+s.id+' · '+(s.topic||''))
-   +toneSelect('library-tone-mode')+'<p class="slide-library-tone-note">'+esc(ui.toneInfo)+'</p>'+'<div class="slide-library-detail-stage" data-slide-preview><div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(previewDeck)+'" data-tone="'+esc(libraryTone(s,previewDeck))+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
+   +toneSelect('library-tone-mode')+'<p class="slide-library-tone-note">'+esc(ui.toneInfo)+'</p>'+'<div class="slide-library-detail-stage slide-library-detail-open" data-slide-preview data-slide-preview-open="'+esc(s.id)+'" role="button" tabindex="0" aria-label="Vis '+esc(s.title)+' i fullskjerm"><div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(previewDeck)+'" data-tone="'+esc(libraryTone(s,previewDeck))+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
+   +'<p class="slide-library-fullscreen-hint" aria-hidden="true">Trykk på lysbildet for fullskjerm</p>'
    +'<div class="slide-library-info"><section><h2>'+esc(ui.speakerLabel)+'</h2>'+(note||'<p class="fineprint">Se notatene i historiene nedenfor.</p>')
    +'<h2>'+esc(ui.sourceLabel)+'</h2>'+sources+'</section>'
    +'<section><h2>'+esc(ui.useLabel)+'</h2>'+(uses||'<p class="fineprint">Ikke brukt i noen historie ennå.</p>')+'</section></div>';
@@ -670,15 +671,38 @@ function initPromptContextEvents(){
 }
 function initEvents(){
  document.addEventListener('fullscreenchange',presenterFullscreenChanged);
- // On mobile Safari a touch may not produce a reliable synthetic click after
- // composited full-viewport elements are changed. Handle touch pointerup directly,
- // while retaining click/keyboard semantics for other input methods.
- document.addEventListener('pointerup',e=>{
-  if((e.pointerType==='touch'||e.pointerType==='pen')&&dismissLibraryFullscreenTarget(e.target)){
-   e.preventDefault();e.stopPropagation();closeModal();
-  }
- },true);
+ // Never remove the overlay during pointerup: on iOS Safari the subsequent
+ // synthetic click can then hit (and activate) the library card underneath.
+ // Cancelling touchend suppresses that click. Mouse and keyboard keep click.
+ document.addEventListener('touchstart',e=>{
+  fullscreenTouchStart=null;
+  if(!document.getElementById('slide-library-fullscreen')||e.touches.length!==1)return;
+  fullscreenTouchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+ },{capture:true,passive:true});
+ document.addEventListener('touchend',e=>{
+  const start=fullscreenTouchStart;fullscreenTouchStart=null;
+  if(!start||e.changedTouches.length!==1||!document.getElementById('slide-library-fullscreen'))return;
+  const touch=e.changedTouches[0],distance=Math.hypot(touch.clientX-start.x,touch.clientY-start.y);
+  if(distance>18)return; // Dragging/scrolling is not a dismiss tap.
+  const hit=document.elementFromPoint(touch.clientX,touch.clientY);
+  if(!hit||!dismissLibraryFullscreenTarget(hit))return;
+  // On touch devices, close only after completing the gesture, and cancel
+  // compatibility mouse/click events before removing the dialog from the DOM.
+  if(e.cancelable)e.preventDefault();
+  e.stopImmediatePropagation();
+  fullscreenGhostTap={x:touch.clientX,y:touch.clientY,at:performance.now()};
+  closeModal();
+ },{capture:true,passive:false});
  document.addEventListener('click',e=>{
+  // Defensive fallback for WebViews that ignore cancelled compatibility clicks.
+  // Consume only the click at the just-dismissed touch position, not later taps.
+  const ghost=fullscreenGhostTap;
+  if(ghost){
+   fullscreenGhostTap=null;
+   if(performance.now()-ghost.at<650&&Math.hypot(e.clientX-ghost.x,e.clientY-ghost.y)<22){
+    e.preventDefault();e.stopImmediatePropagation();return;
+   }
+  }
   if(dismissLibraryFullscreenTarget(e.target)){
    e.preventDefault();closeModal();return;
   }
@@ -694,11 +718,8 @@ const pc=e.target.closest('[data-prompt-copy]');
 if(pc){const editor=document.getElementById('prompt-editor');if(editor){if(!navigator.clipboard?.writeText){toast(D.prompts.page.variableUi.copyUnsupported);return}navigator.clipboard.writeText(editor.value).then(()=>toast(D.prompts.page.variableUi.copySuccess)).catch(()=>toast(D.prompts.page.variableUi.copyFailure));}return}
 const pr=e.target.closest('[data-prompt-reset]');
 if(pr){const item=D.prompts.items.find(x=>x.id===pr.dataset.promptReset),editor=document.getElementById('prompt-editor');if(item&&editor){rebuildPromptEditor(item,true)}return}
-const libraryCard=e.target.closest('a[data-slide-fullscreen-open]');
-if(libraryCard&&e.button===0&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey){
- e.preventDefault();openLibrarySlideFullscreen(libraryCard.dataset.slideFullscreenOpen,libraryCard);return;
-}
-if(e.target.closest('[data-slide-fullscreen-details]')){closeModal();return}
+const preview=e.target.closest('[data-slide-preview-open]');
+if(preview){e.preventDefault();openLibrarySlideFullscreen(preview.dataset.slidePreviewOpen,preview);return}
 if(e.target.closest('#present-fullscreen-toggle')){togglePresenterFullscreen();return}if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;render();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}const scopeBtn=e.target.closest('[data-slide-scope]');if(scopeBtn){libraryFilters.scope=scopeBtn.dataset.slideScope;updateSlideLibrary();return}if(e.target.closest('[data-slide-reset]')){libraryFilters={query:'',topic:'all',story:'all',scope:'all'};render();return}
 const openSlide=e.target.closest('[data-slide-open]');
 if(openSlide){const deckId=openSlide.dataset.deckOpen,deck=D.pages.presentationDecks[deckId];const index=deck?.slides.findIndex(x=>x.slideId===openSlide.dataset.slideOpen)??-1;if(index>=0)presentation(deckId,index);return}if(e.target.closest('#slide-next')){slide=Math.min(slide+1,presentationSlides().length-1);showSlide();return}if(e.target.closest('#slide-prev')){slide=Math.max(slide-1,0);showSlide();return}if(e.target.closest('#reset-qualify')){selectedChecklist.clear();render();return}const scen=e.target.closest('[data-scenario]');if(scen){scenarioIndex=Number(scen.dataset.scenario);render();return}if(e.target.closest('[data-search-select]')){closeModal();return}if(e.target.closest('[data-dismiss]')&&(e.target.matches('.overlay')||e.target.closest('.modal-close'))){closeModal();return}if(e.target.closest('#menu-toggle')){const open=!document.getElementById('sidebar').classList.contains('open');setMobileMenuOpen(open);return}});document.addEventListener('change',e=>{
@@ -714,7 +735,7 @@ if(toggled){
  if(item){window.InnsiktPromptContext.setChoice(item,toggled.dataset.promptToggle,toggled.checked);refreshPromptFromContext()}
  return;
 }
-if(e.target.matches('#speaker-toggle')){showSpeakerNotes=e.target.checked;showSlide();return}if(e.target.matches('[data-qualify]')){let id=Number(e.target.dataset.qualify);if(e.target.checked)selectedChecklist.add(id);else selectedChecklist.delete(id);document.getElementById('qualify-progress').style.width=(selectedChecklist.size/qualification().length*100)+'%';document.getElementById('progress-count').textContent=selectedChecklist.size+' av 6 belyst';document.getElementById('qualify-message').textContent=qualificationMessage()}});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('.overlay')&&document.getElementById('sidebar')?.classList.contains('open')){e.preventDefault();setMobileMenuOpen(false,{restoreFocus:true});return}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!document.querySelector('.overlay'))search()}});window.addEventListener('hashchange',render)}
+if(e.target.matches('#speaker-toggle')){showSpeakerNotes=e.target.checked;showSlide();return}if(e.target.matches('[data-qualify]')){let id=Number(e.target.dataset.qualify);if(e.target.checked)selectedChecklist.add(id);else selectedChecklist.delete(id);document.getElementById('qualify-progress').style.width=(selectedChecklist.size/qualification().length*100)+'%';document.getElementById('progress-count').textContent=selectedChecklist.size+' av 6 belyst';document.getElementById('qualify-message').textContent=qualificationMessage()}});document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-slide-preview-open]')){e.preventDefault();openLibrarySlideFullscreen(e.target.dataset.slidePreviewOpen,e.target);return}if(e.key==='Escape'&&!document.querySelector('.overlay')&&document.getElementById('sidebar')?.classList.contains('open')){e.preventDefault();setMobileMenuOpen(false,{restoreFocus:true});return}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!document.querySelector('.overlay'))search()}});window.addEventListener('hashchange',render)}
 async function init(){document.querySelectorAll('[data-icon]').forEach(x=>x.innerHTML=ico(x.dataset.icon));try{const namesOfFiles=['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides','visual-assets','architecture-profiles'];const files=await Promise.all(namesOfFiles.map(async name=>{const response=await fetch('./data/'+name+'.json',{cache:'no-store'});if(!response.ok)throw new Error(name+': HTTP '+response.status);return response.json()}));const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles]=files;
  const deploymentResponse=await fetch('./data/deployment.json',{cache:'no-store'});
  if(!deploymentResponse.ok)throw Error('Mangler distribusjonskonfigurasjon');

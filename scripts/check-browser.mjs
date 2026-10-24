@@ -122,9 +122,14 @@ try {
   await page.locator('.slide-library-card').first().waitFor();
   assert.equal(await page.locator('.slide-library-card').count(),expectedSlideCount,label+': alle selvstendige lysbilder');
   await page.locator('.slide-library-card[href="#lysbilder/portal-opening"]').click();
-  await page.locator('#slide-library-fullscreen .present-frame').waitFor();
-  await page.locator('[data-slide-fullscreen-details]').click();
+  await page.locator('.slide-library-info').waitFor();
   await page.locator('.slide-library-detail-stage .present-frame').waitFor();
+  // The detail page remains the first step; only its slide is fullscreen-capable.
+  await page.locator('[data-slide-preview-open]').click();
+  await page.locator('#slide-library-fullscreen .present-frame').waitFor();
+  await page.locator('#slide-library-fullscreen .modal-close').click();
+  assert.equal(await page.locator('#slide-library-fullscreen').count(),0,label+': close returns to slide details');
+  assert.ok(await page.locator('.slide-library-info').isVisible(),label+': notes and sources retained on detail page');
   assert.equal(await page.locator('.slide-library-detail-stage .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
   const tonePair=await page.locator('.slide-library-detail-stage .present-frame').evaluate(el=>{
    el.dataset.tone='strong';

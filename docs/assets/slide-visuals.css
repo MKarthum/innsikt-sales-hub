@@ -335,7 +335,7 @@
 .v4-list-card,.v4-road-card{height:25cqw;justify-content:center}
 .v4-list--voices .v4-list-card h3::before{display:none}
 
-/* Bibliotekskort viser ett 16:9-lysbilde i viewporten ved klikk.
+/* Detaljsidens lysbilde kan åpnes i skjermdekkende 16:9-visning.
    Høyden er styrende i liggende mobil; behold samme kanoniske 960×540-renderer. */
 .slide-library-fullscreen-overlay{padding:0;backdrop-filter:none;background:#0c1e2b}
 #slide-library-fullscreen{
@@ -382,3 +382,8 @@
 #slide-library-fullscreen .slide-library-fullscreen-content{pointer-events:auto}
 #slide-library-fullscreen .slide-library-fullscreen-stage{pointer-events:auto}
 #slide-library-fullscreen .slide-library-fullscreen-details{bottom:max(12px,env(safe-area-inset-bottom,0px) + 10px);touch-action:manipulation}
+
+/* Only the detail-page slide is interactive; library cards remain normal links. */
+.slide-library-detail-open{cursor:zoom-in}
+.slide-library-detail-open:hover,.slide-library-detail-open:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.slide-library-fullscreen-hint{font:650 12px var(--font-body);color:var(--muted);margin:-16px 0 25px;max-width:960px;text-align:right}
