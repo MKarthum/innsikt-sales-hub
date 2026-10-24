@@ -67,6 +67,7 @@ try {
   await page.locator('.dialogue-choice-grid').waitFor();
   assert.equal(await page.locator('.dialogue-choice').count(),2,label+': trening og støtte er tydelige valg');
   await page.locator('.dialogue-choice[href="#kundedialog/trening"]').click();
+  await page.locator('.dialogue-scenario').first().waitFor();
   assert.equal(await page.locator('.dialogue-scenario').count(),8,label+': alle fiktive scenarioer');
   await page.locator('.dialogue-scenario[href="#kundedialog/tren-scenario-08"]').click();
   await page.locator('.dialogue-role-sheet').waitFor();
@@ -83,6 +84,7 @@ try {
   await page.locator('.dialogue-debrief summary').click();
   assert.ok((await page.locator('.dialogue-debrief-body').innerText()).includes('EU-region'),label+': etterprat viser faglige fallgruver');
   await page.locator('.dialogue-actions a[href="#kundedialog/trening"]').click();
+  await page.locator('.dialogue-scenario').first().waitFor();
   assert.equal(await page.locator('.dialogue-scenario').count(),8,label+': bytte øvelse');
   // Brukerreise B: direkte møteforberedelse uten trening.
   await page.evaluate(()=>{location.hash='#kundedialog/stotte'});
