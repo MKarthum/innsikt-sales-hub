@@ -423,7 +423,7 @@ function exportPresentation(mode){
  },mode).then(()=>{if(mode==='html')toast('Presentasjonen er lastet ned som HTML.');})
  .catch(e=>toast('Kunne ikke eksportere: '+e.message));
 }
-function presentation(deckId='portal',initialSlide=0){
+function presentation(deckId='innsikt',initialSlide=0){
  selectedDeck=deckId;slide=Math.max(0,Math.min(initialSlide,presentationSlides().length-1));showSpeakerNotes=false;
  const choices=Object.entries(D.pages.presentationDecks).map(([id,d])=>
   '<button class="deck-option '+(id===selectedDeck?'active':'')+'" type="button" data-deck="'+esc(id)+'" aria-pressed="'+(id===selectedDeck)+'">'+esc(d.label)+'</button>'
