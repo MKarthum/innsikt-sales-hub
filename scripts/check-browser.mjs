@@ -97,9 +97,9 @@ try {
   await page.locator('.slide-library-card').first().waitFor();
   assert.equal(await page.locator('.slide-library-card').count(),18,label+': 18 selvstendige lysbilder');
   await page.locator('.slide-library-card[href="#lysbilder/portal-opening"]').click();
-  await page.locator('.slide-library-preview .present-frame').waitFor();
-  assert.equal(await page.locator('.slide-library-preview .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
-  const tonePair=await page.locator('.slide-library-preview .present-frame').evaluate(el=>{
+  await page.locator('.slide-library-detail-stage .present-frame').waitFor();
+  assert.equal(await page.locator('.slide-library-detail-stage .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
+  const tonePair=await page.locator('.slide-library-detail-stage .present-frame').evaluate(el=>{
    const strong={bg:getComputedStyle(el).backgroundColor,fg:getComputedStyle(el).color};
    el.dataset.tone='light';
    const light={bg:getComputedStyle(el).backgroundColor,fg:getComputedStyle(el).color};
