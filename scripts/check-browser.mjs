@@ -95,7 +95,7 @@ try {
   // Bibliotek: enhetlig ID, detaljvisning, kildepolicy og direkte åpning.
   await page.evaluate(()=>{location.hash='#lysbilder'});
   await page.locator('.slide-library-card').first().waitFor();
-  assert.equal(await page.locator('.slide-library-card').count(),30,label+': 30 selvstendige lysbilder');
+  assert.equal(await page.locator('.slide-library-card').count(),36,label+': 36 selvstendige lysbilder');
   await page.locator('.slide-library-card[href="#lysbilder/portal-opening"]').click();
   await page.locator('.slide-library-detail-stage .present-frame').waitFor();
   assert.equal(await page.locator('.slide-library-detail-stage .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
@@ -114,7 +114,7 @@ try {
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#present-modal').count(),0,label+': tilbake til bibliotek etter Presenter');
   await page.locator('#present-button').click();
-  assert.equal(await page.locator('[data-deck]').count(),7,'Syv komponerbare Presenter-løp');
+  assert.equal(await page.locator('[data-deck]').count(),8,'Åtte komponerbare Presenter-løp');
   assert.ok((await page.locator('#slide-body').innerText()).includes('Tenk om virksomheten din fikk'),label+': Hvorfor Innsikt starter som hovedfortelling');
   for(const deck of ['portal','sales']) {
    await page.locator('[data-deck="'+deck+'"]').click();

@@ -1,0 +1,479 @@
+{
+  "schemaVersion": 1,
+  "profiles": [
+    {
+      "id": "conceptual",
+      "kind": "conceptual",
+      "eyebrow": "TEKNOLOGINØYTRAL MODELL",
+      "label": "Fra kilder til bruk",
+      "intro": "En dataplattform kobler sammen kilder, bearbeiding og anvendelse.",
+      "sources": [
+        {
+          "label": "ERP / økonomi",
+          "assetId": "source-erp"
+        },
+        {
+          "label": "Databaser / CRM",
+          "assetId": "tabler-database"
+        },
+        {
+          "label": "Filer / API",
+          "assetId": "source-files"
+        },
+        {
+          "label": "Hendelser / IoT",
+          "assetId": "source-stream"
+        }
+      ],
+      "ingest": {
+        "title": "Innhenting",
+        "items": [
+          "Batch / strøm",
+          "API / filer"
+        ]
+      },
+      "platform": {
+        "title": "Datagrunnlag",
+        "assetId": "core-storage",
+        "top": "Lagre · kvalitetssikre",
+        "bottom": "Modeller · gjør forståelig"
+      },
+      "serve": {
+        "title": "Tilgjengeliggjør",
+        "items": [
+          "Dataprodukter",
+          "Semantikk / API"
+        ]
+      },
+      "consumers": [
+        {
+          "label": "Rapportering",
+          "assetId": "consume-report"
+        },
+        {
+          "label": "Apper / tjenester",
+          "assetId": "consume-app"
+        },
+        {
+          "label": "KI / agenter",
+          "assetId": "consume-ai"
+        }
+      ],
+      "support": [
+        {
+          "label": "Tilgang & sikkerhet",
+          "assetId": "support-security"
+        },
+        {
+          "label": "Katalog & kvalitet",
+          "assetId": "support-catalog"
+        },
+        {
+          "label": "Orkestrering",
+          "assetId": "support-jobs"
+        },
+        {
+          "label": "Observability & drift",
+          "assetId": "support-observe"
+        }
+      ],
+      "footer": "Lagene er ansvar og kapabiliteter – ikke nødvendigvis separate systemer."
+    },
+    {
+      "id": "modern",
+      "kind": "conceptual",
+      "eyebrow": "REFERANSEMØNSTER",
+      "label": "En moderne, modulær arkitektur",
+      "intro": "Eksempel på en typisk flyt. Omfang og verktøy varierer med behovet.",
+      "sources": [
+        {
+          "label": "ERP / økonomi",
+          "assetId": "source-erp"
+        },
+        {
+          "label": "Databaser / CRM",
+          "assetId": "tabler-database"
+        },
+        {
+          "label": "Filer / API",
+          "assetId": "source-files"
+        },
+        {
+          "label": "Hendelser / IoT",
+          "assetId": "source-stream"
+        }
+      ],
+      "ingest": {
+        "title": "Integrasjon",
+        "items": [
+          "ELT / CDC",
+          "Hendelser / API"
+        ]
+      },
+      "platform": {
+        "title": "Lakehouse / Warehouse",
+        "assetId": "core-storage",
+        "top": "Rådata → kvalitet → kuratert",
+        "bottom": "SQL · Python · modeller"
+      },
+      "serve": {
+        "title": "Servering",
+        "items": [
+          "Semantisk lag",
+          "Data-API / deling"
+        ]
+      },
+      "consumers": [
+        {
+          "label": "Rapportering",
+          "assetId": "consume-report"
+        },
+        {
+          "label": "Apper / tjenester",
+          "assetId": "consume-app"
+        },
+        {
+          "label": "KI / agenter",
+          "assetId": "consume-ai"
+        }
+      ],
+      "support": [
+        {
+          "label": "Tilgang & sikkerhet",
+          "assetId": "support-security"
+        },
+        {
+          "label": "Katalog & kvalitet",
+          "assetId": "support-catalog"
+        },
+        {
+          "label": "Orkestrering",
+          "assetId": "support-jobs"
+        },
+        {
+          "label": "Observability & drift",
+          "assetId": "support-observe"
+        }
+      ],
+      "footer": "Åpne grensesnitt og styring går på tvers av hele løsningen."
+    },
+    {
+      "id": "ai-on-data",
+      "kind": "conceptual",
+      "eyebrow": "DATA + KI",
+      "label": "KI trenger forståelig og tilgjengelig data",
+      "intro": "Rapportering og KI kan bygge på det samme styrte datagrunnlaget.",
+      "sources": [
+        {
+          "label": "ERP / økonomi",
+          "assetId": "source-erp"
+        },
+        {
+          "label": "Databaser / CRM",
+          "assetId": "tabler-database"
+        },
+        {
+          "label": "Filer / API",
+          "assetId": "source-files"
+        },
+        {
+          "label": "Hendelser / IoT",
+          "assetId": "source-stream"
+        }
+      ],
+      "ingest": {
+        "title": "Tilgjengeliggjør",
+        "items": [
+          "Integrasjoner",
+          "Kontroller tilgang"
+        ]
+      },
+      "platform": {
+        "title": "Kontekstlag",
+        "assetId": "core-storage",
+        "top": "Data + begreper + kvalitet",
+        "bottom": "Dokumentasjon · metadata"
+      },
+      "serve": {
+        "title": "Bruk og verifiser",
+        "items": [
+          "Søk / retrieval",
+          "SQL / verktøy / test"
+        ]
+      },
+      "consumers": [
+        {
+          "label": "Rapportering",
+          "assetId": "consume-report"
+        },
+        {
+          "label": "Apper / tjenester",
+          "assetId": "consume-app"
+        },
+        {
+          "label": "KI / agenter",
+          "assetId": "consume-ai"
+        }
+      ],
+      "support": [
+        {
+          "label": "Tilgang & sikkerhet",
+          "assetId": "support-security"
+        },
+        {
+          "label": "Katalog & kvalitet",
+          "assetId": "support-catalog"
+        },
+        {
+          "label": "Orkestrering",
+          "assetId": "support-jobs"
+        },
+        {
+          "label": "Observability & drift",
+          "assetId": "support-observe"
+        }
+      ],
+      "footer": "KI kan også hjelpe med å forbedre datagrunnlaget."
+    },
+    {
+      "id": "snowflake",
+      "kind": "vendor",
+      "vendorId": "snowflake",
+      "eyebrow": "EKSEMPEL · SNOWFLAKE",
+      "label": "Snowflake + dbt: typisk datastack",
+      "intro": "Representative byggeklosser, ikke en anbefalt fasit for alle kunder.",
+      "sources": [
+        {
+          "label": "ERP / økonomi",
+          "assetId": "source-erp"
+        },
+        {
+          "label": "Databaser / CRM",
+          "assetId": "tabler-database"
+        },
+        {
+          "label": "Filer / API",
+          "assetId": "source-files"
+        },
+        {
+          "label": "Hendelser / IoT",
+          "assetId": "source-stream"
+        }
+      ],
+      "ingest": {
+        "title": "Last inn",
+        "items": [
+          "Snowpipe / COPY",
+          "Streaming / connector"
+        ]
+      },
+      "platform": {
+        "title": "Snowflake",
+        "assetId": "snowflake",
+        "top": "RAW → CORE → MART",
+        "bottom": "dbt + SQL / Snowpark",
+        "partnerId": "dbt"
+      },
+      "serve": {
+        "title": "Dataprodukter",
+        "items": [
+          "SQL / views",
+          "Semantikk / deling"
+        ]
+      },
+      "consumers": [
+        {
+          "label": "BI-verktøy",
+          "assetId": "consume-report"
+        },
+        {
+          "label": "Apper",
+          "assetId": "consume-app"
+        },
+        {
+          "label": "Cortex AI",
+          "assetId": "consume-ai"
+        }
+      ],
+      "support": [
+        {
+          "label": "Horizon / tilgang",
+          "assetId": "support-security"
+        },
+        {
+          "label": "dbt test & lineage",
+          "assetId": "support-catalog"
+        },
+        {
+          "label": "Tasks / CI-CD",
+          "assetId": "support-jobs"
+        },
+        {
+          "label": "Monitoring / kost",
+          "assetId": "support-observe"
+        }
+      ],
+      "footer": "dbt er en valgfri modelleringskomponent; Dynamic Tables og Snowpark er andre muligheter.",
+      "brandNotice": "dbt™ og dbt-logoen er varemerker til dbt Labs, Inc. Ingen tilknytning."
+    },
+    {
+      "id": "fabric",
+      "kind": "vendor",
+      "vendorId": "fabric",
+      "eyebrow": "EKSEMPEL · MICROSOFT FABRIC",
+      "label": "Fabric: integrert data- og analyseflyt",
+      "intro": "OneLake knytter sammen flere arbeidsflater og analysebehov.",
+      "sources": [
+        {
+          "label": "ERP / økonomi",
+          "assetId": "source-erp"
+        },
+        {
+          "label": "Databaser / CRM",
+          "assetId": "tabler-database"
+        },
+        {
+          "label": "Filer / API",
+          "assetId": "source-files"
+        },
+        {
+          "label": "Hendelser / IoT",
+          "assetId": "source-stream"
+        }
+      ],
+      "ingest": {
+        "title": "Data Factory",
+        "assetId": "data-factory",
+        "items": [
+          "Pipelines / Copy",
+          "Dataflow Gen2"
+        ]
+      },
+      "platform": {
+        "title": "OneLake",
+        "assetId": "fabric",
+        "top": "Lakehouse · Warehouse",
+        "bottom": "Delta · Spark · SQL"
+      },
+      "serve": {
+        "title": "Semantisk modell",
+        "items": [
+          "Power BI-modeller",
+          "SQL / Direct Lake"
+        ]
+      },
+      "consumers": [
+        {
+          "label": "Power BI",
+          "assetId": "power-bi"
+        },
+        {
+          "label": "Apper / data",
+          "assetId": "consume-app"
+        },
+        {
+          "label": "Data agents",
+          "assetId": "consume-ai"
+        }
+      ],
+      "support": [
+        {
+          "label": "Entra / sikkerhet",
+          "assetId": "support-security"
+        },
+        {
+          "label": "OneLake-katalog",
+          "assetId": "support-catalog"
+        },
+        {
+          "label": "Pipelines / DevOps",
+          "assetId": "support-jobs"
+        },
+        {
+          "label": "Monitorering",
+          "assetId": "support-observe"
+        }
+      ],
+      "footer": "Fabric er integrert, men valg av Lakehouse, Warehouse og KI avhenger av oppgaven."
+    },
+    {
+      "id": "databricks",
+      "kind": "vendor",
+      "vendorId": "databricks",
+      "eyebrow": "EKSEMPEL · DATABRICKS",
+      "label": "Databricks: lakehouse til BI og KI",
+      "intro": "Felles styring av databehandling, analyse og modeller.",
+      "sources": [
+        {
+          "label": "ERP / økonomi",
+          "assetId": "source-erp"
+        },
+        {
+          "label": "Databaser / CRM",
+          "assetId": "tabler-database"
+        },
+        {
+          "label": "Filer / API",
+          "assetId": "source-files"
+        },
+        {
+          "label": "Hendelser / IoT",
+          "assetId": "source-stream"
+        }
+      ],
+      "ingest": {
+        "title": "Lakeflow",
+        "items": [
+          "Connect / Auto Loader",
+          "Batch / streaming"
+        ]
+      },
+      "platform": {
+        "title": "Delta Lake / Lakehouse",
+        "assetId": "databricks",
+        "top": "Bronze → Silver → Gold",
+        "bottom": "Lakeflow / Spark / SQL"
+      },
+      "serve": {
+        "title": "SQL + ML/AI",
+        "items": [
+          "Databricks SQL",
+          "Model / AI Serving"
+        ]
+      },
+      "consumers": [
+        {
+          "label": "AI/BI & Genie",
+          "assetId": "consume-report"
+        },
+        {
+          "label": "Apper / deling",
+          "assetId": "consume-app"
+        },
+        {
+          "label": "Mosaic AI",
+          "assetId": "consume-ai"
+        }
+      ],
+      "support": [
+        {
+          "label": "Unity Catalog",
+          "assetId": "support-security"
+        },
+        {
+          "label": "Lineage & kvalitet",
+          "assetId": "support-catalog"
+        },
+        {
+          "label": "Lakeflow Jobs / CI",
+          "assetId": "support-jobs"
+        },
+        {
+          "label": "MLflow / monitor",
+          "assetId": "support-observe"
+        }
+      ],
+      "footer": "Et eksempel: Databricks kan også kobles til eksterne BI-verktøy og datakilder."
+    }
+  ]
+}

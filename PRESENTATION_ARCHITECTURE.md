@@ -68,3 +68,7 @@ Presenter tilbyr i tillegg Fortellingsstyrt (standard), Alltid lys og Alltid mø
 ## Internt innhold
 
 INTERNAL_CONTENT_CONTRACT.md beskriver hvordan en separat tilgangsbeskyttet installasjon kan laste egne historier og lysbilder, samt reserverer typede samlinger for fremtidige interne løsninger og kundehistorier. Det finnes ikke interne kundedata i GitHub Pages. docs/data/deployment.json er låst til offentlig modus i publiseringsvalideringen, og krever beskyttet intern endepunktkonfigurasjon for intern distribusjon.
+
+## Ressursbibliotek og arkitekturprofiler
+
+Se ARCHITECTURE_ASSETS.md for felles bibliotek over logoer, lisensierte eksterne figurer og egenproduserte SVG-ressurser.

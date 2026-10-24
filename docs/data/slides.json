@@ -755,6 +755,144 @@
       "speakerBase": "Portalen er laget for å gi nye og erfarne selgere støtte i det øyeblikket de trenger den. Når vi kjenner igjen et kundebehov, kan vi hente relevant forklaring, formulere kvalifiserende spørsmål og forberede en god samtale. Den erstatter verken kundedialogen eller ekspertene; den hjelper oss å komme bedre forberedt til begge.",
       "topic": "Bruk av portalen",
       "keywords": []
+    },
+    {
+      "id": "architecture-conceptual",
+      "scope": "shared",
+      "tone": "light",
+      "type": "architecture",
+      "cue": "DATAARKITEKTUR",
+      "title": "Konseptuell dataplattform",
+      "profileId": "conceptual",
+      "topic": "Dataarkitektur",
+      "keywords": [
+        "dataplattform",
+        "arkitektur",
+        "kilder",
+        "rapportering",
+        "KI",
+        "conceptual"
+      ],
+      "speakerBase": "Poenget er en kjede av kapabiliteter: kilder, integrasjon, lagring, bearbeiding og konsum. En arkitektur er ikke nødvendigvis fem separate produkter. Finn først ut hva virksomheten trenger og hva som finnes allerede.",
+      "sourceIds": [
+        "architecture-fabric-lifecycle",
+        "architecture-databricks-scope"
+      ]
+    },
+    {
+      "id": "architecture-modern",
+      "scope": "shared",
+      "tone": "light",
+      "type": "architecture",
+      "cue": "DATAARKITEKTUR",
+      "title": "Typisk moderne dataarkitektur",
+      "profileId": "modern",
+      "topic": "Dataarkitektur",
+      "keywords": [
+        "dataplattform",
+        "arkitektur",
+        "kilder",
+        "rapportering",
+        "KI",
+        "modern"
+      ],
+      "speakerBase": "Dette er et representativt, teknologinøytralt mønster. Batch, CDC og strømmer kommer inn fra kilder. Data bearbeides i warehouse eller lakehouse, og publiseres med semantikk eller API-er til BI, apper og KI. Styring og drift støtter hele kjeden.",
+      "sourceIds": [
+        "architecture-fabric-lifecycle",
+        "architecture-databricks-scope"
+      ]
+    },
+    {
+      "id": "architecture-ai",
+      "scope": "shared",
+      "tone": "light",
+      "type": "architecture",
+      "cue": "DATAARKITEKTUR",
+      "title": "KI på et styrt datagrunnlag",
+      "profileId": "ai-on-data",
+      "topic": "Dataarkitektur",
+      "keywords": [
+        "dataplattform",
+        "arkitektur",
+        "kilder",
+        "rapportering",
+        "KI",
+        "ai-on-data"
+      ],
+      "speakerBase": "KI og BI trenger tydelige definisjoner, kontekst og tilgang til relevante data. Oppmerksomheten bør ikke bare ligge på modeller. Kvalitet, retrieval og kontroll er del av løsningen – og KI kan hjelpe med dokumentasjon og forbedring av data.",
+      "sourceIds": [
+        "architecture-databricks-scope",
+        "architecture-fabric-lifecycle"
+      ]
+    },
+    {
+      "id": "architecture-snowflake",
+      "scope": "shared",
+      "tone": "light",
+      "type": "architecture",
+      "cue": "DATAARKITEKTUR",
+      "title": "Snowflake + dbt: en mulig datastack",
+      "profileId": "snowflake",
+      "topic": "Dataarkitektur",
+      "keywords": [
+        "dataplattform",
+        "arkitektur",
+        "kilder",
+        "rapportering",
+        "KI",
+        "snowflake"
+      ],
+      "speakerBase": "Dette illustrerer Snowflake med typiske innlastingsmekanismer som Snowpipe, modellering gjennom dbt eller andre Snowflake-funksjoner, servering gjennom SQL og visninger, og konsum i BI, apper eller Cortex. dbt er valgfritt og representerer én variant av arkitekturen.",
+      "sourceIds": [
+        "architecture-snowflake",
+        "architecture-dbt"
+      ]
+    },
+    {
+      "id": "architecture-fabric",
+      "scope": "shared",
+      "tone": "light",
+      "type": "architecture",
+      "cue": "DATAARKITEKTUR",
+      "title": "Microsoft Fabric: integrert plattform",
+      "profileId": "fabric",
+      "topic": "Dataarkitektur",
+      "keywords": [
+        "dataplattform",
+        "arkitektur",
+        "kilder",
+        "rapportering",
+        "KI",
+        "fabric"
+      ],
+      "speakerBase": "Fabric samler dataflyt, lakehouse/warehouse, semantiske modeller, Power BI og KI i samme økosystem gjennom OneLake. Diagrammet viser en vanlig variant, ikke at alle tjenester må brukes eller at data alltid må kopieres.",
+      "sourceIds": [
+        "architecture-fabric",
+        "architecture-fabric-lifecycle"
+      ]
+    },
+    {
+      "id": "architecture-databricks",
+      "scope": "shared",
+      "tone": "light",
+      "type": "architecture",
+      "cue": "DATAARKITEKTUR",
+      "title": "Databricks: data, analyse og KI",
+      "profileId": "databricks",
+      "topic": "Dataarkitektur",
+      "keywords": [
+        "dataplattform",
+        "arkitektur",
+        "kilder",
+        "rapportering",
+        "KI",
+        "databricks"
+      ],
+      "speakerBase": "Databricks-varianten viser Lakeflow for innhenting, Delta-lakehouse og medallion-lag, SQL og modell-/KI-servering, konsum til AI/BI eller apper og støtte fra Unity Catalog og MLflow. Tjenestene varierer med sky og kundenes behov.",
+      "sourceIds": [
+        "architecture-databricks",
+        "architecture-databricks-scope"
+      ]
     }
   ]
 }

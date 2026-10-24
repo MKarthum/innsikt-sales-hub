@@ -151,3 +151,5 @@ Notatene skal være **et faktisk sammenhengende talemanus**, med naturlig overga
 Når produktets førsteside, oppgavekort eller prioriterte funksjoner endres, må de to Presenter-historiene vurderes mot den **nåværende** brukerreisen, ikke historisk navigasjon. Hovedløpet skal demonstrere konkret nytte tidlig (eksempelvis `#prompter/meeting-prep`), deretter behov, faglig fordypning og marked ved behov. Eksempelløpet bruker eksisterende kanonisk `forretning/okonomi` og `prompter/discovery`. Presenter er fortsatt et redaksjonelt lag over innholdet og skal ikke hardkode separate fagdefinisjoner. Regresjonstest den faktiske 16:9-visningen, notater og eksport; ikke bygg om teknikken for en redaksjonell endring.
 
 - Presentasjonsvisningen velger farger per fortellerdel, eller kan tvinges lys/mørk i Presenter. Interne historier og kundecaser må følge INTERNAL_CONTENT_CONTRACT.md; legg aldri interne innholdsdata i dette offentlige repoet.
+
+- Ressursbibliotek og arkitekturprofiler: ARCHITECTURE_ASSETS.md. Bruk sentral asset-ID, aldri kopier logoer inn i lysbildedata.
