@@ -22,7 +22,9 @@
         "layout": "bridge",
         "beforeLabel": "Uklart kundesignal",
         "afterLabel": "Spørsmål og møteforberedelse",
-        "evidenceLine": "Hva er kundens neste beslutning?"
+        "evidenceLine": "Hva er kundens neste beslutning?",
+        "beforeCue": "I DAG",
+        "afterCue": "MED PORTALEN"
       }
     },
     {
@@ -288,7 +290,9 @@
         "layout": "bridge",
         "beforeLabel": "«Tallene stemmer ikke»",
         "afterLabel": "Hva betyr det, for hvem – og hvorfor?",
-        "evidenceLine": "Eksemplet er fiktivt."
+        "evidenceLine": "Eksemplet er fiktivt.",
+        "beforeCue": "KUNDEN SIER",
+        "afterCue": "VI UNDERSØKER"
       }
     },
     {
@@ -564,7 +568,9 @@
         "layout": "bridge",
         "beforeLabel": "Mer kapasitet",
         "afterLabel": "Større behov for faglig kontroll",
-        "evidenceLine": "Analyse · kode · utforskning"
+        "evidenceLine": "Analyse · kode · utforskning",
+        "beforeCue": "MULIGHET",
+        "afterCue": "FORUTSETNING"
       },
       "sourceIds": [],
       "speakerBase": "KI gir oss mulighet til å arbeide raskere med informasjon, analyse og kode. Vi bør ikke forveksle dette med at resultatene alltid er riktige, eller at teknologien erstatter fagkompetanse. Poenget er at kapasiteten er reell og bør brukes der den faktisk skaper verdi.",
@@ -842,7 +848,9 @@
         "layout": "bridge",
         "beforeLabel": "Selgeren avklarer behovet",
         "afterLabel": "Fagmiljøet vurderer løsningene",
-        "evidenceLine": "Samarbeid før teknologivalg"
+        "evidenceLine": "Samarbeid før teknologivalg",
+        "beforeCue": "SELGEREN",
+        "afterCue": "FAGMILJØET"
       },
       "sourceIds": [],
       "speakerBase": "En selger trenger ikke velge mellom Snowflake, Fabric, KI-agenter og en mer tradisjonell analyse før første møte er over. En god oppfølging begynner med å tydeliggjøre behov og betydning for virksomheten. Da kan riktig kompetanse involveres og et mulig første tiltak defineres sammen med kunden.",
@@ -1048,7 +1056,9 @@
         "layout": "bridge",
         "beforeLabel": "Ny KI-kapasitet",
         "afterLabel": "Samme krav til verdi og forståelse",
-        "evidenceLine": "Endringen ligger i tempoet – ikke i målet."
+        "evidenceLine": "Endringen ligger i tempoet – ikke i målet.",
+        "beforeCue": "DET NYE",
+        "afterCue": "DET SOM BESTÅR"
       }
     },
     {

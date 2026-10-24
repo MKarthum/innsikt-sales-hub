@@ -68,12 +68,12 @@ function render(slide,esc,position={}){
  const title='<h2 class="v2-headline">'+escs(slide.title)+'</h2>';
  if(kind==='impact'){
   if(v.layout==='bridge')return block('impact v4-bridge',top
-    +'<div class="v4-bridge-main"><div class="v4-bridge-copy"><span class="v2-impact-kicker">'+escs(v.kicker||'')+'</span>'
+    +'<div class="v4-bridge-main"><div class="v4-bridge-copy">'+(v.kicker&&v.kicker!==slide.cue?'<span class="v2-impact-kicker">'+escs(v.kicker)+'</span>':'')
     +title+'<p class="v4-bridge-intro">'+escs(v.support||'')+'</p></div>'
     +'<div class="v4-bridge-visual">'
-    +'<div class="v4-bridge-card v4-bridge-before"><small>UTGANGSPUNKT</small><strong>'+escs(v.beforeLabel)+'</strong></div>'
+    +'<div class="v4-bridge-card v4-bridge-before"><small>'+escs(v.beforeCue||'UTGANGSPUNKT')+'</small><strong>'+escs(v.beforeLabel)+'</strong></div>'
     +'<div class="v4-bridge-arrow" aria-hidden="true">↓</div>'
-    +'<div class="v4-bridge-card v4-bridge-after"><small>NESTE STEG</small>'
+    +'<div class="v4-bridge-card v4-bridge-after"><small>'+escs(v.afterCue||'NESTE STEG')+'</small>'
     +assetImage(v.figureAssetId,'v4-bridge-icon')+'<strong>'+escs(v.afterLabel)+'</strong></div></div></div>'
     +'<p class="v4-bridge-bottom">'+escs(v.evidenceLine||'')+'</p>');
   return block('impact',top+'<div class="v2-impact-layout"><div class="v2-impact-main">'
