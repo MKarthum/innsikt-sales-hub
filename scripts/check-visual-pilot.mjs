@@ -43,7 +43,7 @@ try{
   });
   assert.ok(Math.abs(metrics.width/metrics.height-16/9)<.02,'Stabilt format '+index);
   assert.ok(metrics.overflowX<=3&&metrics.overflowY<=3,'Ingen avklipping '+index+': '+JSON.stringify(metrics));
-  const artwork=await slide.locator('.story-scene svg, .story-scene img').first().evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height}});
+  const artwork=await slide.locator('.scene-analysts-figure, .v4-bridge-visual, .scene-duality-graph').first().evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height}});
   assert.ok(artwork.width>150&&artwork.height>100,'Illustrasjonen må være synlig og stor: '+index+' '+JSON.stringify(artwork));
   await slide.screenshot({path:output+'/slide-'+index+'.png'});
   if(index<3)await page.locator('#slide-next').click();
