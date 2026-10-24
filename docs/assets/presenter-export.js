@@ -73,11 +73,13 @@ async function exportDeck(data,mode='html'){
   if(!response.ok)throw Error('Kunne ikke hente presentasjonsstil');
   const visuals=await fetch('./assets/slide-visuals.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!visuals.ok)throw Error('Kunne ikke hente lysbildestil');
+  const storyScenes=await fetch('./assets/slide-story-scenes.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
+  if(!storyScenes.ok)throw Error('Kunne ikke hente lysbildescenene');
   const architectureCss=await fetch('./assets/architecture-visuals.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!architectureCss.ok)throw Error('Kunne ikke hente arkitekturens stiler');
   const vendorCss=await fetch('./assets/vendor-architectures.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!vendorCss.ok)throw Error('Kunne ikke hente leverandørdiagramstiler');
-  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())));
+  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())));
   if(mode==='print'){win.document.open();win.document.write(html);win.document.close();win.focus();return;}
   const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
   const link=document.createElement('a');link.href=url;link.download='innsikt-'+data.id+'-v'+data.version+'.html';

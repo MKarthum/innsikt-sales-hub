@@ -55,3 +55,6 @@ Nye lysbilder: endre datafil først, velg eksisterende scene og figur før du le
 ## Visuell revisjon v0.14.0
 
 Se SLIDE_VISUAL_REVIEW_2026-10-24.md for individuell evaluering og begrunnelse for 39 lysbilder. Det visuelle oppsettet velges etter budskap (valg, spørsmål, kundestemmer, trinn eller hovedresonnement), mens kilde-, tema-, scene- og objektsystemene beholdes.
+## 0.15.0: spesialiserte forklaringsscener
+
+Åtte svake lysbilder bruker slide-story-scenes.js med egen modul og CSS. Komposisjonene har dataeid forklaringsinnhold, samme semantiske temaroller og samme eksportvei som de øvrige lysbildene. Se individuell vurdering i SLIDE_VISUAL_REVIEW_2026-10-24.md.
