@@ -16,5 +16,5 @@ for(const [id,deck] of Object.entries(presentationDecks)){
  if(resolved.length!==deck.slides.length)throw Error('Ugyldig historielengde '+id);
  resolved.forEach((s,i)=>{if(!s.note?.includes(deck.slides[i].note))throw Error('Notat mistet ved oppløsning '+s.id)});
 }
-if(model.composeNotes('Faglig forklaring','Overgang')!=='Faglig forklaring\\n\\nOvergang'.replaceAll('\\n','\n'))throw Error('Notatkomposisjon feiler');
+if(model.composeNotes('Faglig forklaring',{note:'Overgang'})!=='Faglig forklaring\\n\\nOvergang'.replaceAll('\\n','\n'))throw Error('Notatkomposisjon feiler');
 console.log('PASS – lysbilder, eierskap, historiekoblinger og notater validert');
