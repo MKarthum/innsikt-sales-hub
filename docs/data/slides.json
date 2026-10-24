@@ -711,13 +711,22 @@
           "label": "DAGENS ARBEID",
           "title": "Medarbeider sorterer",
           "detail": "Registrer valg og tidsbruk.",
-          "flow": ["Henvendelse", "Medarbeider velger", "Valgt team"]
+          "flow": [
+            "Henvendelse",
+            "Medarbeider velger",
+            "Valgt team"
+          ]
         },
         "trial": {
           "label": "AVGRENSET TEST",
           "title": "KI foreslår team",
           "detail": "Medarbeider vurderer hvert forslag.",
-          "flow": ["Henvendelse", "KI foreslår", "Medarbeider avgjør", "Valgt team"]
+          "flow": [
+            "Henvendelse",
+            "KI foreslår",
+            "Medarbeider avgjør",
+            "Valgt team"
+          ]
         },
         "measureLabel": "SAMMENLIGN",
         "measures": [
@@ -887,30 +896,43 @@
       "tone": "strong",
       "type": "visual",
       "cue": "KUNDEDIALOG",
-      "title": "Tre spørsmål gir et bedre første kundemøte",
+      "title": "Tre spørsmål gjør et kundesignal mulig å følge opp",
       "visual": {
-        "scene": "list",
-        "items": [
-          "Hva skal bli bedre?",
-          "Hva bygger arbeidet på?",
-          "Hvordan måler vi effekt?"
+        "scene": "road",
+        "layout": "discovery-dialogue",
+        "exampleLabel": "FIKTIVT EKSEMPEL",
+        "signalLabel": "KUNDEN SIER",
+        "signal": "«Vi oppdager for sent at leveranser blir forsinket.»",
+        "questionLabel": "VI SPØR",
+        "answerLabel": "KUNDEN SVARER (FIKTIVT)",
+        "insightLabel": "DA KAN VI AVKLARE",
+        "clarifications": [
+          {
+            "question": "Hva rekker dere ikke å gjøre?",
+            "answer": "«Vi får ikke omprioritert i tide.»",
+            "insight": "Beslutningen som påvirkes"
+          },
+          {
+            "question": "Hva bruker dere for å følge status?",
+            "answer": "«Status kommer fra flere systemer.»",
+            "insight": "Datagrunnlaget som må undersøkes"
+          },
+          {
+            "question": "Hva ville vært et bedre resultat?",
+            "answer": "«Vi vil se risiko før fristen ryker.»",
+            "insight": "Mulig mål: varsling før fristen"
+          }
         ],
-        "detail": [
-          "En beslutning eller arbeidsflyt",
-          "Data, eierskap og sammenheng",
-          "Kvalitet og forretningsverdi"
-        ],
-        "figureAssetId": "customer-dialogue",
-        "itemAssetIds": [
-          "business-decision",
-          "data-semantic",
-          "verified-analysis"
-        ],
-        "layout": "questions",
-        "takeaway": "Behov → datagrunnlag → hvordan vi ser at det virker."
+        "nextLabel": "NESTE STEG",
+        "nextAction": "Undersøk én leveranseflyt med prosesseier og dataansvarlig.",
+        "guardrail": "Årsak og løsning er fortsatt ukjent.",
+        "conclusion": "Fra kundens ord til en avgrenset undersøkelse – uten teknologivalg."
       },
-      "sourceIds": [],
-      "speakerBase": "Disse spørsmålene er ikke en universell intervjuguide, men et naturlig utgangspunkt. Spør først hva virksomheten prøver å oppnå, deretter hvilke data og prosesser arbeidet bygger på, og til slutt hva et godt resultat ville være. Målet er å kunne gå videre sammen med kunden og riktig fagkompetanse.",
+      "sourceIds": [
+        "gds-performance-metrics",
+        "nng-interview-probing"
+      ],
+      "speakerBase": "Dette er en fiktiv samtale, ikke en kundereferanse. Kunden sier at forsinkede leveranser oppdages for sent. Det første spørsmålet avklarer hvorfor det betyr noe: de rekker ikke å omprioritere. Det andre gir en hypotese om hvor vi bør lete: status kommer fra flere systemer, men vi vet ennå ikke om systemene er årsaken. Det tredje gir et mulig målepunkt: hvor tidlig en relevant risiko kan varsles før fristen. Ingen av svarene dokumenterer en faktisk diagnose eller effekt. Vi kan nå foreslå å undersøke én leveranseflyt med prosesseier og dataansvarlig – uten å foreslå dataplattform eller KI på forhånd. Kildene støtter metoden med oppfølgingsspørsmål og meningsfulle målepunkter, ikke dette oppdiktede eksemplet. Overgang: Selgerportalen kan hjelpe oss å forberede nettopp slike spørsmål og finne faglig støtte.",
       "topic": "Kundedialog",
       "keywords": []
     },

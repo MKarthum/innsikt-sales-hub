@@ -622,5 +622,19 @@
     "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html",
     "type": "konsulentrapport / undersøkelse",
     "checked": "2026-10-24"
+  },
+  "gds-performance-metrics": {
+    "title": "GOV.UK Service Manual – How to set performance metrics for your service",
+    "publisher": "Government Digital Service",
+    "url": "https://www.gov.uk/service-manual/measuring-success/how-to-set-performance-metrics-for-your-service",
+    "type": "offentlig metodeveiledning",
+    "checked": "2026-10-25"
+  },
+  "nng-interview-probing": {
+    "title": "Nielsen Norman Group – 5 Facilitation Mistakes to Avoid During User Interviews",
+    "publisher": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/interview-facilitation-mistakes/",
+    "type": "faglig metodeartikkel",
+    "checked": "2026-10-25"
   }
 }

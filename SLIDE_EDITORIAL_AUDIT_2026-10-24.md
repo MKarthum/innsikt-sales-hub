@@ -27,7 +27,7 @@
 | insight-three-disciplines | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | risk-and-trust | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | seller-signals | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | Selvstendig objekt | Kontroller semantikk, linjebrudd og begge paletter |
-| seller-better-questions | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | innsikt | Kontroller semantikk, linjebrudd og begge paletter |
+| seller-better-questions | Ett fiktivt kundesignal → tre spørsmål/svar/utledninger → avgrenset undersøkelse; ingen dekorative figur-ID-er | innsikt | Kontroller lesbarhet og forbehold i begge paletter, Presenter, mobil og eksport |
 | seller-specialist | Kort hovedpoeng med relevant sentral figur; 1 gjenbrukte figur-ID-er | sales | Kontroller linjebrudd og bildebalanse |
 | portal-purpose | Portalbro med tre meningsbærende trinn; 4 gjenbrukte figur-ID-er | innsikt | Kontroller semantikk, linjebrudd og begge paletter |
 | architecture-conceptual | Teknologinøytral kilde-til-konsum-arkitektur | dataarkitektur | Ikke presenter lag som obligatorisk produktstruktur |
