@@ -29,3 +29,15 @@ Dersom portalen eller Claude-artefakten bytter merkevare, skal bare disse verdie
 
 ## Kontroller
 `node scripts/check.mjs` inkluderer modellvalidering for bibliotek og historiekoblinger. Test visning i desktop/fullskjerm/mobil før publisering; det er ikke bevist gjennom statiske tester. Eksisterende presentasjonsløp skal ha samme antall lysbilder og notater etter migrering.
+
+## Iterasjon 2: kuratert bibliotek og visuell pilot (24.10.2026)
+
+- De gamle presentasjonsstegene er fortsatt historiespesifikke. Kun tre eksisterende lysbilder med gjenbrukbar kundedialog er foreløpig klassifisert som `shared`. Deling er et redaksjonelt valg, ikke et teknisk krav.
+- `slides.json` eier `topic`, `keywords`, `scope`, `sourceIds`, `speakerBase` og eventuelt `visual.scene` med innholdsparametere. Historier i `pages.json` eier rekkefølge og overgangsnotater.
+- Bibliotekets tema, historietilhørighet, fritekstsøk og scope kan kombineres. Oversikten bruker faktisk lysbilderendering som miniatyr i stedet for typekort.
+- De tre prøvescenene (tusen analytikere, to utfall, samspill) rendres gjennom `slide-visuals.js` og `slide-visuals.css`. Den modulære renderer henter all synlig fagtekst fra datafilene; illustrasjonene tegnes med SVG.
+- Fargene styres av presentasjonens semantiske toner (`strong` og `light`), inkludert `warning`. Ny merkevareprofil kan endre tokenparene uten at illustrasjonskoden omskrives. Standardkontrasten valideres automatisk, men andre merkevarepaletter må gjennomgå egne kontrast- og skjermtester.
+- Ingen generell kildeslide: Kilder eies per lysbilde, er synlige i bibliotekets detaljvisning og vises på selve lysbildet bare ved `sourceDisplay: "required"`.
+- Eksportert HTML får de samme visuelle CSS-reglene som nettstedet; PDF via nettleserens utskrift består. PowerPoint ligger fortsatt utenfor denne iterasjonen.
+- Tre nye lysbilder er en **visuell pilot**, ikke et ferdig foredrag. Foredragsnotatene tilhører historien og inkluderer overganger. De kan erstattes eller utvides enkeltvis.
+- `scripts/check-visual-pilot.mjs` produserer visuelle skjermbilder fra Chromium, og CI bevarer dem som kortlivet artefakt for faktisk designgjennomgang. Skjermbildene er verifikasjon, ikke kanonisk innhold.

@@ -184,7 +184,7 @@ function dev(){let done=D.backlog.filter(x=>x.status==='lukket').length;return `
 <div class="grid-equal"><div class="panel"><div class="small-label">ÅPNE FORBEDRINGER</div><div class="metric num" style="border:0;padding:7px 0;font-size:32px">${D.backlog.length-done}</div><p>Felles backlog som versjonsstyres i <code>docs/data/backlog.json</code>.</p></div><div class="panel"><div class="small-label">LOKALE INNSPILL I DIN NETTLESER</div><div class="metric num" style="border:0;padding:7px 0;font-size:32px">${notes.length}</div><p>${esc(D.pages.copy.localFeedback)}</p><button class="btn subtle" data-feedback-open="1">${ico('message-circle')} Gi nytt innspill</button></div></div>
 <section class="subsection"><div class="section-heading"><div><h2>${esc(D.pages.copy.devBacklogTitle)}</h2><p>Forslag og uavklarte punkter – ikke påstander om leverte funksjoner</p></div></div><div class="table-like">${D.backlog.map(b=>`<div class="table-row"><span class="id">${esc(b.id)}</span><div><strong>${esc(b.title)}</strong><p>${esc(b.why)} · ${esc(b.area)}</p></div><span class="badge ${b.priority==='høy'?'gold':'grey'}">${esc(b.priority)} prioritet</span></div>`).join('')}</div></section>
 <section class="subsection"><div class="section-heading"><div><h2>Dine lokale innspill</h2><p>${esc(D.pages.copy.localFeedbackCaution)}</p></div><button class="btn subtle" id="export-notes" ${notes.length?'':'disabled'}>${ico('download')} Eksporter Markdown</button></div>${notes.length?`<div class="trend-list">${notes.slice().reverse().map((n,i)=>`<div class="panel"><div class="small-label">${esc(n.page)} · ${esc(n.date)}</div><p style="white-space:pre-wrap;color:#244351">${esc(n.text)}</p></div>`).join('')}</div>`:'<div class="empty">'+esc(D.pages.copy.feedbackEmpty)+'</div>'}</section>`}
-function render(){const raw=location.hash.slice(1)||'oversikt';const [p,sub]=raw.split('/');current=names[p]?p:'oversikt';let crumb=names[current];if(sub){const entity=current==='arkitektur'?D.learning.diagrams.find(x=>x.id===sub):current==='verktoy'?D.learning.templates.find(x=>x.id===sub):current==='prompter'?(sub==='variabler'?{title:D.prompts.page.variableUi.overviewTitle}:D.prompts.items.find(x=>x.id===sub)):current==='muligheter'?D.plays.find(x=>x.id===sub):current==='forretning'?(D.businessSignals.find(x=>x.id===sub)||(sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null)||(sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null)):null;if(entity)crumb+=' / '+(entity.title||entity.name||entity.area)}const trail=document.getElementById('crumb');trail.replaceChildren();if(sub&&crumb!==names[current]){const link=document.createElement('a');link.href='#'+current;link.textContent=names[current];const divider=document.createElement('span');divider.className='sep';divider.textContent='/';divider.setAttribute('aria-hidden','true');const leaf=document.createElement('span');leaf.textContent=crumb.slice(names[current].length+3);leaf.setAttribute('aria-current','page');trail.append(link,divider,leaf)}else{trail.textContent=names[current];trail.setAttribute('aria-current','page')}document.querySelectorAll('.nav a').forEach(a=>{const active=a.dataset.page===current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});if(document.querySelector('#reference-nav a.active'))document.getElementById('reference-nav').open=true;document.getElementById('sidebar').classList.remove('open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');let html='';if(current==='muligheter'&&sub){const pl=D.plays.find(x=>x.id===sub);html=pl?playDetail(pl):plays()}else if(current==='forretning'&&sub){const sector=sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null,caseItem=sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null,b=D.businessSignals.find(x=>x.id===sub);html=sector?industrySectorPage(sector):caseItem?industryCasePage(caseItem):b?businessDetail(b):business()}else if(current==='arkitektur'){html=architecture(sub)}else if(current==='verktoy'){html=toolkit(sub)}else if(current==='prompter'){html=prompts(sub)}else if(current==='lysbilder'){html=slideLibraryPage(sub)}else{html=({oversikt:overview,guide,marked:market,muligheter:plays,kundedialog:dialogue,forretning:business,kompetanse:competence,teknologi:technology,ai:aiProducts,bransje:industry,horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev}[current])()}document.getElementById('main').innerHTML=html;window.InnsiktGlossary?.enhance(document.getElementById('main'));window.scrollTo({top:0,behavior:'instant'});document.title=`${crumb} · Innsikt`;}
+function render(){const raw=location.hash.slice(1)||'oversikt';const [p,sub]=raw.split('/');current=names[p]?p:'oversikt';let crumb=names[current];if(sub){const entity=current==='arkitektur'?D.learning.diagrams.find(x=>x.id===sub):current==='verktoy'?D.learning.templates.find(x=>x.id===sub):current==='prompter'?(sub==='variabler'?{title:D.prompts.page.variableUi.overviewTitle}:D.prompts.items.find(x=>x.id===sub)):current==='muligheter'?D.plays.find(x=>x.id===sub):current==='forretning'?(D.businessSignals.find(x=>x.id===sub)||(sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null)||(sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null)):null;if(entity)crumb+=' / '+(entity.title||entity.name||entity.area)}const trail=document.getElementById('crumb');trail.replaceChildren();if(sub&&crumb!==names[current]){const link=document.createElement('a');link.href='#'+current;link.textContent=names[current];const divider=document.createElement('span');divider.className='sep';divider.textContent='/';divider.setAttribute('aria-hidden','true');const leaf=document.createElement('span');leaf.textContent=crumb.slice(names[current].length+3);leaf.setAttribute('aria-current','page');trail.append(link,divider,leaf)}else{trail.textContent=names[current];trail.setAttribute('aria-current','page')}document.querySelectorAll('.nav a').forEach(a=>{const active=a.dataset.page===current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});if(document.querySelector('#reference-nav a.active'))document.getElementById('reference-nav').open=true;document.getElementById('sidebar').classList.remove('open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');let html='';if(current==='muligheter'&&sub){const pl=D.plays.find(x=>x.id===sub);html=pl?playDetail(pl):plays()}else if(current==='forretning'&&sub){const sector=sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null,caseItem=sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null,b=D.businessSignals.find(x=>x.id===sub);html=sector?industrySectorPage(sector):caseItem?industryCasePage(caseItem):b?businessDetail(b):business()}else if(current==='arkitektur'){html=architecture(sub)}else if(current==='verktoy'){html=toolkit(sub)}else if(current==='prompter'){html=prompts(sub)}else if(current==='lysbilder'){html=slideLibraryPage(sub)}else{html=({oversikt:overview,guide,marked:market,muligheter:plays,kundedialog:dialogue,forretning:business,kompetanse:competence,teknologi:technology,ai:aiProducts,bransje:industry,horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev}[current])()}document.getElementById('main').innerHTML=html;if(current==='lysbilder'&&!sub)updateSlideLibrary();fitLibraryPreviews();window.InnsiktGlossary?.enhance(document.getElementById('main'));window.scrollTo({top:0,behavior:'instant'});document.title=`${crumb} · Innsikt`;}
 function toast(t){document.querySelector('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),2700)}
 function closeModal(){
   presenterResizeObserver?.disconnect();presenterResizeObserver=null;
@@ -212,16 +212,66 @@ function feedback(){modal('Gi innspill til neste versjon',`<p class="fineprint">
 function saveFeedback(){const t=document.getElementById('feedback-note')?.value.trim();if(!t){toast('Skriv et innspill først.');return}notes.push({page:names[current],text:t,date:new Date().toISOString().slice(0,10)});try{localStorage.setItem('innsikt-feedback-v1',JSON.stringify(notes))}catch{toast('Lagring er blokkert i nettleseren. Kopier innspillet manuelt.');return}closeModal();toast('Innspillet er lagret lokalt. Eksporter før du bytter enhet.');if(current==='utvikling')render()}
 function exportFeedback(){const txt='# Innspill – Innsikt\n\n'+notes.map((n,i)=>`## ${i+1}. ${n.page} (${n.date})\n\n${n.text}\n`).join('\n');const b=new Blob([txt],{type:'text/markdown;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='innsikt-innspill.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Eksportert som Markdown.')}
 let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null;
+let libraryFilters={query:'',topic:'all',story:'all',scope:'all'};
+function fitLibraryPreviews(){
+ if(typeof document==='undefined'||!document.querySelectorAll)return;
+ document.querySelectorAll('[data-slide-preview]').forEach(el=>{
+  if(el.style&&el.clientWidth)el.style.setProperty('--thumb-scale',String(el.clientWidth/960));
+ });
+}
+function slideLibraryResults(){
+ const ui=D.pages.slideLibraryUi,decks=D.pages.presentationDecks,lib=D.slides.items;
+ const needle=libraryFilters.query.trim().toLocaleLowerCase('no');
+ const valid=lib.filter(s=>{
+  const used=window.InnsiktSlides.usage(D.slides,decks,s.id);
+  if(libraryFilters.scope!=='all'&&s.scope!==libraryFilters.scope)return false;
+  if(libraryFilters.story!=='all'&&!used.some(u=>u.deckId===libraryFilters.story))return false;
+  if(libraryFilters.topic!=='all'&&s.topic!==libraryFilters.topic)return false;
+  if(needle&&!([s.title,s.id,s.topic,s.body,...(s.keywords||[])].filter(x=>typeof x==='string').join(' ').toLocaleLowerCase('no').includes(needle)))return false;
+  return true;
+ });
+ const count=typeof document==='undefined'?null:document.getElementById('slide-library-count');
+ if(count)count.textContent=valid.length+' '+ui.resultsLabel;
+ if(!valid.length)return '<p class="slide-library-empty">'+esc(ui.empty)+'</p>';
+ const topics=[...new Set(lib.map(s=>s.topic||'Øvrige'))].sort((a,b)=>(ui.topicOrder.indexOf(a)<0?999:ui.topicOrder.indexOf(a))-(ui.topicOrder.indexOf(b)<0?999:ui.topicOrder.indexOf(b)));
+ return topics.map(topic=>{
+  const slides=valid.filter(x=>(x.topic||'Øvrige')===topic);
+  if(!slides.length)return '';
+  return '<section class="slide-library-group"><h2>'+esc(topic)+'</h2><div class="slide-library-grid">'
+   +slides.map(s=>{
+    const used=window.InnsiktSlides.usage(D.slides,decks,s.id);
+    const deckId=used[0]?.deckId||'portal',idx=used[0]?.index||0;
+    return '<a class="slide-library-card" href="#lysbilder/'+esc(s.id)+'">'
+    +'<div class="slide-library-tile" data-slide-preview><div class="slide-library-mini"><div class="present-frame present-rich" data-tone="'+esc(s.tone||'strong')+'">'+slideMarkup(s,idx,deckId)+'</div></div></div>'
+    +'<div class="slide-library-card-body"><strong>'+esc(s.title)+'</strong><span class="slide-library-card-tag">'+esc(s.scope==='shared'?ui.sharedLabel:ui.storyLabel)+'</span>'
+    +'<small>'+esc(ui.useLabel)+': '+used.length+' · '+esc(s.id)+'</small></div></a>';
+   }).join('')+'</div></section>';
+ }).join('');
+}
+function updateSlideLibrary(){
+ const out=document.getElementById('slide-library-results');
+ if(!out)return;
+ out.innerHTML=slideLibraryResults();
+ document.querySelectorAll('[data-slide-scope]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.slideScope===libraryFilters.scope)));
+ fitLibraryPreviews();
+}
 function slideLibraryPage(id){
  const ui=D.pages.slideLibraryUi,lib=D.slides.items,decks=D.pages.presentationDecks;
  if(!id){
+  const topics=[...new Set(lib.map(s=>s.topic||'Øvrige'))];
+  const options=(arr)=>arr.map(([value,label])=>'<option value="'+esc(value)+'">'+esc(label)+'</option>').join('');
+  const topicOptions=options([['all',ui.allTopics],...topics.map(x=>[x,x])]).replace('value="'+esc(libraryFilters.topic)+'"','value="'+esc(libraryFilters.topic)+'" selected');
+  const storyOptions=options([['all',ui.allStories],...Object.entries(decks).map(([k,v])=>[k,v.label])]).replace('value="'+esc(libraryFilters.story)+'"','value="'+esc(libraryFilters.story)+'" selected');
+  const choices=[['all',ui.allScopes],['shared',ui.sharedCount],['story',ui.storyCount]]
+   .map(([k,v])=>'<button type="button" data-slide-scope="'+esc(k)+'" aria-pressed="'+(libraryFilters.scope===k)+'">'+esc(v)+'</button>').join('');
   return hdr(ui.eyebrow,ui.title,ui.intro)
-   +'<div class="slide-library-grid">'+lib.map(s=>{
-    const used=window.InnsiktSlides.usage(D.slides,decks,s.id);
-    return '<a class="slide-library-card" href="#lysbilder/'+esc(s.id)+'">'
-      +'<div class="slide-library-tile"><span>'+esc(s.type)+'</span><strong>'+esc(s.title)+'</strong></div>'
-      +'<div class="slide-library-card-body"><strong>'+esc(s.id)+'</strong><span>'+esc(s.scope==='shared'?ui.sharedLabel:ui.storyLabel)+'</span><small>'+esc(ui.useLabel)+': '+used.length+'</small></div></a>';
-   }).join('')+'</div>';
+    +'<section class="slide-library-tools"><h2>'+esc(ui.filterTitle)+'</h2><div class="slide-library-controls">'
+    +'<label>'+esc(ui.searchPlaceholder)+'<input type="search" data-slide-search placeholder="'+esc(ui.searchPlaceholder)+'" value="'+esc(libraryFilters.query)+'"></label>'
+    +'<label>'+esc(ui.topicLabel)+'<select data-slide-filter="topic">'+topicOptions+'</select></label>'
+    +'<label>'+esc(ui.storyFilterLabel)+'<select data-slide-filter="story">'+storyOptions+'</select></label></div>'
+    +'<div class="slide-library-scope" aria-label="'+esc(ui.scopeFilterLabel)+'">'+choices+'</div></section>'
+    +'<div class="slide-library-meta"><strong id="slide-library-count"></strong><button type="button" data-slide-reset>'+esc(ui.clearFilters)+'</button></div>'
+    +'<div id="slide-library-results">'+slideLibraryResults()+'</div>';
  }
  const s=lib.find(x=>x.id===id);
  if(!s)return hdr(ui.eyebrow,ui.title,ui.intro)+'<p class="empty">Ukjent lysbilde.</p>';
@@ -231,14 +281,15 @@ function slideLibraryPage(id){
  const uses=used.map(u=>'<section class="slide-library-usage"><strong>'+esc(u.deckLabel)+'</strong>'
    +'<p>'+esc(u.note)+'</p><button class="btn subtle" type="button" data-slide-open="'+esc(s.id)+'" data-deck-open="'+esc(u.deckId)+'">'+esc(ui.openLabel)+' '+ico('arrow-right')+'</button></section>').join('');
  return '<a class="text-link" href="#lysbilder">'+ico('arrow-left')+' '+esc(ui.returnLabel)+'</a>'
-   +hdr(ui.eyebrow,s.title,s.id)
-   +'<div class="slide-library-preview"><div class="present-frame present-rich" data-tone="'+esc(s.tone||'strong')+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
+   +hdr(ui.eyebrow,s.title,s.id+' · '+(s.topic||''))
+   +'<div class="slide-library-detail-stage" data-slide-preview><div class="present-frame present-rich" data-tone="'+esc(s.tone||'strong')+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
    +'<div class="slide-library-info"><section><h2>'+esc(ui.speakerLabel)+'</h2>'+(note||'<p class="fineprint">Se notatene i historiene nedenfor.</p>')
    +'<h2>'+esc(ui.sourceLabel)+'</h2>'+sources+'</section>'
    +'<section><h2>'+esc(ui.useLabel)+'</h2>'+(uses||'<p class="fineprint">Ikke brukt i noen historie ennå.</p>')+'</section></div>';
 }
 function presentationSlides(){return window.InnsiktSlides.resolve(D.slides,D.pages.presentationDecks[selectedDeck],selectedDeck)}
 function slideMarkup(s,index,deckId,notes=false){
+ if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{index,total:D.pages.presentationDecks[deckId].slides.length});
  const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
  let v='<div class="slide-eyebrow">'+esc(s.cue||deck.label.toUpperCase())+' · '+(index+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
  if(s.type==='metric'){
@@ -451,6 +502,8 @@ function refreshPromptFromContext(){
  if(status)status.textContent=ui.cleanMessage;
 }
 function initPromptContextEvents(){
+ document.addEventListener('input',e=>{if(e.target.matches?.('[data-slide-search]')){libraryFilters.query=e.target.value;updateSlideLibrary()}});
+ document.addEventListener('change',e=>{const select=e.target.closest?.('[data-slide-filter]');if(select){libraryFilters[select.dataset.slideFilter]=select.value;updateSlideLibrary()}});
  document.addEventListener('input',e=>{
   const field=e.target.closest('[data-context-var]');
   if(field){
@@ -494,7 +547,7 @@ const pc=e.target.closest('[data-prompt-copy]');
 if(pc){const editor=document.getElementById('prompt-editor');if(editor){if(!navigator.clipboard?.writeText){toast(D.prompts.page.variableUi.copyUnsupported);return}navigator.clipboard.writeText(editor.value).then(()=>toast(D.prompts.page.variableUi.copySuccess)).catch(()=>toast(D.prompts.page.variableUi.copyFailure));}return}
 const pr=e.target.closest('[data-prompt-reset]');
 if(pr){const item=D.prompts.items.find(x=>x.id===pr.dataset.promptReset),editor=document.getElementById('prompt-editor');if(item&&editor){rebuildPromptEditor(item,true)}return}
-if(e.target.closest('#present-fullscreen-toggle')){togglePresenterFullscreen();return}if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;render();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}
+if(e.target.closest('#present-fullscreen-toggle')){togglePresenterFullscreen();return}if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;render();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}const scopeBtn=e.target.closest('[data-slide-scope]');if(scopeBtn){libraryFilters.scope=scopeBtn.dataset.slideScope;updateSlideLibrary();return}if(e.target.closest('[data-slide-reset]')){libraryFilters={query:'',topic:'all',story:'all',scope:'all'};render();return}
 const openSlide=e.target.closest('[data-slide-open]');
 if(openSlide){const deckId=openSlide.dataset.deckOpen,deck=D.pages.presentationDecks[deckId];const index=deck?.slides.findIndex(x=>x.slideId===openSlide.dataset.slideOpen)??-1;if(index>=0)presentation(deckId,index);return}if(e.target.closest('#slide-next')){slide=Math.min(slide+1,presentationSlides().length-1);showSlide();return}if(e.target.closest('#slide-prev')){slide=Math.max(slide-1,0);showSlide();return}if(e.target.closest('#reset-qualify')){selectedChecklist.clear();render();return}const scen=e.target.closest('[data-scenario]');if(scen){scenarioIndex=Number(scen.dataset.scenario);render();return}if(e.target.closest('[data-search-select]')){closeModal();return}if(e.target.closest('[data-dismiss]')&&(e.target.matches('.overlay')||e.target.closest('.modal-close'))){closeModal();return}if(e.target.closest('#menu-toggle')){let bar=document.getElementById('sidebar');const open=bar.classList.toggle('open');document.getElementById('menu-toggle').setAttribute('aria-expanded',String(open));return}});document.addEventListener('change',e=>{
 const selected=e.target.closest('[data-prompt-choice]');

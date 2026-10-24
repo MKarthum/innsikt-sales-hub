@@ -20,9 +20,9 @@ function luminance(color){
 function contrast(a,b){const [l1,l2]=[luminance(a),luminance(b)].sort((x,y)=>y-x);return (l1+0.05)/(l2+0.05)}
 for(const tone of ['strong','light']){
  const bg=resolve('--slide-'+tone+'-bg');
- for(const role of ['fg','muted','accent']){
+ for(const role of ['fg','muted','accent','warning']){
   const fg=resolve('--slide-'+tone+'-'+role),ratio=contrast(bg,fg);
   if(ratio<4.5)throw Error('Uleselig '+tone+'/'+role+' mot '+bg+': '+ratio.toFixed(2)+':1');
  }
 }
-console.log('PASS – lysbildenes seks kontrastpar oppfyller minst 4,5:1 i standardtema');
+console.log('PASS – lysbildenes åtte kontrastpar oppfyller minst 4,5:1 i standardtema');
