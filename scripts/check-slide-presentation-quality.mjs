@@ -4,7 +4,7 @@ const slides=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items;
 const profiles=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles;
 const expected=new Set(slides.map(s=>s.id));
 assert.ok(slides.length>0,'Slide library must not be empty');
-const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road'};
+const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road'};
 const accepted=new Set(Object.keys(layouts));
 const seen=new Set();
 for(const s of slides){
@@ -52,6 +52,7 @@ for(const s of slides){
  if(v.layout==='meeting-brief')assert.ok(v.fields?.length===3&&v.fields.every(x=>x.name&&x.value)&&v.questions?.length===2&&v.transferLabel&&v.agenda&&v.review&&v.briefLabel&&v.conclusion,'Meeting brief needs editable context, illustrative output and review');
  if(v.layout==='conversation-takeaway')assert.ok(v.signal&&v.question&&v.nextAction&&v.signalLabel&&v.questionLabel&&v.nextLabel&&v.conclusion,'Conversation takeaway must show specific result, not only steps');
  if(v.layout==='capability-journey')assert.ok(v.stages?.length===3&&v.stages.every(x=>x.label&&x.title&&x.detail&&x.assetId)&&v.case&&v.assist&&v.conclusion,'Capability journey needs a decision, optional KI and context');
+ if(v.layout==='controlled-comparison')assert.ok(v.exampleLabel&&v.problem&&v.hypothesis&&v.baseline?.label&&v.baseline?.title&&v.baseline?.detail&&v.trial?.label&&v.trial?.title&&v.trial?.detail&&v.baseline?.flow?.length===3&&v.trial?.flow?.length===4&&v.baseline.flow.every(Boolean)&&v.trial.flow.every(Boolean)&&v.measureLabel&&v.measures?.length===2&&v.measures.every(x=>typeof x==='string'&&x.length>3)&&v.guardrail&&v.decisionLabel&&v.decision&&v.conclusion,'Controlled comparison needs two comparable methods, two measures, explicit controls and a decision gate');
  if(v.layout==='bounded-discovery')assert.ok(v.sources?.length===2&&v.sourceTitle&&v.checkTitle&&v.result&&v.inScope&&v.later&&v.conclusion,'Discovery needs a bounded investigation and an explicit exclusion');
  if(v.scene==='analyst-grid')assert.equal(v.number,'1 000','Preserve metaphor');
 }

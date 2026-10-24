@@ -699,31 +699,40 @@
       "scope": "shared",
       "tone": "strong",
       "type": "visual",
-      "cue": "FAG OG VERDI",
-      "title": "Start med ett behov, test og bygg videre",
+      "cue": "TEST ÉN OPPGAVE",
+      "title": "Test én oppgave før du bygger en stor løsning",
       "visual": {
         "scene": "road",
-        "steps": [
-          "Velg ett behov",
-          "Test med riktige data",
-          "Lær – og bygg videre"
+        "layout": "controlled-comparison",
+        "exampleLabel": "FIKTIVT EKSEMPEL",
+        "problem": "Kundeservice bruker tid på å sortere henvendelser.",
+        "hypothesis": "Kan KI foreslå riktig team?",
+        "baseline": {
+          "label": "DAGENS ARBEID",
+          "title": "Medarbeider sorterer",
+          "detail": "Registrer valg og tidsbruk.",
+          "flow": ["Henvendelse", "Medarbeider velger", "Valgt team"]
+        },
+        "trial": {
+          "label": "AVGRENSET TEST",
+          "title": "KI foreslår team",
+          "detail": "Medarbeider vurderer hvert forslag.",
+          "flow": ["Henvendelse", "KI foreslår", "Medarbeider avgjør", "Valgt team"]
+        },
+        "measureLabel": "SAMMENLIGN",
+        "measures": [
+          "Treff mot avtalt fasit",
+          "Tid per henvendelse"
         ],
-        "hint": "Et konkret resultat før neste store plan",
-        "figureAssetId": "delivery-loop",
-        "stepAssetIds": [
-          "value-compass",
-          "verified-analysis",
-          "delivery-loop"
-        ],
-        "layout": "steps",
-        "stepDetails": [
-          "Start der verdien kan vises",
-          "Avklar kvalitet og risiko for formålet",
-          "Bruk resultatet til å velge neste steg"
-        ]
+        "guardrail": "Kun godkjente testdata · ingen automatisk videresending",
+        "decisionLabel": "BESLUTNING ETTER TEST",
+        "decision": "Utvid bare hvis nytte, kvalitet og kontroll holder.",
+        "conclusion": "Begynn lite, men avgjør videre arbeid på faktisk resultat."
       },
-      "sourceIds": [],
-      "speakerBase": "Start med et avgrenset behov som betyr noe for virksomheten. Finn datagrunnlaget som faktisk trengs og avklar kvalitet, sikkerhet og ansvar for nettopp dette formålet. Test om tiltaket gir verdi. Bygg videre eller endre kurs basert på det dere lærer. Dette betyr ikke at kvalitet er valgfritt; innsatsen skal være proporsjonal med risiko.",
+      "sourceIds": [
+        "nist-ai-rmf"
+      ],
+      "speakerBase": "Tenk på et fiktivt kundeserviceteam som bruker tid på å sortere henvendelser. Før vi velger løsning, avklarer vi hva riktig team betyr, hvem som eier kategoriene, og hvordan dagens kvalitet og tidsbruk måles. Så kan vi teste om KI gir nyttige forslag på et lite, representativt utvalg godkjente testdata. En medarbeider kontrollerer fortsatt hvert forslag; vi automatiserer ikke videresendingen. Sammenlign med dagens arbeidsmåte, vurder feil, risiko og ressursbruk, og utvid bare hvis kvalitet, nytte og kontroll er gode nok. Hvis ikke, juster eller stopp. Dette er et tenkt eksempel, ikke et gjennomført prosjekt eller et dokumentert effektresultat. NIST AI RMF er et frivillig rammeverk for risikostyring og evaluering, ikke en kilde til resultatpåstander i dette eksemplet. Overgang: Under testen kan vi oppdage uklare kategorier eller mangelfulle data. KI kan også hjelpe oss å forbedre dette grunnlaget, med verifisering.",
       "topic": "Fag og verdi",
       "keywords": []
     },

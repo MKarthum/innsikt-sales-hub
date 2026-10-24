@@ -36,3 +36,7 @@ Faglig designprinsipp: Tegn sammenhengen som betyr noe. En klikkoppskrift skal i
 ## Metodiske referanser
 
 Retningslinjene fra [Harvard Catalyst](https://catalyst.harvard.edu/writing-communication-center/visualize-science/slides/), [Carnegie Mellon](https://www.cmu.edu/student-success/other-resources/resource-descriptions/powerpoint-design.html) og [Microsofts veiledning om tilgjengelige presentasjoner](https://support.microsoft.com/en-us/accessibility/powerpoint/make-your-powerpoint-presentations-accessible-to-people-with-disabilities) er brukt som vurderingskriterier, ikke som en universell komposisjonsmal. De nye figurene inneholder illustrative eksempler, ikke forskningsbaserte årsakspåstander.
+
+## Oppfølging v0.17.5 – `ai-pragmatic` (24.10.2026)
+
+Før: Tre like steg («Velg ett behov», «Test med riktige data», «Lær – og bygg videre») uten eksplisitt sammenligningsgrunnlag, målemetode eller kontrollgrense. Etter: Fiktiv kundeservicesortering viser manuell arbeidsmåte ved siden av KI-forslag med menneskelig godkjenning, to sammenlignbare arbeidsflyter (henvendelse → menneskelig valg versus henvendelse → KI-forslag → menneskelig valg), felles mål (treff mot avtalt fasit og tid per henvendelse), avgrensede testdata og beslutningsport. Ingen effekt er påstått. ID, historieplassering og kildeautoritet beholdes; NIST AI RMF er kun rammeverkskilde for risikovurdering. Visuell godkjenning krever særskilt dokumentasjon fra faktisk rendering.

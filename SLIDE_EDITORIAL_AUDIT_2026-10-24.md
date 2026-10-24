@@ -22,7 +22,7 @@
 | data-meaning-customer | Ulike begrepsperspektiver; 1 gjenbrukte figur-ID-er | innsikt | Unngå å behandle begrep som universelle definisjoner |
 | ai-good-vs-fast | Avveining; ikke en falsk teknologidikotomi; 1 gjenbrukte figur-ID-er | Selvstendig objekt | Kontroller semantikk, linjebrudd og begge paletter |
 | ai-two-extremes | Avveining; ikke en falsk teknologidikotomi; 1 gjenbrukte figur-ID-er | innsikt | Kontroller semantikk, linjebrudd og begge paletter |
-| ai-pragmatic | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | innsikt | Kontroller semantikk, linjebrudd og begge paletter |
+| ai-pragmatic | Fiktiv kundeservicesituasjon: dagens manuelle sortering mot KI-forslag med menneskelig godkjenning; felles kvalitets-/tidsmål og tydelig kontrollgrense | innsikt | Kontroller likeverdig sammenligning, lesbar målebro, lys/mørk og eksport |
 | ai-improve-data | Gjentatt læringssløyfe; 1 gjenbrukte figur-ID-er | innsikt | Kontroller semantikk, linjebrudd og begge paletter |
 | insight-three-disciplines | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | risk-and-trust | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
