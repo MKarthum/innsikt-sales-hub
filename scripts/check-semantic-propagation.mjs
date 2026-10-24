@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const read=n=>JSON.parse(fs.readFileSync('docs/data/'+n+'.json','utf8'));
-const raw=()=>{const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides]=['site','pages','sources','market','sales','technologies','backlog','learning', 'prompts','horizon','slides'].map(read);return {meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides}};
+const raw=()=>{const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles]=['site','pages','sources','market','sales','technologies','backlog','learning', 'prompts','horizon','slides','visual-assets','architecture-profiles'].map(read);return {meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles}};
 const js=n=>fs.readFileSync('docs/assets/'+n+'.js','utf8');
 const match=(data,path)=>path.split('.').reduce((acc,key)=>acc[key],data);
 const owners={

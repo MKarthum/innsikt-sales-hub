@@ -3,11 +3,11 @@ import vm from 'node:vm';
 
 const read=(path)=>fs.readFileSync(path,'utf8');
 const json=(name)=>JSON.parse(read('docs/data/'+name+'.json'));
-const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides]=
-  ['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides'].map(json);
+const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles]=
+  ['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides','visual-assets','architecture-profiles'].map(json);
 const resolverSandbox={window:{}};
 vm.runInNewContext(read('docs/assets/content.js'),resolverSandbox,{filename:'content.js'});
-const fixture=resolverSandbox.window.InnsiktContent.materialize({meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides});
+const fixture=resolverSandbox.window.InnsiktContent.materialize({meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles});
 
 const source=read('docs/assets/site.js');
 const ending=/\binit\(\);\s*\}\)\(\);\s*$/;
@@ -25,7 +25,7 @@ const setup=[
 '   oversikt:overview,guide,forretning:business,muligheter:plays,kundedialog:dialogue,',
 '   marked:market,kompetanse:competence,arkitektur:()=>architecture(),',
 '   teknologi:technology,ai:aiProducts,bransje:industry,',
-'   verktoy:()=>toolkit(),prompter:()=>prompts(),lysbilder:()=>slideLibraryPage(),horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev',
+'   verktoy:()=>toolkit(),prompter:()=>prompts(),lysbilder:()=>slideLibraryPage(),ressurser:()=>resourceLibraryPage(),horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev',
 ' }))add(name,fn);',
 " D.plays.forEach(x=>add('muligheter/'+x.id,()=>playDetail(x)));",
 " D.businessSignals.forEach(x=>add('forretning/'+x.id,()=>businessDetail(x)));",
@@ -66,6 +66,8 @@ sandbox.window.InnsiktPromptContext.configure(fixture.prompts);
 vm.runInContext(read('docs/assets/prompts.js'),sandbox,{timeout:3000,filename:'prompts.js'});
 vm.runInContext(read('docs/assets/horizon.js'),sandbox,{timeout:3000,filename:'horizon.js'});
 vm.runInContext(read('docs/assets/slide-model.js'),sandbox,{timeout:3000,filename:'slide-model.js'});
+vm.runInContext(read('docs/assets/visual-assets.js'),sandbox,{timeout:3000,filename:'visual-assets.js'});
+vm.runInContext(read('docs/assets/architecture-visuals.js'),sandbox,{timeout:3000,filename:'architecture-visuals.js'});
 vm.runInContext(read('docs/assets/slide-visuals.js'),sandbox,{timeout:3000,filename:'slide-visuals.js'});
 vm.runInContext(instrumented,sandbox,{timeout:3000,filename:'site.js'});
 let entries;
