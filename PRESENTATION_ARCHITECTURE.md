@@ -80,3 +80,9 @@ Et mobiltrykk på «Lukk» eller utenfor 16:9-lysbildeflaten fullføres nå via 
 Korrekt flyt er **kort i bibliotek → lysbildets detaljside med notater/kilder/gjenbruk → trykk på lysbildet → fullskjerm**. Kort er vanlige lenker, og data/notes beholdes i detaljsiden. Fullskjerm er en frivillig ekstra visning, ikke en erstatning for detaljsiden. Trykk på selve lysbildet eller Enter/Mellomrom ved tastaturfokus åpner; Lukk/berøring utenfor/Escape returnerer til samme detaljside uten ruteendring.
 
 **Gjeldende regel:** Avsnittene fra v0.17.1 om fullskjerm direkte fra kort, og v0.17.2 om `pointerup`, er historiske og erstattes av v0.17.3. Kortet leder alltid først til detaljsiden.
+
+## v0.17.4 – enkel og robust fullskjermlukking
+
+Gjeldende implementering for detaljsidens lysbildefullskjerm bruker dedikerte hendelseslyttere på dialogens lukkeknapp og på området utenfor selve lysbildet. Den tidligere globale `pointerup`-/`touchend`-håndteringen er fjernet. En `touchend` på lukkekontroll eller bakgrunn kansellerer kompatibilitetsklikk og lar dialogen bli stående til neste hendelsessyklus før den fjernes. En kort gjenåpningsbeskyttelse hindrer at sent leverte mobilklikk åpner forhåndsvisningen på nytt. Lukking via tastatur eller mus følger vanlige klikk-/Escape-hendelser. Lukkeknappen ligger nederst i mobilvisningen, utenfor lysbildet og med et større trykkfelt.
+
+**Behold totrinnsflyten:** bibliotekskort → detaljside med notater og kilder → trykk på lysbildet → fullskjerm → tilbake til samme detaljside. Nytt lyd-/touchregime må ha en regresjonstest som simulerer sent kompatibilitetsklikk etter lukking.
