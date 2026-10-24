@@ -29,7 +29,8 @@
     "prompter": "Prompter for salg",
     "horisont": "I grenselandet",
     "trendradar": "Trendradar",
-    "lysbilder": "Lysbildebibliotek"
+    "lysbilder": "Lysbildebibliotek",
+    "ressurser": "Figur- og logobibliotek"
   },
   "headers": {
     "FORRETNINGSBEHOV": {
@@ -881,6 +882,79 @@
           "resolution": "strong"
         }
       }
+    },
+    "dataarkitektur": {
+      "label": "Dataplattform og arkitektur · 6 bilder",
+      "audience": "Selgere og konsulenter med varierende teknisk bakgrunn",
+      "intro": "Fra et generisk dataplattformmønster til representative eksempler med Snowflake, Fabric og Databricks.",
+      "narrative": {
+        "mode": "reference-architecture",
+        "use": "Forklar dataflyt og hva lagene løser – ikke en produktkonkurranse.",
+        "centralQuestion": "Hvordan kan vi organisere data fra kilder til rapportering og KI?",
+        "turn": "En generisk arkitektur har mange av de samme ansvarene på tvers av plattformer.",
+        "resolution": "Verktøyvalg gjøres ut fra kundens behov, kompetanse og eksisterende miljø.",
+        "story": "Denne presentasjonen begynner med en teknologinøytral modell for å forklare hvorfor data må hentes, modelleres, gjøres forståelige og brukes på en kontrollert måte. Arkitekturen viser vanlige kapabiliteter, ikke nødvendigvis separate systemer. Deretter ser vi et mer konkret referansemønster som introduserer batch, strømmer, semantikk, rapportering og KI. Vi utforsker hvordan KI bygger på data og kontekst og også kan bidra til forbedring. Så sammenligner vi tre representative oppsett med Snowflake, Microsoft Fabric og Databricks. Leverandørene kan dekke mange av de samme behovene, og eksemplene er ikke uttømmende eller én korrekt måte å bygge løsning på. Det sentrale er å forstå hvilke krav virksomheten har, hvilke data og kompetanser som finnes, og hvilken verdi som skal skapes.",
+        "beats": [
+          {
+            "id": "foundations",
+            "function": "Et felles språk om dataplattformer."
+          },
+          {
+            "id": "uses",
+            "function": "Skille forretningsbehov, styring og teknologi."
+          },
+          {
+            "id": "examples",
+            "function": "Vis tre representative leverandørvarianter uten å kåre vinner."
+          }
+        ]
+      },
+      "visualStyle": {
+        "defaultTone": "light",
+        "beats": {
+          "foundations": "strong",
+          "uses": "light",
+          "examples": "light"
+        }
+      },
+      "slides": [
+        {
+          "slideId": "architecture-conceptual",
+          "beat": "foundations",
+          "delivery": "tell",
+          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til Typisk moderne dataarkitektur."
+        },
+        {
+          "slideId": "architecture-modern",
+          "beat": "foundations",
+          "delivery": "tell",
+          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til KI på et styrt datagrunnlag."
+        },
+        {
+          "slideId": "architecture-ai",
+          "beat": "uses",
+          "delivery": "tell",
+          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til Snowflake + dbt: en mulig datastack."
+        },
+        {
+          "slideId": "architecture-snowflake",
+          "beat": "examples",
+          "delivery": "tell",
+          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til Microsoft Fabric: integrert plattform."
+        },
+        {
+          "slideId": "architecture-fabric",
+          "beat": "examples",
+          "delivery": "tell",
+          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til Databricks: data, analyse og KI."
+        },
+        {
+          "slideId": "architecture-databricks",
+          "beat": "examples",
+          "delivery": "tell",
+          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til de konkrete kundebehovene."
+        }
+      ]
     }
   },
   "marketIntro": {
@@ -1066,6 +1140,7 @@
     "storyFilterLabel": "Historie",
     "scopeFilterLabel": "Bruk",
     "topicOrder": [
+      "Dataarkitektur",
       "KI og kapasitet",
       "Kvalitet og forståelse",
       "Fag og verdi",
@@ -1073,5 +1148,16 @@
       "Bruk av portalen"
     ],
     "toneInfo": "Biblioteket viser lysbildets egen forhåndsvisning. I Presenter bestemmes fargene av historien eller valgt lys/mørk visning."
+  },
+  "resourceLibraryUi": {
+    "eyebrow": "Bibliotek",
+    "title": "Figurer, logoer og illustrasjoner",
+    "intro": "Felles byggeklosser bak lysbildene. Se opphav, bruksregler og hvilke diagrammer som bruker dem.",
+    "slideTab": "Lysbilder",
+    "assetTab": "Figurer og logoer",
+    "used": "Brukes i",
+    "origin": "Opphav",
+    "rights": "Bruksrettigheter",
+    "empty": "Ingen ressurser"
   }
 }

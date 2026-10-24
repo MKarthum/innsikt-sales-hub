@@ -49,6 +49,19 @@ function build(data,stylesheet){
  +data.slides.map((html,i)=>'<section class="present-frame present-rich export-slide" data-tone="'+safe(data.tones?.[i]||'strong')+'">'+html+'</section>').join('')
  +'</main><script>'+script.replaceAll('</script','<\\/script')+'</script></body></html>';
 }
+async function inlineLibraryImages(html){
+ const files=[...new Set([...html.matchAll(/src="(\.\/assets\/library\/(?:vendor|external|original)\/[a-z0-9-]+\.(?:svg|png|jpg|jpeg|webp))"/g)].map(m=>m[1]))];
+ if(!files.length)return html;
+ const substitutions=await Promise.all(files.map(async path=>{
+  const r=await fetch(path,{cache:'no-store'});
+  if(!r.ok)throw Error('Kan ikke bygge inn ressurs: '+path);
+  const blob=await r.blob();
+  const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(blob);});
+  return [path,data];
+ }));
+ for(const [path,uri] of substitutions)html=html.replaceAll('src="'+path+'"','src="'+uri+'"');
+ return html;
+}
 async function exportDeck(data,mode='html'){
  let win=null;
  if(mode==='print'){
@@ -60,7 +73,9 @@ async function exportDeck(data,mode='html'){
   if(!response.ok)throw Error('Kunne ikke hente presentasjonsstil');
   const visuals=await fetch('./assets/slide-visuals.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!visuals.ok)throw Error('Kunne ikke hente lysbildestil');
-  const html=build(data,(await response.text())+'\n'+(await visuals.text()));
+  const architectureCss=await fetch('./assets/architecture-visuals.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
+  if(!architectureCss.ok)throw Error('Kunne ikke hente arkitekturens stiler');
+  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await architectureCss.text())));
   if(mode==='print'){win.document.open();win.document.write(html);win.document.close();win.focus();return;}
   const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
   const link=document.createElement('a');link.href=url;link.download='innsikt-'+data.id+'-v'+data.version+'.html';

@@ -524,5 +524,47 @@
     "type": "internasjonale prinsipper",
     "published": "2024-05-03",
     "checked": "2026-10-24"
+  },
+  "architecture-snowflake": {
+    "title": "Snowflake – Key Concepts and Architecture",
+    "publisher": "Snowflake",
+    "url": "https://docs.snowflake.com/en/user-guide/intro-key-concepts",
+    "type": "official architecture documentation",
+    "checked": "2026-10-24"
+  },
+  "architecture-dbt": {
+    "title": "dbt Developer Hub – Quickstart with Snowflake",
+    "publisher": "dbt Labs",
+    "url": "https://docs.getdbt.com/guides/snowflake",
+    "type": "official architecture documentation",
+    "checked": "2026-10-24"
+  },
+  "architecture-fabric": {
+    "title": "What is Microsoft Fabric?",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/microsoft-fabric-overview",
+    "type": "official architecture documentation",
+    "checked": "2026-10-24"
+  },
+  "architecture-fabric-lifecycle": {
+    "title": "End-to-end data lifecycle in Fabric",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/data-lifecycle",
+    "type": "official architecture documentation",
+    "checked": "2026-10-24"
+  },
+  "architecture-databricks": {
+    "title": "Databricks reference architectures",
+    "publisher": "Databricks",
+    "url": "https://docs.databricks.com/aws/en/lakehouse-architecture/reference",
+    "type": "official architecture documentation",
+    "checked": "2026-10-24"
+  },
+  "architecture-databricks-scope": {
+    "title": "Scope of Databricks platform",
+    "publisher": "Databricks",
+    "url": "https://docs.databricks.com/aws/en/lakehouse-architecture/scope",
+    "type": "official architecture documentation",
+    "checked": "2026-10-24"
   }
 }
