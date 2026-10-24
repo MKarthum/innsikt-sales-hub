@@ -238,5 +238,13 @@
     "status": "åpen",
     "priority": "middels",
     "why": "Se SLIDE_QUALITY_REVIEW_V017.md for rangerte gjenstående svakheter. Prioriter ai-pragmatic, seller-better-questions og portal-learning med faktisk 16:9-inspeksjon; unngå generiske kort og endring av fungerende bilder."
+  },
+  {
+    "id": "B-31",
+    "title": "Brukerteste samtaletrening og samtalestøtte i par",
+    "area": "Kundedialog",
+    "status": "åpen",
+    "priority": "høy",
+    "why": "La nye og erfarne selgere teste 15-minutters øvelser, rollekort og rask møteforberedelse. Registrer observerte problemer, nytte og hva som faktisk tas i bruk. Automatiske tester kan ikke dokumentere reell læring."
   }
 ]

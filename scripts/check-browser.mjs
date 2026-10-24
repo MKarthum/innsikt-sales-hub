@@ -22,7 +22,7 @@ try {
   await page.goto(base,{waitUntil:'networkidle'});
   await page.locator('#main .hero').waitFor();
   assert.equal((await page.locator('#version-label').innerText()).trim(),expectedVersion,label+': versjon');
-  assert.equal(await page.locator('.home-task').count(),3,label+': rask oppgavestart');
+  assert.equal(await page.locator('.home-task').count(),4,label+': rask oppgavestart');
   assert.equal(await page.locator('#main .prompt-card').count(),3,label+': fremhevede prompter');
   for (const route of [...pages,...details]) {
    await page.evaluate(id=>{location.hash='#'+id},route);
@@ -62,10 +62,35 @@ try {
   await page.evaluate(()=>{location.hash='#guide'});
   await page.locator('.glossary-item').first().waitFor();
   assert.ok((await page.locator('.glossary-item').allTextContents()).some(t=>t.includes('Business intelligence')),label+': fullt navn i ordlisten');
+  // Brukerreise A og C: naviger direkte fra to valg til skjermede rollekort og refleksjon.
   await page.evaluate(()=>{location.hash='#kundedialog'});
-  await page.locator('[data-scenario="7"]').waitFor();
-  await page.locator('[data-scenario="7"]').click();
-  assert.ok((await page.locator('.scenario-content').innerText()).includes('dataene våre'),label+': suverenitet i kundedialogen');
+  await page.locator('.dialogue-choice-grid').waitFor();
+  assert.equal(await page.locator('.dialogue-choice').count(),2,label+': trening og støtte er tydelige valg');
+  await page.locator('.dialogue-choice[href="#kundedialog/trening"]').click();
+  assert.equal(await page.locator('.dialogue-scenario').count(),8,label+': alle fiktive scenarioer');
+  await page.locator('.dialogue-scenario[href="#kundedialog/tren-scenario-08"]').click();
+  await page.locator('.dialogue-role-sheet').waitFor();
+  const sellerText=await page.locator('.dialogue-role-sheet').innerText();
+  assert.ok(sellerText.includes('sikkerhetsansvarlig'),label+': krevende selgerrolle');
+  assert.ok(!sellerText.includes('Ved spørsmål om data:'),label+': kunden sine opplysninger skjules');
+  assert.equal(await page.locator('.breadcrumb-trail a[href="#kundedialog"]').count(),1,label+': treningsrute med klikkbar forelder');
+  await page.locator('[data-dialogue-copy]').click();
+  assert.ok((await page.evaluate(()=>navigator.clipboard.readText())).endsWith('#kundedialog/kunde-scenario-08'),label+': delbar kunderolle');
+  await page.locator('.dialogue-role-nav a[href="#kundedialog/kunde-scenario-08"]').click();
+  assert.ok((await page.locator('.dialogue-customer').innerText()).includes('Ved spørsmål om data:'),label+': kundens egen bakgrunn');
+  await page.locator('.dialogue-role-nav a[href="#kundedialog/evaluer-scenario-08"]').click();
+  assert.equal(await page.locator('.dialogue-debrief[open]').count(),0,label+': fasit skjult før refleksjon');
+  await page.locator('.dialogue-debrief summary').click();
+  assert.ok((await page.locator('.dialogue-debrief-body').innerText()).includes('EU-region'),label+': etterprat viser faglige fallgruver');
+  await page.locator('.dialogue-actions a[href="#kundedialog/trening"]').click();
+  assert.equal(await page.locator('.dialogue-scenario').count(),8,label+': bytte øvelse');
+  // Brukerreise B: direkte møteforberedelse uten trening.
+  await page.evaluate(()=>{location.hash='#kundedialog/stotte'});
+  await page.locator('.dialogue-support-grid').waitFor();
+  assert.equal(await page.locator('.dialogue-support-item').count(),6,label+': seks praktiske innganger');
+  assert.equal(await page.locator('a[href="#prompter/meeting-prep"]').count()>0,true,label+': møtebrief finnes');
+  assert.equal(await page.locator('.breadcrumb-trail a[href="#kundedialog"]').count(),1,label+': støtte med foreldrenivå');
+  assert.ok((await page.locator('.dialogue-support-grid').innerText()).includes('Hva skjer i dag'),label+': konkrete oppfølgingsspørsmål');
   if(label==='mobil') {
    await page.locator('#menu-toggle').click();
    assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true','mobilmeny åpner');

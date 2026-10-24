@@ -436,7 +436,32 @@
       "avoid": "Å foreslå et nytt dashboard uten å forstå datagrunnlaget.",
       "next": "Foreslå å se på én rapporteringsprosess med økonomi og en analysefagperson.",
       "play": "rapportering",
-      "id": "scenario-01"
+      "id": "scenario-01",
+      "training": {
+        "level": "start",
+        "objective": "Undersøk konsekvensene av en treg rapporteringsprosess før du diskuterer verktøy.",
+        "sellerBrief": "Du møter en økonomidirektør for første gang etter at vedkommende har klaget over månedsrapporteringen. Finn ut hva som faktisk står på spill, og hvem som bør undersøke prosessen videre.",
+        "customer": {
+          "situation": "Tallene hentes fra tre systemer. Medarbeiderne jobber sent før styremøter, og du vil slippe overraskelser. Du mistenker at et nytt rapportverktøy kanskje hjelper, men vet ikke sikkert.",
+          "opening": "Vi bruker altfor lang tid på å bli enige om tallene før styremøtene.",
+          "reveal": [
+            "Ved spørsmål om konkrete avvik: Salg og økonomi teller «aktive kunder» forskjellig, og avstemming gjøres manuelt.",
+            "Ved spørsmål om konsekvens: Styrepapirene har noen ganger blitt sendt sent, men dere har ikke beregnet tidsbruken systematisk.",
+            "Ved spørsmål om ansvar: Økonomi eier rapporten; IT eier uttrekkene, og avdelingslederne eier flere definisjoner."
+          ],
+          "behavior": "Du er løsningsorientert og litt utålmodig. Ikke oppgi alle detaljene med en gang, men svar naturlig når selgeren viser interesse for prosessen.",
+          "ambiguity": "Det kan være både uklare begreper, arbeidsflyt og tekniske forhold. Du vet ikke hva som bør løses først."
+        },
+        "review": {
+          "lookFor": [
+            "Fant selgeren en konkret beslutning eller frist som påvirkes?",
+            "Undersøkte selgeren hvorfor tallene blir forskjellige?",
+            "Ble det foreslått et faglig neste steg uten forhåndsvalg av system?"
+          ],
+          "retry": "Prøv på nytt med én åpen oppfølging når kunden sier at tallene «ikke stemmer»."
+        }
+      },
+      "evidence": "assessment"
     },
     {
       "title": "«Vi vet ikke hvilke kundetyper som er lønnsomme.»",
@@ -450,7 +475,32 @@
       "avoid": "Å love en prediksjonsmodell før lønnsomhet er definert.",
       "next": "Avtal et avgrenset møte om én analyse som kan støtte kommersiell prioritering.",
       "play": "kundevekst",
-      "id": "scenario-02"
+      "id": "scenario-02",
+      "training": {
+        "level": "videre",
+        "objective": "Skille inntekter fra reell lønnsomhet og avdekke hvem som kan bidra til et bedre beslutningsgrunnlag.",
+        "sellerBrief": "En salgsdirektør vil prioritere de «beste» kundene. Du vet at omsetningen er kjent, men har ikke fått innsyn i kostnadene. Utforsk hva en slik prioritering faktisk krever.",
+        "customer": {
+          "situation": "Du blir målt på vekst, mens økonomi etterlyser marginer. Salgsapparatet ønsker mer tid hos store kunder. Noen storkunder tar mye tid i kundeservice.",
+          "opening": "Vi vil satse mer på de lønnsomme kundene, men ser egentlig bare omsetningen.",
+          "reveal": [
+            "Ved spørsmål om beslutning: Dere vurderer å flytte oppfølging fra noen kundesegmenter til andre neste kvartal.",
+            "Ved spørsmål om kostnader: Servicekostnadene måles per sak, men kobles ikke konsekvent til kundene.",
+            "Ved spørsmål om eierskap: Økonomidirektøren må godkjenne marginbegrepene, og kundeservice må delta."
+          ],
+          "behavior": "Du liker konkrete resultater, men blir skeptisk hvis selgeren antar at store kunder er ulønnsomme. Utfordre en for rask konklusjon.",
+          "ambiguity": "Flere forhold kan forklare lav lønnsomhet: rabatter, feil kostnadsfordeling, produktsammensetning eller kundebehandling."
+        },
+        "review": {
+          "lookFor": [
+            "Spurte selgeren hvilken kommersiell beslutning innsikten skal støtte?",
+            "Ble definisjonen av lønnsomhet og datagrunnlaget problematisert?",
+            "Ble nødvendige interessenter identifisert?"
+          ],
+          "retry": "Utforsk forskjellen på å finne lønnsomme kunder og å gjøre kunder mer lønnsomme."
+        }
+      },
+      "evidence": "assessment"
     },
     {
       "title": "«Vi ser flaskehalsene når det allerede er for sent.»",
@@ -464,7 +514,32 @@
       "avoid": "Å selge sanntidsdashboards før vi vet hvilke tiltak kunden kan gjøre.",
       "next": "Undersøk datatilgangen rundt én kritisk prosess og knytt den til et målbart effektmål.",
       "play": "driftsinnsikt",
-      "id": "scenario-03"
+      "id": "scenario-03",
+      "training": {
+        "level": "videre",
+        "objective": "Avdekke hvilken operativ beslutning som bør forbedres før dere snakker om sanntidsdata.",
+        "sellerBrief": "En driftsleder ønsker bedre oversikt over flaskehalser. Snakk om tiltak, variasjon og konsekvenser før du foreslår analyse eller plattform.",
+        "customer": {
+          "situation": "Planen legges hver mandag. I løpet av uken oppstår topper som gir omprioriteringer. Det er uklart om prognoser, bemanning eller arbeidsprosesser er viktigst.",
+          "opening": "Vi oppdager flaskehalsene for sent. Da er dagen nesten kjørt.",
+          "reveal": [
+            "Ved spørsmål om tiltak: Du kan flytte personell mellom to oppgaver, men bare hvis du vet om risikoen minst én dag i forveien.",
+            "Ved spørsmål om data: Ordredata finnes, men kapasitet registreres ulikt av skiftlederne.",
+            "Ved spørsmål om konsekvens: Forsinkelser skaper overtid og klager, men tallene er foreløpig grove."
+          ],
+          "behavior": "Du snakker helst om driften. Spør selgeren hva et dashboard skal hjelpe deg å gjøre dersom samtalen blir teknisk.",
+          "ambiguity": "Mer oppdatert data er ikke nødvendigvis nyttig hvis beslutninger tas for sent eller ansvaret er uklart."
+        },
+        "review": {
+          "lookFor": [
+            "Fant selgeren et tidspunkt da en beslutning kan endres?",
+            "Skilte selgeren mellom bedre data og muligheten til å handle?",
+            "Ble en konkret prosess valgt for videre kartlegging?"
+          ],
+          "retry": "Be kunden fortelle om siste flaskehals fra første varsel til faktisk tiltak."
+        }
+      },
+      "evidence": "assessment"
     },
     {
       "title": "«Vi behandler tusenvis av saker, men lærer lite av dem.»",
@@ -478,7 +553,32 @@
       "avoid": "Å love en KI-assistent som automatisk leser alle kundesaker.",
       "next": "Foreslå en avgrenset analyse av sakstyper og effekt, med personvern som premiss.",
       "play": "kundeopplevelse",
-      "id": "scenario-04"
+      "id": "scenario-04",
+      "training": {
+        "level": "videre",
+        "objective": "Finne årsaker til gjentatte henvendelser uten å hoppe rett til en KI-assistent.",
+        "sellerBrief": "En kundeserviceleder ønsker å lære av store mengder henvendelser. Utforsk om dette handler om produktproblemer, prosessforbedring eller kunnskapsstøtte.",
+        "customer": {
+          "situation": "Dere behandler mange fritekstsaker. Teamene registrerer årsak ulikt, og det er flere saker som kommer tilbake. Du er bekymret for personopplysninger i friteksten.",
+          "opening": "Vi har masse kundesaker, men jeg føler ikke at vi lærer noe av dem.",
+          "reveal": [
+            "Ved spørsmål om eksempler: En stor del av henvendelsene gjelder uklare fakturaer; hvor stor del vet dere ikke.",
+            "Ved spørsmål om måling: Dere måler svartid, men ikke systematisk om samme kunde tar kontakt igjen.",
+            "Ved spørsmål om data: Fritekst kan inneholde følsomme opplysninger; personvernansvarlig må involveres før analyse."
+          ],
+          "behavior": "Du er positiv til forbedring, men motsetter deg at all saksinformasjon automatisk sendes til en ekstern KI-tjeneste.",
+          "ambiguity": "Løsningen kan være forbedrede fakturaer og prosess, bedre årsakskoding eller analyse – ikke nødvendigvis automatisering."
+        },
+        "review": {
+          "lookFor": [
+            "Fant selgeren et gjentakende problem som virksomheten kan forbedre?",
+            "Ble kvalitet, tilgang og personvern tatt opp på riktig nivå?",
+            "Ble gevinsten knyttet til færre saker eller bedre service?"
+          ],
+          "retry": "Utforsk hvordan dere kan teste én sakstype uten å analysere alle kundedata."
+        }
+      },
+      "evidence": "assessment"
     },
     {
       "title": "«Vi har innført Fabric, men rapportene tar fortsatt for lang tid.»",
@@ -492,7 +592,32 @@
       ],
       "avoid": "«Dere må bygge en ny lakehouse-arkitektur.»",
       "next": "Avklar en teknisk/faglig samtale, ikke en bestemt løsning.",
-      "id": "scenario-05"
+      "id": "scenario-05",
+      "training": {
+        "level": "avansert",
+        "objective": "Utfordre antakelsen om at en ny plattform er enten problemet eller løsningen.",
+        "sellerBrief": "En IT-leder mener en ny dataplattform ikke har gitt ønsket effekt. Undersøk hva «tregt» betyr for brukere, prosesser og teknologi, og avtal riktig kompetanse for avklaring.",
+        "customer": {
+          "situation": "Ledelsen har investert i Microsoft Fabric. Du ønsker å vise resultater og er lei av forslag om enda en arkitekturendring. Rapportene blir likevel levert sent.",
+          "opening": "Vi har allerede kjøpt Fabric, men rapporteringen går ikke noe raskere.",
+          "reveal": [
+            "Ved spørsmål om hvor tiden går: Modelloppdateringene er raske; manuell validering av nøkkeltall før publisering tar flere dager.",
+            "Ved spørsmål om ansvar: Forretningen har ikke blitt enig om to sentrale definisjoner. IT har ansvar for plattformen, men ikke for beslutningen om begrepene.",
+            "Ved spørsmål om leveranse: Ett rapportteam jobber raskt, mens andre bruker gamle godkjenningsrutiner."
+          ],
+          "behavior": "Du korrigerer selgeren hvis vedkommende gir Fabric skylden uten grunnlag, eller lover ytelsesforbedringer uten å spørre.",
+          "ambiguity": "Noen rapporter kan også ha tekniske ytelsesproblemer. Ikke slå fast én årsak uten undersøkelse."
+        },
+        "review": {
+          "lookFor": [
+            "Undersøkte selgeren konkret hvilke deler av prosessen som er trege?",
+            "Ble både faglig definisjon og tekniske forhold holdt åpne?",
+            "Ble neste steg en diagnose med rette folk heller enn en migrasjon?"
+          ],
+          "retry": "Spør hva som faktisk har blitt raskere etter plattformbyttet, før du spør hva som gjenstår."
+        }
+      },
+      "evidence": "assessment"
     },
     {
       "title": "«Vi må få noe konkret ut av KI-satsingen vår.»",
@@ -506,7 +631,32 @@
       ],
       "avoid": "«Vi kan bygge en KI-agent som løser dette.»",
       "next": "Kartlegg ett bruksområde, forventet effekt og databehov.",
-      "id": "scenario-06"
+      "id": "scenario-06",
+      "training": {
+        "level": "avansert",
+        "objective": "Avdekke hvorfor KI-piloter ikke gir varig bruk, og hvordan ett relevant bruksområde kan vurderes.",
+        "sellerBrief": "En digitaliseringsleder har mange KI-demonstrasjoner, men få løsninger i ordinær drift. Utforsk arbeidsprosess, måling, datagrunnlag, risiko og eierskap.",
+        "customer": {
+          "situation": "Dere har vist flere KI-piloter for ledelsen. Det er betydelig forventningspress. Ett miljø har faktisk spart tid, men noen piloter møter kvalitets- og tilgangsutfordringer.",
+          "opening": "Vi har hatt KI-piloter lenge. Nå trenger vi noe som faktisk fungerer.",
+          "reveal": [
+            "Ved spørsmål om bruksområde: En intern oppgave med dokumentoppsummering virker lovende, men ansatte kontrollerer fortsatt svar manuelt.",
+            "Ved spørsmål om innføring: Ingen har fått helhetlig ansvar for kvalitet, drift eller brukeropplæring.",
+            "Ved spørsmål om risiko: En annen pilot stoppet på grunn av usikre datatilganger; det er uklart hva som er tekniske og organisatoriske hindringer."
+          ],
+          "behavior": "Du presser selgeren til å nevne en agent eller modell. Gi rom for et bedre svar som starter med et konkret behov.",
+          "ambiguity": "Noen piloter kan skaleres; andre bør avsluttes. Problemet behøver ikke være modellkvaliteten alene."
+        },
+        "review": {
+          "lookFor": [
+            "Ble ett konkret arbeidsløp og forventet effekt identifisert?",
+            "Ble kvalitet og menneskelig kontroll behandlet som del av driften?",
+            "Ble det avtalt hvordan man kan vurdere både videreføring og stans?"
+          ],
+          "retry": "Prøv å spørre hva brukerne faktisk gjør annerledes når piloten fungerer."
+        }
+      },
+      "evidence": "assessment"
     },
     {
       "title": "«Vi vurderer å ansette flere på data.»",
@@ -520,7 +670,32 @@
       ],
       "avoid": "«Vi sender dere noen CV-er.»",
       "next": "Undersøk om innleie, spesialiststøtte eller team passer best.",
-      "id": "scenario-07"
+      "id": "scenario-07",
+      "training": {
+        "level": "start",
+        "objective": "Kvalifisere om behovet er midlertidig kapasitet, spesialistkompetanse eller organisatorisk prioritering.",
+        "sellerBrief": "En data- og analyseleder vurderer nye ansettelser. Utforsk oppgavene som står fast, tidshorisonten og beslutningsprosessen før du diskuterer bemanningsmodell.",
+        "customer": {
+          "situation": "Teamet har et etterslep. Ledergruppen er uenig i hvor mye som skal prioriteres neste år. Noen oppgaver krever spisskompetanse, andre trenger tydeligere bestilling.",
+          "opening": "Vi vurderer å ansette flere datafolk. Vi får ikke gjort alt.",
+          "reveal": [
+            "Ved spørsmål om leveranser: Én viktig analyse er forsinket; mange andre oppgaver står i kø uten tydelig forretningseier.",
+            "Ved spørsmål om varighet: En modernisering krever spisskompetanse i noen måneder, mens daglig drift ser ut til å være et varig behov.",
+            "Ved spørsmål om beslutning: Budsjettet er ikke godkjent, og økonomi vil se tydeligere prioriteringer før nyansettelse."
+          ],
+          "behavior": "Du er åpen for råd, men blir mindre interessert hvis selgeren bare spør hvor mange CV-er du trenger.",
+          "ambiguity": "Kapasitet kan hjelpe, men bedre prioritering eller en annen arbeidsform kan være like relevant."
+        },
+        "review": {
+          "lookFor": [
+            "Fant selgeren de konkrete leveransene som blir hindret?",
+            "Ble tidshorisont, prioritering og kompetanse undersøkt hver for seg?",
+            "Ble det avtalt et nyttig neste steg uten å love tilgjengelige konsulenter?"
+          ],
+          "retry": "Prøv å avklare hva som må være levert før dere kan vurdere rett bemanning."
+        }
+      },
+      "evidence": "assessment"
     },
     {
       "id": "scenario-08",
@@ -534,7 +709,32 @@
       ],
       "avoid": "Å svare at «EU-region løser problemet» eller anbefale én leverandør uten en krav- og risikovurdering.",
       "next": "Få sikkerhet, personvern, juridisk og dataplattform til å avklare kravbildet før arkitekturvalg.",
-      "play": "datasuverenitet"
+      "play": "datasuverenitet",
+      "training": {
+        "level": "avansert",
+        "objective": "Skille krav til datalokalisering, behandling og tilgang uten å gi skråsikre lov- eller leverandørråd.",
+        "sellerBrief": "En IT- og sikkerhetsansvarlig er skeptisk til skytjenester og KI. Finn ut hvilke data og bruksområder det gjelder, og hvem som må delta i en reell kravavklaring.",
+        "customer": {
+          "situation": "Virksomheten diskuterer bruk av en intern KI-tjeneste. Noen hevder at all behandling utenfor Norge er forbudt, andre mener en EU-region løser alt. Du har ikke samlet kravbildet.",
+          "opening": "Vi kan ikke sende dataene våre hvor som helst, så KI i skyen er vanskelig.",
+          "reveal": [
+            "Ved spørsmål om data: Noe er offentlig, noe er personopplysninger, og én kategori har særlige kontraktskrav.",
+            "Ved spørsmål om tilgang: Bekymringen gjelder både hvor data lagres, hvem som kan administrere tjenesten, og hvilken informasjon som kan brukes til modelltrening.",
+            "Ved spørsmål om regelverk: Juridisk og personvern er ikke ferdige med vurderingen. Interne retningslinjer blir også tolket ulikt."
+          ],
+          "behavior": "Du er faglig krevende. Still et oppfølgingsspørsmål dersom selgeren hevder at en bestemt skyregion eller modell automatisk oppfyller alle krav.",
+          "ambiguity": "Ulike datasett og bruksområder kan kreve ulike løsninger. Det er ikke grunnlag for å konkludere med leverandørvalg i møtet."
+        },
+        "review": {
+          "lookFor": [
+            "Ble data og bruksområde konkretisert før arkitektur ble diskutert?",
+            "Skilte selgeren mellom lagring, behandling, tilgang og modellbruk?",
+            "Ble riktig kravavklaring foreslått med sikkerhet, juridisk og personvern?"
+          ],
+          "retry": "Undersøk først ett datasett og én tenkt KI-oppgave, ikke hele skystrategien."
+        }
+      },
+      "evidence": "assessment"
     }
   ],
   "competences": [
