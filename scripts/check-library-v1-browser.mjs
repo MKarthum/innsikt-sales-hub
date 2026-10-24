@@ -111,6 +111,13 @@ try{
   const stage=p.locator('.slide-library-detail-stage');
   const scene=stage.locator('.story-scene');
   assert.equal(await scene.count(),1,'Custom scene for '+s.id);
+   if(s.id==='portal-learning'){
+    const rag=JSON.parse(fs.readFileSync('docs/data/learning.json','utf8')).diagrams.find(d=>d.id==='rag');
+    assert.ok((await stage.locator('.v10-lookup-question').innerText()).includes('FIKTIVT SPØRSMÅL'),'Fictional seller question is labeled');
+    assert.ok((await stage.locator('.v10-lookup-source').innerText()).includes(rag.description),'Lookup uses canonical description');
+    assert.deepEqual(await stage.locator('.v10-lookup-takeaways li strong').allInnerTexts(),rag.questions,'Two questions come from canonical RAG diagram');
+    assert.ok((await stage.locator('.v10-lookup-boundary').innerText()).includes('DETTE VET VI IKKE'),'Unknowns are visible');
+   }
    if(s.id==='seller-better-questions'){
     assert.equal(await stage.locator('.v9-dialogue-signal blockquote').count(),1,'Fictional customer signal is prominent');
     assert.ok((await stage.locator('.v9-dialogue-signal').innerText()).includes('FIKTIVT EKSEMPEL'),'Fictional label is visible');

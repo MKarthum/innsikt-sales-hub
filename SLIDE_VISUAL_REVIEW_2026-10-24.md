@@ -18,7 +18,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | portal-three-ways | Tre veier inn i Innsikt | Start med oppgaven – ikke med teknologien | Sammenlignbare tre valg med større tekst og tydelig støttepunkt |
 | portal-meeting-brief | En møtebrief kan være første nyttige resultat | En nyttig møtebrief krever tre enkle grep | Viser hvert handlingstrinn og hvorfor det gjøres |
 | portal-customer-signal | Fra kundesignal til gode spørsmål | Et kundesignal er starten på en undersøkelse | Gir kundedialogen en retning fra signal til spørsmål |
-| portal-learning | Fagstoff når du trenger det | Du trenger ikke kunne alt for å stille neste spørsmål | Sammenlignbare tre valg med større tekst og tydelig støttepunkt |
+| portal-learning | Fagstoff når du trenger det | Ett fagoppslag gir to bedre spørsmål om KI på dokumenter | Fiktivt selgerspørsmål → kanonisk RAG-oppslag → to spørsmål; synlig grense for hva vi ikke vet |
 | portal-market | Markedet gir nyttig kontekst | En trend er bakgrunn – kundens situasjon avgjør | Sammenlignbare tre valg med større tekst og tydelig støttepunkt |
 | portal-outcome | Målet er neste gode samtale | Det viktigste resultatet er neste gode samtale | Viser hvert handlingstrinn og hvorfor det gjøres |
 | sales-opening | Kunden sier at tallene ikke stemmer. Hva gjør vi nå? | «Tallene stemmer ikke» er et signal, ikke en IT-bestilling | Forteller et konkret før-til-etter-resonnement i stedet for dekorative ringer |

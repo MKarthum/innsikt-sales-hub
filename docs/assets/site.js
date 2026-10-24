@@ -411,7 +411,7 @@ function slideMarkup(s,index,deckId,notes=false){
   const p=D.architectureProfiles.profiles.find(x=>x.id===s.profileId);
   return window.InnsiktArchitectureScenes.render(s,esc,p,D.visualAssets,{index,total:D.pages.presentationDecks[deckId].slides.length});
  }
- if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{index,total:D.pages.presentationDecks[deckId].slides.length,businessSignals:D.businessSignals,assets:D.visualAssets});
+ if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{index,total:D.pages.presentationDecks[deckId].slides.length,businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams});
  const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
  let v='<div class="slide-eyebrow">'+esc(s.cue||deck.label.toUpperCase())+' · '+(index+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
  if(s.type==='metric'){

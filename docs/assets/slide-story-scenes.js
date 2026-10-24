@@ -1,12 +1,23 @@
 /* Specialized editorial compositions. Content lives on each slide object; no duplicated stories. */
 (()=>{
 'use strict';
-function render(slide,{v,top,title,escs,assetImage,block}){
+function render(slide,{v,top,title,escs,assetImage,block,diagram}){
  const section=(cls,body)=>'<section class="'+cls+'">'+body+'</section>';
  const footer=(text,cls='v5-footer')=>'<p class="'+cls+'">'+escs(text||'')+'</p>';
  const heading='<div class="v5-heading">'+title+'</div>';
  const icon=(id,cls='v5-icon')=>assetImage(id,cls);
  switch(v.layout){
+ case 'knowledge-lookup': {
+  if(!diagram||!Array.isArray(diagram.questions)||diagram.questions.length!==2)throw Error('Missing canonical diagram/questions for '+slide.id);
+  return block('special v5-special v10-lookup',top+heading
+   +'<section class="v10-lookup-question"><small>'+escs(v.exampleLabel)+'</small><blockquote>'+escs(v.question)+'</blockquote></section>'
+   +'<div class="v10-lookup-main"><section class="v10-lookup-source"><small>'+escs(v.lookupLabel)+'</small><span>'+escs(v.lookupSection)+'</span>'
+   +'<h3>'+escs(diagram.title)+'</h3><p>'+escs(diagram.description)+'</p></section>'
+   +'<section class="v10-lookup-takeaways"><small>'+escs(v.questionsLabel)+'</small><ol>'
+   +diagram.questions.map(q=>'<li><strong>'+escs(q)+'</strong></li>').join('')+'</ol></section></div>'
+   +'<section class="v10-lookup-boundary"><small>'+escs(v.guardrailLabel)+'</small><strong>'+escs(v.guardrail)+'</strong></section>'
+   +footer(v.conclusion));
+ }
  case 'discovery-dialogue': {
   return block('special v5-special v9-dialogue',top+heading
    +'<section class="v9-dialogue-signal"><div><small>'+escs(v.exampleLabel)+'</small><span>'+escs(v.signalLabel)+'</span></div><blockquote>'+escs(v.signal)+'</blockquote></section>'

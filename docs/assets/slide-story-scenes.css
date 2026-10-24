@@ -262,3 +262,24 @@
 .v9-dialogue-next strong{font:770 1.7cqw/1.16 var(--font-display)}
 .v9-dialogue-next p{margin:0;padding:.75cqw 1.2cqw;border-left:1px solid color-mix(in srgb,var(--pres-fg) 23%,transparent);font:750 1.47cqw/1.2 var(--font-body);color:var(--pres-fg)}
 .v9-dialogue .v5-footer{margin-top:.75cqw;padding-top:.65cqw;min-height:2.9cqw;font-size:1.43cqw}
+
+
+/* Canonical architecture lookup becomes two actionable seller questions. */
+.v10-lookup .v5-heading{margin:1cqw 0 1.1cqw}
+.v10-lookup .v5-heading .v2-headline{font-size:3.42cqw;line-height:1.08;max-width:100%}
+.v10-lookup-question{flex:0 0 auto;display:grid;grid-template-columns:24% 76%;align-items:center;gap:0;padding:1.25cqw 1.7cqw;border-left:.45cqw solid var(--pres-accent);border-radius:.6cqw;background:color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg));min-height:6.3cqw;box-sizing:border-box}
+.v10-lookup-question blockquote{margin:0;padding:0;border:0;font:790 2.2cqw/1.16 var(--font-display);letter-spacing:-.02em;color:var(--pres-fg)}
+.v10-lookup-main{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:44% 54%;gap:2%;margin-top:1.1cqw}
+.v10-lookup-source,.v10-lookup-takeaways{min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:center;border-radius:.75cqw;padding:1.8cqw 2.05cqw;box-sizing:border-box}
+.v10-lookup-source{border:1px solid color-mix(in srgb,var(--pres-fg) 22%,transparent);background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg));gap:.75cqw}
+.v10-lookup-source>span{font:650 1.48cqw/1.2 var(--font-body);color:var(--pres-muted)}
+.v10-lookup-source h3{font:820 2.65cqw/1.12 var(--font-display);letter-spacing:-.025em;margin:.45cqw 0 0}
+.v10-lookup-source p{font:560 1.58cqw/1.27 var(--font-body);color:var(--pres-muted);margin:.5cqw 0 0}
+.v10-lookup-takeaways{border:1px solid color-mix(in srgb,var(--pres-accent) 45%,transparent);background:color-mix(in srgb,var(--pres-accent) 8%,var(--pres-bg));gap:1.3cqw}
+.v10-lookup-takeaways ol{list-style:none;counter-reset:lookup;margin:0;padding:0;display:flex;flex-direction:column;gap:1cqw}
+.v10-lookup-takeaways li{display:flex;align-items:center;gap:1.25cqw;padding:1.05cqw 1.35cqw;background:var(--pres-bg);border-radius:.6cqw;border-left:.36cqw solid var(--pres-accent)}
+.v10-lookup-takeaways li::before{counter-increment:lookup;content:counter(lookup,decimal-leading-zero);font:800 1.35cqw var(--font-body);color:var(--pres-accent)}
+.v10-lookup-takeaways strong{font:780 2.03cqw/1.17 var(--font-display)}
+.v10-lookup-boundary{flex:0 0 auto;display:grid;grid-template-columns:23% 77%;align-items:center;gap:0;margin-top:1cqw;padding:1.0cqw 1.45cqw;border-left:.4cqw solid var(--pres-fg);background:color-mix(in srgb,var(--pres-fg) 6%,var(--pres-bg));border-radius:.4cqw}
+.v10-lookup-boundary strong{font:690 1.56cqw/1.2 var(--font-body);color:var(--pres-fg)}
+.v10-lookup .v5-footer{margin-top:.8cqw;padding-top:.7cqw;min-height:2.7cqw;font-size:1.43cqw}

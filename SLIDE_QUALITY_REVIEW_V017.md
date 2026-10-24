@@ -27,7 +27,7 @@ Faglig designprinsipp: Tegn sammenhengen som betyr noe. En klikkoppskrift skal i
 
 1. **`ai-pragmatic` (middels–høy):** Generisk «velg–test–lær». Dersom en ny revisjon gir et reelt eksempel på beslutningspunkt og verdikriterium, kan den være nyttig. Ikke kopier forgreiningen fra `market-next-moves` ukritisk.
 2. **`seller-better-questions` (middels):** Tre klare spørsmål fungerer muntlig, men bildet forklarer lite ut over ordene. Test ett konkret kundescenario som viser hva svarene endrer.
-3. **`portal-learning` (middels):** Kortene viser riktig navigasjon, men er en meny. Vurder ett virkelig oppslag eller konkret usikkerhet («Hva betyr kunde?») før nytt sceneformat utvikles.
+3. **`portal-learning` (utført v0.17.8):** Tre menykort erstattet med ett reelt, kanonisk RAG-oppslag og to kildeeide kundespørsmål. Kontroll av visuell kvalitet og eksport dokumenteres i PR/issue #26.
 4. **`market-customer-pressure` (middels):** Skiller kundesignaler fra markedshypoteser, men overlapper delvis `market-priorities`. Revider dramaturgien før du lager en ny illustrasjon; mulig reduksjon er bedre enn ny pynt.
 5. **Leverandørarkitekturer (varierende):** Noe liten skrift i et møterom, men faglig distinkte diagrammer. Kontroller på storskjerm før du forenkler; fjern ikke reell teknisk substans for estetikkens skyld.
 
