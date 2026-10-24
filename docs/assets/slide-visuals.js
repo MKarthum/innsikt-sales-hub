@@ -29,11 +29,12 @@ function orbits(){
  +'<circle class="visual-orbits-core-halo" cx="230" cy="180" r="67"/>'
  +'</svg>';
 }
-function render(slide,esc){
+function render(slide,esc,position={}){
  const v=slide.visual||{},kind=v.scene;
+ const counter=String((position.index??0)+1).padStart(2,'0')+' / '+String(position.total??1).padStart(2,'0');
  const label='<div class="scene-eyebrow">'+esc(slide.cue||'')+'</div>';
  if(kind==='analyst-grid')return '<div class="story-scene scene-analysts">'
-  +'<div class="scene-topline">'+label+'<span class="scene-id">01 / 03</span></div>'
+  +'<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>'
   +'<div class="scene-analysts-layout"><div class="scene-analysts-copy">'
   +'<h2 class="scene-analysts-lead">'+esc(v.lead)+'</h2>'
   +'<div class="scene-analysts-number">'+esc(v.number)+'</div>'
@@ -41,13 +42,13 @@ function render(slide,esc){
   +'<div class="scene-analysts-figure">'+gridPeople()+'</div></div>'
   +'<div class="scene-bottomline"><span class="scene-kicker-mark"></span>'+esc(v.tag)+'</div></div>';
  if(kind==='two-directions')return '<div class="story-scene scene-duality">'
-  +'<div class="scene-topline">'+label+'<span class="scene-id">02 / 03</span></div>'
+  +'<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>'
   +'<header class="scene-duality-intro"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p></header>'
   +'<div class="scene-duality-graph"><div class="scene-duality-origin">'+esc(v.center)+'</div>'+branch()+'</div>'
   +'<div class="scene-duality-outcomes"><div class="scene-duality-good"><span class="scene-duality-symbol">+</span><h3>'+esc(v.positive)+'</h3><p>'+esc(v.positiveDetail)+'</p></div>'
   +'<div class="scene-duality-risk"><span class="scene-duality-symbol">−</span><h3>'+esc(v.negative)+'</h3><p>'+esc(v.negativeDetail)+'</p></div></div></div>';
  if(kind==='value-system')return '<div class="story-scene scene-system">'
-  +'<div class="scene-topline">'+label+'<span class="scene-id">03 / 03</span></div>'
+  +'<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>'
   +'<div class="scene-system-layout"><div class="scene-system-story"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p><div class="scene-system-foot">'+esc(v.footer)+'</div></div>'
   +'<div class="scene-system-figure">'+orbits()+'<div class="scene-system-core">'+esc(v.core)+'</div>'
   +'<div class="scene-system-label scene-system-label--top">'+esc(v.business)+'</div>'
