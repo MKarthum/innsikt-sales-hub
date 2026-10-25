@@ -25,27 +25,30 @@ function glossary(D,h,selectedId){
  +'<div class="glossary">'+D.learning.glossary.map(g=>'<details class="glossary-item" data-glossary-id="'+e(g.id)+'"'+(g.id===selectedId?' open':'')+'><summary>'+e(g.term)+'</summary>'+(g.fullName?'<p class="fineprint"><strong>Fullt navn:</strong> '+e(g.fullName)+'</p>':'')+'<p>'+e(g.meaning)+'</p><p class="fineprint"><strong>Eksempel:</strong> '+e(g.example)+'</p></details>').join('')+'</div>';
 }
 function architecture(D,h,id){
- const {esc:e,headerCopy,ico,sourceLinks}=h,diagrams=D.learning.diagrams,d=diagrams.find(x=>x.id===id);
- if(d)return '<a class="back-link" href="#arkitektur">'+ico('arrow-left')+' Alle skisser</a>'
- +headerCopy('ARKITEKTUR')+diagram(d,h)
- +'<div class="arch-detail-grid"><section class="panel"><h3>Spørsmål du kan stille kunden</h3><ul class="lesson-questions">'+d.questions.map(q=>'<li>'+e(q)+'</li>').join('')+'</ul><a class="btn subtle" href="#verktoy/ai">Se kartleggingsmal '+ico('arrow-right')+'</a></section>'
- +'<section class="panel"><h3>Dette er forenklet</h3><p>'+e(d.caution)+'</p>'+sourceLinks(d.sources,D)+'</section></div>'
- +'<section class="subsection"><div class="section-heading"><div><h2>Se et annet oppsett</h2></div></div><div class="learning-grid">'+diagrams.filter(x=>x.id!==id).map(x=>card(x,e)).join('')+'</div></section>';
- const u=D.pages.architectureExplorerUi,featured=u.applicationDiagramIds||[],applications=featured.map(diagramId=>diagrams.find(x=>x.id===diagramId)).filter(Boolean);
+ const {esc:e,headerCopy,ico,sourceLinks}=h,diagrams=D.learning.diagrams,d=diagrams.find(x=>x.id===id),u=D.pages.architectureExplorerUi;
+ const riskLibrary=()=>'<section class="subsection arch-detail-risks" data-arch-detail-risks>'
+  +'<div class="section-heading"><div><h2>'+e(u.riskDetailTitle)+'</h2><p>'+e(u.riskDetailIntro)+'</p></div></div>'
+  +'<div class="risk-grid">'+D.learning.risks.map(x=>
+   '<article class="risk-card"><h3>'+e(x.title)+'</h3><p>'+e(x.example)+'</p>'
+   +'<div class="risk-action"><strong>'+e(u.riskDetailActionLabel)+'</strong> '+e(x.action)+'</div></article>'
+  ).join('')+'</div></section>';
+ if(d)return '<a class="back-link" href="#arkitektur">'+ico('arrow-left')+' '+e(u.backToArchitecture)+'</a>'
+  +headerCopy('ARKITEKTUR')+diagram(d,h)
+  +'<div class="arch-detail-grid"><section class="panel"><h3>'+e(u.detailQuestionsTitle)+'</h3><ul class="lesson-questions">'
+  +d.questions.map(q=>'<li>'+e(q)+'</li>').join('')+'</ul><a class="btn subtle" href="#verktoy/ai">'
+  +e(u.detailTemplateLink)+' '+ico('arrow-right')+'</a></section>'
+  +'<section class="panel"><h3>'+e(u.detailCautionTitle)+'</h3><p>'+e(d.caution)+'</p>'+sourceLinks(d.sources,D)+'</section></div>'
+  +(id==='ai-on-data'?riskLibrary():'')
+  +'<section class="subsection"><div class="section-heading"><div><h2>'+e(u.relatedDiagramsTitle)+'</h2></div></div>'
+  +'<div class="learning-grid">'+diagrams.filter(x=>x.id!==id).map(x=>card(x,e)).join('')+'</div></section>';
+ const featured=u.applicationDiagramIds||[],applications=featured.map(diagramId=>diagrams.find(x=>x.id===diagramId)).filter(Boolean);
  return headerCopy('ARKITEKTUR')
- +window.InnsiktArchitectureExplorer.render(D,h)
- +'<section class="arch-principles" data-arch-principles>'
- +'<div class="arch-principles-eyebrow">'+e(D.horizon.ui.generalLabel)+'</div>'
- +'<h2>'+e(D.horizon.questions.title)+'</h2><p>'+e(u.independentIntro)+'</p>'
- +'<div class="arch-principles-grid">'+D.horizon.questions.items.map((q,i)=>'<div class="arch-principle"><span class="arch-principle-num">'+String(i+1).padStart(2,'0')+'</span><p>'+e(q)+'</p></div>').join('')+'</div></section>'
- +'<section class="arch-applications"><div class="section-heading"><div><h2>'+e(u.applicationsTitle)+'</h2><p>'+e(u.applicationsIntro)+'</p></div></div>'
- +'<div class="learning-grid">'+applications.map(x=>card(x,e)).join('')+'</div></section>'
- +'<details class="arch-explorer-more"><summary>'+e(u.moreDiagrams)+'</summary>'
- +'<div class="section-heading"><div><h2>'+e(u.otherDiagramsTitle)+'</h2><p>'+e(u.otherDiagramsIntro)+'</p></div></div>'
- +'<div class="learning-grid">'+diagrams.filter(x=>!featured.includes(x.id)).map(x=>card(x,e)).join('')+'</div></details>'
- +'<section class="subsection"><div class="section-heading"><div><h2>Risiko når KI får et svakt datagrunnlag</h2><p>KI kan gjøre det enklere å stille spørsmål, men ikke automatisk gjøre tallene riktige.</p></div></div><div class="risk-grid">'+D.learning.risks.map(x=>'<article class="risk-card"><h3>'+e(x.title)+'</h3><p>'+e(x.example)+'</p><div class="risk-action"><strong>Hva hjelper?</strong> '+e(x.action)+'</div></article>').join('')+'</div></section>'
- +'<section class="subsection"><div class="note-card"><b>Viktig nyanse</b>Strukturerte data er spesielt viktig når KI skal svare på tall, KPI-er og hendelser. Dokumentbasert KI kan også bruke tekst og ustrukturerte kilder, men krever tilsvarende arbeid med kvalitet, tilgang og etterprøving.</div></section>'
- +'<section class="subsection"><a class="text-link" href="#horisont">'+e(D.pages.navigation.horisont)+' '+ico('arrow-right')+'</a></section>';
+  +window.InnsiktArchitectureExplorer.render(D,h)
+  +'<section class="arch-applications" data-arch-applications><div class="section-heading"><div><h2>'+e(u.applicationsTitle)+'</h2><p>'+e(u.applicationsIntro)+'</p></div></div>'
+  +'<div class="learning-grid">'+applications.map(x=>card(x,e)).join('')+'</div></section>'
+  +'<section class="arch-next" data-arch-next><div class="section-heading"><div><h2>'+e(u.nextTitle)+'</h2><p>'+e(u.nextIntro)+'</p></div></div>'
+  +'<div class="arch-next-links">'+u.nextLinks.map(link=>'<a href="'+e(link.route)+'"><strong>'+e(link.label)+'</strong>'
+  +'<span>'+e(link.description)+'</span>'+ico('arrow-right')+'</a>').join('')+'</div></section>';
 }
 function templateText(t){return t.title+'\nFormål: '+t.purpose+'\n\n'+t.sections.map(s=>s.title+'\n'+s.questions.map(q=>'- '+q).join('\n')).join('\n\n')+'\n\nViktig: '+t.caution;}
 function toolkit(D,h,id){

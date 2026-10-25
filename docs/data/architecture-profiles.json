@@ -79,9 +79,9 @@
       ],
       "footer": "Lagene er ansvar og kapabiliteter – ikke nødvendigvis separate systemer.",
       "pageGuide": {
-        "title": "Hva denne modellen forteller",
-        "interpretation": "Følg ansvarene fra kildesystem til anvendelse. Dette er kapabiliteter virksomheten trenger, ikke fem separate produkter eller én bestemt teknologipakke.",
-        "question": "Hvilke av oppgavene har dere allerede kontroll på, og hvor oppstår flaskehalsene?"
+        "title": "Slik leser du grunnmodellen",
+        "interpretation": "Begynn til høyre: Hvilken beslutning eller arbeidsoppgave skal forbedres? Følg deretter bakover til datakildene, og finn hvor kvalitet, begreper, tilgang og ansvar må ivaretas. Kolonnene er oppgaver – ikke nødvendigvis separate systemer.",
+        "question": "Hva skal brukerne faktisk få gjort, og hvilken del av dataflyten hindrer dem i dag?"
       }
     },
     {
@@ -317,12 +317,12 @@
         "foot": "dbt, Streamlit og Cortex er eksempler – ikke krav til løsningen."
       },
       "pageGuide": {
-        "title": "Hva er det viktige i Snowflake-figuren?",
-        "interpretation": "Inntak, bearbeiding og bruk er valg som kan kombineres på flere måter. BI er et selvstendig valg utenfor selve dataplattformen; en bestemt rapporteringspakke er ikke nødvendig.",
-        "question": "Trenger dere å videreføre eksisterende BI, velge et separat analyseverktøy eller bygge en målrettet app?",
+        "title": "Det du bør legge merke til",
+        "interpretation": "Snowflake samler data for flere bruksflater. Inntak, modellering og BI er valg som kan kombineres; Power BI, Sigma og Tableau er eksempler, ikke en nødvendig del av plattformen.",
+        "question": "Vil dere videreføre eksisterende BI, velge en annen analyseflate eller bygge en avgrenset datapp?",
         "decision": {
           "title": "BI er et valg – ikke en del av Snowflake-pakken",
-          "intro": "Power BI er ett mulig rapporteringsverktøy, men ikke en forutsetning. Valget bør starte med brukernes behov og det dere allerede betaler for.",
+          "intro": "Power BI er ett alternativ, ikke et Snowflake-krav. Valget av analyseflate bør vurderes opp mot dagens brukere, kompetanse, kostnader og ønsket grad av uavhengighet.",
           "alternatives": [
             {
               "label": "Eksisterende BI",
@@ -509,9 +509,9 @@
         "foot": "Ikke alle Fabric-produkter må brukes; sanntidssporet og analysearbeidsflatene løser forskjellige behov."
       },
       "pageGuide": {
-        "title": "Hva er annerledes i Fabric?",
-        "interpretation": "OneLake ligger under og binder sammen arbeidsflatene. Data Factory, sanntid, lakehouse, warehouse og rapportering er ulike arbeidsmåter – ikke fem obligatoriske sekvensielle steg.",
-        "question": "Hvilke arbeidsflater trenger dere faktisk, og hvilke data kan brukes uten å bygges opp på nytt?"
+        "title": "Det du bør legge merke til",
+        "interpretation": "OneLake ligger som felles datagrunnlag under arbeidsflatene. Inntak, sanntid, Lakehouse, Warehouse og Power BI er ulike funksjoner som kan kombineres, ikke en obligatorisk kjede.",
+        "question": "Hvilke Fabric-funksjoner løser et konkret behov, og hvilke eksisterende løsninger bør videreføres?"
       }
     },
     {
@@ -693,9 +693,9 @@
         "foot": "Databricks på ulike skyer kan kobles til mange eksterne tjenester. To konsumløp er illustrasjoner, ikke et krav."
       },
       "pageGuide": {
-        "title": "Hva er annerledes i Databricks?",
-        "interpretation": "Lakehouse og medallion-mønsteret viser hvordan data kan modnes fra rådata til kvalitetssikrede dataprodukter. SQL/BI og ML/KI kan bruke de samme dataene uten at alle komponenter er obligatoriske.",
-        "question": "Hvor trenger dere datakvalitet, felles styring og ulike bruksmønstre – og hvilke deler kan beholdes fra dagens miljø?"
+        "title": "Det du bør legge merke til",
+        "interpretation": "Bronze, Silver og Gold er et mønster for gradvis å kvalitetssikre data – ikke tre påkrevde produkter. De samme dataene kan brukes av SQL/BI, datavitenskap og KI.",
+        "question": "Hvilke datasett trenger tydelig eierskap og kvalitet, og hvor bør nye løsninger kobles til det dere allerede har?"
       }
     }
   ]

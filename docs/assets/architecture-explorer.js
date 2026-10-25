@@ -40,10 +40,10 @@ function readingGuide(profile,ui,escape){
  return '<section class="arch-reading-guide" data-arch-reading-guide>'
  +'<div class="arch-reading-main"><h3>'+E(guide.title)+'</h3><p>'+E(guide.interpretation)+'</p>'
  +'<div class="arch-reading-question"><strong>'+E(ui.guideQuestionLabel)+'</strong><p>'+E(guide.question)+'</p></div></div>'
- +(decision?'<div class="arch-bi-decisions" data-arch-bi-alternatives><h4>'+E(decision.title)+'</h4><p>'+E(decision.intro)+'</p>'
+ +(decision?'<details class="arch-bi-decisions" data-arch-bi-alternatives><summary>'+E(decision.title)+'</summary><p>'+E(decision.intro)+'</p>'
  +'<div class="arch-bi-options">'+decision.alternatives.map(x=>
   '<div class="arch-bi-option"><strong>'+E(x.label)+'</strong><p>'+E(x.text)+'</p></div>').join('')+'</div>'
- +'<p class="arch-bi-caution">'+E(decision.caution)+'</p></div>':'')
+ +'<p class="arch-bi-caution">'+E(decision.caution)+'</p></details>':'')
  +'</section>';
 }
 function panel(D,h,profile,active){
@@ -52,40 +52,51 @@ function panel(D,h,profile,active){
  const scene=window.InnsiktArchitectureScenes.render(slide,esc,profile,D.visualAssets,{showNumbers:false});
  const ui=D.pages.architectureExplorerUi;
  return '<section class="arch-explorer-panel" data-arch-panel="'+e(esc,profile.id)+'" role="region" aria-label="'+e(esc,profile.label)+'"'
+  +(profile.kind==='vendor'?' data-arch-vendor-panel':'')
   +(active?'':' hidden')+'>'
   +'<div class="arch-explorer-claim"><div><h3>'+e(esc,profile.label)+'</h3><p>'+e(esc,profile.intro)+'</p></div></div>'
   +'<div class="arch-explorer-stage" role="region" tabindex="0" aria-label="'+e(esc,ui.panRegionLabel)+' – '+e(esc,profile.label)+'">'
   +'<div class="present-frame present-rich" data-tone="light">'+scene+'</div>'
   +'<button type="button" class="arch-stage-open" data-arch-detail-open aria-label="'+e(esc,ui.panOpenAria)+'"><span>'+e(esc,ui.panOpenHint)+'</span></button></div>'
   +panNavigation(profile,ui,esc)
-  +technicalDetails(D,h,profile)
   +readingGuide(profile,ui,esc)
+  +technicalDetails(D,h,profile)
   +'<div class="arch-explorer-foot"><p>'+e(esc,profile.footer)+'</p>'
   +'<div class="arch-explorer-actions"><a class="btn subtle" href="#lysbilder/'+e(esc,slide.id)+'">'
   +e(esc,ui.openSlide)+'</a></div></div>'
   +'<details class="arch-explorer-sources"><summary>'+e(esc,ui.sourcesLabel)+'</summary>'+sourceLinks(slide.sourceIds||[],D)+'</details>'
   +'</section>';
 }
+function principles(D,ui,esc){
+ const E=x=>e(esc,x),questions=D.horizon.questions;
+ return '<section class="arch-principles" data-arch-principles>'
+ +'<div class="arch-principles-eyebrow">'+E(D.horizon.ui.generalLabel)+'</div>'
+ +'<h2>'+E(questions.title)+'</h2><p>'+E(ui.independentIntro)+'</p>'
+ +'<div class="arch-principles-grid">'+questions.items.map((q,i)=>
+  '<div class="arch-principle"><span class="arch-principle-num">'+String(i+1).padStart(2,'0')+'</span><p>'+E(q)+'</p></div>').join('')+'</div></section>';
+}
 function render(D,h){
  const {esc}=h,ui=D.pages.architectureExplorerUi;
  if(!ui||!window.InnsiktArchitectureScenes||!D.architectureProfiles?.profiles)return '';
- const profiles=D.architectureProfiles.profiles.filter(p=>p.id===ui.baseProfileId||p.kind==='vendor');
- const initial=profiles[0]?.id;if(!initial)return '';
- const options=groups=>groups.map(p=>
-  '<button type="button" data-arch-option="'+e(esc,p.id)+'" aria-pressed="'+(p.id===initial?'true':'false')+'"'
-  +' class="arch-explorer-option'+(p.id===initial?' is-active':'')+'">'+e(esc,ui.optionLabels[p.id]||p.label)+'</button>'
+ const base=D.architectureProfiles.profiles.find(p=>p.id===ui.baseProfileId);
+ const vendors=D.architectureProfiles.profiles.filter(p=>p.kind==='vendor');
+ if(!base||!vendors.length)return '';
+ const chosen=vendors[0].id;
+ const choices=vendors.map(p=>
+  '<button type="button" data-arch-option="'+e(esc,p.id)+'" aria-pressed="'+(p.id===chosen?'true':'false')+'"'
+  +' class="arch-explorer-option'+(p.id===chosen?' is-active':'')+'">'+e(esc,ui.optionLabels[p.id]||p.label)+'</button>'
  ).join('');
- const generic=profiles.filter(p=>p.kind!=='vendor'),vendors=profiles.filter(p=>p.kind==='vendor');
  return '<section class="arch-explorer" data-architecture-explorer aria-label="'+e(esc,ui.title)+'">'
-  +'<div class="arch-explorer-head"><div class="small-label">'+e(esc,ui.eyebrow)+'</div>'
-  +'<h2>'+e(esc,ui.title)+'</h2><p>'+e(esc,ui.intro)+'</p></div>'
-  +'<div class="arch-explorer-toolbar">'
-  +'<div class="arch-explorer-choicegroup" role="group" aria-label="'+e(esc,ui.genericGroup)+'">'
-  +'<span class="arch-explorer-choice-label">'+e(esc,ui.genericGroup)+'</span>'+options(generic)+'</div>'
-  +'<div class="arch-explorer-choicegroup" role="group" aria-label="'+e(esc,ui.vendorGroup)+'">'
-  +'<span class="arch-explorer-choice-label">'+e(esc,ui.vendorGroup)+'</span>'+options(vendors)+'</div></div>'
-  +'<div class="arch-explorer-panels">'+profiles.map(p=>panel(D,h,p,p.id===initial)).join('')+'</div>'
-  +'</section>';
+  +'<div class="arch-explorer-head"><div class="small-label">'+e(esc,ui.eyebrow)+'</div></div>'
+  +'<div class="arch-explorer-panels">'+panel(D,h,base,true)+'</div>'
+  +principles(D,ui,esc)
+  +'<section class="arch-explorer-vendors" data-arch-vendors>'
+  +'<div class="arch-explorer-head arch-explorer-vendor-head"><div class="small-label">'+e(esc,ui.vendorEyebrow)+'</div>'
+  +'<h2>'+e(esc,ui.vendorTitle)+'</h2><p>'+e(esc,ui.vendorIntro)+'</p></div>'
+  +'<div class="arch-explorer-toolbar"><div class="arch-explorer-choicegroup" role="group" aria-label="'+e(esc,ui.vendorGroup)+'">'
+  +'<span class="arch-explorer-choice-label">'+e(esc,ui.vendorGroup)+'</span>'+choices+'</div></div>'
+  +'<div class="arch-explorer-panels">'+vendors.map(p=>panel(D,h,p,p.id===chosen)).join('')+'</div>'
+  +'</section></section>';
 }
 if(typeof document!=='undefined'&&typeof document.addEventListener==='function')document.addEventListener('click',event=>{
  const detail=event.target instanceof Element?event.target.closest('[data-arch-detail],[data-arch-detail-open]'):null;
@@ -127,13 +138,13 @@ if(typeof document!=='undefined'&&typeof document.addEventListener==='function')
  const explorer=target.closest('[data-architecture-explorer]');
  if(!explorer)return;
  const chosen=target.getAttribute('data-arch-option');
- if(![...explorer.querySelectorAll('[data-arch-panel]')].some(p=>p.getAttribute('data-arch-panel')===chosen))return;
+ if(![...explorer.querySelectorAll('[data-arch-vendor-panel]')].some(p=>p.getAttribute('data-arch-panel')===chosen))return;
  for(const button of explorer.querySelectorAll('[data-arch-option]')){
   const selected=button.getAttribute('data-arch-option')===chosen;
   button.setAttribute('aria-pressed',selected?'true':'false');
   button.classList.toggle('is-active',selected);
  }
- for(const region of explorer.querySelectorAll('[data-arch-panel]')){
+ for(const region of explorer.querySelectorAll('[data-arch-vendor-panel]')){
   region.hidden=region.getAttribute('data-arch-panel')!==chosen;
  }
 });
