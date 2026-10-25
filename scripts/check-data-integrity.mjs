@@ -120,6 +120,9 @@ for(const [key,d] of Object.entries(pages.presentationDecks||{})){
 for(const file of ['docs/index.html','docs/assets/site.js','docs/assets/learning.js','docs/assets/presenter-export.js','docs/assets/site.css'])if(!fs.existsSync(file))fail('Mangler fil '+file);
 const html=fs.readFileSync('docs/index.html','utf8');
 const navSections=pages.navigationSections||[];
+const customerWork=navSections.find(section=>section.id==='work')?.items.map(item=>item.route);
+if(JSON.stringify(customerWork)!==JSON.stringify(['forretning','muligheter','kundedialog/stotte','verktoy','prompter']))
+ fail('Arbeid med kunder må følge kundens behov og arbeidsflyten før KI-verktøyene');
 const mainRoutes=new Set(navSections.flatMap(group=>group.items.map(x=>x.route)));
 const required=['oversikt','prompter','forretning','muligheter','kundedialog/stotte','verktoy','kompetanse','marked','teknologi','arkitektur','horisont','lysbilder','ressurser','om-innsikt','guide','kundedialog/trening','ordliste','kilder','utvikling'];
 if(!html.includes('id="nav-groups"'))fail('Mangler datastyrt menykontainer');
