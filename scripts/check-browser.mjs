@@ -51,7 +51,7 @@ try {
   await page.locator('[data-source-trace-select]').selectOption('signal:'+firstSignal.id);
   assert.ok((await page.locator('[data-source-trace-step="claim"]').innerText()).includes(firstSignal.angle),label+': vurdering fra market.json');
   assert.ok((await page.locator('[data-source-trace-step="context"]').innerText()).includes(firstSignal.listen),label+': lyttepunkt fra market.json');
-  assert.ok((await page.locator('[data-source-trace-step="claim"]').innerText()).includes('Faglig vurdering'),label+': vurdering ikke fremstilt som dokumentert hendelse');
+  assert.equal((await page.locator('[data-source-trace-step="claim"] .badge').textContent()).trim(),'Faglig vurdering',label+': vurdering ikke fremstilt som dokumentert hendelse');
   assert.ok(!(await page.locator('[data-source-trace-step="claim"]').innerText()).includes(firstEvent.fact),label+': ingen foreldet faktatekst');
   assert.equal(await page.locator('[data-source-trace-step="sources"] a').count(),firstSignal.sources.length,label+': kildebytte uten foreldede lenker');
   assert.equal(await page.evaluate(()=>location.hash),'#kilder',label+': valg endrer ikke hash');
