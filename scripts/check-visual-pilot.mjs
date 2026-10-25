@@ -164,6 +164,39 @@ try{
    }
   }
  }finally{techBaseServer?.kill();fs.rmSync(techBaseDir,{recursive:true,force:true})}
+
+ // Kildespor: låst main før endringen, sammenlign mobil og desktop.
+ const sourceBaseDir=fs.mkdtempSync(path.join(os.tmpdir(),'innsikt-sources-before-'));
+ let sourceBaseServer;
+ try{
+  const sourceBaseSha='f0cf8a7fb76addc83a7a52737022ca6ebe1ae7eb';
+  execFileSync('git',['fetch','--depth=1','origin',sourceBaseSha],{stdio:'ignore'});
+  const fd=fs.openSync(path.join(sourceBaseDir,'site.tar'),'w');
+  try{execFileSync('git',['archive','--format=tar',sourceBaseSha,'docs'],{stdio:['ignore',fd,'pipe']});}finally{fs.closeSync(fd);}
+  execFileSync('tar',['-xf',path.join(sourceBaseDir,'site.tar'),'-C',sourceBaseDir]);
+  sourceBaseServer=spawn('python3',['-m','http.server','8773','--bind','127.0.0.1','--directory',sourceBaseDir],{stdio:'ignore'});
+  await new Promise(resolve=>setTimeout(resolve,500));
+  for(const width of [320,390,900,1512]){
+   const height=width===320?700:width===390?844:width===900?900:980;
+   for(const [state,url] of [['before','http://127.0.0.1:8773/docs/#kilder'],['after',(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'#kilder']]){
+    const shot=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
+    await shot.goto(url,{waitUntil:'networkidle'});
+    await shot.locator('.source-card').first().waitFor();
+    const overflow=await shot.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+    if(state==='after'){
+     assert.ok(overflow<=3,'Kildespor uten horisontal overflyt '+width+': '+overflow);
+     await shot.locator('[data-source-trace-select]').waitFor();
+    }
+    await shot.screenshot({path:output+'/sources-'+width+'-'+state+'-viewport.png'});
+    await shot.screenshot({path:output+'/sources-'+width+'-'+state+'-full.png',fullPage:true});
+    if(state==='after'){
+     await shot.locator('[data-source-trace-select]').selectOption('signal:embeddedai');
+     await shot.screenshot({path:output+'/sources-'+width+'-assessment.png'});
+    }
+    await shot.close();
+   }
+  }
+ }finally{sourceBaseServer?.kill();fs.rmSync(sourceBaseDir,{recursive:true,force:true})}
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
  console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
 }finally{await browser.close()}
