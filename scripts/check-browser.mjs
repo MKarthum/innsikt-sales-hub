@@ -1,6 +1,7 @@
 /* Reelle Chromium-røykprøver for beta. Kjør etter at lokal HTTP-server er startet. */
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {readFileSync as readTechFixture} from 'node:fs';
 import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
@@ -99,6 +100,48 @@ try {
   assert.equal(await page.locator('[data-play-journey-select]').inputValue(),'ki-data',label+': valg beholdes ved kategorifilter');
   await page.locator('[data-filter="Alle"]').click();
   assert.equal(await page.locator('.play-grid .play-card').count(),expectedSales.plays.length,label+': alle ni kort bevart');
+  // Teknologikart: behov, områder og avklaringsspørsmål uten parallelle fakta.
+  await page.evaluate(()=>{location.hash='#teknologi'});
+  await page.locator('[data-tech-journey-select]').waitFor();
+  assert.equal(await page.locator('[data-tech-journey-select]').inputValue(),'rapportering',label+': teknologi standardbehov');
+  const expectedPaths=JSON.parse(readTechFixture('docs/data/pages.json','utf8')).technologyJourneyUi.paths;
+  const expectedTech=JSON.parse(readTechFixture('docs/data/technologies.json','utf8')).tech;
+  assert.deepEqual(await page.locator('[data-tech-journey-select] option').evaluateAll(nodes=>nodes.map(n=>n.value)),expectedPaths.map(p=>p.playId),label+': tre kanoniske behov');
+  for(const path of expectedPaths){
+   const play=expectedSales.plays.find(p=>p.id===path.playId);
+   await page.locator('[data-tech-journey-select]').selectOption(path.playId);
+   assert.equal(await page.locator('[data-tech-journey-play]').getAttribute('data-tech-journey-play'),path.playId,label+': valgt behov');
+   assert.equal((await page.locator('[data-tech-journey-step="signal"] blockquote').innerText()).trim(),play.hook,label+': kanonisk signal');
+   assert.deepEqual((await page.locator('[data-tech-journey-step="questions"] li').allTextContents()).map(x=>x.trim()),play.questions.slice(0,2),label+': kanoniske spørsmål');
+   assert.ok((await page.locator('.technology-journey-caution').innerText()).includes(play.not),label+': kanonisk forbehold');
+   assert.deepEqual(await page.locator('[data-tech-journey-kind]').evaluateAll(nodes=>nodes.map(x=>x.dataset.techJourneyKind)),path.kinds,label+': to områder');
+   assert.equal(await page.locator('[data-tech-catalog-cards] .tech-item').count(),expectedTech.length,label+': behov nullstiller filter');
+   for(const kind of path.kinds){
+    await page.locator('[data-tech-journey-kind]').filter({hasText:kind}).click();
+    assert.equal(await page.locator('[data-tech-catalog-cards] .tech-item').count(),expectedTech.filter(x=>x.kind===kind).length,label+': filtrerte produkter');
+    if(expectedTech.filter(x=>x.kind===kind).length===1)assert.equal((await page.locator('[data-tech-catalog-label]').innerText()).trim(),'teknologi eller område',label+': entall i resultat');
+    assert.deepEqual((await page.locator('[data-tech-catalog-cards] .kind').allTextContents()).map(x=>x.trim()),expectedTech.filter(x=>x.kind===kind).map(x=>x.kind),label+': riktig kategori');
+    assert.equal(await page.locator('[data-tech-filter="'+kind+'"]').getAttribute('aria-pressed'),'true',label+': filter synkronisert');
+    assert.equal(await page.locator('[data-tech-journey-kind][aria-pressed="true"]').count(),1,label+': ett aktivt område');
+    assert.equal(await page.evaluate(()=>location.hash),'#teknologi',label+': ingen hash-endring');
+   }
+   await page.locator('[data-tech-journey-reset]').click();
+   assert.equal(await page.locator('[data-tech-catalog-cards] .tech-item').count(),expectedTech.length,label+': reset Alle');
+   assert.equal(await page.locator('[data-tech-filter="Alle"]').getAttribute('aria-pressed'),'true',label+': Alle markert');
+   assert.equal(await page.locator('.technology-journey-footer a').getAttribute('href'),'#muligheter/'+path.playId,label+': detaljrute');
+  }
+  await page.locator('[data-tech-journey-select]').focus();
+  assert.ok(await page.locator('[data-tech-journey-select]').evaluate(el=>document.activeElement===el),label+': tastaturfokus');
+  await page.locator('[data-tech-filter="Dataplattform"]').click();
+  assert.equal(await page.locator('[data-tech-catalog-cards] .tech-item').count(),expectedTech.filter(x=>x.kind==='Dataplattform').length,label+': eksisterende filter');
+  await page.locator('[data-tech-filter="Alle"]').click();
+  assert.ok((await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,label+': ingen teknologioverløp');
+  await page.locator('.technology-journey-footer a').click();
+  await page.locator('.detail-banner h2').waitFor();
+  assert.equal(await page.evaluate(()=>location.hash),'#muligheter/modernisering',label+': detaljlenke');
+  await page.evaluate(()=>{location.hash='#teknologi'});
+  await page.locator('[data-tech-journey-select]').waitFor();
+  assert.equal(await page.locator('[data-tech-journey-select]').inputValue(),'modernisering',label+': valg beholdes');
   await page.evaluate(()=>{location.hash='#horisont'});
   await page.locator('.horizon-concept-grid .horizon-concept').first().waitFor();
   assert.equal(await page.locator('.horizon-concept-grid .horizon-concept').count(),6,label+': seks begreper med én kanonisk kilde');
@@ -494,6 +537,7 @@ try {
   const response=await route.fetch();
   const sales=await response.json();
   sales.plays.find(x=>x.id==='rapportering').hook='QA_KANONISK_SIGNAL_FRA_SALES';
+  sales.plays.find(x=>x.id==='rapportering').questions[0]='QA_KANONISK_SPORSMAL_FRA_SALES';
   await route.fulfill({response,body:JSON.stringify(sales)});
  });
  const fixturePage=await fixture.newPage();
@@ -503,6 +547,10 @@ try {
  await fixturePage.evaluate(()=>{location.hash='#muligheter'});
  await fixturePage.locator('[data-play-journey-id="rapportering"]').waitFor();
  assert.equal((await fixturePage.locator('[data-play-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Metamorfisk signal på salgsinnganger følger sales.json uten kopiering');
+ await fixturePage.evaluate(()=>{location.hash='#teknologi'});
+ await fixturePage.locator('[data-tech-journey-play="rapportering"]').waitFor();
+ assert.equal((await fixturePage.locator('[data-tech-journey-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Teknologikart bruker sales.json hook');
+ assert.equal((await fixturePage.locator('[data-tech-journey-step="questions"] li').first().innerText()).trim(),'QA_KANONISK_SPORSMAL_FRA_SALES','Teknologikart bruker sales.json questions');
  await fixture.close();
 } catch(error){problems.push(error.stack||String(error));} finally {await browser.close();}
 if(problems.length){console.error(problems.join('\n'));process.exitCode=1;}
