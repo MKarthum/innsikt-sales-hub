@@ -17,6 +17,7 @@ try{
  assert.equal(await page.locator('[data-arch-option="modern"],[data-arch-option="ai-on-data"]').count(),0,'Technical detail and AI use are not competing base architectures');
  assert.equal(await page.locator('[data-arch-panel]:not([hidden])').count(),1,'Exactly one architecture perspective shown');
  assert.equal(await page.locator('[data-arch-panel="conceptual"]:not([hidden]) .da-scene').count(),1,'Page reuses presentation renderer');
+ await page.screenshot({path:out+'/architecture-first-impression-desktop.png',fullPage:false});
  const details=page.locator('[data-arch-technical]');
  await details.locator('summary').click();
  assert.equal(await details.locator('li').count(),6,'Technical expansion contains three canonical pairs of technical details');

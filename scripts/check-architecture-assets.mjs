@@ -16,6 +16,14 @@ for(const id of ['modern','ai-on-data']){
   assert.deepEqual(derived[field],core[field],'Inherited '+field+' remains identical in '+id);
  }
 }
+const changed=structuredClone(rawProfiles.profiles);
+changed.find(p=>p.id==='conceptual').sources[0].label='ENDRET_KILDE_FELLES';
+const inherited=resolutionSandbox.window.InnsiktContent.expandArchitectureProfiles(changed);
+for(const id of ['modern','ai-on-data'])assert.equal(inherited.find(p=>p.id===id).sources[0].label,'ENDRET_KILDE_FELLES','One canonical source change propagates to '+id);
+const applicationIds=load('pages').architectureExplorerUi.applicationDiagramIds;
+assert.deepEqual(applicationIds,['bi','rag'],'Different structured-data and document-retrieval uses');
+for(const id of applicationIds)assert.ok(load('learning').diagrams.some(d=>d.id===id),'Canonical use case '+id+' must exist');
+
 assert.equal(assets.schemaVersion,1);
 assert.equal(profiles.schemaVersion,1);
 const ids=new Set();

@@ -96,7 +96,7 @@
     "ARKITEKTUR": {
       "eyebrow": "ARKITEKTUR I PRAKSIS",
       "title": "Slik henger data, analyse og KI sammen",
-      "intro": "Én felles referansemodell med teknisk fordypning, to forskjellige anvendelseseksempler og tre konkrete plattformvarianter. Modellene er pedagogiske, ikke en anbefalt løsningsarkitektur."
+      "intro": "Start med én felles referansemodell. Utforsk teknikken, to ulike anvendelser og tre plattformeksempler etter behov."
     },
     "VERKTØYKASSE": {
       "eyebrow": "GJENBRUKBARE UTGANGSPUNKTER",
@@ -1301,8 +1301,8 @@
   ],
   "architectureExplorerUi": {
     "eyebrow": "UTFORSK DATAFLYTEN",
-    "title": "Følg dataene fra kilde til bruk",
-    "intro": "Én felles referansemodell viser oppgavene. Åpne teknisk fordypning for detaljer – eller utforsk hvordan ulike plattformer løser dem.",
+    "title": "Utforsk modellen eller en konkret plattform",
+    "intro": "Den felles modellen forklarer hvilke oppgaver som må løses. Teknisk fordypning utdyper de samme stegene.",
     "genericGroup": "Felles modell",
     "vendorGroup": "Konkrete plattformeksempler",
     "sources": "Datakilder",
