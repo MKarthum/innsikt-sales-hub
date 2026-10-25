@@ -327,3 +327,26 @@
 .v12-pause-open li strong{font:760 2.18cqw/1.17 var(--font-display)}
 .v12-pause-guardrail{flex:0 0 auto;margin:0;padding:1.0cqw 0 0;border-top:1px solid color-mix(in srgb,var(--pres-fg) 20%,transparent);font:690 1.58cqw/1.23 var(--font-body);color:var(--pres-muted)}
 .v12-question-pause .v5-footer{margin-top:.85cqw;padding-top:.75cqw;min-height:2.9cqw;font-size:1.45cqw}
+
+/* Controlled data-quality learning: observed labels → KI question → human gate → tested rule. */
+.v13-quality .v5-heading{margin:1cqw 0 .95cqw}
+.v13-quality .v5-heading .v2-headline{font-size:3.45cqw;line-height:1.08;max-width:100%}
+.v13-quality-example{flex:0 0 auto;margin:0 0 1cqw;font:780 1.18cqw/1.2 var(--font-body);letter-spacing:.06em;color:var(--pres-accent)}
+.v13-quality-top{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:56% 41%;gap:3%;align-items:stretch}
+.v13-quality-observation,.v13-quality-proposal{min-width:0;min-height:0;box-sizing:border-box;border-radius:.7cqw;padding:1.45cqw 1.7cqw;display:flex;flex-direction:column;gap:.65cqw}
+.v13-quality-observation{border:1px solid color-mix(in srgb,var(--pres-fg) 24%,transparent);background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg))}
+.v13-quality-observation h3{font:780 2.0cqw/1.14 var(--font-display);margin:.15cqw 0 .35cqw;letter-spacing:-.02em}
+.v13-quality-observation table{width:100%;border-collapse:separate;border-spacing:0 .45cqw;table-layout:fixed}
+.v13-quality-observation th{text-align:left;color:var(--pres-muted);font:710 1.13cqw/1.14 var(--font-body);padding:0 .85cqw .1cqw}
+.v13-quality-observation td{font:770 2.38cqw/1.17 var(--font-display);color:var(--pres-fg);padding:.9cqw .85cqw;background:var(--pres-bg);border-top:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent);border-bottom:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent)}
+.v13-quality-observation td:first-child{border-left:.35cqw solid var(--pres-accent);border-radius:.4cqw 0 0 .4cqw}
+.v13-quality-observation td:last-child{border-right:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent);border-radius:0 .4cqw .4cqw 0}
+.v13-quality-caveat{margin:auto 0 0;padding:.5cqw 0 0;font:670 1.4cqw/1.18 var(--font-body);color:var(--pres-muted)}
+.v13-quality-proposal{justify-content:center;border:1px solid color-mix(in srgb,var(--pres-accent) 45%,transparent);border-left:.5cqw solid var(--pres-accent);background:color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg));gap:1.45cqw}
+.v13-quality-proposal blockquote{margin:0;padding:0;border:0;font:820 2.65cqw/1.13 var(--font-display);letter-spacing:-.03em;color:var(--pres-fg)}
+.v13-quality-gate{flex:0 0 auto;display:grid;grid-template-columns:54% 44%;gap:2%;margin-top:1.15cqw}
+.v13-quality-review,.v13-quality-result{display:flex;flex-direction:column;gap:.5cqw;justify-content:center;padding:1.1cqw 1.55cqw;min-height:7.6cqw;border-radius:.6cqw;box-sizing:border-box}
+.v13-quality-review{background:color-mix(in srgb,var(--pres-accent) 13%,var(--pres-bg));border:.28cqw solid var(--pres-accent)}
+.v13-quality-result{background:color-mix(in srgb,var(--pres-fg) 4%,var(--pres-bg));border:1px solid color-mix(in srgb,var(--pres-fg) 23%,transparent)}
+.v13-quality-gate strong{font:750 2.15cqw/1.16 var(--font-display);color:var(--pres-fg)}
+.v13-quality .v5-footer{margin-top:.8cqw;padding-top:.7cqw;min-height:2.8cqw;font-size:1.4cqw}

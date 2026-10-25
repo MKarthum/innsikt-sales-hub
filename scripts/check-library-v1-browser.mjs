@@ -146,6 +146,16 @@ try{
     assert.ok((await stage.locator('.v9-dialogue-next').innerText()).includes('Årsak og løsning er fortsatt ukjent'),'Next action retains uncertainty');
     assert.ok((await stage.locator('.v9-dialogue-next').innerText()).includes('prosesseier og dataansvarlig'),'Next step is a bounded investigation');
    }
+   if(s.id==='ai-improve-data'){
+    assert.ok((await stage.locator('.v13-quality-example').innerText()).includes('FIKTIVT'),'Quality example is explicitly fictional');
+    assert.equal(await stage.locator('.v13-quality-observation tbody tr').count(),2,'Exactly two illustrative registrations');
+    assert.deepEqual(await stage.locator('.v13-quality-observation tbody td').allInnerTexts(),['Fakturafeil A','Kundeservice','Fakturafeil B','Økonomi'],'Labels are illustrative and consistent');
+    assert.ok((await stage.locator('.v13-quality-proposal blockquote').innerText()).endsWith('?'),'KI asks a question, not an automatic decision');
+    assert.ok((await stage.locator('.v13-quality-review').innerText()).includes('FAGANSVARLIG VERIFISERER'),'Human control is visible');
+    assert.ok((await stage.locator('.v13-quality-result').innerText()).includes('BARE ETTER GODKJENT ENDRING'),'Outcome is conditional');
+    assert.ok((await stage.locator('.v13-quality-caveat').innerText()).includes('ikke bevis på feil'),'Different labels do not prove a defect');
+    assert.equal(await stage.locator('.scene-loop').count(),0,'Generic two-circle loop was replaced');
+   }
    if(s.id==='ai-pragmatic'){
     assert.equal(await stage.locator('.v8-compare-option').count(),2,'Comparison keeps two equally visible methods');
     assert.equal(await stage.locator('.v8-compare-baseline .v8-compare-flow li').count(),3,'Baseline shows the real human workflow');

@@ -5,7 +5,7 @@ const diagrams=JSON.parse(fs.readFileSync('docs/data/learning.json','utf8')).dia
 const profiles=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles;
 const expected=new Set(slides.map(s=>s.id));
 assert.ok(slides.length>0,'Slide library must not be empty');
-const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road','discovery-dialogue':'road','guided-question-pause':'road','knowledge-lookup':'road','readiness-contrast':'impact'};
+const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road','discovery-dialogue':'road','guided-question-pause':'road','knowledge-lookup':'road','verified-quality-loop':'loop','readiness-contrast':'impact'};
 const accepted=new Set(Object.keys(layouts));
 const seen=new Set();
 for(const s of slides){
@@ -58,6 +58,11 @@ for(const s of slides){
   const diagram=diagrams.find(d=>d.id===v.diagramId);
   assert.ok(v.exampleLabel&&v.question&&v.lookupLabel&&v.lookupSection&&v.questionsLabel&&v.guardrailLabel&&v.guardrail&&v.conclusion&&diagram?.title&&diagram?.description&&diagram.questions?.length===2,'Knowledge lookup requires one canonical diagram and two questions: '+s.id);
   assert.ok(!v.questions&&!v.description&&!v.diagramTitle,'Knowledge lookup must not duplicate canonical diagram content: '+s.id);
+ }
+ if(v.layout==='verified-quality-loop'){
+  assert.ok(v.exampleLabel?.includes('FIKTIVT')&&v.findingLabel&&v.finding?.trim()&&v.requestColumnLabel&&v.teamColumnLabel&&v.aiLabel&&v.aiProposal?.trim().endsWith('?')&&v.reviewLabel&&v.review?.trim()&&v.resultLabel&&v.result?.trim()&&v.guardrail?.trim()&&v.conclusion?.trim(),'Quality loop must show fictional observation, question, human review and conditional outcome: '+s.id);
+  assert.ok(v.records?.length===2&&v.records.every(x=>x.request?.trim()&&x.team?.trim()),'Quality loop needs two labeled example records: '+s.id);
+  assert.deepEqual(s.sourceIds,['dbt-ai-development','dbt-data-tests','nist-ai-rmf'],'Quality loop must cite tests, AI assistance and risk management: '+s.id);
  }
  if(v.layout==='guided-question-pause')assert.ok(v.exampleLabel?.includes('FIKTIVT')&&v.answerLabel?.includes('FIKTIVT')&&v.questionLabel&&v.question?.trim()&&v.answer?.trim()&&v.insightLabel&&v.insight?.trim()&&v.openLabel&&v.openQuestions?.length===2&&v.openQuestions.every(x=>typeof x==='string'&&x.trim())&&v.guardrail?.trim()&&v.conclusion?.trim(),'Guided question pause needs a fictional answer, one consequence, exactly two unanswered follow-ups and caveat');
  if(v.layout==='discovery-dialogue')assert.ok(v.exampleLabel&&v.signalLabel&&v.signal&&v.questionLabel&&v.answerLabel&&v.insightLabel&&v.clarifications?.length===3&&v.clarifications.every(x=>x.question?.trim()&&x.answer?.trim()&&x.insight?.trim())&&v.nextLabel&&v.nextAction&&v.guardrail&&v.conclusion,'Discovery dialogue needs a fictional signal, three answer-based inferences, bounded next step and caveat');

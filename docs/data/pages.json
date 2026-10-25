@@ -399,7 +399,7 @@
           "slideId": "ai-improve-data",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er en viktig nyanse. Data og KI står ikke i hver sin ende av et samlebånd. Vi kan bruke KI til å utforske, dokumentere og teste data mens vi utvikler løsningene. Samtidig verifiserer vi resultatene. Det skaper en læringssløyfe. Overgang: Nå kan vi samle fagområdene."
+          "note": "Dette er samme fiktive kundesortering som i forrige bilde. Nå ser vi en annen gevinst av en avgrenset test: Den kan avdekke uklare registreringsregler. Pek på de to radene. Er dette en feil? Ikke nødvendigvis. KI foreslår å undersøke forskjellen, mens fagansvarlig avklarer om etikettene er riktige og eventuelt godkjenner en dokumentert regel. Test regelen på nye saker. Påpek at kontroll av tillatte kategorier ikke er det samme som å kontrollere riktig team i hver sak. Vi har ikke dokumentert noen effekt eller automatisk retting. Overgang: Når behov, data og vurdering henger sammen, kan KI bli en nyttig forsterker."
         },
         {
           "slideId": "ai-value-in-context",
