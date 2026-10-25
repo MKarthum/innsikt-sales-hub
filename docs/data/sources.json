@@ -255,7 +255,7 @@
     "publisher": "Snowflake Documentation",
     "url": "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents",
     "type": "leverandørdokumentasjon",
-    "checked": "2026-10-13"
+    "checked": "2026-10-25"
   },
   "googleIntegration": {
     "title": "What is Data Integration?",
@@ -290,7 +290,7 @@
     "publisher": "Microsoft Learn",
     "url": "https://learn.microsoft.com/en-us/fabric/iq/",
     "type": "leverandørdokumentasjon · preview",
-    "checked": "2026-10-14"
+    "checked": "2026-10-25"
   },
   "fabricOntology": {
     "title": "What is ontology (preview)?",
@@ -304,14 +304,14 @@
     "publisher": "Glean Documentation",
     "url": "https://docs.glean.com/security/knowledge-graph",
     "type": "leverandørdokumentasjon",
-    "checked": "2026-10-14"
+    "checked": "2026-10-25"
   },
   "gleanConnectors": {
     "title": "How connectors power the Glean experience",
     "publisher": "Glean Documentation",
     "url": "https://docs.glean.com/connectors/connectors-power-glean",
     "type": "leverandørdokumentasjon",
-    "checked": "2026-10-14"
+    "checked": "2026-10-25"
   },
   "webstep-sectors": {
     "title": "Webstep – bransjer og kompetanse",
@@ -432,7 +432,7 @@
     "url": "https://www.gartner.com/en/documents/8475745",
     "type": "offentlig sammendrag av abonnementsrapport",
     "published": "2026-10-16",
-    "checked": "2026-10-21"
+    "checked": "2026-10-25"
   },
   "gartner-data26": {
     "title": "Gartner – Data and Analytics Predictions 2026",
@@ -664,6 +664,27 @@
     "publisher": "dbt Labs",
     "url": "https://docs.getdbt.com/docs/build/data-tests",
     "type": "leverandørdokumentasjon (datatester)",
+    "checked": "2026-10-25"
+  },
+  "gleanEnterpriseGraph": {
+    "title": "Glean Enterprise Graph – bygger videre på Knowledge Graph",
+    "publisher": "Glean",
+    "url": "https://www.glean.com/enterprise-context/enterprise-graph",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-25"
+  },
+  "microsoftIQ": {
+    "title": "Microsoft IQ – Work IQ, Fabric IQ og Foundry IQ",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/microsoft-iq/",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-25"
+  },
+  "palantirOntology": {
+    "title": "Palantir – The Ontology system",
+    "publisher": "Palantir Documentation",
+    "url": "https://www.palantir.com/docs/foundry/architecture-center/ontology-system",
+    "type": "leverandørdokumentasjon",
     "checked": "2026-10-25"
   }
 }

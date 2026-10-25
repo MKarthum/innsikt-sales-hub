@@ -393,13 +393,17 @@
     {
       "id": "company-brain",
       "term": "Company Brain",
-      "meaning": "Uformell markedsbetegnelse på løsninger som gir søk eller KI tilgang til virksomhetskontekst fra flere systemer. Ikke en entydig arkitektur eller etablert standard.",
-      "example": "En ansatt finner både beslutningsgrunnlaget, relevant dokumentasjon og hvem som har ansvar for saken.",
+      "meaning": "Uformelt målbilde for KI som kan bruke virksomhetens autoritative data, dokumenter, begreper, relasjoner og regler på tvers av arbeidsprosesser, med riktig tilgang og etterprøvbarhet. Ikke en standardarkitektur eller et bestemt produkt. Kunnskapsgraf er én mulig byggestein, ikke synonymt med «Company Brain».",
+      "example": "Ved en forsinket leveranse kan en assistent koble godkjente statusdata med relevant dokumentasjon, finne ansvarlig team og forklare mulige årsaker med kildehenvisninger. Eventuelle tiltak må følge virksomhetens fullmakter og kontrollrutiner.",
       "evidence": "assessment",
-      "reviewed": "2026-10-21",
+      "reviewed": "2026-10-25",
       "sourceIds": [
+        "gartner-context",
         "gleanGraph",
-        "gleanConnectors"
+        "gleanEnterpriseGraph",
+        "microsoftIQ",
+        "agent-foundation",
+        "palantirOntology"
       ],
       "inline": {
         "enabled": true,
