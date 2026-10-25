@@ -71,3 +71,7 @@ Det er fortsatt ingen internt innhold i dette offentlige repoet. Å legge til ny
 ## Oppdatering 25.10.2026 – kjerne og utvidelser
 
 Utvidelse v2: schemaVersion 1 er fremdeles støttet. schemaVersion 2 gir tools, navngitte collections og navigation.groups/views med genererte #intern-ruter, uten å endre åpne sider. Kun deklarative felt og kontrollerte lenker; ingen kjørbar HTML/JS i internpakken. Se CORE_ORG_BOUNDARY.md for kildegrenser, oppgradering og sikkerhet.
+
+## Virksomhetsspesifikk profil (v2)
+
+Den interne innholdspakken kan ha et separat `organizationProfile`-objekt for virksomhetsnavn, valgfri undertittel i sidepanelet, startsidebudskap, overskrift og liste over kompetanseområder, kilder som underbygger disse og prioriterte bransje-ID-er. Dette er internt redaksjonelt innhold, ikke en overstyring av kanoniske åpne fakta. Streng validering av felt, kilde-ID-er og bransje-ID-er skjer før data vises. Åpne nettadresser eller HTML kan ikke injiseres som visningsfelter. Det er ikke krav om profil i offentlig modus, og dataene skal aldri ligge i `docs/data` i dette repoet.

@@ -54,3 +54,11 @@ For samlinger er det en delt, trygg kort-/detaljvisning med eskapert tekst, vali
 
 Ingen data eller endringer skal automatisk synkroniseres fra organisasjonsrepo tilbake til den offentlige kjernen. Ved ny funksjon som kan være allmenn, legg den til den åpne kjernen med syntetisk testinnhold og et nytt bakoverkompatibelt kontraktsnivå – ikke med kundedata.
 
+
+## Virksomhetsprofil i beskyttet pakke (schemaVersion 2)
+
+En organisasjon kan legge til `organizationProfile` bare i den autentiserte innholdspakken. Den åpne kjernen inneholder ingen profil for en konkret arbeidsgiver. Profilen kan angi `name`, `brandSubtitle`, `home` (feltene `eyebrow`, `titleLine1`, `titleLine2`, `intro`), `competenceHeader` (`title`, `intro`), `competences` (liste med `id`, `label`, `description`), `competenceSourceIds` og `focusSectorIds` (eksisterende, stabile bransje-ID-er). Ingen felt kan inneholde kjørbar HTML. Alle refererte kilder må finnes i felles eller beskyttet kilderegister.
+
+I intern modus tilpasses startbudskap, kompetansebeskrivelser og visning av prioriterte bransjer; øvrige generiske sider og fakta forblir eid av offentlig kjerne. Webgrensesnittet er fremdeles produktet Innsikt, med organisasjonsprofil som tillegg. Den generiske utgaven må kunne kjøres uten profil, uten ekstra nettverkskall og uten at interne strenger havner i offentlige artefakter.
+
+Videre arbeid: erstatt arbeidsgiverspesifikke kildehenvisninger og tidligere bransjeprioritering i den åpne datahistorien med nøytralt kildegrunnlag. Flytt eksisterende virksomhetsinnhold til et separat, tilgangsstyrt organisasjonsrepo **før** det slettes eller endres vesentlig i offentlig kjerne. Oppbevar bekreftede rettigheter, gjeldende lisenser, historikk og proveniens; ingen slik overføring skjer automatisk herfra. Offentlig Git-historikk vil fortsatt være offentlig tilgjengelig.

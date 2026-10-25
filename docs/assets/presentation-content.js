@@ -95,6 +95,48 @@ function combine(base,content){
    allItemIds.add(item.id);
   }
  }
+ // Organization-specific positioning is only accepted from an authenticated internal package.
+ // Generic guidance and factual data remain owned by the public core.
+ let organizationProfile=null;
+ if(content.organizationProfile!==undefined){
+  if(content.schemaVersion!==2)throw Error('Virksomhetsprofil krever schemaVersion 2');
+  const profile=plainObject(content.organizationProfile,'organizationProfile');
+  const allowed=new Set(['name','brandSubtitle','home','competenceHeader','competences','competenceSourceIds','focusSectorIds']);
+  for(const field of Object.keys(profile))if(!allowed.has(field))throw Error('Ukjent virksomhetsprofilfelt: '+field);
+  const requiredText=(v,field)=>{if(typeof v!=='string'||!v.trim()||v.length>350)throw Error('Ugyldig virksomhetsprofiltekst: '+field);return v;};
+  requiredText(profile.name,'name');
+  if(profile.brandSubtitle!==undefined)requiredText(profile.brandSubtitle,'brandSubtitle');
+  const readTextFields=(value,label,allowedFields)=>{
+   if(value===undefined)return null;
+   const item=plainObject(value,label);
+   for(const [key,text] of Object.entries(item)){
+    if(!allowedFields.includes(key))throw Error('Ukjent felt i '+label+': '+key);
+    requiredText(text,label+'.'+key);
+   }
+   return item;
+  };
+  const home=readTextFields(profile.home,'organizationProfile.home',['eyebrow','titleLine1','titleLine2','intro']);
+  const competenceHeader=readTextFields(profile.competenceHeader,'organizationProfile.competenceHeader',['title','intro']);
+  const competences=profile.competences===undefined?null:list(profile.competences,'organizationProfile.competences',24);
+  if(competences){
+   if(!competences.length)throw Error('Tomt kompetanseregister i virksomhetsprofil');
+   const ids=new Set();
+   for(const skill of competences){
+    plainObject(skill,'organization competence');
+    if(!validId(skill.id)||ids.has(skill.id))throw Error('Ugyldig/duplisert virksomhetskompetanse');
+    for(const key of Object.keys(skill))if(!['id','label','description'].includes(key))throw Error('Ukjent kompetansefelt: '+key);
+    requiredText(skill.label,'competence.label');requiredText(skill.description,'competence.description');ids.add(skill.id);
+   }
+  }
+  const competenceSourceIds=list(profile.competenceSourceIds,'organizationProfile.competenceSourceIds',20);
+  if(competenceSourceIds.some(id=>!sourceIds.has(id))||new Set(competenceSourceIds).size!==competenceSourceIds.length)
+   throw Error('Ukjente eller dupliserte kompetansekilder i virksomhetsprofil');
+  const focusSectorIds=list(profile.focusSectorIds,'organizationProfile.focusSectorIds',24);
+  const validSectors=new Set(base.industrySectors.map(s=>s.id));
+  if(focusSectorIds.some(id=>!validSectors.has(id))||new Set(focusSectorIds).size!==focusSectorIds.length)
+   throw Error('Ukjente eller dupliserte prioriterte bransjer i virksomhetsprofil');
+  organizationProfile={...profile,home,competenceHeader,competences,competenceSourceIds,focusSectorIds};
+ }
  const config=content.navigation===undefined?null:plainObject(content.navigation,'navigation');
  if(config&&content.schemaVersion!==2)throw Error('Intern navigasjon krever schemaVersion 2');
  const groups=config?list(config.groups,'navigation.groups',30):[{id:'organization',label:'VIRKSOMHETENS RESSURSER',collapsible:true}];
@@ -121,6 +163,7 @@ function combine(base,content){
   sources:{...base.sources,...sources},
   slides:{...base.slides,items:[...base.slides.items,...slides]},
   pages:{...base.pages,presentationDecks:{...base.pages.presentationDecks,...decks}},
+  organizationProfile,
   internalCollections:collections,
   internalNavigation:{groups,items:views}
  };

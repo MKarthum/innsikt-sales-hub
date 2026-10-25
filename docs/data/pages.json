@@ -57,8 +57,8 @@
     },
     "KOMPETANSE": {
       "eyebrow": "KOMPETANSE",
-      "title": "Hva kan Webstep bidra med?",
-      "intro": "Faglig bredde uttrykt som kunderelevante kompetanseområder. Beskrivelsene er basert på Websteps offentlige tjenestesider, ikke en oppdatert intern kapasitetsoversikt."
+      "title": "Kompetanse innen data og KI",
+      "intro": "Eksempler på kompetanseområder som kan være relevante for datadrevne forbedringer. Dette er ikke en bekreftelse på en bestemt leverandørs kapasitet."
     },
     "TEKNOLOGIKART": {
       "eyebrow": "TEKNOLOGIKART",
@@ -333,7 +333,7 @@
     "industryCasesExistingTitle": "Andre innganger til forretningsbehov",
     "industryCasesMethodsTitle": "Fra problem til tverrfaglig forbedring",
     "industryCasesSourceNote": "Eksemplene er kvalifiseringshypoteser – ikke faktiske Webstep-oppdrag, dokumenterte gevinster eller påstander om kundens modenhet.",
-    "industryCasesScopeNote": "Kjernebransjer følger Websteps offentlige bransjebeskrivelse. Transport er også omtalt i Q2-rapporten. Handel og havbruk er illustrative tillegg, ikke dokumentasjon på Websteps kundesammensetning."
+    "industryCasesScopeNote": "Utvalget viser ni illustrative bransjer med dokumentert faglig praksis og mulige problemstillinger. Bransjene er ikke en påstand om en bestemt leverandørs kundesammensetning eller prioriteringer."
   },
   "presentationDecks": {
     "innsikt": {
@@ -874,8 +874,8 @@
     "linked": "Relaterte kompetanse- og leveranseinnganger",
     "caseContext": "Bransjekontekst",
     "basis": "Kildene dokumenterer bransjepraksis, ikke kundens utfordringer eller faktisk gevinst.",
-    "core": "Websteps offentlig omtalte bransjer",
-    "illustrative": "Andre illustrative bransjer",
+    "core": "Bransjeeksempler",
+    "illustrative": "Andre bransjeeksempler",
     "journey": "Fra forretningsproblem til tverrfaglig leveranse",
     "qualification": "Før leveransevalg",
     "maturity": "Ikke anta et modenhetsgap",

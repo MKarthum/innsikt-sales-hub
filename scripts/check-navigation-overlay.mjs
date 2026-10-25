@@ -21,6 +21,20 @@ const sample={schemaVersion:2,classification:'internal',
  navigation
 };
 const merged=api.combine(base,sample);
+const orgProfile={
+ name:'Eksempelbedriften',brandSubtitle:'EKSEMPEL · DATA',
+ home:{eyebrow:'EKSEMPEL · ARBEIDSFLATE',titleLine1:'Oppdag behov.',titleLine2:'Finn neste steg.',intro:'Et organisasjonstilpasset eksempel.'},
+ competenceHeader:{title:'Våre fagområder',intro:'Bekreftet internt før publisering.'},
+ competences:[{id:'org-data',label:'Dataplattform',description:'Internt beskrevet fagområde.'}],
+ competenceSourceIds:['org-source'],focusSectorIds:[base.industrySectors[0].id]
+};
+const profileContent={...sample,sources:{'org-source':{title:'Intern prøve',url:'https://example.org/test',publisher:'Eksempel'}},organizationProfile:orgProfile};
+const profiled=api.combine(base,profileContent);
+assert.equal(profiled.organizationProfile.name,'Eksempelbedriften');
+assert.equal(profiled.organizationProfile.competences[0].label,'Dataplattform');
+assert.equal(profiled.organizationProfile.focusSectorIds[0],base.industrySectors[0].id);
+assert.equal(api.combine(base,null).organizationProfile,undefined);
+assert.equal(base.organizationProfile,undefined);
 assert.equal(merged.internalNavigation.items.length,2);
 assert.equal(merged.internalCollections.tools[0].id,'org-tool-001');
 assert.equal(merged.internalCollections['internal-methods'][0].id,'org-method-001');
@@ -42,6 +56,11 @@ invalid({navigation:{groups:navigation.groups,views:[{...navigation.views[0],gro
 invalid({navigation:{groups:navigation.groups,views:[...navigation.views,navigation.views[0]]}},/Ugyldig intern menyside/);
 invalid({sources:{...base.sources}},/Duplisert/);
 invalid({schemaVersion:1,navigation},/schemaVersion 2/);
+invalid({organizationProfile:{...orgProfile,focusSectorIds:['ukjent-bransje']}},/Ukjente eller dupliserte/);
+invalid({organizationProfile:{...orgProfile,home:{titleLine1:'<a>',danger:'raw-html'}}},/Ukjent felt/);
+invalid({organizationProfile:{...orgProfile,competences:[{id:'bad',label:'Etikett',description:'Felt',html:'<script>'}]}},/Ukjent kompetansefelt/);
+invalid({organizationProfile:{...orgProfile,competenceSourceIds:['missing']}},/Ukjente eller dupliserte/);
+invalid({organizationProfile:{...orgProfile,unexpected:'not-allowed'}},/Ukjent virksomhetsprofilfelt/);
 // Test the actual shared renderer rather than a separate test-only nav model.
 const all=load('site');
 const contentSandbox={window:{}};
@@ -53,19 +72,24 @@ const materialized=contentSandbox.window.InnsiktContent.materialize({
  horizon:load('horizon'),slides:base.slides,'visual-assets':load('visual-assets'),
  visualAssets:load('visual-assets'),architectureProfiles:load('architecture-profiles')
 });
-const runtime=api.combine(materialized,sample);
+const runtime=api.combine(materialized,profileContent);
 const src=fs.readFileSync('docs/assets/site.js','utf8');
 const end=/\binit\(\);\s*\}\)\(\);\s*$/;
 assert.ok(end.test(src));
 const injected=src.replace(end, [
  'D=globalThis.__fixture;names=D.pages.navigation;',
- 'globalThis.__navProbe=()=>({sections:navSections(),page:internalPage("customer-reference"),detail:internalPage("customer-reference~org-case-001"),tool:internalPage("internal-tools~org-tool-001")});',
+ 'globalThis.__navProbe=()=>({sections:navSections(),home:overview(),competence:competence(),business:business(),page:internalPage("customer-reference"),detail:internalPage("customer-reference~org-case-001"),tool:internalPage("internal-tools~org-tool-001")});',
  '})();'
 ].join('\n'));
 const sandbox={console,window:{},localStorage:{getItem:()=>null},__fixture:runtime,location:{hash:''}};
 vm.createContext(sandbox);
 vm.runInContext(injected,sandbox,{timeout:3000});
 const probe=vm.runInContext('__navProbe()',sandbox,{timeout:3000});
+assert.ok(probe.home.includes('EKSEMPEL · ARBEIDSFLATE'));
+assert.ok(probe.competence.includes('Våre fagområder'));
+assert.ok(probe.competence.includes('Dataplattform'));
+assert.ok(probe.business.includes('Eksempelbedriften: prioriterte bransjer'));
+assert.ok(!JSON.stringify(materialized.pages).includes('EKSEMPEL · ARBEIDSFLATE'));
 assert.ok(probe.sections.some(g=>g.id==='org-organization'));
 assert.ok(probe.sections.find(g=>g.id==='org-organization').items.some(i=>i.route==='intern/customer-reference'));
 assert.ok(probe.page.includes(entry.title));
