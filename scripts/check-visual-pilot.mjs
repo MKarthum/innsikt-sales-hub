@@ -133,6 +133,37 @@ try{
   baselineServer?.kill();
   fs.rmSync(baselineDir,{recursive:true,force:true});
  }
+ // Teknologikart: før/etter fra eksakt v0.18.11, ikke skiftende live Pages.
+ const techBaseDir=fs.mkdtempSync(path.join(os.tmpdir(),'innsikt-tech-before-'));
+ let techBaseServer;
+ try{
+  const techBaseSha='1639193b5817f7da24ec8838251304708799fb15';
+  execFileSync('git',['fetch','--depth=1','origin',techBaseSha],{stdio:'ignore'});
+  const fd=fs.openSync(path.join(techBaseDir,'site.tar'),'w');
+  try{execFileSync('git',['archive','--format=tar',techBaseSha,'docs'],{stdio:['ignore',fd,'pipe']});}finally{fs.closeSync(fd);}
+  execFileSync('tar',['-xf',path.join(techBaseDir,'site.tar'),'-C',techBaseDir]);
+  techBaseServer=spawn('python3',['-m','http.server','8772','--bind','127.0.0.1','--directory',techBaseDir],{stdio:'ignore'});
+  await new Promise(resolve=>setTimeout(resolve,500));
+  for(const width of [320,390,900,1512]){
+   const height=width===320?700:width===390?844:width===900?900:980;
+   for(const [state,url] of [['before','http://127.0.0.1:8772/docs/#teknologi'],['after',(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'#teknologi']]){
+    const shot=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
+    await shot.goto(url,{waitUntil:'networkidle'});
+    await shot.locator('.tech-item').first().waitFor();
+    const overflow=await shot.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+    if(state==='after')assert.ok(overflow<=3,'Teknologikart uten horisontal overflyt '+width+': '+overflow);
+    await shot.screenshot({path:output+'/technology-'+width+'-'+state+'-viewport.png'});
+    await shot.screenshot({path:output+'/technology-'+width+'-'+state+'-full.png',fullPage:true});
+    if(state==='after'){
+     await shot.locator('[data-tech-journey-select]').selectOption('datakvalitet');
+     await shot.locator('[data-tech-journey-kind]').first().click();
+     assert.equal(await shot.locator('.tech-item').count(),1,'Datakvalitet filtrerer ved '+width);
+     await shot.screenshot({path:output+'/technology-'+width+'-datakvalitet.png'});
+    }
+    await shot.close();
+   }
+  }
+ }finally{techBaseServer?.kill();fs.rmSync(techBaseDir,{recursive:true,force:true})}
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
  console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
 }finally{await browser.close()}

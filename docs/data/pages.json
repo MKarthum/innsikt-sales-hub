@@ -1356,5 +1356,43 @@
     "panOpenAria": "Utforsk arkitekturdiagrammet i stort format",
     "guideQuestionLabel": "Diskuter med kunden",
     "independentIntro": "Teknologier skifter, men disse spørsmålene er viktige på tvers av både BI, dataplattform og KI."
+  },
+  "technologyJourneyUi": {
+    "eyebrow": "BEHOV FØR PRODUKT",
+    "title": "Fra kundebehov til aktuelle teknologiområder",
+    "intro": "Velg en situasjon, undersøk to relevante områder og still spørsmål før dere vurderer konkrete produkter.",
+    "selectLabel": "Velg kundesituasjon",
+    "stepSignal": "Hva hører du?",
+    "stepAreas": "Områder å undersøke",
+    "stepQuestions": "Spør før produktvalg",
+    "signalNotice": "Illustrativt kundesignal – ikke en dokumentert kundereferanse.",
+    "areasNotice": "Mulige spor å undersøke – ikke produktanbefalinger.",
+    "notLabel": "Unngå å anta",
+    "cta": "Åpne hele samtaleguiden",
+    "resetLabel": "Vis alle teknologiområder",
+    "statusPrefix": "Viser teknologiretning for",
+    "paths": [
+      {
+        "playId": "rapportering",
+        "kinds": [
+          "Analyse og BI",
+          "Transformasjon og semantikk"
+        ]
+      },
+      {
+        "playId": "datakvalitet",
+        "kinds": [
+          "Datastyring og kvalitet",
+          "Transformasjon og semantikk"
+        ]
+      },
+      {
+        "playId": "modernisering",
+        "kinds": [
+          "Dataplattform",
+          "Integrasjon og orkestrering"
+        ]
+      }
+    ]
   }
 }
