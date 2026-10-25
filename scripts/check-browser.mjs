@@ -1,6 +1,7 @@
 /* Reelle Chromium-røykprøver for beta. Kjør etter at lokal HTTP-server er startet. */
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {readFileSync as readTechFixture} from 'node:fs';
 import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
@@ -103,8 +104,8 @@ try {
   await page.evaluate(()=>{location.hash='#teknologi'});
   await page.locator('[data-tech-journey-select]').waitFor();
   assert.equal(await page.locator('[data-tech-journey-select]').inputValue(),'rapportering',label+': teknologi standardbehov');
-  const expectedPaths=JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).technologyJourneyUi.paths;
-  const expectedTech=JSON.parse(fs.readFileSync('docs/data/technologies.json','utf8')).tech;
+  const expectedPaths=JSON.parse(readTechFixture('docs/data/pages.json','utf8')).technologyJourneyUi.paths;
+  const expectedTech=JSON.parse(readTechFixture('docs/data/technologies.json','utf8')).tech;
   assert.deepEqual(await page.locator('[data-tech-journey-select] option').evaluateAll(nodes=>nodes.map(n=>n.value)),expectedPaths.map(p=>p.playId),label+': tre kanoniske behov');
   for(const path of expectedPaths){
    const play=expectedSales.plays.find(p=>p.id===path.playId);
