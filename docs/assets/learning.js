@@ -34,6 +34,10 @@ function architecture(D,h,id){
  const u=D.pages.architectureExplorerUi,featured=u.applicationDiagramIds||[],applications=featured.map(diagramId=>diagrams.find(x=>x.id===diagramId)).filter(Boolean);
  return headerCopy('ARKITEKTUR')
  +window.InnsiktArchitectureExplorer.render(D,h)
+ +'<section class="arch-principles" data-arch-principles>'
+ +'<div class="arch-principles-eyebrow">'+e(D.horizon.ui.generalLabel)+'</div>'
+ +'<h2>'+e(D.horizon.questions.title)+'</h2><p>'+e(u.independentIntro)+'</p>'
+ +'<div class="arch-principles-grid">'+D.horizon.questions.items.map((q,i)=>'<div class="arch-principle"><span class="arch-principle-num">'+String(i+1).padStart(2,'0')+'</span><p>'+e(q)+'</p></div>').join('')+'</div></section>'
  +'<section class="arch-applications"><div class="section-heading"><div><h2>'+e(u.applicationsTitle)+'</h2><p>'+e(u.applicationsIntro)+'</p></div></div>'
  +'<div class="learning-grid">'+applications.map(x=>card(x,e)).join('')+'</div></section>'
  +'<details class="arch-explorer-more"><summary>'+e(u.moreDiagrams)+'</summary>'

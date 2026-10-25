@@ -35,12 +35,18 @@
 .arch-pan-nav button:focus-visible,.arch-explorer-stage:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 /* The full architectural composition is visible first on small screens.
    A reader can opt in to 1:1 detail; only then pan the SAME diagram. */
-.arch-pan-toggle{border:1px solid var(--teal);border-radius:999px;background:var(--navy);color:#fff;font:740 13px var(--font-body);padding:10px 16px;cursor:pointer}
+.arch-pan-toggle{display:none;border:1px solid var(--teal);border-radius:999px;background:var(--navy);color:#fff;font:740 13px var(--font-body);padding:10px 16px;cursor:pointer}
 .arch-pan-toggle:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 .arch-pan-nav{display:none;margin-top:10px}
+.arch-explorer-panel.is-detail .arch-pan-toggle{display:inline-flex}
+.arch-stage-open{display:none}
 @container architecture-panel (max-width:850px){
  .arch-explorer-claim{display:block}
  .arch-pan-guide{display:block}
+ .arch-stage-open{display:block;position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:zoom-in;z-index:4}
+ .arch-stage-open:focus-visible{outline:4px solid var(--teal);outline-offset:-5px;border-radius:5px}
+ .arch-stage-open span{position:absolute;right:10px;bottom:10px;padding:7px 10px;border:1px solid var(--border);background:var(--navy);color:white;border-radius:999px;font:750 12px/1.2 var(--font-body);box-shadow:0 3px 12px rgba(10,32,44,.2)}
+ .arch-explorer-panel.is-detail .arch-stage-open{display:none}
  .arch-explorer-stage{aspect-ratio:16/9;overflow:hidden}
  .arch-explorer-stage .vp-heading,.arch-explorer-stage .da-intro,.arch-explorer-stage .scene-topline{display:none}
  .arch-explorer-panel.is-detail .arch-pan-nav{display:flex}
@@ -79,3 +85,27 @@
 .arch-explorer-more .section-heading{margin-top:18px}
 @container architecture-panel (max-width:850px){.arch-explorer-technical-grid{grid-template-columns:1fr}}
 @media (max-width:650px){.arch-explorer-technical{margin:13px 17px 0;padding:15px}.arch-explorer-technical-grid{gap:8px}}
+
+/* Interpretation and choice belong to the same canonical profile as the scene. */
+.arch-reading-guide{padding:17px 28px 20px;border-top:1px solid var(--border);display:grid;gap:15px}
+.arch-reading-guide h3{font:780 19px/1.25 var(--font-display);color:var(--ink);margin:0 0 8px}
+.arch-reading-guide p{font-size:14px;line-height:1.55;color:var(--muted);margin:0}
+.arch-reading-question{margin-top:12px;border-left:3px solid var(--teal);padding:3px 0 3px 13px}
+.arch-reading-question strong{display:block;font-size:12px;letter-spacing:.03em;color:var(--teal);margin-bottom:5px}
+.arch-bi-decisions{padding:18px;border:1px solid var(--border);border-radius:13px;background:var(--surface-secondary)}
+.arch-bi-decisions h4{font:780 17px/1.25 var(--font-display);color:var(--ink);margin:0 0 8px}
+.arch-bi-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.arch-bi-option{min-width:0;border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface)}
+.arch-bi-option strong{font-size:13px;color:var(--ink);display:block;margin-bottom:6px}
+.arch-bi-option p{font-size:12px;line-height:1.55}
+.arch-bi-caution{border-top:1px solid var(--border);padding-top:10px;font-style:italic}
+.arch-principles{border:1px solid var(--border);border-radius:18px;padding:24px 28px;margin:24px 0;background:var(--surface)}
+.arch-principles-eyebrow{font-size:11px;font-weight:800;letter-spacing:.09em;color:var(--teal)}
+.arch-principles h2{font:800 clamp(20px,3vw,27px)/1.15 var(--font-display);color:var(--ink);margin:8px 0}
+.arch-principles>p{font-size:14px;color:var(--muted);max-width:70ch;line-height:1.55;margin:0 0 15px}
+.arch-principles-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.arch-principle{min-width:0;padding:15px;display:flex;gap:13px;border:1px solid var(--border);border-radius:11px;background:var(--surface-secondary)}
+.arch-principle-num{font:800 15px var(--font-display);color:var(--teal);flex:0 0 18px}
+.arch-principle p{margin:0;font-size:14px;line-height:1.5;color:var(--ink)}
+@media(max-width:780px){.arch-bi-options{grid-template-columns:1fr}.arch-principles-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.arch-reading-guide{padding:17px}.arch-bi-decisions{padding:14px}.arch-principles{padding:20px 17px}}
