@@ -842,6 +842,7 @@
     "stepQualify": "Må avklares før vi konkluderer",
     "qualifyNotice": "Åpne kriterier – ikke forhold vi vet er oppfylt.",
     "notTitle": "Ikke anta dette",
+    "nextTitle": "Foreslått neste handling",
     "cta": "Åpne hele samtaleguiden",
     "statusPrefix": "Viser samtaleflyt for"
   },
