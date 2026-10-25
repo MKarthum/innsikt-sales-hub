@@ -25,7 +25,8 @@ const legacy=api.combine(base,{schemaVersion:1,classification:'internal',sources
 assert.equal(legacy.internalCollections.customerStories[0].id,entry.id);
 assert.deepEqual(legacy.pages.navigationSections,base.pages.navigationSections);
 assert.equal(legacy.organizationProfile,null);
-assert.equal(legacy.internalNavigation.items.length,0);
+assert.equal(legacy.internalNavigation.items.length,1);
+assert.equal(legacy.internalNavigation.items[0].collection,'customerStories');
 const orgProfile={
  name:'Eksempelbedriften',brandSubtitle:'EKSEMPEL · DATA',
  home:{eyebrow:'EKSEMPEL · ARBEIDSFLATE',titleLine1:'Oppdag behov.',titleLine2:'Finn neste steg.',intro:'Et organisasjonstilpasset eksempel.'},
