@@ -6,6 +6,7 @@ const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
 const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8')).items.length;
 const expectedSlideCount=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.length;
+const expectedSales=JSON.parse(fs.readFileSync('docs/data/sales.json','utf8'));
 const canonicalSlideTitles=new Map(JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.map(x=>[x.id,x.title]));
 const expectedDeckCount=Object.keys(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks).length;
 const pages=['oversikt','om-innsikt','ordliste','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','lysbilder','kilder','utvikling','prompter','horisont','trendradar'];
@@ -33,6 +34,32 @@ try {
    assert.ok(!html.includes('Kunne ikke laste nettsidens data'),label+': feilside '+route);
    assert.ok(!/\$\{[^{}]+\}/.test(html),label+': rå uttrykk '+route);
   }
+  // Møteforberedelse skal bruke samme stabile salgsinnganger som detaljrutene.
+  await page.evaluate(()=>{location.hash='#kompetanse'});
+  await page.locator('[data-competence-audience]').waitFor();
+  assert.equal(await page.locator('[data-competence-audience]').inputValue(),'audience-1',label+': første rolle valgt');
+  assert.equal(await page.locator('[data-competence-audience] option').count(),expectedSales.audiences.length,label+': alle roller');
+  assert.equal(await page.locator('.competence-path-step').count(),4,label+': fire meningsfulle ledd');
+  assert.equal(await page.locator('.competence-role-details .person-card').count(),8,label+': gamle rolleinnganger bevart');
+  assert.equal(await page.locator('.competence-overview .tile').count(),4,label+': eksisterende fagområder bevart');
+  for(const id of ['audience-1','audience-7','audience-4',...expectedSales.audiences.map(x=>x.id).filter(x=>!['audience-1','audience-7','audience-4'].includes(x))]){
+   const audience=expectedSales.audiences.find(x=>x.id===id);
+   const play=expectedSales.plays.find(x=>x.id===audience.entry);
+   assert.ok(play,label+': salgsinngang finnes for '+id);
+   await page.locator('[data-competence-audience]').selectOption(id);
+   assert.equal(await page.locator('[data-competence-play]').getAttribute('data-competence-play'),play.id,label+': korrekt salgsinngang '+id);
+   assert.equal((await page.locator('.competence-path-role').innerText()).trim(),audience.label,label+': rolle '+id);
+   assert.equal((await page.locator('[data-competence-step="signal"] blockquote').innerText()).trim(),play.hook,label+': kanonisk signal '+id);
+   assert.deepEqual((await page.locator('.competence-path-questions li').allTextContents()).map(x=>x.trim()),play.questions.slice(0,2),label+': spørsmål i riktig rekkefølge '+id);
+   assert.deepEqual((await page.locator('.competence-path-tags span').allTextContents()).map(x=>x.trim()),play.competence,label+': fagfelt uten mapping '+id);
+   assert.equal(await page.locator('.competence-path-footer a').getAttribute('href'),'#muligheter/'+play.id,label+': korrekt CTA '+id);
+   assert.equal(await page.locator('[data-competence-status]').innerText(),'Viser samtaleflyt for '+audience.label,label+': høflig statusmelding '+id);
+   assert.equal(await page.evaluate(()=>location.hash),'#kompetanse',label+': rollevalg endrer ikke ruten');
+  }
+  const competenceOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+  assert.ok(competenceOverflow<=3,label+': ingen horisontal avklipping i kompetanseflyten '+competenceOverflow);
+  await page.locator('.competence-role-details summary').click();
+  assert.equal(await page.locator('.competence-role-details a[href^="#muligheter/"]').count(),8,label+': gamle direktelenker tilgjengelige');
   await page.evaluate(()=>{location.hash='#horisont'});
   await page.locator('.horizon-concept-grid .horizon-concept').first().waitFor();
   assert.equal(await page.locator('.horizon-concept-grid .horizon-concept').count(),6,label+': seks begreper med én kanonisk kilde');
@@ -423,5 +450,17 @@ try {
   console.log('PASS – '+label+': '+pages.length+' sider, '+details.length+' detaljer, søk, kopiering/tilbakestilling, Presenter, navigasjon og bredde');
   await context.close();
  }
+ const fixture=await browser.newContext({viewport:{width:390,height:844}});
+ await fixture.route('**/data/sales.json',async route=>{
+  const response=await route.fetch();
+  const sales=await response.json();
+  sales.plays.find(x=>x.id==='rapportering').hook='QA_KANONISK_SIGNAL_FRA_SALES';
+  await route.fulfill({response,body:JSON.stringify(sales)});
+ });
+ const fixturePage=await fixture.newPage();
+ await fixturePage.goto(base+'#kompetanse',{waitUntil:'networkidle'});
+ await fixturePage.locator('[data-competence-step="signal"] blockquote').waitFor();
+ assert.equal((await fixturePage.locator('[data-competence-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Kanonisk endring i sales.json slår ut uten kopi');
+ await fixture.close();
 } catch(error){problems.push(error.stack||String(error));} finally {await browser.close();}
 if(problems.length){console.error(problems.join('\n'));process.exitCode=1;}
