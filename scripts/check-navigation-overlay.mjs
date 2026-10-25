@@ -27,7 +27,8 @@ assert.equal(merged.internalCollections['internal-methods'][0].id,'org-method-00
 assert.ok(merged.pages!==base.pages);
 assert.deepEqual(merged.pages.navigationSections,base.pages.navigationSections);
 assert.equal(merged.pages.navigationSections.length,base.pages.navigationSections.length);
-assert.equal(merged.pages.navigationSections[1].items[0].route,'prompter');
+assert.equal(merged.pages.navigationSections[1].items[0].route,'forretning');
+assert.equal(merged.pages.navigationSections[1].items.at(-1).route,'prompter');
 assert.ok(!JSON.stringify(base).includes('Dette er privat testinnhold.'));
 assert.equal(merged.internalCollections.customerStories[0].body,'Dette er privat testinnhold.');
 assert.equal(merged.slides.items.length,base.slides.items.length);
