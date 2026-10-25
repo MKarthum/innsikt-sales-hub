@@ -1385,6 +1385,40 @@
     "detailCautionTitle": "Hva figuren ikke viser",
     "relatedDiagramsTitle": "Andre anvendelser"
   },
+  "sourceTraceUi": {
+    "eyebrow": "SPORBARHET I PRAKSIS",
+    "title": "Fra påstand til originalkilde",
+    "intro": "Velg en dokumentert markedshendelse eller en faglig vurdering. Se hva kilden faktisk støtter, hva vi tolker, og hvilket spørsmål det kan åpne i en kundesamtale.",
+    "selectLabel": "Velg påstand eller vurdering",
+    "claimLabel": "Påstand eller vurdering",
+    "contextLabel": "Mulig konsekvens",
+    "listenLabel": "Lytt etter",
+    "questionLabel": "Spør kunden",
+    "sourcesLabel": "Originalkilder",
+    "reviewedLabel": "Faglig vurdert",
+    "publishedLabel": "Publisert",
+    "checkedLabel": "Lenke kontrollert",
+    "unknownDate": "ukjent dato",
+    "contextNotice": "Tolkning og kundespørsmål er faglige forslag, ikke dokumenterte kundeeffekter.",
+    "relatedAction": "Se flere markedshendelser og spørsmål",
+    "registerTitle": "Alle kilder",
+    "registerIntro": "Åpne dokumentasjonen direkte. Kontrolldato er ikke det samme som faktaverifisering.",
+    "openSource": "Åpne originalkilde",
+    "lastReview": "Siste gjennomgang av denne arbeidsversjonen:",
+    "methodTitle": "Fire nivåer av innhold",
+    "methodLevels": [
+      "Dokumenterte fakta: opplysning, kilde, publiserings- eller kontrolldato.",
+      "Leverandørbeskrivelser: hva en plattform sier den støtter, ikke bevis på kundeverdi.",
+      "Faglige hypoteser: vår vurdering av mulige salgsinnganger, markert som forslag.",
+      "Kundecaser: tas inn først når vi har dokumentasjon og nødvendig tillatelse."
+    ],
+    "evidenceLabels": {
+      "documented": "Dokumentert hendelse",
+      "assessment": "Faglig vurdering",
+      "vendor": "Leverandørbeskrivelse",
+      "hypothesis": "Hypotese"
+    }
+  },
   "technologyJourneyUi": {
     "eyebrow": "BEHOV FØR PRODUKT",
     "title": "Fra kundebehov til aktuelle teknologiområder",

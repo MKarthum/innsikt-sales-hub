@@ -35,6 +35,26 @@ try {
    assert.ok(!html.includes('Kunne ikke laste nettsidens data'),label+': feilside '+route);
    assert.ok(!/\$\{[^{}]+\}/.test(html),label+': rå uttrykk '+route);
   }
+
+  // Kildespor: dokumentert hendelse og faglig vurdering er tydelig adskilt.
+  const marketFixture=JSON.parse(readTechFixture('docs/data/market.json','utf8'));
+  const sourcesFixture=JSON.parse(readTechFixture('docs/data/sources.json','utf8'));
+  await page.evaluate(()=>{location.hash='#kilder'});
+  await page.locator('[data-source-trace-select]').waitFor();
+  const firstEvent=marketFixture.marketEvents[0],firstSignal=marketFixture.marketSignals[0];
+  assert.equal(await page.locator('[data-source-trace-select] option').count(),marketFixture.marketEvents.length+marketFixture.marketSignals.length,label+': alle sporbare markedsobjekter');
+  assert.equal(await page.locator('[data-source-trace-select]').inputValue(),'event:'+firstEvent.id,label+': dokumentert hendelse først');
+  assert.ok((await page.locator('[data-source-trace-step="claim"]').innerText()).includes(firstEvent.fact),label+': kanonisk faktatekst');
+  assert.ok((await page.locator('[data-source-trace-step="context"]').innerText()).includes(firstEvent.ask),label+': kanonisk kundespørsmål');
+  assert.equal(await page.locator('[data-source-trace-step="sources"] a').count(),firstEvent.sources.length,label+': alle originalkilder');
+  assert.equal(await page.locator('[data-source-trace-step="sources"] a').first().getAttribute('href'),sourcesFixture[firstEvent.sources[0]].url,label+': eksakt originalkilde');
+  await page.locator('[data-source-trace-select]').selectOption('signal:'+firstSignal.id);
+  assert.ok((await page.locator('[data-source-trace-step="claim"]').innerText()).includes(firstSignal.angle),label+': vurdering fra market.json');
+  assert.ok((await page.locator('[data-source-trace-step="context"]').innerText()).includes(firstSignal.listen),label+': lyttepunkt fra market.json');
+  assert.equal((await page.locator('[data-source-trace-step="claim"] .badge').textContent()).trim(),'Faglig vurdering',label+': vurdering ikke fremstilt som dokumentert hendelse');
+  assert.ok(!(await page.locator('[data-source-trace-step="claim"]').innerText()).includes(firstEvent.fact),label+': ingen foreldet faktatekst');
+  assert.equal(await page.locator('[data-source-trace-step="sources"] a').count(),firstSignal.sources.length,label+': kildebytte uten foreldede lenker');
+  assert.equal(await page.evaluate(()=>location.hash),'#kilder',label+': valg endrer ikke hash');
   // Møteforberedelse skal bruke samme stabile salgsinnganger som detaljrutene.
   await page.evaluate(()=>{location.hash='#kompetanse'});
   await page.locator('[data-competence-audience]').waitFor();
@@ -552,5 +572,17 @@ try {
  assert.equal((await fixturePage.locator('[data-tech-journey-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Teknologikart bruker sales.json hook');
  assert.equal((await fixturePage.locator('[data-tech-journey-step="questions"] li').first().innerText()).trim(),'QA_KANONISK_SPORSMAL_FRA_SALES','Teknologikart bruker sales.json questions');
  await fixture.close();
+
+ const sourceFixture=await browser.newContext({viewport:{width:390,height:844}});
+ await sourceFixture.route('**/data/market.json',async route=>{
+  const response=await route.fetch(),market=await response.json();
+  market.marketEvents[0].fact='QA_KANONISK_PASTAND_FRA_MARKET';
+  await route.fulfill({response,body:JSON.stringify(market)});
+ });
+ const sourcePage=await sourceFixture.newPage();
+ await sourcePage.goto(base+'#kilder',{waitUntil:'networkidle'});
+ await sourcePage.locator('[data-source-trace-step="claim"]').waitFor();
+ assert.ok((await sourcePage.locator('[data-source-trace-step="claim"]').innerText()).includes('QA_KANONISK_PASTAND_FRA_MARKET'),'Kildespor følger market.json uten tekstkopi');
+ await sourceFixture.close();
 } catch(error){problems.push(error.stack||String(error));} finally {await browser.close();}
 if(problems.length){console.error(problems.join('\n'));process.exitCode=1;}

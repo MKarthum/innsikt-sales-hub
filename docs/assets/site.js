@@ -52,7 +52,7 @@ const architecture=(id)=>window.InnsiktLearning.architecture(D,learningHelpers()
 const toolkit=(id)=>window.InnsiktLearning.toolkit(D,learningHelpers(),id);
 const prompts=(id)=>id==='variabler'?window.InnsiktPrompts.overview(D,learningHelpers()):id?window.InnsiktPrompts.detail(D,learningHelpers(),id):window.InnsiktPrompts.library(D,learningHelpers(),promptFilter);
 const horizon=()=>window.InnsiktHorizon.render(D,learningHelpers());
-let D, current='oversikt',filter='Alle',playJourneyId='rapportering',techJourneyPlayId='rapportering',techFilter='Alle',aiFilter='Alle',promptFilter='Alle',slide=0;
+let D, current='oversikt',filter='Alle',playJourneyId='rapportering',techJourneyPlayId='rapportering',techFilter='Alle',sourceTraceId=null,aiFilter='Alle',promptFilter='Alle',slide=0;
 let showSlideNumbers=true;try{showSlideNumbers=localStorage.getItem('innsikt-present-numbers-v1')!=='false'}catch{}
 let notes=[];try{const raw=JSON.parse(localStorage.getItem('innsikt-feedback-v1')||'[]');if(Array.isArray(raw))notes=raw.filter(x=>x&&typeof x.text==='string').slice(-100)}catch{}
 let names={};
@@ -305,7 +305,36 @@ function industry(){
  +'<section class="subsection"><div class="note-card"><b>Ikke overtolk oppkjøp</b>'+esc(D.marketUi.acquisitionCaution)+'</div></section>';
 }
 
-function sources(){return `${headerCopy('KILDER OG METODE')}<section class="panel" style="margin-bottom:20px"><h3>Fire nivåer av innhold</h3>${list(['Dokumenterte fakta: opplysning, kilde, publiserings- eller kontrolldato.','Leverandørbeskrivelser: hva en plattform sier den støtter, ikke bevis på kundeverdi.','Faglige hypoteser: vår vurdering av mulige salgsinnganger, markert som forslag.','Kundecaser: tas inn først når vi har dokumentasjon og nødvendig tillatelse.'])}</section><div class="grid-equal">${Object.entries(D.sources).map(([id,s])=>`<article class="source-card"><span class="source-icon">${ico('book-open')}</span><div><h3>${esc(s.title)}</h3><p>${esc(s.publisher)} · ${(s.published?'Publisert '+esc(s.published)+' · ':'')+'Kontrollert '+esc(s.checked||'ukjent')} · ${esc(s.type)}</p><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">Åpne originalkilde ${ico('external')}</a></div></article>`).join('')}</div><section class="subsection"><div class="hint">Siste gjennomgang av denne arbeidsversjonen: ${esc(D.meta.reviewed)}. ${esc(D.pages.copy.sourcesDateNote)}</div></section>`}
+function sourceTraceItems(){
+ return [
+  ...D.marketEvents.map(x=>({id:'event:'+x.id,title:x.title,statement:x.fact,context:x.why,contextLabel:D.pages.sourceTraceUi.contextLabel,question:x.ask,sources:x.sources,evidence:x.evidence,reviewed:x.reviewed})),
+  ...D.marketSignals.map(x=>({id:'signal:'+x.id,title:x.title,statement:x.angle,context:x.listen,contextLabel:D.pages.sourceTraceUi.listenLabel,question:x.ask,sources:x.sources,evidence:x.evidence,reviewed:x.reviewed}))
+ ];
+}
+function sourceTraceBody(item){
+ const ui=D.pages.sourceTraceUi;
+ const refs=(item.sources||[]).map(id=>({id,...D.sources[id]})).filter(x=>x.url);
+ return '<div class="source-trace-flow">'
+ +'<article class="source-trace-step" data-source-trace-step="claim"><div class="source-trace-step-head"><span class="source-trace-number">1</span><span>'+esc(ui.claimLabel)+'</span></div><span class="badge grey">'+esc(ui.evidenceLabels[item.evidence]||item.evidence)+'</span><h3>'+esc(item.title)+'</h3><p>'+esc(item.statement)+'</p><small>'+esc(ui.reviewedLabel)+' '+esc(item.reviewed)+'</small></article>'
+ +'<article class="source-trace-step" data-source-trace-step="context"><div class="source-trace-step-head"><span class="source-trace-number">2</span><span>'+esc(item.contextLabel)+'</span></div><p>'+esc(item.context)+'</p><strong>'+esc(ui.questionLabel)+'</strong><p class="source-trace-question">'+esc(item.question)+'</p><small>'+esc(ui.contextNotice)+'</small></article>'
+ +'<article class="source-trace-step" data-source-trace-step="sources"><div class="source-trace-step-head"><span class="source-trace-number">3</span><span>'+esc(ui.sourcesLabel)+'</span></div><ul class="source-trace-links">'+refs.map(s=>'<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(s.title)+' '+ico('external')+'</a><small>'+esc(s.publisher)+' · '+(s.published?esc(ui.publishedLabel)+' '+esc(s.published)+' · ':'')+esc(ui.checkedLabel)+' '+esc(s.checked||ui.unknownDate)+'</small></li>').join('')+'</ul></article>'
+ +'</div>';
+}
+function sourceTrace(){
+ const ui=D.pages.sourceTraceUi,items=sourceTraceItems();
+ if(!items.length)return '';
+ const selected=items.find(x=>x.id===sourceTraceId)||items[0];sourceTraceId=selected.id;
+ return '<section class="source-trace-section" aria-labelledby="source-trace-title"><div class="source-trace-heading"><span class="eyebrow">'+esc(ui.eyebrow)+'</span><h2 id="source-trace-title">'+esc(ui.title)+'</h2><p>'+esc(ui.intro)+'</p></div>'
+ +'<div class="source-trace-select-wrap"><label for="source-trace-select">'+esc(ui.selectLabel)+'</label><select id="source-trace-select" class="input" data-source-trace-select>'+items.map(x=>'<option value="'+esc(x.id)+'"'+(x.id===selected.id?' selected':'')+'>'+esc(x.title)+'</option>').join('')+'</select></div>'
+ +'<div data-source-trace-body aria-live="polite">'+sourceTraceBody(selected)+'</div><a class="text-link source-trace-related" href="#bransje">'+esc(ui.relatedAction)+' '+ico('arrow-right')+'</a></section>';
+}
+function sources(){
+ const ui=D.pages.sourceTraceUi;
+ return headerCopy('KILDER OG METODE')+sourceTrace()
+ +'<section class="panel source-method"><h3>'+esc(ui.methodTitle)+'</h3>'+list(ui.methodLevels)+'</section>'
+ +'<section class="subsection"><div class="section-heading"><div><h2>'+esc(ui.registerTitle)+'</h2><p>'+esc(ui.registerIntro)+'</p></div></div><div class="grid-equal">'+Object.entries(D.sources).map(([id,s])=>'<article class="source-card"><span class="source-icon">'+ico('book-open')+'</span><div><h3>'+esc(s.title)+'</h3><p>'+esc(s.publisher)+' · '+(s.published?esc(ui.publishedLabel)+' '+esc(s.published)+' · ':'')+esc(ui.checkedLabel)+' '+esc(s.checked||ui.unknownDate)+' · '+esc(s.type)+'</p><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(ui.openSource)+' '+ico('external')+'</a></div></article>').join('')+'</div></section>'
+ +'<section class="subsection"><div class="hint">'+esc(ui.lastReview)+' '+esc(D.meta.reviewed)+'. '+esc(D.pages.copy.sourcesDateNote)+'</div></section>';
+}
 function trendradar(){
  const ui=D.pages.trendRadarUi;
  const cards=D.emergingSignals.map(x=>
@@ -881,6 +910,12 @@ if(preview){e.preventDefault();openLibrarySlideFullscreen(preview.dataset.slideP
 if(e.target.closest('#present-fullscreen-toggle')){togglePresenterFullscreen();return}if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const kindBtn=e.target.closest('[data-tech-journey-kind]');if(kindBtn){techFilter=kindBtn.dataset.techJourneyKind;refreshTechnologyCatalog();document.querySelectorAll('[data-tech-journey-kind]').forEach(btn=>{if(btn.dataset.techJourneyKind===techFilter)btn.focus()});return}if(e.target.closest('[data-tech-journey-reset]')){techFilter='Alle';refreshTechnologyCatalog();document.querySelector('[data-tech-journey-reset]')?.focus();return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;refreshTechnologyCatalog();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}const scopeBtn=e.target.closest('[data-slide-scope]');if(scopeBtn){libraryFilters.scope=scopeBtn.dataset.slideScope;updateSlideLibrary();return}if(e.target.closest('[data-slide-reset]')){libraryFilters={query:'',topic:'all',story:'all',scope:'all'};render();return}
 const openSlide=e.target.closest('[data-slide-open]');
 if(openSlide){const deckId=openSlide.dataset.deckOpen,deck=D.pages.presentationDecks[deckId];const index=deck?.slides.findIndex(x=>x.slideId===openSlide.dataset.slideOpen)??-1;if(index>=0)presentation(deckId,index);return}if(e.target.closest('#slide-next')){slide=Math.min(slide+1,presentationSlides().length-1);showSlide();return}if(e.target.closest('#slide-prev')){slide=Math.max(slide-1,0);showSlide();return}const share=e.target.closest('[data-dialogue-copy]');if(share){const target=location.origin+location.pathname+'#kundedialog/kunde-'+share.dataset.dialogueCopy;const ui=D.pages.dialogueUi.seller;if(navigator.clipboard?.writeText)navigator.clipboard.writeText(target).then(()=>toast(ui.shareSuccess)).catch(()=>toast(ui.shareFailure));else toast(ui.shareFailure);return}if(e.target.closest('[data-search-select]')){closeModal();return}if(e.target.closest('[data-dismiss]')&&(e.target.matches('.overlay')||e.target.closest('.modal-close'))){closeModal();return}if(e.target.closest('#menu-toggle')){const open=!document.getElementById('sidebar').classList.contains('open');setMobileMenuOpen(open);return}});document.addEventListener('change',e=>{
+const traceSelect=e.target.closest('[data-source-trace-select]');
+if(traceSelect){
+ const item=sourceTraceItems().find(x=>x.id===traceSelect.value);
+ if(item){sourceTraceId=item.id;const body=document.querySelector('[data-source-trace-body]');if(body)body.innerHTML=sourceTraceBody(item);}
+ return;
+}
 const techSelect=e.target.closest('[data-tech-journey-select]');
 if(techSelect){const path=D.pages.technologyJourneyUi.paths.find(x=>x.playId===techSelect.value),play=D.plays.find(x=>x.id===techSelect.value);if(path&&play){techJourneyPlayId=play.id;techFilter='Alle';refreshTechnologyCatalog();const status=document.querySelector('[data-tech-journey-status]');if(status)status.textContent=D.pages.technologyJourneyUi.statusPrefix+' '+play.name;}return;}
 const playSelect=e.target.closest('[data-play-journey-select]');
