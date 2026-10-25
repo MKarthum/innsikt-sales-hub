@@ -12,6 +12,26 @@ const owners={
  'value-overview':d=>d.valueOverview?[d.valueOverview]:[],
  notice:d=>d.pages.sharedNotices||[]
 };
+function expandArchitectureProfiles(profiles){
+ const byId=new Map(profiles.map(p=>[p.id,p])), cache=new Map(), active=new Set();
+ if(byId.size!==profiles.length)throw Error('Duplisert arkitekturprofil-ID');
+ function expand(id){
+  if(cache.has(id))return cache.get(id);
+  const p=byId.get(id);if(!p)throw Error('Ukjent basisprofil: '+id);
+  if(active.has(id))throw Error('Sirkel i arkitekturprofiler: '+id);
+  active.add(id);
+  let value=p;
+  if(p.baseProfileId){
+   const base=expand(p.baseProfileId);
+   value={...base,...p,
+    sources:p.sources||base.sources,consumers:p.consumers||base.consumers,support:p.support||base.support,
+    ingest:{...base.ingest,...p.ingest},platform:{...base.platform,...p.platform},serve:{...base.serve,...p.serve}
+   };
+  }
+  active.delete(id);cache.set(id,value);return value;
+ }
+ return profiles.map(p=>expand(p.id));
+}
 function materialize(data){
  const registry=new Map();
  for(const [owner,get] of Object.entries(owners)){
@@ -51,7 +71,9 @@ function materialize(data){
   }
   return result;
  }
- return resolve(data);
+ const output=resolve(data);
+ if(output.architectureProfiles?.profiles)output.architectureProfiles.profiles=expandArchitectureProfiles(output.architectureProfiles.profiles);
+ return output;
 }
-window.InnsiktContent={materialize};
+window.InnsiktContent={materialize,expandArchitectureProfiles};
 })();

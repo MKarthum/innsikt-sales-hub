@@ -96,7 +96,7 @@
     "ARKITEKTUR": {
       "eyebrow": "ARKITEKTUR I PRAKSIS",
       "title": "Slik henger data, analyse og KI sammen",
-      "intro": "Se hvordan data går fra kildesystemer til rapporter, apper og KI. Utforsk sammenhengen og sammenlign plattformer – dette er eksempler, ikke en fasit."
+      "intro": "Én felles referansemodell med teknisk fordypning, to forskjellige anvendelseseksempler og tre konkrete plattformvarianter. Modellene er pedagogiske, ikke en anbefalt løsningsarkitektur."
     },
     "VERKTØYKASSE": {
       "eyebrow": "GJENBRUKBARE UTGANGSPUNKTER",
@@ -687,22 +687,18 @@
     "dataarkitektur": {
       "label": "Dataarkitektur · faglig fordypning",
       "audience": "Konsulenter og teknisk interesserte selgere; krever at møtet etterspør arkitektur.",
-      "intro": "Valgfri faglig fordypning: prinsipper og tre ulike leverandørarkitekturer. Ikke en generell salgsfortelling.",
+      "intro": "Én teknologinøytral grunnmodell, deretter tre illustrative plattformoppbygginger. Teknisk fordypning og anvendelser finnes separat.",
       "narrative": {
         "mode": "reference-architecture",
         "use": "Forklar dataflyt og hva lagene løser – ikke en produktkonkurranse.",
         "centralQuestion": "Hvordan kan vi organisere data fra kilder til rapportering og KI?",
         "turn": "En generisk arkitektur har mange av de samme ansvarene på tvers av plattformer.",
         "resolution": "Verktøyvalg gjøres ut fra kundens behov, kompetanse og eksisterende miljø.",
-        "story": "Denne presentasjonen begynner med en teknologinøytral modell for å forklare hvorfor data må hentes, modelleres, gjøres forståelige og brukes på en kontrollert måte. Arkitekturen viser vanlige kapabiliteter, ikke nødvendigvis separate systemer. Deretter ser vi et mer konkret referansemønster som introduserer batch, strømmer, semantikk, rapportering og KI. Vi utforsker hvordan KI bygger på data og kontekst og også kan bidra til forbedring. Så sammenligner vi tre representative oppsett med Snowflake, Microsoft Fabric og Databricks. Leverandørene kan dekke mange av de samme behovene, og eksemplene er ikke uttømmende eller én korrekt måte å bygge løsning på. Det sentrale er å forstå hvilke krav virksomheten har, hvilke data og kompetanser som finnes, og hvilken verdi som skal skapes.",
+        "story": "Begynn med én teknologinøytral dataplattformmodell: kilder, innhenting, datagrunnlag, tilgjengeliggjøring og bruk, med sikkerhet, kvalitet og drift på tvers. Hver del representerer et ansvar, ikke nødvendigvis et eget produkt. Gå deretter direkte til de tre ulike leverandøreksemplene Snowflake, Microsoft Fabric og Databricks. Sammenlign hvordan løsningene dekker de samme behovene med forskjellig intern organisering, men unngå å kåre en generell vinner. Ved spørsmål om ELT, CDC, strømmer, lakehouse, semantikk eller KI, bruk teknisk fordypning eller de separate anvendelsesskissene på arkitektursiden. Valg må forankres i virksomhetens behov, eksisterende miljø og kompetanse.",
         "beats": [
           {
             "id": "foundations",
             "function": "Et felles språk om dataplattformer."
-          },
-          {
-            "id": "uses",
-            "function": "Skille forretningsbehov, styring og teknologi."
           },
           {
             "id": "examples",
@@ -714,7 +710,6 @@
         "defaultTone": "light",
         "beats": {
           "foundations": "strong",
-          "uses": "light",
           "examples": "light"
         }
       },
@@ -723,19 +718,7 @@
           "slideId": "architecture-conceptual",
           "beat": "foundations",
           "delivery": "tell",
-          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til Typisk moderne dataarkitektur."
-        },
-        {
-          "slideId": "architecture-modern",
-          "beat": "foundations",
-          "delivery": "tell",
-          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til KI på et styrt datagrunnlag."
-        },
-        {
-          "slideId": "architecture-ai",
-          "beat": "uses",
-          "delivery": "tell",
-          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til Snowflake + dbt: en mulig datastack."
+          "note": "Dette er én felles konseptuell dataplattformmodell, ikke fem obligatoriske produkter. Forklar hvilke oppgaver kilder, inntak, datagrunnlag og tilgjengeliggjøring løser, og hvordan rapportering, apper og KI anvender dataene. Sikkerhet, kvalitet og drift går på tvers. De tekniske detaljene utdypes på arkitektursiden, ikke i enda en nesten lik arkitekturslide. Overgang: La oss se tre forskjellige plattformeksempler."
         },
         {
           "slideId": "architecture-snowflake",
@@ -1318,24 +1301,35 @@
   ],
   "architectureExplorerUi": {
     "eyebrow": "UTFORSK DATAFLYTEN",
-    "title": "Velg perspektiv på dataflyten",
-    "intro": "Start med helheten eller utforsk hvordan ulike plattformer løser lignende oppgaver.",
-    "genericGroup": "Grunnmodeller",
-    "vendorGroup": "Plattformeksempler",
+    "title": "Følg dataene fra kilde til bruk",
+    "intro": "Én felles referansemodell viser oppgavene. Åpne teknisk fordypning for detaljer – eller utforsk hvordan ulike plattformer løser dem.",
+    "genericGroup": "Felles modell",
+    "vendorGroup": "Konkrete plattformeksempler",
     "sources": "Datakilder",
     "uses": "Bruk og resultat",
     "crosscutting": "På tvers av hele løsningen",
     "vendorNotice": "Illustrativ arkitektur · ingen leverandørgodkjenning implisert.",
     "openSlide": "Åpne som lysbilde",
     "sourcesLabel": "Kilder og dokumentasjon",
-    "moreDiagrams": "Se fire enkle dataveier steg for steg",
+    "moreDiagrams": "Andre anvendelser og KI i datateamet",
     "optionLabels": {
-      "conceptual": "Helheten",
-      "modern": "Moderne dataflyt",
-      "ai-on-data": "Analyse og KI",
+      "conceptual": "Felles referansemodell",
       "snowflake": "Snowflake",
       "fabric": "Fabric",
       "databricks": "Databricks"
-    }
+    },
+    "baseProfileId": "conceptual",
+    "technicalProfileId": "modern",
+    "technicalTitle": "Vis teknisk fordypning av samme modell",
+    "technicalIntro": "Her utdypes innhenting, datagrunnlag og tilgjengeliggjøring med typiske teknikker. Kildene, bruken og de tverrgående kravene er de samme.",
+    "technicalSlideLink": "Åpne teknisk fordypning som lysbilde",
+    "applicationsTitle": "Samme behov for pålitelig informasjon – forskjellige bruksmønstre",
+    "applicationsIntro": "Rapportering på strukturerte data og KI-svar fra dokumenter krever ulike prosesser. Se to eksempler med hvert sitt formål og sine egne forbehold.",
+    "applicationDiagramIds": [
+      "bi",
+      "rag"
+    ],
+    "otherDiagramsTitle": "Flere måter data og KI skaper verdi på",
+    "otherDiagramsIntro": "De øvrige skissene viser verdi for organisasjonen og KI som støtte i utviklingsarbeidet."
   }
 }

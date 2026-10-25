@@ -82,27 +82,9 @@
     {
       "id": "modern",
       "kind": "conceptual",
-      "eyebrow": "REFERANSEMØNSTER",
-      "label": "Moderne dataflyt støtter batch, strømmer og KI",
-      "intro": "Eksempel på en typisk flyt. Omfang og verktøy varierer med behovet.",
-      "sources": [
-        {
-          "label": "ERP / økonomi",
-          "assetId": "source-erp"
-        },
-        {
-          "label": "Databaser / CRM",
-          "assetId": "tabler-database"
-        },
-        {
-          "label": "Filer / API",
-          "assetId": "source-files"
-        },
-        {
-          "label": "Hendelser / IoT",
-          "assetId": "source-stream"
-        }
-      ],
+      "eyebrow": "TEKNISK FORDYPNING · SAMME DATAFLYT",
+      "label": "Teknisk fordypning i den felles dataplattformmodellen",
+      "intro": "Dette utdyper de samme arkitekturansvarene med eksempler på teknikker og mønstre, ikke en alternativ plattformarkitektur.",
       "ingest": {
         "title": "Integrasjon",
         "items": [
@@ -112,7 +94,6 @@
       },
       "platform": {
         "title": "Lakehouse / Warehouse",
-        "assetId": "core-storage",
         "top": "Rådata → kvalitet → kuratert",
         "bottom": "SQL · Python · modeller"
       },
@@ -123,64 +104,15 @@
           "Data-API / deling"
         ]
       },
-      "consumers": [
-        {
-          "label": "Rapportering",
-          "assetId": "consume-report"
-        },
-        {
-          "label": "Apper / tjenester",
-          "assetId": "consume-app"
-        },
-        {
-          "label": "KI / agenter",
-          "assetId": "consume-ai"
-        }
-      ],
-      "support": [
-        {
-          "label": "Tilgang & sikkerhet",
-          "assetId": "support-security"
-        },
-        {
-          "label": "Katalog & kvalitet",
-          "assetId": "support-catalog"
-        },
-        {
-          "label": "Orkestrering",
-          "assetId": "support-jobs"
-        },
-        {
-          "label": "Observability & drift",
-          "assetId": "support-observe"
-        }
-      ],
-      "footer": "Åpne grensesnitt og styring går på tvers av hele løsningen."
+      "footer": "Teknikker og verktøy velges etter behov; lagene er ikke separate produktkrav.",
+      "baseProfileId": "conceptual"
     },
     {
       "id": "ai-on-data",
       "kind": "conceptual",
-      "eyebrow": "DATA + KI",
-      "label": "KI og BI trenger forståelige og tilgjengelige data",
-      "intro": "Rapportering og KI kan bygge på det samme styrte datagrunnlaget.",
-      "sources": [
-        {
-          "label": "ERP / økonomi",
-          "assetId": "source-erp"
-        },
-        {
-          "label": "Databaser / CRM",
-          "assetId": "tabler-database"
-        },
-        {
-          "label": "Filer / API",
-          "assetId": "source-files"
-        },
-        {
-          "label": "Hendelser / IoT",
-          "assetId": "source-stream"
-        }
-      ],
+      "eyebrow": "ANVENDELSE · DATA OG KI",
+      "label": "Data og virksomhetskontekst støtter analyse og KI",
+      "intro": "Et perspektiv på anvendelse og kontroll – ikke en alternativ dataplattformarkitektur.",
       "ingest": {
         "title": "Tilgjengeliggjør",
         "items": [
@@ -190,7 +122,6 @@
       },
       "platform": {
         "title": "Kontekstlag",
-        "assetId": "core-storage",
         "top": "Data + begreper + kvalitet",
         "bottom": "Dokumentasjon · metadata"
       },
@@ -201,39 +132,8 @@
           "SQL / verktøy / test"
         ]
       },
-      "consumers": [
-        {
-          "label": "Rapportering",
-          "assetId": "consume-report"
-        },
-        {
-          "label": "Apper / tjenester",
-          "assetId": "consume-app"
-        },
-        {
-          "label": "KI / agenter",
-          "assetId": "consume-ai"
-        }
-      ],
-      "support": [
-        {
-          "label": "Tilgang & sikkerhet",
-          "assetId": "support-security"
-        },
-        {
-          "label": "Katalog & kvalitet",
-          "assetId": "support-catalog"
-        },
-        {
-          "label": "Orkestrering",
-          "assetId": "support-jobs"
-        },
-        {
-          "label": "Observability & drift",
-          "assetId": "support-observe"
-        }
-      ],
-      "footer": "KI kan også hjelpe med å forbedre datagrunnlaget."
+      "footer": "Dette er et anvendelsesperspektiv. Dokumentbasert KI kan følge en annen flyt enn strukturerte data.",
+      "baseProfileId": "conceptual"
     },
     {
       "id": "snowflake",
