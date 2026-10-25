@@ -1316,7 +1316,6 @@
     "eyebrow": "FØRST: OPPGAVENE",
     "title": "Hva må dataarkitekturen få til?",
     "intro": "Kilder må bli til pålitelig informasjon som kan brukes. Fellesmodellen viser ansvarene – ikke fem produkter du må kjøpe.",
-    "genericGroup": "Felles modell",
     "vendorGroup": "Velg plattformeksempel",
     "sources": "Datakilder",
     "uses": "Bruk og resultat",
@@ -1324,9 +1323,7 @@
     "vendorNotice": "Illustrativ arkitektur · ingen leverandørgodkjenning implisert.",
     "openSlide": "Åpne som lysbilde",
     "sourcesLabel": "Kilder og dokumentasjon",
-    "moreDiagrams": "Andre anvendelser og KI i datateamet",
     "optionLabels": {
-      "conceptual": "Felles referansemodell",
       "snowflake": "Snowflake",
       "fabric": "Fabric",
       "databricks": "Databricks"
@@ -1342,8 +1339,6 @@
       "bi",
       "rag"
     ],
-    "otherDiagramsTitle": "Flere måter data og KI skaper verdi på",
-    "otherDiagramsIntro": "De øvrige skissene viser verdi for organisasjonen og KI som støtte i utviklingsarbeidet.",
     "panGuide": "Trykk på figuren for å utforske den i stort format. Flytt deg sideveis mellom områdene.",
     "panNavLabel": "Navigering i arkitekturen",
     "panRegionLabel": "Sideveis utforskbar arkitektur",
@@ -1385,7 +1380,12 @@
     ],
     "riskDetailTitle": "Hva kan gå galt når data og KI tas i bruk?",
     "riskDetailIntro": "Dette er typiske risikoer å vurdere i en konkret løsning, ikke fem ekstra steg i arkitekturen.",
-    "riskDetailActionLabel": "Mulig kontroll"
+    "riskDetailActionLabel": "Mulig kontroll",
+    "backToArchitecture": "Tilbake til arkitekturen",
+    "detailQuestionsTitle": "Spørsmål i en kundesamtale",
+    "detailTemplateLink": "Se kartleggingsmal",
+    "detailCautionTitle": "Hva figuren ikke viser",
+    "relatedDiagramsTitle": "Andre anvendelser"
   },
   "technologyJourneyUi": {
     "eyebrow": "BEHOV FØR PRODUKT",
