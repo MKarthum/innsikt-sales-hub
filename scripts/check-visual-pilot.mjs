@@ -1,6 +1,9 @@
 /* Representative visual regression checks drawn from the curated main story; full library is tested separately. */
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {execFileSync,spawn} from 'node:child_process';
 import {chromium} from 'playwright';
 const output='artifacts/visual-pilot';
 const library=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items;
@@ -90,17 +93,45 @@ try{
   await shot.screenshot({path:output+'/competence-'+width+'-cio.png',fullPage:true});
   await shot.close();
  }
- // Pinned before/after evidence for the #muligheter workflow (same viewports in both commits).
- for(const width of [320,390,900,1512]){
-  const height=width===320?700:width===390?844:width===900?900:980;
-  const shot=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
-  await shot.goto((process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'#muligheter',{waitUntil:'networkidle'});
-  await shot.locator('.play-grid .play-card').first().waitFor();
-  await shot.waitForTimeout(200);
-  assert.ok((await shot.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,'Ingen horisontal overflyt i salgsinnganger '+width);
-  await shot.screenshot({path:output+'/plays-'+width+'-default.png',fullPage:false});
-  await shot.screenshot({path:output+'/plays-'+width+'-full.png',fullPage:true});
-  await shot.close();
+ // Compare the actual 0.18.9 main commit with this PR, not a changing live deployment.
+ const baselineSha='8524f29cce8495f5b20a656284ae29ca5ce99067';
+ const baselineDir=fs.mkdtempSync(path.join(os.tmpdir(),'innsikt-plays-before-'));
+ const archive=path.join(baselineDir,'site.tar');
+ let baselineServer;
+ try{
+  execFileSync('git',['fetch','--depth=1','origin',baselineSha],{stdio:'ignore'});
+  const archiveFd=fs.openSync(archive,'w');
+  try{execFileSync('git',['archive','--format=tar',baselineSha,'docs'],{stdio:['ignore',archiveFd,'pipe']});}
+  finally{fs.closeSync(archiveFd);}
+  execFileSync('tar',['-xf',archive,'-C',baselineDir]);
+  baselineServer=spawn('python3',['-m','http.server','8771','--bind','127.0.0.1','--directory',baselineDir],{stdio:'ignore'});
+  await new Promise(resolve=>setTimeout(resolve,450));
+  for(const width of [320,390,900,1512]){
+   const height=width===320?700:width===390?844:width===900?900:980;
+   for(const [state,url] of [['before','http://127.0.0.1:8771/docs/#muligheter'],['after',(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'#muligheter']]){
+    const shot=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
+    await shot.goto(url,{waitUntil:'networkidle'});
+    await shot.locator('.play-grid .play-card').first().waitFor();
+    await shot.waitForTimeout(200);
+    const overflow=await shot.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+    if(overflow>3){
+     const offenders=await shot.evaluate(()=>[...document.querySelectorAll('body *')].filter(el=>el.getBoundingClientRect().right>innerWidth+3).slice(0,8).map(el=>({tag:el.tagName,cls:el.className?.baseVal||el.className,right:Math.round(el.getBoundingClientRect().right)})));
+     console.log('OVERFLOW '+state+' '+width+' '+overflow+' '+JSON.stringify(offenders));
+    }
+    await shot.screenshot({path:output+'/plays-'+width+'-'+state+'-viewport.png',fullPage:false});
+    await shot.screenshot({path:output+'/plays-'+width+'-'+state+'-full.png',fullPage:true});
+    if(state==='after'){
+     assert.ok(overflow<=3,'Ingen horisontal overflyt i salgsinnganger '+width+': '+overflow);
+     await shot.locator('[data-play-journey-select]').selectOption('ki-data');
+     assert.equal(await shot.locator('[data-play-journey-id]').getAttribute('data-play-journey-id'),'ki-data','KI-signal ved '+width);
+     await shot.screenshot({path:output+'/plays-'+width+'-ki-data.png',fullPage:false});
+    }
+    await shot.close();
+   }
+  }
+ }finally{
+  baselineServer?.kill();
+  fs.rmSync(baselineDir,{recursive:true,force:true});
  }
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
  console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
