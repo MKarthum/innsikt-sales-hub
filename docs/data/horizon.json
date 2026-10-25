@@ -1,6 +1,6 @@
 {
   "meta": {
-    "reviewed": "2026-10-21",
+    "reviewed": "2026-10-25",
     "edition": "0.1.0",
     "editorialScope": "Spekulasjon er merket som hypotese. Alt i JSON er offentlig tilgjengelig selv om det ikke vises i grensesnittet."
   },
@@ -16,15 +16,17 @@
     "open-question": "Åpent spørsmål"
   },
   "comparison": {
-    "title": "Dataplattform eller kunnskapsgraf?",
-    "intro": "De løser ulike oppgaver og kan utfylle hverandre. Begrepsforklaringene nedenfor hentes fra den samme ordboken som brukes i «Start her».",
+    "title": "Seks begreper – ikke seks konkurrerende løsninger",
+    "intro": "Fra datagrunnlag og forretningsbegreper til relasjoner og en mulig helhetlig KI-ambisjon. Begrepene forklares fra den kanoniske ordlisten.",
     "conceptIds": [
       "dataplattform",
-      "kunnskapsgraf",
       "semantisk-modell",
-      "ontologi"
+      "ontologi",
+      "kunnskapsgraf",
+      "virksomhetskontekst",
+      "company-brain"
     ],
-    "outcome": "Dataplattformen kan levere kontrollerte data; semantiske modeller kan definere måltall; kunnskapsgrafer og andre tjenester kan beskrive relasjoner. Skal KI utføre handlinger, må også fullmakter, regler og sporbarhet ivaretas. Dette krever ikke nødvendigvis én ny felles plattform.",
+    "outcome": "En dataplattform og semantiske modeller kan gi autoritative tall. En ontologi og eventuelt en kunnskapsgraf kan gi struktur og relasjoner. Søk, RAG og KI-agenter kan bruke denne konteksten, men handlinger krever fullmakter og kontroll. «Company Brain» er et mulig målbilde på tvers av delene, ikke et ekstra lag alle må anskaffe.",
     "diagramId": "ai-on-data",
     "sourceIds": [
       "fabricIQ",
@@ -84,26 +86,35 @@
     },
     {
       "id": "company-brain",
-      "title": "«Company Brain» – en ambisjon, ikke én standard",
+      "title": "«Company Brain» er mer enn en kunnskapsgraf",
       "evidence": "vendor",
-      "status": "Flere tekniske tilnærminger",
-      "summary": "Glean dokumenterer en kunnskapsgraf bygget fra innhold, personer og aktivitet i tilkoblede arbeidsverktøy. Snowflake beskriver KI-agenter som kombinerer SQL mot strukturerte data med søk i dokumenter.",
-      "interpretation": "Begge kan bidra til mer nyttig KI på virksomhetskontekst, men utgangspunkt, datamodell og bruksområder er forskjellige. En KI-løsning trenger ikke alltid en egen graf, og heller ikke alltid et datavarehus.",
-      "customerQuestion": "Trenger brukerne sikre tall og KPI-er, å finne dokumenter og personer, eller en kombinasjon?",
+      "status": "Uformelt målbilde · ulike tilnærminger, ingen felles standard",
+      "summary": "Glean kobler innhold, personer og aktivitet i en kunnskapsgraf, og bruker en bredere Enterprise Graph som kontekst for søk, assistenter og agenter. Det er ett eksempel på virksomhets-KI, ikke definisjonen av «Company Brain». Microsoft IQ skiller mellom arbeidskontekst, forretningsdata og dokumentkunnskap. Snowflake kombinerer analyser og dokumentsøk i agenter; Palantirs ontologi beskriver objekter, beslutningslogikk og handlinger.",
+      "interpretation": "«Company Brain» brukes som en bred visjon om at KI skal forstå og utnytte virksomhetens kontekst. En kunnskapsgraf kan synliggjøre relasjoner, mens søk/RAG, semantiske modeller, styrte datatjenester og verktøytilgang løser andre deler av behovet. Ingen av delene er alene en komplett løsning, og ingen bestemt komponent er nødvendig i alle tilfeller. Undersøk datakvalitet, autoritative kilder, rettigheter, oppdatering, ansvar og kontroll før valg av arkitektur. Leverandøreksemplene dokumenterer produktretninger, ikke at begrepet er en standard eller at gevinst er realisert.",
+      "customerQuestion": "Hva må KI faktisk kunne: finne dokumentasjon og kompetanse, tolke godkjente tall, følge relasjoner eller utføre handlinger – og hvilke datakilder, regler og tilganger kan allerede gjenbrukes?",
       "sourceIds": [
         "gleanGraph",
-        "gleanConnectors",
-        "agent-foundation"
+        "gleanEnterpriseGraph",
+        "microsoftIQ",
+        "agent-foundation",
+        "palantirOntology",
+        "gartner-context"
       ],
       "conceptIds": [
         "company-brain",
         "kunnskapsgraf",
+        "virksomhetskontekst",
+        "semantisk-modell",
         "rag"
       ],
       "relatedLinks": [
         {
           "label": "Se dokumentbasert KI",
           "route": "arkitektur/rag"
+        },
+        {
+          "label": "Se KI på et styrt datagrunnlag",
+          "route": "arkitektur/ai-on-data"
         }
       ]
     },

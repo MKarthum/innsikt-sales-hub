@@ -28,7 +28,7 @@ Fordi dette fortsatt er et gradvis normalisert prosjekt, brukes eksisterende dom
 
 Bruk `evidence` for `documented` (dokumentert fakta), `vendor` (leverandørens beskrivelser/veikart), `assessment` eller `hypothesis` (egen vurdering/hypotese), og `open-question` (ikke avklart). Knytt tidsfølsomt innhold til `reviewed`, og fakta/leverandørinformasjon til faktisk kildereferanse. `sources.json.checked` er siste kontroll av kildelenken, mens `sources.json.published` er kildens publiseringsdato; ingen av dem erstatter innholdets `reviewed` eller produktets `status`/preview-angivelse.
 
-En leverandørkilde dokumenterer hva leverandøren beskriver, ikke kundens realiserte gevinst. Beskriv «Company Brain» som uformell markedsterminologi, ikke standardarkitektur. Konvergens mellom dataplattform og kunnskapsgraf er en mulighet, ikke et bevist utfall.
+En leverandørkilde dokumenterer hva leverandøren beskriver, ikke kundens realiserte gevinst. Beskriv «Company Brain» som uformell markedsterminologi, ikke standardarkitektur. Konvergens mellom dataplattform og kunnskapsgraf er en mulighet, ikke et bevist utfall. Kunnskapsgraf (for eksempel Gleans Knowledge Graph/Enterprise Graph) er en mulig byggestein, ikke synonymt med begrepet. Skill dokumentbasert virksomhetssøk, semantiske data og operative handlinger; se COMPANY_BRAIN_RESEARCH_2026-10-25.md for kildevurdering.
 
 ## Automatisk verifikasjon og begrensninger
 

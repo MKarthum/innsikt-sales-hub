@@ -33,6 +33,16 @@ try {
    assert.ok(!html.includes('Kunne ikke laste nettsidens data'),label+': feilside '+route);
    assert.ok(!/\$\{[^{}]+\}/.test(html),label+': rå uttrykk '+route);
   }
+  await page.evaluate(()=>{location.hash='#horisont'});
+  await page.locator('.horizon-concept-grid .horizon-concept').first().waitFor();
+  assert.equal(await page.locator('.horizon-concept-grid .horizon-concept').count(),6,label+': seks begreper med én kanonisk kilde');
+  const brainChapter=page.locator('.horizon-chapter').filter({has:page.locator('h3',{hasText:'«Company Brain»'})});
+  assert.equal(await brainChapter.count(),1,label+': ett fordypningskapittel om Company Brain');
+  const brainText=await brainChapter.innerText();
+  for(const vendor of ['Glean','Microsoft IQ','Snowflake','Palantir'])assert.ok(brainText.includes(vendor),label+': kildebelagt perspektiv '+vendor);
+  assert.ok(brainText.includes('ikke definisjonen'),label+': Glean er ikke definisjonen av Company Brain');
+  assert.ok((await page.locator('.horizon-concept-grid').innerText()).includes('Kunnskapsgraf er én mulig byggestein'),label+': graf er ikke synonym for Company Brain');
+  assert.equal(await page.locator('.horizon-concept-grid').evaluate(el=>document.documentElement.scrollWidth>innerWidth+3),false,label+': ingen horisontal overløp i begrepssammenligning');
   // Lysbildedetaljer må vise klikkbart bibliotek og navn på objektet.
   for(const slideId of ['portal-opening','architecture-snowflake']){
    await page.evaluate(id=>{location.hash='#lysbilder/'+id},slideId);
