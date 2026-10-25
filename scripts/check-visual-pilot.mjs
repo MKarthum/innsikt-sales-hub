@@ -188,7 +188,7 @@ try{
      await shot.locator('[data-source-trace-select]').waitFor();
     }
     await shot.screenshot({path:output+'/sources-'+width+'-'+state+'-viewport.png'});
-    await shot.screenshot({path:output+'/sources-'+width+'-'+state+'-full.png',fullPage:true});
+    if(state==='after')await shot.locator('.source-trace-section').screenshot({path:output+'/sources-'+width+'-trace.png'});
     if(state==='after'){
      await shot.locator('[data-source-trace-select]').selectOption('signal:embeddedai');
      await shot.screenshot({path:output+'/sources-'+width+'-assessment.png'});
