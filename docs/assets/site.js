@@ -52,7 +52,7 @@ const architecture=(id)=>window.InnsiktLearning.architecture(D,learningHelpers()
 const toolkit=(id)=>window.InnsiktLearning.toolkit(D,learningHelpers(),id);
 const prompts=(id)=>id==='variabler'?window.InnsiktPrompts.overview(D,learningHelpers()):id?window.InnsiktPrompts.detail(D,learningHelpers(),id):window.InnsiktPrompts.library(D,learningHelpers(),promptFilter);
 const horizon=()=>window.InnsiktHorizon.render(D,learningHelpers());
-let D, current='oversikt',filter='Alle',techFilter='Alle',aiFilter='Alle',promptFilter='Alle',slide=0;
+let D, current='oversikt',filter='Alle',playJourneyId='rapportering',techFilter='Alle',aiFilter='Alle',promptFilter='Alle',slide=0;
 let showSlideNumbers=true;try{showSlideNumbers=localStorage.getItem('innsikt-present-numbers-v1')!=='false'}catch{}
 let notes=[];try{const raw=JSON.parse(localStorage.getItem('innsikt-feedback-v1')||'[]');if(Array.isArray(raw))notes=raw.filter(x=>x&&typeof x.text==='string').slice(-100)}catch{}
 let names={};
@@ -187,7 +187,27 @@ function market(){const mi=D.pages.marketIntro,mx=55;return `${headerCopy('MARKE
 <section class="subsection"><div class="note-card"><b>Statistikk er støtte, ikke salgsbudskapet.</b>${esc(D.metricGuidance.variants.long)}</div></section>`}
 
 function card(p){return `<a class="play-card" href="#muligheter/${esc(p.id)}"><div class="bottom"><span class="number">${esc(p.number)} / ${String(D.plays.length).padStart(2,'0')}</span><span class="badge">${esc(p.category)}</span></div><h3>${esc(p.name)}</h3><p>${esc(p.short)}</p><div class="hook">${esc(p.hook)}</div><div class="bottom"><span class="fineprint">${p.questions.length} gode spørsmål</span><span>Åpne veiledning ${ico('arrow-right')}</span></div></a>`}
-function plays(){const cats=['Alle',...new Set(D.plays.map(x=>x.category))];let shown=D.plays.filter(p=>filter==='Alle'||p.category===filter);return `${headerCopy('SALGSINNGANGER')}<div class="hint">${esc(guidance('customer-first'))}</div><div class="filters" role="group" aria-label="Filtrer salgsinnganger">${cats.map(c=>`<button class="filter ${filter===c?'active':''}" data-filter="${esc(c)}">${esc(c)}</button>`).join('')}</div><div class="play-grid">${shown.map(card).join('')}</div><section class="subsection"><div class="stat-banner"><div><h3>Hvordan vet vi at dette er en mulighet?</h3><p>Se hvordan du kan avklare et behov før du kontakter fagmiljøet.</p></div><a class="btn dark" href="#kundedialog">Øv på kundedialog ${ico('arrow-right')}</a></div></section>`}
+
+function playJourneyBody(playId){
+ const p=D.plays.find(x=>x.id===playId);
+ if(!p)return '';
+ const ui=D.pages.playJourneyUi;
+ return `<div class="play-journey-steps" data-play-journey-id="${esc(p.id)}">
+  <section class="play-journey-step" data-play-step="signal"><div class="play-journey-step-head"><span class="play-journey-number" aria-hidden="true">1</span><h3>${esc(ui.stepSignal)}</h3></div><blockquote>${esc(p.hook)}</blockquote><p class="play-journey-caution">${esc(guidance('not-a-case','short'))}</p></section>
+  <section class="play-journey-step" data-play-step="questions"><div class="play-journey-step-head"><span class="play-journey-number" aria-hidden="true">2</span><h3>${esc(ui.stepQuestions)}</h3></div><ol>${p.questions.slice(0,2).map(x=>`<li>${esc(x)}</li>`).join('')}</ol></section>
+  <section class="play-journey-step" data-play-step="qualify"><div class="play-journey-step-head"><span class="play-journey-number" aria-hidden="true">3</span><h3>${esc(ui.stepQualify)}</h3></div><p class="play-journey-caution">${esc(ui.qualifyNotice)}</p><ul>${p.qualify.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><details class="play-journey-not"><summary>${esc(ui.notTitle)}</summary><p>${esc(p.not)}</p></details></section>
+ </div><div class="play-journey-footer"><p>${esc(guidance('customer-first'))}</p><a class="btn dark" href="#muligheter/${esc(p.id)}">${esc(ui.cta)} ${ico('arrow-right')}</a></div>`;
+}
+function playJourney(){
+ const ui=D.pages.playJourneyUi;
+ const selected=D.plays.find(p=>p.id===playJourneyId)||D.plays[0];
+ return `<section class="play-journey" aria-labelledby="play-journey-title" data-play-journey>
+  <div class="play-journey-intro"><div><div class="eyebrow">${esc(ui.eyebrow)}</div><h2 id="play-journey-title">${esc(ui.title)}</h2><p>${esc(ui.intro)}</p></div>
+   <div class="play-journey-picker"><label for="play-journey-select">${esc(ui.selectLabel)}</label><select id="play-journey-select" data-play-journey-select>${D.plays.map(p=>`<option value="${esc(p.id)}" ${selected.id===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select><span class="visually-hidden" role="status" aria-live="polite" data-play-journey-status></span></div>
+  </div><div data-play-journey-body>${playJourneyBody(selected.id)}</div></section>`;
+}
+
+function plays(){const cats=['Alle',...new Set(D.plays.map(x=>x.category))];let shown=D.plays.filter(p=>filter==='Alle'||p.category===filter);return `${headerCopy('SALGSINNGANGER')}${playJourney()}<div class="filters" role="group" aria-label="Filtrer salgsinnganger">${cats.map(c=>`<button class="filter ${filter===c?'active':''}" data-filter="${esc(c)}">${esc(c)}</button>`).join('')}</div><div class="play-grid">${shown.map(card).join('')}</div><section class="subsection"><div class="stat-banner"><div><h3>Hvordan vet vi at dette er en mulighet?</h3><p>Se hvordan du kan avklare et behov før du kontakter fagmiljøet.</p></div><a class="btn dark" href="#kundedialog">Øv på kundedialog ${ico('arrow-right')}</a></div></section>`}
 function playDetail(p){return `<a class="back-link" href="#muligheter">${ico('arrow-left')} Tilbake til salgsinngangene</a><section class="detail-banner"><div class="eyebrow">SALGSINNGANG ${esc(p.number)} · ${esc(p.category).toUpperCase()}</div><h2>${esc(p.name)}</h2><p>${esc(p.short)}</p><div class="quote">${esc(p.hook)}</div></section><div class="grid-2"><div><section class="panel"><h3>Hva kan dette bety?</h3><p>${esc(p.why)}</p><h3 style="margin-top:24px">Signaler å lytte etter</h3>${list(p.signals)}</section><section class="panel" style="margin-top:16px"><h3>Spørsmål som fører samtalen videre</h3><ol class="question-list">${p.questions.map(x=>`<li>${esc(x)}</li>`).join('')}</ol><div style="margin-top:17px"><button class="btn subtle" data-copy="${esc(p.id)}">${ico('copy')} Kopier samtaleguiden</button></div></section></div><aside><section class="panel"><h3>Hvem kan eie behovet?</h3><div class="tag-list">${p.roles.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div><hr class="divider"/><h3>Aktuell kompetanse</h3><div class="tag-list">${p.competence.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div><hr class="divider"/><h3>Kvalifisering</h3>${list(p.qualify)}</section><section class="panel" style="margin-top:16px;border-left:3px solid #3ba98f"><h3>Neste steg</h3><p>${esc(p.next)}</p></section><div class="note-card" style="margin-top:16px"><b>Unngå dette</b>${esc(p.not)}</div><div class="panel" style="margin-top:16px"><h3>Kildegrunnlag</h3><p class="fineprint">${esc(guidance('not-a-case'))}</p>${sourceLinks(p.sources,D)}</div></aside></div><div class="detail-actions"><a class="btn" href="#kundedialog">Øv på kundedialog ${ico('arrow-right')}</a><a class="btn subtle" href="#utvikling">Foreslå forbedring ${ico('message-circle')}</a></div>${relatedPrompt("play")}`}
 function dialogue(sub){return window.InnsiktDialogue.render(D,{esc,ico,headerCopy},sub)}
 function competenceJourneyBody(audienceId){
@@ -830,6 +850,18 @@ if(preview){e.preventDefault();openLibrarySlideFullscreen(preview.dataset.slideP
 if(e.target.closest('#present-fullscreen-toggle')){togglePresenterFullscreen();return}if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;render();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}const scopeBtn=e.target.closest('[data-slide-scope]');if(scopeBtn){libraryFilters.scope=scopeBtn.dataset.slideScope;updateSlideLibrary();return}if(e.target.closest('[data-slide-reset]')){libraryFilters={query:'',topic:'all',story:'all',scope:'all'};render();return}
 const openSlide=e.target.closest('[data-slide-open]');
 if(openSlide){const deckId=openSlide.dataset.deckOpen,deck=D.pages.presentationDecks[deckId];const index=deck?.slides.findIndex(x=>x.slideId===openSlide.dataset.slideOpen)??-1;if(index>=0)presentation(deckId,index);return}if(e.target.closest('#slide-next')){slide=Math.min(slide+1,presentationSlides().length-1);showSlide();return}if(e.target.closest('#slide-prev')){slide=Math.max(slide-1,0);showSlide();return}const share=e.target.closest('[data-dialogue-copy]');if(share){const target=location.origin+location.pathname+'#kundedialog/kunde-'+share.dataset.dialogueCopy;const ui=D.pages.dialogueUi.seller;if(navigator.clipboard?.writeText)navigator.clipboard.writeText(target).then(()=>toast(ui.shareSuccess)).catch(()=>toast(ui.shareFailure));else toast(ui.shareFailure);return}if(e.target.closest('[data-search-select]')){closeModal();return}if(e.target.closest('[data-dismiss]')&&(e.target.matches('.overlay')||e.target.closest('.modal-close'))){closeModal();return}if(e.target.closest('#menu-toggle')){const open=!document.getElementById('sidebar').classList.contains('open');setMobileMenuOpen(open);return}});document.addEventListener('change',e=>{
+const playSelect=e.target.closest('[data-play-journey-select]');
+if(playSelect){
+ const play=D.plays.find(p=>p.id===playSelect.value);
+ if(play){
+  playJourneyId=play.id;
+  const body=document.querySelector('[data-play-journey-body]');
+  if(body)body.innerHTML=playJourneyBody(play.id);
+  const status=document.querySelector('[data-play-journey-status]');
+  if(status)status.textContent=D.pages.playJourneyUi.statusPrefix+' '+play.name;
+ }
+ return;
+}
 const competenceSelect=e.target.closest('[data-competence-audience]');
 if(competenceSelect){
  const audience=D.audiences.find(x=>x.id===competenceSelect.value);

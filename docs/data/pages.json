@@ -832,6 +832,19 @@
       "visibility": "presented"
     }
   ],
+  "playJourneyUi": {
+    "eyebrow": "SAMTALEFORBEREDELSE",
+    "title": "Fra kundesignal til neste spørsmål",
+    "intro": "Velg en situasjon og se hva du kan undersøke før du foreslår en løsning.",
+    "selectLabel": "Velg en situasjon",
+    "stepSignal": "Hva du kan høre",
+    "stepQuestions": "Spør videre",
+    "stepQualify": "Må avklares før vi konkluderer",
+    "qualifyNotice": "Åpne kriterier – ikke forhold vi vet er oppfylt.",
+    "notTitle": "Ikke anta dette",
+    "cta": "Åpne hele samtaleguiden",
+    "statusPrefix": "Viser samtaleflyt for"
+  },
   "competenceJourneyUi": {
     "eyebrow": "MØTEFORBEREDELSE",
     "title": "Fra kundebehov til faglig samtale",

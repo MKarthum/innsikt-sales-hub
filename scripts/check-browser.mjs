@@ -60,6 +60,45 @@ try {
   assert.ok(competenceOverflow<=3,label+': ingen horisontal avklipping i kompetanseflyten '+competenceOverflow);
   await page.locator('.competence-role-details summary').click();
   assert.equal(await page.locator('.competence-role-details a[href^="#muligheter/"]').count(),8,label+': gamle direktelenker tilgjengelige');
+  // Salgsinnganger: dataeid samtaleflyt uten å erstatte filter, detaljer eller ruter.
+  await page.evaluate(()=>{location.hash='#muligheter'});
+  await page.locator('[data-play-journey-select]').waitFor();
+  assert.equal(await page.locator('[data-play-journey-select]').inputValue(),'rapportering',label+': første signal');
+  assert.deepEqual(await page.locator('[data-play-journey-select] option').evaluateAll(nodes=>nodes.map(n=>n.value)),expectedSales.plays.map(p=>p.id),label+': ni kanoniske signaler');
+  for(const id of ['rapportering','modernisering','ki-data',...expectedSales.plays.map(p=>p.id).filter(id=>!['rapportering','modernisering','ki-data'].includes(id))]){
+   const play=expectedSales.plays.find(p=>p.id===id);
+   await page.locator('[data-play-journey-select]').selectOption(id);
+   assert.equal(await page.locator('[data-play-journey-id]').getAttribute('data-play-journey-id'),id,label+': valgt signal '+id);
+   assert.equal((await page.locator('[data-play-step="signal"] blockquote').innerText()).trim(),play.hook,label+': eksakt kanonisk signal '+id);
+   assert.deepEqual((await page.locator('[data-play-step="questions"] li').allTextContents()).map(x=>x.trim()),play.questions.slice(0,2),label+': to spørsmål '+id);
+   assert.deepEqual((await page.locator('[data-play-step="qualify"] ul li').allTextContents()).map(x=>x.trim()),play.qualify,label+': åpne kriterier '+id);
+   await page.locator('.play-journey-not summary').click();
+   assert.equal((await page.locator('.play-journey-not p').innerText()).trim(),play.not,label+': ikke anta '+id);
+   assert.equal(await page.locator('.play-journey-footer a').getAttribute('href'),'#muligheter/'+id,label+': korrekt CTA '+id);
+   assert.equal(await page.evaluate(()=>location.hash),'#muligheter',label+': valg uten navigasjon '+id);
+   if(id!=='rapportering')assert.equal(await page.locator('[data-play-journey-status]').innerText(),'Viser samtaleflyt for '+play.name,label+': statusmelding '+id);
+  }
+  // A real keyboard change must retain focus in the native select.
+  await page.locator('[data-play-journey-select]').selectOption('rapportering');
+  await page.locator('[data-play-journey-select]').focus();
+  await page.keyboard.press('ArrowDown');
+  await page.waitForFunction(()=>document.querySelector('[data-play-journey-select]')?.value==='kundevekst');
+  assert.equal(await page.locator('[data-play-journey-select]').evaluate(el=>el===document.activeElement),true,label+': fokus bevart ved tastaturvalg');
+  assert.equal(await page.locator('[data-play-journey-id]').getAttribute('data-play-journey-id'),'kundevekst',label+': tastaturvalg oppdaterer data');
+  assert.ok((await page.locator('[data-play-step="signal"] .play-journey-caution').innerText()).includes('ikke en dokumentert kundereferanse'),label+': fiktivt signal merket');
+  assert.ok((await page.locator('[data-play-step="qualify"] .play-journey-caution').innerText()).includes('Åpne kriterier'),label+': kvalifisering ikke bekreftet');
+  assert.ok((await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,label+': ingen horisontal overflyt i salgsinnganger');
+  await page.locator('[data-play-journey-select]').selectOption('ki-data');
+  await page.locator('.play-journey-footer a').click();
+  await page.locator('.detail-banner h2').waitFor();
+  assert.equal(await page.evaluate(()=>location.hash),'#muligheter/ki-data',label+': eksisterende detaljrute');
+  await page.locator('.back-link[href="#muligheter"]').click();
+  await page.locator('[data-play-journey-select]').waitFor();
+  await page.locator('[data-filter="Dataplattform"]').click();
+  assert.equal(await page.locator('.play-grid .play-card').count(),1,label+': eksisterende kategorifilter');
+  assert.equal(await page.locator('[data-play-journey-select]').inputValue(),'ki-data',label+': valg beholdes ved kategorifilter');
+  await page.locator('[data-filter="Alle"]').click();
+  assert.equal(await page.locator('.play-grid .play-card').count(),expectedSales.plays.length,label+': alle ni kort bevart');
   await page.evaluate(()=>{location.hash='#horisont'});
   await page.locator('.horizon-concept-grid .horizon-concept').first().waitFor();
   assert.equal(await page.locator('.horizon-concept-grid .horizon-concept').count(),6,label+': seks begreper med én kanonisk kilde');
@@ -461,6 +500,9 @@ try {
  await fixturePage.goto(base+'#kompetanse',{waitUntil:'networkidle'});
  await fixturePage.locator('[data-competence-step="signal"] blockquote').waitFor();
  assert.equal((await fixturePage.locator('[data-competence-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Kanonisk endring i sales.json slår ut uten kopi');
+ await fixturePage.evaluate(()=>{location.hash='#muligheter'});
+ await fixturePage.locator('[data-play-journey-id="rapportering"]').waitFor();
+ assert.equal((await fixturePage.locator('[data-play-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Metamorfisk signal på salgsinnganger følger sales.json uten kopiering');
  await fixture.close();
 } catch(error){problems.push(error.stack||String(error));} finally {await browser.close();}
 if(problems.length){console.error(problems.join('\n'));process.exitCode=1;}
