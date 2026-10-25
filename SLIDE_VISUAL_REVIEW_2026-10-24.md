@@ -50,7 +50,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | architecture-databricks | Databricks: data, analyse og KI | Databricks bruker lakehouse-data til BI og KI | Behovstilpasset teknisk diagram, ikke en generisk kortscene |
 | market-why-now | Markedet flytter seg raskt – men behovene består | KI endrer tempoet – behovet for forståelse består | Forteller et konkret før-til-etter-resonnement i stedet for dekorative ringer |
 | market-three-forces | Tre krefter endrer data- og KI-markedet | Agenter, semantikk og plattformer nærmer seg hverandre | Tre faglige områder står separat med en felles, synlig konklusjon |
-| market-customer-pressure | Markedsnyheten blir først relevant hos kunden | En trend blir relevant når den møter et kundebehov | Lar kundens egne ord stå synlig med forklarende spørsmål |
+| market-customer-pressure | Tre kundeutsagn overlappet med market-priorities | KI-strategien kan være foran gjennomføringsevnen | Asymmetrisk Deloitte-kontrast: 42 % strategi vs. fire kvalitativt lavere vurderte operative områder; spørsmål og metodeforbehold uten falsk prosentgap |
 | market-priorities | Tre faglige prioriteringer som henger sammen | Innsikt bør prioritere data, analyse og KI i samspill | Tre faglige områder står separat med en felles, synlig konklusjon |
 | market-next-moves | Begynn med behovet. Lær. Utvid ved verdi. | Start avgrenset, mål effekt og bygg videre | Viser hvert handlingstrinn og hvorfor det gjøres |
 
@@ -97,3 +97,9 @@ Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md). Fire prioritert
 ## Oppfølging 25.10.2026 – seller-better-questions
 
 Tidligere: tre separate spørsmålskort uten kundesvar eller tydelig neste handling. Ny scene: ett tydelig merket fiktivt kundesignal, tre sammenstilte spørsmål/svar/utledninger og avgrenset oppfølging uten teknologivalg. Metodekildene underbygger spørsmål og måling, ikke eksempelet eller en effektpåstand. Visuell aksept i begge temaer, mobil og eksport krever faktisk rendering og kontroll før merge.
+
+## Etterkontroll v0.17.9 – `market-customer-pressure` (Puls B)
+
+Før: 16:9-bildet brukte tre illustrerte kundereplikker, og gjentok dermed funksjonen til `market-priorities`. Etter: én stor kildebelagt, selvrapportert strategiverdi (42 %) til venstre; fire **kvalitativt** lavere vurderte operative dimensjoner til høyre; ett avklarende kundespørsmål og en synlig global metodeavgrensning. Ingen søylelengder eller påstått differanse. [Deloitte 2026](https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html) er kilde til begge sider, ikke til noen kundediagnose.
+
+B har sammenlignet faktisk før/etter-rendering av bilde 4 ved 960×540 intern 16:9-flate, lys og mørk; kontrollert 1536×864, 1280×720, 844×390 og 390×844, mobil detalj → fullskjerm → Lukk, Presenter og nedlastet offline HTML. Ingen geometrisk tekstklipping etter justering av prosenttallets linjehøyde. C må likevel gjøre **uavhengig** visuell og faglig kontroll før merge. Skjermbilder ligger utenfor repo i `/workspace/b-readiness-visual/`.

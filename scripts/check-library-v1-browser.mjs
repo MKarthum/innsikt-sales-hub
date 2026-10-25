@@ -111,6 +111,16 @@ try{
   const stage=p.locator('.slide-library-detail-stage');
   const scene=stage.locator('.story-scene');
   assert.equal(await scene.count(),1,'Custom scene for '+s.id);
+   if(s.id==='market-customer-pressure'){
+    assert.equal(await stage.locator('.v11-readiness-number').innerText(),'42 %','Survey figure is visible');
+    assert.deepEqual(await stage.locator('.v11-readiness-operations li').allInnerTexts(),['Infrastruktur','Data','Risiko','Kompetanse'],'Four qualitative readiness dimensions');
+    assert.ok((await stage.locator('.v11-readiness-question').innerText()).includes('Hvor stopper ambisjonene'),'Customer question is visible');
+    assert.ok((await stage.locator('.v11-readiness-caveat').innerText()).includes('ikke en diagnose'),'Global caveat is visible');
+    assert.equal(await stage.locator('.v5-voice-line').count(),0,'No old three-customer-quote layout');
+   }
+   if(s.id==='market-priorities'){
+    assert.equal(await stage.locator('.v6-priority-row').count(),3,'Priorities retain three illustrative pathways');
+   }
    if(s.id==='portal-learning'){
     const rag=JSON.parse(fs.readFileSync('docs/data/learning.json','utf8')).diagrams.find(d=>d.id==='rag');
     assert.ok((await stage.locator('.v10-lookup-question').innerText()).includes('FIKTIVT SPØRSMÅL'),'Fictional seller question is labeled');

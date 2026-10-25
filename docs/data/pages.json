@@ -440,7 +440,7 @@
         "centralQuestion": "Hva er Innsikt i markedet nå, og hva bør vi prioritere videre?",
         "turn": "Kapasitet og nye verktøy øker, men dataforståelse, tillit og beslutningsbehov bestemmer verdien.",
         "resolution": "Prioriter datagrunnlag, anvendelig analyse og pragmatisk KI i sammenheng.",
-        "story": "Start i Innsikts faglige oppdrag: hjelpe virksomheter å bruke data til å forstå, beslutte og handle bedre. Markedet har fått betydelig ny kapasitet gjennom KI og agenter, mens semantikk, tilgang og samspill mellom data- og KI-plattformer får større betydning. Skill eksplisitt mellom dokumenterte trender og våre vurderinger, og unngå universelle konklusjoner om modenhet og løsning. Oversett trendene til gjenkjennelige kundeproblemer: treg rapportering, uforståelige tall, utilstrekkelig dataflyt og spørsmål om trygg KI-bruk. Derfra viser vi de tre faglige prioriteringene som Innsikt faktisk skal levere på: robuste og anvendelige data, analyse som hjelper beslutninger og KI som løser konkrete oppgaver med riktig kontroll. Avslutt med en pragmatisk metode for å starte lite, verifisere effekt og bygge videre. Dette er strategisk salgsorientering, ikke produktbrosjyre eller trendshow.",
+        "story": "Start i Innsikts faglige oppdrag: hjelpe virksomheter å bruke data til å forstå, beslutte og handle bedre. Markedet har fått betydelig ny kapasitet gjennom KI og agenter, mens semantikk, tilgang og samspill mellom data- og KI-plattformer får større betydning. Skill eksplisitt mellom dokumenterte trender og våre vurderinger, og unngå universelle konklusjoner om modenhet og løsning. Deloittes globale lederundersøkelse viser at opplevd strategisk KI-beredskap kan ligge foran beredskapen innen data, infrastruktur, risiko og kompetanse. Det er et markedssignal, ikke en diagnose av kunden. Først etter å ha undersøkt kundens faktiske hindringer kan vi vurdere hvilken faglig inngang som er relevant. Derfra viser vi de tre faglige prioriteringene som Innsikt faktisk skal levere på: robuste og anvendelige data, analyse som hjelper beslutninger og KI som løser konkrete oppgaver med riktig kontroll. Avslutt med en pragmatisk metode for å starte lite, verifisere effekt og bygge videre. Dette er strategisk salgsorientering, ikke produktbrosjyre eller trendshow.",
         "beats": [
           {
             "id": "why",
@@ -487,7 +487,7 @@
           "slideId": "market-customer-pressure",
           "beat": "signals",
           "delivery": "tell",
-          "note": "Gjør de tre typiske behovene til spørsmål, ikke diagnoser. Vi skal oppdage flaskehalsen kunden selv ser. Overgang: Risiko og dataforståelse avgjør mulighetsrommet. Det avgjørende er hvilke kundebehov som er reelle, og hvordan vi kan levere verdi uten å kreve full perfeksjon først."
+          "note": "Etter de tre markedstrendene viser vi en annen type informasjon: Deloittes globale lederundersøkelse. 42 prosent vurderer KI-strategien som svært godt forberedt, mens vurdert beredskap er lavere innen data, infrastruktur, risiko og kompetanse. Ikke bruk dette som en påstand om norske kunder. Spør heller hvor ambisjonene møter hindringer i faktisk arbeid. Overgang: Neste bilde viser hvorfor kontroll og risiko må tilpasses konsekvensene."
         },
         {
           "slideId": "risk-and-trust",
