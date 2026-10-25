@@ -90,6 +90,18 @@ try{
   await shot.screenshot({path:output+'/competence-'+width+'-cio.png',fullPage:true});
   await shot.close();
  }
+ // Pinned before/after evidence for the #muligheter workflow (same viewports in both commits).
+ for(const width of [320,390,900,1512]){
+  const height=width===320?700:width===390?844:width===900?900:980;
+  const shot=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
+  await shot.goto((process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'#muligheter',{waitUntil:'networkidle'});
+  await shot.locator('.play-grid .play-card').first().waitFor();
+  await shot.waitForTimeout(200);
+  assert.ok((await shot.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,'Ingen horisontal overflyt i salgsinnganger '+width);
+  await shot.screenshot({path:output+'/plays-'+width+'-default.png',fullPage:false});
+  await shot.screenshot({path:output+'/plays-'+width+'-full.png',fullPage:true});
+  await shot.close();
+ }
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
  console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
 }finally{await browser.close()}
