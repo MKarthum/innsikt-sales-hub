@@ -4,6 +4,12 @@ Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent doku
 
 [Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
 
+## Lisens og viderebruk
+
+Innsikt er et **personlig initiert hobby- og utviklingsprosjekt**, ikke en offisiell Webstep-publikasjon. Den åpne, originale kjernen er tilgjengelig under **[MIT-lisensen](LICENSE)** i den utstrekning rettighetshaverne kan lisensiere materialet. Også virksomheter kan bruke, kopiere og videreutvikle publiserte versjoner. Lisensen gir ikke krav på fremtidige oppdateringer, support, driftskontinuitet eller fortsatt tilgjengelighet. Allerede mottatte MIT-rettigheter består.
+
+Egne interne kundehistorier, verktøy, virksomhetsprofil og andre beskyttede data bør ligge i et separat organisasjonsrepo; de blir ikke automatisk åpent lisensiert. Leverandørlogoer og annet tredjepartsmateriale har egne rettigheter. Se [rettigheter og bruk](RIGHTS_AND_USAGE.md), [tredjepartsmerknader](THIRD_PARTY_NOTICES.md) og [mal for organisasjonsutgave](ORGANIZATION_RIGHTS_TEMPLATE.md). At prosjektet er personlig initiert avklarer ikke eventuelle arbeidsforholdsrettigheter.
+
 ## Et enklere hovedbudskap
 
 **Datagrunnlag og plattform → analyse og beslutninger → KI og nye arbeidsmåter.** Dette er tre mulige kundebehov, ikke tre like statistikkort. Den sterke KI-veksten har egen, kildebelagt plass. Et generelt EU-tall for dataanalyse er bevisst fjernet – det ga lite salgsinnsikt.

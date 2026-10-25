@@ -880,7 +880,11 @@
     "qualification": "Før leveransevalg",
     "maturity": "Ikke anta et modenhetsgap",
     "example": "Illustrativ samtaleinngang",
-    "maturityStepsTitle": "Fra innsikt til mulig handling"
+    "maturityStepsTitle": "Fra innsikt til mulig handling",
+    "priorityBadge": "Prioritert bransje",
+    "exampleBadge": "Bransjeeksempel",
+    "priorityHeading": "Prioriterte bransjer",
+    "otherHeading": "Andre bransjeeksempler"
   },
   "trendRadarUi": {
     "introTitle": "Tidlige signaler – ikke ferdige anbefalinger",

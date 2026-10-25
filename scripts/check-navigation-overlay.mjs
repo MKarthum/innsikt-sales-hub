@@ -21,6 +21,11 @@ const sample={schemaVersion:2,classification:'internal',
  navigation
 };
 const merged=api.combine(base,sample);
+const legacy=api.combine(base,{schemaVersion:1,classification:'internal',sources:{},slides:[],presentationDecks:{},customerStories:[entry],solutions:[]});
+assert.equal(legacy.internalCollections.customerStories[0].id,entry.id);
+assert.deepEqual(legacy.pages.navigationSections,base.pages.navigationSections);
+assert.equal(legacy.organizationProfile,null);
+assert.equal(legacy.internalNavigation.items.length,0);
 const orgProfile={
  name:'Eksempelbedriften',brandSubtitle:'EKSEMPEL · DATA',
  home:{eyebrow:'EKSEMPEL · ARBEIDSFLATE',titleLine1:'Oppdag behov.',titleLine2:'Finn neste steg.',intro:'Et organisasjonstilpasset eksempel.'},
@@ -88,7 +93,27 @@ const probe=vm.runInContext('__navProbe()',sandbox,{timeout:3000});
 assert.ok(probe.home.includes('EKSEMPEL · ARBEIDSFLATE'));
 assert.ok(probe.competence.includes('Våre fagområder'));
 assert.ok(probe.competence.includes('Dataplattform'));
-assert.ok(probe.business.includes('Eksempelbedriften: prioriterte bransjer'));
+assert.ok(probe.business.includes('Eksempelbedriften: Prioriterte bransjer'));
+const ui=runtime.pages.industryUi;
+const savedUi={...ui};
+Object.assign(ui,{priorityBadge:'QA_BADGE_PRIORITY',exampleBadge:'QA_BADGE_EXAMPLE',priorityHeading:'QA_HEADING_PRIORITY',otherHeading:'QA_HEADING_OTHER'});
+const labeled=vm.runInContext('__navProbe()',sandbox,{timeout:3000});
+assert.match(labeled.business,/<span class="sector-card-type">QA_BADGE_PRIORITY<\/span>/);
+assert.match(labeled.business,/<span class="sector-card-type">QA_BADGE_EXAMPLE<\/span>/);
+assert.match(labeled.business,/<h2>Eksempelbedriften: QA_HEADING_PRIORITY<\/h2>/);
+assert.match(labeled.business,/<h2>QA_HEADING_OTHER<\/h2>/);
+assert.equal((labeled.business.match(/class="sector-card"/g)||[]).length,base.industrySectors.length);
+const publicRuntime=api.combine(materialized,null);
+sandbox.__fixture=publicRuntime;
+vm.runInContext('D=globalThis.__fixture;',sandbox,{timeout:3000});
+const publicProbe=vm.runInContext('__navProbe()',sandbox,{timeout:3000});
+assert.equal((publicProbe.business.match(/class="sector-card"/g)||[]).length,9);
+assert.equal((publicProbe.business.match(/<span class="sector-card-type">QA_BADGE_EXAMPLE<\/span>/g)||[]).length,9);
+assert.ok(!publicProbe.business.includes('QA_BADGE_PRIORITY'));
+assert.ok(!publicProbe.sections.some(g=>g.id.startsWith('org-')));
+Object.assign(ui,savedUi);
+sandbox.__fixture=runtime;
+vm.runInContext('D=globalThis.__fixture;',sandbox,{timeout:3000});
 assert.ok(!JSON.stringify(materialized.pages).includes('EKSEMPEL · ARBEIDSFLATE'));
 assert.ok(probe.sections.some(g=>g.id==='org-organization'));
 assert.ok(probe.sections.find(g=>g.id==='org-organization').items.some(i=>i.route==='intern/customer-reference'));

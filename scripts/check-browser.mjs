@@ -152,11 +152,37 @@ try {
   await page.locator('.industry-case-card').first().click();
   await page.locator('.business-detail-grid').waitFor();
   assert.ok((await page.locator('.business-detail-grid').innerText()).includes('avgrensede') || (await page.locator('.business-detail-grid').innerText()).length>100, label+': detaljvisning');
+  // Search must open the canonical glossary definition, not the separate introduction.
   await page.locator('#search-button').click();
   await page.locator('#search-input').fill('dataplattform');
-  assert.ok(await page.locator('.result-item').count()>0,'søk på begrep');
-  await page.keyboard.press('Escape');
-  assert.equal(await page.locator('#search-input').count(),0,'lukke søk');
+  const glossaryHit=page.locator('.result-item[href="#ordliste/dataplattform"]');
+  await glossaryHit.waitFor();
+  assert.ok((await glossaryHit.innerText()).includes('Dataplattform'),label+': treff med stabil begrepsrute');
+  await glossaryHit.click();
+  await page.waitForFunction(()=>location.hash==='#ordliste/dataplattform'&&document.querySelector('.glossary-item[data-glossary-id="dataplattform"]')?.open);
+  assert.equal(await page.locator('#search-input').count(),0,label+': søk lukkes ved valg');
+  assert.equal(await page.locator('.glossary-item[open]').count(),1,label+': bare valgt begrep åpnes');
+  await page.waitForFunction(()=>document.activeElement===document.querySelector('.glossary-item[data-glossary-id="dataplattform"] summary'));
+  const focusPosition=await page.locator('.glossary-item[data-glossary-id="dataplattform"] summary').evaluate(el=>({top:el.getBoundingClientRect().top,header:document.querySelector('.topbar').getBoundingClientRect().height}));
+  assert.ok(focusPosition.top>=focusPosition.header+8,label+': valgt begrep er synlig under fast toppmeny');
+  assert.equal(await page.locator('#crumb a[href="#ordliste"]').count(),1,label+': ordliste som klikkbar forelder');
+  assert.equal((await page.locator('#crumb [aria-current="page"]').innerText()).trim(),'Dataplattform',label+': riktig begrep i sti');
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+3),false,label+': ordliste uten horisontalt overløp');
+  await page.locator('#search-button').click();
+  await page.locator('#search-input').fill('Business intelligence');
+  await page.locator('.result-item[href="#ordliste/bi"]').click();
+  await page.waitForFunction(()=>location.hash==='#ordliste/bi'&&document.querySelector('.glossary-item[data-glossary-id="bi"]')?.open);
+  assert.ok((await page.locator('.glossary-item[data-glossary-id="bi"]').innerText()).includes('Business intelligence'),label+': fullt navn er indeksert og vist');
+  for(const term of ['SQL','dbt']){
+   await page.locator('#search-button').click();
+   await page.locator('#search-input').fill(term);
+   assert.ok(await page.locator('.result-item[href^="#ordliste/"]').count()>0,label+': begrepssøk '+term);
+   await page.keyboard.press('Escape');
+   assert.equal(await page.locator('#search-input').count(),0,label+': Escape lukker søk');
+  }
+  await page.evaluate(()=>location.hash='#ordliste');
+  await page.waitForFunction(()=>location.hash==='#ordliste'&&document.querySelectorAll('.glossary-item').length>0);
+  assert.equal(await page.locator('.glossary-item[open]').count(),0,label+': ordinær ordliste starter lukket');
   // Bibliotek: enhetlig ID, detaljvisning, kildepolicy og direkte åpning.
   await page.evaluate(()=>{location.hash='#lysbilder'});
   await page.locator('.slide-library-card').first().waitFor();
