@@ -52,6 +52,7 @@ const toolkit=(id)=>window.InnsiktLearning.toolkit(D,learningHelpers(),id);
 const prompts=(id)=>id==='variabler'?window.InnsiktPrompts.overview(D,learningHelpers()):id?window.InnsiktPrompts.detail(D,learningHelpers(),id):window.InnsiktPrompts.library(D,learningHelpers(),promptFilter);
 const horizon=()=>window.InnsiktHorizon.render(D,learningHelpers());
 let D, current='oversikt',filter='Alle',techFilter='Alle',aiFilter='Alle',promptFilter='Alle',slide=0;
+let showSlideNumbers=true;try{showSlideNumbers=localStorage.getItem('innsikt-present-numbers-v1')!=='false'}catch{}
 let notes=[];try{const raw=JSON.parse(localStorage.getItem('innsikt-feedback-v1')||'[]');if(Array.isArray(raw))notes=raw.filter(x=>x&&typeof x.text==='string').slice(-100)}catch{}
 let names={};
 function mainLink(text,page){return `<a class="text-link" href="#${page}">${esc(text)} ${ico('arrow-right')}</a>`}
@@ -175,10 +176,29 @@ function trendradar(){
  +'<section class="subsection"><div class="horizon-chapter-list">'+cards+'</div></section>'
  +'<section class="subsection"><div class="note-card"><b>'+esc(ui.methodTitle)+'</b> '+esc(ui.methodText)+'</div></section>';
 }
-function dev(){let done=D.backlog.filter(x=>x.status==='lukket').length;return `${headerCopy('VIDEREUTVIKLING')}
-<div class="grid-equal"><div class="panel"><div class="small-label">ÅPNE FORBEDRINGER</div><div class="metric num" style="border:0;padding:7px 0;font-size:32px">${D.backlog.length-done}</div><p>Felles backlog som versjonsstyres i <code>docs/data/backlog.json</code>.</p></div><div class="panel"><div class="small-label">LOKALE INNSPILL I DIN NETTLESER</div><div class="metric num" style="border:0;padding:7px 0;font-size:32px">${notes.length}</div><p>${esc(D.pages.copy.localFeedback)}</p><button class="btn subtle" data-feedback-open="1">${ico('message-circle')} Gi nytt innspill</button></div></div>
-<section class="subsection"><div class="section-heading"><div><h2>${esc(D.pages.copy.devBacklogTitle)}</h2><p>Forslag og uavklarte punkter – ikke påstander om leverte funksjoner</p></div></div><div class="table-like">${D.backlog.map(b=>`<div class="table-row"><span class="id">${esc(b.id)}</span><div><strong>${esc(b.title)}</strong><p>${esc(b.why)} · ${esc(b.area)}</p></div><span class="badge ${b.priority==='høy'?'gold':'grey'}">${esc(b.priority)} prioritet</span></div>`).join('')}</div></section>
-<section class="subsection"><div class="section-heading"><div><h2>Dine lokale innspill</h2><p>${esc(D.pages.copy.localFeedbackCaution)}</p></div><button class="btn subtle" id="export-notes" ${notes.length?'':'disabled'}>${ico('download')} Eksporter Markdown</button></div>${notes.length?`<div class="trend-list">${notes.slice().reverse().map((n,i)=>`<div class="panel"><div class="small-label">${esc(n.page)} · ${esc(n.date)}</div><p style="white-space:pre-wrap;color:#244351">${esc(n.text)}</p></div>`).join('')}</div>`:'<div class="empty">'+esc(D.pages.copy.feedbackEmpty)+'</div>'}</section>`}
+function dev(){
+ const ui=D.pages.devUi,all=D.backlog;
+ const pending=all.filter(x=>x.status!=='lukket'),completed=all.filter(x=>x.status==='lukket');
+ const highlights=ui.focusIds.map(id=>pending.find(x=>x.id===id)).filter(Boolean);
+ const focus=new Set(highlights.map(x=>x.id));
+ const active=pending.filter(x=>x.status!=='senere'&&!focus.has(x.id));
+ active.sort((a,b)=>(a.status==='pågår'?0:1)-(b.status==='pågår'?0:1)||(a.priority==='høy'?0:1)-(b.priority==='høy'?0:1));
+ const later=pending.filter(x=>x.status==='senere'&&!focus.has(x.id));
+ const card=b=>'<article class="dev-item"><div class="dev-item-top"><span class="dev-id">'+esc(b.id)+'</span><span class="dev-state">'+esc(ui.statusLabels[b.status]||b.status)+'</span></div><h3>'+esc(b.title)+'</h3><p>'+esc(b.why)+'</p><div class="dev-item-meta">'+esc(b.area)+' · '+esc(ui.priorityLabels[b.priority]||b.priority)+' '+esc(ui.priorityLabel.toLocaleLowerCase('no'))+'</div></article>';
+ const group=(title,intro,items,collapsed=false)=>!items.length?'' : '<section class="subsection"><div class="section-heading"><div><h2>'+esc(title)+' <span class="dev-count">'+items.length+'</span></h2><p>'+esc(intro)+'</p></div></div>'+(collapsed?'<details class="dev-collapsed"><summary>'+esc(title)+' ('+items.length+')</summary><div class="dev-list">'+items.map(card).join('')+'</div></details>':'<div class="dev-list">'+items.map(card).join('')+'</div>')+'</section>';
+ return headerCopy('VIDEREUTVIKLING')
+ +'<div class="dev-overview">'
+  +'<div class="panel"><span class="small-label">'+esc(ui.versionLabel)+'</span><strong>'+esc(D.meta.version)+'</strong><p>'+esc(D.meta.released)+'</p></div>'
+  +'<div class="panel"><span class="small-label">'+esc(ui.backlogLabel)+'</span><strong>'+pending.length+'</strong><p>'+esc(ui.methodNote)+'</p></div>'
+  +'<div class="panel"><span class="small-label">'+esc(ui.feedbackLabel)+'</span><strong>'+notes.length+'</strong><p>'+esc(ui.feedbackIntro)+'</p></div>'
+ +'</div>'
+ +group(ui.currentTitle,ui.currentIntro,highlights)
+ +group(ui.allTitle,ui.allIntro,active,true)
+ +group(ui.laterTitle,ui.laterIntro,later,true)
+ +group(ui.completedTitle,ui.methodNote,completed,true)
+ +'<section class="subsection"><div class="section-heading"><div><h2>'+esc(ui.feedbackTitle)+'</h2><p>'+esc(D.pages.copy.localFeedbackCaution)+'</p></div><div class="dev-actions"><button class="btn subtle" data-feedback-open="1">'+ico('message-circle')+' '+esc(ui.feedbackAction)+'</button><button class="btn subtle" id="export-notes" '+(notes.length?'':'disabled')+'>'+ico('download')+' '+esc(ui.exportAction)+'</button></div></div>'
+ +(notes.length?'<div class="dev-list">'+notes.slice().reverse().map(n=>'<article class="dev-item"><div class="dev-item-meta">'+esc(n.page)+' · '+esc(n.date)+'</div><p class="dev-note">'+esc(n.text)+'</p></article>').join('')+'</div>':'<div class="empty">'+esc(D.pages.copy.feedbackEmpty)+'</div>')+'</section>';
+}
 function render(){const raw=location.hash.slice(1)||'oversikt';const [p,sub]=raw.split('/');const nextId=p==='lysbilder'?D.pages.retiredSlideRedirects?.[sub]:null;if(nextId&&nextId!==sub){location.replace('#lysbilder/'+nextId);return;}current=names[p]?p:'oversikt';let crumb=names[current];if(sub){const entity=current==='arkitektur'?D.learning.diagrams.find(x=>x.id===sub):current==='verktoy'?D.learning.templates.find(x=>x.id===sub):current==='prompter'?(sub==='variabler'?{title:D.prompts.page.variableUi.overviewTitle}:D.prompts.items.find(x=>x.id===sub)):current==='muligheter'?D.plays.find(x=>x.id===sub):current==='forretning'?(D.businessSignals.find(x=>x.id===sub)||(sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null)||(sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null)):current==='lysbilder'?D.slides.items.find(x=>x.id===sub):current==='kundedialog'?window.InnsiktDialogue.entity(D,sub):null;if(entity)crumb+=' / '+(entity.title||entity.name||entity.area);else if(current==='lysbilder')crumb+=' / '+D.pages.slideLibraryUi.notFound}const trail=document.getElementById('crumb');trail.replaceChildren();trail.removeAttribute('aria-current');if(sub&&crumb!==names[current]){const link=document.createElement('a');link.href='#'+current;link.textContent=names[current];const divider=document.createElement('span');divider.className='sep';divider.textContent='/';divider.setAttribute('aria-hidden','true');const leaf=document.createElement('span');leaf.textContent=crumb.slice(names[current].length+3);leaf.setAttribute('aria-current','page');trail.append(link,divider,leaf)}else{trail.textContent=names[current];trail.setAttribute('aria-current','page')}document.querySelectorAll('.nav a').forEach(a=>{const active=a.dataset.page===current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});if(document.querySelector('#reference-nav a.active'))document.getElementById('reference-nav').open=true;setMobileMenuOpen(false);let html='';if(current==='muligheter'&&sub){const pl=D.plays.find(x=>x.id===sub);html=pl?playDetail(pl):plays()}else if(current==='forretning'&&sub){const sector=sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null,caseItem=sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null,b=D.businessSignals.find(x=>x.id===sub);html=sector?industrySectorPage(sector):caseItem?industryCasePage(caseItem):b?businessDetail(b):business()}else if(current==='arkitektur'){html=architecture(sub)}else if(current==='verktoy'){html=toolkit(sub)}else if(current==='prompter'){html=prompts(sub)}else if(current==='lysbilder'){html=slideLibraryPage(sub)}else if(current==='ressurser'){html=resourceLibraryPage()}else{html=({oversikt:overview,guide,marked:market,muligheter:plays,kundedialog:()=>dialogue(sub),forretning:business,kompetanse:competence,teknologi:technology,ai:aiProducts,bransje:industry,horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev}[current])()}document.getElementById('main').innerHTML=html;if(current==='lysbilder'&&!sub)updateSlideLibrary();fitLibraryPreviews();window.InnsiktGlossary?.enhance(document.getElementById('main'));window.scrollTo({top:0,behavior:'instant'});document.title=`${crumb} · Innsikt`;}
 function toast(t){document.querySelector('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),2700)}
 function setMobileMenuOpen(open,{restoreFocus=false}={}){
@@ -406,14 +426,15 @@ function slideLibraryPage(id){
    +'<section><h2>'+esc(ui.useLabel)+'</h2>'+(uses||'<p class="fineprint">Ikke brukt i noen historie ennå.</p>')+'</section></div>';
 }
 function presentationSlides(){return window.InnsiktSlides.resolve(D.slides,D.pages.presentationDecks[selectedDeck],selectedDeck)}
-function slideMarkup(s,index,deckId,notes=false){
+function slideMarkup(s,index,deckId,notes=false,showNumbers=false){
+ const position={index,total:D.pages.presentationDecks[deckId].slides.length,showNumbers};
  if(s.type==='architecture'){
   const p=D.architectureProfiles.profiles.find(x=>x.id===s.profileId);
-  return window.InnsiktArchitectureScenes.render(s,esc,p,D.visualAssets,{index,total:D.pages.presentationDecks[deckId].slides.length});
+  return window.InnsiktArchitectureScenes.render(s,esc,p,D.visualAssets,position);
  }
- if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{index,total:D.pages.presentationDecks[deckId].slides.length,businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams});
+ if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{...position,businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams});
  const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
- let v='<div class="slide-eyebrow">'+esc(s.cue||deck.label.toUpperCase())+' · '+(index+1)+' / '+slides.length+'</div><h2>'+esc(s.title)+'</h2>';
+ let v='<div class="slide-eyebrow">'+esc(s.cue||(showNumbers?deck.label.toUpperCase():s.topic||''))+(showNumbers?'<span class="slide-placement-number"> · '+(index+1)+' / '+slides.length+'</span>':'')+'</div><h2>'+esc(s.title)+'</h2>';
  if(s.type==='metric'){
   const a=D.stats.ki.at(-1);
   v+='<div class="slide-metric"><b>'+esc(a.value)+' %</b><span>av norske foretak med minst ti sysselsatte bruker KI i '+esc(a.year)+'</span></div>';
@@ -531,7 +552,7 @@ function showSlide(){
  const slides=presentationSlides(),s=slides[slide];if(!s)return;
  const frame=document.getElementById('slide-body');
  if(frame.setAttribute)frame.setAttribute('data-tone',window.InnsiktSlides.tone(s,D.pages.presentationDecks[selectedDeck],presentationThemeMode));
- frame.innerHTML=slideMarkup(s,slide,selectedDeck);
+ frame.innerHTML=slideMarkup(s,slide,selectedDeck,false,showSlideNumbers);
  window.InnsiktGlossary?.enhance(document.getElementById('slide-body'));
  document.getElementById('slide-counter').textContent=(slide+1)+' av '+slides.length;
  document.getElementById('slide-prev').disabled=slide===0;
@@ -542,6 +563,7 @@ function showSlide(){
  if(note)note.innerHTML=showSpeakerNotes&&s.note?'<strong>Presentatørnotat</strong><p>'+esc(s.note)+'</p>':'';
  if(note)note.hidden=!showSpeakerNotes||!s.note;
  const themeSelector=document.getElementById('present-tone-mode');if(themeSelector)themeSelector.value=presentationThemeMode;
+ const numberSelector=document.getElementById('slide-number-toggle');if(numberSelector)numberSelector.checked=showSlideNumbers;
  document.querySelectorAll('[data-deck]').forEach(b=>{
   b.classList.toggle('active',b.dataset.deck===selectedDeck);
   b.setAttribute('aria-pressed',String(b.dataset.deck===selectedDeck));
@@ -559,7 +581,7 @@ function exportPresentation(mode){
 
  return window.InnsiktPresenterExport.exportDeck({
   id:selectedDeck,label:deck.label,notice:deck.intro||'',version:D.meta.version,
-  slides:presentationSlides().map((s,i)=>slideMarkup(s,i,selectedDeck)),
+  slides:presentationSlides().map((s,i)=>slideMarkup(s,i,selectedDeck,false,showSlideNumbers)),
   tones:presentationSlides().map(s=>window.InnsiktSlides.tone(s,deck,presentationThemeMode)),
   classification:deck.classification==='internal'?'internal':'public'
  },mode).then(()=>{if(mode==='html')toast('Presentasjonen er lastet ned som HTML.');})
@@ -576,6 +598,7 @@ function presentation(deckId='innsikt',initialSlide=0){
   +'<div class="present-stage" id="present-stage"><div class="present-frame present-rich" id="slide-body" aria-live="polite"></div></div>'
   +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev" aria-label="Forrige lysbilde">'+ico('arrow-left')+' <span>Forrige</span></button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next" aria-label="Neste lysbilde"><span>Neste</span> '+ico('arrow-right')+'</button><button class="btn subtle" type="button" id="present-fullscreen-toggle" aria-label="Vis i fullskjerm" aria-pressed="false" title="Vis i fullskjerm">'+ico('maximize')+' <span>Fullskjerm</span></button></div>'
   +'<div class="present-footer"><label><input type="checkbox" id="speaker-toggle" /> Vis presentatørnotater</label>'
+  +'<label><input type="checkbox" id="slide-number-toggle" '+(showSlideNumbers?'checked':'')+' /> '+esc(D.pages.slideLibraryUi.numberToggleLabel)+'</label>'
   +'<span>Piltaster bytter lysbilde · Esc lukker</span></div>'
   +'<aside id="slide-speaker-notes" class="slide-speaker" hidden></aside>'
   +'<div class="present-export-controls"><button class="btn subtle" type="button" id="deck-download">'+ico('download')+' Last ned HTML</button>'
@@ -722,6 +745,7 @@ if(toggled){
  if(item){window.InnsiktPromptContext.setChoice(item,toggled.dataset.promptToggle,toggled.checked);refreshPromptFromContext()}
  return;
 }
+if(e.target.matches('#slide-number-toggle')){showSlideNumbers=e.target.checked;try{localStorage.setItem('innsikt-present-numbers-v1',String(showSlideNumbers))}catch{}showSlide();return}
 if(e.target.matches('#speaker-toggle')){showSpeakerNotes=e.target.checked;showSlide();return}});document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-slide-preview-open]')){e.preventDefault();openLibrarySlideFullscreen(e.target.dataset.slidePreviewOpen,e.target);return}if(e.key==='Escape'&&!document.querySelector('.overlay')&&document.getElementById('sidebar')?.classList.contains('open')){e.preventDefault();setMobileMenuOpen(false,{restoreFocus:true});return}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!document.querySelector('.overlay'))search()}});window.addEventListener('hashchange',render)}
 async function init(){document.querySelectorAll('[data-icon]').forEach(x=>x.innerHTML=ico(x.dataset.icon));try{const namesOfFiles=['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides','visual-assets','architecture-profiles'];const files=await Promise.all(namesOfFiles.map(async name=>{const response=await fetch('./data/'+name+'.json',{cache:'no-store'});if(!response.ok)throw new Error(name+': HTTP '+response.status);return response.json()}));const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles]=files;
  const deploymentResponse=await fetch('./data/deployment.json',{cache:'no-store'});

@@ -32,6 +32,10 @@ Ett lysbilde skal ha ett hovedbudskap, lettlest komposisjon og relevante notater
 
 Bilder og leverandørlogoer lagres lokalt med rettighetsinformasjon. Eksterne illustrasjoner må ha en gyldig lisens. Leverandørens logo kan identifisere produktet, men bruk betyr ikke partnerskap eller godkjenning. Kilder legges på relevante lysbilder; vises på selve bildet bare om en sitat-/figurkontrakt krever det.
 
+## Visningskontekst er ikke lysbildeinnhold
+
+Biblioteket viser alltid et selvstendig lysbilde uten nummer. Historier eier sekvens og beregner nummer fra gjeldende plassering; presentatøren kan slå nummer av/på for visning og HTML/PDF-eksport. Paginering i navigasjonskontrollene vises uavhengig av denne innstillingen. Nummerering **inne i** figurer, arbeidsflyter og spørsmål er faglig innhold og skal ikke påvirkes. Fortellingsstyrt tema, placement-notater og historieoverganger eies av deck, ikke av det felles lysbildet. Ikke utled bibliotekets nummer eller historietilhørighet fra første forekomst i en historie. Test bibliotek, detaljside, fullskjerm, Presenter, tema og offline-eksport sammen.
+
 ## Tema og portabilitet
 
 Lys visning er standard. Presenter og biblioteket bruker ett delt tema-valg, med Mørk eller Fortellingsstyrt som alternativer. Fargene styres med kontrast-par for --pres-* og --slide-*; grafikk og tekst følger de semantiske rollene. Logoer beholder offisielle farger på nøytral flate. Test begge visninger, også i nedlastet HTML/PDF og på mobil.

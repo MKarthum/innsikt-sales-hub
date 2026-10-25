@@ -48,7 +48,11 @@ if(!pages.headers.TRENDRADAR||!pages.trendRadarUi)fail('Trendradar mangler datae
 const radarFields=['title','stage','summary','whyFollow','uncertainty','watch','relatedRoute'];
 for(const x of market.emergingSignals||[]){for(const f of radarFields)if(!str(x[f]))fail('Trendradar mangler '+f+': '+x.id);if(x.evidence!=='assessment'||!date(x.reviewed))fail('Trendradar uten vurdering/dato: '+x.id);refs(x.sources,'Trendradar '+x.id);if(x.relatedRoute.startsWith('#')||x.relatedRoute.startsWith('http'))fail('Trendradar skal bruke intern hash-rute: '+x.id);}
 ids(market.trends,'Trender');ids(market.marketEvents,'Markedshendelser');ids(market.marketSignals,'Markedsforhold');
-ids(tech.aiProducts,'KI-produkter');ids(backlog,'Forbedringspunkter');ids(learning.diagrams,'Arkitekturer');ids(learning.templates,'Maler');
+ids(tech.aiProducts,'KI-produkter');ids(backlog,'Forbedringspunkter');
+const dev=pages.devUi,idsBacklog=new Set(backlog.map(x=>x.id));
+if(!Array.isArray(dev?.focusIds)||dev.focusIds.length<1||new Set(dev.focusIds).size!==dev.focusIds.length||dev.focusIds.some(id=>!idsBacklog.has(id)||backlog.find(x=>x.id===id).status==='lukket'))fail('Videreutvikling har ugyldige prioriterte ID-er');
+for(const b of backlog){if(!['åpen','pågår','senere','lukket'].includes(b.status)||!['høy','middels','lav'].includes(b.priority))fail('Ugyldig backlog-status/prioritet: '+b.id);}
+for(const key of ['currentTitle','allTitle','laterTitle','versionLabel','feedbackTitle','methodNote'])if(!str(dev?.[key]))fail('Videreutvikling mangler tekst: '+key);ids(learning.diagrams,'Arkitekturer');ids(learning.templates,'Maler');
 if(!Array.isArray(learning.glossary)||learning.glossary.length<10)fail('For få begrepsforklaringer');
 else{const terms=learning.glossary.map(x=>x.term);if(new Set(terms).size!==terms.length)fail('Dupliserte begreper');}
 for(const x of sales.plays){refs(x.sources,'Salgsinngang '+x.id);if(!x.questions?.length||!x.signals?.length||!str(x.next)||!str(x.why))fail('Salgsinngang er ufullstendig '+x.id)}

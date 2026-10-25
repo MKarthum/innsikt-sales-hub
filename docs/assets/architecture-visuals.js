@@ -30,9 +30,9 @@ function render(slide,esc,profile,catalog,position){
    +'<div class="da-consumers">'+profile.consumers.map(output).join('')+'</div></section>';
  const supports='<div class="da-foundation"><span class="da-foundation-title">PÅ TVERS AV HELE LØSNINGEN</span>'
    +'<div class="da-support">'+profile.support.map(s=>'<div>'+icon(s.assetId,'small')+'<strong>'+E(s.label)+'</strong></div>').join('')+'</div></div>';
- const counter=String((position?.index??0)+1).padStart(2,'0')+' / '+String(position?.total??1).padStart(2,'0');
+ const counter=position?.showNumbers?'<span class="scene-id">'+String((position.index??0)+1).padStart(2,'0')+' / '+String(position.total??1).padStart(2,'0')+'</span>':'';
  return '<div class="story-scene da-scene">'
-   +'<div class="scene-topline"><div class="scene-eyebrow">'+E(profile.eyebrow)+'</div><span class="scene-id">'+counter+'</span></div>'
+   +'<div class="scene-topline"><div class="scene-eyebrow">'+E(profile.eyebrow)+'</div>'+counter+'</div>'
    +'<header class="da-intro"><h2>'+E(profile.label)+'</h2><p>'+E(profile.intro)+'</p></header>'
    +'<div class="da-architecture"><div class="da-flow">'+[left,ingest,platform,serving,consumption].join('')+'</div>'
    +'<svg class="da-arrows" viewBox="0 0 900 20" preserveAspectRatio="none" aria-hidden="true">'

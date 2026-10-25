@@ -13,6 +13,7 @@ try{
  await p.evaluate(()=>location.hash='#lysbilder');
  await p.locator('.slide-library-card').first().waitFor();
  assert.equal(await p.locator('.slide-library-card').count(),items.length,'Complete library');
+ assert.equal(await p.locator('.slide-library-card .scene-id,.slide-library-card .slide-placement-number').count(),0,'Independent library cards have no presentation numbers');
  await p.screenshot({path:out+'/library.png',fullPage:false});
  // Detail page is mandatory first step; its actual 16:9 slide opens fullscreen.
  const card=p.locator('.slide-library-card').first();
@@ -20,6 +21,7 @@ try{
  const originalHash=await p.evaluate(()=>location.hash);
  await card.click();
  assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Card opens its detailed content page');
+ assert.equal(await p.locator('.slide-library-detail-stage .scene-id,.slide-library-detail-stage .slide-placement-number').count(),0,'Independent detail preview has no presentation numbers');
  await p.locator('.slide-library-info').waitFor();
  assert.ok(await p.locator('.slide-library-info h2').count()>=2,'Speaker notes, sources and use remain on detail page');
  const opener=p.locator('[data-slide-preview-open]');
@@ -29,6 +31,7 @@ try{
  await full.waitFor();
  assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Fullscreen does not change details route');
  assert.equal(await full.locator('.present-frame').getAttribute('data-library-slide-id'),slideId);
+ assert.equal(await full.locator('.scene-id,.slide-placement-number').count(),0,'Fullscreen of an independent slide stays unnumbered');
  const geometry=await full.evaluate(el=>{
   const slide=el.querySelector('.slide-library-fullscreen-stage').getBoundingClientRect();
   return {slide:{width:slide.width,height:slide.height,left:slide.left,right:slide.right}};
@@ -176,6 +179,7 @@ try{
    }
    return {outside,clip,scene:{width:r.width,height:r.height},title:matches[0]?.textContent};
   });
+  assert.equal(await stage.locator('.scene-id,.slide-placement-number').count(),0,'Preview must not derive placement from the first story: '+s.id);
   const audit=await inspect();
   if(audit.outside.length||audit.clip.length)problems.push(s.id+' layout '+JSON.stringify(audit));
   const token=(s.visual?.scene||'visual').replace(/[^a-z]/g,'-');
