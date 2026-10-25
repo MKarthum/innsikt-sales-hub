@@ -37,8 +37,8 @@ try {
   }
 
   // Kildespor: dokumentert hendelse og faglig vurdering er tydelig adskilt.
-  const marketFixture=JSON.parse(fs.readFileSync('docs/data/market.json','utf8'));
-  const sourcesFixture=JSON.parse(fs.readFileSync('docs/data/sources.json','utf8'));
+  const marketFixture=JSON.parse(readTechFixture('docs/data/market.json','utf8'));
+  const sourcesFixture=JSON.parse(readTechFixture('docs/data/sources.json','utf8'));
   await page.evaluate(()=>{location.hash='#kilder'});
   await page.locator('[data-source-trace-select]').waitFor();
   const firstEvent=marketFixture.marketEvents[0],firstSignal=marketFixture.marketSignals[0];
