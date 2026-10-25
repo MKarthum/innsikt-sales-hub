@@ -86,7 +86,7 @@
       "label": "Source erp",
       "category": "original-figure",
       "path": "assets/library/original/source-erp.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "fb1e558f4445238969c2270c03b408155639875c2ee6775340a41aba56df0349"
     },
@@ -95,7 +95,7 @@
       "label": "Source crm",
       "category": "original-figure",
       "path": "assets/library/original/source-crm.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "7dd60871ff123bbddb9e8c5f3a030c23276bb4dbd3a5d58c1e16df14e0e7b181"
     },
@@ -104,7 +104,7 @@
       "label": "Source stream",
       "category": "original-figure",
       "path": "assets/library/original/source-stream.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "86db0416adeaf11acb14caf6a7ffbe09ef458d869488886d36a94b239b0dfe80"
     },
@@ -113,7 +113,7 @@
       "label": "Source api",
       "category": "original-figure",
       "path": "assets/library/original/source-api.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "3c906657bfe337274983343985d526e775aff0ef249055f348aa9e1df72db209"
     },
@@ -122,7 +122,7 @@
       "label": "Source files",
       "category": "original-figure",
       "path": "assets/library/original/source-files.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "fe92003794e1c16d5e4710f6b546eef1601e860845826a8b331fedb92dafbcb0"
     },
@@ -131,7 +131,7 @@
       "label": "Consume report",
       "category": "original-figure",
       "path": "assets/library/original/consume-report.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "1a71f4740b7dd7e50dc81fdece9584406e13c7cdbc19010ae5038cf926a5426e"
     },
@@ -140,7 +140,7 @@
       "label": "Consume ai",
       "category": "original-figure",
       "path": "assets/library/original/consume-ai.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "779de85ad6b86ab2f15e4442f2b8358f893d063cbcec4882fe05b6ae41f660d8"
     },
@@ -149,7 +149,7 @@
       "label": "Consume app",
       "category": "original-figure",
       "path": "assets/library/original/consume-app.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "fde624ea470daea3f65881de2b910589563330a7d0420d6f09db2558e3299af3"
     },
@@ -158,7 +158,7 @@
       "label": "Support security",
       "category": "original-figure",
       "path": "assets/library/original/support-security.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "1d4c949cd31e39faec58d0d762a4a82a8217475801cfe353c476c56dbcd8d872"
     },
@@ -167,7 +167,7 @@
       "label": "Support observe",
       "category": "original-figure",
       "path": "assets/library/original/support-observe.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "8936e217180670c99f78cabeba748adc4f820842d4e67e80095b4fe60aa6e2e9"
     },
@@ -176,7 +176,7 @@
       "label": "Support catalog",
       "category": "original-figure",
       "path": "assets/library/original/support-catalog.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "fea7a764584b63080719e733839d3eddb0f2082f3f8eb9c6f05eb1acf8581013"
     },
@@ -185,7 +185,7 @@
       "label": "Support jobs",
       "category": "original-figure",
       "path": "assets/library/original/support-jobs.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "69ca9320aae5b8f8e7768b366932a07bd2182ee5f125d8ce455975e532b4f79b"
     },
@@ -194,7 +194,7 @@
       "label": "Support code",
       "category": "original-figure",
       "path": "assets/library/original/support-code.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "76ede3f7ed9da764be139a9e5d552cef11a289f08fcc0399911de760fd87b591"
     },
@@ -203,7 +203,7 @@
       "label": "Core storage",
       "category": "original-figure",
       "path": "assets/library/original/core-storage.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "233e14766bae0d5809cdbda69ce4ca4fe888bb1143441aed99a6e4983f0f8669"
     },
@@ -212,7 +212,7 @@
       "label": "Core transform",
       "category": "original-figure",
       "path": "assets/library/original/core-transform.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
       "sha256": "6a9cf93085b984df9eb7c92b765810f4e4bf050e98c508004090df1e2009e738"
     },
@@ -343,7 +343,7 @@
       "label": "Market signal",
       "category": "original-figure",
       "path": "assets/library/original/market-signal.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "77b7e29afab428ed96ca07de1f58995e929447ae0ae0bfbda044c722ccce432f"
     },
@@ -352,7 +352,7 @@
       "label": "Business decision",
       "category": "original-figure",
       "path": "assets/library/original/business-decision.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "314bdd8dfded69589313f1f20d24c403fb52bcdb1807236a4a7b6c066e2a30b6"
     },
@@ -361,7 +361,7 @@
       "label": "Data semantic",
       "category": "original-figure",
       "path": "assets/library/original/data-semantic.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "e89a1b60d60a50516b435508c81bde5a44d7527330b04790beb9dd00001af68c"
     },
@@ -370,7 +370,7 @@
       "label": "Ai agent",
       "category": "original-figure",
       "path": "assets/library/original/ai-agent.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "8e0355c87b740c0d1c2685d3e7a083daf0581088b1508ba937222ef1fec4037b"
     },
@@ -379,7 +379,7 @@
       "label": "Governance shield",
       "category": "original-figure",
       "path": "assets/library/original/governance-shield.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "1d4c949cd31e39faec58d0d762a4a82a8217475801cfe353c476c56dbcd8d872"
     },
@@ -388,7 +388,7 @@
       "label": "Value compass",
       "category": "original-figure",
       "path": "assets/library/original/value-compass.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "9cac203c96e95a63664d34bffae44d21eae7bc4dc4f4996ee65a62919db1a07b"
     },
@@ -397,7 +397,7 @@
       "label": "Customer dialogue",
       "category": "original-figure",
       "path": "assets/library/original/customer-dialogue.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "bb8a2d300e74ccf65bafcadab3aeeb570959c4d8997f42dd6138da537018be8b"
     },
@@ -406,7 +406,7 @@
       "label": "Delivery loop",
       "category": "original-figure",
       "path": "assets/library/original/delivery-loop.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "4e531a0d5ac11b4702d5051856ff8e32d0a3981a02a10cc2010915769ec55845"
     },
@@ -415,7 +415,7 @@
       "label": "Product map",
       "category": "original-figure",
       "path": "assets/library/original/product-map.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "39bbf35de91a9ea0cde3e16ff56c877540594608f6816630ac49218e5b128388"
     },
@@ -424,7 +424,7 @@
       "label": "Verified analysis",
       "category": "original-figure",
       "path": "assets/library/original/verified-analysis.svg",
-      "rights": "Webstep/Innsikt original work",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "84617457512591b8bea0ef0aafcdc7ac60526a41a623ebbcc50d6e7853cab2fe"
     }
