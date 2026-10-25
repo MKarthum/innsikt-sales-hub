@@ -740,18 +740,41 @@
       "scope": "shared",
       "tone": "light",
       "type": "visual",
-      "cue": "KI OG KAPASITET",
-      "title": "KI kan også hjelpe oss å forbedre dataene",
+      "cue": "KONTROLLERT FORBEDRING",
+      "title": "KI kan foreslå datakvalitetsgrep – fagfolk må verifisere",
       "visual": {
         "scene": "loop",
-        "left": "Data og kontekst",
-        "right": "Analyse og KI",
-        "center": "LÆRING",
-        "foot": "KI kan støtte dokumentasjon og kvalitetssjekk – menneskene verifiserer.",
-        "figureAssetId": "delivery-loop"
+        "layout": "verified-quality-loop",
+        "exampleLabel": "FIKTIVT EKSEMPEL · HENVENDELSESSORTERING",
+        "findingLabel": "TESTEN GIR ET SIGNAL",
+        "finding": "Lignende fakturahenvendelser har ulike teametiketter.",
+        "requestColumnLabel": "Henvendelse",
+        "teamColumnLabel": "Registrert team",
+        "records": [
+          {
+            "request": "Fakturafeil A",
+            "team": "Kundeservice"
+          },
+          {
+            "request": "Fakturafeil B",
+            "team": "Økonomi"
+          }
+        ],
+        "aiLabel": "KI FORESLÅR Å UNDERSØKE",
+        "aiProposal": "Bør disse sakene følge samme kategoriregel?",
+        "reviewLabel": "FAGANSVARLIG VERIFISERER",
+        "review": "Undersøk forskjellen og avklar når hver kategori skal brukes.",
+        "resultLabel": "BARE ETTER GODKJENT ENDRING",
+        "result": "Dokumenter regelen og test den mot nye eksempler.",
+        "guardrail": "Ulike etiketter er et signal – ikke bevis på feil.",
+        "conclusion": "Bruk KI til å foreslå hva som bør undersøkes – ikke til å bestemme fasiten."
       },
-      "sourceIds": [],
-      "speakerBase": "Det er feil å tenke at data må ryddes helt ferdig før KI kan bidra. KI kan støtte koding, dokumentasjon, dataprofilering og kvalitetskontroll når mennesker vurderer og verifiserer resultatene. Slik kan bruk og datagrunnlag forbedres sammen. Verktøy, tilgang og kontroll må tilpasses de faktiske dataene og arbeidsoppgavene.",
+      "sourceIds": [
+        "dbt-ai-development",
+        "dbt-data-tests",
+        "nist-ai-rmf"
+      ],
+      "speakerBase": "Vi fortsetter det fiktive eksemplet fra forrige bilde, der KI foreslår hvilket team en henvendelse skal til. I den avgrensede testen ser vi to lignende fakturahenvendelser med ulike teametiketter. Det er ikke i seg selv en feil; det kan finnes saklige forskjeller. KI kan foreslå at dette undersøkes, men skal ikke omklassifisere sakene på egen hånd. En fagansvarlig undersøker eksemplene, avklarer kriteriene og dokumenterer en eventuell godkjent endring. Deretter tester vi regelen mot nye representative eksempler. Datatester kan i tillegg sjekke tillatte verdier og manglende kategorier, men en slik test alene bekrefter ikke at riktig team er valgt. Slik kan KI-assistert utvikling og datakvalitet forbedres sammen – uten å påstå at resultatet er dokumentert eller at KI alltid er nødvendig. dbts produktdokumentasjon viser at KI-assistert generering av tester og dokumentasjon finnes i enkelte verktøy, og beskriver hva datatester faktisk kontrollerer; NIST AI RMF gir prinsipper for verifisering og kontroll. Ingen av kildene dokumenterer dette oppdiktede caset. Overgang: Verdien oppstår når vi kombinerer forretningsforståelse, datagrunnlag, analyse og KI.",
       "topic": "KI og kapasitet",
       "keywords": []
     },

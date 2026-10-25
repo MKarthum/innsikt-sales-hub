@@ -19,6 +19,18 @@ function render(slide,{v,top,title,escs,assetImage,block,diagram}){
    +'<blockquote>'+escs(v.question)+'</blockquote></section>'
    +'<p class="v11-readiness-caveat">'+escs(v.caveat)+'</p>'+footer(v.conclusion));
  }
+ case 'verified-quality-loop': {
+  return block('special v5-special v13-quality',top+heading
+   +'<p class="v13-quality-example">'+escs(v.exampleLabel)+'</p>'
+   +'<div class="v13-quality-top"><section class="v13-quality-observation"><small>'+escs(v.findingLabel)+'</small>'
+   +'<h3>'+escs(v.finding)+'</h3><table><thead><tr><th scope="col">'+escs(v.requestColumnLabel)+'</th><th scope="col">'+escs(v.teamColumnLabel)+'</th></tr></thead><tbody>'
+   +v.records.map(row=>'<tr><td>'+escs(row.request)+'</td><td>'+escs(row.team)+'</td></tr>').join('')+'</tbody></table>'
+   +'<p class="v13-quality-caveat">'+escs(v.guardrail)+'</p></section>'
+   +'<aside class="v13-quality-proposal"><small>'+escs(v.aiLabel)+'</small><blockquote>'+escs(v.aiProposal)+'</blockquote></aside></div>'
+   +'<div class="v13-quality-gate"><section class="v13-quality-review"><small>'+escs(v.reviewLabel)+'</small><strong>'+escs(v.review)+'</strong></section>'
+   +'<section class="v13-quality-result"><small>'+escs(v.resultLabel)+'</small><strong>'+escs(v.result)+'</strong></section></div>'
+   +footer(v.conclusion));
+ }
  case 'knowledge-lookup': {
   if(!diagram||!Array.isArray(diagram.questions)||diagram.questions.length!==2)throw Error('Missing canonical diagram/questions for '+slide.id);
   return block('special v5-special v10-lookup',top+heading

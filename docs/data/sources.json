@@ -651,5 +651,19 @@
     "url": "https://docs.snowflake.com/en/user-guide/data-load-snowpipe-intro",
     "type": "official documentation",
     "checked": "2026-10-25"
+  },
+  "dbt-ai-development": {
+    "title": "About the Studio IDE – AI assistance for tests and documentation",
+    "publisher": "dbt Labs",
+    "url": "https://docs.getdbt.com/docs/platform/studio-ide/develop-in-studio",
+    "type": "leverandørdokumentasjon (eksempel på KI-assistert utvikling)",
+    "checked": "2026-10-25"
+  },
+  "dbt-data-tests": {
+    "title": "Add data tests to your DAG",
+    "publisher": "dbt Labs",
+    "url": "https://docs.getdbt.com/docs/build/data-tests",
+    "type": "leverandørdokumentasjon (datatester)",
+    "checked": "2026-10-25"
   }
 }

@@ -49,3 +49,7 @@ Før: Seks sentrale produktbokser stablet ikon, navn og forklaring vertikalt, me
 ## v0.17.11 – salgsdekkets spørsmålspause
 
 `sales-questions` (4/7) er en muntlig pause, ikke en kopi av `seller-better-questions`. Ett synlig fiktivt svar avklarer at godkjenning av månedsrapporten forsinkes; to åpne spørsmål og en tydelig begrensning hindrer at årsaken fremstilles som kjent. Scene `guided-question-pause` har tekst i `slides.json`, deck-notat i `pages.json`, semantisk CSS og eksisterende eksportvei. Kilder støtter intervjumetoden, ikke det fiktive caset. Visuell og teknisk kontroll dokumenteres i PR og issue #26.
+
+## Oppfølging v0.17.12 – `ai-improve-data` (25.10.2026)
+
+Generisk «Data og kontekst ↔ Analyse og KI»-sløyfe er erstattet av to fiktive teametiketter, et avgrenset KI-spørsmål, menneskelig vurdering og betinget dokumentasjon/test. Ingen autonom omklassifisering eller effektpåstand. `ai-pragmatic` viser selve forsøket (6/10); dette bildet viser en mulig kvalitetslæring (7/10); `ai-value-in-context` oppsummerer faglig samspill (8/10). Kilder: dbt Labs om IDE-assistanse og datatester samt NIST AI RMF. Visuell og teknisk godkjenning dokumenteres i PR/#26; denne tekstlige vurderingen alene er ikke visuell verifikasjon.

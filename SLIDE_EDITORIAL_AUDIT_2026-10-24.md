@@ -23,7 +23,7 @@
 | ai-good-vs-fast | Avveining; ikke en falsk teknologidikotomi; 1 gjenbrukte figur-ID-er | Selvstendig objekt | Kontroller semantikk, linjebrudd og begge paletter |
 | ai-two-extremes | Avveining; ikke en falsk teknologidikotomi; 1 gjenbrukte figur-ID-er | innsikt | Kontroller semantikk, linjebrudd og begge paletter |
 | ai-pragmatic | Fiktiv kundeservicesituasjon: dagens manuelle sortering mot KI-forslag med menneskelig godkjenning; felles kvalitets-/tidsmål og tydelig kontrollgrense | innsikt | Kontroller likeverdig sammenligning, lesbar målebro, lys/mørk og eksport |
-| ai-improve-data | Gjentatt læringssløyfe; 1 gjenbrukte figur-ID-er | innsikt | Kontroller semantikk, linjebrudd og begge paletter |
+| ai-improve-data | Fiktive teametiketter → KI foreslår spørsmål → fagansvarlig verifiserer → dokumentert og testet regel; ingen figurasset | innsikt | Kontroller at etikettforskjell ikke fremstår som bevist feil, og at godkjenning er synlig |
 | insight-three-disciplines | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | risk-and-trust | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | seller-signals | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | Selvstendig objekt | Kontroller semantikk, linjebrudd og begge paletter |
