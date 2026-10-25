@@ -45,7 +45,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | architecture-conceptual | Konseptuell dataplattform | Dataplattformen binder kilder og bruk sammen | Behovstilpasset teknisk diagram, ikke en generisk kortscene |
 | architecture-modern | Typisk moderne dataarkitektur | Moderne dataflyt støtter batch, strømmer og KI | Behovstilpasset teknisk diagram, ikke en generisk kortscene |
 | architecture-ai | KI på et styrt datagrunnlag | KI og BI trenger forståelige og tilgjengelige data | Behovstilpasset teknisk diagram, ikke en generisk kortscene |
-| architecture-snowflake | Snowflake + dbt: en mulig datastack | Snowflake deler data til rapporter, apper og KI | Behovstilpasset teknisk diagram, ikke en generisk kortscene |
+| architecture-snowflake | Snowflake: tydeligere inntak og modellering | Snowflake gir et felles datagrunnlag; inntak, modellering og bruksflater velges etter behov | Horisontale ikon–navn–forklaring-kort i eksisterende 3+3-rutenett; kontroller 16:9 og fotnote |
 | architecture-fabric | Microsoft Fabric: integrert plattform | Fabric samler arbeidsflater rundt OneLake | Behovstilpasset teknisk diagram, ikke en generisk kortscene |
 | architecture-databricks | Databricks: data, analyse og KI | Databricks bruker lakehouse-data til BI og KI | Behovstilpasset teknisk diagram, ikke en generisk kortscene |
 | market-why-now | Markedet flytter seg raskt – men behovene består | KI endrer tempoet – behovet for forståelse består | Forteller et konkret før-til-etter-resonnement i stedet for dekorative ringer |

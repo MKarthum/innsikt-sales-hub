@@ -40,3 +40,8 @@ Retningslinjene fra [Harvard Catalyst](https://catalyst.harvard.edu/writing-comm
 ## Oppfølging v0.17.5 – `ai-pragmatic` (24.10.2026)
 
 Før: Tre like steg («Velg ett behov», «Test med riktige data», «Lær – og bygg videre») uten eksplisitt sammenligningsgrunnlag, målemetode eller kontrollgrense. Etter: Fiktiv kundeservicesortering viser manuell arbeidsmåte ved siden av KI-forslag med menneskelig godkjenning, to sammenlignbare arbeidsflyter (henvendelse → menneskelig valg versus henvendelse → KI-forslag → menneskelig valg), felles mål (treff mot avtalt fasit og tid per henvendelse), avgrensede testdata og beslutningsport. Ingen effekt er påstått. ID, historieplassering og kildeautoritet beholdes; NIST AI RMF er kun rammeverkskilde for risikovurdering. Visuell godkjenning krever særskilt dokumentasjon fra faktisk rendering.
+
+
+## Oppfølging v0.17.10 – `architecture-snowflake` (25.10.2026)
+
+Før: Seks sentrale produktbokser stablet ikon, navn og forklaring vertikalt, med små forklaringer. «Shares / Openflow» blandet datadeling og kildeintegrasjon i samme inntaksboks. Etter (planlagt og implementert for separat C-review): De seks boksene har horisontal ikon–navn–kortforklaring, og inntak er presisert til Snowpipe (filer), Snowpipe Streaming (hendelser) og Openflow (koblinger). Modellering er kortet ned uten å fjerne dbt, Dynamic Tables eller Snowpark. Leverandørspesifikk tredeling, støttefunksjoner, logoer og varemerkeopplysning beholdes. Faggrunnlag: Snowflakes offisielle Snowpipe/Openflow/Dynamic Tables-dokumentasjon. **Visuell godkjenning og eventuell merge må dokumenteres separat med faktiske skjermbilder og tester.**

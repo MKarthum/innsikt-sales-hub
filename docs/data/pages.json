@@ -739,7 +739,7 @@
           "slideId": "architecture-snowflake",
           "beat": "examples",
           "delivery": "tell",
-          "note": "Dette er et konseptuelt eksempel, ikke en komplett anbefalt arkitektur. Fokuser på dataflyten fra virksomhetens systemer, gjennom modellering og tilgjengeliggjøring til rapportering eller KI. Forklar hvilke oppgaver de ulike lagene løser og at støttefunksjonene gjelder på tvers. Sammenlign arkitekturene på den samme måten, men påpek at leverandørene både dekker ulike behov og overlapper i funksjonalitet. Overgang: Gå videre til Microsoft Fabric: integrert plattform."
+          "note": "Les figuren fra venstre mot høyre: datakilder, valg av inntak, felles datagrunnlag og ulike bruksflater. Skill mellom filinnlasting, streaming og Openflow-koblinger; datadeling er ikke det samme som inntak. Pek på dbt, Dynamic Tables og Snowpark som mulige måter å bearbeide data på, ikke en obligatorisk serie produkter. Avslutt med felles styrings- og kostansvar. Overgang: I Fabric er OneLake den samlende strukturen."
         },
         {
           "slideId": "architecture-fabric",

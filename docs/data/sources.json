@@ -644,5 +644,12 @@
     "type": "leverandørdokumentasjon",
     "published": "2026-08-04",
     "checked": "2026-10-25"
+  },
+  "snowflake-ingest-options": {
+    "title": "Snowpipe – when to use Snowpipe, Snowpipe Streaming and Openflow",
+    "publisher": "Snowflake Documentation",
+    "url": "https://docs.snowflake.com/en/user-guide/data-load-snowpipe-intro",
+    "type": "official documentation",
+    "checked": "2026-10-25"
   }
 }
