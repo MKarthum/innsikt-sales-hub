@@ -11,6 +11,16 @@ try{
  await page.locator('#present-tone-mode').waitFor();
  assert.equal(await page.locator('#present-tone-mode').inputValue(),'light','Unified default is light');
  assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'light','First slide is light');
+ assert.equal(await page.locator('#slide-number-toggle').isChecked(),true,'Presentation numbers on by default');
+ assert.equal(await page.locator('#slide-body .scene-id,#slide-body .slide-placement-number').count(),1,'Placement number is visible in selected story');
+ await page.locator('#slide-number-toggle').uncheck();
+ assert.equal(await page.locator('#slide-body .scene-id,#slide-body .slide-placement-number').count(),0,'Hide number, not content');
+ await page.locator('#slide-next').click();
+ assert.equal(await page.locator('#slide-body .scene-id,#slide-body .slide-placement-number').count(),0,'Hidden number remains hidden after navigation');
+ assert.ok((await page.locator('#slide-counter').innerText()).startsWith('2 av'),'Navigation pager remains available');
+ await page.locator('#slide-number-toggle').check();
+ assert.ok((await page.locator('#slide-body .scene-id,#slide-body .slide-placement-number').innerText()).includes('02 / '),'Number follows current placement');
+ await page.locator('#slide-prev').click();
  await page.locator('#present-tone-mode').selectOption('story');
  assert.equal(await page.locator('#present-tone-mode').inputValue(),'story','Story mode is explicit opt-in');
  assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'strong');
@@ -31,11 +41,25 @@ try{
  const out=await page.evaluate(()=>window.__themeExport);
  assert.ok(out.args.tones.every(x=>x==='strong'),'Download uses same palette as presentation');
  assert.equal(out.args.classification,'public');
+ await page.locator('#slide-number-toggle').uncheck();
+ await page.evaluate(()=>window.__themeExport=null);
+ await page.locator('#deck-download').click();
+ await page.waitForFunction(()=>window.__themeExport!==null);
+ const unnumbered=await page.evaluate(()=>window.__themeExport);
+ assert.ok(unnumbered.args.slides.every(html=>!html.includes('class="scene-id"')&&!html.includes('class="slide-placement-number"')),'Export honors disabled numbering');
+ await page.locator('#slide-number-toggle').check();
+
  await page.locator('#present-tone-mode').selectOption('story');
  await page.locator('[data-deck="innsikt"]').click();
  assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'strong');
  assert.equal(privateFetch,0,'Public mode never requests private content');
  await page.keyboard.press('Escape');
+ await page.evaluate(()=>location.hash='#utvikling');
+ await page.locator('.dev-overview .panel').first().waitFor();
+ assert.equal(await page.locator('.dev-overview .panel').count(),3,'Development summary is visible');
+ assert.equal(await page.locator('.dev-list').first().locator('.dev-item').count(),4,'Four concrete priorities are shown first');
+ assert.ok(await page.locator('.dev-collapsed').count()>=2,'Remaining and later work grouped without hiding information');
+ assert.ok(await page.locator('#export-notes').isDisabled(),'No invented local feedback');
  // Simulate an authorized internal deployment; no private content is committed to this repository.
  const privatePage=await browser.newPage({viewport:{width:1280,height:800}});
  const fakeSlide={id:'test-private-slide',classification:'internal',scope:'story',storyId:'test-private-story',

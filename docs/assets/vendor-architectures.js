@@ -49,9 +49,9 @@ function render(profile,slide,catalog,escape,position){
   +section(d.workloadTitle,'<div class="vp-db-engine-items">'+d.workloads.map(x=>atom(x)).join('')+'</div>','vp-db-workloads')
   +outputs('vp-db-outputs')+'</div>';
  }else throw Error('Ukjent leverandørkomposisjon: '+profile.variant);
- const n=String((position?.index??0)+1).padStart(2,'0')+' / '+String(position?.total??1).padStart(2,'0');
+ const n=position?.showNumbers?'<span class="scene-id">'+String((position.index??0)+1).padStart(2,'0')+' / '+String(position.total??1).padStart(2,'0')+'</span>':'';
  return '<div class="story-scene vp-scene vp-scene-'+e(profile.id)+'">'
-  +'<div class="scene-topline"><div class="scene-eyebrow">'+e(profile.eyebrow)+'</div><span class="scene-id">'+n+'</span></div>'
+  +'<div class="scene-topline"><div class="scene-eyebrow">'+e(profile.eyebrow)+'</div>'+n+'</div>'
   +'<div class="vp-heading"><h2>'+e(profile.label)+'</h2><p>'+e(profile.intro)+'</p></div>'
   +composition+help()+'<div class="vp-bottom"><p>'+e(d.foot)+'</p><small>'+e(profile.brandNotice||'Illustrativ arkitektur · ingen leverandørgodkjenning implisert.')+'</small></div></div>';
 }

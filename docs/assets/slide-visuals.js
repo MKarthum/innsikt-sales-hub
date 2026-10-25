@@ -31,7 +31,7 @@ function orbits(){
 }
 function render(slide,esc,position={}){
  const v=slide.visual||{},kind=v.scene;
- const counter=String((position.index??0)+1).padStart(2,'0')+' / '+String(position.total??1).padStart(2,'0');
+ const counter=position.showNumbers?'<span class="scene-id">'+String((position.index??0)+1).padStart(2,'0')+' / '+String(position.total??1).padStart(2,'0')+'</span>':'';
  const assetImage=(id,cls)=>{
   if(!id)return '';
   const asset=window.InnsiktAssets.get(position.assets,id);
@@ -40,7 +40,7 @@ function render(slide,esc,position={}){
 
  const label='<div class="scene-eyebrow">'+esc(slide.cue||'')+'</div>';
  if(kind==='analyst-grid')return '<div class="story-scene scene-analysts">'
-  +'<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>'
+  +'<div class="scene-topline">'+label+counter+'</div>'
   +'<div class="scene-analysts-layout"><div class="scene-analysts-copy">'
   +'<h2 class="scene-analysts-lead">'+esc(v.lead)+'</h2>'
   +'<div class="scene-analysts-number">'+esc(v.number)+'</div>'
@@ -48,13 +48,13 @@ function render(slide,esc,position={}){
   +'<div class="scene-analysts-figure">'+gridPeople()+'</div></div>'
   +'<div class="scene-bottomline"><span class="scene-kicker-mark"></span>'+esc(v.tag)+'</div></div>';
  if(kind==='two-directions')return '<div class="story-scene scene-duality">'
-  +'<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>'
+  +'<div class="scene-topline">'+label+counter+'</div>'
   +'<header class="scene-duality-intro"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p></header>'
   +'<div class="scene-duality-graph"><div class="scene-duality-origin">'+esc(v.center)+'</div>'+branch()+'</div>'
   +'<div class="scene-duality-outcomes"><div class="scene-duality-good"><span class="scene-duality-symbol">+</span><h3>'+esc(v.positive)+'</h3><p>'+esc(v.positiveDetail)+'</p></div>'
   +'<div class="scene-duality-risk"><span class="scene-duality-symbol">−</span><h3>'+esc(v.negative)+'</h3><p>'+esc(v.negativeDetail)+'</p></div></div></div>';
  if(kind==='value-system')return '<div class="story-scene scene-system">'
-  +'<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>'
+  +'<div class="scene-topline">'+label+counter+'</div>'
   +'<div class="scene-system-layout"><div class="scene-system-story"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p><div class="scene-system-foot">'+esc(v.footer)+'</div></div>'
   +'<div class="scene-system-figure">'+orbits()+'<div class="scene-system-core">'+esc(v.core)+'</div>'
   +'<div class="scene-system-label scene-system-label--top">'+esc(v.business)+'</div>'
@@ -62,7 +62,7 @@ function render(slide,esc,position={}){
   +'<div class="scene-system-label scene-system-label--right">'+esc(v.ai)+'</div>'
   +'</div></div></div>';
 
- const top='<div class="scene-topline">'+label+'<span class="scene-id">'+counter+'</span></div>';
+ const top='<div class="scene-topline">'+label+counter+'</div>';
  const escs=x=>esc(String(x??''));
  const block=(name,inside)=>'<div class="story-scene scene-v2 scene-v2-'+name+'">'+inside+'</div>';
  const title='<h2 class="v2-headline">'+escs(slide.title)+'</h2>';

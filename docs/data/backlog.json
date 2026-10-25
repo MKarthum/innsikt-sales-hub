@@ -132,8 +132,8 @@
     "title": "Koble kanoniske begreper og fakta mellom alle sider via stabile ID-er",
     "area": "Arkitektur",
     "priority": "høy",
-    "status": "åpen",
-    "why": "Gjør forklaring, tekstvarianter, kilder og status autoritative og gjenbrukbare, også der tekst ikke vises."
+    "status": "pågår",
+    "why": "Kanoniske ID-er brukes nå for flere felles begreper, kilder og presentasjoner. Gå gjennom resterende semantiske overlapp ved konkrete endringer, fremfor å opprette parallelle beskrivelser."
   },
   {
     "id": "B-18",
@@ -235,9 +235,9 @@
     "id": "B-30",
     "title": "Fortsette målrettet visuell revisjon av presentasjonsbiblioteket",
     "area": "Presenter",
-    "status": "åpen",
+    "status": "pågår",
     "priority": "middels",
-    "why": "Se SLIDE_QUALITY_REVIEW_V017.md for rangerte gjenstående svakheter. Prioriter ai-pragmatic, seller-better-questions og portal-learning med faktisk 16:9-inspeksjon; unngå generiske kort og endring av fungerende bilder."
+    "why": "Flere svake bilder er omarbeidet i v0.17.5–0.17.13. Velg gjenværende arbeid etter faktisk 16:9-visning og tilbakemeldinger; ikke gjenta allerede ferdige forbedringer."
   },
   {
     "id": "B-31",
