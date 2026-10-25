@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const load=n=>JSON.parse(fs.readFileSync('docs/data/'+n+'.json','utf8'));
-const base={pages:load('pages'),slides:load('slides'),sources:load('sources')};
+const base={pages:load('pages'),slides:load('slides'),sources:load('sources'),industrySectors:load('sales').industrySectors};
 const context={window:{}};
 vm.runInNewContext(fs.readFileSync('docs/assets/presentation-content.js','utf8'),context);
 const api=context.window.InnsiktPresentationContent;
@@ -46,7 +46,7 @@ assert.equal(merged.pages.navigationSections[1].items.at(-1).route,'prompter');
 assert.ok(!JSON.stringify(base).includes('Dette er privat testinnhold.'));
 assert.equal(merged.internalCollections.customerStories[0].body,'Dette er privat testinnhold.');
 assert.equal(merged.slides.items.length,base.slides.items.length);
-const invalid=(patch,match)=>assert.throws(()=>api.combine(base,{...sample,...patch}),match);
+const invalid=(patch,match)=>assert.throws(()=>api.combine(base,{...profileContent,...patch}),match);
 invalid({tools:[{...tool,href:'javascript:alert(1)'}]},/Utrygg lenke/);
 invalid({tools:[{...tool,classification:'public'}]},/Ugyldig/);
 invalid({tools:[{...tool,id:entry.id}]},/duplisert/);
