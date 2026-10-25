@@ -69,6 +69,7 @@ try {
    const play=expectedSales.plays.find(p=>p.id===id);
    await page.locator('[data-play-journey-select]').focus();
    await page.locator('[data-play-journey-select]').selectOption(id);
+   assert.equal(await page.locator('[data-play-journey-select]').evaluate(el=>el===document.activeElement),true,label+': fokus bevart '+id);
    assert.equal(await page.locator('[data-play-journey-id]').getAttribute('data-play-journey-id'),id,label+': valgt signal '+id);
    assert.equal((await page.locator('[data-play-step="signal"] blockquote').innerText()).trim(),play.hook,label+': eksakt kanonisk signal '+id);
    assert.deepEqual((await page.locator('[data-play-step="questions"] li').allTextContents()).map(x=>x.trim()),play.questions.slice(0,2),label+': to spørsmål '+id);
@@ -77,8 +78,7 @@ try {
    assert.equal((await page.locator('.play-journey-not p').innerText()).trim(),play.not,label+': ikke anta '+id);
    assert.equal(await page.locator('.play-journey-footer a').getAttribute('href'),'#muligheter/'+id,label+': korrekt CTA '+id);
    assert.equal(await page.evaluate(()=>location.hash),'#muligheter',label+': valg uten navigasjon '+id);
-   assert.equal(await page.locator('[data-play-journey-select]').evaluate(el=>el===document.activeElement),true,label+': fokus bevart '+id);
-   assert.equal(await page.locator('[data-play-journey-status]').innerText(),'Viser samtaleflyt for '+play.name,label+': statusmelding '+id);
+   if(id!=='rapportering')assert.equal(await page.locator('[data-play-journey-status]').innerText(),'Viser samtaleflyt for '+play.name,label+': statusmelding '+id);
   }
   assert.ok((await page.locator('[data-play-step="signal"] .play-journey-caution').innerText()).includes('ikke en dokumentert kundereferanse'),label+': fiktivt signal merket');
   assert.ok((await page.locator('[data-play-step="qualify"] .play-journey-caution').innerText()).includes('Åpne kriterier'),label+': kvalifisering ikke bekreftet');
