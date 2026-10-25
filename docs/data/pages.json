@@ -512,18 +512,18 @@
     "portal": {
       "label": "Vis løsningen · én konkret arbeidsflyt",
       "audience": "Kolleger og ledere som skal få se hvordan Innsikt hjelper med konkrete oppgaver i kundearbeid.",
-      "intro": "Vis hvordan en selger faktisk bruker portalen i et kundemøte: inngang, prompt, behov og faglig støtte. Demonstrer én reell arbeidsflyt, ikke alle sider.",
+      "intro": "Vis hvordan en selger faktisk bruker portalen før et kundemøte: inngang, prompt, behov og faglig støtte. Demonstrer én reell arbeidsflyt, ikke alle sider.",
       "narrative": {
         "mode": "product-demonstration",
         "use": "Hovedløpet for å vise den nye forsiden, møtebriefen og alternative oppgaveinnganger. Ikke en obligatorisk brukerreise.",
         "centralQuestion": "Hvordan kan Innsikt hjelpe meg med en konkret oppgave før neste kundemøte?",
         "turn": "En ferdig prompt eller et gjenkjennelig kundebehov kan gi nytte før man må fordype seg i fagstoff.",
         "resolution": "Publikum ser hvordan man starter med sin oppgave og finner dybde ved behov.",
-        "story": "En kundeansvarlig skal snart i kundemøte og trenger å være bedre forberedt. Løsningen skal ikke begynne med en katalog over nyheter, begreper og teknologi, men med spørsmålet om hvilken oppgave brukeren ønsker å få gjort. Vi introduserer de tre inngangene på den nye forsiden, og demonstrerer først en praktisk gevinst: en ferdig møtebrief-prompt som kan redigeres og kopieres. Om brukeren allerede kjenner kundens problem, er det riktigere å gå direkte til Forretningsbehov og kvalifiseringsspørsmål. Når selgeren får et faglig spørsmål om KI på interne dokumenter, kan et faktisk arkitekturoppslag gi to nyttige avklaringsspørsmål om kildefasit og tilgang. Fordypningen er frivillig og hjelper med spørsmålene, ikke med å velge løsning på kundens vegne. Marked og trender gir støtte når kontekst er nyttig, men er ikke et obligatorisk første steg. Historien ender med et konkret resultat: et brukbart utkast, skarpere spørsmål og en vei til kvalifisert oppfølging. Ingen av delene betyr at systemet automatisk kjenner kunden eller bestemmer riktig løsning.",
+        "story": "En kundeansvarlig skal snart i kundemøte og trenger å være bedre forberedt. Løsningen skal ikke begynne med en katalog over nyheter, begreper og teknologi, men med spørsmålet om hvilken oppgave brukeren ønsker å få gjort. Vi peker kort på oppgaveinngangene på forsiden og går direkte til en praktisk gevinst: en møtebrief-prompt som kan redigeres og kopieres. Om brukeren allerede kjenner kundens problem, er det riktigere å gå direkte til Forretningsbehov og kvalifiseringsspørsmål. Når selgeren får et faglig spørsmål om KI på interne dokumenter, kan et faktisk arkitekturoppslag gi to nyttige avklaringsspørsmål om kildefasit og tilgang. Fordypningen er frivillig og hjelper med spørsmålene, ikke med å velge løsning på kundens vegne. Marked og trender gir støtte når kontekst er nyttig, men er ikke et obligatorisk første steg. Historien ender med et konkret resultat: et brukbart utkast, skarpere spørsmål og en vei til kvalifisert oppfølging. Ingen av delene betyr at systemet automatisk kjenner kunden eller bestemmer riktig løsning.",
         "beats": [
           {
             "id": "challenge",
-            "function": "Presenter brukerens utfordring og de tre faktiske startpunktene."
+            "function": "Presenter kundesituasjonen og velg møteforberedelse som første handling."
           },
           {
             "id": "quick-win",
@@ -548,13 +548,7 @@
           "slideId": "portal-opening",
           "beat": "challenge",
           "delivery": "tell",
-          "note": "Åpne med situasjonen, ikke menyen: «Se for dere at jeg skal i kundemøte i morgen. Jeg vil være godt forberedt, men jeg trenger ikke å bli ekspert på alle data- og KI-teknologiene først.» Innsikt hjelper oss med to ting: å finne noe vi kan bruke umiddelbart, og å forstå mer når vi trenger det. Dette er en gjennomgang av arbeidsverktøyet, ikke en presentasjon av et bestemt kundeprosjekt. Forklar at vi skal følge en vanlig forberedelsessituasjon gjennom løsningen. Overgang: Hva ønsker vi å få gjort først?"
-        },
-        {
-          "slideId": "portal-three-ways",
-          "beat": "challenge",
-          "delivery": "tell",
-          "note": "Vis forsiden mens du forklarer at dette er de tre oppgavekortene brukeren møter der. Ikke framstill dem som et kurs som må gjennomføres i denne rekkefølgen. En kundeansvarlig velger en konkret oppgave, mens en teknisk konsulent kan gå rett til fagstoff. Fortell at du demonstrerer den første inngangen nå, og viser de to andre etterpå. Her ligger forskjellen fra den gamle løsningen: Nytten kommer før den store oversikten. Det er ingen grunn til å lese markedssider før man lager en møtebrief hvis man allerede vet hvorfor man skal i møtet. Overgang: La oss prøve den raskeste veien til et brukbart resultat."
+          "note": "Åpne med situasjonen, ikke menyen: «Se for dere at jeg skal i kundemøte i morgen. Jeg vil være godt forberedt, men trenger ikke å kunne alle data- og KI-teknologiene.» Innsikt har flere oppgaveinnganger på forsiden: møteforberedelse, utforske behov, faglig fordypning og trening med en kollega. Vi skal ikke gå gjennom fire menyer; vi velger én oppgave og viser hva den gir. Vis eventuelt forsiden kort og pek på «Lag en møtebrief», men ikke stopp på en egen menyside. Dette er en illustrasjon av bruk, ikke et kundeprosjekt. Overgang: Vi starter med møtebriefen."
         },
         {
           "slideId": "portal-meeting-brief",

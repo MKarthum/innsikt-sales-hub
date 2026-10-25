@@ -185,9 +185,9 @@ try {
   // Hovedfortellingen skal følge de samme oppgavene som den nye forsiden.
   await page.locator('[data-deck="portal"]').click();
   await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-three-ways')),label+': oppgaver kommer før fagkatalog');
-  await page.locator('#slide-next').click();
-  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-meeting-brief')),label+': klar første nytte');
+  assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-meeting-brief')),label+': direkte til møtebrief etter åpning');
+  await page.locator('#speaker-toggle').check();
+  assert.ok((await page.locator('#slide-speaker-notes').innerText()).includes('møtebrief'),label+': presenter-notat følger ny overgang');
   await page.locator('#slide-next').click();
   assert.ok((await page.locator('#slide-body').innerText()).includes(canonicalSlideTitles.get('portal-customer-signal')),label+': kundebehov er neste alternativ');
   await page.locator('#slide-next').click();
@@ -321,11 +321,11 @@ try {
   assert.ok(download.suggestedFilename().includes(expectedVersion)&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
   const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
   assert.ok(exported.includes(canonicalSlideTitles.get('portal-opening'))&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
-  assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,7,'alle portal-slides er eksportert');
+  assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,6,'alle seks portal-slides er eksportert');
   const popupPromise=context.waitForEvent('page');
   await page.locator('#deck-print').click();
   const printed=await popupPromise;
-  await printed.waitForFunction(()=>document.querySelectorAll('.export-slide').length===7);
+  await printed.waitForFunction(()=>document.querySelectorAll('.export-slide').length===6);
   assert.ok((await printed.locator('#export-print').count())===1,'utskriftsvisning har PDF-knapp');
   await printed.close();
   await page.locator('#speaker-toggle').check();

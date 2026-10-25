@@ -15,7 +15,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | ID | Tidligere overskrift | Nytt budskap | Visuell beslutning |
 |---|---|---|---|
 | portal-opening | Innsikt hjelper oss fra usikkerhet til en bedre kundesamtale | Innsikt gjør neste kundesamtale enklere å forberede | Forteller et konkret før-til-etter-resonnement i stedet for dekorative ringer |
-| portal-three-ways | Tre veier inn i Innsikt | Start med oppgaven – ikke med teknologien | Sammenlignbare tre valg med større tekst og tydelig støttepunkt |
+| portal-three-ways | Tre veier inn i Innsikt | Start med oppgaven – ikke med teknologien | Tre illustrative valg; fjerde inngang (trening) er presisert. Beholdt i biblioteket, fjernet fra aktivt dekk fordi åpningen allerede viser oppgavevalg. |
 | portal-meeting-brief | En møtebrief kan være første nyttige resultat | En nyttig møtebrief krever tre enkle grep | Viser hvert handlingstrinn og hvorfor det gjøres |
 | portal-customer-signal | Fra kundesignal til gode spørsmål | Et kundesignal er starten på en undersøkelse | Gir kundedialogen en retning fra signal til spørsmål |
 | portal-learning | Fagstoff når du trenger det | Ett fagoppslag gir to bedre spørsmål om KI på dokumenter | Fiktivt selgerspørsmål → kanonisk RAG-oppslag → to spørsmål; synlig grense for hva vi ikke vet |
