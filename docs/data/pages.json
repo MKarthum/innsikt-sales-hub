@@ -1296,5 +1296,26 @@
       "route": "#arkitektur",
       "label": "Arkitektur"
     }
-  ]
+  ],
+  "architectureExplorerUi": {
+    "eyebrow": "UTFORSK DATAFLYTEN",
+    "title": "Hva skjer mellom kildene og det vi faktisk bruker?",
+    "intro": "Velg en grunnmodell eller en plattform. Figuren er den samme som i lysbildebiblioteket, men her kan du undersøke sammenhengen i ditt eget tempo.",
+    "genericGroup": "Grunnmodeller",
+    "vendorGroup": "Plattformeksempler",
+    "sources": "Datakilder",
+    "uses": "Bruk og resultat",
+    "crosscutting": "På tvers av hele løsningen",
+    "openSlide": "Åpne som lysbilde",
+    "sourcesLabel": "Kilder og dokumentasjon",
+    "moreDiagrams": "Se fire enkle dataveier steg for steg",
+    "optionLabels": {
+      "conceptual": "Helheten",
+      "modern": "Moderne dataflyt",
+      "ai-on-data": "Analyse og KI",
+      "snowflake": "Snowflake",
+      "fabric": "Fabric",
+      "databricks": "Databricks"
+    }
+  }
 }
