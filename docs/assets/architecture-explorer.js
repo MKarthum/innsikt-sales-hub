@@ -7,7 +7,7 @@ function mobileModel(profile,ui,escape){
  const d=profile.diagram;
  const values=items=>(items||[]).map(x=>typeof x==='string'?x:[x.label,x.sub].filter(Boolean).join(' – '));
  let phases;
- if(profile.variant==='snowflake'){
+ if(profile.variant==='snowflake-hub'){
   phases=[
    {heading:d.sourceTitle,items:values(d.sources)},
    {heading:d.ingestTitle,items:values(d.ingest)},
@@ -15,7 +15,7 @@ function mobileModel(profile,ui,escape){
    {heading:d.transformTitle,items:values(d.transform)},
    {heading:d.outputTitle,items:values(d.outputs)}
   ];
- }else if(profile.variant==='fabric'){
+ }else if(profile.variant==='fabric-experiences'){
   phases=[
    {heading:d.sourceTitle,items:values(d.sources)},
    {heading:d.topTitle,items:values(d.ingest)},
@@ -23,7 +23,7 @@ function mobileModel(profile,ui,escape){
    {heading:d.lakeTitle,items:[d.lakeDescription]},
    {heading:d.outputTitle,items:values(d.outputs)}
   ];
- }else if(profile.variant==='databricks'){
+ }else if(profile.variant==='databricks-medallion'){
   phases=[
    {heading:d.sourceTitle,items:values(d.sources)},
    {heading:d.ingestTitle,items:values(d.ingest)},
