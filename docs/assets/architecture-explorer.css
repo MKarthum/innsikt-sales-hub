@@ -45,7 +45,6 @@
  .arch-pan-guide{display:block}
  .arch-stage-open{display:block;position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:zoom-in;z-index:4}
  .arch-stage-open:focus-visible{outline:4px solid var(--teal);outline-offset:-5px;border-radius:5px}
- .arch-stage-open span{position:absolute;right:10px;bottom:10px;padding:7px 10px;border:1px solid var(--border);background:var(--navy);color:white;border-radius:999px;font:750 12px/1.2 var(--font-body);box-shadow:0 3px 12px rgba(10,32,44,.2)}
  .arch-explorer-panel.is-detail .arch-stage-open{display:none}
  .arch-explorer-stage{aspect-ratio:16/9;overflow:hidden}
  .arch-explorer-stage .vp-heading,.arch-explorer-stage .da-intro,.arch-explorer-stage .scene-topline{display:none}

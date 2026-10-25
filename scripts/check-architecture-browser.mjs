@@ -109,6 +109,8 @@ try{
    assert.ok(overview.scroll<=overview.client+2,'Overview fits the entire architecture without horizontal clipping');
    await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-overview.png'});
    const open=region.locator('[data-arch-detail-open]');
+   assert.equal(await open.locator('span').count(),0,'No visible label obscures the architectural drawing');
+   assert.equal((await open.getAttribute('aria-label'))?.length>10,true,'Accessible name exists even without the visible badge');
    assert.equal(await open.isVisible(),true,'The diagram itself is the visible entry point');
    assert.equal(await region.locator('[data-arch-detail]').isVisible(),false,'Redundant detail button is hidden before zoom');
    assert.equal(await region.locator('.arch-pan-guide>p').isVisible(),false,'No repeated tap instruction below overview image');
