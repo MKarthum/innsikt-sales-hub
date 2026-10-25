@@ -1315,7 +1315,6 @@
   "architectureExplorerUi": {
     "eyebrow": "01 · FELLES MODELL",
     "title": "Hva må dataarkitekturen få til?",
-    "intro": "Kilder må bli til pålitelig informasjon som kan brukes. Fellesmodellen viser ansvarene – ikke fem produkter du må kjøpe.",
     "vendorGroup": "Velg plattformeksempel",
     "sources": "Datakilder",
     "uses": "Bruk og resultat",
@@ -1339,7 +1338,7 @@
       "bi",
       "rag"
     ],
-    "panGuide": "Trykk på figuren for å utforske den i stort format. Flytt deg sideveis mellom områdene.",
+    "panGuide": "Sveip i den forstørrede figuren, eller hopp mellom kilder, plattform og bruk.",
     "panNavLabel": "Navigering i arkitekturen",
     "panRegionLabel": "Sideveis utforskbar arkitektur",
     "panSources": "Kilder",

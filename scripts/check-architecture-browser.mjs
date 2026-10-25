@@ -111,11 +111,13 @@ try{
    const open=region.locator('[data-arch-detail-open]');
    assert.equal(await open.isVisible(),true,'The diagram itself is the visible entry point');
    assert.equal(await region.locator('[data-arch-detail]').isVisible(),false,'Redundant detail button is hidden before zoom');
+   assert.equal(await region.locator('.arch-pan-guide>p').isVisible(),false,'No repeated tap instruction below overview image');
    await open.focus();
    await mobile.keyboard.press('Enter');
    assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'true','Keyboard Enter on the image opens readable detail');
    assert.equal(await open.isVisible(),false,'Image overlay is removed in pan mode');
    assert.equal(await region.locator('[data-arch-detail]').isVisible(),true,'Accessible return control appears in detail mode');
+   assert.equal(await region.locator('.arch-pan-guide>p').isVisible(),true,'Sideways navigation guidance appears only when needed');
    const dimensions=await canvas.evaluate(x=>({client:x.clientWidth,scroll:x.scrollWidth,height:x.clientHeight,ownScroll:x.scrollWidth>x.clientWidth+100}));
    assert.equal(dimensions.ownScroll,true,'Vendor architecture pans within its own viewport');
    assert.ok(dimensions.height>=500,'Readable detailed architecture at full drawing scale');

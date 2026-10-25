@@ -152,3 +152,9 @@
 @media(max-width:650px){
  .arch-explorer>.arch-explorer-head{padding:15px 17px 4px}
 }
+
+/* The image already invites a tap. Navigation guidance belongs only to the expanded view. */
+@container architecture-panel (max-width:850px){
+ .arch-pan-guide>p{display:none}
+ .arch-explorer-panel.is-detail .arch-pan-guide>p{display:block}
+}
