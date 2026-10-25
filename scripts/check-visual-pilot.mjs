@@ -65,6 +65,7 @@ try{
    await page.evaluate(route=>{location.hash='#'+route},route);
    await page.locator(selector).first().waitFor();
    if(route==='ordliste/bi')await page.waitForFunction(()=>document.querySelector('.glossary-item[data-glossary-id="bi"]')?.open);
+   await page.waitForTimeout(450); // Wait for responsive sidebar and scroll transitions before capturing.
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
    assert.ok(overflow<=3,'Ingen horisontal sideavklipping '+route+'/'+size+': '+overflow);
    if(route==='forretning'){
