@@ -13,9 +13,12 @@ try{
  await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
  await page.evaluate(()=>location.hash='#arkitektur');
  await page.locator('[data-architecture-explorer]').waitFor();
- assert.equal(await page.locator('[data-arch-option]').count(),4,'One reference model and three platform examples');
+ assert.equal(await page.locator('[data-arch-option]').count(),3,'One permanently visible foundation and three vendor examples');
+ assert.equal(await page.locator('[data-arch-vendor-panel]').count(),3,'Three vendor compositions exist in comparison');
  assert.equal(await page.locator('[data-arch-option="modern"],[data-arch-option="ai-on-data"]').count(),0,'Technical detail and AI use are not competing base architectures');
- assert.equal(await page.locator('[data-arch-panel]:not([hidden])').count(),1,'Exactly one architecture perspective shown');
+ assert.equal(await page.locator('[data-arch-panel]:not([hidden])').count(),2,'Reference model and one selected vendor always visible');
+ assert.equal(await page.locator('[data-arch-vendor-panel]:not([hidden])').count(),1,'Exactly one vendor selected');
+ assert.ok(await page.locator('[data-arch-panel="conceptual"]:not([hidden])').isVisible(),'The common model remains visible');
  assert.equal(await page.locator('[data-arch-panel="conceptual"]:not([hidden]) .da-scene').count(),1,'Page reuses presentation renderer');
  await page.screenshot({path:out+'/architecture-first-impression-desktop.png',fullPage:false});
  const details=page.locator('[data-arch-technical]');
@@ -25,6 +28,15 @@ try{
  assert.equal(await page.locator('.arch-applications .learning-card').count(),2,'Two distinctly purposeful BI and document RAG examples');
  assert.equal(await page.locator('.arch-applications a[href="#arkitektur/bi"]').count(),1,'BI example keeps deep link');
  assert.equal(await page.locator('.arch-applications a[href="#arkitektur/rag"]').count(),1,'Document RAG example keeps deep link');
+ assert.equal(await page.locator('#main .risk-card').count(),0,'General AI risk catalog is not dumped on architecture landing');
+ assert.equal(await page.locator('.arch-explorer-more').count(),0,'No hidden catch-all appendix');
+ const next=JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).architectureExplorerUi.nextLinks;
+ assert.deepEqual(await page.locator('[data-arch-next] a').evaluateAll(xs=>xs.map(x=>x.getAttribute('href'))),next.map(x=>x.route),'Next steps link to original canonical owners');
+ assert.ok(await page.locator('[data-arch-vendors]').count()===1,'Vendors have their own comparison section');
+ const order=await page.evaluate(()=>['[data-arch-panel="conceptual"]','.arch-principles','[data-arch-vendors]','[data-arch-applications]','[data-arch-next]'].map(sel=>{
+  const node=document.querySelector('#main '+sel);return node?.getBoundingClientRect().top+window.scrollY;
+ }));
+ assert.ok(order.every(Number.isFinite)&&order.every((v,i)=>i===0||v>order[i-1]),'Reading order foundation → principles → vendor → uses → further reading '+JSON.stringify(order));
  const canonicalQuestions=JSON.parse(fs.readFileSync('docs/data/horizon.json','utf8')).questions;
  assert.equal(await page.locator('.arch-principles h2').textContent(),canonicalQuestions.title,'Architecture promotes the existing supplier-independent questions');
  assert.deepEqual(await page.locator('.arch-principles .arch-principle p').allTextContents(),canonicalQuestions.items,'Four questions use the existing canonical horizon content, no copied facts');
@@ -33,13 +45,16 @@ try{
  const snow=page.locator('[data-arch-panel="snowflake"]:not([hidden])');
  assert.equal(await snow.locator('.vp-output .vp-atom-label strong').filter({hasText:'BI / rapporter'}).count(),1,'Snowflake BI output is a role, not a required Microsoft dependency');
  assert.ok((await snow.locator('.vp-output').allTextContents()).some(x=>x.includes('Sigma')&&x.includes('Tableau')),'Canonical Snowflake scene offers several real BI alternatives');
- assert.equal(await snow.locator('[data-arch-bi-alternatives] .arch-bi-option').count(),3,'One explanatory comparison with existing BI, independent BI and native apps');
+ assert.equal(await snow.locator('[data-arch-bi-alternatives] .arch-bi-option').count(),3,'Three alternative paths for BI');
+ assert.equal(await snow.locator('[data-arch-bi-alternatives]').evaluate(x=>x.open),false,'BI detail begins collapsed');
  assert.equal(await snow.locator('[data-arch-reading-guide]').count(),1,'Each platform has an interpretation guide');
+ assert.equal(await page.locator('[data-arch-panel="conceptual"]:not([hidden])').count(),1,'Snowflake never replaces foundational model');
  assert.ok((await snow.locator('.arch-bi-caution').textContent()).includes('ny binding'),'BI alternatives explain real tradeoffs and do not promise zero lock-in');
  const editedSources=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.find(s=>s.id==='architecture-snowflake').sourceIds;
  assert.ok(['snowflake-bi-ecosystem','snowflake-dashboards-retired','sigma-snowflake-connector','tableau-snowflake-connector'].every(id=>editedSources.includes(id)),'BI alternatives are traceable to source registry');
  await page.screenshot({path:out+'/architecture-page-desktop.png',fullPage:false});
  await page.locator('[data-arch-option="fabric"]').click();
+ assert.equal(await page.locator('[data-arch-panel="conceptual"]:not([hidden])').count(),1,'Fabric never replaces foundation');
  assert.equal(await page.locator('[data-arch-option="fabric"]').getAttribute('aria-pressed'),'true','Platform option is accessible');
  assert.equal(await page.locator('[data-arch-panel="fabric"]:not([hidden]) .vp-fabric').count(),1,'Vendor composition preserved on the page');
  for(const width of [1100,900]){
@@ -103,7 +118,7 @@ try{
    const nav=region.locator('[data-arch-pan]');
    assert.equal(await nav.count(),3,'Accessible anchors to sources/platform/use');
    await nav.nth(1).click();
-   await mobile.waitForFunction(()=>{const v=document.querySelector('[data-arch-panel]:not([hidden]) .arch-explorer-stage');return v&&v.scrollLeft>40;});
+   await mobile.waitForFunction(()=>{const v=document.querySelector('[data-arch-vendor-panel]:not([hidden]) .arch-explorer-stage');return v&&v.scrollLeft>40;});
    if(vendorId==='fabric'){
     await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-fabric-one-lake.png'});
     const lake=await scene.locator('.vp-fabric-lake').boundingBox();
@@ -111,7 +126,7 @@ try{
     assert.ok(lake&&shell&&lake.y>shell.y+20&&lake.x>=shell.x,'OneLake visibly underpins Fabric workspaces; it is not stage 4 in a vertical list');
    }
    await nav.nth(2).click();
-   await mobile.waitForFunction(()=>{const v=document.querySelector('[data-arch-panel]:not([hidden]) .arch-explorer-stage');return v&&v.scrollLeft>300;});
+   await mobile.waitForFunction(()=>{const v=document.querySelector('[data-arch-vendor-panel]:not([hidden]) .arch-explorer-stage');return v&&v.scrollLeft>300;});
    await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-uses.png'});
    await region.locator('[data-arch-detail]').click();
    assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'false','Can return to full architecture overview');
@@ -126,6 +141,10 @@ try{
  await page.locator('.diagram').waitFor();
  await page.evaluate(()=>location.hash='#arkitektur/rag');
  await page.locator('.diagram').waitFor();
+ assert.equal(await page.locator('[data-arch-detail-risks]').count(),0,'RAG has relevant caution, not all general risk cards');
+ await page.evaluate(()=>location.hash='#arkitektur/ai-on-data');
+ await page.locator('.diagram').waitFor();
+ assert.equal(await page.locator('[data-arch-detail-risks] .risk-card').count(),JSON.parse(fs.readFileSync('docs/data/learning.json','utf8')).risks.length,'Risk examples live in detailed KI/data application and use canonical data');
  await page.evaluate(()=>location.hash='#lysbilder/architecture-modern');
  await page.locator('.slide-library-detail-stage .da-scene').waitFor();
  await page.evaluate(()=>location.hash='#lysbilder/architecture-ai');
