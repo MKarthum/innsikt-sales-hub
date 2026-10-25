@@ -4,18 +4,52 @@
 'use strict';
 const e=(escape,value)=>escape(String(value??''));
 function mobileModel(profile,ui,escape){
- const phases=[
-  {heading:ui.sources,items:profile.sources.map(x=>x.label)},
-  {heading:profile.ingest.title,items:profile.ingest.items},
-  {heading:profile.platform.title,items:[profile.platform.top,profile.platform.bottom]},
-  {heading:profile.serve.title,items:profile.serve.items},
-  {heading:ui.uses,items:profile.consumers.map(x=>x.label)}
- ];
- return '<div class="arch-explorer-mobile"><ol class="arch-explorer-steps">'+phases.map((step,i)=>
+ const d=profile.diagram;
+ const values=items=>(items||[]).map(x=>typeof x==='string'?x:[x.label,x.sub].filter(Boolean).join(' – '));
+ let phases;
+ if(profile.variant==='snowflake'){
+  phases=[
+   {heading:d.sourceTitle,items:values(d.sources)},
+   {heading:d.ingestTitle,items:values(d.ingest)},
+   {heading:d.coreTitle,items:[d.coreText]},
+   {heading:d.transformTitle,items:values(d.transform)},
+   {heading:d.outputTitle,items:values(d.outputs)}
+  ];
+ }else if(profile.variant==='fabric'){
+  phases=[
+   {heading:d.sourceTitle,items:values(d.sources)},
+   {heading:d.topTitle,items:values(d.ingest)},
+   {heading:d.workloadTitle,items:values(d.workloads)},
+   {heading:d.lakeTitle,items:[d.lakeDescription]},
+   {heading:d.outputTitle,items:values(d.outputs)}
+  ];
+ }else if(profile.variant==='databricks'){
+  phases=[
+   {heading:d.sourceTitle,items:values(d.sources)},
+   {heading:d.ingestTitle,items:values(d.ingest)},
+   {heading:d.lakeTitle,items:values(d.tiers)},
+   {heading:d.workloadTitle,items:values(d.workloads)},
+   {heading:d.outputTitle,items:values(d.outputs)}
+  ];
+ }else{
+  phases=[
+   {heading:ui.sources,items:values(profile.sources)},
+   {heading:profile.ingest.title,items:values(profile.ingest.items)},
+   {heading:profile.platform.title,items:[profile.platform.top,profile.platform.bottom]},
+   {heading:profile.serve.title,items:values(profile.serve.items)},
+   {heading:ui.uses,items:values(profile.consumers)}
+  ];
+ }
+ const support=d?.support||profile.support;
+ return '<div class="arch-explorer-mobile" data-arch-mobile="'+e(escape,profile.id)+'">'
+ +'<ol class="arch-explorer-steps"'+(d?' data-arch-vendor-detail="'+e(escape,profile.id)+'"':'')+'>'+phases.map((step,i)=>
   '<li><span class="arch-explorer-stepno" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span>'
   +'<div><h3>'+e(escape,step.heading)+'</h3><p>'+step.items.map(x=>e(escape,x)).join(' · ')+'</p></div></li>'
  ).join('')+'</ol>'
- +'<div class="arch-explorer-foundation"><strong>'+e(escape,ui.crosscutting)+'</strong><p>'+profile.support.map(x=>e(escape,x.label)).join(' · ')+'</p></div></div>';
+ +'<div class="arch-explorer-foundation"><strong>'+e(escape,ui.crosscutting)+'</strong><p>'+values(support).map(x=>e(escape,x)).join(' · ')+'</p></div>'
+ +(d?.foot?'<p class="arch-explorer-scene-note" data-arch-scene-note>'+e(escape,d.foot)+'</p>':'')
+ +(profile.kind==='vendor'?'<p class="arch-explorer-disclaimer" data-arch-vendor-notice>'+e(escape,profile.brandNotice||ui.vendorNotice)+'</p>':'')
+ +'</div>';
 }
 function panel(D,h,profile,active){
  const {esc,sourceLinks}=h,slide=D.slides.items.find(s=>s.profileId===profile.id);

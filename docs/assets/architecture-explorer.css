@@ -1,5 +1,5 @@
 /* Page view of the canonical architecture scene. Presenter CSS is reused, not copied. */
-.arch-explorer{margin:18px 0 30px;border:1px solid var(--border);border-radius:18px;background:var(--surface);overflow:hidden;box-shadow:0 14px 46px rgba(15,43,55,.07)}
+.arch-explorer{--muted:#405965;margin:18px 0 30px;border:1px solid var(--border);border-radius:18px;background:var(--surface);overflow:hidden;box-shadow:0 14px 46px rgba(15,43,55,.07)}
 .arch-explorer-head{padding:28px 28px 14px}
 .arch-explorer-head h2{margin:8px 0 8px;font:800 clamp(24px,3vw,32px)/1.13 var(--font-display);letter-spacing:-.04em;color:var(--ink)}
 .arch-explorer-head p{max-width:68ch;color:var(--muted);line-height:1.55;margin:0}
@@ -12,7 +12,7 @@
 .arch-explorer-option:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 .arch-explorer-panel[hidden]{display:none!important}
 .arch-explorer-panel{container:architecture-panel/inline-size;min-width:0}
-.arch-explorer-claim{padding:0 28px 16px}
+.arch-explorer-claim{display:none;padding:0 28px 16px}
 .arch-explorer-claim h3{margin:0 0 5px;color:var(--ink);font:800 clamp(18px,2.1vw,23px)/1.2 var(--font-display)}
 .arch-explorer-claim p{margin:0;color:var(--muted);line-height:1.5}
 .arch-explorer-stage{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:var(--slide-light-bg)}
@@ -27,6 +27,8 @@
 .arch-explorer-sources summary{cursor:pointer;color:var(--teal);font-weight:750}
 .arch-explorer-sources:focus-within{outline-offset:2px}
 .arch-explorer-mobile{display:none;padding:0 20px}
+.arch-explorer-scene-note,.arch-explorer-disclaimer{font-size:13px;line-height:1.5;margin:10px 0 0;padding:12px;border-left:3px solid var(--teal);background:var(--surface-secondary);color:var(--muted)}
+.arch-explorer-disclaimer{border-left-color:var(--border);font-size:12px}
 .arch-explorer-steps{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 .arch-explorer-steps li{min-width:0;display:flex;gap:14px;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--surface-secondary)}
 .arch-explorer-stepno{color:var(--teal);font-size:16px;font-weight:850}
@@ -37,6 +39,7 @@
 @container architecture-panel (max-width: 850px){
  .arch-explorer-stage{display:none}
  .arch-explorer-mobile{display:block}
+ .arch-explorer-claim{display:block}
 }
 @media (max-width:650px){
  .arch-explorer-head{padding:20px 17px 12px}

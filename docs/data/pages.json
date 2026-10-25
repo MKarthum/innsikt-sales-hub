@@ -96,7 +96,7 @@
     "ARKITEKTUR": {
       "eyebrow": "ARKITEKTUR I PRAKSIS",
       "title": "Slik henger data, analyse og KI sammen",
-      "intro": "Fire enkle skisser fra kildesystemer til beslutninger og KI. De viser prinsipper, ikke en fasit for kundens arkitektur."
+      "intro": "Se hvordan data går fra kildesystemer til rapporter, apper og KI. Utforsk sammenhengen og sammenlign plattformer – dette er eksempler, ikke en fasit."
     },
     "VERKTØYKASSE": {
       "eyebrow": "GJENBRUKBARE UTGANGSPUNKTER",
@@ -1299,13 +1299,14 @@
   ],
   "architectureExplorerUi": {
     "eyebrow": "UTFORSK DATAFLYTEN",
-    "title": "Hva skjer mellom kildene og det vi faktisk bruker?",
-    "intro": "Velg en grunnmodell eller en plattform. Figuren er den samme som i lysbildebiblioteket, men her kan du undersøke sammenhengen i ditt eget tempo.",
+    "title": "Velg perspektiv på dataflyten",
+    "intro": "Start med helheten eller utforsk hvordan ulike plattformer løser lignende oppgaver.",
     "genericGroup": "Grunnmodeller",
     "vendorGroup": "Plattformeksempler",
     "sources": "Datakilder",
     "uses": "Bruk og resultat",
     "crosscutting": "På tvers av hele løsningen",
+    "vendorNotice": "Illustrativ arkitektur · ingen leverandørgodkjenning implisert.",
     "openSlide": "Åpne som lysbilde",
     "sourcesLabel": "Kilder og dokumentasjon",
     "moreDiagrams": "Se fire enkle dataveier steg for steg",

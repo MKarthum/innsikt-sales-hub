@@ -415,6 +415,7 @@
     {
       "id": "fabric",
       "kind": "vendor",
+      "brandNotice": "Illustrativ arkitektur · ingen leverandørgodkjenning implisert.",
       "vendorId": "fabric",
       "eyebrow": "EKSEMPEL · MICROSOFT FABRIC",
       "label": "Fabric samler arbeidsflater rundt OneLake",
@@ -582,6 +583,7 @@
     {
       "id": "databricks",
       "kind": "vendor",
+      "brandNotice": "Illustrativ arkitektur · ingen leverandørgodkjenning implisert.",
       "vendorId": "databricks",
       "eyebrow": "EKSEMPEL · DATABRICKS",
       "label": "Databricks bruker lakehouse-data til BI og KI",
