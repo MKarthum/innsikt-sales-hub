@@ -66,3 +66,8 @@ Objektnavn må være unike på tvers av offentlige og interne data. Interne pakk
 Interne presentasjoner er merket **Internt** i Presenter. HTML- og PDF-eksport krever en eksplisitt advarsel/bekreftelse. Eksporterte HTML-filer er ikke beskyttet av innlogging etter nedlasting, og PDF er like lite teknisk beskyttet: eksport skal skje bare i tråd med virksomhetens rutiner.
 
 Det er fortsatt ingen internt innhold i dette offentlige repoet. Å legge til nye felter eller en ny intern samling skal først få eget dataskjema, eier, klassifiseringsregel, visningsform og en test for at innhold ikke lekker inn i offentlig deploy.
+
+
+## Oppdatering 25.10.2026 – kjerne og utvidelser
+
+Utvidelse v2: schemaVersion 1 er fremdeles støttet. schemaVersion 2 gir tools, navngitte collections og navigation.groups/views med genererte #intern-ruter, uten å endre åpne sider. Kun deklarative felt og kontrollerte lenker; ingen kjørbar HTML/JS i internpakken. Se CORE_ORG_BOUNDARY.md for kildegrenser, oppgradering og sikkerhet.

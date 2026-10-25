@@ -30,7 +30,7 @@ const contracts=[
  ['pages.marketIntro.aiDetail','market-guidance:ki-use','marketDetail'],
  ['pages.marketIntro.sectorIntro','market-guidance:ki-use','sectorContext'],
  ['pages.home.intro','guidance:customer-first','home'],
- ['learning.beginner.chapters.4.text','guidance:customer-first','beginner'],
+ ['learning.beginner.chapters.5.text','guidance:customer-first','beginner'],
  ['learning.beginner.chapters.2.text','glossary:dataplattform','beginner'],
  ['pages.site.disclaimer','notice:public-boundary','disclaimer'],
  ['pages.site.publicNotice','notice:public-boundary','sidebar'],

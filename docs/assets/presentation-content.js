@@ -35,11 +35,20 @@ async function load(config,fetcher=fetch){
 }
 function combine(base,content){
  if(!content)return base;
- if(content.classification!=='internal'||content.schemaVersion!==1)
+ if(content.classification!=='internal'||![1,2].includes(content.schemaVersion))
   throw Error('Ugyldig intern innholdspakke');
  const slides=list(content.slides,'slides',250);
  const customerStories=list(content.customerStories,'customerStories',100);
  const solutions=list(content.solutions,'solutions',100);
+ const tools=list(content.tools,'tools',150);
+ const extras=content.collections===undefined?{}:plainObject(content.collections,'collections');
+ const reserved=new Set(['customerStories','solutions','tools','slides','sources','presentationDecks','pages','prompts']);
+ for(const [key,items] of Object.entries(extras)){
+  if(!validId(key)||reserved.has(key))throw Error('Ugyldig eller reservert intern samling: '+key);
+  list(items,'collections.'+key,200);
+ }
+ const collections={customerStories,solutions,tools,...extras};
+
  const decks=content.presentationDecks===undefined?{}:plainObject(content.presentationDecks,'presentationDecks');
  const sources=content.sources===undefined?{}:plainObject(content.sources,'sources');
  const slideIds=new Set(base.slides.items.map(x=>x.id));
@@ -71,20 +80,49 @@ function combine(base,content){
   deckIds.add(id);
  }
  for(const s of slides)if(s.scope==='story'&&!own(decks,s.storyId))throw Error('Intern eierhistorie mangler: '+s.id);
- for(const [label,arr] of [['customerStories',customerStories],['solutions',solutions]]){
-  const ids=new Set();
+ const allItemIds=new Set();
+ for(const [label,arr] of Object.entries(collections)){
   for(const item of arr){
-   plainObject(item,label);if(!validId(item.id)||ids.has(item.id)||item.classification!=='internal'||typeof item.title!=='string')
-    throw Error('Ugyldig intern oppføring i '+label);
-   if(item.sourceIds?.some(id=>!sourceIds.has(id)))throw Error('Ukjent kilde i '+label+'/'+item.id);
-   ids.add(item.id);
+   plainObject(item,label);
+   if(!validId(item.id)||allItemIds.has(item.id)||item.classification!=='internal'||typeof item.title!=='string'||!item.title.trim())
+    throw Error('Ugyldig eller duplisert intern oppføring i '+label);
+   if(item.sourceIds!==undefined&&(!Array.isArray(item.sourceIds)||item.sourceIds.some(id=>!sourceIds.has(id))))
+    throw Error('Ukjent kilde i '+label+'/'+item.id);
+   if(item.href!==undefined&&(typeof item.href!=='string'||!(/^(https:\/\/[^\s]+|\/internal\/[a-zA-Z0-9/_-]+)$/.test(item.href))||item.href.includes('..')))
+    throw Error('Utrygg lenke i '+label+'/'+item.id);
+   for(const key of ['summary','description','body'])if(item[key]!==undefined&&typeof item[key]!=='string')
+    throw Error('Ugyldig tekstfelt i '+label+'/'+item.id);
+   allItemIds.add(item.id);
   }
+ }
+ const config=content.navigation===undefined?null:plainObject(content.navigation,'navigation');
+ if(config&&content.schemaVersion!==2)throw Error('Intern navigasjon krever schemaVersion 2');
+ const groups=config?list(config.groups,'navigation.groups',30):[{id:'organization',label:'VIRKSOMHETENS RESSURSER',collapsible:true}];
+ const views=config?list(config.views,'navigation.views',100):
+  [['customerStories','Kundehistorier'],['solutions','Løsninger'],['tools','Egne verktøy']].filter(([key])=>collections[key].length).map(([collection,label])=>({
+   id:collection.toLowerCase(),label,collection,groupId:'organization'
+  }));
+ const groupIds=new Set(),viewIds=new Set();
+ for(const group of groups){
+  plainObject(group,'navigation group');
+  if(!validId(group.id)||groupIds.has(group.id)||typeof group.label!=='string'||!group.label.trim())
+   throw Error('Ugyldig intern navigasjonsgruppe');
+  groupIds.add(group.id);
+ }
+ for(const view of views){
+  plainObject(view,'navigation view');
+  if(!validId(view.id)||viewIds.has(view.id)||!groupIds.has(view.groupId)||!Object.hasOwn(collections,view.collection)||
+   typeof view.label!=='string'||!view.label.trim())throw Error('Ugyldig intern menyside');
+  for(const field of ['title','intro','icon'])if(view[field]!==undefined&&typeof view[field]!=='string')
+   throw Error('Ugyldig internt menyfelt: '+field);
+  viewIds.add(view.id);
  }
  return {...base,
   sources:{...base.sources,...sources},
   slides:{...base.slides,items:[...base.slides.items,...slides]},
   pages:{...base.pages,presentationDecks:{...base.pages.presentationDecks,...decks}},
-  internalCollections:{customerStories,solutions}
+  internalCollections:collections,
+  internalNavigation:{groups,items:views}
  };
 }
 window.InnsiktPresentationContent={load,combine,checkDeployment};

@@ -14,12 +14,15 @@ function diagram(d,{esc:e,ico}){
 function start(D,h){
  const {esc:e,headerCopy,ico}=h,b=D.learning.beginner;
  return headerCopy('GRUNNKUNNSKAP')
- +'<div class="welcome-top"><div><div class="small-label">'+e(b.readingTime.toUpperCase())+'</div><h2>Du trenger ikke forstå alle verktøyene</h2><p>Dette er grunnlaget for å forstå samtalene om data og KI. Vil du bare ha hjelp til et kundemøte, kan du gå rett til salgsinngangene.</p></div><a class="btn dark" href="#forretning">Finn kundesignaler '+ico('arrow-right')+'</a></div>'
- +'<section class="panel lesson-story"><div class="small-label">ET GJENKJENNELIG EKSEMPEL</div><h3>'+e(b.storyTitle)+'</h3><p>'+e(b.story)+'</p></section>'
+ +'<section class="panel lesson-story"><div class="small-label">'+e(b.readingTime.toUpperCase())+' · ETT GJENNOMGÅENDE EKSEMPEL</div><h2>'+e(b.storyTitle)+'</h2><p>'+e(b.story)+'</p></section>'
  +'<div class="learning-sections">'+b.chapters.map(x=>'<section class="lesson-chapter"><h3>'+e(x.title)+'</h3><p>'+e(x.text)+'</p></section>').join('')+'</div>'
- +'<div class="section-heading"><div><h2>En dataflyt i ett bilde</h2><p>Hva skjer mellom systemene og rapporten?</p></div></div>'+diagram(D.learning.diagrams.find(x=>x.id==='bi'),h)
- +'<section class="subsection"><div class="section-heading"><div><h2>'+e(D.learning.ui.glossaryTitle)+'</h2><p>'+e(D.learning.ui.glossaryIntro)+'</p></div></div><div class="glossary">'+D.learning.glossary.map(g=>'<details class="glossary-item"><summary>'+e(g.term)+'</summary>'+(g.fullName?'<p class="fineprint"><strong>Fullt navn:</strong> '+e(g.fullName)+'</p>':'')+'<p>'+e(g.meaning)+'</p><p class="fineprint"><strong>Eksempel:</strong> '+e(g.example)+'</p></details>').join('')+'</div></section>'
- +'<section class="subsection"><div class="insight-strip"><div><h3>Du kan allerede føre en relevant samtale</h3><p>'+e(b.questions.join(' · '))+'</p></div><a class="btn dark" href="#verktoy/first">Åpne møtemal '+ico('arrow-right')+'</a></div></section>';
+ +'<section class="subsection"><div class="section-heading"><h2>'+e(b.diagramTitle)+'</h2></div>'+diagram(D.learning.diagrams.find(x=>x.id==='bi'),h)+'</section>'
+ +'<section class="subsection"><div class="insight-strip"><div><h3>'+e(b.nextTitle)+'</h3><p>'+e(b.nextIntro)+'</p></div><div class="promo-actions">'+b.relatedLinks.map(x=>'<a class="btn subtle" href="'+e(x.route)+'">'+e(x.label)+' '+ico('arrow-right')+'</a>').join('')+'</div></div></section>';
+}
+function glossary(D,h){
+ const {esc:e,headerCopy}=h;
+ return headerCopy('ORDLISTE')
+ +'<div class="glossary">'+D.learning.glossary.map(g=>'<details class="glossary-item"><summary>'+e(g.term)+'</summary>'+(g.fullName?'<p class="fineprint"><strong>Fullt navn:</strong> '+e(g.fullName)+'</p>':'')+'<p>'+e(g.meaning)+'</p><p class="fineprint"><strong>Eksempel:</strong> '+e(g.example)+'</p></details>').join('')+'</div>';
 }
 function architecture(D,h,id){
  const {esc:e,headerCopy,ico,sourceLinks}=h,diagrams=D.learning.diagrams,d=diagrams.find(x=>x.id===id);
@@ -47,5 +50,5 @@ function toolkit(D,h,id){
  +'<div class="welcome-top"><div><h2>Bruk som startpunkt – tilpass til kunden</h2><p>Du kan kopiere spørsmålene til dine egne interne arbeidsdokumenter. Denne nettsiden lagrer ikke utfylte kundedata.</p></div><a class="btn subtle" href="#kundedialog">Øv på samtalen '+ico('arrow-right')+'</a></div>'
  +'<div class="learning-grid">'+D.learning.templates.map(t=>'<a class="learning-card" href="#verktoy/'+e(t.id)+'"><span class="lesson-badge">'+e(t.audience)+'</span><h3>'+e(t.title)+'</h3><p>'+e(t.purpose)+'</p><span class="lesson-link">Åpne malen →</span></a>').join('')+'</div>';
 }
-window.InnsiktLearning={start,architecture,toolkit,diagram,templateText};
+window.InnsiktLearning={start,glossary,architecture,toolkit,diagram,templateText};
 })();

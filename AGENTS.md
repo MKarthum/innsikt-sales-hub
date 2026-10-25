@@ -121,3 +121,8 @@ Kun to aktive fortellinger: produktdemonstrasjon og kort, selvstendig eksempel. 
 - Forkortelser i ordlisten skal ha `fullName` på originalspråk, men også selvstendig norsk `meaning` og praktisk `example`. Oppslagsvisning og kontekstuell popup må vise fullt navn. Ikke kopier definisjoner inn i UI.
 - Salgsinnganger om lagring, tilgang og suverenitet må skille datalokalisering, behandling, sikkerhet, personvern, leverandørkontroll og juridiske krav. Ikke gi automatiske lovlighets- eller leverandørkonklusjoner.
 - Navigasjonssti skal ha klikkbare foreldrenivåer og hjemlenke. Presenter støtter horisontale sveip både i portalen og eksportert HTML, uten å blokkere vertikal scrolling eller interaktive kontroller.
+
+
+## Oppdatering 25.10.2026 – kjerne og utvidelser
+
+Navigasjon i v0.18.0: Ikke hardkod offentlige menypunkter i HTML; bruk pages.json.navigationSections. Behold eksisterende ruter. Interne organisasjonssider og egne verktøy leveres bare fra beskyttet innholdspakke, aldri fra offentlig kilde. Test v1/v2, ID-kollisjoner og nav-ruter. Se CORE_ORG_BOUNDARY.md.

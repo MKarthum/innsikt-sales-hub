@@ -47,6 +47,7 @@ const guidance=(id,variant='normal')=>{const record=D.sharedGuidance.find(x=>x.i
 const headerCopy=(key)=>{const c=D.pages.headers[key];return hdr(c.eyebrow,c.title,c.intro)};
 const learningHelpers=()=>({esc,ico,headerCopy,sourceLinks});
 const guide=()=>window.InnsiktLearning.start(D,learningHelpers());
+const glossary=()=>window.InnsiktLearning.glossary(D,learningHelpers());
 const architecture=(id)=>window.InnsiktLearning.architecture(D,learningHelpers(),id);
 const toolkit=(id)=>window.InnsiktLearning.toolkit(D,learningHelpers(),id);
 const prompts=(id)=>id==='variabler'?window.InnsiktPrompts.overview(D,learningHelpers()):id?window.InnsiktPrompts.detail(D,learningHelpers(),id):window.InnsiktPrompts.library(D,learningHelpers(),promptFilter);
@@ -55,6 +56,65 @@ let D, current='oversikt',filter='Alle',techFilter='Alle',aiFilter='Alle',prompt
 let showSlideNumbers=true;try{showSlideNumbers=localStorage.getItem('innsikt-present-numbers-v1')!=='false'}catch{}
 let notes=[];try{const raw=JSON.parse(localStorage.getItem('innsikt-feedback-v1')||'[]');if(Array.isArray(raw))notes=raw.filter(x=>x&&typeof x.text==='string').slice(-100)}catch{}
 let names={};
+function navSections(){
+ const sections=D.pages.navigationSections.map(g=>({...g,items:g.items.map(item=>({...item,label:item.label||names[item.route]||names[item.route.split('/')[0]]}))}));
+ if(D.internalNavigation?.items?.length)for(const group of D.internalNavigation.groups){
+  const items=D.internalNavigation.items.filter(item=>item.groupId===group.id).map(item=>({route:'intern/'+item.id,label:item.label,icon:item.icon||'layers'}));
+  if(items.length)sections.push({id:'org-'+group.id,label:group.label,collapsible:group.collapsible!==false,items});
+ }
+ return sections;
+}
+function buildNavigation(){
+ const holder=document.getElementById('nav-groups');
+ holder.innerHTML=navSections().map((group,index)=>{
+  const links=group.items.map(item=>'<a href="#'+esc(item.route)+'" data-nav-route="'+esc(item.route)+'" data-page="'+esc(item.route.split('/')[0])+'">'+ico(item.icon||'file-text')+' <span>'+esc(item.label)+'</span></a>').join('');
+  const label='<span class="sidebar-label'+(index?' mid':'')+'">'+esc(group.label)+'</span>';
+  const id='nav-'+esc(group.id);
+  return group.collapsible
+   ?'<details class="sidebar-disclosure" data-nav-group-id="'+esc(group.id)+'"><summary>'+esc(group.label)+'</summary><nav class="nav" id="'+id+'" aria-label="'+esc(group.label)+'">'+links+'</nav></details>'
+   :'<div class="sidebar-nav-section">'+label+'<nav class="nav" id="'+id+'" aria-label="'+esc(group.label)+'">'+links+'</nav></div>';
+ }).join('');
+}
+function updateNavigation(raw,p){
+ const links=[...document.querySelectorAll('#nav-groups .nav a')];
+ const exact=links.some(a=>a.dataset.navRoute===raw);
+ const mainParent=(p==='bransje'||p==='trendradar')?'marked':(p==='ai'?'teknologi':p);
+ const section=links.some(a=>a.dataset.navRoute===mainParent);
+ for(const a of links){
+  const route=a.dataset.navRoute;
+  const active=route===raw||(route.startsWith('intern/')&&raw.startsWith(route+'~'))||(!exact&&section&&route===mainParent)||(!exact&&!section&&p==='kundedialog'&&route===(raw.startsWith('kundedialog/tren-')||raw.startsWith('kundedialog/kunde-')||raw.startsWith('kundedialog/evaluer-')?'kundedialog/trening':'kundedialog/stotte'));
+  a.classList.toggle('active',active);
+  if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+ }
+ document.querySelectorAll('#nav-groups .sidebar-disclosure').forEach(group=>{if(group.querySelector('a.active'))group.open=true});
+}
+function topicNav(key){
+ return '<nav class="topic-nav" aria-label="Relaterte temaer">'+(D.pages[key]||[]).map(item=>'<a class="'+(typeof location!=='undefined'&&location.hash===item.route?'active':'')+'" href="'+esc(item.route)+'">'+esc(item.label)+'</a>').join('')+'</nav>';
+}
+function portalIntro(){
+ const p=D.pages.portalIntro;
+ return hdr(p.eyebrow,p.title,p.intro)
+ +'<div class="learning-grid">'+p.sections.map(x=>'<article class="panel portal-step"><h2>'+esc(x.title)+'</h2><p>'+esc(x.text)+'</p><a class="text-link" href="'+esc(x.route)+'">'+esc(x.action)+' '+ico('arrow-right')+'</a></article>').join('')+'</div>'
+ +'<section class="subsection"><div class="insight-strip"><div><h3>'+esc(p.subjectTitle)+'</h3><p>'+esc(p.subjectText)+'</p></div><a href="#guide" class="btn subtle">'+esc(p.subjectAction)+' '+ico('arrow-right')+'</a></div></section>'
+ +'<section class="subsection"><div class="note-card"><b>'+esc(p.privacyTitle)+'</b>'+esc(p.privacyText)+'</div></section>';
+}
+function internalPage(sub){
+ const [id,itemId]=String(sub||'').split('~'),view=D.internalNavigation?.items?.find(x=>x.id===id);
+ if(!view)return '<section class="panel"><h1>Fant ikke innholdet</h1><a href="#oversikt">Til hjem</a></section>';
+ const items=D.internalCollections?.[view.collection]||[];
+ if(itemId){
+  const item=items.find(x=>x.id===itemId);
+  if(!item)return '<section class="panel"><h1>Fant ikke oppføringen</h1><a href="#intern/'+esc(id)+'">Tilbake</a></section>';
+  return '<a class="back-link" href="#intern/'+esc(id)+'">'+ico('arrow-left')+' '+esc(view.label)+'</a>'
+   +hdr(view.label,item.title,item.summary||item.description||'')
+   +'<section class="panel"><p>'+esc(item.body||item.description||item.summary||'')+'</p>'
+   +(item.href?'<p><a class="text-link" href="'+esc(item.href)+'" target="_blank" rel="noopener noreferrer">Åpne ressurs '+ico('external')+'</a></p>':'')
+   +(item.sourceIds?.length?sourceLinks(item.sourceIds,D):'')+'</section>';
+ }
+ return hdr(view.label,view.title||view.label,view.intro||'Organisasjonens egne ressurser')
+ +'<div class="learning-grid">'+items.map(item=>'<a class="learning-card" href="#intern/'+esc(view.id)+'~'+esc(item.id)+'"><span class="lesson-badge">Internt</span><h3>'+esc(item.title)+'</h3><p>'+esc(item.summary||item.description||'')+'</p><span class="lesson-link">Åpne →</span></a>').join('')+'</div>'
+ +(!items.length?'<p class="fineprint">Ingen oppføringer i denne samlingen ennå.</p>':'');
+}
 function mainLink(text,page){return `<a class="text-link" href="#${page}">${esc(text)} ${ico('arrow-right')}</a>`}
 function homePillars(){
  return D.pages.home.pillars.map(p=>`<article class="pillar-card">
@@ -70,8 +130,8 @@ function relatedPrompt(kind){const a=D.pages.promptActions?.[kind],item=a&&D.pro
 function overview(){const h=D.pages.home,featured=D.prompts.page.featuredIds.map(id=>D.prompts.items.find(p=>p.id===id)).filter(Boolean);
 return `<section class="hero"><div class="hero-text"><div class="eyebrow">${esc(h.eyebrow)}</div><h1>${esc(h.titleLine1)}<br/>${esc(h.titleLine2)}</h1><p>${esc(h.intro)}</p><div class="hero-actions">${h.heroActions.map(a=>`<a class="btn ${esc(a.style)}" href="${esc(a.route)}">${esc(a.title)} ${ico('arrow-right')}</a>`).join('')}</div></div></section>
 <section class="subsection" aria-labelledby="home-tasks-title"><div class="section-heading"><div><h2 id="home-tasks-title">${esc(h.actionTitle)}</h2><p>${esc(h.actionIntro)}</p></div></div><div class="home-task-grid dialogue-four-tasks">${h.quickTasks.map(quickTask).join('')}</div></section>
-<section class="start-promo"><div class="start-promo-icon">${ico('book-open')}</div><div><h2>${esc(h.startTitle)}</h2><p>${esc(h.startIntro)}</p><a href="#guide" class="lesson-link">${esc(h.startAction)} ${ico('arrow-right')}</a></div></section>
 <section class="subsection" aria-labelledby="home-prompts-title"><div class="section-heading"><div><h2 id="home-prompts-title">${esc(h.promptTitle)}</h2><p>${esc(h.promptBody)}</p></div>${mainLink(h.promptCta,'prompter')}</div><div class="prompt-grid">${featured.map(p=>window.InnsiktPrompts.card(p,esc,D.prompts.page)).join('')}</div></section>
+<section class="start-promo"><div class="start-promo-icon">${ico('book-open')}</div><div><h2>${esc(h.startTitle)}</h2><p>${esc(h.startIntro)}</p><div class="promo-actions"><a href="#om-innsikt" class="lesson-link">${esc(h.startAction)} ${ico('arrow-right')}</a><a href="#guide" class="lesson-link">${esc(h.subjectAction)} ${ico('arrow-right')}</a></div></div></section>
 <section class="subsection"><div class="section-heading"><div><h2>${esc(h.statsTitle)}</h2><p>${esc(h.statsIntro)}</p></div></div><div class="pillar-grid">${homePillars()}</div><p class="stats-caveat">${esc(h.pillarIntro)}</p><div class="home-evidence"><b>${esc(h.kiEvidenceTitle)}</b><p>${esc(h.kiEvidenceBody)}</p>${sourceLinks(['ssb'],D)}</div></section>
 <section class="subsection"><div class="insight-strip"><div><h3>${esc(h.advancedTitle)}</h3><p>${esc(h.advancedIntro)}</p></div><div class="promo-actions">${h.advancedLinks.map(a=>`<a href="${esc(a.route)}" class="btn subtle">${esc(a.label)} ${ico('arrow-right')}</a>`).join('')}</div></div></section><p class="home-public-note">${esc(D.pages.copy.publicRegister)}</p>`}
 
@@ -107,7 +167,7 @@ function business(){
 }
 function businessDetail(b){const linked=b.plays.map(id=>D.plays.find(p=>p.id===id)).filter(Boolean);return `<a class="back-link" href="#forretning">${ico('arrow-left')} Tilbake til forretningsbehov</a><section class="detail-banner"><div class="eyebrow">${esc(b.area.toUpperCase())} · ${esc(b.role)}</div><h2>${esc(b.headline)}</h2><div class="quote">${esc(b.says)}</div></section><div class="business-detail-grid"><div><section class="panel"><h3>Hva bør du lytte etter?</h3>${list(b.listen)}<h3 class="section-subtitle">Hvilke spørsmål åpner samtalen?</h3><ol class="question-list">${b.ask.map(q=>`<li>${esc(q)}</li>`).join('')}</ol></section><section class="panel" style="margin-top:16px"><h3>Hva kan ligge bak – sett fra data og analyse?</h3><p>${esc(b.dataNeed)}</p><div class="note-card"><b>Viktig</b>Dette er en hypotese. Avklar behov og årsak før valg av løsning.</div></section></div><aside><section class="panel"><h3>Mulige Innsiktsleveranser</h3>${list(b.opportunities)}<hr class="divider"/><h3>Et relevant neste steg</h3><p>${esc(b.next)}</p></section><section class="panel" style="margin-top:16px"><h3>Relaterte salgsinnganger</h3><div class="related-plays">${linked.map(p=>`<a href="#muligheter/${esc(p.id)}"><strong>${esc(p.name)}</strong>${ico('arrow-right')}</a>`).join('')}</div></section><div class="panel" style="margin-top:16px"><h3>Grunnlag</h3><p class="fineprint">${esc(guidance('not-a-case'))}</p>${sourceLinks(b.sources,D)}</div></aside></div>${relatedPrompt("business")}`}
 
-function market(){const mi=D.pages.marketIntro,mx=55;return `${headerCopy('MARKED OG DRIVERE')}
+function market(){const mi=D.pages.marketIntro,mx=55;return `${headerCopy('MARKED OG DRIVERE')}${topicNav('marketNavigation')}
 <section class="panel data-story-intro"><div class="small-label">DATA · ANALYSE · KI</div><h2>${esc(mi.dataTitle)}</h2><p>${esc(mi.dataLead)}</p>
 <div class="data-story-grid">${mi.dataStory.map(x=>`<article><h3>${esc(x.title)}</h3><p>${esc(x.body)}</p>${sourceLinks(x.sourceIds,D)}</article>`).join('')}</div></section>
 <section class="subsection"><div class="section-heading"><div><h2>${esc(mi.aiTitle)}</h2><p>${esc(mi.aiDetail)}</p></div></div>
@@ -134,7 +194,7 @@ function technology(){
  const types=['Alle',...new Set(D.tech.map(t=>t.kind))];
  const shown=D.tech.filter(t=>techFilter==='Alle'||t.kind===techFilter);
  const cards=shown.map(t=>'<article class="tech-item"><div class="brand-header">'+brand(t)+'<div><h3>'+esc(t.name)+'</h3><div class="kind">'+esc(t.kind)+'</div></div></div><div><p><strong>Lytt etter:</strong> '+esc(t.signal)+'</p><p><strong>Spør videre:</strong> '+esc(t.talk)+'</p><p class="fineprint"><strong>Vær oppmerksom:</strong> '+esc(t.caution)+'</p>'+sourceLinks([t.source],D)+'</div></article>').join('');
- return headerCopy('TEKNOLOGIKART')
+ return headerCopy('TEKNOLOGIKART')+topicNav('technologyNavigation')
  +'<section class="insight-strip"><div><h3>Markedet endrer seg</h3><p>'+esc(D.marketEvents.find(x=>x.id==="fivetran-dbt").title)+'. '+esc(D.marketSignals.find(x=>x.id==="embeddedai").title)+'.</p></div><a class="btn dark" href="#bransje">Se utviklingen '+ico('arrow-right')+'</a></section>'
  +'<section class="panel"><h3>Se hele datakjeden</h3><p>'+esc(D.learning.diagrams.find(x=>x.id==="bi").variants.long)+'</p></section>'
  +'<section class="subsection"><div class="section-heading"><div><h2>'+shown.length+' teknologier og områder</h2><p>Filtrer etter oppgave</p></div></div>'+tabNav(types,techFilter,'tech-filter','Teknologiområder')+'<div class="tech-list">'+cards+'</div></section>'
@@ -145,7 +205,7 @@ function aiProducts(){
  const groups=['Alle',...new Set(D.aiProducts.map(t=>t.group))];
  const items=D.aiProducts.filter(t=>aiFilter==='Alle'||t.group===aiFilter);
  const cards=items.map(t=>'<article class="ai-card"><header><div class="brand-header">'+brand({logo:t.logo,name:t.platform})+'<div><div class="small-label">'+esc(t.platform)+'</div><h3>'+esc(t.name)+'</h3></div></div><span class="badge grey">'+esc(t.group)+'</span></header><p>'+esc(t.description)+'</p><div class="ai-sales"><strong>Mulig kundesignal</strong><p>'+esc(t.signal)+'</p><strong>Spør videre</strong><p>'+esc(t.question)+'</p></div><p class="fineprint"><strong>Forbehold:</strong> '+esc(t.limits)+'</p><div class="ai-footer"><span class="badge grey">'+esc(t.status)+'</span>'+sourceLinks([t.source],D)+'</div></article>').join('');
- return headerCopy('INNEBYGD KI')
+ return headerCopy('INNEBYGD KI')+topicNav('technologyNavigation')
  +'<div class="ai-duo"><article class="panel"><div class="small-label">FOR DATATEAMET</div><h3>Raskere utvikling og forvaltning</h3><p>'+esc(D.techUi.developmentHelp)+'</p></article><article class="panel"><div class="small-label">FOR FORRETNINGEN</div><h3>Spørsmål mot egne data</h3><p>'+esc(D.techUi.businessDataHelp)+'</p></article></div>'
  +'<section class="subsection">'+tabNav(groups,aiFilter,'ai-filter','Typer KI')+'<div class="ai-grid">'+cards+'</div></section>'
  +'<section class="subsection"><div class="insight-strip"><div><h3>Selvbetjening krever godt datagrunnlag</h3><p>'+esc(D.techUi.selfServiceNeed)+'</p></div><a class="btn dark" href="#forretning">Koble mot forretningsbehov '+ico('arrow-right')+'</a></div></section>';
@@ -153,7 +213,7 @@ function aiProducts(){
 function industry(){
  const events=D.marketEvents.map(e=>'<article class="event-card"><div class="event-date">'+esc(e.date)+'</div><div><h3>'+esc(e.title)+'</h3><p><strong>Hendelse:</strong> '+esc(e.fact)+'</p><p><strong>Mulig konsekvens:</strong> '+esc(e.why)+'</p><div class="hint"><strong>Spør:</strong> '+esc(e.ask)+'</div>'+sourceLinks(e.sources,D)+'</div></article>').join('');
  const signals=D.marketSignals.map((s,i)=>'<article class="panel market-insight-card"><div class="market-no">'+String(i+1).padStart(2,'0')+'</div><h3>'+esc(s.title)+'</h3><p>'+esc(s.angle)+'</p><div class="market-listen"><strong>Lytt etter:</strong> '+esc(s.listen)+'</div><div class="hint"><strong>Spør:</strong> '+esc(s.ask)+'</div>'+sourceLinks(s.sources,D)+'</article>').join('');
- return headerCopy('MARKED OG OPPKJØP')
+ return headerCopy('MARKED OG OPPKJØP')+topicNav('marketNavigation')
  +'<section class="subsection"><div class="section-heading"><div><h2>'+esc(D.pages.copy.marketDealsTitle)+'</h2><p>Hva som har skjedd – og spørsmål det kan utløse</p></div></div><div class="event-list">'+events+'</div></section>'
  +'<section class="subsection"><div class="section-heading"><div><h2>'+esc(D.pages.copy.marketSignalsTitle)+'</h2><p>Fra semantikk og styring til kostnad og plattformlåsing</p></div></div><div class="market-insight-grid">'+signals+'</div></section>'
  +'<section class="subsection"><div class="note-card"><b>Ikke overtolk oppkjøp</b>'+esc(D.marketUi.acquisitionCaution)+'</div></section>';
@@ -171,7 +231,7 @@ function trendradar(){
  +'<div class="horizon-question"><strong>'+esc(ui.watchLabel)+'</strong><p>'+esc(x.watch)+'</p></div>'
  +'<div class="horizon-meta"><a href="#'+esc(x.relatedRoute)+'">'+esc(ui.relatedLabel)+' '+ico('arrow-right')+'</a>'+sourceLinks(x.sources,D)+'</div>'
  +'</article>').join('');
- return headerCopy('TRENDRADAR')
+ return headerCopy('TRENDRADAR')+topicNav('marketNavigation')
  +'<section class="horizon-intro"><h2>'+esc(ui.introTitle)+'</h2><p>'+esc(ui.introText)+'</p></section>'
  +'<section class="subsection"><div class="horizon-chapter-list">'+cards+'</div></section>'
  +'<section class="subsection"><div class="note-card"><b>'+esc(ui.methodTitle)+'</b> '+esc(ui.methodText)+'</div></section>';
@@ -199,7 +259,9 @@ function dev(){
  +'<section class="subsection"><div class="section-heading"><div><h2>'+esc(ui.feedbackTitle)+'</h2><p>'+esc(D.pages.copy.localFeedbackCaution)+'</p></div><div class="dev-actions"><button class="btn subtle" data-feedback-open="1">'+ico('message-circle')+' '+esc(ui.feedbackAction)+'</button><button class="btn subtle" id="export-notes" '+(notes.length?'':'disabled')+'>'+ico('download')+' '+esc(ui.exportAction)+'</button></div></div>'
  +(notes.length?'<div class="dev-list">'+notes.slice().reverse().map(n=>'<article class="dev-item"><div class="dev-item-meta">'+esc(n.page)+' · '+esc(n.date)+'</div><p class="dev-note">'+esc(n.text)+'</p></article>').join('')+'</div>':'<div class="empty">'+esc(D.pages.copy.feedbackEmpty)+'</div>')+'</section>';
 }
-function render(){const raw=location.hash.slice(1)||'oversikt';const [p,sub]=raw.split('/');const nextId=p==='lysbilder'?D.pages.retiredSlideRedirects?.[sub]:null;if(nextId&&nextId!==sub){location.replace('#lysbilder/'+nextId);return;}current=names[p]?p:'oversikt';let crumb=names[current];if(sub){const entity=current==='arkitektur'?D.learning.diagrams.find(x=>x.id===sub):current==='verktoy'?D.learning.templates.find(x=>x.id===sub):current==='prompter'?(sub==='variabler'?{title:D.prompts.page.variableUi.overviewTitle}:D.prompts.items.find(x=>x.id===sub)):current==='muligheter'?D.plays.find(x=>x.id===sub):current==='forretning'?(D.businessSignals.find(x=>x.id===sub)||(sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null)||(sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null)):current==='lysbilder'?D.slides.items.find(x=>x.id===sub):current==='kundedialog'?window.InnsiktDialogue.entity(D,sub):null;if(entity)crumb+=' / '+(entity.title||entity.name||entity.area);else if(current==='lysbilder')crumb+=' / '+D.pages.slideLibraryUi.notFound}const trail=document.getElementById('crumb');trail.replaceChildren();trail.removeAttribute('aria-current');if(sub&&crumb!==names[current]){const link=document.createElement('a');link.href='#'+current;link.textContent=names[current];const divider=document.createElement('span');divider.className='sep';divider.textContent='/';divider.setAttribute('aria-hidden','true');const leaf=document.createElement('span');leaf.textContent=crumb.slice(names[current].length+3);leaf.setAttribute('aria-current','page');trail.append(link,divider,leaf)}else{trail.textContent=names[current];trail.setAttribute('aria-current','page')}document.querySelectorAll('.nav a').forEach(a=>{const active=a.dataset.page===current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});if(document.querySelector('#reference-nav a.active'))document.getElementById('reference-nav').open=true;setMobileMenuOpen(false);let html='';if(current==='muligheter'&&sub){const pl=D.plays.find(x=>x.id===sub);html=pl?playDetail(pl):plays()}else if(current==='forretning'&&sub){const sector=sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null,caseItem=sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null,b=D.businessSignals.find(x=>x.id===sub);html=sector?industrySectorPage(sector):caseItem?industryCasePage(caseItem):b?businessDetail(b):business()}else if(current==='arkitektur'){html=architecture(sub)}else if(current==='verktoy'){html=toolkit(sub)}else if(current==='prompter'){html=prompts(sub)}else if(current==='lysbilder'){html=slideLibraryPage(sub)}else if(current==='ressurser'){html=resourceLibraryPage()}else{html=({oversikt:overview,guide,marked:market,muligheter:plays,kundedialog:()=>dialogue(sub),forretning:business,kompetanse:competence,teknologi:technology,ai:aiProducts,bransje:industry,horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev}[current])()}document.getElementById('main').innerHTML=html;if(current==='lysbilder'&&!sub)updateSlideLibrary();fitLibraryPreviews();window.InnsiktGlossary?.enhance(document.getElementById('main'));window.scrollTo({top:0,behavior:'instant'});document.title=`${crumb} · Innsikt`;}
+function render(){const raw=location.hash.slice(1)||'oversikt';const [p,sub]=raw.split('/');const nextId=p==='lysbilder'?D.pages.retiredSlideRedirects?.[sub]:null;if(nextId&&nextId!==sub){location.replace('#lysbilder/'+nextId);return;}current=(p==='intern'&&D.internalNavigation?.items?.some(x=>x.id===sub?.split('~')[0]))?'intern':(names[p]?p:'oversikt');
+ const internalView=current==='intern'?D.internalNavigation.items.find(x=>x.id===sub?.split('~')[0]):null;
+ const parentLabel=current==='intern'?internalView.label:names[current];if(current==='intern')names.intern=parentLabel;let crumb=parentLabel;if(current==='intern'&&sub.includes('~')){const itemId=sub.split('~')[1],item=D.internalCollections[internalView.collection]?.find(x=>x.id===itemId);if(item)crumb+=' / '+item.title;}if(sub&&current!=='intern'){const entity=current==='arkitektur'?D.learning.diagrams.find(x=>x.id===sub):current==='verktoy'?D.learning.templates.find(x=>x.id===sub):current==='prompter'?(sub==='variabler'?{title:D.prompts.page.variableUi.overviewTitle}:D.prompts.items.find(x=>x.id===sub)):current==='muligheter'?D.plays.find(x=>x.id===sub):current==='forretning'?(D.businessSignals.find(x=>x.id===sub)||(sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null)||(sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null)):current==='lysbilder'?D.slides.items.find(x=>x.id===sub):current==='kundedialog'?window.InnsiktDialogue.entity(D,sub):null;if(entity)crumb+=' / '+(entity.title||entity.name||entity.area);else if(current==='lysbilder')crumb+=' / '+D.pages.slideLibraryUi.notFound}const trail=document.getElementById('crumb');trail.replaceChildren();trail.removeAttribute('aria-current');if(sub&&crumb!==names[current]){const link=document.createElement('a');link.href=current==='intern'?'#intern/'+internalView.id:'#'+current;link.textContent=parentLabel;const divider=document.createElement('span');divider.className='sep';divider.textContent='/';divider.setAttribute('aria-hidden','true');const leaf=document.createElement('span');leaf.textContent=crumb.slice(parentLabel.length+3);leaf.setAttribute('aria-current','page');trail.append(link,divider,leaf)}else{trail.textContent=names[current];trail.setAttribute('aria-current','page')}updateNavigation(raw,p);setMobileMenuOpen(false);let html='';if(current==='intern'){html=internalPage(sub)}else if(current==='muligheter'&&sub){const pl=D.plays.find(x=>x.id===sub);html=pl?playDetail(pl):plays()}else if(current==='forretning'&&sub){const sector=sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null,caseItem=sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null,b=D.businessSignals.find(x=>x.id===sub);html=sector?industrySectorPage(sector):caseItem?industryCasePage(caseItem):b?businessDetail(b):business()}else if(current==='arkitektur'){html=architecture(sub)}else if(current==='verktoy'){html=toolkit(sub)}else if(current==='prompter'){html=prompts(sub)}else if(current==='lysbilder'){html=slideLibraryPage(sub)}else if(current==='ressurser'){html=resourceLibraryPage()}else{html=({oversikt:overview,guide,'om-innsikt':portalIntro,ordliste:glossary,marked:market,muligheter:plays,kundedialog:()=>dialogue(sub),forretning:business,kompetanse:competence,teknologi:technology,ai:aiProducts,bransje:industry,horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev}[current])()}document.getElementById('main').innerHTML=html;if(current==='lysbilder'&&!sub)updateSlideLibrary();fitLibraryPreviews();window.InnsiktGlossary?.enhance(document.getElementById('main'));window.scrollTo({top:0,behavior:'instant'});document.title=`${crumb} · Innsikt`;}
 function toast(t){document.querySelector('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),2700)}
 function setMobileMenuOpen(open,{restoreFocus=false}={}){
  const menu=document.getElementById('sidebar'),toggle=document.getElementById('menu-toggle');
@@ -753,6 +815,6 @@ async function init(){document.querySelectorAll('[data-icon]').forEach(x=>x.inne
  const deployment=await deploymentResponse.json();
  const protectedContent=await window.InnsiktPresentationContent.load(deployment);
  const raw={meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles};
- D=window.InnsiktContent.materialize(window.InnsiktPresentationContent.combine(raw,protectedContent));names=D.pages.navigation;document.querySelectorAll('[data-nav-label]').forEach(el=>{el.textContent=names[el.dataset.navLabel]||''});document.querySelectorAll('[data-nav-group]').forEach(el=>el.textContent=D.pages.navigationGroups[el.dataset.navGroup]||'');document.getElementById('sidebar-notice').textContent=protectedContent?'Intern arbeidsflate – vis og del bare innenfor godkjente områder.':D.pages.site.publicNotice;document.getElementById('version-label').textContent=D.meta.version;document.getElementById('footer-status').textContent='Oppdatert '+D.meta.released;document.getElementById('backlog-count').textContent=D.backlog.filter(x=>x.status!=='lukket').length;window.InnsiktPromptContext.configure(D.prompts);initEvents();initPromptContextEvents();enablePresenterSwipe();window.InnsiktGlossary?.init(D.learning.glossary);render()}catch(e){document.getElementById('main').innerHTML=`<section class="panel"><h1>Kunne ikke laste nettsidens data</h1><p>Start en lokal webserver i prosjektmappen, for eksempel <code>python3 -m http.server 8000</code>. Åpne deretter <code>http://localhost:8000/docs/</code>.</p><p class="fineprint">${esc(e.message)}</p></section>`;console.error(e)}}
+ D=window.InnsiktContent.materialize(window.InnsiktPresentationContent.combine(raw,protectedContent));names=D.pages.navigation;buildNavigation();document.querySelectorAll('[data-nav-label]').forEach(el=>{el.textContent=names[el.dataset.navLabel]||''});document.querySelectorAll('[data-nav-group]').forEach(el=>el.textContent=D.pages.navigationGroups[el.dataset.navGroup]||'');document.getElementById('sidebar-notice').textContent=protectedContent?'Intern arbeidsflate – vis og del bare innenfor godkjente områder.':D.pages.site.publicNotice;document.getElementById('version-label').textContent=D.meta.version;document.getElementById('footer-status').textContent='Oppdatert '+D.meta.released;document.getElementById('backlog-count').textContent=D.backlog.filter(x=>x.status!=='lukket').length;window.InnsiktPromptContext.configure(D.prompts);initEvents();initPromptContextEvents();enablePresenterSwipe();window.InnsiktGlossary?.init(D.learning.glossary);render()}catch(e){document.getElementById('main').innerHTML=`<section class="panel"><h1>Kunne ikke laste nettsidens data</h1><p>Start en lokal webserver i prosjektmappen, for eksempel <code>python3 -m http.server 8000</code>. Åpne deretter <code>http://localhost:8000/docs/</code>.</p><p class="fineprint">${esc(e.message)}</p></section>`;console.error(e)}}
 init();
 })();

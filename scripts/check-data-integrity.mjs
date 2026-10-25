@@ -119,7 +119,16 @@ for(const [key,d] of Object.entries(pages.presentationDecks||{})){
 }
 for(const file of ['docs/index.html','docs/assets/site.js','docs/assets/learning.js','docs/assets/presenter-export.js','docs/assets/site.css'])if(!fs.existsSync(file))fail('Mangler fil '+file);
 const html=fs.readFileSync('docs/index.html','utf8');
-for(const n of pagesNeeded)if(!html.includes('data-page="'+n+'"'))fail('HTML mangler menypunkt '+n);
+const navSections=pages.navigationSections||[];
+const mainRoutes=new Set(navSections.flatMap(group=>group.items.map(x=>x.route)));
+const required=['oversikt','prompter','forretning','muligheter','kundedialog/stotte','verktoy','kompetanse','marked','teknologi','arkitektur','horisont','lysbilder','ressurser','om-innsikt','guide','kundedialog/trening','ordliste','kilder','utvikling'];
+if(!html.includes('id="nav-groups"'))fail('Mangler datastyrt menykontainer');
+for(const route of required)if(!mainRoutes.has(route))fail('Mangler menyrute '+route);
+if(new Set(navSections.map(x=>x.id)).size!==navSections.length)fail('Duplisert menygruppe');
+if(new Set(navSections.flatMap(x=>x.items.map(i=>i.route))).size!==navSections.flatMap(x=>x.items).length)fail('Duplisert menyrute');
+for(const group of navSections){if(!group.label||!group.id||!Array.isArray(group.items)||!group.items.length)fail('Ufullstendig menygruppe '+group.id);
+ for(const item of group.items)if(!pages.navigation[item.route.split('/')[0]])fail('Meny viser til ukjent hovedrute '+item.route);
+}
 if(!html.includes('content.js?v='+site.version))fail('Manglende versjon eller registrering for innholdsløser');
 if(!html.includes('site.js?v='+site.version)||!html.includes('learning.js?v='+site.version)||!html.includes('site.css?v='+site.version))fail('Manglende felles assetversjon');
 const resolvedData=resolverSandbox.window.InnsiktContent.materialize({pages,learning,...sales,...market,...tech,prompts:read('prompts')});
