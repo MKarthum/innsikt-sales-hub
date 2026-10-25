@@ -55,7 +55,7 @@ function render(D,h){
   +'<div class="arch-explorer-panels">'+profiles.map(p=>panel(D,h,p,p.id===initial)).join('')+'</div>'
   +'</section>';
 }
-document.addEventListener('click',event=>{
+if(typeof document!=='undefined'&&typeof document.addEventListener==='function')document.addEventListener('click',event=>{
  const target=event.target instanceof Element?event.target.closest('[data-arch-option]'):null;
  if(!target)return;
  const explorer=target.closest('[data-architecture-explorer]');
