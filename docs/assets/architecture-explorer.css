@@ -144,3 +144,11 @@
  .arch-explorer .arch-principles{padding:22px 17px}
  .arch-explorer .arch-principle{padding:12px}
 }
+
+/* One page title, then the actual scene. Avoid three introductory headlines
+   before readers see the explanation the diagram was built to convey. */
+.arch-explorer>.arch-explorer-head{padding:18px 28px 6px}
+.arch-explorer>.arch-explorer-head .small-label{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--teal)}
+@media(max-width:650px){
+ .arch-explorer>.arch-explorer-head{padding:15px 17px 4px}
+}

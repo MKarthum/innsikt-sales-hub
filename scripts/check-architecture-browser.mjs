@@ -20,6 +20,9 @@ try{
  assert.equal(await page.locator('[data-arch-vendor-panel]:not([hidden])').count(),1,'Exactly one vendor selected');
  assert.ok(await page.locator('[data-arch-panel="conceptual"]:not([hidden])').isVisible(),'The common model remains visible');
  assert.equal(await page.locator('[data-arch-panel="conceptual"]:not([hidden]) .da-scene').count(),1,'Page reuses presentation renderer');
+ assert.equal(await page.locator('.arch-explorer > .arch-explorer-head h2').count(),0,'No redundant huge heading before foundational diagram');
+ const firstDiagram=await page.locator('[data-arch-panel="conceptual"] .arch-explorer-stage').boundingBox();
+ assert.ok(firstDiagram&&firstDiagram.y<510,'Foundational diagram appears early enough on desktop: '+JSON.stringify(firstDiagram));
  await page.screenshot({path:out+'/architecture-first-impression-desktop.png',fullPage:false});
  const details=page.locator('[data-arch-technical]');
  await details.locator('summary').click();
@@ -81,6 +84,8 @@ try{
   assert.equal(await mobile.locator('#sidebar').evaluate(x=>x.classList.contains('open')),false,'Mobile sidebar is closed at load');
   assert.equal(await mobile.locator('#sidebar-backdrop').evaluate(x=>x.classList.contains('open')),false,'Mobile backdrop does not cover architecture');
   await mobile.screenshot({path:out+'/architecture-mobile-'+width+'-top.png',fullPage:false});
+  const foundationTop=await mobile.locator('[data-arch-panel="conceptual"] .arch-explorer-stage').boundingBox();
+  assert.ok(foundationTop&&foundationTop.y<590,'Foundational diagram appears within a normal mobile reading viewport at '+width+': '+JSON.stringify(foundationTop));
   const rawProfiles=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles;
   for(const vendorId of ['snowflake','fabric','databricks']){
    await mobile.locator('[data-arch-option="'+vendorId+'"]').click();

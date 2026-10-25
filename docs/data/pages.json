@@ -95,8 +95,8 @@
     },
     "ARKITEKTUR": {
       "eyebrow": "ARKITEKTUR I PRAKSIS",
-      "title": "Arkitektur: fra behov til løsninger",
-      "intro": "Forstå hvilke oppgaver dataarkitekturen må løse, hva som bør være stabilt over tid, og hvordan ulike plattformer kan fylle de samme behovene."
+      "title": "Fra databehov til arkitektur",
+      "intro": "Se hvilke oppgaver som må løses, hva som bør vare over tid og hvordan ulike plattformer organiserer arbeidet."
     },
     "VERKTØYKASSE": {
       "eyebrow": "GJENBRUKBARE UTGANGSPUNKTER",
@@ -1313,7 +1313,7 @@
     }
   ],
   "architectureExplorerUi": {
-    "eyebrow": "FØRST: OPPGAVENE",
+    "eyebrow": "01 · FELLES MODELL",
     "title": "Hva må dataarkitekturen få til?",
     "intro": "Kilder må bli til pålitelig informasjon som kan brukes. Fellesmodellen viser ansvarene – ikke fem produkter du må kjøpe.",
     "vendorGroup": "Velg plattformeksempel",

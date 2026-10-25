@@ -87,8 +87,7 @@ function render(D,h){
   +' class="arch-explorer-option'+(p.id===chosen?' is-active':'')+'">'+e(esc,ui.optionLabels[p.id]||p.label)+'</button>'
  ).join('');
  return '<section class="arch-explorer" data-architecture-explorer aria-label="'+e(esc,ui.title)+'">'
-  +'<div class="arch-explorer-head"><div class="small-label">'+e(esc,ui.eyebrow)+'</div>'
-  +'<h2>'+e(esc,ui.title)+'</h2><p>'+e(esc,ui.intro)+'</p></div>'
+  +'<div class="arch-explorer-head"><div class="small-label">'+e(esc,ui.eyebrow)+'</div></div>'
   +'<div class="arch-explorer-panels">'+panel(D,h,base,true)+'</div>'
   +principles(D,ui,esc)
   +'<section class="arch-explorer-vendors" data-arch-vendors>'
