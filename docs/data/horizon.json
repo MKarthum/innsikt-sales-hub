@@ -90,7 +90,7 @@
       "evidence": "vendor",
       "status": "Uformelt målbilde · ulike tilnærminger, ingen felles standard",
       "summary": "Glean kobler innhold, personer og aktivitet i en kunnskapsgraf, og bruker en bredere Enterprise Graph som kontekst for søk, assistenter og agenter. Det er ett eksempel på virksomhets-KI, ikke definisjonen av «Company Brain». Microsoft IQ skiller mellom arbeidskontekst, forretningsdata og dokumentkunnskap. Snowflake kombinerer analyser og dokumentsøk i agenter; Palantirs ontologi beskriver objekter, beslutningslogikk og handlinger.",
-      "interpretation": "«Company Brain» brukes som en bred visjon om at KI skal forstå og utnytte virksomhetens kontekst. En kunnskapsgraf kan synliggjøre relasjoner, mens søk/RAG, semantiske modeller, styrte datatjenester og verktøytilgang løser andre deler av behovet. Ingen av delene er alene en komplett løsning, og ingen bestemt komponent er nødvendig i alle tilfeller. Undersøk datakvalitet, autoritative kilder, rettigheter, oppdatering, ansvar og kontroll før valg av arkitektur. Leverandøreksemplene dokumenterer produktretninger, ikke at begrepet er en standard eller at gevinst er realisert.",
+      "interpretation": "«Company Brain» brukes som en bred visjon om at KI skal forstå og utnytte virksomhetens kontekst. En kunnskapsgraf kan synliggjøre relasjoner, mens søk/RAG, semantiske modeller, styrte datatjenester og verktøytilgang løser andre deler av behovet. Ingen av delene er alene en komplett løsning, og ingen bestemt komponent er nødvendig i alle tilfeller. Undersøk datakvalitet, autoritative kilder, rettigheter, oppdatering, ansvar og kontroll før valg av arkitektur. Leverandøreksemplene dokumenterer produktretninger, ikke at begrepet er en standard eller at gevinst er realisert. Begrepet «Second Brain» kommer opprinnelig fra personlig kunnskapsforvaltning, ofte uten KI. Meta beskriver et «Organizational Second Brain» som ivaretar ekspertkunnskap og beslutningsprinsipper innen ett fagområde; det overlapper med ambisjonen, men er ikke automatisk en virksomhetsdekkende løsning.",
       "customerQuestion": "Hva må KI faktisk kunne: finne dokumentasjon og kompetanse, tolke godkjente tall, følge relasjoner eller utføre handlinger – og hvilke datakilder, regler og tilganger kan allerede gjenbrukes?",
       "sourceIds": [
         "gleanGraph",
@@ -98,14 +98,17 @@
         "microsoftIQ",
         "agent-foundation",
         "palantirOntology",
-        "gartner-context"
+        "gartner-context",
+        "forteSecondBrain",
+        "metaOrganizationalSecondBrain"
       ],
       "conceptIds": [
         "company-brain",
         "kunnskapsgraf",
         "virksomhetskontekst",
         "semantisk-modell",
-        "rag"
+        "rag",
+        "second-brain"
       ],
       "relatedLinks": [
         {

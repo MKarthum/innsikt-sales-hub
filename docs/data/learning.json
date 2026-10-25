@@ -391,6 +391,26 @@
       }
     },
     {
+      "id": "second-brain",
+      "term": "Second Brain",
+      "meaning": "Et eksternt system for å samle, organisere og gjenbruke kunnskap, notater og ideer, opprinnelig med individet som bruker. Krever ikke KI. «AI Second Brain» brukes ofte om personlig kunnskapsstøtte med KI; «Organizational Second Brain» brukes også om å bevare og anvende felles ekspertkunnskap. Sistnevnte overlapper med «Company Brain», men er ikke en standardarkitektur eller et synonym.",
+      "example": "En rådgiver gjenfinner egne møtenotater og erfaringer i et personlig notatsystem. I en virksomhet kan godkjente beslutningsprinsipper fra eksperter gjøres tilgjengelige for en KI-assistent, slik Meta beskriver for ett fagområde.",
+      "evidence": "assessment",
+      "reviewed": "2026-10-25",
+      "sourceIds": [
+        "forteSecondBrain",
+        "metaOrganizationalSecondBrain"
+      ],
+      "inline": {
+        "enabled": true,
+        "aliases": [
+          "Second Brain",
+          "Organizational Second Brain"
+        ],
+        "caseSensitive": false
+      }
+    },
+    {
       "id": "company-brain",
       "term": "Company Brain",
       "meaning": "Uformelt målbilde for KI som kan bruke virksomhetens autoritative data, dokumenter, begreper, relasjoner og regler på tvers av arbeidsprosesser, med riktig tilgang og etterprøvbarhet. Ikke en standardarkitektur eller et bestemt produkt. Kunnskapsgraf er én mulig byggestein, ikke synonymt med «Company Brain».",

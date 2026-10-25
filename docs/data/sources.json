@@ -686,5 +686,20 @@
     "url": "https://www.palantir.com/docs/foundry/architecture-center/ontology-system",
     "type": "leverandørdokumentasjon",
     "checked": "2026-10-25"
+  },
+  "forteSecondBrain": {
+    "title": "Building a Second Brain – personal knowledge management",
+    "publisher": "Forte Labs / Tiago Forte",
+    "url": "https://www.buildingasecondbrain.com/",
+    "type": "primærkilde · metode og begrepsopphav",
+    "checked": "2026-10-25"
+  },
+  "metaOrganizationalSecondBrain": {
+    "title": "An Organizational Second Brain: Building an AI That Learns From Experts",
+    "publisher": "Engineering at Meta",
+    "url": "https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/",
+    "type": "primærkilde · teknisk eksempel i avgrenset fagområde",
+    "published": "2026-09-02",
+    "checked": "2026-10-25"
   }
 }
