@@ -77,7 +77,12 @@
           "assetId": "support-observe"
         }
       ],
-      "footer": "Lagene er ansvar og kapabiliteter – ikke nødvendigvis separate systemer."
+      "footer": "Lagene er ansvar og kapabiliteter – ikke nødvendigvis separate systemer.",
+      "pageGuide": {
+        "title": "Hva denne modellen forteller",
+        "interpretation": "Følg ansvarene fra kildesystem til anvendelse. Dette er kapabiliteter virksomheten trenger, ikke fem separate produkter eller én bestemt teknologipakke.",
+        "question": "Hvilke av oppgavene har dere allerede kontroll på, og hvor oppstår flaskehalsene?"
+      }
     },
     {
       "id": "modern",
@@ -280,9 +285,9 @@
             "assetId": "streamlit"
           },
           {
-            "label": "Power BI / BI",
-            "sub": "Rapporter",
-            "assetId": "power-bi"
+            "label": "BI / rapporter",
+            "sub": "Power BI · Sigma · Tableau",
+            "assetId": "consume-report"
           },
           {
             "label": "Cortex AI",
@@ -310,6 +315,30 @@
           }
         ],
         "foot": "dbt, Streamlit og Cortex er eksempler – ikke krav til løsningen."
+      },
+      "pageGuide": {
+        "title": "Hva er det viktige i Snowflake-figuren?",
+        "interpretation": "Inntak, bearbeiding og bruk er valg som kan kombineres på flere måter. BI er et selvstendig valg utenfor selve dataplattformen; en bestemt rapporteringspakke er ikke nødvendig.",
+        "question": "Trenger dere å videreføre eksisterende BI, velge et separat analyseverktøy eller bygge en målrettet app?",
+        "decision": {
+          "title": "BI er et valg – ikke en del av Snowflake-pakken",
+          "intro": "Power BI er ett mulig rapporteringsverktøy, men ikke en forutsetning. Valget bør starte med brukernes behov og det dere allerede betaler for.",
+          "alternatives": [
+            {
+              "label": "Eksisterende BI",
+              "text": "Behold for eksempel Power BI eller Tableau hvis rapportene, brukerne og kompetansen allerede finnes."
+            },
+            {
+              "label": "BI tett på dataplattformen",
+              "text": "Sigma er et eksempel på et separat BI-verktøy som kobles til Snowflake; vurder lisens, identitet, deling og kostnad."
+            },
+            {
+              "label": "Skreddersydd brukerflate",
+              "text": "Streamlit i Snowflake passer for målrettede dataapper og enkelte dashboards, men erstatter ikke automatisk full BI-styring og rapportdistribusjon."
+            }
+          ],
+          "caution": "Å unngå ett leverandørøkosystem er ikke det samme som å unngå ny binding. Sammenlign totaløkonomi, tilgang, modeller, vedlikehold og eksisterende bruk – ikke bare lisensnavn."
+        }
       }
     },
     {
@@ -478,6 +507,11 @@
           }
         ],
         "foot": "Ikke alle Fabric-produkter må brukes; sanntidssporet og analysearbeidsflatene løser forskjellige behov."
+      },
+      "pageGuide": {
+        "title": "Hva er annerledes i Fabric?",
+        "interpretation": "OneLake ligger under og binder sammen arbeidsflatene. Data Factory, sanntid, lakehouse, warehouse og rapportering er ulike arbeidsmåter – ikke fem obligatoriske sekvensielle steg.",
+        "question": "Hvilke arbeidsflater trenger dere faktisk, og hvilke data kan brukes uten å bygges opp på nytt?"
       }
     },
     {
@@ -657,6 +691,11 @@
           }
         ],
         "foot": "Databricks på ulike skyer kan kobles til mange eksterne tjenester. To konsumløp er illustrasjoner, ikke et krav."
+      },
+      "pageGuide": {
+        "title": "Hva er annerledes i Databricks?",
+        "interpretation": "Lakehouse og medallion-mønsteret viser hvordan data kan modnes fra rådata til kvalitetssikrede dataprodukter. SQL/BI og ML/KI kan bruke de samme dataene uten at alle komponenter er obligatoriske.",
+        "question": "Hvor trenger dere datakvalitet, felles styring og ulike bruksmønstre – og hvilke deler kan beholdes fra dagens miljø?"
       }
     }
   ]

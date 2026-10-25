@@ -1102,13 +1102,17 @@
         "KI",
         "snowflake"
       ],
-      "speakerBase": "Dette er en illustrativ Snowflake-arkitektur, ikke en obligatorisk produktliste. For inntak kan vi velge Snowpipe for filer, Snowpipe Streaming for løpende hendelser eller Openflow-koblinger mot kildesystemer. Datadeling er en annen mekanisme og skal ikke forveksles med Openflow. I Snowflake viser figuren ett datagrunnlag som kan modelleres med dbt, Dynamic Tables eller Snowpark. Verktøyene kan kombineres, men alle trengs ikke. Brukssiden viser Streamlit for en intern app, Power BI for rapportering og Cortex AI for KI-støtte. Diskuter tilgang, metadata, orkestrering og kostnader på tvers. Start med kundens krav, ikke produktlisten. Overgang: Fabric organiserer arbeidsflater rundt OneLake, mens Databricks viser et lakehouse med Bronze, Silver og Gold.",
+      "speakerBase": "Dette er en illustrativ Snowflake-arkitektur, ikke en obligatorisk produktliste. For inntak kan vi velge Snowpipe for filer, Snowpipe Streaming for løpende hendelser eller Openflow-koblinger mot kildesystemer. Datadeling er en annen mekanisme og skal ikke forveksles med Openflow. Snowflake-data kan modelleres med dbt, Dynamic Tables eller Snowpark; verktøyene kan kombineres, men alle trengs ikke. På brukssiden illustrerer Streamlit en skreddersydd app, ulike BI-verktøy (for eksempel Power BI, Sigma og Tableau) rapportering, og Cortex AI KI-støtte. Snowflake har avviklet eldre Snowsight Dashboards i 2026; dagens valg er blant annet Streamlit eller eksterne BI-verktøy. Vurder om eksisterende BI bør beholdes, om et verktøy som Sigma er aktuelt, eller om en mindre app dekker behovet. Ingen av valgene er automatisk best eller fri for leverandørbinding. Diskuter tilgang, metadata, orkestrering, totalkostnad og kompetanse. Overgang: Fabric organiserer arbeidsflater rundt OneLake, mens Databricks viser et lakehouse med Bronze, Silver og Gold.",
       "sourceIds": [
         "architecture-snowflake",
         "architecture-dbt",
         "snowflake-streamlit",
         "snowflake-dynamic",
-        "snowflake-ingest-options"
+        "snowflake-ingest-options",
+        "snowflake-bi-ecosystem",
+        "snowflake-dashboards-retired",
+        "sigma-snowflake-connector",
+        "tableau-snowflake-connector"
       ]
     },
     {

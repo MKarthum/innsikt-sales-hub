@@ -701,5 +701,33 @@
     "type": "primærkilde · teknisk eksempel i avgrenset fagområde",
     "published": "2026-09-02",
     "checked": "2026-10-25"
+  },
+  "snowflake-bi-ecosystem": {
+    "title": "Snowflake – oversikt over BI-partnere og teknologier",
+    "publisher": "Snowflake Documentation",
+    "url": "https://docs.snowflake.com/user-guide/ecosystem-all",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-25"
+  },
+  "snowflake-dashboards-retired": {
+    "title": "Snowflake – avvikling av eldre Snowsight Dashboards i 2026",
+    "publisher": "Snowflake Documentation",
+    "url": "https://docs.snowflake.com/en/release-notes/bcr-bundles/un-bundled/bcr-2260",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-25"
+  },
+  "sigma-snowflake-connector": {
+    "title": "Sigma – kobling til Snowflake",
+    "publisher": "Sigma Documentation",
+    "url": "https://help.sigmacomputing.com/docs/connect-to-snowflake",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-25"
+  },
+  "tableau-snowflake-connector": {
+    "title": "Tableau – kobling til Snowflake",
+    "publisher": "Tableau Documentation",
+    "url": "https://help.tableau.com/current/pro/desktop/en-gb/examples_snowflake.htm",
+    "type": "leverandørdokumentasjon",
+    "checked": "2026-10-25"
   }
 }

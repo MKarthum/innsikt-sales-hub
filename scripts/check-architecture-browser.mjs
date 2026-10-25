@@ -25,6 +25,19 @@ try{
  assert.equal(await page.locator('.arch-applications .learning-card').count(),2,'Two distinctly purposeful BI and document RAG examples');
  assert.equal(await page.locator('.arch-applications a[href="#arkitektur/bi"]').count(),1,'BI example keeps deep link');
  assert.equal(await page.locator('.arch-applications a[href="#arkitektur/rag"]').count(),1,'Document RAG example keeps deep link');
+ const canonicalQuestions=JSON.parse(fs.readFileSync('docs/data/horizon.json','utf8')).questions;
+ assert.equal(await page.locator('.arch-principles h2').textContent(),canonicalQuestions.title,'Architecture promotes the existing supplier-independent questions');
+ assert.deepEqual(await page.locator('.arch-principles .arch-principle p').allTextContents(),canonicalQuestions.items,'Four questions use the existing canonical horizon content, no copied facts');
+ assert.equal(await page.locator('.arch-principles .arch-principle').count(),4);
+ await page.locator('[data-arch-option="snowflake"]').click();
+ const snow=page.locator('[data-arch-panel="snowflake"]:not([hidden])');
+ assert.equal(await snow.locator('.vp-output .vp-atom-label strong').filter({hasText:'BI / rapporter'}).count(),1,'Snowflake BI output is a role, not a required Microsoft dependency');
+ assert.ok((await snow.locator('.vp-output').allTextContents()).some(x=>x.includes('Sigma')&&x.includes('Tableau')),'Canonical Snowflake scene offers several real BI alternatives');
+ assert.equal(await snow.locator('[data-arch-bi-alternatives] .arch-bi-option').count(),3,'One explanatory comparison with existing BI, independent BI and native apps');
+ assert.equal(await snow.locator('[data-arch-reading-guide]').count(),1,'Each platform has an interpretation guide');
+ assert.ok((await snow.locator('.arch-bi-caution').textContent()).includes('ny binding'),'BI alternatives explain real tradeoffs and do not promise zero lock-in');
+ const editedSources=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.find(s=>s.id==='architecture-snowflake').sourceIds;
+ assert.ok(['snowflake-bi-ecosystem','snowflake-dashboards-retired','sigma-snowflake-connector','tableau-snowflake-connector'].every(id=>editedSources.includes(id)),'BI alternatives are traceable to source registry');
  await page.screenshot({path:out+'/architecture-page-desktop.png',fullPage:false});
  await page.locator('[data-arch-option="fabric"]').click();
  assert.equal(await page.locator('[data-arch-option="fabric"]').getAttribute('aria-pressed'),'true','Platform option is accessible');
@@ -37,8 +50,8 @@ try{
   const structure=page.locator('[data-arch-panel="fabric"] .arch-explorer-stage');
   if(width===900){
    assert.equal(await page.locator('[data-arch-panel="fabric"] .arch-explorer-mobile').count(),0,'Tablet has same spatial vendor model');
-   await page.locator('[data-arch-panel="fabric"] [data-arch-detail]').click();
-   assert.ok(await structure.evaluate(x=>x.scrollWidth>x.clientWidth),'Tablet detail mode pans same scene rather than stacking boxes');
+   await page.locator('[data-arch-panel="fabric"] [data-arch-detail-open]').click();
+   assert.ok(await structure.evaluate(x=>x.scrollWidth>x.clientWidth),'Click directly on diagram opens legible tablet details');
    await page.locator('[data-arch-panel="fabric"] [data-arch-detail]').click();
   }
  }
@@ -75,8 +88,14 @@ try{
    assert.ok(Math.abs(overview.aspect-16/9)<.1,'Complete 16:9 overview at phone width: '+JSON.stringify(overview));
    assert.ok(overview.scroll<=overview.client+2,'Overview fits the entire architecture without horizontal clipping');
    await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-overview.png'});
-   await region.locator('[data-arch-detail]').click();
-   assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'true','Opt in to readable detail');
+   const open=region.locator('[data-arch-detail-open]');
+   assert.equal(await open.isVisible(),true,'The diagram itself is the visible entry point');
+   assert.equal(await region.locator('[data-arch-detail]').isVisible(),false,'Redundant detail button is hidden before zoom');
+   await open.focus();
+   await mobile.keyboard.press('Enter');
+   assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'true','Keyboard Enter on the image opens readable detail');
+   assert.equal(await open.isVisible(),false,'Image overlay is removed in pan mode');
+   assert.equal(await region.locator('[data-arch-detail]').isVisible(),true,'Accessible return control appears in detail mode');
    const dimensions=await canvas.evaluate(x=>({client:x.clientWidth,scroll:x.scrollWidth,height:x.clientHeight,ownScroll:x.scrollWidth>x.clientWidth+100}));
    assert.equal(dimensions.ownScroll,true,'Vendor architecture pans within its own viewport');
    assert.ok(dimensions.height>=500,'Readable detailed architecture at full drawing scale');
@@ -96,6 +115,8 @@ try{
    await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-uses.png'});
    await region.locator('[data-arch-detail]').click();
    assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'false','Can return to full architecture overview');
+   assert.equal(await region.locator('[data-arch-detail-open]').isVisible(),true,'Diagram becomes clickable again');
+   assert.equal(await region.locator('[data-arch-detail-open]').evaluate(x=>document.activeElement===x),true,'Focus safely returns to diagram trigger');
    const dims=await mobile.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
    assert.ok(dims.sw<=dims.cw+1,'Mobile page never scrolls horizontally '+width+'/'+vendorId+' '+JSON.stringify(dims));
   }

@@ -33,6 +33,19 @@ function technicalDetails(D,h,profile){
   '<section><h4>'+E(stage.title)+'</h4><ul>'+stage.items.map(item=>'<li>'+E(item)+'</li>').join('')+'</ul></section>'
  ).join('')+'</div><a class="text-link" href="#lysbilder/'+E(slide.id)+'">'+E(ui.technicalSlideLink)+'</a></details>';
 }
+function readingGuide(profile,ui,escape){
+ const guide=profile.pageGuide;
+ if(!guide)return '';
+ const E=x=>e(escape,x),decision=guide.decision;
+ return '<section class="arch-reading-guide" data-arch-reading-guide>'
+ +'<div class="arch-reading-main"><h3>'+E(guide.title)+'</h3><p>'+E(guide.interpretation)+'</p>'
+ +'<div class="arch-reading-question"><strong>'+E(ui.guideQuestionLabel)+'</strong><p>'+E(guide.question)+'</p></div></div>'
+ +(decision?'<div class="arch-bi-decisions" data-arch-bi-alternatives><h4>'+E(decision.title)+'</h4><p>'+E(decision.intro)+'</p>'
+ +'<div class="arch-bi-options">'+decision.alternatives.map(x=>
+  '<div class="arch-bi-option"><strong>'+E(x.label)+'</strong><p>'+E(x.text)+'</p></div>').join('')+'</div>'
+ +'<p class="arch-bi-caution">'+E(decision.caution)+'</p></div>':'')
+ +'</section>';
+}
 function panel(D,h,profile,active){
  const {esc,sourceLinks}=h,slide=D.slides.items.find(s=>s.profileId===profile.id);
  if(!slide)return '';
@@ -42,9 +55,11 @@ function panel(D,h,profile,active){
   +(active?'':' hidden')+'>'
   +'<div class="arch-explorer-claim"><div><h3>'+e(esc,profile.label)+'</h3><p>'+e(esc,profile.intro)+'</p></div></div>'
   +'<div class="arch-explorer-stage" role="region" tabindex="0" aria-label="'+e(esc,ui.panRegionLabel)+' – '+e(esc,profile.label)+'">'
-  +'<div class="present-frame present-rich" data-tone="light">'+scene+'</div></div>'
+  +'<div class="present-frame present-rich" data-tone="light">'+scene+'</div>'
+  +'<button type="button" class="arch-stage-open" data-arch-detail-open aria-label="'+e(esc,ui.panOpenAria)+'"><span>'+e(esc,ui.panOpenHint)+'</span></button></div>'
   +panNavigation(profile,ui,esc)
   +technicalDetails(D,h,profile)
+  +readingGuide(profile,ui,esc)
   +'<div class="arch-explorer-foot"><p>'+e(esc,profile.footer)+'</p>'
   +'<div class="arch-explorer-actions"><a class="btn subtle" href="#lysbilder/'+e(esc,slide.id)+'">'
   +e(esc,ui.openSlide)+'</a></div></div>'
@@ -73,12 +88,20 @@ function render(D,h){
   +'</section>';
 }
 if(typeof document!=='undefined'&&typeof document.addEventListener==='function')document.addEventListener('click',event=>{
- const detail=event.target instanceof Element?event.target.closest('[data-arch-detail]'):null;
+ const detail=event.target instanceof Element?event.target.closest('[data-arch-detail],[data-arch-detail-open]'):null;
  if(detail){
-  const region=detail.closest('[data-arch-panel]'),active=region.classList.toggle('is-detail');
-  detail.setAttribute('aria-pressed',active?'true':'false');
-  detail.textContent=active?detail.dataset.labelClose:detail.dataset.labelOpen;
-  if(!active)region.querySelector('.arch-explorer-stage').scrollLeft=0;
+  const region=detail.closest('[data-arch-panel]');
+  if(!region)return;
+  const active=detail.matches('[data-arch-detail-open]')||!region.classList.contains('is-detail');
+  region.classList.toggle('is-detail',active);
+  const back=region.querySelector('[data-arch-detail]');
+  back.setAttribute('aria-pressed',active?'true':'false');
+  back.textContent=active?back.dataset.labelClose:back.dataset.labelOpen;
+  if(active)region.querySelector('.arch-explorer-stage').scrollLeft=0;
+  else {
+   region.querySelector('.arch-explorer-stage').scrollLeft=0;
+   region.querySelector('[data-arch-detail-open]').focus();
+  }
   return;
  }
  const pan=event.target instanceof Element?event.target.closest('[data-arch-pan]'):null;
