@@ -1038,7 +1038,7 @@
       "variants": {
         "short": "Dette er et pedagogisk eksempel, ikke en dokumentert kundereferanse.",
         "normal": "Dette er et redaksjonelt forslag til en salgsinngang, ikke en dokumentert kundecase eller garanti for leveranseevne.",
-        "long": "Ikke lov profiler, leveransekapasitet, referanser eller kompetanse uten bekreftelse fra Websteps fagmiljø. Ved overføring til organisasjonens repo kan intern kontaktinformasjon og godkjente referanser legges til."
+        "long": "Ikke lov profiler, leveransekapasitet, referanser eller kompetanse uten bekreftelse fra relevant fagmiljø. I en intern utgave kan godkjent kontaktinformasjon og dokumenterte referanser legges til separat."
       },
       "evidence": "assessment",
       "sourceIds": [],
