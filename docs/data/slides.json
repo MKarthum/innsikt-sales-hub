@@ -1079,12 +1079,13 @@
         "KI",
         "snowflake"
       ],
-      "speakerBase": "Dette er én mulig arkitektur for kunde- og transaksjonsdata. Kilder kan lastes med Snowpipe og streaming, eller deles direkte. Snowflake står i midten som datagrunnlag med SQL, Snowpark og Dynamic Tables. dbt er vist som et alternativ for å bygge modeller og teste dem; den er ikke obligatorisk. Til høyre skiller vi tre faktiske bruksflater: Streamlit in Snowflake for en intern applikasjon, Power BI for rapporter og Cortex AI for KI-assistert analyse. Alle komponentene trenger tilgangsstyring, katalog og kostkontroll. Historien er at valg av inntak, modellering og konsum avhenger av kunden – ikke at vi anbefaler alt samtidig.",
+      "speakerBase": "Dette er en illustrativ Snowflake-arkitektur, ikke en obligatorisk produktliste. For inntak kan vi velge Snowpipe for filer, Snowpipe Streaming for løpende hendelser eller Openflow-koblinger mot kildesystemer. Datadeling er en annen mekanisme og skal ikke forveksles med Openflow. I Snowflake viser figuren ett datagrunnlag som kan modelleres med dbt, Dynamic Tables eller Snowpark. Verktøyene kan kombineres, men alle trengs ikke. Brukssiden viser Streamlit for en intern app, Power BI for rapportering og Cortex AI for KI-støtte. Diskuter tilgang, metadata, orkestrering og kostnader på tvers. Start med kundens krav, ikke produktlisten. Overgang: Fabric organiserer arbeidsflater rundt OneLake, mens Databricks viser et lakehouse med Bronze, Silver og Gold.",
       "sourceIds": [
         "architecture-snowflake",
         "architecture-dbt",
         "snowflake-streamlit",
-        "snowflake-dynamic"
+        "snowflake-dynamic",
+        "snowflake-ingest-options"
       ]
     },
     {

@@ -334,21 +334,21 @@
         ],
         "brand": "snowflake",
         "workspaceTitle": "SNOWFLAKE DATA CLOUD",
-        "ingestTitle": "Inntak og deling",
+        "ingestTitle": "Inntak",
         "ingest": [
           {
             "label": "Snowpipe",
-            "sub": "Batch / filer",
+            "sub": "Filer",
             "assetId": "source-files"
           },
           {
-            "label": "Streaming",
+            "label": "Snowpipe Streaming",
             "sub": "Hendelser",
             "assetId": "source-stream"
           },
           {
-            "label": "Shares / Openflow",
-            "sub": "Tilgang / flyt",
+            "label": "Openflow",
+            "sub": "Koblinger",
             "assetId": "source-api"
           }
         ],
@@ -358,12 +358,12 @@
         "transform": [
           {
             "label": "dbt",
-            "sub": "SQL-modeller og tester",
+            "sub": "SQL + tester",
             "assetId": "dbt"
           },
           {
             "label": "Dynamic Tables",
-            "sub": "Deklarative oppdateringer",
+            "sub": "Autooppdatering",
             "assetId": "core-transform"
           },
           {
@@ -409,7 +409,7 @@
             "assetId": "support-observe"
           }
         ],
-        "foot": "dbt, Streamlit og Cortex er eksempler på mulige komponenter – ikke obligatoriske deler av hver løsning."
+        "foot": "dbt, Streamlit og Cortex er eksempler – ikke krav til løsningen."
       }
     },
     {

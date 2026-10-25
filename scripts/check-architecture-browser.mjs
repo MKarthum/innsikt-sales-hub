@@ -49,7 +49,25 @@ try{
   assert.equal(audit.outside.length,0,s.id+' text outside '+JSON.stringify(audit.outside));
   assert.ok(audit.foundation&&audit.imageChecks.length>=10,s.id+' missing shared imagery');
   await page.waitForFunction(()=>[...document.querySelectorAll('.slide-library-detail-stage .da-scene img, .slide-library-detail-stage .vp-scene img')].every(x=>x.complete&&x.naturalWidth>0));
-  if(s.profileId==='snowflake')assert.equal(await stage.locator('.vp-snow-shell').count(),1,'Snowflake hub layout');
+  if(s.profileId==='snowflake'){
+   assert.equal(await stage.locator('.vp-snow-shell').count(),1,'Snowflake hub layout');
+   const legibility=await stage.evaluate(node=>{
+    const scene=node.querySelector('.vp-scene');
+    const sceneWidth=scene.getBoundingClientRect().width;
+    return [...scene.querySelectorAll('.vp-snow-shell .vp-trio .vp-atom')].map(atom=>{
+     const label=atom.querySelector('.vp-atom-label');
+     const title=label.querySelector('strong'),detail=label.querySelector('span');
+     const ar=atom.getBoundingClientRect(),lr=label.getBoundingClientRect();
+     const titlePx=parseFloat(getComputedStyle(title).fontSize)*960/sceneWidth;
+     const detailPx=parseFloat(getComputedStyle(detail).fontSize)*960/sceneWidth;
+     return {title:title.textContent,titlePx,detailPx,clipped:lr.right>ar.right+1||lr.bottom>ar.bottom+1||lr.left<ar.left-1||lr.top<ar.top-1||label.scrollWidth>label.clientWidth+1};
+    });
+   });
+   assert.equal(legibility.length,6,'Snowflake retains six ingest/model alternatives');
+   assert.deepEqual(legibility.slice(0,3).map(x=>x.title),['Snowpipe','Snowpipe Streaming','Openflow'],'Distinct ingestion options, not sharing');
+   assert.ok(legibility.every(x=>x.titlePx>=12.5&&x.detailPx>=10.5),'Snowflake text legible at 960px: '+JSON.stringify(legibility));
+   assert.ok(legibility.every(x=>!x.clipped),'Snowflake labels must fit: '+JSON.stringify(legibility));
+  }
   if(s.profileId==='fabric')assert.equal(await stage.locator('.vp-fabric-lake').count(),1,'Fabric OneLake-led layout');
   if(s.profileId==='databricks')assert.equal(await stage.locator('.vp-medallion').count(),1,'Databricks medallion layout');
   await stage.screenshot({path:out+'/'+s.id+'.png'});

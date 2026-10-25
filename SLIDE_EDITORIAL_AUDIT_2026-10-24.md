@@ -33,7 +33,7 @@
 | architecture-conceptual | Teknologinøytral kilde-til-konsum-arkitektur | dataarkitektur | Ikke presenter lag som obligatorisk produktstruktur |
 | architecture-modern | Teknologinøytral kilde-til-konsum-arkitektur | dataarkitektur | Ikke presenter lag som obligatorisk produktstruktur |
 | architecture-ai | Teknologinøytral kilde-til-konsum-arkitektur | dataarkitektur | Ikke presenter lag som obligatorisk produktstruktur |
-| architecture-snowflake | Separat leverandørkomposisjon med produktikoner | dataarkitektur | Verifiser produktnavn og funksjoner mot offisielle kilder |
+| architecture-snowflake | Tre tydelige inntaksvalg og modelleringsalternativer rundt Snowflakes datagrunnlag | dataarkitektur | Skille Openflow fra datadeling; alle komponenter er illustrative, ikke obligatoriske |
 | architecture-fabric | Separat leverandørkomposisjon med produktikoner | dataarkitektur | Verifiser produktnavn og funksjoner mot offisielle kilder |
 | architecture-databricks | Separat leverandørkomposisjon med produktikoner | dataarkitektur | Verifiser produktnavn og funksjoner mot offisielle kilder |
 | market-why-now | Kort hovedpoeng med relevant sentral figur; 1 gjenbrukte figur-ID-er | marked-retning | Kontroller linjebrudd og bildebalanse |

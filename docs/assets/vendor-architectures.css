@@ -35,6 +35,37 @@
 .vp-bottom p{flex:1;margin:0;font:560 1.03cqw/1.16 var(--font-body)}
 .vp-bottom small{font:480 .86cqw/1.1 var(--font-body);max-width:27%;text-align:right}
 .vp-snowflake{grid-template-columns:17% 59% minmax(0,22%)}
+/* Snowflake only: icon, name and short explanation share each compact lane. */
+.vp-snowflake .vp-trio .vp-atom{
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-start;
+  text-align:left;
+  gap:.55cqw;
+  padding:.55cqw .6cqw;
+}
+.vp-snowflake .vp-trio .vp-logo{
+  width:2.65cqw;
+  height:2.65cqw;
+}
+.vp-snowflake .vp-trio .vp-atom-label{gap:.18cqw}
+.vp-snowflake .vp-trio .vp-atom-label strong{
+  font-size:1.46cqw;
+  line-height:1.12;
+}
+.vp-snowflake .vp-trio .vp-atom-label span{
+  font-size:1.25cqw;
+  line-height:1.14;
+}
+.vp-scene-snowflake .vp-snow-core strong{font-size:1.5cqw}
+.vp-scene-snowflake .vp-snow-core>span:last-child{font-size:1.2cqw}
+.vp-scene-snowflake .vp-bottom p{font-size:1.08cqw}
+.vp-scene-snowflake .vp-bottom small{
+  font-size:.97cqw;
+  max-width:35%;
+  line-height:1.15;
+}
+
 .vp-snow-shell{border:1px solid color-mix(in srgb,var(--pres-accent) 35%,transparent);border-radius:1.05cqw;padding:1cqw 1.15cqw;min-height:0;display:grid;grid-template-rows:3.7cqw 1fr 5.45cqw 1.1fr;gap:.75cqw;background:color-mix(in srgb,var(--pres-accent) 7%,var(--pres-bg))}
 .vp-snow-core{display:flex;justify-content:center;align-items:center;gap:1cqw;border:1px dashed color-mix(in srgb,var(--pres-accent) 54%,transparent);border-radius:.65cqw;background:color-mix(in srgb,var(--pres-accent) 12%,var(--pres-bg))}
 .vp-snow-core strong{font:790 1.35cqw var(--font-display);color:var(--pres-fg)}
