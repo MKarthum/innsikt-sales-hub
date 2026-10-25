@@ -94,7 +94,7 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 .lesson-story h3{font-size:18px;margin:9px 0}
 .glossary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .glossary-item{background:#fff;border:1px solid #dfe8eb;border-radius:10px;padding:0 16px}
-.glossary-item summary{cursor:pointer;font-weight:800;font-size:13px;padding:14px 0;color:#294c5c}
+.glossary-item summary{cursor:pointer;font-weight:800;font-size:13px;padding:14px 0;color:#294c5c;scroll-margin-top:92px}
 .glossary-item[open]{border-color:#84c2ad}
 .glossary-item p{font-size:13px;line-height:1.6;color:#47636f}
 .learning-grid,.risk-grid,.tool-section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}

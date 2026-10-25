@@ -41,6 +41,28 @@ try{
    const parent='#'+route.slice(1).split('/')[0];
    assert.equal(await page.locator('#crumb a[href="'+parent+'"]').count(),1,'Parent for '+route);
   }
+  // Glossary detail routes use the same breadcrumb, invalid-ID and history contract.
+  await page.evaluate(()=>location.hash='#ordliste/dataplattform');
+  await page.waitForFunction(()=>location.hash==='#ordliste/dataplattform'&&document.querySelector('#crumb [aria-current="page"]')?.textContent?.trim()==='Dataplattform');
+  assert.equal(await page.locator('#crumb a[href="#ordliste"]').count(),1);
+  assert.equal(await page.locator('#crumb [aria-current="page"]').count(),1);
+  await page.locator('#crumb a[href="#ordliste"]').click();
+  await page.waitForFunction(()=>location.hash==='#ordliste'&&document.querySelector('#crumb')?.getAttribute('aria-current')==='page');
+  assert.equal(await page.locator('.glossary-item[open]').count(),0);
+  await page.evaluate(()=>location.hash='#ordliste/bi');
+  await page.waitForFunction(()=>location.hash==='#ordliste/bi'&&document.querySelector('.glossary-item[data-glossary-id="bi"]')?.open);
+  await page.goBack();
+  await page.waitForFunction(()=>location.hash==='#ordliste');
+  await page.goForward();
+  await page.waitForFunction(()=>location.hash==='#ordliste/bi'&&document.querySelector('.glossary-item[data-glossary-id="bi"]')?.open);
+  await page.reload({waitUntil:'networkidle'});
+  await page.waitForFunction(()=>location.hash==='#ordliste/bi'&&document.querySelector('.glossary-item[data-glossary-id="bi"]')?.open);
+  await page.evaluate(()=>location.hash='#ordliste/ugyldig-begrep');
+  await page.waitForFunction(()=>location.hash==='#ordliste'&&document.querySelector('#crumb')?.getAttribute('aria-current')==='page');
+  await page.locator('.breadcrumb-project[href="#oversikt"]').click();
+  await page.waitForFunction(()=>location.hash==='#oversikt');
+  await page.evaluate(()=>location.hash='#guide');
+  await page.waitForFunction(()=>location.hash==='#guide'&&document.querySelector('#main .lesson-story'));
   await page.close();
  }
  console.log('PASS – all '+library.length+' slide breadcrumbs and existing detail families navigate correctly on desktop and mobile');
