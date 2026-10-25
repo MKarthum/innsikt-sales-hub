@@ -57,7 +57,7 @@ function panel(D,h,profile,active){
   +'<div class="arch-explorer-claim"><div><h3>'+e(esc,profile.label)+'</h3><p>'+e(esc,profile.intro)+'</p></div></div>'
   +'<div class="arch-explorer-stage" role="region" tabindex="0" aria-label="'+e(esc,ui.panRegionLabel)+' – '+e(esc,profile.label)+'">'
   +'<div class="present-frame present-rich" data-tone="light">'+scene+'</div>'
-  +'<button type="button" class="arch-stage-open" data-arch-detail-open aria-label="'+e(esc,ui.panOpenAria)+'"><span>'+e(esc,ui.panOpenHint)+'</span></button></div>'
+  +'<button type="button" class="arch-stage-open" data-arch-detail-open aria-label="'+e(esc,ui.panOpenAria)+'"></button></div>'
   +panNavigation(profile,ui,esc)
   +readingGuide(profile,ui,esc)
   +technicalDetails(D,h,profile)
