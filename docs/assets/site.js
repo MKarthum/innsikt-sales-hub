@@ -139,7 +139,7 @@ function actionTile(icon,title,desc,page){return `<a href="#${page}" class="tile
 
 
 function industryTile(s){
- const n=D.industryUseCases.filter(c=>c.sectorId===s.id).length;
+ const ui=D.pages.industryUi,n=D.industryUseCases.filter(c=>c.sectorId===s.id).length;
  const focus=D.organizationProfile?.focusSectorIds||[];
  const category=focus.includes(s.id)?'Prioritert bransje':'Bransjeeksempel';
  return `<a class="sector-card" href="#forretning/sektor-${esc(s.id)}"><span class="sector-card-type">${esc(category)}</span><h3>${esc(s.name)}</h3><p>${esc(s.scope)}</p><span class="sector-link">${esc(n)} ${esc(ui.sectorCasesCount)} ${ico('arrow-right')}</span></a>`;
