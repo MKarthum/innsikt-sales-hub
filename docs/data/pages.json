@@ -95,8 +95,8 @@
     },
     "ARKITEKTUR": {
       "eyebrow": "ARKITEKTUR I PRAKSIS",
-      "title": "Slik henger data, analyse og KI sammen",
-      "intro": "Se hvordan data blir forståelige og nyttige – og hva som må styres på tvers. Begynn med den felles modellen, og bruk leverandøreksemplene til å diskutere alternativer, ikke handlelister."
+      "title": "Arkitektur: fra behov til løsninger",
+      "intro": "Forstå hvilke oppgaver dataarkitekturen må løse, hva som bør være stabilt over tid, og hvordan ulike plattformer kan fylle de samme behovene."
     },
     "VERKTØYKASSE": {
       "eyebrow": "GJENBRUKBARE UTGANGSPUNKTER",
@@ -1313,11 +1313,11 @@
     }
   ],
   "architectureExplorerUi": {
-    "eyebrow": "UTFORSK DATAFLYTEN",
-    "title": "Utforsk modellen eller en konkret plattform",
-    "intro": "Den felles modellen forklarer hvilke oppgaver som må løses. Teknisk fordypning utdyper de samme stegene.",
+    "eyebrow": "FØRST: OPPGAVENE",
+    "title": "Hva må dataarkitekturen få til?",
+    "intro": "Kilder må bli til pålitelig informasjon som kan brukes. Fellesmodellen viser ansvarene – ikke fem produkter du må kjøpe.",
     "genericGroup": "Felles modell",
-    "vendorGroup": "Konkrete plattformeksempler",
+    "vendorGroup": "Velg plattformeksempel",
     "sources": "Datakilder",
     "uses": "Bruk og resultat",
     "crosscutting": "På tvers av hele løsningen",
@@ -1333,11 +1333,11 @@
     },
     "baseProfileId": "conceptual",
     "technicalProfileId": "modern",
-    "technicalTitle": "Vis teknisk fordypning av samme modell",
-    "technicalIntro": "Her utdypes innhenting, datagrunnlag og tilgjengeliggjøring med typiske teknikker. Kildene, bruken og de tverrgående kravene er de samme.",
+    "technicalTitle": "Se teknikker bak den samme dataflyten",
+    "technicalIntro": "Innhenting, bearbeiding og tilgjengeliggjøring kan bruke ulike teknikker. Dette er fordypning i den felles modellen, ikke en ekstra arkitektur.",
     "technicalSlideLink": "Åpne teknisk fordypning som lysbilde",
-    "applicationsTitle": "Samme behov for pålitelig informasjon – forskjellige bruksmønstre",
-    "applicationsIntro": "Rapportering på strukturerte data og KI-svar fra dokumenter krever ulike prosesser. Se to eksempler med hvert sitt formål og sine egne forbehold.",
+    "applicationsTitle": "Behovet avgjør også hvordan data brukes",
+    "applicationsIntro": "Rapporter på strukturerte data og KI-svar fra dokumenter følger ikke nødvendigvis samme løp. Her er to korte eksempler med ulike krav til oppdatering, definisjoner og kontroll.",
     "applicationDiagramIds": [
       "bi",
       "rag"
@@ -1354,8 +1354,38 @@
     "panDetailClose": "Vis hele modellen",
     "panOpenHint": "Trykk for å utforske",
     "panOpenAria": "Utforsk arkitekturdiagrammet i stort format",
-    "guideQuestionLabel": "Diskuter med kunden",
-    "independentIntro": "Teknologier skifter, men disse spørsmålene er viktige på tvers av både BI, dataplattform og KI."
+    "guideQuestionLabel": "Bruk i kundedialogen",
+    "independentIntro": "Avklar hva dere vil oppnå, hva som må være pålitelig, og hvilken kontroll dere trenger – før dere velger ny teknologi.",
+    "vendorEyebrow": "DERETTER: TEKNOLOGIVALG",
+    "vendorTitle": "Ulike plattformer, mange av de samme oppgavene",
+    "vendorIntro": "Snowflake, Fabric og Databricks organiserer arbeidet ulikt. Figurene er mulige oppsett, ikke produktlister eller en rangering. Se særlig på hva dere kan gjenbruke.",
+    "nextTitle": "Når du trenger mer enn oversikten",
+    "nextIntro": "Arkitektursiden gir et felles språk. Gå videre til riktig fordypning i stedet for å presse alle detaljer inn her.",
+    "nextLinks": [
+      {
+        "label": "Verdi, kontekst og kontroll",
+        "description": "Hvordan analyse og KI støtter beslutninger og handlinger – og hvilke risikoer som følger med.",
+        "route": "#arkitektur/ai-on-data"
+      },
+      {
+        "label": "Teknologier og alternativer",
+        "description": "Se funksjoner og konkrete produkter før et eventuelt plattformvalg.",
+        "route": "#teknologi"
+      },
+      {
+        "label": "KI i datautvikling",
+        "description": "Når KI brukes av datateamet, ikke som et dataplattformlag.",
+        "route": "#arkitektur/ai-in-development"
+      },
+      {
+        "label": "Fordypning i nye arkitekturmønstre",
+        "description": "Kunnskap, relasjoner, agenter og valgfrihet – hypoteser, ikke standardoppskrifter.",
+        "route": "#horisont"
+      }
+    ],
+    "riskDetailTitle": "Hva kan gå galt når data og KI tas i bruk?",
+    "riskDetailIntro": "Dette er typiske risikoer å vurdere i en konkret løsning, ikke fem ekstra steg i arkitekturen.",
+    "riskDetailActionLabel": "Mulig kontroll"
   },
   "technologyJourneyUi": {
     "eyebrow": "BEHOV FØR PRODUKT",
