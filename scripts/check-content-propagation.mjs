@@ -15,7 +15,7 @@ globalThis.__views=()=>{
  const basics=guide(),depth=horizon(),home=overview();
  const slideBody={innerHTML:''},searchBody={innerHTML:''};
  globalThis.document={getElementById:id=>id==='slide-body'?slideBody:id==='search-results'?searchBody:{textContent:'',disabled:false},querySelectorAll:()=>[]};
- selectedDeck='portal';slide=3;showSlide();
+ selectedDeck='portal';slide=D.pages.presentationDecks.portal.slides.findIndex(entry=>entry.slideId==='portal-customer-signal');showSlide();
  searchResults('dataplattform');
  return {guide:basics,horizon:depth,presenter:slideBody.innerHTML,search:searchBody.innerHTML,home};
 };

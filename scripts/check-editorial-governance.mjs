@@ -7,6 +7,17 @@ const ids=new Set(slides.map(s=>s.id));
 const required=['innsikt','marked-retning','portal','sales','dataarkitektur'];
 for(const id of required)assert.ok(decks[id],'Required story missing: '+id);
 assert.ok(Object.keys(decks).length>=required.length,'Missing core stories');
+// Portalens historie skal demonstrere én oppgave før katalogen; bibliotek-ID-er er stabile.
+const portalDeckIds=decks.portal.slides.map(entry=>entry.slideId);
+assert.deepEqual(portalDeckIds.slice(0,2),['portal-opening','portal-meeting-brief'],'Portal: direkte fra åpning til møtebrief');
+assert.equal(portalDeckIds.length,6,'Portal: seks kuraterte lysbilder');
+assert.ok(!portalDeckIds.includes('portal-three-ways'),'Illustrativ meny skal ikke stoppe produktdemoen');
+const portalMenuSlide=slides.find(s=>s.id==='portal-three-ways');
+assert.ok(portalMenuSlide&&portalMenuSlide.visual.items.length===3,'Bibliotekobjektet skal fortsatt eksistere');
+assert.match(portalMenuSlide.visual.takeaway,/trening med en kollega/,'Bibliotekobjektet må nevne den fjerde inngangen');
+const quickTasks=read('pages').home.quickTasks;
+assert.deepEqual(new Set(quickTasks.map(task=>task.id)),new Set(['meeting','need','expert','practice']),'Forsiden har fire oppgaveinnganger');
+assert.equal(quickTasks.find(task=>task.id==='practice').route,'#kundedialog/trening','Treningsinngangen skal peke til praktisk øvelse');
 const questions=new Set(),usage=new Map();
 for(const [id,deck] of Object.entries(decks)){
  const q=deck.narrative?.centralQuestion;

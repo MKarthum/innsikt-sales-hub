@@ -31,7 +31,7 @@ Faglig designprinsipp: Tegn sammenhengen som betyr noe. En klikkoppskrift skal i
 4. **`market-customer-pressure` (utført v0.17.9, venter uavhengig visuell godkjenning):** Illustrative kundereplikker erstattet av Deloittes globale, selvrapporterte beredskapskontrast (42 % strategi; fire kvalitative operative områder). `market-priorities` beholder de illustrative kundesignalene. Tall er ikke en målt prosentdifferanse eller norsk kundediagnose.
 5. **Leverandørarkitekturer (varierende):** Noe liten skrift i et møterom, men faglig distinkte diagrammer. Kontroller på storskjerm før du forenkler; fjern ikke reell teknisk substans for estetikkens skyld.
 
-`portal-three-ways` kan fortsatt bruke tre like inngangskort: det er faktisk en meny med tre alternativer. `ai-thousand-analysts`, `ai-two-directions` og leverandørarkitekturene er ikke endret i denne runden. Ikke innfør nye lysbilder/decks bare for å øke variasjon. Gjør nye valg fra rendret 16:9 og historie, ikke fra en testscore.
+`portal-three-ways` er et illustrativt bibliotekobjekt med tre eksempler, ikke en komplett meny: forsiden har også en fjerde inngang for trening med kollega. Objektet er fjernet fra aktivt portal-dekk i v0.17.13 fordi det gjentok åpningen. `ai-thousand-analysts`, `ai-two-directions` og leverandørarkitekturene er ikke endret i denne runden. Ikke innfør nye lysbilder/decks bare for å øke variasjon. Gjør nye valg fra rendret 16:9 og historie, ikke fra en testscore.
 
 ## Metodiske referanser
 
@@ -53,3 +53,7 @@ Før: Seks sentrale produktbokser stablet ikon, navn og forklaring vertikalt, me
 ## Oppfølging v0.17.12 – `ai-improve-data` (25.10.2026)
 
 Generisk «Data og kontekst ↔ Analyse og KI»-sløyfe er erstattet av to fiktive teametiketter, et avgrenset KI-spørsmål, menneskelig vurdering og betinget dokumentasjon/test. Ingen autonom omklassifisering eller effektpåstand. `ai-pragmatic` viser selve forsøket (6/10); dette bildet viser en mulig kvalitetslæring (7/10); `ai-value-in-context` oppsummerer faglig samspill (8/10). Kilder: dbt Labs om IDE-assistanse og datatester samt NIST AI RMF. Visuell og teknisk godkjenning dokumenteres i PR/#26; denne tekstlige vurderingen alene er ikke visuell verifikasjon.
+
+## Oppfølging v0.17.13 – direkte fra åpning til møtebrief (25.10.2026)
+
+Før: «Vis løsningen» hadde syv bilder. Etter kundesignal og miniportal i 1/7 kom en egen tre-kortmeny i 2/7 før første konkrete oppgave i 3/7. Forsiden har i virkeligheten fire oppgaveinnganger, så menybildet ga også et ufullstendig inntrykk. Etter: Seks bilder med direkte overgang fra åpning til møtebrief (1→2); det tidligere menybildet og dets stabile ID beholdes i biblioteket, tydelig merket som tre eksempler med treningsinngangen nevnt. Historien har fortsatt fem beats, og møtebriefen viser et illustrativt utkast som må kontrolleres av mennesker. Visuell og teknisk verifisering dokumenteres i PR/#26, ikke antatt av denne tekstlige vurderingen.
