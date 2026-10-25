@@ -13,6 +13,8 @@ Felles scene ligger i architecture-visuals.js og architecture-visuals.css. Ressu
 2. licensed-external (eksterne figurer): Kun materiell med dokumenterte lisenser og attribusjon. MIT/CC er ikke det samme som ingen opphavsrett.
 3. original-figure (egne figurer): SVG-er laget for løsningen, som kan forbedres sentralt og brukes i alle profiler.
 
+Rettighetsnotat (25.10.2026): De 25 egne SVG-ene er laget som generiske Innsikt-illustrasjoner, uten Webstep-logo. Den tidligere etiketten «Webstep/Innsikt original work» var upresis som eierskapsangivelse og er erstattet med en nøytral kildebeskrivelse. Dette er **ikke** en rettighetsoverføring eller en bekreftelse av personlig eierskap. Før en lisens omfatter illustrasjonene må opphav og rettigheter kontrolleres. Se LICENSING_PROPOSAL.md.
+
 ## Leverandørbruk
 - Microsoft Fabric, Power BI og Data Factory: Microsofts offisielle ikonsamling. Bare arkitektur, opplæring og dokumentasjon. Ikke beskjær, roter, omfarg eller la dem symbolisere eget produkt. https://learn.microsoft.com/en-us/fabric/fundamentals/icons
 - Snowflake: Offisiell SVG fra Snowflake. Bruk blå logo på hvitt med luft rundt. https://www.snowflake.com/brand-guidelines/
