@@ -849,6 +849,25 @@
       "visibility": "presented"
     }
   ],
+  "competenceJourneyUi": {
+    "eyebrow": "MØTEFORBEREDELSE",
+    "title": "Fra kundebehov til faglig samtale",
+    "intro": "Velg hvem du skal møte. Se et mulig signal, to spørsmål og fagområder å vurdere.",
+    "selectLabel": "Hvem skal du møte?",
+    "stepRole": "Rolle og interesse",
+    "stepSignal": "Mulig signal",
+    "stepQuestions": "Spør videre",
+    "stepCompetence": "Faglig vurdering",
+    "signalNotice": "Illustrativt signal – ikke et faktisk kundesitat.",
+    "competenceNotice": "Aktuelle fagområder, ikke bekreftet leveransekapasitet.",
+    "cta": "Se salgsinngangen og neste steg",
+    "statusPrefix": "Viser samtaleflyt for",
+    "overviewHeading": "Kompetanseområder",
+    "rolesIntro": "Flere roller kan møte de samme utfordringene.",
+    "moreRolesLabel": "Se alle roller og salgsinnganger",
+    "roleLink": "Relevant salgsinngang",
+    "noticeHeading": "En viktig avgrensning"
+  },
   "industryUi": {
     "homeTitle": "Bransjer der datadrevne forbedringer kan ha verdi",
     "homeIntro": "Hva vil kundens forretning oppnå – før teknologien diskuteres?",

@@ -75,6 +75,21 @@ try{
    await page.screenshot({path:output+'/core-'+route.replace('/','-')+'-'+size+'.png',fullPage:false});
   }
  }
+ // Isolated browser contexts avoid inherited sidebar/scroll state when switching viewport.
+ for(const [width,height] of [[1512,980],[900,900],[390,844],[320,700]]){
+  const shot=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
+  await shot.goto((process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'#kompetanse',{waitUntil:'networkidle'});
+  await shot.locator('[data-competence-path]').waitFor();
+  assert.ok(await shot.locator('[data-competence-step="signal"] blockquote').isVisible(),'Signal synlig '+width);
+  assert.ok(await shot.locator('[data-competence-step="questions"] li').first().isVisible(),'Spørsmål synlig '+width);
+  assert.ok((await shot.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,'Ingen horisontal overflyt i kompetanse '+width);
+  assert.equal(await shot.locator('#sidebar.open').count(),0,'Mobilmeny lukket '+width);
+  await shot.screenshot({path:output+'/competence-'+width+'-default.png',fullPage:true});
+  await shot.locator('[data-competence-audience]').selectOption('audience-7');
+  assert.equal(await shot.locator('[data-competence-play]').getAttribute('data-competence-play'),'modernisering','CIO-valg '+width);
+  await shot.screenshot({path:output+'/competence-'+width+'-cio.png',fullPage:true});
+  await shot.close();
+ }
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
  console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
 }finally{await browser.close()}
