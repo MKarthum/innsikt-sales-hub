@@ -279,9 +279,9 @@ function technology(){
  const shown=D.tech.filter(t=>techFilter==='Alle'||t.kind===techFilter);
  const cards=technologyCards(shown);
  return headerCopy('TEKNOLOGIKART')+topicNav('technologyNavigation')+technologyJourney()
+ +'<section class="subsection"><div class="section-heading"><div><h2><span data-tech-catalog-count>'+shown.length+'</span> teknologier og områder</h2><p>Filtrer etter oppgave</p></div></div>'+tabNav(types,techFilter,'tech-filter','Teknologiområder')+'<div class="tech-list" data-tech-catalog-cards>'+cards+'</div></section>'
  +'<section class="insight-strip"><div><h3>Markedet endrer seg</h3><p>'+esc(D.marketEvents.find(x=>x.id==="fivetran-dbt").title)+'. '+esc(D.marketSignals.find(x=>x.id==="embeddedai").title)+'.</p></div><a class="btn dark" href="#bransje">Se utviklingen '+ico('arrow-right')+'</a></section>'
  +'<section class="panel"><h3>Se hele datakjeden</h3><p>'+esc(D.learning.diagrams.find(x=>x.id==="bi").variants.long)+'</p></section>'
- +'<section class="subsection"><div class="section-heading"><div><h2><span data-tech-catalog-count>'+shown.length+'</span> teknologier og områder</h2><p>Filtrer etter oppgave</p></div></div>'+tabNav(types,techFilter,'tech-filter','Teknologiområder')+'<div class="tech-list" data-tech-catalog-cards>'+cards+'</div></section>'
  +'<section class="subsection"><div class="insight-strip"><div><h3>KI er allerede inne i plattformene</h3><p>'+esc(D.aiOverview.variants.short)+'</p></div><a class="btn dark" href="#ai">Se KI-funksjoner '+ico('arrow-right')+'</a></div></section>'
  +'<section class="note-card"><b>Ikke lov partnerfordeler eller tilgjengelig kapasitet</b>'+esc(D.techUi.partnerCaution)+'</section>';
 }

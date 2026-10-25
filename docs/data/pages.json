@@ -1366,7 +1366,7 @@
     "stepAreas": "Områder å undersøke",
     "stepQuestions": "Spør før produktvalg",
     "signalNotice": "Illustrativt kundesignal – ikke en dokumentert kundereferanse.",
-    "areasNotice": "Mulige spor å undersøke – ikke produktanbefalinger.",
+    "areasNotice": "Velg et område for å filtrere listen nedenfor. Dette er mulige spor, ikke produktanbefalinger.",
     "notLabel": "Unngå å anta",
     "cta": "Åpne hele samtaleguiden",
     "resetLabel": "Vis alle teknologiområder",
