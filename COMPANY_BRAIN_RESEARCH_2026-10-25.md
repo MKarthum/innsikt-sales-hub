@@ -6,6 +6,12 @@
 
 **Glean er et relevant, men avgrenset eksempel.** Gleans Knowledge Graph knytter sammen innhold, personer og aktivitet; Enterprise Graph beskrives som en utvidelse som gir også personlig arbeidskontekst. Glean bruker dette sammen med indeksering/søk, RAG, tilgangsstyring, assistenter og agenter. Gleans graf alene er derfor ikke synonymt med en Company Brain-løsning. Gleans egne beskrivelser dokumenterer produktets tilnærming, ikke universelle arkitekturkrav eller dokumentert kundegevinst.
 
+## Beslektet terminologi: Second Brain
+
+Tiago Fortes *Building a Second Brain* beskriver først og fremst en personlig metode for å samle, organisere og gjenbruke kunnskap. Den forutsetter ikke KI eller kunnskapsgraf. «AI Second Brain» brukes ofte om den samme personlige kunnskapsbasen brukt sammen med KI. Begrepet har også fått organisatorisk bruk: Metas [An Organizational Second Brain](https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/) (02.09.2026) dokumenterer en agent som bevarer ekspertvurderinger, rutingregler og korrigeringer i ett bestemt compliance-fagområde. Dette overlapper med Company Brain, men er ikke dokumentasjon av en helhetlig virksomhetsplattform.
+
+**Redaksjonell beslutning:** Én kanonisk definisjon i ordlisten, og én kontekstuell kobling i fordypningen. Ikke et nytt hovedkapittel, produktkategori eller arkitekturkrav. Kilder: [Tiago Forte](https://www.buildingasecondbrain.com/) og [Meta Engineering](https://engineering.fb.com/2026/09/02/ml-applications/organizational-second-brain-ai-learns-from-experts/).
+
 ## Tre spørsmål som må holdes fra hverandre
 
 1. **Hva må KI kunne?** Finne informasjon, forklare godkjente tall, følge avhengigheter, anbefale eller handle. Dette er ulike oppgaver med ulike krav.

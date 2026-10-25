@@ -41,6 +41,8 @@ try {
   const brainText=await brainChapter.innerText();
   for(const vendor of ['Glean','Microsoft IQ','Snowflake','Palantir'])assert.ok(brainText.includes(vendor),label+': kildebelagt perspektiv '+vendor);
   assert.ok(brainText.includes('ikke definisjonen'),label+': Glean er ikke definisjonen av Company Brain');
+  assert.ok(brainText.includes('Organizational Second Brain')&&brainText.includes('Meta'),label+': Meta som organisatorisk eksempel, ikke ny plattformstandard');
+  assert.ok((await page.locator('body').innerText()).includes('Second Brain'),label+': beslektet terminologi i fordypningen');
   assert.ok((await page.locator('.horizon-concept-grid').innerText()).includes('Kunnskapsgraf er én mulig byggestein'),label+': graf er ikke synonym for Company Brain');
   assert.equal(await page.locator('.horizon-concept-grid').evaluate(el=>document.documentElement.scrollWidth>innerWidth+3),false,label+': ingen horisontal overløp i begrepssammenligning');
   // Lysbildedetaljer må vise klikkbart bibliotek og navn på objektet.
