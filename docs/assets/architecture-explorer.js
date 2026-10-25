@@ -51,6 +51,24 @@ function mobileModel(profile,ui,escape){
  +(profile.kind==='vendor'?'<p class="arch-explorer-disclaimer" data-arch-vendor-notice>'+e(escape,profile.brandNotice||ui.vendorNotice)+'</p>':'')
  +'</div>';
 }
+function technicalDetails(D,h,profile){
+ const ui=D.pages.architectureExplorerUi;
+ if(profile.id!==ui.baseProfileId)return '';
+ const technical=D.architectureProfiles.profiles.find(p=>p.id===ui.technicalProfileId);
+ const slide=D.slides.items.find(s=>s.profileId===technical?.id);
+ if(!technical||!slide)return '';
+ const E=x=>e(h.esc,x);
+ const stages=[
+  {title:technical.ingest.title,items:technical.ingest.items},
+  {title:technical.platform.title,items:[technical.platform.top,technical.platform.bottom]},
+  {title:technical.serve.title,items:technical.serve.items}
+ ];
+ return '<details class="arch-explorer-technical" data-arch-technical><summary>'+E(ui.technicalTitle)+'</summary>'
+ +'<p>'+E(ui.technicalIntro)+'</p>'
+ +'<div class="arch-explorer-technical-grid">'+stages.map(stage=>
+  '<section><h4>'+E(stage.title)+'</h4><ul>'+stage.items.map(item=>'<li>'+E(item)+'</li>').join('')+'</ul></section>'
+ ).join('')+'</div><a class="text-link" href="#lysbilder/'+E(slide.id)+'">'+E(ui.technicalSlideLink)+'</a></details>';
+}
 function panel(D,h,profile,active){
  const {esc,sourceLinks}=h,slide=D.slides.items.find(s=>s.profileId===profile.id);
  if(!slide)return '';
@@ -62,6 +80,7 @@ function panel(D,h,profile,active){
   +'<div class="arch-explorer-stage" aria-label="'+e(esc,profile.label)+'">'
   +'<div class="present-frame present-rich" data-tone="light">'+scene+'</div></div>'
   +mobileModel(profile,ui,esc)
+  +technicalDetails(D,h,profile)
   +'<div class="arch-explorer-foot"><p>'+e(esc,profile.footer)+'</p>'
   +'<div class="arch-explorer-actions"><a class="btn subtle" href="#lysbilder/'+e(esc,slide.id)+'">'
   +e(esc,ui.openSlide)+'</a></div></div>'
@@ -71,7 +90,7 @@ function panel(D,h,profile,active){
 function render(D,h){
  const {esc}=h,ui=D.pages.architectureExplorerUi;
  if(!ui||!window.InnsiktArchitectureScenes||!D.architectureProfiles?.profiles)return '';
- const profiles=D.architectureProfiles.profiles.filter(p=>D.slides.items.some(s=>s.profileId===p.id));
+ const profiles=D.architectureProfiles.profiles.filter(p=>p.id===ui.baseProfileId||p.kind==='vendor');
  const initial=profiles[0]?.id;if(!initial)return '';
  const options=groups=>groups.map(p=>
   '<button type="button" data-arch-option="'+e(esc,p.id)+'" aria-pressed="'+(p.id===initial?'true':'false')+'"'

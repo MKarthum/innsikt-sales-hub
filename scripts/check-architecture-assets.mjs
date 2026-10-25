@@ -4,7 +4,26 @@ import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 const load=n=>JSON.parse(fs.readFileSync('docs/data/'+n+'.json','utf8'));
-const assets=load('visual-assets'),profiles=load('architecture-profiles'),slides=load('slides'),decks=load('pages').presentationDecks;
+const assets=load('visual-assets'),rawProfiles=load('architecture-profiles'),slides=load('slides'),decks=load('pages').presentationDecks;
+const resolutionSandbox={window:{}};vm.runInNewContext(fs.readFileSync('docs/assets/content.js','utf8'),resolutionSandbox);
+const profiles={...rawProfiles,profiles:resolutionSandbox.window.InnsiktContent.expandArchitectureProfiles(rawProfiles.profiles)};
+const core=rawProfiles.profiles.find(p=>p.id==='conceptual');
+for(const id of ['modern','ai-on-data']){
+ const raw=rawProfiles.profiles.find(p=>p.id===id),derived=profiles.profiles.find(p=>p.id===id);
+ assert.equal(raw.baseProfileId,core.id,'Derived profile points at one canonical data flow');
+ for(const field of ['sources','consumers','support']){
+  assert.ok(!(field in raw),'Do not duplicate canonical '+field+' in '+id);
+  assert.deepEqual(derived[field],core[field],'Inherited '+field+' remains identical in '+id);
+ }
+}
+const changed=structuredClone(rawProfiles.profiles);
+changed.find(p=>p.id==='conceptual').sources[0].label='ENDRET_KILDE_FELLES';
+const inherited=resolutionSandbox.window.InnsiktContent.expandArchitectureProfiles(changed);
+for(const id of ['modern','ai-on-data'])assert.equal(inherited.find(p=>p.id===id).sources[0].label,'ENDRET_KILDE_FELLES','One canonical source change propagates to '+id);
+const applicationIds=load('pages').architectureExplorerUi.applicationDiagramIds;
+assert.deepEqual(applicationIds,['bi','rag'],'Different structured-data and document-retrieval uses');
+for(const id of applicationIds)assert.ok(load('learning').diagrams.some(d=>d.id===id),'Canonical use case '+id+' must exist');
+
 assert.equal(assets.schemaVersion,1);
 assert.equal(profiles.schemaVersion,1);
 const ids=new Set();
@@ -47,7 +66,7 @@ const archslides=slides.items.filter(s=>s.type==='architecture');
 assert.equal(archslides.length,6);
 assert.equal(new Set(archslides.map(s=>s.profileId)).size,6);
 for(const s of archslides){assert.ok(pids.has(s.profileId));assert.ok(s.scope==='shared');assert.ok(s.sourceIds.length>0);}
-const deck=decks.dataarkitektur;assert.equal(deck.slides.length,6);assert.ok(deck.slides.every(p=>archslides.some(s=>s.id===p.slideId)));
+const deck=decks.dataarkitektur;assert.deepEqual(deck.slides.map(p=>p.slideId),['architecture-conceptual','architecture-snowflake','architecture-fabric','architecture-databricks'],'One base architecture plus three distinct vendor patterns, preserving all six legacy slide IDs');assert.ok(deck.slides.every(p=>archslides.some(s=>s.id===p.slideId)));
 const context={window:{}};vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),context);
 for(const a of assets.items)assert.ok(context.window.InnsiktAssets.get(assets,a.id));
 const used=context.window.InnsiktAssets.usedBy('snowflake',profiles,slides);assert.deepEqual([...used.map(x=>x.id)],['architecture-snowflake']);

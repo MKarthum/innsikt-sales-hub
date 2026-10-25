@@ -1045,7 +1045,7 @@
       "tone": "light",
       "type": "architecture",
       "cue": "DATAARKITEKTUR",
-      "title": "Moderne dataflyt støtter batch, strømmer og KI",
+      "title": "Teknisk fordypning i den felles dataplattformmodellen",
       "profileId": "modern",
       "topic": "Dataarkitektur",
       "keywords": [
@@ -1056,7 +1056,7 @@
         "KI",
         "modern"
       ],
-      "speakerBase": "Dette er et representativt, teknologinøytralt mønster. Batch, CDC og strømmer kommer inn fra kilder. Data bearbeides i warehouse eller lakehouse, og publiseres med semantikk eller API-er til BI, apper og KI. Styring og drift støtter hele kjeden.",
+      "speakerBase": "Teknisk utdypning av samme referansemodell som architecture-conceptual. Skill mellom hva plattformen må kunne (kapabiliteter) og eksempler på utføring (CDC, hendelser, lakehouse/warehouse, SQL/Python, semantikk og data-API). Dette er ikke en annen grunnarkitektur. Dette lysbildet beholdes selvstendig for dem som ønsker tekniske detaljer.",
       "sourceIds": [
         "architecture-fabric-lifecycle",
         "architecture-databricks-scope"
@@ -1068,7 +1068,7 @@
       "tone": "light",
       "type": "architecture",
       "cue": "DATAARKITEKTUR",
-      "title": "KI og BI trenger forståelige og tilgjengelige data",
+      "title": "Data og virksomhetskontekst støtter analyse og KI",
       "profileId": "ai-on-data",
       "topic": "Dataarkitektur",
       "keywords": [
@@ -1079,7 +1079,7 @@
         "KI",
         "ai-on-data"
       ],
-      "speakerBase": "KI og BI trenger tydelige definisjoner, kontekst og tilgang til relevante data. Oppmerksomheten bør ikke bare ligge på modeller. Kvalitet, retrieval og kontroll er del av løsningen – og KI kan hjelpe med dokumentasjon og forbedring av data.",
+      "speakerBase": "Ett mulig anvendelsesperspektiv på data og kontekst, ikke en separat dataplattform eller ett universelt KI-mønster. For strukturert BI, dokumentbasert RAG og KI-assistert datateknikk brukes de ulike kanoniske skissene i learning.json på arkitektursiden. Modeller, verktøykall, tilgangskontroll og menneskelig verifisering må utformes for konkret brukstilfelle.",
       "sourceIds": [
         "architecture-databricks-scope",
         "architecture-fabric-lifecycle"

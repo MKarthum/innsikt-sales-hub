@@ -54,3 +54,20 @@
  .arch-explorer-sources{margin:0 17px 18px}
 }
 @media (prefers-reduced-motion:reduce){.arch-explorer-option{transition:none!important}}
+
+/* Technical detail of the same architecture rather than a competing model. */
+.arch-explorer-technical{margin:14px 28px 0;padding:17px 19px;background:var(--surface-secondary);border:1px solid var(--border);border-radius:12px;color:var(--ink)}
+.arch-explorer-technical summary{font:760 14px/1.45 var(--font-body);color:var(--teal);cursor:pointer}
+.arch-explorer-technical summary:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.arch-explorer-technical>p{font-size:13px;line-height:1.55;color:var(--muted);margin:10px 0}
+.arch-explorer-technical-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}
+.arch-explorer-technical-grid section{border:1px solid var(--border);border-radius:10px;padding:13px;background:var(--surface);min-width:0}
+.arch-explorer-technical-grid h4{font:780 14px var(--font-display);margin:0 0 9px;color:var(--ink)}
+.arch-explorer-technical-grid ul{margin:0;padding-left:17px;color:var(--muted);font-size:13px;line-height:1.6}
+.arch-explorer-technical .text-link{font-size:13px;font-weight:750}
+.arch-applications{margin:24px 0 22px}
+.arch-explorer-more{border:1px solid var(--border);border-radius:13px;background:var(--surface);padding:17px 20px;margin:20px 0}
+.arch-explorer-more>summary{font-weight:750;font-size:14px;color:var(--teal);cursor:pointer}
+.arch-explorer-more .section-heading{margin-top:18px}
+@container architecture-panel (max-width:850px){.arch-explorer-technical-grid{grid-template-columns:1fr}}
+@media (max-width:650px){.arch-explorer-technical{margin:13px 17px 0;padding:15px}.arch-explorer-technical-grid{gap:8px}}
