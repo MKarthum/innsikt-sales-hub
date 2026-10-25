@@ -3,53 +3,16 @@
 (()=>{
 'use strict';
 const e=(escape,value)=>escape(String(value??''));
-function mobileModel(profile,ui,escape){
- const d=profile.diagram;
- const values=items=>(items||[]).map(x=>typeof x==='string'?x:[x.label,x.sub].filter(Boolean).join(' – '));
- let phases;
- if(profile.variant==='snowflake-hub'){
-  phases=[
-   {heading:d.sourceTitle,items:values(d.sources)},
-   {heading:d.ingestTitle,items:values(d.ingest)},
-   {heading:d.coreTitle,items:[d.coreText]},
-   {heading:d.transformTitle,items:values(d.transform)},
-   {heading:d.outputTitle,items:values(d.outputs)}
-  ];
- }else if(profile.variant==='fabric-experiences'){
-  phases=[
-   {heading:d.sourceTitle,items:values(d.sources)},
-   {heading:d.topTitle,items:values(d.ingest)},
-   {heading:d.workloadTitle,items:values(d.workloads)},
-   {heading:d.lakeTitle,items:[d.lakeDescription]},
-   {heading:d.outputTitle,items:values(d.outputs)}
-  ];
- }else if(profile.variant==='databricks-medallion'){
-  phases=[
-   {heading:d.sourceTitle,items:values(d.sources)},
-   {heading:d.ingestTitle,items:values(d.ingest)},
-   {heading:d.lakeTitle,items:values(d.tiers)},
-   {heading:d.workloadTitle,items:values(d.workloads)},
-   {heading:d.outputTitle,items:values(d.outputs)}
-  ];
- }else{
-  phases=[
-   {heading:ui.sources,items:values(profile.sources)},
-   {heading:profile.ingest.title,items:values(profile.ingest.items)},
-   {heading:profile.platform.title,items:[profile.platform.top,profile.platform.bottom]},
-   {heading:profile.serve.title,items:values(profile.serve.items)},
-   {heading:ui.uses,items:values(profile.consumers)}
-  ];
- }
- const support=d?.support||profile.support;
- return '<div class="arch-explorer-mobile" data-arch-mobile="'+e(escape,profile.id)+'">'
- +'<ol class="arch-explorer-steps"'+(d?' data-arch-vendor-detail="'+e(escape,profile.id)+'"':'')+'>'+phases.map((step,i)=>
-  '<li><span class="arch-explorer-stepno" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span>'
-  +'<div><h3>'+e(escape,step.heading)+'</h3><p>'+step.items.map(x=>e(escape,x)).join(' · ')+'</p></div></li>'
- ).join('')+'</ol>'
- +'<div class="arch-explorer-foundation"><strong>'+e(escape,ui.crosscutting)+'</strong><p>'+values(support).map(x=>e(escape,x)).join(' · ')+'</p></div>'
- +(d?.foot?'<p class="arch-explorer-scene-note" data-arch-scene-note>'+e(escape,d.foot)+'</p>':'')
- +(profile.kind==='vendor'?'<p class="arch-explorer-disclaimer" data-arch-vendor-notice>'+e(escape,profile.brandNotice||ui.vendorNotice)+'</p>':'')
- +'</div>';
+/* The page shares the exact vendor scene used in Presenter; never reduce a
+   spatial architecture (especially OneLake) to an invented five-step pipeline. */
+function panNavigation(profile,ui,escape){
+ const E=x=>e(escape,x);
+ return '<div class="arch-pan-guide" data-arch-pan-guide>'
+ +'<p>'+E(ui.panGuide)+'</p>'
+ +'<nav class="arch-pan-nav" aria-label="'+E(ui.panNavLabel)+'">'
+ +[['sources',ui.panSources],['platform',ui.panPlatform],['uses',ui.panUses]].map(([id,label])=>
+  '<button type="button" data-arch-pan="'+id+'">'+E(label)+'</button>').join('')
+ +'</nav></div>';
 }
 function technicalDetails(D,h,profile){
  const ui=D.pages.architectureExplorerUi;
@@ -77,9 +40,9 @@ function panel(D,h,profile,active){
  return '<section class="arch-explorer-panel" data-arch-panel="'+e(esc,profile.id)+'" role="region" aria-label="'+e(esc,profile.label)+'"'
   +(active?'':' hidden')+'>'
   +'<div class="arch-explorer-claim"><div><h3>'+e(esc,profile.label)+'</h3><p>'+e(esc,profile.intro)+'</p></div></div>'
-  +'<div class="arch-explorer-stage" aria-label="'+e(esc,profile.label)+'">'
+  +'<div class="arch-explorer-stage" role="region" tabindex="0" aria-label="'+e(esc,ui.panRegionLabel)+' – '+e(esc,profile.label)+'">'
   +'<div class="present-frame present-rich" data-tone="light">'+scene+'</div></div>'
-  +mobileModel(profile,ui,esc)
+  +panNavigation(profile,ui,esc)
   +technicalDetails(D,h,profile)
   +'<div class="arch-explorer-foot"><p>'+e(esc,profile.footer)+'</p>'
   +'<div class="arch-explorer-actions"><a class="btn subtle" href="#lysbilder/'+e(esc,slide.id)+'">'
@@ -109,6 +72,24 @@ function render(D,h){
   +'</section>';
 }
 if(typeof document!=='undefined'&&typeof document.addEventListener==='function')document.addEventListener('click',event=>{
+ const pan=event.target instanceof Element?event.target.closest('[data-arch-pan]'):null;
+ if(pan){
+  const region=pan.closest('[data-arch-panel]'),canvas=region?.querySelector('.arch-explorer-stage');
+  if(!canvas)return;
+  const key=pan.getAttribute('data-arch-pan');
+  const selectors={
+   sources:'.vp-source-stack,.da-source-col',
+   platform:'.vp-snow-shell,.vp-fabric-shell,.vp-db-lake,.da-platform-col',
+   uses:'.vp-output-stack,.da-consumers-col'
+  };
+  const target=canvas.querySelector(selectors[key]||'');
+  if(!target)return;
+  const bounds=target.getBoundingClientRect(), viewport=canvas.getBoundingClientRect();
+  // Centre the shared work area; sources and results stay aligned with their edge.
+  const left=canvas.scrollLeft+bounds.left-viewport.left+(key==='platform'?(bounds.width-canvas.clientWidth)/2:0);
+  canvas.scrollTo({left:Math.max(0,left),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  return;
+ }
  const target=event.target instanceof Element?event.target.closest('[data-arch-option]'):null;
  if(!target)return;
  const explorer=target.closest('[data-architecture-explorer]');

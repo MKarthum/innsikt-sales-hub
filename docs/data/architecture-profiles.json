@@ -217,7 +217,7 @@
       "brandNotice": "dbt™ og dbt-logoen er varemerker til dbt Labs, Inc. Ingen tilknytning.",
       "variant": "snowflake-hub",
       "diagram": {
-        "sourceTitle": "VIRKSOMHETSDATA",
+        "sourceTitle": "KILDER",
         "sources": [
           {
             "label": "ERP / finans",
@@ -290,7 +290,7 @@
             "assetId": "consume-ai"
           }
         ],
-        "supportTitle": "Tverrgående ansvar",
+        "supportTitle": "STYRING OG DRIFT",
         "support": [
           {
             "label": "Horizon / RBAC",
@@ -440,7 +440,7 @@
         "lakeTitle": "OneLake",
         "lakeDescription": "Felles logisk datagrunnlag · shortcuts / Delta",
         "lakeAsset": "fabric-onelake",
-        "outputTitle": "KONSUM & HANDLING",
+        "outputTitle": "BRUKSFLATER",
         "outputs": [
           {
             "label": "Power BI",
@@ -458,7 +458,7 @@
             "assetId": "fabric-rti"
           }
         ],
-        "supportTitle": "Felles tjenestelag",
+        "supportTitle": "STYRING OG DRIFT",
         "support": [
           {
             "label": "Entra / RBAC",
@@ -637,7 +637,7 @@
             "assetId": "consume-app"
           }
         ],
-        "supportTitle": "Styring og drift",
+        "supportTitle": "STYRING OG DRIFT",
         "support": [
           {
             "label": "Unity Catalog",
