@@ -11,6 +11,52 @@ try{
  const page=await browser.newPage({viewport:{width:1512,height:980},deviceScaleFactor:1,acceptDownloads:true});
  page.on('pageerror',err=>errors.push(err.message));
  await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
+ await page.evaluate(()=>location.hash='#arkitektur');
+ await page.locator('[data-architecture-explorer]').waitFor();
+ assert.equal(await page.locator('[data-arch-option]').count(),6,'Six canonical architecture profiles offered on the page');
+ assert.equal(await page.locator('[data-arch-panel]:not([hidden])').count(),1,'Exactly one architecture perspective shown');
+ assert.equal(await page.locator('[data-arch-panel="conceptual"]:not([hidden]) .da-scene').count(),1,'Page reuses presentation renderer');
+ await page.screenshot({path:out+'/architecture-page-desktop.png',fullPage:false});
+ await page.locator('[data-arch-option="fabric"]').click();
+ assert.equal(await page.locator('[data-arch-option="fabric"]').getAttribute('aria-pressed'),'true','Platform option is accessible');
+ assert.equal(await page.locator('[data-arch-panel="fabric"]:not([hidden]) .vp-fabric').count(),1,'Vendor composition preserved on the page');
+ for(const width of [1100,900]){
+  await page.setViewportSize({width,height:900});
+  const dims=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
+  assert.ok(dims.sw<=dims.cw+1,'No horizontal overflow at '+width+'px '+JSON.stringify(dims));
+  await page.screenshot({path:out+'/architecture-page-'+width+'.png',fullPage:false});
+ }
+ await page.setViewportSize({width:1512,height:980});
+ // A new mobile page avoids inheriting the resized desktop session's sidebar state.
+ const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
+ for(const width of [390,320]){
+  const mobile=await browser.newPage({viewport:{width,height:844},deviceScaleFactor:1});
+  mobile.on('pageerror',err=>errors.push(err.message));
+  await mobile.goto(base+'#arkitektur',{waitUntil:'networkidle'});
+  await mobile.locator('[data-architecture-explorer]').waitFor();
+  assert.equal(await mobile.locator('#sidebar').evaluate(x=>x.classList.contains('open')),false,'Mobile sidebar is closed at load');
+  assert.equal(await mobile.locator('#sidebar-backdrop').evaluate(x=>x.classList.contains('open')),false,'Mobile backdrop does not cover architecture');
+  await mobile.screenshot({path:out+'/architecture-mobile-'+width+'-top.png',fullPage:false});
+  for(const vendorId of ['snowflake','fabric','databricks']){
+   await mobile.locator('[data-arch-option="'+vendorId+'"]').click();
+   const region=mobile.locator('[data-arch-panel="'+vendorId+'"]:not([hidden])');
+   assert.equal(await region.count(),1,'Only selected vendor region visible');
+   assert.equal(await region.locator('.arch-explorer-stage').isVisible(),false,'Tiny slide hidden on mobile');
+   assert.equal(await region.locator('.arch-explorer-mobile').isVisible(),true,'Mobile model visible');
+   const expected=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles.find(p=>p.id===vendorId);
+   assert.ok((await region.locator('[data-arch-scene-note]').textContent()).includes(expected.diagram.foot),'Vendor-specific footnote visible: '+vendorId);
+   assert.ok((await region.locator('[data-arch-vendor-notice]').textContent()).includes(expected.brandNotice),'Canonical legal caveat visible: '+vendorId);
+   const relationship=await region.locator('[data-arch-vendor-detail]').textContent();
+   assert.ok(relationship.includes(({snowflake:'Snowpipe Streaming',fabric:'OneLake',databricks:'Bronze'})[vendorId]),'Distinct vendor-specific mobile model: '+vendorId);
+   const dims=await mobile.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
+   assert.ok(dims.sw<=dims.cw+1,'No horizontal overflow at '+width+'/'+vendorId+': '+JSON.stringify(dims));
+   if(vendorId==='fabric')await region.locator('.arch-explorer-mobile').screenshot({path:out+'/architecture-mobile-'+width+'-fabric-model.png'});
+  }
+  await mobile.close();
+ }
+ await page.evaluate(()=>location.hash='#arkitektur/bi');
+ await page.locator('.diagram').waitFor();
+ await page.setViewportSize({width:1512,height:980});
  await page.evaluate(()=>location.hash='#ressurser');
  await page.locator('.asset-library-card').first().waitFor();
  assert.equal(await page.locator('.asset-library-card').count(),catalog.items.length,'Asset gallery renders all assets');
