@@ -57,3 +57,14 @@
 - `sales-next-step`: Avgrenset fiktiv undersøkelse av ett nøkkeltall med eksplisitt utenfor-scope.
 
 Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md) for 16:9-kontroll, bevisst tilbakeholdenhet og restprioriteringer.
+
+
+## 25.10.2026 – faglig opprydding av arkitekturhistorien (PR #51)
+
+**Beslutning:** De tre tidligere konseptuelle profilene `conceptual`, `modern`, `ai-on-data` er ikke tre likestilte grunnarkitekturer. De brukte identisk kilde-, konsument- og støttestruktur og nesten samme femdelte figur. På nettsiden er derfor bare `conceptual` hovedmodell, med `modern` som **teknisk utdypning i den samme modellen**. BI på strukturerte data (`learning.diagrams.bi`) og dokumentbasert KI/RAG (`learning.diagrams.rag`) er egne, tydelig forskjellige anvendelseseksempler, ikke alternative dataplattformer. De øvrige to kanoniske skissene beholdes bak valgfri fordypning.
+
+**Kuratert fortelling:** `pages.presentationDecks.dataarkitektur` går fra seks til fire slides: `architecture-conceptual`, `architecture-snowflake`, `architecture-fabric` og `architecture-databricks`. De gamle `architecture-modern` og `architecture-ai` består som selvstendige, direkte adresserbare bibliotekobjekter, men er ikke lenger sekvensielle repetisjoner i historien. Deres titler og presentatørnotater forklarer nå at de er teknisk fordypning og anvendelsesperspektiv. Ytterligere omarbeiding av det selvstendige KI-lysbildet til en visuelt særskilt bruksmodell krever en egen faglig vurdering – ikke et ekstra likt grunnkart.
+
+**Autoritet:** Delte `sources`, `consumers` og `support` finnes kun hos `conceptual`; de to avledede profilene har `baseProfileId` og bare egne særtrekk. `InnsiktContent.expandArchitectureProfiles` gir alle eksisterende profil-/lysbildeforbrukere den samme komplette modellen ved lasting. Metamorfisk test viser at én endring av en felles kilde også endrer begge avledede profiler. Ingen leverandør-/media-ID-er eller eksisterende direkte ruter slettes.
+
+**Kontroller:** PR har release 0.18.8, `node scripts/check.mjs`, Chromium mobil/desktop, eksisterende seks lysbildedetaljer, Presenter, kilde-/assetkontroll og portabel eksport. Siste exact-head CI og faktisk screenshot-vurdering må kontrolleres før merge. Kjente avgrensninger: RAG-/BI-skissene er pedagogiske, ikke komplette tekniske referansearkitekturer; ingen ny, full KI-agentarkitektur er påstått.
