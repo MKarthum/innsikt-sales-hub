@@ -37,7 +37,9 @@ try{
   const structure=page.locator('[data-arch-panel="fabric"] .arch-explorer-stage');
   if(width===900){
    assert.equal(await page.locator('[data-arch-panel="fabric"] .arch-explorer-mobile').count(),0,'Tablet has same spatial vendor model');
-   assert.ok(await structure.evaluate(x=>x.scrollWidth>x.clientWidth),'Tablet pans same 16:9 scene rather than stacking boxes');
+   await page.locator('[data-arch-panel="fabric"] [data-arch-detail]').click();
+   assert.ok(await structure.evaluate(x=>x.scrollWidth>x.clientWidth),'Tablet detail mode pans same scene rather than stacking boxes');
+   await page.locator('[data-arch-panel="fabric"] [data-arch-detail]').click();
   }
  }
  await page.setViewportSize({width:1512,height:980});
@@ -68,9 +70,16 @@ try{
    const uniqueSelector={snowflake:'.vp-snow-shell',fabric:'.vp-fabric-lake',databricks:'.vp-medallion'}[vendorId];
    assert.equal(await scene.locator(uniqueSelector).count(),1,'Vendor-specific spatial relationship survives on phone: '+vendorId);
    const canvas=region.locator('.arch-explorer-stage');
+   assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'false','Start with overview, not a clipped drawing');
+   const overview=await canvas.evaluate(x=>({client:x.clientWidth,scroll:x.scrollWidth,height:x.clientHeight,aspect:x.clientWidth/x.clientHeight}));
+   assert.ok(Math.abs(overview.aspect-16/9)<.1,'Complete 16:9 overview at phone width: '+JSON.stringify(overview));
+   assert.ok(overview.scroll<=overview.client+2,'Overview fits the entire architecture without horizontal clipping');
+   await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-overview.png'});
+   await region.locator('[data-arch-detail]').click();
+   assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'true','Opt in to readable detail');
    const dimensions=await canvas.evaluate(x=>({client:x.clientWidth,scroll:x.scrollWidth,height:x.clientHeight,ownScroll:x.scrollWidth>x.clientWidth+100}));
-   assert.equal(dimensions.ownScroll,true,'Vendor architecture scrolls within its own viewport: '+vendorId);
-   assert.ok(dimensions.height>=500,'Vendor diagram remains readable at full drawing scale');
+   assert.equal(dimensions.ownScroll,true,'Vendor architecture pans within its own viewport');
+   assert.ok(dimensions.height>=500,'Readable detailed architecture at full drawing scale');
    await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-sources.png'});
    const nav=region.locator('[data-arch-pan]');
    assert.equal(await nav.count(),3,'Accessible anchors to sources/platform/use');
@@ -85,6 +94,8 @@ try{
    await nav.nth(2).click();
    await mobile.waitForFunction(()=>{const v=document.querySelector('[data-arch-panel]:not([hidden]) .arch-explorer-stage');return v&&v.scrollLeft>300;});
    await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-uses.png'});
+   await region.locator('[data-arch-detail]').click();
+   assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'false','Can return to full architecture overview');
    const dims=await mobile.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
    assert.ok(dims.sw<=dims.cw+1,'Mobile page never scrolls horizontally '+width+'/'+vendorId+' '+JSON.stringify(dims));
   }
