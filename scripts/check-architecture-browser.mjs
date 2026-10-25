@@ -13,9 +13,17 @@ try{
  await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
  await page.evaluate(()=>location.hash='#arkitektur');
  await page.locator('[data-architecture-explorer]').waitFor();
- assert.equal(await page.locator('[data-arch-option]').count(),6,'Six canonical architecture profiles offered on the page');
+ assert.equal(await page.locator('[data-arch-option]').count(),4,'One reference model and three platform examples');
+ assert.equal(await page.locator('[data-arch-option="modern"],[data-arch-option="ai-on-data"]').count(),0,'Technical detail and AI use are not competing base architectures');
  assert.equal(await page.locator('[data-arch-panel]:not([hidden])').count(),1,'Exactly one architecture perspective shown');
  assert.equal(await page.locator('[data-arch-panel="conceptual"]:not([hidden]) .da-scene').count(),1,'Page reuses presentation renderer');
+ const details=page.locator('[data-arch-technical]');
+ await details.locator('summary').click();
+ assert.equal(await details.locator('li').count(),6,'Technical expansion contains three canonical pairs of technical details');
+ assert.ok((await details.textContent()).includes('ELT / CDC'),'Modern data flow is technical depth, not an alternative architecture');
+ assert.equal(await page.locator('.arch-applications .learning-card').count(),2,'Two distinctly purposeful BI and document RAG examples');
+ assert.equal(await page.locator('.arch-applications a[href="#arkitektur/bi"]').count(),1,'BI example keeps deep link');
+ assert.equal(await page.locator('.arch-applications a[href="#arkitektur/rag"]').count(),1,'Document RAG example keeps deep link');
  await page.screenshot({path:out+'/architecture-page-desktop.png',fullPage:false});
  await page.locator('[data-arch-option="fabric"]').click();
  assert.equal(await page.locator('[data-arch-option="fabric"]').getAttribute('aria-pressed'),'true','Platform option is accessible');
@@ -56,6 +64,12 @@ try{
  }
  await page.evaluate(()=>location.hash='#arkitektur/bi');
  await page.locator('.diagram').waitFor();
+ await page.evaluate(()=>location.hash='#arkitektur/rag');
+ await page.locator('.diagram').waitFor();
+ await page.evaluate(()=>location.hash='#lysbilder/architecture-modern');
+ await page.locator('.slide-library-detail-stage .da-scene').waitFor();
+ await page.evaluate(()=>location.hash='#lysbilder/architecture-ai');
+ await page.locator('.slide-library-detail-stage .da-scene').waitFor();
  await page.setViewportSize({width:1512,height:980});
  await page.evaluate(()=>location.hash='#ressurser');
  await page.locator('.asset-library-card').first().waitFor();
