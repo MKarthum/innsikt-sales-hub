@@ -851,3 +851,6 @@ textarea.prompt-var-input{min-height:78px}
 .play-journey select:focus-visible,.play-journey a:focus-visible,.play-journey summary:focus-visible{outline:3px solid #176c5c;outline-offset:3px}
 @media(max-width:1050px){.play-journey-intro{align-items:start;flex-direction:column}.play-journey-picker{width:min(100%,420px)}.play-journey-steps{gap:12px}.play-journey-step{padding:15px 13px}.play-journey-step:not(:last-child)::after{right:-10px}}
 @media(max-width:760px){.play-journey{padding:19px 16px}.play-journey-intro{gap:15px;margin-bottom:17px}.play-journey-picker{width:100%}.play-journey-steps{grid-template-columns:minmax(0,1fr);gap:14px}.play-journey-step{padding:16px}.play-journey-step:not(:last-child)::after{content:'↓';top:auto;bottom:-16px;right:calc(50% - 11px);font-size:15px}.play-journey-footer{display:block}.play-journey-footer .btn{margin-top:14px;white-space:normal}}
+
+/* Eksisterende salgsinngangskort hadde 20px dokumentoverløp ved 320px: begrens min-content-bredden. */
+@media(max-width:760px){.play-grid{grid-template-columns:minmax(0,1fr)}.play-grid .play-card{min-width:0;overflow-wrap:anywhere}.play-grid .play-card .bottom{flex-wrap:wrap}}
