@@ -1137,10 +1137,6 @@
       "collapsible": false,
       "items": [
         {
-          "route": "prompter",
-          "icon": "sparkles"
-        },
-        {
           "route": "forretning",
           "icon": "briefcase",
           "label": "Utforsk kundebehov"
@@ -1157,6 +1153,10 @@
         {
           "route": "verktoy",
           "icon": "file-text"
+        },
+        {
+          "route": "prompter",
+          "icon": "sparkles"
         }
       ]
     },
