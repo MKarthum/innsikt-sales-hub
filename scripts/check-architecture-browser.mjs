@@ -34,6 +34,13 @@ try{
   const dims=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
   assert.ok(dims.sw<=dims.cw+1,'No horizontal overflow at '+width+'px '+JSON.stringify(dims));
   await page.screenshot({path:out+'/architecture-page-'+width+'.png',fullPage:false});
+  const structure=page.locator('[data-arch-panel="fabric"] .arch-explorer-stage');
+  if(width===900){
+   assert.equal(await page.locator('[data-arch-panel="fabric"] .arch-explorer-mobile').count(),0,'Tablet has same spatial vendor model');
+   await page.locator('[data-arch-panel="fabric"] [data-arch-detail]').click();
+   assert.ok(await structure.evaluate(x=>x.scrollWidth>x.clientWidth),'Tablet detail mode pans same scene rather than stacking boxes');
+   await page.locator('[data-arch-panel="fabric"] [data-arch-detail]').click();
+  }
  }
  await page.setViewportSize({width:1512,height:980});
  // A new mobile page avoids inheriting the resized desktop session's sidebar state.
@@ -46,20 +53,51 @@ try{
   assert.equal(await mobile.locator('#sidebar').evaluate(x=>x.classList.contains('open')),false,'Mobile sidebar is closed at load');
   assert.equal(await mobile.locator('#sidebar-backdrop').evaluate(x=>x.classList.contains('open')),false,'Mobile backdrop does not cover architecture');
   await mobile.screenshot({path:out+'/architecture-mobile-'+width+'-top.png',fullPage:false});
+  const rawProfiles=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles;
   for(const vendorId of ['snowflake','fabric','databricks']){
    await mobile.locator('[data-arch-option="'+vendorId+'"]').click();
    const region=mobile.locator('[data-arch-panel="'+vendorId+'"]:not([hidden])');
-   assert.equal(await region.count(),1,'Only selected vendor region visible');
-   assert.equal(await region.locator('.arch-explorer-stage').isVisible(),false,'Tiny slide hidden on mobile');
-   assert.equal(await region.locator('.arch-explorer-mobile').isVisible(),true,'Mobile model visible');
-   const expected=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles.find(p=>p.id===vendorId);
-   assert.ok((await region.locator('[data-arch-scene-note]').textContent()).includes(expected.diagram.foot),'Vendor-specific footnote visible: '+vendorId);
-   assert.ok((await region.locator('[data-arch-vendor-notice]').textContent()).includes(expected.brandNotice),'Canonical legal caveat visible: '+vendorId);
-   const relationship=await region.locator('[data-arch-vendor-detail]').textContent();
-   assert.ok(relationship.includes(({snowflake:'Snowpipe Streaming',fabric:'OneLake',databricks:'Bronze'})[vendorId]),'Distinct vendor-specific mobile model: '+vendorId);
+   assert.equal(await region.count(),1,'Only chosen platform shown');
+   const scene=region.locator('.arch-explorer-stage .vp-scene');
+   assert.equal(await scene.count(),1,'Mobile uses original vendor-specific composition, not a different five-step diagram');
+   assert.equal(await region.locator('.arch-explorer-mobile,.arch-explorer-steps').count(),0,'No flattened five-stage pipeline on mobile');
+   const raw=rawProfiles.find(p=>p.id===vendorId);
+   assert.ok((await scene.textContent()).includes(raw.diagram.foot),'Original footer remains part of scene');
+   assert.ok((await scene.textContent()).includes(raw.brandNotice),'Original vendor legal notice remains');
+   assert.equal(await scene.locator('.vp-section-label').first().textContent(),'KILDER','Shared source role terminology');
+   assert.ok((await scene.locator('.vp-output-stack .vp-section-label').textContent())==='BRUKSFLATER','Shared use role terminology');
+   assert.ok((await scene.locator('.vp-support-heading').textContent())==='STYRING OG DRIFT','Crosscutting terminology is consistent');
+   const uniqueSelector={snowflake:'.vp-snow-shell',fabric:'.vp-fabric-lake',databricks:'.vp-medallion'}[vendorId];
+   assert.equal(await scene.locator(uniqueSelector).count(),1,'Vendor-specific spatial relationship survives on phone: '+vendorId);
+   const canvas=region.locator('.arch-explorer-stage');
+   assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'false','Start with overview, not a clipped drawing');
+   const overview=await canvas.evaluate(x=>({client:x.clientWidth,scroll:x.scrollWidth,height:x.clientHeight,aspect:x.clientWidth/x.clientHeight}));
+   assert.ok(Math.abs(overview.aspect-16/9)<.1,'Complete 16:9 overview at phone width: '+JSON.stringify(overview));
+   assert.ok(overview.scroll<=overview.client+2,'Overview fits the entire architecture without horizontal clipping');
+   await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-overview.png'});
+   await region.locator('[data-arch-detail]').click();
+   assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'true','Opt in to readable detail');
+   const dimensions=await canvas.evaluate(x=>({client:x.clientWidth,scroll:x.scrollWidth,height:x.clientHeight,ownScroll:x.scrollWidth>x.clientWidth+100}));
+   assert.equal(dimensions.ownScroll,true,'Vendor architecture pans within its own viewport');
+   assert.ok(dimensions.height>=500,'Readable detailed architecture at full drawing scale');
+   await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-sources.png'});
+   const nav=region.locator('[data-arch-pan]');
+   assert.equal(await nav.count(),3,'Accessible anchors to sources/platform/use');
+   await nav.nth(1).click();
+   await mobile.waitForFunction(()=>{const v=document.querySelector('[data-arch-panel]:not([hidden]) .arch-explorer-stage');return v&&v.scrollLeft>40;});
+   if(vendorId==='fabric'){
+    await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-fabric-one-lake.png'});
+    const lake=await scene.locator('.vp-fabric-lake').boundingBox();
+    const shell=await scene.locator('.vp-fabric-shell').boundingBox();
+    assert.ok(lake&&shell&&lake.y>shell.y+20&&lake.x>=shell.x,'OneLake visibly underpins Fabric workspaces; it is not stage 4 in a vertical list');
+   }
+   await nav.nth(2).click();
+   await mobile.waitForFunction(()=>{const v=document.querySelector('[data-arch-panel]:not([hidden]) .arch-explorer-stage');return v&&v.scrollLeft>300;});
+   await canvas.screenshot({path:out+'/architecture-mobile-'+width+'-'+vendorId+'-uses.png'});
+   await region.locator('[data-arch-detail]').click();
+   assert.equal(await region.locator('[data-arch-detail]').getAttribute('aria-pressed'),'false','Can return to full architecture overview');
    const dims=await mobile.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
-   assert.ok(dims.sw<=dims.cw+1,'No horizontal overflow at '+width+'/'+vendorId+': '+JSON.stringify(dims));
-   if(vendorId==='fabric')await region.locator('.arch-explorer-mobile').screenshot({path:out+'/architecture-mobile-'+width+'-fabric-model.png'});
+   assert.ok(dims.sw<=dims.cw+1,'Mobile page never scrolls horizontally '+width+'/'+vendorId+' '+JSON.stringify(dims));
   }
   await mobile.close();
  }

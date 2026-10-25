@@ -1330,6 +1330,14 @@
       "rag"
     ],
     "otherDiagramsTitle": "Flere måter data og KI skaper verdi på",
-    "otherDiagramsIntro": "De øvrige skissene viser verdi for organisasjonen og KI som støtte i utviklingsarbeidet."
+    "otherDiagramsIntro": "De øvrige skissene viser verdi for organisasjonen og KI som støtte i utviklingsarbeidet.",
+    "panGuide": "Se hele arkitekturen først. Åpne detaljene hvis du vil lese og følge sammenhengene fra venstre mot høyre.",
+    "panNavLabel": "Navigering i arkitekturen",
+    "panRegionLabel": "Sideveis utforskbar arkitektur",
+    "panSources": "Kilder",
+    "panPlatform": "Plattform",
+    "panUses": "Bruk",
+    "panDetailOpen": "Utforsk detaljene",
+    "panDetailClose": "Vis hele modellen"
   }
 }
