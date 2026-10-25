@@ -81,7 +81,7 @@ const injected=src.replace(end, [
  'globalThis.__navProbe=()=>({sections:navSections(),home:overview(),competence:competence(),business:business(),page:internalPage("customer-reference"),detail:internalPage("customer-reference~org-case-001"),tool:internalPage("internal-tools~org-tool-001")});',
  '})();'
 ].join('\n'));
-const sandbox={console,window:{},localStorage:{getItem:()=>null},__fixture:runtime,location:{hash:''}};
+const sandbox={console,window:{InnsiktPrompts:{card:()=>'<article>syntetisk testkort</article>'}},localStorage:{getItem:()=>null},__fixture:runtime,location:{hash:''}};
 vm.createContext(sandbox);
 vm.runInContext(injected,sandbox,{timeout:3000});
 const probe=vm.runInContext('__navProbe()',sandbox,{timeout:3000});
