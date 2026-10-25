@@ -1,49 +1,72 @@
 {
   "beginner": {
     "readingTime": "Ca. 8 minutter",
-    "storyTitle": "Hvorfor gir CRM og økonomisystemet ulike salgstall?",
-    "story": "CRM følger salgsmuligheter, mens økonomisystemet følger fakturaer og inntekter. Tallene beskriver ikke nødvendigvis det samme. Godt dataarbeid handler om å sette dem i sammenheng, bli enige om definisjonene og gjøre resultatet nyttig.",
+    "storyTitle": "Hvorfor viser salgs- og økonomisystemet ulike tall?",
+    "story": "CRM viser salgsmuligheter, mens økonomisystemet viser fakturaer og inntekter. Tallene må ikke nødvendigvis stemme overens. Vi følger dette eksemplet fra behovet for sammenhengende data til analyse, beslutning og mulig bruk av KI.",
     "chapters": [
       {
-        "title": "1. Hva er data og innsikt?",
-        "text": "Data er registreringer av det som skjer – for eksempel ordre og kundesaker. Innsikt oppstår når tallene settes i sammenheng og gir grunnlag for en bedre beslutning. Rapporten er et middel, ikke målet.",
-        "id": "chapter-1"
+        "id": "chapter-1",
+        "title": "1. Start med beslutningen",
+        "text": "Innsikt handler om at mennesker og virksomheter kan handle klokere. Et godt startpunkt er derfor hva kunden ønsker å forstå, forbedre eller beslutte – ikke hvilket verktøy de vil kjøpe."
       },
       {
-        "title": "2. Hva gjør et datateam?",
-        "text": "Datateamet kobler systemer sammen, rydder data, lager felles definisjoner og gjør informasjon tilgjengelig for rapportering, analyse og KI. Mye av verdien ligger i det som skjer før et dashboard vises.",
-        "id": "chapter-2"
+        "id": "chapter-2",
+        "title": "2. Få et felles datagrunnlag",
+        "text": "Ulike kildesystemer kan beskrive forskjellige hendelser og bruke ulike definisjoner. Dataintegrasjon, kvalitet, modellering og styring er nødvendig for å sette informasjonen i sammenheng."
       },
       {
-        "title": "3. Hva er en dataplattform?",
+        "id": "chapter-3",
+        "title": "3. Gjør data tilgjengelige",
         "text": {
           "$content": "glossary:dataplattform",
           "variant": "beginner"
-        },
-        "id": "chapter-3"
+        }
       },
       {
-        "title": "4. Hva endrer KI?",
+        "id": "chapter-4",
+        "title": "4. Fra analyse til handling",
+        "text": "Rapportering og analyse hjelper virksomheten å forstå hva som har skjedd, hvorfor, og hva man bør gjøre. Verdien er ikke antall rapporter, men bedre valg og prosesser."
+      },
+      {
+        "id": "chapter-5",
+        "title": "5. Hva endrer KI?",
         "text": {
           "$content": "ai-overview:ai-modes",
           "variant": "long"
-        },
-        "id": "chapter-4"
+        }
       },
       {
-        "title": "5. Hva skal salg gjøre?",
+        "id": "chapter-6",
+        "title": "6. Slik åpner du kundesamtalen",
         "text": {
           "$content": "guidance:customer-first",
           "variant": "beginner"
-        },
-        "id": "chapter-5"
+        }
       }
     ],
     "questions": [
       "Hva bruker dere unødvendig mye tid på?",
       "Hvilke beslutninger mangler dere et godt grunnlag for?",
       "Hvem påvirkes, og hva har dere allerede prøvd?"
-    ]
+    ],
+    "relatedLinks": [
+      {
+        "route": "#forretning",
+        "label": "Se konkrete kundebehov"
+      },
+      {
+        "route": "#arkitektur",
+        "label": "Utforsk arkitektur"
+      },
+      {
+        "route": "#marked",
+        "label": "Les oppdatert markedsstoff"
+      }
+    ],
+    "exampleEyebrow": "CA. 8 MINUTTER · ETT GJENNOMGÅENDE EKSEMPEL",
+    "diagramTitle": "Fra kildedata til beslutninger",
+    "nextTitle": "Gå videre når du trenger det",
+    "nextIntro": "Bruk eksempler, arkitektur og oppdatert markedskunnskap som oppslag – ikke som et nytt kurs."
   },
   "glossary": [
     {

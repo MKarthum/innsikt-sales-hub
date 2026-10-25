@@ -22,7 +22,7 @@ const setup=[
 ' const output=[];',
 ' const add=(name,fn)=>output.push({name,html:fn()});',
 ' for(const [name,fn] of Object.entries({',
-'   oversikt:overview,guide,forretning:business,muligheter:plays,kundedialog:dialogue,',
+"   oversikt:overview,guide,\'om-innsikt\':portalIntro,ordliste:glossary,forretning:business,muligheter:plays,kundedialog:dialogue,",
 '   marked:market,kompetanse:competence,arkitektur:()=>architecture(),',
 '   teknologi:technology,ai:aiProducts,bransje:industry,',
 '   verktoy:()=>toolkit(),prompter:()=>prompts(),lysbilder:()=>slideLibraryPage(),ressurser:()=>resourceLibraryPage(),horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev',

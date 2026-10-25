@@ -771,3 +771,20 @@ textarea.prompt-var-input{min-height:78px}
 .dev-actions{display:flex;gap:8px;flex-wrap:wrap}
 .dev-item .dev-note{white-space:pre-wrap;color:#244351;margin-top:10px}
 @media(max-width:760px){.dev-overview{grid-template-columns:1fr}.dev-list{grid-template-columns:1fr}.dev-actions{width:100%}}
+
+/* Oppgaveorientert, datadrevet meny og tematiske søsterinnganger. */
+#nav-groups{display:grid;gap:16px}
+#nav-groups .sidebar-label{display:block}
+#nav-groups .sidebar-label.mid{margin-top:0}
+#nav-groups .sidebar-disclosure{margin-top:0}
+#nav-groups .sidebar-disclosure .nav{margin-top:6px}
+.topic-nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 24px}
+.topic-nav a{font-size:12px;font-weight:750;color:#2b6370;border:1px solid #d0e3e6;border-radius:999px;background:white;padding:9px 14px}
+.topic-nav a.active,.topic-nav a:hover{background:#e3f5ef;border-color:#70b9a7;color:#185e4e}
+.portal-step{display:flex;flex-direction:column;gap:12px}
+.portal-step h2{font-size:17px;margin:0}
+.portal-step p{line-height:1.6;font-size:13px}
+.portal-step .text-link{margin-top:auto}
+.start-promo .promo-actions{margin-top:12px}
+.start-promo .lesson-link{margin-right:16px}
+@media(max-width:820px){#nav-groups{gap:14px}.topic-nav{gap:6px}.topic-nav a{padding:8px 11px}}

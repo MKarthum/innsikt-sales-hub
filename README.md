@@ -30,7 +30,7 @@ Hjelpe førstelinjeselgere med å forstå markedet, gjenkjenne behov hos forretn
 
 ## Læring og støtte for ulike nivåer
 
-- **Start her:** et kort grunnkurs med eksempler og ordforklaringer.
+- **Slik bruker du Innsikt:** produktintroduksjon. **Introduksjon til data og KI:** valgfritt fagkurs. **Ordliste:** selvstendig fagoppslag.
 - **Data og KI i praksis:** fire generiske arkitekturskisser om rapportering, KI på strukturerte data, KI-assistert utvikling og dokumentbasert KI.
 - **Verktøykasse:** fire kopierbare maler for kundedialog, mulighetskvalifisering, KI-vurdering og overlevering. Ingen person- eller kundedata lagres av malene.
 - **Presenter:** to redaksjonelle løp: en gjennomgang av selve Innsikt-løsningen og et kort, illustrativt eksempel fra «Forretningsbehov». Med gjennomarbeidet fortelling og presentatørnotater.
@@ -169,3 +169,7 @@ Radiovalgene er ryddet for doble forklaringer; den samlede forhåndsvisningen er
 ## CV opp mot kundeforespørsel (v0.11.7)
 
 Egen prioritert prompt for kritisk vurdering av dokumentert CV mot kundens «må»- og «bør»-krav, med kvalitativ anbefaling og kildebelegg fremfor poengscore. Brukeren kan velge «Kun vurdering» eller «Vurdering + spisset CV»; kun CV-utkast åpner Word/PDF, lengde og krav om vedlagt kundemal. Kundens mal går foran firmamal. Et annet, generelt prompt for kompetanseavklaring er fortsatt tilgjengelig under de spesialiserte oppgavene. Kilder leses av det godkjente KI-verktøyet fra vedlegg eller tilkoblede dokumentkilder; det offentlige nettstedet håndterer ikke CV-filer. Se PROMPT_WORKFLOW.md.
+
+## Navigasjon og intern utvidelse v0.18.0
+
+Hjem og praktiske arbeidsoppgaver ligger først, fagoppslag deretter. Åpne menygrupper styres av pages.json.navigationSections. En intern organisasjon kan utvide samlinger, verktøy og navigasjon fra eget tilgangsstyrt repo uten å endre kjernefiler; se CORE_ORG_BOUNDARY.md.

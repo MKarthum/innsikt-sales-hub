@@ -12,25 +12,27 @@
     }
   },
   "navigation": {
-    "oversikt": "Oversikt",
-    "guide": "Start her",
+    "oversikt": "Hjem",
+    "guide": "Introduksjon til data og KI",
     "forretning": "Forretningsbehov",
     "muligheter": "Salgsinnganger",
     "kundedialog": "Kundedialog",
     "marked": "Marked og trender",
-    "kompetanse": "Kompetanse",
-    "arkitektur": "Data og KI i praksis",
-    "teknologi": "Teknologikart",
+    "kompetanse": "Kompetanse og tjenester",
+    "arkitektur": "Arkitektur",
+    "teknologi": "Teknologi og KI",
     "ai": "KI i plattformene",
-    "bransje": "Marked og oppkjøp",
-    "verktoy": "Verktøykasse",
+    "bransje": "Leverandør- og markedshendelser",
+    "verktoy": "Maler og sjekklister",
     "kilder": "Kilder",
     "utvikling": "Videreutvikling",
-    "prompter": "Prompter for salg",
-    "horisont": "I grenselandet",
+    "prompter": "Prompter og KI-verktøy",
+    "horisont": "Faglig fordypning",
     "trendradar": "Trendradar",
     "lysbilder": "Lysbildebibliotek",
-    "ressurser": "Figur- og logobibliotek"
+    "ressurser": "Figurer og logoer",
+    "om-innsikt": "Slik bruker du Innsikt",
+    "ordliste": "Ordliste"
   },
   "headers": {
     "FORRETNINGSBEHOV": {
@@ -87,9 +89,9 @@
       "intro": "En prioritert oversikt over hva som bør testes, forbedres eller avklares før bredere bruk. Forslag er ikke det samme som leverte funksjoner."
     },
     "GRUNNKUNNSKAP": {
-      "eyebrow": "START HER · CA. 8 MINUTTER",
-      "title": "Data og innsikt – uten teknologispråk",
-      "intro": "En introduksjon du kan lese én gang og komme tilbake til. Du trenger ikke kjenne verktøyene for å føre en god kundesamtale."
+      "eyebrow": "FAGINTRODUKSJON · CA. 8 MINUTTER",
+      "title": "Data, analyse og KI – slik skaper vi verdi",
+      "intro": "En kort faglig innføring med ett gjennomgående eksempel. Markedstall og teknologidetaljer finner du i oppslagsdelene når du trenger dem."
     },
     "ARKITEKTUR": {
       "eyebrow": "ARKITEKTUR I PRAKSIS",
@@ -115,6 +117,11 @@
       "eyebrow": "TRENDER UNDER OBSERVASJON",
       "title": "Utviklingstrekk verdt å følge",
       "intro": "En kuratert radar for teknologi og markedssignaler som kan bli relevante, men som ennå ikke er klare salgsinnganger eller anbefalte investeringer."
+    },
+    "ORDLISTE": {
+      "eyebrow": "FAGLIG OPPSLAG",
+      "title": "Begreper og forkortelser",
+      "intro": "Korte, faglig presise forklaringer med eksempler. De samme definisjonene brukes som kontekstuell hjelp i resten av løsningen."
     }
   },
   "home": {
@@ -129,11 +136,11 @@
     "statsIntro": "Forstå sammenhengen mellom datagrunnlag, beslutningsstøtte og KI.",
     "actionTitle": "Hva trenger du hjelp med?",
     "actionIntro": "Velg en konkret oppgave. Du kan gå direkte til verktøyene eller fordype deg underveis.",
-    "startTitle": "Ny innen data, analyse og KI?",
-    "startIntro": "Få en kort innføring i hva fagområdet handler om og hvilke begreper du trenger. Introduksjonen er valgfri.",
-    "startAction": "Ta introduksjonen",
-    "advancedTitle": "For deg som vil gå dypere",
-    "advancedIntro": "Gå rett til relevant fagstoff eller praktiske maler.",
+    "startTitle": "Ny i Innsikt eller fagområdet?",
+    "startIntro": "Se hvordan portalen fungerer, eller ta den korte fagintroduksjonen. Begge er valgfrie.",
+    "startAction": "Slik bruker du Innsikt",
+    "advancedTitle": "Fagstoff når du trenger det",
+    "advancedIntro": "Bruk oppslagsdelene direkte – uten introduksjonskurs.",
     "pillarTitle": "Slik henger de sammen",
     "pillarIntro": {
       "$content": "value-overview:three-needs",
@@ -234,10 +241,10 @@
       {
         "id": "expert",
         "icon": "network",
-        "title": "Jeg vil forstå et fagtema",
-        "description": "Finn forklaringer, arkitekturprinsipper og teknisk bakgrunn.",
-        "route": "#arkitektur",
-        "action": "Se faglig fordypning"
+        "title": "Jeg vil slå opp et fagtema",
+        "description": "Finn kompetanse, teknologi og prinsipper for arkitektur.",
+        "route": "#teknologi",
+        "action": "Se fagstoff"
       },
       {
         "id": "practice",
@@ -261,7 +268,8 @@
         "label": "Maler og sjekklister",
         "route": "#verktoy"
       }
-    ]
+    ],
+    "subjectAction": "Introduksjon til data og KI"
   },
   "qualification": {
     "items": [
@@ -1110,5 +1118,179 @@
     },
     "methodNote": "Prioritet er en redaksjonell vurdering, ikke leveranseløfte. Lukkede punkter beholdes for sporbarhet.",
     "emptyTitle": "Ingen punkter i denne gruppen."
-  }
+  },
+  "navigationSections": [
+    {
+      "id": "home",
+      "label": "HJEM",
+      "collapsible": false,
+      "items": [
+        {
+          "route": "oversikt",
+          "icon": "layout-dashboard"
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "label": "ARBEID MED KUNDER",
+      "collapsible": false,
+      "items": [
+        {
+          "route": "prompter",
+          "icon": "sparkles"
+        },
+        {
+          "route": "forretning",
+          "icon": "briefcase",
+          "label": "Utforsk kundebehov"
+        },
+        {
+          "route": "muligheter",
+          "icon": "target"
+        },
+        {
+          "route": "kundedialog/stotte",
+          "icon": "messages",
+          "label": "Samtalestøtte"
+        },
+        {
+          "route": "verktoy",
+          "icon": "file-text"
+        }
+      ]
+    },
+    {
+      "id": "knowledge",
+      "label": "FAG OG MARKED",
+      "collapsible": false,
+      "items": [
+        {
+          "route": "kompetanse",
+          "icon": "layers"
+        },
+        {
+          "route": "marked",
+          "icon": "trending-up"
+        },
+        {
+          "route": "teknologi",
+          "icon": "network"
+        },
+        {
+          "route": "arkitektur",
+          "icon": "network"
+        },
+        {
+          "route": "horisont",
+          "icon": "compass"
+        }
+      ]
+    },
+    {
+      "id": "resources",
+      "label": "PRESENTASJONER OG RESSURSER",
+      "collapsible": true,
+      "items": [
+        {
+          "route": "lysbilder",
+          "icon": "presentation"
+        },
+        {
+          "route": "ressurser",
+          "icon": "file-text"
+        }
+      ]
+    },
+    {
+      "id": "learn",
+      "label": "LÆRING OG OM LØSNINGEN",
+      "collapsible": true,
+      "items": [
+        {
+          "route": "om-innsikt",
+          "icon": "book-open"
+        },
+        {
+          "route": "guide",
+          "icon": "book-open"
+        },
+        {
+          "route": "kundedialog/trening",
+          "icon": "users",
+          "label": "Samtaletrening"
+        },
+        {
+          "route": "ordliste",
+          "icon": "book-open"
+        },
+        {
+          "route": "kilder",
+          "icon": "book-open"
+        },
+        {
+          "route": "utvikling",
+          "icon": "git-pull-request"
+        }
+      ]
+    }
+  ],
+  "portalIntro": {
+    "eyebrow": "SLIK BRUKER DU INNSIKT",
+    "title": "Finn det du trenger – uten å lese alt",
+    "intro": "Innsikt er en arbeidsflate for kundesamtaler. Start med oppgaven din. Bruk fag- og markedsstoff som støtte når du trenger det.",
+    "sections": [
+      {
+        "title": "Start med en arbeidsoppgave",
+        "text": "Forbered et møte, utforsk et kundebehov eller finn en salgsinngang. Du trenger ikke gå gjennom et kurs først.",
+        "route": "#prompter",
+        "action": "Se KI-verktøyene"
+      },
+      {
+        "title": "Slå opp underveis",
+        "text": "Bruk kompetanse, marked, teknologi og arkitektur til å forstå kundens situasjon. Søk finner både temaer og konkrete eksempler.",
+        "route": "#marked",
+        "action": "Se marked og trender"
+      },
+      {
+        "title": "Lag og bruk materiell",
+        "text": "Velg et lysbilde i biblioteket eller åpne Presenter. Et lysbilde kan inngå i flere historier uten at innholdet kopieres.",
+        "route": "#lysbilder",
+        "action": "Åpne lysbildebiblioteket"
+      }
+    ],
+    "privacyTitle": "Offentlig arbeidsgrunnlag",
+    "privacyText": "Den åpne utgaven bruker offentlig godkjent innhold. Ikke skriv inn konfidensiell kundeinformasjon her. En intern utgave kan ha egne kilder og verktøy bak virksomhetens tilgangskontroll.",
+    "subjectTitle": "Ny i fagområdet?",
+    "subjectText": "Den separate fagintroduksjonen viser hvordan datagrunnlag, analyse og KI henger sammen. Den er valgfri og laget for å kunne leses én gang.",
+    "subjectAction": "Introduksjon til data og KI"
+  },
+  "marketNavigation": [
+    {
+      "route": "#marked",
+      "label": "Marked og trender"
+    },
+    {
+      "route": "#bransje",
+      "label": "Leverandør- og markedshendelser"
+    },
+    {
+      "route": "#trendradar",
+      "label": "Trendradar"
+    }
+  ],
+  "technologyNavigation": [
+    {
+      "route": "#teknologi",
+      "label": "Teknologikart"
+    },
+    {
+      "route": "#ai",
+      "label": "KI i plattformene"
+    },
+    {
+      "route": "#arkitektur",
+      "label": "Arkitektur"
+    }
+  ]
 }

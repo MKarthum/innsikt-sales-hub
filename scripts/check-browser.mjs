@@ -8,7 +8,7 @@ const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','u
 const expectedSlideCount=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.length;
 const canonicalSlideTitles=new Map(JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.map(x=>[x.id,x.title]));
 const expectedDeckCount=Object.keys(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks).length;
-const pages=['oversikt','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','lysbilder','kilder','utvikling','prompter','horisont','trendradar'];
+const pages=['oversikt','om-innsikt','ordliste','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','lysbilder','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const problems=[];
@@ -69,9 +69,10 @@ try {
   assert.equal(await page.locator('.breadcrumb-project[href="#oversikt"]').count(),1,label+': hjem i navigasjonsstien');
   await page.locator('.breadcrumb-project').click();
   await page.waitForFunction(()=>location.hash==='#oversikt');
-  assert.ok((await page.locator('#nav-main [data-page]').evaluateAll(links=>links.map(a=>a.dataset.page))).indexOf('guide')<
-            (await page.locator('#nav-main [data-page]').evaluateAll(links=>links.map(a=>a.dataset.page))).indexOf('prompter'),label+': Start her foran prompter');
-  await page.evaluate(()=>{location.hash='#guide'});
+  const menuRoutes=await page.locator('#nav-groups .nav a').evaluateAll(links=>links.map(a=>a.dataset.navRoute));
+  assert.ok(menuRoutes.indexOf('prompter')<menuRoutes.indexOf('guide'),label+': arbeidsverktøy før fagintroduksjon');
+  assert.ok(menuRoutes.includes('om-innsikt')&&menuRoutes.includes('kundedialog/stotte')&&menuRoutes.includes('kundedialog/trening'),label+': oppgaver og læring har tydelige innganger');
+  await page.evaluate(()=>{location.hash='#ordliste'});
   await page.locator('.glossary-item').first().waitFor();
   assert.ok((await page.locator('.glossary-item').allTextContents()).some(t=>t.includes('Business intelligence')),label+': fullt navn i ordlisten');
   // Brukerreise A og C: naviger direkte fra to valg til skjermede rollekort og refleksjon.

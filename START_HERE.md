@@ -154,3 +154,8 @@ Når produktets førsteside, oppgavekort eller prioriterte funksjoner endres, m�
 
 - Ressursbibliotek og arkitekturprofiler: ARCHITECTURE_ASSETS.md. Bruk sentral asset-ID, aldri kopier logoer inn i lysbildedata.
 - I v0.12.3 er Lys standard i lysbildebibliotek og Presenter, med ett delt visningsvalg (Lys / Mørk / Fortellingsstyrt). Leverandørdiagrammer deler ikoner og data, men ikke en fast komposisjon.
+
+
+## Oppdatering 25.10.2026 – kjerne og utvidelser
+
+Navigasjon i v0.18.0 eies av docs/data/pages.json.navigationSections. Produktintroduksjonen #om-innsikt og fagkurset #guide er forskjellige. Ordliste ligger på #ordliste. Interne tillegg skal kun komme fra tilgangsstyrt separat repository og schemaVersion 2, se CORE_ORG_BOUNDARY.md.

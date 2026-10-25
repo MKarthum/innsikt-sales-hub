@@ -12,12 +12,12 @@ const injected=site.replace(ending, `
 D=globalThis.__fixture;
 names=D.pages.navigation;
 globalThis.__views=()=>{
- const basics=guide(),depth=horizon(),home=overview();
+ const basics=guide(),dictionary=glossary(),depth=horizon(),home=overview();
  const slideBody={innerHTML:''},searchBody={innerHTML:''};
  globalThis.document={getElementById:id=>id==='slide-body'?slideBody:id==='search-results'?searchBody:{textContent:'',disabled:false},querySelectorAll:()=>[]};
  selectedDeck='portal';slide=D.pages.presentationDecks.portal.slides.findIndex(entry=>entry.slideId==='portal-customer-signal');showSlide();
  searchResults('dataplattform');
- return {guide:basics,horizon:depth,presenter:slideBody.innerHTML,search:searchBody.innerHTML,home};
+ return {guide:basics,glossary:dictionary,horizon:depth,presenter:slideBody.innerHTML,search:searchBody.innerHTML,home};
 };
 })();`);
 function render(data){
@@ -43,7 +43,7 @@ if(!term)throw Error('Mangler kanonisk dataplattform-ID');
 const glossaryMarker='Entydig testmarkør: kanonisk begrepsendring 2026.';
 term.meaning=glossaryMarker;
 const glossaryNext=render(changedGlossary);
-for(const name of ['guide','horizon','search']){
+for(const name of ['glossary','horizon','search']){
  if(glossaryNext[name]===old[name]||!glossaryNext[name].includes(glossaryMarker))throw Error(name+' reagerer ikke på begrepsendringen');
 }
 if(glossaryNext.presenter!==old.presenter)throw Error('Lysbildet skal ikke få påtvunget et irrelevant begrep');
@@ -56,5 +56,5 @@ const guidanceMarker='Entydig testmarkør: kundedialogendring 2026.';
 guidance.variants.normal=guidanceMarker;
 const guidanceNext=render(changedGuidance);
 if(guidanceNext.presenter===old.presenter||!guidanceNext.presenter.includes(guidanceMarker))throw Error('Presenter bruker ikke oppdatert kanonisk kundedialog');
-if(guidanceNext.guide!==old.guide||guidanceNext.horizon!==old.horizon)throw Error('Kundedialogendring påvirker urelatert fordypning');
+if(guidanceNext.guide!==old.guide||guidanceNext.glossary!==old.glossary||guidanceNext.horizon!==old.horizon)throw Error('Kundedialogendring påvirker urelatert fordypning');
 console.log('PASS – kanoniske begreper følger relevante konsumenter, mens Presenter følger relevant kundedialoginnhold');
