@@ -19,10 +19,10 @@ function start(D,h){
  +'<section class="subsection"><div class="section-heading"><h2>'+e(b.diagramTitle)+'</h2></div>'+diagram(D.learning.diagrams.find(x=>x.id==='bi'),h)+'</section>'
  +'<section class="subsection"><div class="insight-strip"><div><h3>'+e(b.nextTitle)+'</h3><p>'+e(b.nextIntro)+'</p></div><div class="promo-actions">'+b.relatedLinks.map(x=>'<a class="btn subtle" href="'+e(x.route)+'">'+e(x.label)+' '+ico('arrow-right')+'</a>').join('')+'</div></div></section>';
 }
-function glossary(D,h){
+function glossary(D,h,selectedId){
  const {esc:e,headerCopy}=h;
  return headerCopy('ORDLISTE')
- +'<div class="glossary">'+D.learning.glossary.map(g=>'<details class="glossary-item"><summary>'+e(g.term)+'</summary>'+(g.fullName?'<p class="fineprint"><strong>Fullt navn:</strong> '+e(g.fullName)+'</p>':'')+'<p>'+e(g.meaning)+'</p><p class="fineprint"><strong>Eksempel:</strong> '+e(g.example)+'</p></details>').join('')+'</div>';
+ +'<div class="glossary">'+D.learning.glossary.map(g=>'<details class="glossary-item" data-glossary-id="'+e(g.id)+'"'+(g.id===selectedId?' open':'')+'><summary>'+e(g.term)+'</summary>'+(g.fullName?'<p class="fineprint"><strong>Fullt navn:</strong> '+e(g.fullName)+'</p>':'')+'<p>'+e(g.meaning)+'</p><p class="fineprint"><strong>Eksempel:</strong> '+e(g.example)+'</p></details>').join('')+'</div>';
 }
 function architecture(D,h,id){
  const {esc:e,headerCopy,ico,sourceLinks}=h,diagrams=D.learning.diagrams,d=diagrams.find(x=>x.id===id);
