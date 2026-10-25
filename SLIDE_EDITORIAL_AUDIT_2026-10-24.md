@@ -38,7 +38,7 @@
 | architecture-databricks | Separat leverandørkomposisjon med produktikoner | dataarkitektur | Verifiser produktnavn og funksjoner mot offisielle kilder |
 | market-why-now | Kort hovedpoeng med relevant sentral figur; 1 gjenbrukte figur-ID-er | marked-retning | Kontroller linjebrudd og bildebalanse |
 | market-three-forces | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
-| market-customer-pressure | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
+| market-customer-pressure | Deloitte 2026: 42 % selvvurdert strategiberedskap mot kvalitativt lavere vurdering av fire operative områder; ingen figurer eller simulerte måltall | marked-retning | Kildestyrt kontrast; forbehold, kundespørsmål og begge paletter må kontrolleres visuelt |
 | market-priorities | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | market-next-moves | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 

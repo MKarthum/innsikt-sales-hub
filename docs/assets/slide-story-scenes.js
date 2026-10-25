@@ -7,6 +7,18 @@ function render(slide,{v,top,title,escs,assetImage,block,diagram}){
  const heading='<div class="v5-heading">'+title+'</div>';
  const icon=(id,cls='v5-icon')=>assetImage(id,cls);
  switch(v.layout){
+ case 'readiness-contrast': {
+  return block('special v5-special v11-readiness',top+heading
+   +'<div class="v11-readiness-study"><small>'+escs(v.studyLabel)+'</small></div>'
+   +'<div class="v11-readiness-main"><section class="v11-readiness-strategy"><small>'+escs(v.strategyLabel)+'</small>'
+   +'<strong class="v11-readiness-number">'+escs(v.strategyNumber)+'</strong><p>'+escs(v.strategyText)+'</p></section>'
+   +'<section class="v11-readiness-operations"><small>'+escs(v.operationsLabel)+'</small>'
+   +'<h3>'+escs(v.operationsTitle)+'</h3><p>'+escs(v.operationsText)+'</p>'
+   +'<ul>'+v.operationsAreas.map(x=>'<li>'+escs(x)+'</li>').join('')+'</ul></section></div>'
+   +'<section class="v11-readiness-question"><small>'+escs(v.questionLabel)+'</small>'
+   +'<blockquote>'+escs(v.question)+'</blockquote></section>'
+   +'<p class="v11-readiness-caveat">'+escs(v.caveat)+'</p>'+footer(v.conclusion));
+ }
  case 'knowledge-lookup': {
   if(!diagram||!Array.isArray(diagram.questions)||diagram.questions.length!==2)throw Error('Missing canonical diagram/questions for '+slide.id);
   return block('special v5-special v10-lookup',top+heading

@@ -5,7 +5,7 @@ const diagrams=JSON.parse(fs.readFileSync('docs/data/learning.json','utf8')).dia
 const profiles=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles;
 const expected=new Set(slides.map(s=>s.id));
 assert.ok(slides.length>0,'Slide library must not be empty');
-const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road','discovery-dialogue':'road','knowledge-lookup':'road'};
+const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road','discovery-dialogue':'road','knowledge-lookup':'road','readiness-contrast':'impact'};
 const accepted=new Set(Object.keys(layouts));
 const seen=new Set();
 for(const s of slides){
@@ -49,6 +49,7 @@ for(const s of slides){
  if(v.layout==='cause-map')assert.ok(v.symptom&&v.symptomLabel&&v.causesLabel&&v.items?.length===3&&v.detail?.length===3,'Hypothesis slide must distinguish symptom from cause');
  if(v.layout==='prompt-example')assert.ok(v.exampleLabel&&v.example&&v.context&&v.transfer&&v.outputLabel&&v.review&&v.questions?.length===3,'Prompt example must distinguish fictional input from reviewed questions');
  if(v.layout==='risk-ladder')assert.ok(v.levels?.length===3&&v.levels.every(x=>x.label&&x.example&&x.impact&&x.control)&&v.scaleStart&&v.scaleEnd,'Risk requires consequence and matching control at three levels');
+ if(v.layout==='readiness-contrast')assert.ok(v.studyLabel&&v.strategyLabel&&v.strategyNumber==='42 %'&&v.strategyText&&v.operationsLabel&&v.operationsTitle&&v.operationsText&&v.operationsAreas?.length===4&&v.operationsAreas.every(Boolean)&&v.questionLabel&&v.question&&v.caveat&&v.conclusion,'Readiness contrast needs source-labeled strategy and qualitative operational dimensions: '+s.id);
  if(v.layout==='priority-pathways')assert.ok(v.pathways?.length===3&&v.pathways.every(x=>x.signal&&x.priority&&x.action)&&v.signalLabel&&v.responseLabel,'Priorities must explain concrete needs and responses');
  if(v.layout==='meeting-brief')assert.ok(v.fields?.length===3&&v.fields.every(x=>x.name&&x.value)&&v.questions?.length===2&&v.transferLabel&&v.agenda&&v.review&&v.briefLabel&&v.conclusion,'Meeting brief needs editable context, illustrative output and review');
  if(v.layout==='conversation-takeaway')assert.ok(v.signal&&v.question&&v.nextAction&&v.signalLabel&&v.questionLabel&&v.nextLabel&&v.conclusion,'Conversation takeaway must show specific result, not only steps');
@@ -63,6 +64,12 @@ for(const s of slides){
  if(v.layout==='bounded-discovery')assert.ok(v.sources?.length===2&&v.sourceTitle&&v.checkTitle&&v.result&&v.inScope&&v.later&&v.conclusion,'Discovery needs a bounded investigation and an explicit exclusion');
  if(v.scene==='analyst-grid')assert.equal(v.number,'1 000','Preserve metaphor');
 }
+const market=slides.find(s=>s.id==='market-customer-pressure');
+const priorities=slides.find(s=>s.id==='market-priorities');
+assert.equal(market?.visual?.layout,'readiness-contrast','Market pressure must own survey evidence');
+assert.deepEqual(market.sourceIds,['deloitte-ai-2026'],'Readiness survey must not cite unrelated trends');
+assert.equal(priorities?.visual?.layout,'priority-pathways','Customer pathways stay on priorities slide');
+assert.equal(priorities.visual.pathways.length,3,'Keep three illustrative customer pathways');
 const file=fs.readFileSync('SLIDE_VISUAL_REVIEW_2026-10-24.md','utf8');
 for(const id of expected)assert.ok(file.includes('| '+id+' |'),'Missing individual review '+id);
 console.log('PASS – '+slides.length+' clear slide statements, semantically selected scene compositions and full visual audit');

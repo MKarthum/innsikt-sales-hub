@@ -1238,8 +1238,8 @@
       "scope": "shared",
       "tone": "light",
       "type": "visual",
-      "cue": "LYTT ETTER SIGNALENE",
-      "title": "En trend blir relevant når den møter et kundebehov",
+      "cue": "FRA STRATEGI TIL GJENNOMFØRING",
+      "title": "KI-strategien kan være foran gjennomføringsevnen",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1249,31 +1249,30 @@
         "fremtid",
         "trend"
       ],
-      "speakerBase": "Deloitte peker på avstanden mellom ambisjoner og beredskap i data, infrastruktur og risiko, men et slikt leverandørfunn må tolkes med varsomhet. Lytt til kundens egen beskrivelse: Er problemet tid, forståelse eller kontroll? Først da vet vi hvor Innsikt kan hjelpe.",
+      "speakerBase": "Dette er Deloittes globale lederundersøkelse for 2026, basert på svar fra 3 235 ledere i 24 land samlet inn i august–september 2025. Ifølge Deloitte vurderer 42 prosent KI-strategien som svært godt forberedt, mens respondentene vurderer beredskapen lavere innen infrastruktur, data, risiko og kompetanse. Dette er respondentenes vurderinger, ikke en objektiv måling av modenhet, og tallene sier ikke noe direkte om norske virksomheter eller kunden foran oss. Poenget er ikke at kunden må bygge en ny plattform: Vi må spørre hvor deres ambisjon møter faktiske hindringer i prosess, data, ansvar eller kompetanse. Kilden dokumenterer markedssignalet, ikke en årsakssammenheng eller et kundebehov. Overgang: Hvor mye kontroll som trengs, avhenger av hva løsningen skal brukes til og hvilke konsekvenser feil kan få.",
       "sourceIds": [
-        "deloitte-ai-2026",
-        "gartner-2026-trends"
+        "deloitte-ai-2026"
       ],
       "visual": {
-        "scene": "list",
-        "items": [
-          "«Rapportene kommer for sent»",
-          "«Tallene henger ikke sammen»",
-          "«Kan vi stole på KI-svaret?»"
+        "scene": "impact",
+        "layout": "readiness-contrast",
+        "studyLabel": "DELOITTE · GLOBAL LEDERUNDERSØKELSE 2026",
+        "strategyLabel": "STRATEGISK BEREDSKAP",
+        "strategyNumber": "42 %",
+        "strategyText": "vurderer KI-strategien som svært godt forberedt.",
+        "operationsLabel": "OPERATIV BEREDSKAP",
+        "operationsTitle": "Lavere vurdert beredskap",
+        "operationsText": "Respondentene oppgir lavere beredskap innen:",
+        "operationsAreas": [
+          "Infrastruktur",
+          "Data",
+          "Risiko",
+          "Kompetanse"
         ],
-        "detail": [
-          "Tid, arbeidsflyt og beslutninger",
-          "Begreper, kilder og eierskap",
-          "Tilgang, risiko og kontroll"
-        ],
-        "figureAssetId": "customer-dialogue",
-        "itemAssetIds": [
-          "delivery-loop",
-          "data-semantic",
-          "governance-shield"
-        ],
-        "layout": "voices",
-        "takeaway": "Markedssignalet er bare nyttig når kunden kjenner seg igjen."
+        "questionLabel": "SPØRSMÅL TIL KUNDEN",
+        "question": "Hvor stopper ambisjonene opp i faktisk arbeid hos dere?",
+        "caveat": "Global lederundersøkelse – ikke en diagnose av norske enkeltkunder.",
+        "conclusion": "Bruk markedssignalet til å undersøke gjennomføringsevne, ikke til å velge teknologi."
       }
     },
     {
