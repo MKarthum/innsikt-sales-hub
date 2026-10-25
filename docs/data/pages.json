@@ -651,7 +651,7 @@
           "slideId": "sales-questions",
           "beat": "investigate",
           "delivery": "tell",
-          "note": "Knyt spørsmålene til den eksisterende visningen i portalen, ikke til et generisk salgsrammeverk. «Forretningsbehov» viser oss konsekvens, datagrunnlag og hvem som er involvert. I det fiktive eksempelet gjør dette oppfølgingen mer presis, selv om vi fortsatt ikke vet årsaken. Det er en viktig begrensning: Vi ber ikke en kundeansvarlig velge løsning ut fra noen få punkter, og det er normalt å involvere riktig fagkompetanse. Vis eventuelt de relaterte salgsinngangene. Overgang: Hvordan kan brukeren forberede den videre samtalen uten å begynne på et blankt ark?"
+          "note": "Vis spørsmålet og les det mulige kundesvaret som et fiktivt eksempel. Stopp deretter opp: «Hvilket av de to spørsmålene til høyre ville dere stilt først – og hvorfor?» Gi gruppen 10–15 sekunder. Poenget er ikke å gjette årsaken, men å se at vi nå forstår én konkret konsekvens: godkjenningen blir forsinket. Vi vet fortsatt ikke om forskjellen skyldes definisjoner, manuell avstemming eller dataflyt. Knytt gjerne dette til Forretningsbehov → Økonomi og styring. Overgang: Hvordan kan vi forberede flere gode oppfølgingsspørsmål uten å begynne fra null?"
         },
         {
           "slideId": "sales-discovery-prompt",

@@ -45,3 +45,7 @@ Før: Tre like steg («Velg ett behov», «Test med riktige data», «Lær – o
 ## Oppfølging v0.17.10 – `architecture-snowflake` (25.10.2026)
 
 Før: Seks sentrale produktbokser stablet ikon, navn og forklaring vertikalt, med små forklaringer. «Shares / Openflow» blandet datadeling og kildeintegrasjon i samme inntaksboks. Etter (planlagt og implementert for separat C-review): De seks boksene har horisontal ikon–navn–kortforklaring, og inntak er presisert til Snowpipe (filer), Snowpipe Streaming (hendelser) og Openflow (koblinger). Modellering er kortet ned uten å fjerne dbt, Dynamic Tables eller Snowpark. Leverandørspesifikk tredeling, støttefunksjoner, logoer og varemerkeopplysning beholdes. Faggrunnlag: Snowflakes offisielle Snowpipe/Openflow/Dynamic Tables-dokumentasjon. **Visuell godkjenning og eventuell merge må dokumenteres separat med faktiske skjermbilder og tester.**
+
+## v0.17.11 – salgsdekkets spørsmålspause
+
+`sales-questions` (4/7) er en muntlig pause, ikke en kopi av `seller-better-questions`. Ett synlig fiktivt svar avklarer at godkjenning av månedsrapporten forsinkes; to åpne spørsmål og en tydelig begrensning hindrer at årsaken fremstilles som kjent. Scene `guided-question-pause` har tekst i `slides.json`, deck-notat i `pages.json`, semantisk CSS og eksisterende eksportvei. Kilder støtter intervjumetoden, ikke det fiktive caset. Visuell og teknisk kontroll dokumenteres i PR og issue #26.

@@ -12,7 +12,7 @@
 | sales-opening | Kort hovedpoeng med relevant sentral figur; 1 gjenbrukte figur-ID-er | sales | Kontroller linjebrudd og bildebalanse |
 | sales-finance-case | Fiktiv situasjon, beholder tydelig sitat | sales | Merk alltid eksemplet fiktivt |
 | sales-hypotheses | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | sales | Kontroller semantikk, linjebrudd og begge paletter |
-| sales-questions | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | sales | Kontroller semantikk, linjebrudd og begge paletter |
+| sales-questions | Én fiktiv konsekvens avklares, mens to oppfølgingsspørsmål og årsaken står åpne; muntlig 10–15 sekunders pause i kundeeksemplet. Ingen dekorative figur-ID-er. | sales | Kontrollér synlig fiktivmerking, lesbarhet 16:9, tema, notater og offline-eksport |
 | sales-discovery-prompt | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | sales | Kontroller semantikk, linjebrudd og begge paletter |
 | sales-next-step | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | sales | Kontroller semantikk, linjebrudd og begge paletter |
 | ai-thousand-analysts | Kapasitetsmetafor, ingen tallpåstand | innsikt | Tusen er metafor, ikke estimat |

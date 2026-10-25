@@ -24,7 +24,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | sales-opening | Kunden sier at tallene ikke stemmer. Hva gjør vi nå? | «Tallene stemmer ikke» er et signal, ikke en IT-bestilling | Forteller et konkret før-til-etter-resonnement i stedet for dekorative ringer |
 | sales-finance-case | «Vi bruker flere dager på månedsavslutning» | «Vi bruker flere dager på månedsavslutning» | Beholder fiktivt sitat og tydelig avsenderkontekst |
 | sales-hypotheses | Et symptom kan ha flere årsaker | Én rapporteringsutfordring kan ha flere årsaker | Sammenlignbare tre valg med større tekst og tydelig støttepunkt |
-| sales-questions | Tre spørsmål før vi foreslår noe | Tre spørsmål avklarer hva som faktisk stopper opp | Gjør de tre spørsmålene til hovedinnhold, ikke marginal liste |
+| sales-questions | Tre spørsmål før vi foreslår noe | Ett kundesvar avklarer konsekvensen – ikke årsaken | Muntlig spørsmålspause: ett fiktivt svar til venstre, to åpne spørsmål til høyre; ikke tre like kort |
 | sales-discovery-prompt | En ferdig prompt hjelper oss å forberede samtalen | Prompten skal forberede spørsmål – ikke gi diagnosen | Viser hvert handlingstrinn og hvorfor det gjøres |
 | sales-next-step | Vi kan foreslå en avgrenset avklaring – ikke et IT-prosjekt | Første steg kan være en avgrenset avklaring | Viser hvert handlingstrinn og hvorfor det gjøres |
 | ai-thousand-analysts | Tenk om virksomheten din fikk tusen nye analytikere i morgen. | Tenk om virksomheten din fikk tusen nye analytikere i morgen. | Beholder sterk tallmetafor og mange figurer; styrker ikke ved ekstra pynt |

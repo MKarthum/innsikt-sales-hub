@@ -30,6 +30,18 @@ function render(slide,{v,top,title,escs,assetImage,block,diagram}){
    +'<section class="v10-lookup-boundary"><small>'+escs(v.guardrailLabel)+'</small><strong>'+escs(v.guardrail)+'</strong></section>'
    +footer(v.conclusion));
  }
+ case 'guided-question-pause': {
+  return block('special v5-special v12-question-pause',top+heading
+   +'<p class="v12-example">'+escs(v.exampleLabel)+'</p>'
+   +'<div class="v12-pause-layout"><section class="v12-pause-evidence">'
+   +'<div class="v12-pause-question"><small>'+escs(v.questionLabel)+'</small><h3>'+escs(v.question)+'</h3></div>'
+   +'<div class="v12-pause-answer"><small>'+escs(v.answerLabel)+'</small><blockquote>'+escs(v.answer)+'</blockquote></div>'
+   +'<div class="v12-pause-insight"><small>'+escs(v.insightLabel)+'</small><strong>'+escs(v.insight)+'</strong></div></section>'
+   +'<section class="v12-pause-open"><small>'+escs(v.openLabel)+'</small><ol>'
+   +v.openQuestions.map(q=>'<li><strong>'+escs(q)+'</strong></li>').join('')+'</ol>'
+   +'<p class="v12-pause-guardrail">'+escs(v.guardrail)+'</p></section></div>'
+   +footer(v.conclusion));
+ }
  case 'discovery-dialogue': {
   return block('special v5-special v9-dialogue',top+heading
    +'<section class="v9-dialogue-signal"><div><small>'+escs(v.exampleLabel)+'</small><span>'+escs(v.signalLabel)+'</span></div><blockquote>'+escs(v.signal)+'</blockquote></section>'

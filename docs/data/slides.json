@@ -383,14 +383,17 @@
       "tone": "strong",
       "type": "visual",
       "cue": "KVALIFISER BEHOVET",
-      "title": "Tre spørsmål avklarer hva som faktisk stopper opp",
+      "title": "Ett kundesvar avklarer konsekvensen – ikke årsaken",
       "bullets": [
-        "Hvilken beslutning blir forsinket eller svekket?",
-        "Hvor oppstår forskjellene, og hvem eier definisjonene?",
-        "Hva må vi undersøke før vi anbefaler et tiltak?"
+        "Spør hvilken beslutning som forsinkes når tallene spriker.",
+        "Et mulig, fiktivt svar: Økonomilederen får ikke godkjent månedsrapporten.",
+        "Undersøk deretter hvor forskjellen oppstår og hvem som kan avklare definisjonene."
       ],
-      "sourceIds": [],
-      "speakerBase": "Før vi anbefaler teknologi, bør vi undersøke hvilken beslutning som påvirkes, hvor uenigheten oppstår og hvem som kjenner dataene. Spørsmålene gir retning for en avgrenset avklaring og gjør det lettere å koble inn riktig fagkompetanse.",
+      "sourceIds": [
+        "nng-interview-probing",
+        "gds-performance-metrics"
+      ],
+      "speakerBase": "Vi er fortsatt i det fiktive eksemplet om treg månedsavslutning og ulike tall. Start med et åpent spørsmål: Hva blir vanskelig når tallene spriker? Et mulig, oppdiktet svar er at økonomilederen ikke får godkjent månedsrapporten før tallene er avstemt. Da kjenner vi en konkret konsekvens, men verken årsaken eller riktig løsning. Spør publikum: Hva ville dere undersøkt videre? To muligheter er hvor i prosessen forskjellen oppstår, og hvem som kan avklare definisjonene. Ikke anta at det er en dataplattformfeil. Nielsen Norman Group underbygger verdien av åpne, ikke-ledende oppfølgingsspørsmål; GOV.UK understøtter å begynne med formål og konsekvens før målepunkt og datakilder. Ingen av kildene dokumenterer det fiktive svaret. Overgang: Vi kan bruke portalen til å forberede flere slike spørsmål, men en prompt kan ikke fastslå diagnosen.",
       "topic": "Kundedialog",
       "keywords": [
         "behov",
@@ -399,25 +402,22 @@
         "årsaker"
       ],
       "visual": {
-        "scene": "list",
-        "items": [
-          "Hva er konsekvensen?",
-          "Hvor oppstår avviket?",
-          "Hvem eier tallene?"
-        ],
-        "detail": [
-          "Hvilken beslutning blir vanskelig?",
-          "I hvilken rapport eller prosess?",
+        "scene": "road",
+        "layout": "guided-question-pause",
+        "exampleLabel": "FIKTIVT EKSEMPEL · MÅNEDSAVSLUTNING",
+        "questionLabel": "VI SPØR",
+        "question": "Hva blir vanskelig når tallene spriker?",
+        "answerLabel": "MULIG KUNDESVAR · FIKTIVT",
+        "answer": "«Jeg kan ikke godkjenne månedsrapporten før vi har avstemt tallene.»",
+        "insightLabel": "DET VET VI NÅ",
+        "insight": "En godkjenning blir forsinket.",
+        "openLabel": "HVA VILLE DU SPURT VIDERE?",
+        "openQuestions": [
+          "Hvor i prosessen oppstår forskjellen?",
           "Hvem kan avklare definisjonene?"
         ],
-        "figureAssetId": "customer-dialogue",
-        "itemAssetIds": [
-          "business-decision",
-          "verified-analysis",
-          "customer-dialogue"
-        ],
-        "layout": "questions",
-        "takeaway": "Avklar konsekvens, mulig årsak og eierskap før tiltak."
+        "guardrail": "Fortsatt ukjent: årsak og riktig tiltak.",
+        "conclusion": "Bruk svaret til å velge neste spørsmål – ikke en teknologi."
       }
     },
     {
