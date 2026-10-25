@@ -9,6 +9,7 @@ function panNavigation(profile,ui,escape){
  const E=x=>e(escape,x);
  return '<div class="arch-pan-guide" data-arch-pan-guide>'
  +'<p>'+E(ui.panGuide)+'</p>'
+ +'<button type="button" class="arch-pan-toggle" data-arch-detail aria-pressed="false" data-label-open="'+E(ui.panDetailOpen)+'" data-label-close="'+E(ui.panDetailClose)+'">'+E(ui.panDetailOpen)+'</button>'
  +'<nav class="arch-pan-nav" aria-label="'+E(ui.panNavLabel)+'">'
  +[['sources',ui.panSources],['platform',ui.panPlatform],['uses',ui.panUses]].map(([id,label])=>
   '<button type="button" data-arch-pan="'+id+'">'+E(label)+'</button>').join('')
@@ -72,6 +73,14 @@ function render(D,h){
   +'</section>';
 }
 if(typeof document!=='undefined'&&typeof document.addEventListener==='function')document.addEventListener('click',event=>{
+ const detail=event.target instanceof Element?event.target.closest('[data-arch-detail]'):null;
+ if(detail){
+  const region=detail.closest('[data-arch-panel]'),active=region.classList.toggle('is-detail');
+  detail.setAttribute('aria-pressed',active?'true':'false');
+  detail.textContent=active?detail.dataset.labelClose:detail.dataset.labelOpen;
+  if(!active)region.querySelector('.arch-explorer-stage').scrollLeft=0;
+  return;
+ }
  const pan=event.target instanceof Element?event.target.closest('[data-arch-pan]'):null;
  if(pan){
   const region=pan.closest('[data-arch-panel]'),canvas=region?.querySelector('.arch-explorer-stage');
