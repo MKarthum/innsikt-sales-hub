@@ -124,6 +124,9 @@ try{
      assert.ok(overflow<=3,'Ingen horisontal overflyt i salgsinnganger '+width+': '+overflow);
      await shot.locator('[data-play-journey-select]').selectOption('ki-data');
      assert.equal(await shot.locator('[data-play-journey-id]').getAttribute('data-play-journey-id'),'ki-data','KI-signal ved '+width);
+     const expectedNext=JSON.parse(fs.readFileSync('docs/data/sales.json','utf8')).plays.find(p=>p.id==='ki-data').next;
+     assert.equal((await shot.locator('[data-play-journey-next] p').innerText()).trim(),expectedNext,'Neste handling ved '+width);
+     await shot.locator('.play-journey-footer').screenshot({path:output+'/plays-'+width+'-next-action.png'});
      await shot.screenshot({path:output+'/plays-'+width+'-ki-data.png',fullPage:false});
     }
     await shot.close();

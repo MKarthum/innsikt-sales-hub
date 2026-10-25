@@ -196,7 +196,7 @@ function playJourneyBody(playId){
   <section class="play-journey-step" data-play-step="signal"><div class="play-journey-step-head"><span class="play-journey-number" aria-hidden="true">1</span><h3>${esc(ui.stepSignal)}</h3></div><blockquote>${esc(p.hook)}</blockquote><p class="play-journey-caution">${esc(guidance('not-a-case','short'))}</p></section>
   <section class="play-journey-step" data-play-step="questions"><div class="play-journey-step-head"><span class="play-journey-number" aria-hidden="true">2</span><h3>${esc(ui.stepQuestions)}</h3></div><ol>${p.questions.slice(0,2).map(x=>`<li>${esc(x)}</li>`).join('')}</ol></section>
   <section class="play-journey-step" data-play-step="qualify"><div class="play-journey-step-head"><span class="play-journey-number" aria-hidden="true">3</span><h3>${esc(ui.stepQualify)}</h3></div><p class="play-journey-caution">${esc(ui.qualifyNotice)}</p><ul>${p.qualify.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><details class="play-journey-not"><summary>${esc(ui.notTitle)}</summary><p>${esc(p.not)}</p></details></section>
- </div><div class="play-journey-footer"><p>${esc(guidance('customer-first'))}</p><a class="btn dark" href="#muligheter/${esc(p.id)}">${esc(ui.cta)} ${ico('arrow-right')}</a></div>`;
+ </div><div class="play-journey-footer"><div class="play-journey-followup"><div class="play-journey-next" data-play-journey-next><h3>${esc(ui.nextTitle)}</h3><p>${esc(p.next)}</p></div><p class="play-journey-guidance">${esc(guidance('customer-first'))}</p></div><a class="btn dark" href="#muligheter/${esc(p.id)}">${esc(ui.cta)} ${ico('arrow-right')}</a></div>`;
 }
 function playJourney(){
  const ui=D.pages.playJourneyUi;

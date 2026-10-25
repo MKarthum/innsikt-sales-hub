@@ -93,6 +93,8 @@ try {
    assert.equal((await page.locator('[data-play-step="signal"] blockquote').innerText()).trim(),play.hook,label+': eksakt kanonisk signal '+id);
    assert.deepEqual((await page.locator('[data-play-step="questions"] li').allTextContents()).map(x=>x.trim()),play.questions.slice(0,2),label+': to spørsmål '+id);
    assert.deepEqual((await page.locator('[data-play-step="qualify"] ul li').allTextContents()).map(x=>x.trim()),play.qualify,label+': åpne kriterier '+id);
+   assert.equal((await page.locator('[data-play-journey-next] h3').innerText()).trim(),'Foreslått neste handling',label+': neste-steg-etikett '+id);
+   assert.equal((await page.locator('[data-play-journey-next] p').innerText()).trim(),play.next,label+': kanonisk neste handling '+id);
    await page.locator('.play-journey-not summary').click();
    assert.equal((await page.locator('.play-journey-not p').innerText()).trim(),play.not,label+': ikke anta '+id);
    assert.equal(await page.locator('.play-journey-footer a').getAttribute('href'),'#muligheter/'+id,label+': korrekt CTA '+id);
@@ -558,6 +560,7 @@ try {
   const sales=await response.json();
   sales.plays.find(x=>x.id==='rapportering').hook='QA_KANONISK_SIGNAL_FRA_SALES';
   sales.plays.find(x=>x.id==='rapportering').questions[0]='QA_KANONISK_SPORSMAL_FRA_SALES';
+  sales.plays.find(x=>x.id==='rapportering').next='QA_KANONISK_NESTE_HANDLING_FRA_SALES';
   await route.fulfill({response,body:JSON.stringify(sales)});
  });
  const fixturePage=await fixture.newPage();
@@ -567,6 +570,7 @@ try {
  await fixturePage.evaluate(()=>{location.hash='#muligheter'});
  await fixturePage.locator('[data-play-journey-id="rapportering"]').waitFor();
  assert.equal((await fixturePage.locator('[data-play-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Metamorfisk signal på salgsinnganger følger sales.json uten kopiering');
+ assert.equal((await fixturePage.locator('[data-play-journey-next] p').innerText()).trim(),'QA_KANONISK_NESTE_HANDLING_FRA_SALES','Metamorfisk neste handling på salgsinnganger følger sales.json uten kopiering');
  await fixturePage.evaluate(()=>{location.hash='#teknologi'});
  await fixturePage.locator('[data-tech-journey-play="rapportering"]').waitFor();
  assert.equal((await fixturePage.locator('[data-tech-journey-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Teknologikart bruker sales.json hook');
