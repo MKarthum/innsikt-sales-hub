@@ -67,9 +67,7 @@ try {
   assert.deepEqual(await page.locator('[data-play-journey-select] option').evaluateAll(nodes=>nodes.map(n=>n.value)),expectedSales.plays.map(p=>p.id),label+': ni kanoniske signaler');
   for(const id of ['rapportering','modernisering','ki-data',...expectedSales.plays.map(p=>p.id).filter(id=>!['rapportering','modernisering','ki-data'].includes(id))]){
    const play=expectedSales.plays.find(p=>p.id===id);
-   await page.locator('[data-play-journey-select]').focus();
    await page.locator('[data-play-journey-select]').selectOption(id);
-   assert.equal(await page.locator('[data-play-journey-select]').evaluate(el=>el===document.activeElement),true,label+': fokus bevart '+id);
    assert.equal(await page.locator('[data-play-journey-id]').getAttribute('data-play-journey-id'),id,label+': valgt signal '+id);
    assert.equal((await page.locator('[data-play-step="signal"] blockquote').innerText()).trim(),play.hook,label+': eksakt kanonisk signal '+id);
    assert.deepEqual((await page.locator('[data-play-step="questions"] li').allTextContents()).map(x=>x.trim()),play.questions.slice(0,2),label+': to spørsmål '+id);
@@ -80,6 +78,13 @@ try {
    assert.equal(await page.evaluate(()=>location.hash),'#muligheter',label+': valg uten navigasjon '+id);
    if(id!=='rapportering')assert.equal(await page.locator('[data-play-journey-status]').innerText(),'Viser samtaleflyt for '+play.name,label+': statusmelding '+id);
   }
+  // A real keyboard change must retain focus in the native select.
+  await page.locator('[data-play-journey-select]').selectOption('rapportering');
+  await page.locator('[data-play-journey-select]').focus();
+  await page.keyboard.press('ArrowDown');
+  await page.waitForFunction(()=>document.querySelector('[data-play-journey-select]')?.value==='kundevekst');
+  assert.equal(await page.locator('[data-play-journey-select]').evaluate(el=>el===document.activeElement),true,label+': fokus bevart ved tastaturvalg');
+  assert.equal(await page.locator('[data-play-journey-id]').getAttribute('data-play-journey-id'),'kundevekst',label+': tastaturvalg oppdaterer data');
   assert.ok((await page.locator('[data-play-step="signal"] .play-journey-caution').innerText()).includes('ikke en dokumentert kundereferanse'),label+': fiktivt signal merket');
   assert.ok((await page.locator('[data-play-step="qualify"] .play-journey-caution').innerText()).includes('Åpne kriterier'),label+': kvalifisering ikke bekreftet');
   assert.ok((await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,label+': ingen horisontal overflyt i salgsinnganger');
