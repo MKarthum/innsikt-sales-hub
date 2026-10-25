@@ -128,6 +128,16 @@ try{
     assert.deepEqual(await stage.locator('.v10-lookup-takeaways li strong').allInnerTexts(),rag.questions,'Two questions come from canonical RAG diagram');
     assert.ok((await stage.locator('.v10-lookup-boundary').innerText()).includes('DETTE VET VI IKKE'),'Unknowns are visible');
    }
+   if(s.id==='sales-questions'){
+    assert.ok((await stage.locator('.v12-example').innerText()).includes('FIKTIVT'),'Example is clearly fictional');
+    assert.ok((await stage.locator('.v12-pause-answer').innerText()).includes('MULIG KUNDESVAR · FIKTIVT'),'Answer is labeled hypothetical');
+    assert.ok((await stage.locator('.v12-pause-insight').innerText()).includes('En godkjenning blir forsinket'),'One consequence is known');
+    assert.equal(await stage.locator('.v12-pause-open li').count(),2,'Exactly two unanswered follow-up questions');
+    assert.ok((await stage.locator('.v12-pause-guardrail').innerText()).includes('ukjent'),'Cause remains explicitly unknown');
+    assert.equal(await stage.locator('.v5-case-questions').count(),0,'No recycled three-card scene');
+    const fontSizes=await stage.evaluate(el=>[...el.querySelectorAll('.v12-pause-question h3,.v12-pause-answer blockquote,.v12-pause-open li strong')].map(x=>parseFloat(getComputedStyle(x).fontSize)));
+    assert.ok(fontSizes[0]>=20&&fontSizes[1]>=20&&fontSizes.slice(2).every(px=>px>=18),'Guided dialogue readable at canonical 960×540: '+fontSizes);
+   }
    if(s.id==='seller-better-questions'){
     assert.equal(await stage.locator('.v9-dialogue-signal blockquote').count(),1,'Fictional customer signal is prominent');
     assert.ok((await stage.locator('.v9-dialogue-signal').innerText()).includes('FIKTIVT EKSEMPEL'),'Fictional label is visible');
