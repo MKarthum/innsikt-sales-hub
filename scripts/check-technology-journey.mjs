@@ -11,6 +11,6 @@ for(const path of ui.paths){
  assert.equal(new Set(path.kinds).size,2,'Unike områder '+path.playId);
  for(const kind of path.kinds)assert.ok(kinds.has(kind),'Ukjent teknologiområde '+kind);
 }
-for(const key of ['eyebrow','title','intro','selectLabel','stepSignal','stepAreas','stepQuestions','signalNotice','areasNotice','notLabel','cta','resetLabel','statusPrefix'])assert.ok(typeof ui[key]==='string'&&ui[key].trim(),'Mangler etikett '+key);
+for(const key of ['eyebrow','title','intro','selectLabel','stepSignal','stepAreas','stepQuestions','signalNotice','areasNotice','notLabel','cta','resetLabel','statusPrefix','catalogSingle','catalogPlural'])assert.ok(typeof ui[key]==='string'&&ui[key].trim(),'Mangler etikett '+key);
 for(const play of sales.plays)for(const fact of [play.hook,...play.questions,play.not])assert.ok(!JSON.stringify(ui).includes(fact),'Ikke kopier salgsfakta til pages.json');
 console.log('PASS – tre kanoniske kundebehov, seks gyldige områdereferanser og dataeierskap');

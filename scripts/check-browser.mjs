@@ -119,6 +119,7 @@ try {
    for(const kind of path.kinds){
     await page.locator('[data-tech-journey-kind]').filter({hasText:kind}).click();
     assert.equal(await page.locator('[data-tech-catalog-cards] .tech-item').count(),expectedTech.filter(x=>x.kind===kind).length,label+': filtrerte produkter');
+    if(expectedTech.filter(x=>x.kind===kind).length===1)assert.equal((await page.locator('[data-tech-catalog-label]').innerText()).trim(),'teknologi eller område',label+': entall i resultat');
     assert.deepEqual((await page.locator('[data-tech-catalog-cards] .kind').allTextContents()).map(x=>x.trim()),expectedTech.filter(x=>x.kind===kind).map(x=>x.kind),label+': riktig kategori');
     assert.equal(await page.locator('[data-tech-filter="'+kind+'"]').getAttribute('aria-pressed'),'true',label+': filter synkronisert');
     assert.equal(await page.locator('[data-tech-journey-kind][aria-pressed="true"]').count(),1,label+': ett aktivt område');

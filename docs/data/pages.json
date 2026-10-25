@@ -1393,6 +1393,8 @@
           "Integrasjon og orkestrering"
         ]
       }
-    ]
+    ],
+    "catalogSingle": "teknologi eller område",
+    "catalogPlural": "teknologier og områder"
   }
 }

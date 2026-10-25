@@ -269,6 +269,8 @@ function refreshTechnologyCatalog(){
  if(cards)cards.innerHTML=technologyCards(shown);
  const count=document.querySelector('[data-tech-catalog-count]');
  if(count)count.textContent=shown.length;
+ const countLabel=document.querySelector('[data-tech-catalog-label]');
+ if(countLabel)countLabel.textContent=shown.length===1?D.pages.technologyJourneyUi.catalogSingle:D.pages.technologyJourneyUi.catalogPlural;
  document.querySelectorAll('[data-tech-filter]').forEach(btn=>{const active=btn.dataset.techFilter===techFilter;btn.classList.toggle('active',active);btn.setAttribute('aria-pressed',String(active))});
 }
 function technologyCards(shown){
@@ -279,7 +281,7 @@ function technology(){
  const shown=D.tech.filter(t=>techFilter==='Alle'||t.kind===techFilter);
  const cards=technologyCards(shown);
  return headerCopy('TEKNOLOGIKART')+topicNav('technologyNavigation')+technologyJourney()
- +'<section class="subsection"><div class="section-heading"><div><h2><span data-tech-catalog-count>'+shown.length+'</span> teknologier og områder</h2><p>Filtrer etter oppgave</p></div></div>'+tabNav(types,techFilter,'tech-filter','Teknologiområder')+'<div class="tech-list" data-tech-catalog-cards>'+cards+'</div></section>'
+ +'<section class="subsection"><div class="section-heading"><div><h2><span data-tech-catalog-count>'+shown.length+'</span> <span data-tech-catalog-label>'+esc(shown.length===1?D.pages.technologyJourneyUi.catalogSingle:D.pages.technologyJourneyUi.catalogPlural)+'</span></h2><p>Filtrer etter oppgave</p></div></div>'+tabNav(types,techFilter,'tech-filter','Teknologiområder')+'<div class="tech-list" data-tech-catalog-cards>'+cards+'</div></section>'
  +'<section class="insight-strip"><div><h3>Markedet endrer seg</h3><p>'+esc(D.marketEvents.find(x=>x.id==="fivetran-dbt").title)+'. '+esc(D.marketSignals.find(x=>x.id==="embeddedai").title)+'.</p></div><a class="btn dark" href="#bransje">Se utviklingen '+ico('arrow-right')+'</a></section>'
  +'<section class="panel"><h3>Se hele datakjeden</h3><p>'+esc(D.learning.diagrams.find(x=>x.id==="bi").variants.long)+'</p></section>'
  +'<section class="subsection"><div class="insight-strip"><div><h3>KI er allerede inne i plattformene</h3><p>'+esc(D.aiOverview.variants.short)+'</p></div><a class="btn dark" href="#ai">Se KI-funksjoner '+ico('arrow-right')+'</a></div></section>'
