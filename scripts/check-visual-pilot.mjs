@@ -57,6 +57,24 @@ try{
  await page.evaluate(()=>location.hash='#lysbilder');
  await page.locator('.slide-library-card').first().waitFor();
  await page.screenshot({path:output+'/library-mobile.png',fullPage:false});
+ // Core pages changed by the organization-profile integration must also have visual evidence.
+ // Capture the public baseline; synthetic internal profile rendering is validated separately.
+ for(const [size,width,height] of [['desktop',1536,864],['mobile',390,844]]){
+  await page.setViewportSize({width,height});
+  for(const [route,selector] of [['oversikt','.hero h1'],['kompetanse','.page-title'],['forretning','.sector-card'],['ordliste/bi','.glossary-item[data-glossary-id="bi"]']]){
+   await page.evaluate(route=>{location.hash='#'+route},route);
+   await page.locator(selector).first().waitFor();
+   if(route==='ordliste/bi')await page.waitForFunction(()=>document.querySelector('.glossary-item[data-glossary-id="bi"]')?.open);
+   await page.waitForTimeout(450); // Wait for responsive sidebar and scroll transitions before capturing.
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+   assert.ok(overflow<=3,'Ingen horisontal sideavklipping '+route+'/'+size+': '+overflow);
+   if(route==='forretning'){
+    assert.equal(await page.locator('.sector-card').count(),9,'Ni offentlige bransjer');
+    assert.equal(await page.locator('.sector-card-type').filter({hasText:'Prioritert bransje'}).count(),0,'Ingen offentlig prioritet');
+   }
+   await page.screenshot({path:output+'/core-'+route.replace('/','-')+'-'+size+'.png',fullPage:false});
+  }
+ }
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
  console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
 }finally{await browser.close()}

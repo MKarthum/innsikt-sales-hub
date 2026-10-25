@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const load=n=>JSON.parse(fs.readFileSync('docs/data/'+n+'.json','utf8'));
-const base={pages:load('pages'),slides:load('slides'),sources:load('sources')};
+const base={pages:load('pages'),slides:load('slides'),sources:load('sources'),industrySectors:load('sales').industrySectors};
 const context={window:{}};
 vm.runInNewContext(fs.readFileSync('docs/assets/presentation-content.js','utf8'),context);
 const api=context.window.InnsiktPresentationContent;
@@ -21,6 +21,26 @@ const sample={schemaVersion:2,classification:'internal',
  navigation
 };
 const merged=api.combine(base,sample);
+const legacy=api.combine(base,{schemaVersion:1,classification:'internal',sources:{},slides:[],presentationDecks:{},customerStories:[entry],solutions:[]});
+assert.equal(legacy.internalCollections.customerStories[0].id,entry.id);
+assert.deepEqual(legacy.pages.navigationSections,base.pages.navigationSections);
+assert.equal(legacy.organizationProfile,null);
+assert.equal(legacy.internalNavigation.items.length,1);
+assert.equal(legacy.internalNavigation.items[0].collection,'customerStories');
+const orgProfile={
+ name:'Eksempelbedriften',brandSubtitle:'EKSEMPEL · DATA',
+ home:{eyebrow:'EKSEMPEL · ARBEIDSFLATE',titleLine1:'Oppdag behov.',titleLine2:'Finn neste steg.',intro:'Et organisasjonstilpasset eksempel.'},
+ competenceHeader:{title:'Våre fagområder',intro:'Bekreftet internt før publisering.'},
+ competences:[{id:'org-data',label:'Dataplattform',description:'Internt beskrevet fagområde.'}],
+ competenceSourceIds:['org-source'],focusSectorIds:[base.industrySectors[0].id]
+};
+const profileContent={...sample,sources:{'org-source':{title:'Intern prøve',url:'https://example.org/test',publisher:'Eksempel'}},organizationProfile:orgProfile};
+const profiled=api.combine(base,profileContent);
+assert.equal(profiled.organizationProfile.name,'Eksempelbedriften');
+assert.equal(profiled.organizationProfile.competences[0].label,'Dataplattform');
+assert.equal(profiled.organizationProfile.focusSectorIds[0],base.industrySectors[0].id);
+assert.equal(api.combine(base,null).organizationProfile,undefined);
+assert.equal(base.organizationProfile,undefined);
 assert.equal(merged.internalNavigation.items.length,2);
 assert.equal(merged.internalCollections.tools[0].id,'org-tool-001');
 assert.equal(merged.internalCollections['internal-methods'][0].id,'org-method-001');
@@ -32,7 +52,7 @@ assert.equal(merged.pages.navigationSections[1].items.at(-1).route,'prompter');
 assert.ok(!JSON.stringify(base).includes('Dette er privat testinnhold.'));
 assert.equal(merged.internalCollections.customerStories[0].body,'Dette er privat testinnhold.');
 assert.equal(merged.slides.items.length,base.slides.items.length);
-const invalid=(patch,match)=>assert.throws(()=>api.combine(base,{...sample,...patch}),match);
+const invalid=(patch,match)=>assert.throws(()=>api.combine(base,{...profileContent,...patch}),match);
 invalid({tools:[{...tool,href:'javascript:alert(1)'}]},/Utrygg lenke/);
 invalid({tools:[{...tool,classification:'public'}]},/Ugyldig/);
 invalid({tools:[{...tool,id:entry.id}]},/duplisert/);
@@ -42,6 +62,11 @@ invalid({navigation:{groups:navigation.groups,views:[{...navigation.views[0],gro
 invalid({navigation:{groups:navigation.groups,views:[...navigation.views,navigation.views[0]]}},/Ugyldig intern menyside/);
 invalid({sources:{...base.sources}},/Duplisert/);
 invalid({schemaVersion:1,navigation},/schemaVersion 2/);
+invalid({organizationProfile:{...orgProfile,focusSectorIds:['ukjent-bransje']}},/Ukjente eller dupliserte/);
+invalid({organizationProfile:{...orgProfile,home:{titleLine1:'<a>',danger:'raw-html'}}},/Ukjent felt/);
+invalid({organizationProfile:{...orgProfile,competences:[{id:'bad',label:'Etikett',description:'Felt',html:'<script>'}]}},/Ukjent kompetansefelt/);
+invalid({organizationProfile:{...orgProfile,competenceSourceIds:['missing']}},/Ukjente eller dupliserte/);
+invalid({organizationProfile:{...orgProfile,unexpected:'not-allowed'}},/Ukjent virksomhetsprofilfelt/);
 // Test the actual shared renderer rather than a separate test-only nav model.
 const all=load('site');
 const contentSandbox={window:{}};
@@ -53,19 +78,44 @@ const materialized=contentSandbox.window.InnsiktContent.materialize({
  horizon:load('horizon'),slides:base.slides,'visual-assets':load('visual-assets'),
  visualAssets:load('visual-assets'),architectureProfiles:load('architecture-profiles')
 });
-const runtime=api.combine(materialized,sample);
+const runtime=api.combine(materialized,profileContent);
 const src=fs.readFileSync('docs/assets/site.js','utf8');
 const end=/\binit\(\);\s*\}\)\(\);\s*$/;
 assert.ok(end.test(src));
 const injected=src.replace(end, [
  'D=globalThis.__fixture;names=D.pages.navigation;',
- 'globalThis.__navProbe=()=>({sections:navSections(),page:internalPage("customer-reference"),detail:internalPage("customer-reference~org-case-001"),tool:internalPage("internal-tools~org-tool-001")});',
+ 'globalThis.__navProbe=()=>({sections:navSections(),home:overview(),competence:competence(),business:business(),page:internalPage("customer-reference"),detail:internalPage("customer-reference~org-case-001"),tool:internalPage("internal-tools~org-tool-001")});',
  '})();'
 ].join('\n'));
-const sandbox={console,window:{},localStorage:{getItem:()=>null},__fixture:runtime,location:{hash:''}};
+const sandbox={console,window:{InnsiktPrompts:{card:()=>'<article>syntetisk testkort</article>'}},localStorage:{getItem:()=>null},__fixture:runtime,location:{hash:''}};
 vm.createContext(sandbox);
 vm.runInContext(injected,sandbox,{timeout:3000});
 const probe=vm.runInContext('__navProbe()',sandbox,{timeout:3000});
+assert.ok(probe.home.includes('EKSEMPEL · ARBEIDSFLATE'));
+assert.ok(probe.competence.includes('Våre fagområder'));
+assert.ok(probe.competence.includes('Dataplattform'));
+assert.ok(probe.business.includes('Eksempelbedriften: Prioriterte bransjer'));
+const ui=runtime.pages.industryUi;
+const savedUi={...ui};
+Object.assign(ui,{priorityBadge:'QA_BADGE_PRIORITY',exampleBadge:'QA_BADGE_EXAMPLE',priorityHeading:'QA_HEADING_PRIORITY',otherHeading:'QA_HEADING_OTHER'});
+const labeled=vm.runInContext('__navProbe()',sandbox,{timeout:3000});
+assert.match(labeled.business,/<span class="sector-card-type">QA_BADGE_PRIORITY<\/span>/);
+assert.match(labeled.business,/<span class="sector-card-type">QA_BADGE_EXAMPLE<\/span>/);
+assert.match(labeled.business,/<h2>Eksempelbedriften: QA_HEADING_PRIORITY<\/h2>/);
+assert.match(labeled.business,/<h2>QA_HEADING_OTHER<\/h2>/);
+assert.equal((labeled.business.match(/class="sector-card"/g)||[]).length,base.industrySectors.length);
+const publicRuntime=api.combine(materialized,null);
+assert.equal(publicRuntime.organizationProfile,undefined);
+const publicSandbox={console,window:{InnsiktPrompts:{card:()=>'<article>syntetisk testkort</article>'}},localStorage:{getItem:()=>null},__fixture:publicRuntime,location:{hash:''}};
+vm.createContext(publicSandbox);
+vm.runInContext(injected,publicSandbox,{timeout:3000});
+const publicProbe=vm.runInContext('__navProbe()',publicSandbox,{timeout:3000});
+assert.equal((publicProbe.business.match(/class="sector-card"/g)||[]).length,9);
+assert.equal((publicProbe.business.match(/<span class="sector-card-type">QA_BADGE_EXAMPLE<\/span>/g)||[]).length,9);
+assert.ok(!publicProbe.business.includes('QA_BADGE_PRIORITY'));
+assert.ok(!publicProbe.sections.some(g=>g.id.startsWith('org-')));
+Object.assign(ui,savedUi);
+assert.ok(!JSON.stringify(materialized.pages).includes('EKSEMPEL · ARBEIDSFLATE'));
 assert.ok(probe.sections.some(g=>g.id==='org-organization'));
 assert.ok(probe.sections.find(g=>g.id==='org-organization').items.some(i=>i.route==='intern/customer-reference'));
 assert.ok(probe.page.includes(entry.title));

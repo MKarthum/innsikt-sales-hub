@@ -57,8 +57,8 @@
     },
     "KOMPETANSE": {
       "eyebrow": "KOMPETANSE",
-      "title": "Hva kan Webstep bidra med?",
-      "intro": "Faglig bredde uttrykt som kunderelevante kompetanseområder. Beskrivelsene er basert på Websteps offentlige tjenestesider, ikke en oppdatert intern kapasitetsoversikt."
+      "title": "Kompetanse innen data og KI",
+      "intro": "Eksempler på kompetanseområder som kan være relevante for datadrevne forbedringer. Dette er ikke en bekreftelse på en bestemt leverandørs kapasitet."
     },
     "TEKNOLOGIKART": {
       "eyebrow": "TEKNOLOGIKART",
@@ -81,7 +81,7 @@
     "KILDER OG METODE": {
       "eyebrow": "KILDER OG METODE",
       "title": "Hva bygger vi kunnskapen på?",
-      "intro": "Kildene er sporbare. Tall, leverandørpåstander, Websteps egne tjenestebeskrivelser og våre salgsfortolkninger holdes tydelig fra hverandre."
+      "intro": "Kildene er sporbare. Skill dokumenterte tall og fakta, leverandørpåstander og egne faglige vurderinger."
     },
     "VIDEREUTVIKLING": {
       "eyebrow": "VIDEREUTVIKLING",
@@ -101,7 +101,7 @@
     "VERKTØYKASSE": {
       "eyebrow": "GJENBRUKBARE UTGANGSPUNKTER",
       "title": "Maler for kundedialoger og oppfølging",
-      "intro": "Kopier en struktur for første møte, kvalifisering eller overlevering. Foreløpig er dette åpne eksempler, ikke Websteps godkjente arbeidsdokumenter."
+      "intro": "Kopier en struktur for første møte, kvalifisering eller overlevering. Malene er generiske eksempler og ikke godkjente arbeidsdokumenter for en bestemt virksomhet."
     },
     "PROMPTBIBLIOTEK": {
       "eyebrow": "KI SOM ARBEIDSVERKTØY FOR SALG",
@@ -332,8 +332,8 @@
     "industryCasesHome": "Fra gate-tid og catering på fly til lageroptimalisering, pasientflyt og nettkapasitet.",
     "industryCasesExistingTitle": "Andre innganger til forretningsbehov",
     "industryCasesMethodsTitle": "Fra problem til tverrfaglig forbedring",
-    "industryCasesSourceNote": "Eksemplene er kvalifiseringshypoteser – ikke faktiske Webstep-oppdrag, dokumenterte gevinster eller påstander om kundens modenhet.",
-    "industryCasesScopeNote": "Kjernebransjer følger Websteps offentlige bransjebeskrivelse. Transport er også omtalt i Q2-rapporten. Handel og havbruk er illustrative tillegg, ikke dokumentasjon på Websteps kundesammensetning."
+    "industryCasesSourceNote": "Eksemplene er kvalifiseringshypoteser – ikke dokumenterte kundeoppdrag, bekreftede gevinster eller påstander om kundens modenhet.",
+    "industryCasesScopeNote": "Utvalget viser ni illustrative bransjer med dokumentert faglig praksis og mulige problemstillinger. Bransjene er ikke en påstand om en bestemt leverandørs kundesammensetning eller prioriteringer."
   },
   "presentationDecks": {
     "innsikt": {
@@ -874,13 +874,17 @@
     "linked": "Relaterte kompetanse- og leveranseinnganger",
     "caseContext": "Bransjekontekst",
     "basis": "Kildene dokumenterer bransjepraksis, ikke kundens utfordringer eller faktisk gevinst.",
-    "core": "Websteps offentlig omtalte bransjer",
-    "illustrative": "Andre illustrative bransjer",
+    "core": "Bransjeeksempler",
+    "illustrative": "Andre bransjeeksempler",
     "journey": "Fra forretningsproblem til tverrfaglig leveranse",
     "qualification": "Før leveransevalg",
     "maturity": "Ikke anta et modenhetsgap",
     "example": "Illustrativ samtaleinngang",
-    "maturityStepsTitle": "Fra innsikt til mulig handling"
+    "maturityStepsTitle": "Fra innsikt til mulig handling",
+    "priorityBadge": "Prioritert bransje",
+    "exampleBadge": "Bransjeeksempel",
+    "priorityHeading": "Prioriterte bransjer",
+    "otherHeading": "Andre bransjeeksempler"
   },
   "trendRadarUi": {
     "introTitle": "Tidlige signaler – ikke ferdige anbefalinger",
