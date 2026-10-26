@@ -108,3 +108,7 @@ B har sammenlignet faktisk før/etter-rendering av bilde 4 ved 960×540 intern 1
 ## Hovedfortelling v0.18.32
 
 Åtte bilder frem til faktisk demonstrasjon. Beholdt analytikermetafor og aktiv-kunde-kontrast. Forbedret brede KI-oppgaver, SSB/Gartner-markedsbelegg, multiplikator/scalering, kundens ulike faglige innganger og direkte overgang til promptbibliotek. Nytt fagkart `insight-value-chain` bruker eksisterende ikonregister og egen kompakt 16:9-komposisjon. Tester og skjermbilder skal kontrolleres for lys/mørk og relevante mobilstørrelser. Svakheter: fagkartet kan bli noe tett på projektor; gjennomgå også manuell lesbarhet.
+
+## Visuell etterkontroll v0.18.34
+
+Skjermbilde fra Actions v0.18.33 viste avklippede etiketter i den avsluttende portalillustrasjonen, selv om container-scrolltestene var grønne. Rettet scenevinduets `box-sizing`, redusert node-/ikonstørrelse og frigjort høyde i den felles portalrendereren. Ny nettleserregresjon måler at alle tre tekstetiketter faktisk ligger innenfor visningsvinduet i både lys og mørk på 1280×720, 844×390 og 390×844. Dette er en reell visuell akseptport fremfor bare kontroll av scroll-dimensjoner.

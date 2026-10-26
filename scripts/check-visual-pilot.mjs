@@ -63,6 +63,17 @@ try{
     assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),tone,'Tone '+tone+'/'+width+'/'+i);
     const m=await shown.evaluate(el=>({w:el.clientWidth,h:el.clientHeight,ox:el.scrollWidth-el.clientWidth,oy:el.scrollHeight-el.clientHeight}));
     assert.ok(m.w>0&&m.h>0&&m.ox<=3&&m.oy<=3,'Slide geometry '+tone+'/'+width+'/'+i+': '+JSON.stringify(m));
+    if(decks.innsikt.slides[i].slideId==='portal-purpose'){
+     const cards=await shown.evaluate(scene=>{
+      const frame=scene.querySelector('.v2-portal-window')?.getBoundingClientRect();
+      const labels=[...scene.querySelectorAll('.v2-portal-node strong')];
+      return {count:labels.length,allInside:!!frame&&labels.every(el=>{
+       const rect=el.getBoundingClientRect();
+       return rect.top>=frame.top+1&&rect.bottom<=frame.bottom-2;
+      })};
+     });
+     assert.ok(cards.count===3&&cards.allInside,'Portal transition must not clip any action labels: '+tone+'/'+width+' '+JSON.stringify(cards));
+    }
     if(width===1280)await page.locator('#slide-body').screenshot({path:output+'/main-'+tone+'-'+(i+1)+'.png'});
     if(i<decks.innsikt.slides.length-1)await page.locator('#slide-next').click();
    }
