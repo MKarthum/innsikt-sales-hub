@@ -78,8 +78,8 @@ try{
     await page.locator('[data-prompt-choice="needSituation"][value="progress"]').scrollIntoViewIfNeeded();
     await checkTopbar('prompter/discovery',w);
     if(w===900){
-     await navigate('oversikt');
-     await page.waitForTimeout(150);
+     await page.evaluate(()=>{location.hash='#oversikt'});
+     await page.waitForFunction(()=>location.hash==='#oversikt'&&!!document.querySelector('#main .home-task'));
      await checkTopbar('oversikt',w);
      await navigate('muligheter/rapportering');
      await page.locator('#main a[href="#prompter/discovery"]').waitFor();
