@@ -159,7 +159,8 @@
 .v2-business-context strong{font:650 2.0cqw/1.42 var(--font-display);color:var(--pres-fg)}
 .scene-v2-definition .v2-def-title{margin:3.2% 0 0;font-size:4.5cqw}
 .v2-def-main{flex:1;display:grid;grid-template-columns:34% 66%;align-items:center;gap:2%;min-height:0}
-.v2-def-word{width:22cqw;height:22cqw;display:grid;place-items:center;border:2px solid var(--pres-accent);border-radius:50%;font:820 4.25cqw var(--font-display);color:var(--pres-accent);background:color-mix(in srgb,var(--pres-accent) 7%,var(--pres-bg))}
+.v2-def-word{box-sizing:border-box;width:22cqw;height:22cqw;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2cqw;padding:2cqw;border:2px solid var(--pres-accent);border-radius:50%;font:820 3.5cqw/1.12 var(--font-display);letter-spacing:-.04em;text-align:center;color:var(--pres-accent);background:color-mix(in srgb,var(--pres-accent) 7%,var(--pres-bg))}
+.v2-def-word span{display:block;max-width:100%;white-space:nowrap}
 .v2-def-lenses{display:grid;gap:1.2cqw}
 .v2-def-lens{display:flex;align-items:center;justify-content:space-between;gap:3cqw;padding:1.6cqw 2.2cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 20%,transparent);border-radius:1cqw}
 .v2-def-lens small{font:760 1.48cqw var(--font-body);color:var(--pres-accent)}

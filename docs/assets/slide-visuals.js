@@ -3,14 +3,15 @@
 'use strict';
 function gridPeople(){
  let nodes='';
- for(let r=0;r<14;r++)for(let c=0;c<12;c++){
-  const dx=c-5.5,dy=r-6.5,d=Math.hypot(dx/5.5,dy/6.5);
-  const x=36+c*27+(r%2)*6,y=25+r*24;
+ for(let r=0;r<13;r++)for(let c=0;c<12;c++){
+  const dx=c-5.5,dy=r-6,d=Math.hypot(dx/5.5,dy/6);
+  // Allow a visible gap between one row's feet and the next row's heads.
+  const x=36+c*27+(r%2)*6,y=20+r*29;
   const opacity=Math.max(.18,Math.min(1,1.2-d*.65));
   // Distinct head, shoulders, two arms and legs: not a circle with a rounded tail.
   nodes+='<g transform="translate('+x+' '+y+')" opacity="'+opacity.toFixed(2)+'">'
    +'<circle cx="0" cy="-7.5" r="4.2"/>'
-   +'<path d="M-5 -1.5 H5 L4.2 9 H-4.2 Z M-5 -1 L-8 8 H-5.4 L-2.5 2 M5 -1 L8 8 H5.4 L2.5 2 M-3.5 8 L-4.8 14 H-1.8 L0 9 M3.5 8 L4.8 14 H1.8 L0 9 Z"/>'
+   +'<path d="M-5 -1.5 H5 L4.2 9 H-4.2 Z M-5 -1 L-8 8 H-5.4 L-2.5 2 M5 -1 L8 8 H5.4 L2.5 2 M-3.5 8 L-4.8 13 H-1.8 L0 9 M3.5 8 L4.8 13 H1.8 L0 9 Z"/>'
    +'</g>';
  }
  return '<svg viewBox="0 0 405 390" class="visual-people" aria-hidden="true" focusable="false"><circle class="visual-halo" cx="204" cy="193" r="176"/><circle class="visual-orbit" cx="204" cy="193" r="159"/><circle class="visual-orbit visual-orbit--inner" cx="204" cy="193" r="100"/><g class="visual-people-marks">'+nodes+'</g></svg>';
@@ -130,7 +131,7 @@ function render(slide,esc,position={}){
  }
  if(kind==='definition'){
   return block('definition',top+'<h2 class="v2-def-title">'+escs(slide.title)+'</h2>'
-   +'<div class="v2-def-main"><div class="v2-def-word">'+escs(v.term)+'</div>'
+   +'<div class="v2-def-main"><div class="v2-def-word">'+String(v.term||'').trim().split(/\\s+/).map(word=>'<span>'+escs(word)+'</span>').join('')+'</div>'
    +'<div class="v2-def-lenses">'+(v.roles||[]).map((role,i)=>'<div class="v2-def-lens"><small>'+escs(role)+'</small><strong>'+escs((v.meanings||[])[i])+'</strong></div>').join('')+'</div></div>'
    +'<p class="v2-def-footer">'+escs(v.takeaway||'')+'</p>');
  }

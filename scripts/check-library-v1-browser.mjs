@@ -159,6 +159,25 @@ try{
     assert.ok((await stage.locator('.v13-quality-caveat').innerText()).includes(s.visual.guardrail),'Caveat comes from the canonical slide content, not a copied test phrase');
     assert.equal(await stage.locator('.scene-loop').count(),0,'Generic two-circle loop was replaced');
    }
+   if(s.id==='data-meaning-customer'){
+    const circle=await stage.locator('.v2-def-word').evaluate(el=>{
+     const bounds=el.getBoundingClientRect();
+     return {wordCount:el.querySelectorAll('span').length,words:[...el.querySelectorAll('span')].map(x=>{
+      const b=x.getBoundingClientRect();
+      return {horizontalOffset:Math.abs((b.left+b.right)/2-(bounds.left+bounds.right)/2),inside:b.left>=bounds.left+1&&b.right<=bounds.right-1&&b.top>=bounds.top+1&&b.bottom<=bounds.bottom-1};
+     })};
+    });
+    assert.equal(circle.wordCount,2,'Multiword definition should use two centered lines');
+    assert.ok(circle.words.every(w=>w.inside&&w.horizontalOffset<=2),'Both definition words must remain centered inside the circle: '+JSON.stringify(circle));
+   }
+   if(s.id==='ai-thousand-analysts'){
+    const people=await stage.locator('.visual-people-marks').evaluate(el=>{
+     const nodes=[...el.querySelectorAll('g')],first=nodes[0]?.getBoundingClientRect(),nextRow=nodes[12]?.getBoundingClientRect();
+     return {count:nodes.length,feetToHeadGap:nextRow.top-first.bottom};
+    });
+    assert.equal(people.count,156,'Keep a dense grid of distinct analysts');
+    assert.ok(people.feetToHeadGap>1,'Adjacent rows of analysts must not overlap: '+JSON.stringify(people));
+   }
    if(s.id==='ai-pragmatic'){
     assert.equal(await stage.locator('.v14-pilot-steps li').count(),3,'Three distinct stages');
     assert.ok((await stage.locator('.v14-pilot-context').innerText()).includes('FIKTIVT'),'Illustrative scenario');
