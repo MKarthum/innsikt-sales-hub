@@ -5,13 +5,16 @@ function gridPeople(){
  let nodes='';
  for(let r=0;r<13;r++)for(let c=0;c<12;c++){
   const dx=c-5.5,dy=r-6,d=Math.hypot(dx/5.5,dy/6);
-  // Allow a visible gap between one row's feet and the next row's heads.
+  // Small geometric, gender-neutral humanoids: rounded-square heads and a
+  // subtle digital visor, but recognisably human shoulders, arms and legs.
+  // 29px row pitch leaves a visible gap between heads and feet.
   const x=36+c*27+(r%2)*6,y=20+r*29;
   const opacity=Math.max(.18,Math.min(1,1.2-d*.65));
-  // Distinct head, shoulders, two arms and legs: not a circle with a rounded tail.
-  nodes+='<g transform="translate('+x+' '+y+')" opacity="'+opacity.toFixed(2)+'">'
-   +'<circle cx="0" cy="-7.5" r="4.2"/>'
-   +'<path d="M-5 -1.5 H5 L4.2 9 H-4.2 Z M-5 -1 L-8 8 H-5.4 L-2.5 2 M5 -1 L8 8 H5.4 L2.5 2 M-3.5 8 L-4.8 13 H-1.8 L0 9 M3.5 8 L4.8 13 H1.8 L0 9 Z"/>'
+  nodes+='<g class="visual-ai-worker" transform="translate('+x+' '+y+')" opacity="'+opacity.toFixed(2)+'">'
+   +'<rect class="visual-ai-head" x="-4.5" y="-12" width="9" height="8.5" rx="2.5"/>'
+   +'<rect class="visual-ai-visor" x="-2.65" y="-8.5" width="5.3" height="1.25" rx=".625" fill="var(--pres-bg)" opacity=".84"/>'
+   +'<path d="M-1.6 -3.6 H1.6 V-1.4 H-1.6 Z M-5 -1.6 H5 V8.5 H-5 Z M-5 -1 L-7.3 7 H-5.2 L-3 2 M5 -1 L7.3 7 H5.2 L3 2 M-3.6 8 L-4.8 13 H-1.8 L0 8.5 M3.6 8 L4.8 13 H1.8 L0 8.5 Z"/>'
+   +'<rect class="visual-ai-core" x="-1.25" y="2.1" width="2.5" height="2.5" rx=".55" fill="var(--pres-bg)" opacity=".72"/>'
    +'</g>';
  }
  return '<svg viewBox="0 0 405 390" class="visual-people" aria-hidden="true" focusable="false"><circle class="visual-halo" cx="204" cy="193" r="176"/><circle class="visual-orbit" cx="204" cy="193" r="159"/><circle class="visual-orbit visual-orbit--inner" cx="204" cy="193" r="100"/><g class="visual-people-marks">'+nodes+'</g></svg>';

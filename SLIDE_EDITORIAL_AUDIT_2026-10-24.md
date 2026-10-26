@@ -84,3 +84,7 @@ Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md) for 16:9-kontrol
 ## Hovedfortellingen forkortet (v0.18.27)
 
 `ai-improve-data` er beholdt som selvstendig bibliotekobjekt, men fjernet fra det korte hovedløpet. Pilotbildet dekker nå også læring om datagrunnlag. Presentasjonen består av ni lysbilder før demo. Browsertesten kontrollerer den nye tretrinnsscenen med menneskelig kontroll, kvalitets- og tidsmål.
+
+## 26.10.2026 – KI-assisterte analytikersilhuetter (v0.18.31)
+
+Åpningsscenens 156 figurer er nå mer kjønnsnøytrale og svakt robotinspirerte, med mykt firkantet hode, diskret visir og lite digitalt brystpanel. Kropp, armer og ben er fortsatt menneskelige. Rutenettet beholder luft mellom radene. Regresjonstesten kontrollerer samtlige figurtrekk og avstanden mellom radene.
