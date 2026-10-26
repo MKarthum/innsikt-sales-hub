@@ -5,7 +5,7 @@ const diagrams=JSON.parse(fs.readFileSync('docs/data/learning.json','utf8')).dia
 const profiles=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles;
 const expected=new Set(slides.map(s=>s.id));
 assert.ok(slides.length>0,'Slide library must not be empty');
-const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road','discovery-dialogue':'road','guided-question-pause':'road','knowledge-lookup':'road','verified-quality-loop':'loop','readiness-contrast':'impact'};
+const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road','progressive-pilot':'road','discovery-dialogue':'road','guided-question-pause':'road','knowledge-lookup':'road','verified-quality-loop':'loop','readiness-contrast':'impact'};
 const accepted=new Set(Object.keys(layouts));
 const seen=new Set();
 for(const s of slides){
@@ -66,6 +66,15 @@ for(const s of slides){
  }
  if(v.layout==='guided-question-pause')assert.ok(v.exampleLabel?.includes('FIKTIVT')&&v.answerLabel?.includes('FIKTIVT')&&v.questionLabel&&v.question?.trim()&&v.answer?.trim()&&v.insightLabel&&v.insight?.trim()&&v.openLabel&&v.openQuestions?.length===2&&v.openQuestions.every(x=>typeof x==='string'&&x.trim())&&v.guardrail?.trim()&&v.conclusion?.trim(),'Guided question pause needs a fictional answer, one consequence, exactly two unanswered follow-ups and caveat');
  if(v.layout==='discovery-dialogue')assert.ok(v.exampleLabel&&v.signalLabel&&v.signal&&v.questionLabel&&v.answerLabel&&v.insightLabel&&v.clarifications?.length===3&&v.clarifications.every(x=>x.question?.trim()&&x.answer?.trim()&&x.insight?.trim())&&v.nextLabel&&v.nextAction&&v.guardrail&&v.conclusion,'Discovery dialogue needs a fictional signal, three answer-based inferences, bounded next step and caveat');
+ if(v.layout==='progressive-pilot'){
+  assert.ok(v.exampleLabel?.includes('FIKTIVT')&&v.problem&&v.measureLabel&&v.guardrail&&v.conclusion,
+   'Progressive pilot must be explicitly illustrative and have a problem, measures, controls and outcome: '+s.id);
+  assert.equal(v.steps?.length,3,'Progressive pilot must describe three stages: '+s.id);
+  assert.ok(v.steps.every(x=>x.label?.trim()&&x.title?.trim()&&x.detail?.length>=20),
+   'Each progressive pilot stage must be self-contained: '+s.id);
+  assert.ok(v.measures?.length===2&&v.measures.every(x=>typeof x==='string'&&x.length>=5),
+   'Progressive pilot must define two comparable measures: '+s.id);
+ }
  if(v.layout==='controlled-comparison')assert.ok(v.exampleLabel&&v.problem&&v.hypothesis&&v.baseline?.label&&v.baseline?.title&&v.baseline?.detail&&v.trial?.label&&v.trial?.title&&v.trial?.detail&&v.baseline?.flow?.length===3&&v.trial?.flow?.length===4&&v.baseline.flow.every(Boolean)&&v.trial.flow.every(Boolean)&&v.measureLabel&&v.measures?.length===2&&v.measures.every(x=>typeof x==='string'&&x.length>3)&&v.guardrail&&v.decisionLabel&&v.decision&&v.conclusion,'Controlled comparison needs two comparable methods, two measures, explicit controls and a decision gate');
  if(v.layout==='bounded-discovery')assert.ok(v.sources?.length===2&&v.sourceTitle&&v.checkTitle&&v.result&&v.inScope&&v.later&&v.conclusion,'Discovery needs a bounded investigation and an explicit exclusion');
  if(v.scene==='analyst-grid')assert.equal(v.number,'1 000','Preserve metaphor');

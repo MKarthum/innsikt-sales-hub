@@ -49,7 +49,7 @@ for(const s of slides){
  if(v.figureAssetId)assert.ok(['impact','list','road','domains','contrast','definition','portal','loop'].includes(v.scene),'Primary figure must belong to supported scene '+s.id);
  if(s.type==='visual'){
   assert.ok(s.visual&&s.visual.scene,'Slide without visual scene: '+s.id);
-  if(['impact','list','road','domains'].includes(v.scene)&&!['meeting-brief','conversation-takeaway','bounded-discovery','controlled-comparison','discovery-dialogue','guided-question-pause','knowledge-lookup','readiness-contrast'].includes(v.layout))assert.ok(figures.length>0,'Visual with no semantic reusable assets: '+s.id);
+  if(['impact','list','road','domains'].includes(v.scene)&&!['meeting-brief','conversation-takeaway','bounded-discovery','controlled-comparison','progressive-pilot','discovery-dialogue','guided-question-pause','knowledge-lookup','readiness-contrast'].includes(v.layout))assert.ok(figures.length>0,'Visual with no semantic reusable assets: '+s.id);
  }
 }
 for(const id of ['market-why-now','market-three-forces','market-customer-pressure','market-priorities']) {
