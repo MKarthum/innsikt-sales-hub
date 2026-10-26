@@ -973,3 +973,13 @@ textarea.prompt-var-input{min-height:78px}
 .source-method{margin-bottom:20px}
 @media(max-width:1100px){.source-trace-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.source-trace-step:last-child{grid-column:1/-1}}
 @media(max-width:620px){.source-trace-flow{grid-template-columns:minmax(0,1fr)}.source-trace-step:last-child{grid-column:auto}.source-trace-section{padding:17px}.source-trace-step{padding:15px}}
+
+/* Hold alle topphandlinger synlige når sidepanelet fortsatt er åpent på smal desktop. */
+@media (min-width:821px) and (max-width:1100px){
+ .topbar{gap:14px}
+ .topbar .breadcrumb{min-width:0;flex:1 1 auto;overflow:hidden;white-space:nowrap}
+ .topbar .breadcrumb-project,.topbar .breadcrumb>.sep{flex-shrink:0}
+ .topbar .breadcrumb-trail{min-width:0;flex:0 1 auto;overflow:hidden}
+ .topbar .breadcrumb-trail a{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .topbar .top-actions{flex:0 0 auto}
+}
