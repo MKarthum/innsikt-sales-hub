@@ -156,7 +156,7 @@ try{
     assert.ok((await stage.locator('.v13-quality-proposal blockquote').innerText()).endsWith('?'),'KI asks a question, not an automatic decision');
     assert.ok((await stage.locator('.v13-quality-review').innerText()).includes('FAGANSVARLIG VERIFISERER'),'Human control is visible');
     assert.ok((await stage.locator('.v13-quality-result').innerText()).includes('BARE ETTER GODKJENT ENDRING'),'Outcome is conditional');
-    assert.ok((await stage.locator('.v13-quality-caveat').innerText()).includes('ikke bevis på feil'),'Different labels do not prove a defect');
+    assert.ok((await stage.locator('.v13-quality-caveat').innerText()).includes(s.visual.guardrail),'Caveat comes from the canonical slide content, not a copied test phrase');
     assert.equal(await stage.locator('.scene-loop').count(),0,'Generic two-circle loop was replaced');
    }
    if(s.id==='ai-pragmatic'){
