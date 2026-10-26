@@ -556,15 +556,15 @@
       "type": "visual",
       "tone": "strong",
       "cue": "HVORFOR INNSIKT?",
-      "title": "KI-kapasitet trenger behov, datagrunnlag og vurdering",
+      "title": "Behov, kvalitet og vurdering må virke sammen",
       "visual": {
         "scene": "value-system",
         "lead": "Det er samspillet som gjør kapasiteten nyttig.",
         "core": "VERDI",
-        "business": "Forstå behovet",
-        "data": "Kjenn datagrunnlaget",
-        "ai": "Bruk analyse og KI",
-        "footer": "Forstå problemet. Kjenn dataene. Bruk analyse og KI klokt."
+        "business": "Avklar behov og konsekvens",
+        "data": "Sikre et egnet datagrunnlag",
+        "ai": "Vurder kvalitet og risiko",
+        "footer": "Analyse og KI kan bidra på tvers – verdien avgjøres av beslutningen."
       },
       "speakerBase": "Innsikt-faget kombinerer forståelse av virksomhetens behov med dataarbeid, analyse og KI. Dette er ikke en lineær sjekkliste: KI kan også forbedre datagrunnlaget. Riktig omfang og kontroll avhenger av risiko og faktisk behov.",
       "sourceIds": []
@@ -620,7 +620,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "KVALITET OG FORSTÅELSE",
-      "title": "«Kunde» betyr ikke nødvendigvis det samme for alle",
+      "title": "Én «kunde» kan være flere forskjellige analyseenheter",
       "visual": {
         "scene": "definition",
         "term": "KUNDE",
@@ -630,11 +630,11 @@
           "Kundeservice"
         ],
         "meanings": [
-          "Kundeforholdet",
-          "Fakturamottakeren",
-          "Personen som bruker tjenesten"
+          "Avtaleparten",
+          "Den som mottar faktura",
+          "Den som bruker tjenesten"
         ],
-        "takeaway": "Felles begreper må avklares før vi sammenligner tall eller spør KI.",
+        "takeaway": "Alle perspektivene kan være riktige – men de kan ikke telles om hverandre.",
         "figureAssetId": "data-semantic"
       },
       "sourceIds": [],
@@ -669,14 +669,14 @@
       "tone": "light",
       "type": "visual",
       "cue": "FAG OG VERDI",
-      "title": "Verken «bare KI» eller «fiks alt først» er en strategi",
+      "title": "Verken ukritisk automatisering eller evig opprydding gir verdi",
       "visual": {
         "scene": "contrast",
-        "leftTitle": "«Bare bruk KI»",
-        "leftText": "Raskt svar – uklart grunnlag",
-        "rightTitle": "«Fiks alt først»",
-        "rightText": "Perfekt plattform – ingen verdi ennå",
-        "bridge": "Start med det kunden trenger, og bygg kvalitet underveis.",
+        "leftTitle": "«Automatiser nå»",
+        "leftText": "Uten klart behov og tilstrekkelig kontroll",
+        "rightTitle": "«Vent til alt er klart»",
+        "rightText": "Nytten utsettes mens alt skal moderniseres",
+        "bridge": "Velg én viktig oppgave. Test trygt. Forbedre grunnlaget underveis.",
         "figureAssetId": "value-compass"
       },
       "sourceIds": [],
