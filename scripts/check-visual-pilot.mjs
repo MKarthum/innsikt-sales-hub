@@ -52,6 +52,23 @@ try{
   await slide.screenshot({path:output+'/slide-'+index+'.png'});
   if(index<decks.innsikt.slides.length)await page.locator('#slide-next').click();
  }
+ // Re-check every main-story slide in both palettes, including a landscape and portrait mobile viewport.
+ for(const tone of ['light','strong']){
+  await page.locator('#present-tone-mode').selectOption(tone);
+  for(const [width,height] of [[1280,720],[844,390],[390,844]]){
+   await page.setViewportSize({width,height});
+   await page.locator('[data-deck="innsikt"]').click();
+   for(let i=0;i<decks.innsikt.slides.length;i++){
+    const shown=page.locator('#slide-body .story-scene');await shown.waitFor();
+    assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),tone,'Tone '+tone+'/'+width+'/'+i);
+    const m=await shown.evaluate(el=>({w:el.clientWidth,h:el.clientHeight,ox:el.scrollWidth-el.clientWidth,oy:el.scrollHeight-el.clientHeight}));
+    assert.ok(m.w>0&&m.h>0&&m.ox<=3&&m.oy<=3,'Slide geometry '+tone+'/'+width+'/'+i+': '+JSON.stringify(m));
+    if(width===1280)await page.locator('#slide-body').screenshot({path:output+'/main-'+tone+'-'+(i+1)+'.png'});
+    if(i<decks.innsikt.slides.length-1)await page.locator('#slide-next').click();
+   }
+  }
+ }
+ await page.setViewportSize({width:1536,height:940});
  await page.keyboard.press('Escape');
  await page.evaluate(()=>location.hash='#lysbilder/ai-thousand-analysts');
  await page.locator('.slide-library-detail-stage .story-scene').waitFor();

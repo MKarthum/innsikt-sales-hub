@@ -72,7 +72,7 @@
 .v5-force span{font:530 1.48cqw/1.2 var(--font-body);color:var(--pres-muted)}
 .v5-force b{font:830 2.3cqw var(--font-display);color:var(--pres-accent)}
 .v5-force-focus{display:flex;flex-direction:column;justify-content:center;gap:2cqw;padding:2.8cqw;background:color-mix(in srgb,var(--pres-accent) 10%,var(--pres-bg));border:1px solid color-mix(in srgb,var(--pres-accent) 46%,transparent);border-radius:1cqw}
-.v5-force-focus h3{font:830 3.75cqw/1.06 var(--font-display);letter-spacing:-.045em}
+.v5-force-focus h3{font:860 6.2cqw/1.04 var(--font-display);letter-spacing:-.045em}
 .v5-force-focus p{font:550 1.72cqw/1.32 var(--font-body);color:var(--pres-muted)}
 /* Customer language -> diagnostic question, one clear pairing per row. */
 .v5-voices-layout{flex:1;min-height:0;display:flex;flex-direction:column;gap:.55cqw}

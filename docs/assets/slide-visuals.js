@@ -59,6 +59,7 @@ function render(slide,esc,position={}){
   +'<div class="scene-topline">'+label+counter+'</div>'
   +'<header class="scene-duality-intro"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p></header>'
   +'<div class="scene-duality-stage"><div class="scene-duality-origin">'+esc(v.center)+'</div>'
+  +'<div class="scene-duality-fork" aria-hidden="true"><span>↙</span><span>↘</span></div>'
   +'<div class="scene-duality-outcomes"><div class="scene-duality-good"><span class="scene-duality-symbol">+</span><h3>'+esc(v.positive)+'</h3><p>'+esc(v.positiveDetail)+'</p></div>'
   +'<div class="scene-duality-risk"><span class="scene-duality-symbol">−</span><h3>'+esc(v.negative)+'</h3><p>'+esc(v.negativeDetail)+'</p></div></div></div></div>';
  if(kind==='value-system')return '<div class="story-scene scene-system">'
@@ -76,6 +77,12 @@ function render(slide,esc,position={}){
  const title='<h2 class="v2-headline">'+escs(slide.title)+'</h2>';
  const special=window.InnsiktStoryScenes.render(slide,{v,top,title,escs,assetImage,block,diagram:position.diagrams?.find(d=>d.id===v.diagramId)});
  if(special)return special;
+ if(kind==='insight-ecosystem')return block('ecosystem',top
+  +'<div class="eco-head">'+title+'<p>'+escs(v.subtitle)+'</p></div>'
+  +'<div class="eco-context"><div><small>'+escs(v.inputLabel)+'</small><strong>'+escs(v.input)+'</strong></div><span aria-hidden="true">→</span><div><small>'+escs(v.outputLabel)+'</small><strong>'+escs(v.output)+'</strong></div></div>'
+  +'<div class="eco-flow">'+v.stages.map((x,i)=>'<section class="eco-stage"><div class="eco-stage-top"><span>'+String(i+1).padStart(2,'0')+'</span>'+assetImage(x.assetId,'eco-stage-icon')+'</div><h3>'+escs(x.title)+'</h3><p>'+escs(x.detail)+'</p></section>').join('<span class="eco-link" aria-hidden="true">→</span>')+'</div>'
+  +'<div class="eco-foundation"><small>'+escs(v.foundationLabel)+'</small><div>'+v.guardrails.map(x=>'<span>'+escs(x)+'</span>').join('')+'</div></div>'
+  +'<p class="eco-conclusion">'+escs(v.conclusion)+'</p>');
  if(kind==='impact'){
   if(v.layout==='bridge')return block('impact v4-bridge',top
     +'<div class="v4-bridge-main"><div class="v4-bridge-copy">'+(v.kicker&&v.kicker!==slide.cue?'<span class="v2-impact-kicker">'+escs(v.kicker)+'</span>':'')

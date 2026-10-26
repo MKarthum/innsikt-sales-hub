@@ -90,3 +90,7 @@ Korrekt flyt er **kort i bibliotek → lysbildets detaljside med notater/kilder/
 Gjeldende implementering for detaljsidens lysbildefullskjerm bruker dedikerte hendelseslyttere på dialogens lukkeknapp og på området utenfor selve lysbildet. Den tidligere globale `pointerup`-/`touchend`-håndteringen er fjernet. En `touchend` på lukkekontroll eller bakgrunn kansellerer kompatibilitetsklikk og lar dialogen bli stående til neste hendelsessyklus før den fjernes. En kort gjenåpningsbeskyttelse hindrer at sent leverte mobilklikk åpner forhåndsvisningen på nytt. Lukking via tastatur eller mus følger vanlige klikk-/Escape-hendelser. Lukkeknappen ligger nederst i mobilvisningen, utenfor lysbildet og med et større trykkfelt.
 
 **Behold totrinnsflyten:** bibliotekskort → detaljside med notater og kilder → trykk på lysbildet → fullskjerm → tilbake til samme detaljside. Nytt lyd-/touchregime må ha en regresjonstest som simulerer sent kompatibilitetsklikk etter lukking.
+
+## v0.18.32 – hovedfortellingen
+
+`innsikt` har åtte kuraterte bilder. Ny `insight-ecosystem`-scene tegner en pedagogisk sammenheng fra virksomhetsbehov gjennom dataplattform, datateknikk/modellering, analyse/BI og KI/arbeidsflyt til handling; det er ikke en ny teknisk referansearkitektur. Data og ikon-ID-er eies av `slides.json` og assetregisteret. `architecture-conceptual` eier fortsatt teknisk utdypning. Ingen fiktive pilotbilder eller teknisk dypdykk i hovedløpet.

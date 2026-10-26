@@ -532,14 +532,14 @@
       "title": "Du kan skalere innsikt. Du kan også skalere feil.",
       "visual": {
         "scene": "two-directions",
-        "lead": "Det er bruken og kvaliteten på grunnlaget som avgjør utfallet.",
-        "positive": "Bedre beslutningsgrunnlag",
-        "positiveDetail": "Relevant datagrunnlag og faglig kontroll gjør analysene nyttige.",
-        "negative": "Feil i større tempo",
-        "negativeDetail": "Uklare premisser kan gi raske, overbevisende – og gale – svar.",
-        "center": "SAMME KAPASITET"
+        "lead": "Den samme kapasiteten forsterker både gode og svake premisser.",
+        "positive": "Mer innsikt",
+        "positiveDetail": "Flere relevante spørsmål og bedre begrunnede valg.",
+        "negative": "Flere feil",
+        "negativeDetail": "Uklare begreper og svake data i større skala.",
+        "center": "× KAPASITET"
       },
-      "speakerBase": "KI øker kapasiteten til analyse og produksjon. Hvor nyttig resultatet blir, avhenger blant annet av problemforståelse, datagrunnlag og kvalitetskontroll. Dette er en faglig vurdering, ikke et dokumentert effektmål.",
+      "speakerBase": "Kapasitet kan forsterke både godt og svakt grunnlag. En faglig illustrasjon uten kvantifiserte effektpåstander.",
       "sourceIds": []
     },
     {
@@ -575,7 +575,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "KI OG KAPASITET",
-      "title": "KI gjør analyse, kode og utforskning mer tilgjengelig",
+      "title": "KI øker kapasiteten i langt mer enn analyse",
       "visual": {
         "scene": "impact",
         "kicker": "HVORFOR NÅ?",
@@ -589,28 +589,30 @@
         "afterCue": "FORUTSETNING",
         "capabilities": [
           {
-            "label": "Analyse",
-            "detail": "Utforske data og mønstre",
+            "label": "Datateknikk",
+            "detail": "Bygge, rense og koble data",
+            "assetId": "core-transform"
+          },
+          {
+            "label": "Analyse og BI",
+            "detail": "Modellere, undersøke og forklare",
             "assetId": "verified-analysis"
           },
           {
-            "label": "Kode",
-            "detail": "Utvikle og teste raskere",
+            "label": "Utvikling og arbeidsflyt",
+            "detail": "Kode, teste og støtte prosesser",
             "assetId": "support-code"
-          },
-          {
-            "label": "Utforskning",
-            "detail": "Prøve flere hypoteser",
-            "assetId": "ai-agent"
           }
         ],
-        "gateTitle": "Faglig vurdering",
-        "gateText": "Er problemet riktig forstått, og holder resultatet mål?",
-        "conclusion": "Mer kapasitet er nyttig når kvaliteten følger med.",
-        "gateCue": "AVGJØRENDE KONTROLL"
+        "gateTitle": "Faglig ansvar",
+        "gateText": "Mer produksjon krever fortsatt forståelse, prioritering og kontroll.",
+        "conclusion": "Tusen analytikere er bare begynnelsen på kapasitetsendringen.",
+        "gateCue": "AVGJØRENDE"
       },
-      "sourceIds": [],
-      "speakerBase": "KI gir oss mulighet til å arbeide raskere med informasjon, analyse og kode. Vi bør ikke forveksle dette med at resultatene alltid er riktige, eller at teknologien erstatter fagkompetanse. Poenget er at kapasiteten er reell og bør brukes der den faktisk skaper verdi.",
+      "sourceIds": [
+        "stanford-economy26"
+      ],
+      "speakerBase": "KI kan bistå med ulike kunnskaps- og utviklingsoppgaver. Dette er en illustrasjon av bruksområder, ikke dokumentert produktivitetsgevinst eller erstatning av ansatte.",
       "topic": "KI og kapasitet",
       "keywords": []
     },
@@ -620,7 +622,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "KVALITET OG FORSTÅELSE",
-      "title": "«Aktiv kunde» kan telles på flere måter",
+      "title": "Samme ord kan gi forskjellige tall – også med KI",
       "visual": {
         "scene": "definition",
         "term": "AKTIV KUNDE",
@@ -634,7 +636,7 @@
           "Kunder med faktura",
           "Kunder med kontakt"
         ],
-        "takeaway": "Alle kan være relevante definisjoner. De gir ikke nødvendigvis samme tall.",
+        "takeaway": "«Aktiv kunde» må defineres før vi sammenligner tall.",
         "figureAssetId": "data-semantic"
       },
       "sourceIds": [],
@@ -770,6 +772,66 @@
       "speakerBase": "Vi fortsetter den samme fiktive kundeservicetesten. Under prøvingen dukker to lignende fakturasaker opp med forskjellige teamregistreringer. Dette kan være korrekt, eller skyldes uklare regler. KI kan peke på mulig inkonsistens, men må ikke bestemme hvilken kategori som er riktig. Fagansvarlig undersøker sakene, dokumenterer begrunnelsen og tester en eventuell godkjent forbedring. Poenget er en løkke der prosess, data og KI-støtte utvikles sammen, ikke at KI automatisk reparerer data.",
       "topic": "KI og kapasitet",
       "keywords": []
+    },
+    {
+      "id": "insight-value-chain",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "HVA ER INNSIKT?",
+      "title": "Innsikt binder sammen behov, data, analyse og handling",
+      "topic": "Fag og verdi",
+      "keywords": [
+        "dataplattform",
+        "datateknikk",
+        "modellering",
+        "analyse",
+        "BI",
+        "KI",
+        "beslutning"
+      ],
+      "visual": {
+        "scene": "insight-ecosystem",
+        "subtitle": "En faglig sammenheng – ikke en obligatorisk teknisk arkitektur.",
+        "inputLabel": "STARTPUNKT",
+        "input": "Et spørsmål i virksomheten",
+        "outputLabel": "MÅL",
+        "output": "Bedre beslutninger og arbeidsprosesser",
+        "stages": [
+          {
+            "title": "Dataplattform",
+            "detail": "Kilder, lagring og tilgang",
+            "assetId": "core-storage"
+          },
+          {
+            "title": "Datateknikk og modellering",
+            "detail": "Flyt, struktur og felles data",
+            "assetId": "core-transform"
+          },
+          {
+            "title": "Analyse og BI",
+            "detail": "Forstå, visualisere, forklare",
+            "assetId": "verified-analysis"
+          },
+          {
+            "title": "KI og arbeidsflyt",
+            "detail": "Assistere og automatisere",
+            "assetId": "ai-agent"
+          }
+        ],
+        "foundationLabel": "PÅ TVERS",
+        "guardrails": [
+          "Datakvalitet",
+          "Felles begreper",
+          "Sikkerhet og kontroll"
+        ],
+        "conclusion": "Ulike behov starter ulike steder. Kompetansene må kunne spille sammen."
+      },
+      "sourceIds": [
+        "digdir",
+        "nist-ai-rmf"
+      ],
+      "speakerBase": "Pedagogisk oversikt, ikke en referansearkitektur. Behovet avgjør inngang og prioritering. Datateknikk, modellering, analyse, BI og KI kan kombineres på ulike måter; datakvalitet og sikkerhet er tverrgående hensyn. Teknisk utdypning finnes i kanonisk konseptuell arkitektur."
     },
     {
       "id": "insight-three-disciplines",
@@ -988,15 +1050,15 @@
       "tone": "strong",
       "type": "visual",
       "cue": "BRUK AV PORTALEN",
-      "title": "Én vei gjennom kompleksiteten: finn neste gode spørsmål",
+      "title": "Derfor laget jeg Innsikt – et verktøy vi utvikler sammen",
       "visual": {
         "scene": "portal",
         "steps": [
-          "Gjenkjenn behovet",
-          "Finn gode spørsmål",
-          "Forbered neste steg"
+          "Forbered et kundemøte",
+          "Utforsk et behov",
+          "Finn fagstoff og verktøy"
         ],
-        "footer": "Bruk Innsikt som samtalestøtte – gå nå videre til en faktisk oppgave i portalen.",
+        "footer": "Vi starter i promptbiblioteket. Bruk portalen, og si fra hva som mangler.",
         "figureAssetId": "product-map",
         "stepAssetIds": [
           "market-signal",
@@ -1005,7 +1067,7 @@
         ]
       },
       "sourceIds": [],
-      "speakerBase": "En selger kan møte rapportering som spriker, forsinkede beslutninger eller et generelt ønske om KI. Det finnes ingen universell startteknologi. Innsikt hjelper med å kjenne igjen behovet, formulere spørsmål, finne fagstoff og forberede en avgrenset oppfølging. Dette bildet er en overgang til demonstrasjon: velg én faktisk oppgave og vis den nå.",
+      "speakerBase": "Portalen gir oppgaveinnganger, kvalifisering, fagstoff og redigerbare prompter. Den kjører ikke KI-modeller selv. Demonstrer promptbiblioteket live, og inviter til konkrete tidlige innspill.",
       "topic": "Bruk av portalen",
       "keywords": []
     },
@@ -1212,7 +1274,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "DET VI SER I MARKEDET",
-      "title": "Agenter, semantikk og plattformer nærmer seg hverandre",
+      "title": "KI tas i bruk bredt. Markedet endrer seg samtidig.",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1222,8 +1284,9 @@
         "fremtid",
         "trend"
       ],
-      "speakerBase": "Dette er tre områder Gartner fremhever i 2026: agentbruk, semantikk og konvergens. Ikke presenter dem som like modne hos alle kunder. Et viktig salgsspørsmål er hva kunden ønsker automatisert, hvilke begreper som må være forstått og hva eksisterende plattform faktisk kan levere.",
+      "speakerBase": "SSB: 48 prosent av norske foretak med minst ti ansatte (uten finans) oppga bruk av KI i 2026. Gartner fremhever agenter, semantikk og plattformkonvergens; dette er analytikervurderinger. Skille utbredelse fra verdi.",
       "sourceIds": [
+        "ssb",
         "gartner-2026-trends"
       ],
       "visual": {
@@ -1247,11 +1310,11 @@
         ],
         "layout": "convergence",
         "focus": {
-          "label": "SPØRSMÅLET VI TAR MED TIL KUNDEN",
-          "title": "Hvor kan dette gi verdi?",
-          "detail": "Automatisering, bedre forståelse eller enklere tilgang?"
+          "label": "SSB · NORSKE FORETAK · 2026",
+          "title": "48 %",
+          "detail": "Bruker minst én KI-teknologi. Foretak med minst ti ansatte, uten finans."
         },
-        "conclusion": "Trendene er ulike, men må vurderes mot samme kundevirkelighet."
+        "conclusion": "Utbredelse er dokumentert; verdien for kunden må undersøkes."
       }
     },
     {
@@ -1302,7 +1365,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "HVA VI SKAL VÆRE GODE PÅ",
-      "title": "Tre kundesignaler – flere mulige veier videre",
+      "title": "Kunder har ulike behov – ikke én KI-bestilling",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1312,33 +1375,31 @@
         "fremtid",
         "trend"
       ],
-      "speakerBase": "Vi anbefaler ikke en bestemt teknologi fra et generelt markedstrendbilde. Kundens utfordring gir et sted å begynne: felles definisjoner, bedre beslutningsgrunnlag eller en konkret oppgave KI kan støtte. Disse illustrative utsagnene er ikke sitater fra kunder. Data, analyse og KI vil ofte inngå i samme løsning. Derfor prioriterer vi bredden og evnen til å koble fagområdene, framfor å gjøre alt til et KI-initiativ. Dette er vår faglige prioritering, ikke en direkte Gartner-rangering.",
-      "sourceIds": [
-        "gartner-2026-trends"
-      ],
+      "speakerBase": "De tre generiske, illustrative kundesignalene viser mulige faglige innganger, aldri ferdige diagnoser. Mange behov krever flere kompetanser i samspill.",
+      "sourceIds": [],
       "visual": {
         "scene": "domains",
         "layout": "priority-pathways",
-        "signalLabel": "ILLUSTRATIVE KUNDESIGNALER",
-        "responseLabel": "FØRSTE FAGLIGE INNGANG",
+        "signalLabel": "ILLUSTRATIVE UTSAGN",
+        "responseLabel": "MULIG FAGLIG INNGANG",
         "pathways": [
           {
-            "signal": "«Avdelingene bruker ulike tall.»",
-            "priority": "Datagrunnlag",
-            "action": "Avklar begreper og dataflyt"
+            "signal": "«Rapportene viser ulike tall.»",
+            "priority": "Data og modellering",
+            "action": "Undersøk definisjoner og kilder"
           },
           {
             "signal": "«Vi oppdager avvik for sent.»",
-            "priority": "Analyse og innsikt",
-            "action": "Finn beslutningen som trenger bedre informasjon"
+            "priority": "Analyse og BI",
+            "action": "Finn beslutningen som mangler innsikt"
           },
           {
-            "signal": "«De samme henvendelsene tar for mye tid.»",
-            "priority": "KI-støttet arbeidsflyt",
-            "action": "Test forslag til svar med kvalitetssjekk"
+            "signal": "«Prosessen tar for mye tid.»",
+            "priority": "Arbeidsflyt og KI",
+            "action": "Kartlegg oppgaven, test og kontroller"
           }
         ],
-        "conclusion": "Inngangene er ikke siloer. Ett behov kan kreve både data, analyse og KI.",
+        "conclusion": "Første inngang er ikke en diagnose. Behov overlapper.",
         "figureAssetId": "value-compass"
       }
     },

@@ -77,6 +77,7 @@ for(const s of slides){
  }
  if(v.layout==='controlled-comparison')assert.ok(v.exampleLabel&&v.problem&&v.hypothesis&&v.baseline?.label&&v.baseline?.title&&v.baseline?.detail&&v.trial?.label&&v.trial?.title&&v.trial?.detail&&v.baseline?.flow?.length===3&&v.trial?.flow?.length===4&&v.baseline.flow.every(Boolean)&&v.trial.flow.every(Boolean)&&v.measureLabel&&v.measures?.length===2&&v.measures.every(x=>typeof x==='string'&&x.length>3)&&v.guardrail&&v.decisionLabel&&v.decision&&v.conclusion,'Controlled comparison needs two comparable methods, two measures, explicit controls and a decision gate');
  if(v.layout==='bounded-discovery')assert.ok(v.sources?.length===2&&v.sourceTitle&&v.checkTitle&&v.result&&v.inScope&&v.later&&v.conclusion,'Discovery needs a bounded investigation and an explicit exclusion');
+ if(v.scene==='insight-ecosystem')assert.ok(v.stages?.length===4&&v.stages.every(x=>x.title&&x.detail&&x.assetId)&&v.guardrails?.length===3&&v.input&&v.output&&v.conclusion,'Fagkartet må vise arbeidskjede og tverrgående kvalitet');
  if(v.scene==='analyst-grid')assert.equal(v.number,'1 000','Preserve metaphor');
 }
 const market=slides.find(s=>s.id==='market-customer-pressure');

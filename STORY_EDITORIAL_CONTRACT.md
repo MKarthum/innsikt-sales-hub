@@ -4,7 +4,7 @@ En fortelling er en jobb, ikke en liste med tilgjengelige slides.
 
 | Presentasjon | Selvstendig publikum og jobb | Dramaturgisk poeng | Neste handling |
 |---|---|---|---|
-| Hvorfor Innsikt? | Motivasjon og forståelse for selgere | Markedet øker KI-kapasitet og mulige faglige innganger; kundens behov og kvalitet avgjør veien videre | Vis en konkret arbeidsoppgave i Innsikt-portalen |
+| Hvorfor Innsikt? | Selgere og fagfolk før demo | KI-kapasitet → dokumentert marked → hele fagområdet → mening og risiko → ulike kundebehov → portal | Gå live til promptbiblioteket og inviter til konkrete innspill |
 | Innsikt, marked og veien videre | Selgere og ledelse som trenger retning | Agenter, semantikk og plattformkonvergens -> kundens faktiske behov -> tre faglige prioriteringer | Vurder datagrunnlag, analyse og KI samlet |
 | Vis løsningen | Kolleger som vil lære selgerportalen | Fra kundesituasjon og prompt til forståelse og neste steg | Vis én konkret oppgave i portalen |
 | Kundeeksempel | Selger med et uavklart behov | Fiktivt rapporteringsproblem -> mulige årsaker -> spørsmål -> avgrenset oppfølging | Planlegg et godt neste møte |
@@ -17,3 +17,7 @@ Før en ny historie legges til: dokumenter tydelig målgruppe, et spørsmål ing
 Skille mellom dokumenterte fakta, leverandørundersøkelser og våre faglige vurderinger. Kildene følger det aktuelle lysbildet. Vi bruker ikke en universell kildeslide. Illustrative kundecaser er merket fiktive.
 
 Kanonisk innhold: pages.json eier historier og overgangsnotater; slides.json eier individuelle lysbilder og grunnnotater; visual-assets.json eier figurer. Se SLIDE_EDITORIAL_AUDIT_2026-10-24.md for per-objektvurdering.
+
+## Hovedfortelling 26.10.2026
+
+`innsikt` er nå åtte muntlige bilder (omtrent 6–7 minutter). Den svarer på hvorfor fagområdet og portalen trengs. `portal` forblir et separat, valgfritt demonstrasjonsløp; det skal ikke forveksles med hovedfortellingen. Live demo av promptbiblioteket starter etter siste bilde.

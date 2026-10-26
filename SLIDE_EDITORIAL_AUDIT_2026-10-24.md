@@ -24,6 +24,7 @@
 | ai-two-extremes | Avveining; ikke en falsk teknologidikotomi; 1 gjenbrukte figur-ID-er | innsikt | Kontroller semantikk, linjebrudd og begge paletter |
 | ai-pragmatic | Fiktiv kundeservicesituasjon: dagens manuelle sortering mot KI-forslag med menneskelig godkjenning; felles kvalitets-/tidsmål og tydelig kontrollgrense | innsikt | Kontroller likeverdig sammenligning, lesbar målebro, lys/mørk og eksport |
 | ai-improve-data | Fiktive teametiketter → KI foreslår spørsmål → fagansvarlig verifiserer → dokumentert og testet regel; ingen figurasset | innsikt | Kontroller at etikettforskjell ikke fremstår som bevist feil, og at godkjenning er synlig |
+| insight-value-chain | Ny faglig helhetsoversikt fra behov til handling, fire gjenbrukte asset-ID-er og tre tverrgående kontrollhensyn | innsikt | Begge temaer, mobil, eksport og lesbarhet på avstand |
 | insight-three-disciplines | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | risk-and-trust | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | seller-signals | Tre adskilte symptomer eller råd og gjenbrukte symboler; 4 gjenbrukte figur-ID-er | Selvstendig objekt | Kontroller semantikk, linjebrudd og begge paletter |
@@ -88,3 +89,7 @@ Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md) for 16:9-kontrol
 ## 26.10.2026 – KI-assisterte analytikersilhuetter (v0.18.31)
 
 Åpningsscenens 156 figurer er nå mer kjønnsnøytrale og svakt robotinspirerte, med mykt firkantet hode, diskret visir og lite digitalt brystpanel. Kropp, armer og ben er fortsatt menneskelige. Rutenettet beholder luft mellom radene. Regresjonstesten kontrollerer samtlige figurtrekk og avstanden mellom radene.
+
+## 26.10.2026 – ny hovedfortelling v0.18.32
+
+Åtte bilder i rekkefølgen `ai-thousand-analysts`, `ai-capacity-now`, `market-three-forces`, `insight-value-chain`, `ai-two-directions`, `data-meaning-customer`, `market-priorities`, `portal-purpose`. Åpning beholdt; kapasitetsbildet bredere; markedsbildet forankret i SSB og Gartner; nytt fagkart; skalering har nå en multiplikator og tydelig forgreining; «aktiv kunde» bevart; behovsbildet favner ulike innganger; avslutning inviterer til bruk og live promptdemo. `ai-two-extremes` og `ai-pragmatic` er beholdt i biblioteket, men tatt ut av hovedløpet. Gjenstående risiko: kartet kan være tett på projektor, og markedssignaler trenger muntlig forklaring.

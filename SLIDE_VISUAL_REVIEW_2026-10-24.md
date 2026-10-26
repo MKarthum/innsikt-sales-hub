@@ -36,6 +36,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | ai-two-extremes | Vi må unngå to ytterpunkter. | Verken «bare KI» eller «fiks alt først» er en strategi | To muligheter vises side ved side og broen mellom dem presiseres |
 | ai-pragmatic | Avgrens testen før du investerer. | Test én oppgave før du bygger en stor løsning | Sammenligner manuell sortering og KI-forslag på samme mål, med menneskelig kontroll og beslutningsport |
 | ai-improve-data | KI kan foreslå datakvalitetsgrep, men fagfolk verifiserer. | KI kan foreslå datakvalitetsgrep – fagfolk må verifisere | To fiktive registreringer gir et undersøkelsessignal, ikke en bevist feil; KI-spørsmål følges av menneskelig kontrollport og betinget dokumentasjon/test |
+| insight-value-chain | Nytt fagkart viser sammenheng uten teknisk dypdykk | Fire faglige kapabiliteter mellom behov og handling, én tverrgående kvalitetsstripe, semantisk temastyring |
 | insight-three-disciplines | Innsikt er mer enn én teknologi. | Data, analyse og KI skaper mer verdi i sammenheng | Tre faglige områder står separat med en felles, synlig konklusjon |
 | risk-and-trust | Kontroll må passe til risikoen. | Kontrollen må stå i forhold til konsekvensen av feil | Tre faglige områder står separat med en felles, synlig konklusjon |
 | seller-signals | Lytt etter behov – ikke teknologinavn. | Kundens frustrasjon sier mer enn teknologinavnet | Lar kundens egne ord stå synlig med forklarende spørsmål |
@@ -103,3 +104,7 @@ Tidligere: tre separate spørsmålskort uten kundesvar eller tydelig neste handl
 Før: 16:9-bildet brukte tre illustrerte kundereplikker, og gjentok dermed funksjonen til `market-priorities`. Etter: én stor kildebelagt, selvrapportert strategiverdi (42 %) til venstre; fire **kvalitativt** lavere vurderte operative dimensjoner til høyre; ett avklarende kundespørsmål og en synlig global metodeavgrensning. Ingen søylelengder eller påstått differanse. [Deloitte 2026](https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html) er kilde til begge sider, ikke til noen kundediagnose.
 
 B har sammenlignet faktisk før/etter-rendering av bilde 4 ved 960×540 intern 16:9-flate, lys og mørk; kontrollert 1536×864, 1280×720, 844×390 og 390×844, mobil detalj → fullskjerm → Lukk, Presenter og nedlastet offline HTML. Ingen geometrisk tekstklipping etter justering av prosenttallets linjehøyde. C må likevel gjøre **uavhengig** visuell og faglig kontroll før merge. Skjermbilder ligger utenfor repo i `/workspace/b-readiness-visual/`.
+
+## Hovedfortelling v0.18.32
+
+Åtte bilder frem til faktisk demonstrasjon. Beholdt analytikermetafor og aktiv-kunde-kontrast. Forbedret brede KI-oppgaver, SSB/Gartner-markedsbelegg, multiplikator/scalering, kundens ulike faglige innganger og direkte overgang til promptbibliotek. Nytt fagkart `insight-value-chain` bruker eksisterende ikonregister og egen kompakt 16:9-komposisjon. Tester og skjermbilder skal kontrolleres for lys/mørk og relevante mobilstørrelser. Svakheter: fagkartet kan bli noe tett på projektor; gjennomgå også manuell lesbarhet.

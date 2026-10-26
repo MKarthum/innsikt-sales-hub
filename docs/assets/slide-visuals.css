@@ -31,19 +31,22 @@
 .visual-people-marks{fill:var(--pres-accent)}
 .scene-bottomline{display:flex;align-items:center;gap:14px;font-size:1.7cqw;color:var(--pres-muted)}
 .scene-kicker-mark{width:26px;height:2px;background:var(--pres-accent);display:inline-block;flex-shrink:0}
-.scene-duality{display:flex;flex-direction:column;padding:5.1% 6%;gap:0}
-.scene-duality-intro{padding:3% 0 1%;text-align:center;max-width:94%;margin:0 auto;width:100%}
-.story-scene .scene-duality-intro h2{font-size:4.7cqw;font-weight:820;line-height:1.12;text-wrap:balance}
-.story-scene .scene-duality-intro p{font-size:1.8cqw;margin-top:1.1%;color:var(--pres-muted)}
-.scene-duality-stage{flex:1;min-height:0;display:flex;flex-direction:column;gap:2.8cqw;justify-content:center;padding:1.2cqw 3.4cqw 0}
-.scene-duality-origin{align-self:center;border:1px solid color-mix(in srgb,var(--pres-accent) 40%,transparent);border-radius:100px;background:color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg));padding:.85cqw 2.5cqw;font-size:1.55cqw;letter-spacing:.1em;font-weight:800;color:var(--pres-accent)}
-.scene-duality-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.8cqw;padding:0;flex:1;min-height:0;max-height:27cqw}
-.scene-duality-outcomes>div{min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;border-radius:1.7cqw;padding:2.9cqw 3cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 12%,transparent);box-shadow:0 .75cqw 2.6cqw color-mix(in srgb,var(--pres-fg) 4%,transparent)}
-.scene-duality-symbol{display:inline-grid;place-items:center;font:800 2.25cqw/1 var(--font-display);border-radius:50%;width:3.65cqw;height:3.65cqw;margin-bottom:1.8cqw;background:var(--pres-bg);border:2px solid currentColor}
-.scene-duality-good{color:var(--pres-accent);background:color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg))}
-.scene-duality-risk{color:var(--pres-warning);background:color-mix(in srgb,var(--pres-warning) 10%,var(--pres-bg))}
-.story-scene .scene-duality-outcomes h3{font-size:3.1cqw;line-height:1.1;font-weight:820;letter-spacing:-.045em;color:var(--pres-fg)}
-.story-scene .scene-duality-outcomes p{font-size:1.75cqw;line-height:1.34;max-width:36cqw;margin-top:1.1cqw;color:var(--pres-muted)}
+.scene-duality{display:flex;flex-direction:column;padding:4.8% 6%;background:radial-gradient(circle at 50% 74%,color-mix(in srgb,var(--pres-accent) 10%,transparent),transparent 52%),var(--pres-bg)}
+.scene-duality-intro{padding:2.5% 0 0;text-align:center;max-width:97%;margin:0 auto;width:100%}
+.story-scene .scene-duality-intro h2{font-size:4.5cqw;font-weight:830;line-height:1.12;text-wrap:balance}
+.story-scene .scene-duality-intro p{font-size:1.8cqw;margin-top:1.2%;color:var(--pres-muted)}
+.scene-duality-stage{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:1.4cqw 3.5cqw 0}
+.scene-duality-origin{align-self:center;border:2px solid var(--pres-accent);border-radius:100px;background:color-mix(in srgb,var(--pres-accent) 14%,var(--pres-bg));padding:1.25cqw 3.2cqw;font:850 2.6cqw/1 var(--font-display);letter-spacing:.04em;color:var(--pres-accent);box-shadow:0 0 0 .7cqw color-mix(in srgb,var(--pres-accent) 7%,transparent)}
+.scene-duality-fork{display:grid;grid-template-columns:1fr 1fr;height:4.6cqw;align-items:center;text-align:center;color:var(--pres-accent);font:850 4.4cqw/1 var(--font-display)}
+.scene-duality-fork span:first-child{padding-left:9cqw}.scene-duality-fork span:last-child{padding-right:9cqw}
+.scene-duality-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.4cqw;flex:1;min-height:0;max-height:26cqw}
+.scene-duality-outcomes>div{min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;border-radius:1.2cqw;padding:2.5cqw 3.5cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 14%,transparent);position:relative;overflow:hidden}
+.scene-duality-outcomes>div:before{content:'';position:absolute;left:0;top:0;bottom:0;width:.75cqw;background:currentColor;opacity:.8}
+.scene-duality-symbol{display:inline-grid;place-items:center;font:850 3.2cqw/1 var(--font-display);border-radius:50%;width:4.7cqw;height:4.7cqw;margin-bottom:1.15cqw;background:var(--pres-bg);border:2px solid currentColor}
+.scene-duality-good{color:var(--pres-accent);background:linear-gradient(130deg,color-mix(in srgb,var(--pres-accent) 15%,var(--pres-bg)),var(--pres-bg))}
+.scene-duality-risk{color:var(--pres-warning);background:linear-gradient(130deg,color-mix(in srgb,var(--pres-warning) 15%,var(--pres-bg)),var(--pres-bg))}
+.story-scene .scene-duality-outcomes h3{font-size:3.55cqw;line-height:1.08;font-weight:840;letter-spacing:-.045em;color:var(--pres-fg)}
+.story-scene .scene-duality-outcomes p{font-size:1.72cqw;line-height:1.32;max-width:36cqw;margin-top:1.1cqw;color:var(--pres-muted)}
 .scene-system{padding:5.1% 6%;display:flex;flex-direction:column;background:radial-gradient(circle at 76% 53%,color-mix(in srgb,var(--pres-accent) 10%,transparent),transparent 45%),var(--pres-bg)}
 .scene-system-layout{flex:1;display:grid;grid-template-columns:minmax(0,43%) minmax(0,57%);min-height:0;align-items:center;gap:0}
 .scene-system-story{position:relative;z-index:2;padding-bottom:2%;display:flex;flex-direction:column;justify-content:center;min-height:100%}
@@ -62,6 +65,32 @@
 .scene-system-label--top{top:0;left:50%;transform:translateX(-50%);max-width:50%}
 .scene-system-label--left{bottom:0;left:0;max-width:38%}
 .scene-system-label--right{bottom:0;right:0;max-width:38%}
+
+
+/* Innsikt-fagkart: ren visning av dataeide kapabiliteter, uten parallell arkitekturmodell. */
+.scene-v2-ecosystem{background:radial-gradient(circle at 50% 52%,color-mix(in srgb,var(--pres-accent) 8%,transparent),transparent 55%),var(--pres-bg)!important}
+.eco-head{flex:0 0 auto;margin:1.7cqw 0 0}
+.scene-v2 .eco-head .v2-headline{font:825 3.85cqw/1.10 var(--font-display);letter-spacing:-.05em;text-wrap:balance;max-width:97%}
+.scene-v2 .eco-head p{font:550 1.55cqw/1.25 var(--font-body);margin-top:.8cqw}
+.eco-context{display:flex;align-items:center;gap:1.2cqw;margin:1.6cqw 0 1.4cqw}
+.eco-context>div{flex:1;min-width:0;display:flex;align-items:center;gap:1cqw;padding:1.1cqw 1.35cqw;border-radius:.75cqw;background:color-mix(in srgb,var(--pres-accent) 8%,var(--pres-bg));border:1px solid color-mix(in srgb,var(--pres-accent) 27%,transparent)}
+.eco-context small{font:800 1.08cqw/1.12 var(--font-body);white-space:nowrap;color:var(--pres-accent)}
+.eco-context strong{font:730 1.55cqw/1.15 var(--font-display);color:var(--pres-fg)}
+.eco-context>span{font:850 2.4cqw/1 var(--font-display);color:var(--pres-accent)}
+.eco-flow{flex:1;min-height:0;display:flex;align-items:stretch;gap:.5cqw}
+.eco-stage{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center;gap:1.1cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent);border-radius:.85cqw;padding:1.4cqw 1.2cqw;background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg))}
+.eco-stage:nth-of-type(2n){background:color-mix(in srgb,var(--pres-accent) 8%,var(--pres-bg))}
+.eco-stage-top{display:flex;align-items:center;justify-content:space-between}
+.eco-stage-top span{font:850 1.35cqw/1 var(--font-body);color:var(--pres-accent)}
+.eco-stage-icon{width:4.5cqw;height:4.5cqw;object-fit:contain;padding:.5cqw;box-sizing:border-box;background:#f5faf8;border-radius:.7cqw}
+.eco-stage h3{font:780 2cqw/1.13 var(--font-display);letter-spacing:-.02em;color:var(--pres-fg)}
+.scene-v2 .eco-stage p{font:540 1.35cqw/1.2 var(--font-body);color:var(--pres-muted)}
+.eco-link{flex:0 0 1.25cqw;align-self:center;text-align:center;font:850 2cqw/1 var(--font-display);color:var(--pres-accent)}
+.eco-foundation{display:flex;align-items:center;gap:2cqw;flex:0 0 auto;margin:1.5cqw 0 0;padding:1.05cqw 1.4cqw;border-top:2px solid var(--pres-accent);background:color-mix(in srgb,var(--pres-accent) 8%,var(--pres-bg));border-radius:.6cqw}
+.eco-foundation small{font:800 1.12cqw/1.15 var(--font-body);white-space:nowrap;color:var(--pres-accent)}
+.eco-foundation>div{display:flex;flex:1;justify-content:space-between;gap:1cqw}
+.eco-foundation span{font:730 1.5cqw/1.15 var(--font-body);color:var(--pres-fg)}
+.scene-v2 .eco-conclusion{font:750 1.5cqw/1.2 var(--font-body);color:var(--pres-fg);margin:1.05cqw 0 0}
 
 /* Bibliotek: ekte render av hver scene, ikke fiktive typekort. */
 .slide-library-tools{padding:17px 20px;border:1px solid var(--border);border-radius:15px;background:var(--surface);margin:0 0 20px;display:grid;gap:14px}
