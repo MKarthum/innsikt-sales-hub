@@ -285,7 +285,7 @@ try {
     assert.ok(placement.close.height>=44&&placement.close.width>=44&&placement.hit,'lukk er synlig og trykkbar ved '+menuWidth+' px');
     assert.equal(placement.icon,'M5 5 19 19M19 5 5 19','lukk har kryssikon, ikke reserveikon');
     if(menuWidth!==820){
-     fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
+     await (await import('node:fs/promises')).mkdir('artifacts/visual-pilot',{recursive:true});
      await page.screenshot({path:'artifacts/visual-pilot/sidebar-mobile-'+menuWidth+'.png'});
     }
     await page.locator('#sidebar-close').click();
