@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {chromium} from 'playwright';
 const url=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
@@ -24,10 +25,14 @@ try{
  await page.locator('#present-tone-mode').selectOption('story');
  assert.equal(await page.locator('#present-tone-mode').inputValue(),'story','Story mode is explicit opt-in');
  assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'strong');
- for(let i=0;i<2;i++)await page.locator('#slide-next').click();
- assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'light','First narrative beat change');
- for(let i=0;i<5;i++)await page.locator('#slide-next').click();
- assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'strong','Return to conclusion');
+ const mainStory=JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks.innsikt;
+ const firstTension=mainStory.slides.findIndex(entry=>entry.beat==='tension');
+ const firstResolution=mainStory.slides.findIndex(entry=>entry.beat==='resolution');
+ assert.ok(firstTension>0&&firstResolution>firstTension,'Narrative must progress from possibility via tension to resolution');
+ for(let i=0;i<firstTension;i++)await page.locator('#slide-next').click();
+ assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),mainStory.visualStyle.beats.tension,'First narrative beat change');
+ for(let i=firstTension;i<firstResolution;i++)await page.locator('#slide-next').click();
+ assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),mainStory.visualStyle.beats.resolution,'Return to conclusion');
  await page.locator('#present-tone-mode').selectOption('light');
  assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'light','Light everywhere');
  await page.locator('[data-deck="portal"]').click();
