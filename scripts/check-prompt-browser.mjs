@@ -50,15 +50,63 @@ try{
   if(label==='desktop'){
    await (await import('node:fs/promises')).mkdir('artifacts/visual-pilot',{recursive:true});
    await page.waitForTimeout(2800); // Kopi-toast skal ikke dekke kontrollene i skjermbildet.
-   for(const [w,h] of [[320,700],[390,844],[900,900],[1512,980]]){
+   // Toppmenyen skal ha plass til alle handlinger også i intervallet 821–1100 px.
+   const checkTopbar=async(route,w)=>{
+    const state=await page.evaluate(()=>{
+     const ids=['search-button','present-button','feedback-button'];
+     return {
+      scrollWidth:document.documentElement.scrollWidth,viewport:innerWidth,
+      breadcrumbHref:document.querySelector('.breadcrumb-project')?.getAttribute('href'),
+      controls:ids.map(id=>{
+       const el=document.getElementById(id),r=el.getBoundingClientRect(),style=getComputedStyle(el);
+       const hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+       return {id,left:r.left,right:r.right,width:r.width,visible:style.display!=='none'&&style.visibility!=='hidden',hit:!!hit&&(hit===el||el.contains(hit)),tabIndex:el.tabIndex};
+      })
+     };
+    });
+    assert.ok(state.scrollWidth<=state.viewport+2,route+': ingen horisontal overflyt ved '+w+' '+JSON.stringify(state));
+    assert.equal(state.breadcrumbHref,'#oversikt',route+': brødsmulestien har hjemlenke');
+    for(const button of state.controls){
+     assert.ok(button.visible&&button.width>20&&button.left>=-1&&button.right<=state.viewport+1,route+': '+button.id+' helt innenfor '+w+'px '+JSON.stringify(button));
+     assert.ok(button.hit,route+': '+button.id+' er ikke dekket av andre elementer');
+     assert.ok(button.tabIndex>=0,route+': '+button.id+' kan fokuseres');
+    }
+   };
+   for(const [w,h] of [[320,700],[390,844],[820,900],[821,900],[900,900],[1100,900],[1512,980]]){
     await page.setViewportSize({width:w,height:h});
-    await page.waitForTimeout(350); // Mobilmenyen animeres ut når desktopviewporten krympes.
+    await page.waitForTimeout(350); // Vent på responsiv meny og animasjon.
     await page.locator('[data-prompt-choice="needSituation"][value="progress"]').scrollIntoViewIfNeeded();
-    const dimensions=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,viewport:innerWidth}));
-    // 900px har en kjent eldre toppmeny-overflyt (#26); dokumenter, men ikke blokker prompttesten.
-    if(w===900&&dimensions.scrollWidth>dimensions.viewport+2)console.warn('KJENT 900px-overflyt: '+JSON.stringify(dimensions));
-    else assert.ok(dimensions.scrollWidth<=dimensions.viewport+2,label+': ingen horisontal overflyt ved '+w+' '+JSON.stringify(dimensions));
-    await page.screenshot({path:'artifacts/visual-pilot/prompt-discovery-'+w+'.png'});
+    await checkTopbar('prompter/discovery',w);
+    if(w===900){
+     await page.evaluate(()=>{location.hash='#oversikt'});
+     await page.waitForFunction(()=>location.hash==='#oversikt'&&!!document.querySelector('#main .home-task'));
+     await checkTopbar('oversikt',w);
+     await page.evaluate(()=>{location.hash='#muligheter/rapportering'});
+     await page.waitForFunction(()=>location.hash==='#muligheter/rapportering'&&!!document.querySelector('#main a[href="#prompter/discovery"]'));
+     await checkTopbar('muligheter/rapportering',w);
+     assert.ok(await page.locator('#crumb a[href="#muligheter"]').count()>0,'detaljruten har klikkbar foreldreside');
+     await page.evaluate(()=>{location.hash='#prompter/discovery'});
+     await page.waitForFunction(()=>location.hash==='#prompter/discovery'&&!!document.querySelector('[data-context-var="KUNDENS_UTSAGN"]'));
+     for(const id of ['search-button','present-button','feedback-button']){
+      await page.locator('#'+id).focus();
+      assert.equal(await page.evaluate(()=>document.activeElement?.id),id,id+': tastaturfokus ved 900px');
+     }
+     await page.locator('#search-button').click();
+     await page.locator('#search-input').waitFor();
+     await page.keyboard.press('Escape');
+     await page.locator('#search-input').waitFor({state:'detached'});
+     await page.locator('#present-button').click();
+     await page.locator('#present-modal').waitFor();
+     await page.keyboard.press('Escape');
+     await page.locator('#present-modal').waitFor({state:'detached'});
+     await page.locator('#feedback-button').click();
+     await page.locator('#feedback-note').waitFor();
+     await page.keyboard.press('Escape');
+     await page.locator('#feedback-note').waitFor({state:'detached'});
+     await checkTopbar('prompter/discovery etter dialoger',w);
+     await page.locator('[data-prompt-choice="needSituation"][value="progress"]').scrollIntoViewIfNeeded();
+    }
+    if([320,390,900,1512].includes(w))await page.screenshot({path:'artifacts/visual-pilot/prompt-discovery-'+w+'.png'});
    }
    await page.setViewportSize({width,height});
   }
