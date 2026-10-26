@@ -163,6 +163,18 @@ function industryCasePage(c){
 
 function businessTile(b){return `<a class="business-card" href="#forretning/${esc(b.id)}"><div class="business-card-top"><span class="badge grey">${esc(b.area)}</span><span class="business-arrow">${ico('arrow-right')}</span></div><h3>${esc(b.headline)}</h3><p class="business-quote">${esc(b.says)}</p><p class="fineprint">Hvem: ${esc(b.role)}</p><span class="business-cta">Se mulige behov og spørsmål ${ico('arrow-right')}</span></a>`}
 
+function featuredIndustryCase(){
+ const ui=D.pages.industryUi,c=D.industryUseCases.find(x=>x.id===ui.featuredCaseId);
+ if(!c)return '';
+ const p=D.plays.find(x=>x.id===c.playIds[0]);if(!p)return '';
+ const steps=[[ui.symptom,c.symptom,'symptom'],[ui.data,c.dataHypothesis,'data'],[ui.pilot,c.pilot,'pilot'],[ui.linked,p.name,'play']];
+ return `<section class="featured-industry-case subsection" data-featured-case-id="${esc(c.id)}" aria-labelledby="featured-industry-title">
+ <div class="section-heading"><div><span class="case-role">${esc(ui.example)}</span><h2 id="featured-industry-title">${esc(ui.featuredTitle)}</h2><p>${esc(D.pages.copy.industryCasesSourceNote)}</p></div></div>
+ <h3 class="featured-industry-case-title">${esc(c.title)}</h3>
+ <div class="featured-industry-steps">${steps.map(([label,value,id])=>`<article data-featured-step="${id}"><span class="featured-industry-label">${esc(label)}</span><p>${esc(value)}</p></article>`).join('')}</div>
+ <div class="featured-industry-footer"><div class="featured-industry-caution"><strong>${esc(ui.caution)}</strong><p>${esc(c.caution)}</p></div><div class="featured-industry-links"><a class="btn subtle" href="#forretning/case-${esc(c.id)}">${esc(ui.featuredCaseAction)} ${ico('arrow-right')}</a><a class="btn dark" href="#muligheter/${esc(p.id)}">${esc(ui.featuredPlayAction)} ${ico('arrow-right')}</a></div></div></section>`;
+}
+
 function business(){
  const ui=D.pages.industryUi;
  const priority=D.organizationProfile?.focusSectorIds||[];
@@ -171,7 +183,7 @@ function business(){
  const sectors=priority.length
   ?`<div class="section-heading"><h2>${esc(D.organizationProfile.name)}: ${esc(ui.priorityHeading)}</h2></div><div class="sector-grid">${focused.map(industryTile).join('')}</div><section class="subsection"><div class="section-heading"><h2>${esc(ui.otherHeading)}</h2></div><div class="sector-grid">${other.map(industryTile).join('')}</div></section>`
   :`<div class="sector-grid">${D.industrySectors.map(industryTile).join('')}</div>`;
- return `${headerCopy('FORRETNINGSBEHOV')}<section class="industry-intro"><h2>${esc(D.pages.copy.industryCasesTitle)}</h2><p>${esc(D.pages.copy.industryCasesIntro)}</p><p class="fineprint">${esc(D.pages.copy.industryCasesScopeNote)}</p></section>${sectors}${industryJourney()}<section class="subsection"><div class="section-heading"><div><h2>${esc(D.pages.copy.industryCasesExistingTitle)}</h2><p>${esc(D.pages.copy.industryCasesSourceNote)}</p></div></div><div class="business-grid">${D.businessSignals.map(businessTile).join('')}</div></section><section class="subsection"><div class="hint"><b>${esc(D.pages.copy.noEarlySolution.title)}</b> ${esc(D.pages.copy.noEarlySolution.body)}</div></section>`;
+ return `${headerCopy('FORRETNINGSBEHOV')}<section class="industry-intro"><h2>${esc(D.pages.copy.industryCasesTitle)}</h2><p>${esc(D.pages.copy.industryCasesIntro)}</p><p class="fineprint">${esc(D.pages.copy.industryCasesScopeNote)}</p></section>${featuredIndustryCase()}${sectors}${industryJourney()}<section class="subsection"><div class="section-heading"><div><h2>${esc(D.pages.copy.industryCasesExistingTitle)}</h2><p>${esc(D.pages.copy.industryCasesSourceNote)}</p></div></div><div class="business-grid">${D.businessSignals.map(businessTile).join('')}</div></section><section class="subsection"><div class="hint"><b>${esc(D.pages.copy.noEarlySolution.title)}</b> ${esc(D.pages.copy.noEarlySolution.body)}</div></section>`;
 }
 function businessDetail(b){const linked=b.plays.map(id=>D.plays.find(p=>p.id===id)).filter(Boolean);return `<a class="back-link" href="#forretning">${ico('arrow-left')} Tilbake til forretningsbehov</a><section class="detail-banner"><div class="eyebrow">${esc(b.area.toUpperCase())} · ${esc(b.role)}</div><h2>${esc(b.headline)}</h2><div class="quote">${esc(b.says)}</div></section><div class="business-detail-grid"><div><section class="panel"><h3>Hva bør du lytte etter?</h3>${list(b.listen)}<h3 class="section-subtitle">Hvilke spørsmål åpner samtalen?</h3><ol class="question-list">${b.ask.map(q=>`<li>${esc(q)}</li>`).join('')}</ol></section><section class="panel" style="margin-top:16px"><h3>Hva kan ligge bak – sett fra data og analyse?</h3><p>${esc(b.dataNeed)}</p><div class="note-card"><b>Viktig</b>Dette er en hypotese. Avklar behov og årsak før valg av løsning.</div></section></div><aside><section class="panel"><h3>Mulige Innsiktsleveranser</h3>${list(b.opportunities)}<hr class="divider"/><h3>Et relevant neste steg</h3><p>${esc(b.next)}</p></section><section class="panel" style="margin-top:16px"><h3>Relaterte salgsinnganger</h3><div class="related-plays">${linked.map(p=>`<a href="#muligheter/${esc(p.id)}"><strong>${esc(p.name)}</strong>${ico('arrow-right')}</a>`).join('')}</div></section><div class="panel" style="margin-top:16px"><h3>Grunnlag</h3><p class="fineprint">${esc(guidance('not-a-case'))}</p>${sourceLinks(b.sources,D)}</div></aside></div>${relatedPrompt("business")}`}
 

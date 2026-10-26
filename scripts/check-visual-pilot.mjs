@@ -200,6 +200,39 @@ try{
    }
   }
  }finally{sourceBaseServer?.kill();fs.rmSync(sourceBaseDir,{recursive:true,force:true})}
+
+ // P0.2: låst før/etter, fire responsive bredder og begge dypelenker.
+ const beforeDir=fs.mkdtempSync(path.join(os.tmpdir(),'innsikt-case-before-'));let beforeServer;
+ try{
+  execFileSync('git',['fetch','--depth=1','origin','679f9d1bbf9db1785fbc06fbc36c54a011aa48d2'],{stdio:'ignore'});
+  const fd=fs.openSync(path.join(beforeDir,'site.tar'),'w');
+  try{execFileSync('git',['archive','--format=tar','679f9d1bbf9db1785fbc06fbc36c54a011aa48d2','docs'],{stdio:['ignore',fd,'pipe']});}finally{fs.closeSync(fd)}
+  execFileSync('tar',['-xf',path.join(beforeDir,'site.tar'),'-C',beforeDir]);
+  beforeServer=spawn('python3',['-m','http.server','8774','--bind','127.0.0.1','--directory',beforeDir],{stdio:'ignore'});
+  await new Promise(resolve=>setTimeout(resolve,500));
+  for(const width of [320,390,900,1512]){
+   const height=width===320?700:width===390?844:width===900?900:980;
+   for(const [state,url] of [['before','http://127.0.0.1:8774/docs/#forretning'],['after',(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'#forretning']]){
+    const shot=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
+    await shot.goto(url,{waitUntil:'networkidle'});await shot.locator('.sector-card').first().waitFor();
+    await shot.screenshot({path:output+'/case-'+width+'-'+state+'-viewport.png'});
+    if(state==='after'){
+     const panel=shot.locator('[data-featured-case-id="handel-lager"]');await panel.waitFor();
+     assert.ok((await shot.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,'Ingen case-overflyt '+width);
+     assert.equal(await panel.locator('[data-featured-step]').count(),4,'Fire steg '+width);
+     await panel.screenshot({path:output+'/case-'+width+'-featured.png'});
+     await panel.locator('a[href="#forretning/case-handel-lager"]').click();
+     await shot.locator('.business-detail-grid').waitFor();
+     assert.equal((await shot.locator('.detail-banner h2').innerText()).trim(),'Færre utsolgte varer og lavere lagerbinding','Case-lenke '+width);
+     await shot.evaluate(()=>location.hash='#forretning');
+     await shot.locator('a[href="#muligheter/driftsinnsikt"]').click();
+     await shot.waitForFunction(()=>location.hash==='#muligheter/driftsinnsikt'&&document.querySelector('.detail-banner'));
+    }
+    await shot.close();
+   }
+  }
+ }finally{beforeServer?.kill();fs.rmSync(beforeDir,{recursive:true,force:true})}
+
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
  console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
 }finally{await browser.close()}
