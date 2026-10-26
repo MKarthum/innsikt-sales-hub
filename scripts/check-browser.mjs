@@ -283,7 +283,7 @@ try {
   for(const [step,expected] of [['symptom',fc.symptom],['data',fc.dataHypothesis],['pilot',fc.pilot],['play',fp.name]])
    assert.equal((await feature.locator('[data-featured-step="'+step+'"] p').innerText()).trim(),expected,label+': kanonisk '+step);
   assert.ok((await feature.innerText()).includes(fc.caution),label+': viktig forbehold');
-  assert.ok((await feature.innerText()).includes(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).copy.industryCasesSourceNote),label+': ikke reell kundereferanse');
+  assert.ok((await feature.innerText()).includes(JSON.parse(readTechFixture('docs/data/pages.json','utf8')).copy.industryCasesSourceNote),label+': ikke reell kundereferanse');
   assert.equal(await feature.locator('a[href="#forretning/case-handel-lager"]').count(),1,label+': case-lenke');
   assert.equal(await feature.locator('a[href="#muligheter/driftsinnsikt"]').count(),1,label+': salgsinngang');
   assert.ok((await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,label+': case uten overflyt');
