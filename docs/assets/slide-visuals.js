@@ -131,7 +131,7 @@ function render(slide,esc,position={}){
  }
  if(kind==='definition'){
   return block('definition',top+'<h2 class="v2-def-title">'+escs(slide.title)+'</h2>'
-   +'<div class="v2-def-main"><div class="v2-def-word">'+String(v.term||'').trim().split(/\\s+/).map(word=>'<span>'+escs(word)+'</span>').join('')+'</div>'
+   +'<div class="v2-def-main"><div class="v2-def-word">'+String(v.term||'').trim().split(/\s+/).map(word=>'<span>'+escs(word)+'</span>').join('')+'</div>'
    +'<div class="v2-def-lenses">'+(v.roles||[]).map((role,i)=>'<div class="v2-def-lens"><small>'+escs(role)+'</small><strong>'+escs((v.meanings||[])[i])+'</strong></div>').join('')+'</div></div>'
    +'<p class="v2-def-footer">'+escs(v.takeaway||'')+'</p>');
  }
