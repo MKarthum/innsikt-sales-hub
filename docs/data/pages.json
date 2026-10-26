@@ -1086,6 +1086,16 @@
       "playLink": "Se relevant salgsinngang"
     },
     "support": {
+      "signalEyebrow": "KONKRET KUNDESIGNAL",
+      "signalTitle": "Spør videre ut fra det kunden sier",
+      "signalIntro": "Velg et illustrativt signal. Bruk spørsmålene til å utforske behovet, ikke til å fastslå en løsning.",
+      "signalChoose": "Velg en situasjon",
+      "signalQuestions": "Tre spørsmål du kan stille",
+      "signalCaution": "Ikke anta dette",
+      "signalNext": "Mulig neste steg",
+      "signalPlayAction": "Se hele salgsinngangen",
+      "signalTrainingAction": "Øv på denne situasjonen",
+      "generalTitle": "Seks spørsmål som passer i alle samtaler",
       "eyebrow": "SAMTALESTØTTE",
       "heading": "Gode spørsmål før kundemøtet",
       "intro": "Bruk spørsmålene som en fleksibel huskeliste, ikke som et intervju som må gjennom alle punktene. Finn det som er viktig i akkurat denne samtalen.",

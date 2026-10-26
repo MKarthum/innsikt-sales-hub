@@ -753,6 +753,27 @@ textarea.prompt-var-input{min-height:78px}
 .dialogue-debrief-body li{margin-bottom:8px}
 .dialogue-debrief-body h3{margin:18px 0 6px;color:#1b4650}
 .dialogue-debrief-body a{font-weight:700;color:#176b5a}
+/* Situasjonsbasert samtalestøtte. */
+.dialogue-signal{padding:25px;margin:0 0 26px;min-width:0}
+.dialogue-signal h2{font:800 21px/1.35 Manrope,sans-serif;color:#173e48;margin:10px 0 8px}
+.dialogue-signal>p{color:#526d77;line-height:1.6;margin:0 0 18px}
+.dialogue-signal-label{display:block;font-size:13px;font-weight:800;color:#274c55;margin-bottom:8px}
+.dialogue-signal select{display:block;width:100%;max-width:100%;min-width:0;padding:12px 14px;border:1px solid #abc9c4;border-radius:10px;background:#fff;color:#163e48;font-family:inherit;font-size:14px;font-weight:600;line-height:1.4}
+.dialogue-signal select:focus-visible{outline:3px solid #16886e;outline-offset:3px}
+.dialogue-signal-body{min-width:0}
+.dialogue-signal-body blockquote{margin:20px 0 14px;padding:13px 17px;border-left:4px solid #258e75;background:#eff8f5;border-radius:0 9px 9px 0;font-weight:750;line-height:1.55;color:#174c45}
+.dialogue-signal-steps{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px}
+.dialogue-signal-step{min-width:0;padding:18px;border:1px solid #d9e8e4;border-radius:12px;background:#fbfdfc}
+.dialogue-signal-step h3{font-size:14px;margin:0 0 11px;color:#1a4c52}
+.dialogue-signal-step ol{margin:0;padding-left:20px;color:#2e5059;line-height:1.65}
+.dialogue-signal-step li{margin:0 0 8px}
+.dialogue-signal-step p{margin:0;color:#496671;line-height:1.65}
+.dialogue-signal-next{margin:13px 0 0;padding:15px 18px;background:#edf7f2;border-radius:12px;color:#20534c}
+.dialogue-signal-next strong{display:block;font-size:13px;margin-bottom:5px}
+.dialogue-signal-next p{margin:0;line-height:1.6}
+.dialogue-signal .dialogue-actions{margin:14px 0 0}
+.dialogue-general-heading{font:800 19px/1.35 Manrope,sans-serif;color:#173e48;margin:25px 0 15px}
+@media(max-width:760px){.dialogue-signal{padding:19px}.dialogue-signal-steps{grid-template-columns:1fr}.dialogue-signal-step{padding:16px}}
 .dialogue-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .dialogue-support-item{padding:23px}
 .dialogue-support-item h2{font:800 17px Manrope,sans-serif;margin:9px 0;color:#173e48}

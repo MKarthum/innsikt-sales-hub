@@ -233,6 +233,42 @@ try{
   }
  }finally{beforeServer?.kill();fs.rmSync(beforeDir,{recursive:true,force:true})}
 
+ // P0.3: låst main før/etter og faktisk valg ved fire bredder.
+ const dialogueBefore=fs.mkdtempSync(path.join(os.tmpdir(),'innsikt-dialogue-before-'));let dialogueServer;
+ try{
+  const dialogueBase='e0489280352152ed7b9339632c62ee816a714712';
+  execFileSync('git',['fetch','--depth=1','origin',dialogueBase],{stdio:'ignore'});
+  const fd=fs.openSync(path.join(dialogueBefore,'site.tar'),'w');
+  try{execFileSync('git',['archive','--format=tar',dialogueBase,'docs'],{stdio:['ignore',fd,'pipe']});}finally{fs.closeSync(fd)}
+  execFileSync('tar',['-xf',path.join(dialogueBefore,'site.tar'),'-C',dialogueBefore]);
+  dialogueServer=spawn('python3',['-m','http.server','8775','--bind','127.0.0.1','--directory',dialogueBefore],{stdio:'ignore'});
+  await new Promise(resolve=>setTimeout(resolve,500));
+  for(const width of [320,390,900,1512]){
+   const height=width===320?700:width===390?844:width===900?900:980;
+   let baselineOverflow=0;
+   for(const [state,url] of [['before','http://127.0.0.1:8775/docs/#kundedialog/stotte'],['after',(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'#kundedialog/stotte']]){
+    const shot=await browser.newPage({viewport:{width,height},reducedMotion:'reduce'});
+    await shot.goto(url,{waitUntil:'networkidle'});await shot.locator('.dialogue-support-grid').waitFor();
+    await shot.screenshot({path:output+'/dialogue-'+width+'-'+state+'-viewport.png'});
+    const overflow=await shot.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+    if(state==='before')baselineOverflow=overflow;
+    if(state==='after'){
+     // 900px har allerede global topbar-overflyt på pinned main; denne PR-en skal ikke forverre den.
+     assert.ok(overflow<=Math.max(3,baselineOverflow+1),'Ingen ny overflyt '+width+': før '+baselineOverflow+', etter '+overflow);
+     await shot.locator('[data-dialogue-support-select]').selectOption('ki-data');
+     const body=shot.locator('[data-dialogue-support-play="ki-data"]');
+     assert.equal(await body.locator('[data-dialogue-support-step="questions"] li').count(),3,'Tre spørsmål '+width);
+     await shot.screenshot({path:output+'/dialogue-'+width+'-ki-data-viewport.png'});
+     await shot.locator('.dialogue-signal').screenshot({path:output+'/dialogue-'+width+'-signal-panel.png'});
+     await body.locator('a[href="#kundedialog/tren-scenario-06"]').click();
+     await shot.locator('.dialogue-role-sheet').waitFor();
+     assert.equal(await shot.evaluate(()=>location.hash),'#kundedialog/tren-scenario-06','Treningslenke '+width);
+    }
+    await shot.close();
+   }
+  }
+ }finally{dialogueServer?.kill();fs.rmSync(dialogueBefore,{recursive:true,force:true})}
+
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
  console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
 }finally{await browser.close()}
