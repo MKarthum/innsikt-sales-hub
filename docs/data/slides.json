@@ -719,12 +719,12 @@
           "Tidsbruk"
         ],
         "guardrail": "Godkjente testdata · menneskelig beslutning i hvert steg",
-        "conclusion": "Start lite og la dokumenterte resultater styre neste steg."
+        "conclusion": "En liten test kan forbedre både arbeidsmåte og datagrunnlag."
       },
       "sourceIds": [
         "nist-ai-rmf"
       ],
-      "speakerBase": "I et fiktivt kundeserviceteam fordeles henvendelser manuelt til riktig team. Vi starter med å forstå prosessen og måle dagens kvalitet og tidsbruk. Deretter kan KI foreslå hvilket team en sak hører til på godkjente testdata, men medarbeideren bestemmer fortsatt. Til slutt sammenlignes resultatene og konsekvensene. Kanskje bør vi forbedre definisjoner eller rutiner før videre automatisering, kanskje løsningen gir liten nytte og bør stoppes. Ingen effekt er målt eller lovet. Overgang: En liten test kan også avdekke et behov for bedre datagrunnlag.",
+      "speakerBase": "I et fiktivt kundeserviceteam fordeles henvendelser manuelt til riktig team. Vi starter med å forstå prosessen og måle dagens kvalitet og tidsbruk. Deretter kan KI foreslå hvilket team en sak hører til på godkjente testdata, men medarbeideren bestemmer fortsatt. Til slutt sammenlignes resultatene og konsekvensene. Kanskje bør vi forbedre definisjoner eller rutiner før videre automatisering, kanskje løsningen gir liten nytte og bør stoppes. Den kan også avdekke uklare kategorier eller datagrunnlag som bør undersøkes. Ingen effekt er målt eller lovet. Overgang: En liten test kan også avdekke et behov for bedre datagrunnlag.",
       "topic": "Fag og verdi",
       "keywords": []
     },

@@ -80,3 +80,7 @@ Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md) for 16:9-kontrol
 - Treperspektivbildet om behov/data/KI er tatt ut av hovedhistorien, men forbedret og beholdt i biblioteket.
 - Hovedhistorien slutter med ulike kundesignaler og bare ett portalbilde. Demoen gjennomføres i selve løsningen, ikke som ytterligere statiske lysbilder.
 - Presentasjonstester følger nå kapittel- og objekt-ID-er, ikke dagens plassnummer. Chromium tar bilder av alle hovedfortellingens lysbilder.
+
+## Hovedfortellingen forkortet (v0.18.27)
+
+`ai-improve-data` er beholdt som selvstendig bibliotekobjekt, men fjernet fra det korte hovedløpet. Pilotbildet dekker nå også læring om datagrunnlag. Presentasjonen består av ni lysbilder før demo. Browsertesten kontrollerer den nye tretrinnsscenen med menneskelig kontroll, kvalitets- og tidsmål.

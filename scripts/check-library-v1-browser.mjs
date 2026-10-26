@@ -160,13 +160,15 @@ try{
     assert.equal(await stage.locator('.scene-loop').count(),0,'Generic two-circle loop was replaced');
    }
    if(s.id==='ai-pragmatic'){
-    assert.equal(await stage.locator('.v8-compare-option').count(),2,'Comparison keeps two equally visible methods');
-    assert.equal(await stage.locator('.v8-compare-baseline .v8-compare-flow li').count(),3,'Baseline shows the real human workflow');
-    assert.equal(await stage.locator('.v8-compare-trial .v8-compare-flow li').count(),4,'Trial makes the human decision visible');
-    assert.ok((await stage.locator('.v8-compare-human').innerText()).includes('Medarbeider avgjør'),'Human remains decision-maker');
-    assert.equal(await stage.locator('.v8-compare-metrics strong').count(),2,'Comparison shows two common measures');
-    assert.ok((await stage.locator('.v8-compare-boundary').innerText()).includes('ingen automatisk videresending'),'Comparison states explicit control boundary');
-    assert.ok((await stage.locator('.v8-compare-trial').innerText()).includes('Medarbeider vurderer'),'KI remains a proposal with human review');
+    assert.equal(await stage.locator('.v14-pilot-steps li').count(),3,'Three distinct stages');
+    assert.ok((await stage.locator('.v14-pilot-context').innerText()).includes('FIKTIVT'),'Illustrative scenario');
+    assert.ok((await stage.locator('.v14-pilot-steps li').nth(0).innerText()).includes('dagens arbeid'),'Baseline first');
+    assert.ok((await stage.locator('.v14-pilot-steps li').nth(1).innerText()).includes('ansatte avgjør'),'Human decides');
+    assert.ok((await stage.locator('.v14-pilot-steps li').nth(2).innerText()).includes('Sammenlign og juster'),'Decision after test');
+    const proof=await stage.locator('.v14-pilot-evidence').innerText();
+    assert.ok(proof.includes('Riktig team')&&proof.includes('Tidsbruk'),'Quality and time are measured');
+    assert.ok(proof.includes('menneskelig beslutning'),'No autonomous routing');
+    assert.equal(await stage.locator('.v8-compare-option').count(),0,'Dense comparison is no longer used');
    }
   const inspect=async()=>stage.evaluate(node=>{
    const root=node.querySelector('.story-scene'),r=root.getBoundingClientRect();

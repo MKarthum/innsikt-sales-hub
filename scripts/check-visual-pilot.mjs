@@ -271,5 +271,5 @@ try{
  }finally{dialogueServer?.kill();fs.rmSync(dialogueBefore,{recursive:true,force:true})}
 
  assert.deepEqual(errors,[],'Feilfri Javascript-konsoll');
- console.log('PASS – bibliotekfiltre, tre visuelt renderte slides og mobilvisning');
+ console.log('PASS – bibliotekfiltre, '+decks.innsikt.slides.length+' visuelt renderte slides og mobilvisning');
 }finally{await browser.close()}
