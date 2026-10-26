@@ -337,32 +337,32 @@
   },
   "presentationDecks": {
     "innsikt": {
-      "label": "Hvorfor Innsikt? · hovedfortelling",
+      "label": "Hvorfor Innsikt? · fra marked til kundedialog",
       "audience": "Interne selgere og kundeansvarlige med ulik fagbakgrunn",
-      "intro": "Den sentrale fortellingen: økt KI-kapasitet gir muligheter og risiko – Innsikt setter teknologi, data og beslutninger i sammenheng.",
+      "intro": "En kort fortelling om nye muligheter i markedet, kravene til datagrunnlag og vurdering, og hvorfor kundesamtaler krever flere faglige innganger. Avsluttes med en konkret demonstrasjon av portalen.",
       "narrative": {
         "mode": "storytelling",
-        "use": "Hovedfortelling: fra KI-kapasitet til bedre kundesamtaler.",
-        "centralQuestion": "Hvordan skaper vi bedre innsikt og verdi med data og KI?",
-        "turn": "Stor kapasitet krever kontekst og kompetanse.",
-        "resolution": "Pragmatisk samspill mellom behov, data, analyse og KI.",
-        "story": "Tusen analytikere er et bilde på tilgjengelig kapasitet, ikke en beregning av hvor mange ansatte KI kan erstatte. Poenget er hastigheten og bredden i oppgaver som allerede kan støttes av KI. KI gir oss mulighet til å arbeide raskere med informasjon, analyse og kode. Vi bør ikke forveksle dette med at resultatene alltid er riktige, eller at teknologien erstatter fagkompetanse. Poenget er at kapasiteten er reell og bør brukes der den faktisk skaper verdi. KI øker kapasiteten til analyse og produksjon. Hvor nyttig resultatet blir, avhenger blant annet av problemforståelse, datagrunnlag og kvalitetskontroll. Dette er en faglig vurdering, ikke et dokumentert effektmål. Kunde er et illustrerende eksempel: Tre deler av virksomheten kan bruke samme ord om forskjellige ting, uten at noen tar feil. Når vi skal analysere data på tvers, må vi forstå definisjonen og situasjonen. Løsningen kan være begrepsavklaring, modellering eller enklere endringer – ikke nødvendigvis en ny plattform. Det er lett å gjøre diskusjonen for svart-hvitt: Enten tror vi at KI alene løser alt, eller at alt datagrunnlag må være perfekt før vi kan begynne. Begge tilnærmingene kan bli kostbare og trege. Det riktige omfanget av dataarbeid, analyse, plattform og KI avhenger av hva virksomheten ønsker å oppnå og hvilken risiko som er akseptabel. En pragmatisk vei er å sammenligne en avgrenset KI-støttet oppgave med dagens arbeidsmåte. I et fiktivt kundeserviceeksempel foreslår KI riktig team for en henvendelse, mens en medarbeider fortsatt avgjør. Målet er å undersøke kvalitet og tidsbruk på godkjente testdata, med tydelige grenser før eventuell videre bruk. Ingen effekt er gitt på forhånd. Det er feil å tenke at data må ryddes helt ferdig før KI kan bidra. KI kan støtte koding, dokumentasjon, dataprofilering og kvalitetskontroll når mennesker vurderer og verifiserer resultatene. Slik kan bruk og datagrunnlag forbedres sammen. Verktøy, tilgang og kontroll må tilpasses de faktiske dataene og arbeidsoppgavene. Innsikt-faget kombinerer forståelse av virksomhetens behov med dataarbeid, analyse og KI. Dette er ikke en lineær sjekkliste: KI kan også forbedre datagrunnlaget. Riktig omfang og kontroll avhenger av risiko og faktisk behov. Tre spørsmål kan gjøre et uklart signal mer håndterbart. I et fiktivt eksempel med leveranseforsinkelser avklarer vi konsekvensen, hvilket statusgrunnlag som bør undersøkes, og et mulig mål for tidligere varsling. Det gir grunnlag for å undersøke én konkret arbeidsflyt sammen med kunden, men ingen bekreftet årsak eller teknologianbefaling. Portalen er laget for å gi nye og erfarne selgere støtte i det øyeblikket de trenger den. Når vi kjenner igjen et kundebehov, kan vi hente relevant forklaring, formulere kvalifiserende spørsmål og forberede en god samtale. Den erstatter verken kundedialogen eller ekspertene; den hjelper oss å komme bedre forberedt til begge.",
+        "use": "Åpning før demo: marked og drivere → verdi og kompleksitet → kundedialog → Innsikt-portalen.",
+        "centralQuestion": "Når mulighetene innen data og KI øker, hvordan finner vi riktig problem å løse hos kunden?",
+        "turn": "Kapasitet og teknologi er ikke løsningen i seg selv: Kundens behov, datagrunnlag og risiko avgjør hva vi bør gjøre.",
+        "resolution": "Vi må kunne følge ulike kundesignaler til riktig spørsmål og fagkompetanse. Portalen hjelper oss med akkurat dette.",
+        "story": "Åpne med tusen analytikere som et tankeeksperiment om tilgjengelig kapasitet, ikke erstattede stillinger. KI gjør analyse, kode og utforskning raskere, men markedet endrer seg også gjennom agenter, mer vekt på semantikk og nye samspill mellom data- og KI-plattformer. Dette er utviklingstrekk, ikke krav alle kunder må følge. Mer kapasitet forsterker både gode og dårlige beslutningsgrunnlag. Ulike avdelinger kan dessuten telle det samme på forskjellige måter: En «kunde» kan være en juridisk avtalepart, en fakturamottaker eller en bruker. Perspektivene kan være legitime, men er ikke nødvendigvis samme analyseenhet. Vi må unngå to lite nyttige ytterpunkter: ukritisk automatisering og å utsette all nytte til en fullstendig datamodernisering er ferdig. I stedet starter vi med en konkret arbeidsoppgave, dokumenterer dagens situasjon, tester kontrollert og forbedrer datagrunnlag og arbeidsprosess etter hva vi lærer. Behov, datakvalitet, analyse og faglig vurdering er gjensidig avhengige; KI er et hjelpemiddel på tvers, ikke en likestilt, isolert aktivitet. I kundesamtalen vet vi sjelden om problemet skyldes prosess, definisjoner, data, analyse eller teknologi. Vi må først stille bedre spørsmål, før vi foreslår løsning. Innsikt-portalen gir selgere en praktisk vei fra markedssignal og kundesymptom til spørsmål, faglig støtte og en avgrenset neste handling. Her går vi rett over i demo.",
         "beats": [
           {
             "id": "possibility",
-            "function": "Åpne med mulighet eller konkret kundebehov."
+            "function": "Nye muligheter og markedskrefter."
           },
           {
             "id": "tension",
-            "function": "Vis utfordringen og hvorfor den betyr noe."
+            "function": "Mer kapasitet gjør problemforståelse og datakvalitet viktigere."
           },
           {
             "id": "choices",
-            "function": "Gi pragmatiske alternativer og avklaringer."
+            "function": "Prioriter en konkret arbeidsprosess; test, kontroller og lær."
           },
           {
             "id": "resolution",
-            "function": "Vis verdi og et konkret neste steg."
+            "function": "Kundedialogen har mange innganger – portalen hjelper oss å finne riktig neste spørsmål."
           }
         ]
       },
@@ -371,61 +371,61 @@
           "slideId": "ai-thousand-analysts",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "Begynn rolig og la spørsmålet henge: Tenk om virksomheten fikk tusen nye analytikere i morgen. Ikke besvar det for tidlig. De kan arbeide med analyser og kode, men hva ville dere satt dem til? Fortell at dette er et bilde på kapasitet, ikke et anslag på erstattede ansatte. Overgang: Ny kapasitet. Nye muligheter."
+          "note": "Åpne med tankeeksperimentet, ikke en prognose om jobber. «Hva ville vi bedt dem undersøke?» Overgang: Kapasiteten er ikke bare en metafor; markedet endrer seg."
         },
         {
           "slideId": "ai-capacity-now",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "Her ønsker jeg først begeistringen, ikke forbeholdene. Vi kan utforske mer, få hjelp til kode og analyse og teste ideer raskere enn før. Samtidig er ikke et raskt svar det samme som et riktig svar. Spør hva det faktisk kan gjøre mulig hos kunden. Overgang: Samme kraft kan også gi feil."
+          "note": "KI gjør analyse, koding og utforskning mer tilgjengelig, med krav til kontroll. Ikke gå inn i løsninger ennå. Overgang: Det skjer flere ting i markedet samtidig."
+        },
+        {
+          "slideId": "market-three-forces",
+          "beat": "possibility",
+          "delivery": "tell",
+          "note": "Forklar kort tre utviklingstrekk: agenter, semantikk og plattformkonvergens. De er ikke universelle krav eller bevis for et bestemt kundebehov. Overgang: Flere muligheter kan gi både bedre og dårligere utfall."
         },
         {
           "slideId": "ai-two-directions",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Vend fortellingen fra ren kapasitet til kvalitet: Dette er ikke to ulike teknologier, men to retninger for samme kapasitet. Den kan forsterke innsikt, eller produsere feil og svake svar enda fortere. Vær konkret, ikke dramatisk. Overgang: Hvor kommer egentlig forståelsen fra?"
+          "note": "Den samme kapasiteten kan gjøre gode analyser bedre, men også spre feil premisser raskere. Overgang: Hvorfor er «riktig informasjon» mer komplisert enn det høres ut?"
         },
         {
           "slideId": "data-meaning-customer",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Bruk «kunde» som et hverdagslig eksempel, ikke en komplisert datamodell. Salg, økonomi og kundeservice kan alle mene noe fornuftig med ordet, men betydningen varierer. Da hjelper ikke flere analyser alene. Overgang: Her går diskusjonen ofte i to ytterpunkter."
+          "note": "Presenter tre legitime perspektiver på «kunde» med ulike analyseenheter. Et felles begrep er ikke nødvendigvis en felles definisjon. Avklar hva vi teller før vi sammenligner eller bruker KI. Overgang: Hva gjør vi når datagrunnlaget er ujevnt?"
         },
         {
           "slideId": "ai-two-extremes",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Presiser min nyanse: Jeg irriterer meg over at dette fremstilles svart-hvitt. Vi skal verken sette KI på alt ukritisk eller kreve en komplett dataplattform før vi gjør noe som helst. Det kommer an på behovet og risikoen. Overgang: Hva gjør vi i praksis?"
+          "note": "Ikke lag falsk motsetning mellom KI og datakvalitet. Ytterpunktene er å automatisere uten kontroll eller å vente på et perfekt datagrunnlag. Velg ut fra behov, konsekvens og læring. Overgang: Slik kan vi faktisk starte."
         },
         {
           "slideId": "ai-pragmatic",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Vi trenger ikke et stort KI-program for å lære om én konkret oppgave. Se på det fiktive eksemplet: I dag sorterer medarbeideren henvendelsene. I testen foreslår KI riktig team, men medarbeideren tar fortsatt beslutningen. Mål kvalitet og tidsbruk på sammenlignbare saker, og avklar data og kontroll før start. Det er først resultatet som kan begrunne mer arbeid. Overgang: En slik test kan også avdekke uklare kategorier og mangler i dataene – og KI kan hjelpe oss å forbedre dem."
+          "note": "Bruk ett tydelig, fiktivt eksempel: sortering av kundehenvendelser. Sammenlign dagens arbeid med forslag fra KI, der medarbeideren bestemmer. Mål kvalitet og tidsbruk; det er ikke et løfte om effekt. Overgang: Testen kan også vise hva som må forbedres i grunnlaget."
         },
         {
           "slideId": "ai-improve-data",
           "beat": "choices",
           "delivery": "tell",
-          "note": "Dette er samme fiktive kundesortering som i forrige bilde. Nå ser vi en annen gevinst av en avgrenset test: Den kan avdekke uklare registreringsregler. Pek på de to radene. Er dette en feil? Ikke nødvendigvis. KI foreslår å undersøke forskjellen, mens fagansvarlig avklarer om etikettene er riktige og eventuelt godkjenner en dokumentert regel. Test regelen på nye saker. Påpek at kontroll av tillatte kategorier ikke er det samme som å kontrollere riktig team i hver sak. Vi har ikke dokumentert noen effekt eller automatisk retting. Overgang: Når behov, data og vurdering henger sammen, kan KI bli en nyttig forsterker."
-        },
-        {
-          "slideId": "ai-value-in-context",
-          "beat": "resolution",
-          "delivery": "tell",
-          "note": "Her lander fagligheten. Vi trenger forretningsforståelse, relevant og forståelig data, analyse og god bruk av KI. Det er ikke én bestemt plattform vi selger. Målet er å hjelpe virksomheten å forstå mer og handle bedre. Overgang: Hva betyr dette for dem som møter kundene?"
+          "note": "Fortsett det samme eksemplet: Ulike teametiketter er et spørsmål, ikke automatisk en datafeil. KI kan foreslå kontrollpunkter, men fagfolk må avklare og teste regelen. Ikke bygg mer enn vi har belegg for. Overgang: I kundemøtet kjenner vi sjelden hele årsaken på forhånd."
         },
         {
           "slideId": "seller-better-questions",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Nå er vi hos selgeren. Dette er et fiktivt eksempel: En kunde oppdager leveranseforsinkelser for sent. Spørsmålene avklarer konsekvens, hvilket datagrunnlag som bør undersøkes, og et mulig mål. Legg merke til hva vi ikke vet: årsaken. Neste steg er en avgrenset samtale med prosesseier og dataansvarlig, ikke et KI- eller plattformforslag. Overgang: Derfor har vi en portal som hjelper oss å forberede spørsmålene og finne riktig fagstøtte."
+          "note": "Nå skifter vi eksplisitt fra leveranseeksemplet til selgerens situasjon. Et kundesignal kan skyldes data, prosess, definisjoner eller analyse. Tre spørsmål kan avklare konsekvens, grunnlag og ønsket resultat; ikke velg teknologi først. Overgang: Hvordan hjelper vi selgeren å navigere?"
         },
         {
           "slideId": "portal-purpose",
           "beat": "resolution",
           "delivery": "tell",
-          "note": "Avslutt uten å selge teknologien. Portalen gjør det lettere å kjenne igjen behov, forberede spørsmål og finne faglig fordypning når dere trenger den. Den tar ikke samtalen for oss. Nå viser vi hvordan det ser ut i praksis. Avslutning: Gå over til portal-demoen."
+          "note": "Dette er ikke en ny fagmodell, men broen til demoen. Portalen hjelper oss å identifisere behov, finne spørsmål og hente riktig faglig støtte. Stopp presentasjonen og vis én faktisk oppgave i løsningen."
         }
       ],
       "visualStyle": {
