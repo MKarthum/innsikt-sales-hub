@@ -277,6 +277,23 @@ try {
   await page.evaluate(()=>{location.hash='#forretning'});
   await page.locator('.sector-card').first().waitFor();
   assert.equal(await page.locator('.sector-card').count(),9,label+': bransjeoversikt');
+  const fc=expectedSales.industryUseCases.find(c=>c.id==='handel-lager'),fp=expectedSales.plays.find(p=>p.id===fc.playIds[0]);
+  const feature=page.locator('[data-featured-case-id="handel-lager"]');
+  assert.equal(await feature.count(),1,label+': illustrativ case');
+  for(const [step,expected] of [['symptom',fc.symptom],['data',fc.dataHypothesis],['pilot',fc.pilot],['play',fp.name]])
+   assert.equal((await feature.locator('[data-featured-step="'+step+'"] p').innerText()).trim(),expected,label+': kanonisk '+step);
+  assert.ok((await feature.innerText()).includes(fc.caution),label+': viktig forbehold');
+  assert.ok((await feature.innerText()).includes(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).copy.industryCasesSourceNote),label+': ikke reell kundereferanse');
+  assert.equal(await feature.locator('a[href="#forretning/case-handel-lager"]').count(),1,label+': case-lenke');
+  assert.equal(await feature.locator('a[href="#muligheter/driftsinnsikt"]').count(),1,label+': salgsinngang');
+  assert.ok((await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth))<=3,label+': case uten overflyt');
+  for(const c of expectedSales.industryUseCases){
+   await page.evaluate(id=>location.hash='#forretning/case-'+id,c.id);
+   await page.waitForFunction(id=>location.hash==='#forretning/case-'+id&&document.querySelector('.business-detail-grid'),c.id);
+   assert.equal((await page.locator('.detail-banner h2').innerText()).trim(),c.title,label+': case-rute '+c.id);
+  }
+  await page.evaluate(()=>location.hash='#forretning');await feature.waitFor();
+
   await page.evaluate(()=>{location.hash='#forretning/sektor-transport'});
   await page.locator('.industry-case-card').first().waitFor();
   assert.equal(await page.locator('.industry-case-card').count(),4,label+': transport-caser');
@@ -576,6 +593,19 @@ try {
  assert.equal((await fixturePage.locator('[data-tech-journey-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Teknologikart bruker sales.json hook');
  assert.equal((await fixturePage.locator('[data-tech-journey-step="questions"] li').first().innerText()).trim(),'QA_KANONISK_SPORSMAL_FRA_SALES','Teknologikart bruker sales.json questions');
  await fixture.close();
+
+
+ const industryFixture=await browser.newContext({viewport:{width:390,height:844}});
+ await industryFixture.route('**/data/sales.json',async route=>{
+  const response=await route.fetch(),sales=await response.json();
+  sales.industryUseCases.find(c=>c.id==='handel-lager').pilot='QA_KANONISK_PILOT_FRA_SALES';
+  await route.fulfill({response,body:JSON.stringify(sales)});
+ });
+ const industryPage=await industryFixture.newPage();
+ await industryPage.goto(base+'#forretning',{waitUntil:'networkidle'});
+ await industryPage.locator('[data-featured-case-id="handel-lager"]').waitFor();
+ assert.equal((await industryPage.locator('[data-featured-step="pilot"] p').innerText()).trim(),'QA_KANONISK_PILOT_FRA_SALES','Metamorfisk pilot fra sales.json');
+ await industryFixture.close();
 
  const sourceFixture=await browser.newContext({viewport:{width:390,height:844}});
  await sourceFixture.route('**/data/market.json',async route=>{

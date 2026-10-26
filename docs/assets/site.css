@@ -326,6 +326,26 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 @media(max-width:760px){.sector-grid,.industry-case-grid,.sector-summary-grid,.industry-journey{grid-template-columns:1fr}.industry-intro{padding:17px}.sector-card,.industry-case-card{padding:18px}}
 
 
+
+/* Dataeid, illustrativt eksempel før bransjeoversikten. */
+.featured-industry-case{min-width:0;background:linear-gradient(135deg,#f0faf6,#f9fcfb);border:1px solid #cce6db;border-radius:18px;padding:23px;margin:22px 0 25px}
+.featured-industry-case .section-heading{margin-bottom:15px}
+.featured-industry-case .section-heading h2{margin:5px 0 7px}
+.featured-industry-case .section-heading p{max-width:760px;font-size:12px;line-height:1.6}
+.featured-industry-case-title{font:800 18px/1.4 'Manrope',sans-serif;color:#184d45;margin:0 0 16px}
+.featured-industry-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.featured-industry-steps article{min-width:0;border:1px solid #dcebe5;background:#fff;border-radius:12px;padding:16px}
+.featured-industry-label{display:block;color:#277361;font-size:11px;font-weight:800;line-height:1.4;margin-bottom:8px}
+.featured-industry-steps p{font-size:13px;line-height:1.6;color:#375c60;margin:0;overflow-wrap:anywhere}
+.featured-industry-footer{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:15px}
+.featured-industry-caution{flex:1 1 230px;min-width:0;font-size:12px;line-height:1.6;color:#48676b}
+.featured-industry-caution strong{display:block;color:#245e55}
+.featured-industry-caution p{margin:3px 0 0}
+.featured-industry-links{display:flex;flex-wrap:wrap;gap:9px}
+.featured-industry-links .btn{white-space:normal;text-align:center;justify-content:center}
+@media(max-width:1100px){.featured-industry-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.featured-industry-case{padding:17px}.featured-industry-steps{grid-template-columns:1fr}.featured-industry-links{width:100%}.featured-industry-links .btn{flex:1 1 170px}}
+
 /* Diskret, felles begrepshjelp. */
 .glossary-trigger{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed currentColor;padding:0 0 1px;cursor:help;line-height:inherit;text-align:inherit;border-radius:0;text-decoration:none}
 .glossary-trigger:hover{color:#0e7864;border-bottom-style:solid}

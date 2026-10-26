@@ -41,7 +41,8 @@ for(const c of sales.industryUseCases){
 }
 if(sales.industryJourney?.steps?.length!==4||!str(sales.industryJourney.qualification)||!str(sales.industryJourney.maturityCaution))fail('Mangler forretningsdrevet kvalifiseringsløp');
 const ui=pages.industryUi;
-for(const field of ['homeTitle','homeIntro','sectorCases','symptom','goal','questions','metrics','data','pilot','expand','maturity'])if(!str(ui?.[field]))fail('Mangler bransjevisningsfelt: '+field);
+for(const field of ['homeTitle','homeIntro','sectorCases','symptom','goal','questions','metrics','data','pilot','expand','maturity','featuredTitle','featuredCaseAction','featuredPlayAction'])if(!str(ui?.[field]))fail('Mangler bransjevisningsfelt: '+field);
+if(!str(ui?.featuredCaseId)||!sales.industryUseCases.some(c=>c.id===ui.featuredCaseId))fail('Ukjent featuredCaseId i industryUi: '+String(ui?.featuredCaseId));
 
 ids(market.emergingSignals,'Trendradar');
 if(!pages.headers.TRENDRADAR||!pages.trendRadarUi)fail('Trendradar mangler dataeide overskrifter og UI-etiketter');

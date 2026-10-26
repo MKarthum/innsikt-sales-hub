@@ -866,6 +866,10 @@
     "noticeHeading": "En viktig avgrensning"
   },
   "industryUi": {
+    "featuredCaseId": "handel-lager",
+    "featuredTitle": "Fra mulig problem til første avklaring",
+    "featuredCaseAction": "Utforsk caset",
+    "featuredPlayAction": "Åpne salgsinngangen",
     "homeTitle": "Bransjer der datadrevne forbedringer kan ha verdi",
     "homeIntro": "Hva vil kundens forretning oppnå – før teknologien diskuteres?",
     "actionTitle": "Utforske bransjens forretningsbehov",
