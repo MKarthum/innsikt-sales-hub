@@ -8,12 +8,27 @@ vm.runInNewContext(fs.readFileSync('docs/assets/dialogue.js','utf8'),sandbox,{fi
 const view=sandbox.window.InnsiktDialogue;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const h={esc,ico:()=>'',headerCopy:()=>''};
-const D={scenarios:sales.scenarios,pages};
+const D={scenarios:sales.scenarios,plays:sales.plays,pages};
 assert.equal(sales.scenarios.length,8);
 assert.equal(pages.qualification.items.length,pages.qualification.followUps.length);
 assert.ok(view.render(D,h,'').includes('#kundedialog/trening'));
 assert.ok(view.render(D,h,'stotte').includes(pages.qualification.followUps[0]));
 assert.ok(view.render(D,h,'trening').includes('scenario-08'));
+assert.ok(view.render(D,h,'stotte').includes('data-dialogue-support-select'),'Situasjonsvelger');
+assert.equal((view.render(D,h,'stotte').match(/<option value=/g)||[]).length,sales.plays.length,'Alle signaler');
+for(const p of sales.plays){
+ const html=view.supportBody(D,h,p.id);
+ assert.ok(html.includes('data-dialogue-support-play="'+esc(p.id)+'"'),p.id+': ID');
+ assert.ok(html.includes(esc(p.hook))&&html.includes(esc(p.not))&&html.includes(esc(p.next)),p.id+': dataeier');
+ assert.equal((html.match(/<li>/g)||[]).length,3,p.id+': tre spørsmål');
+ for(const question of p.questions.slice(0,3))assert.ok(html.includes(esc(question)),p.id+': spørsmål');
+ const scenario=sales.scenarios.find(s=>s.play===p.id);
+ if(scenario)assert.ok(html.includes('#kundedialog/tren-'+scenario.id),p.id+': parøvelse');
+}
+const oldQuestion=sales.plays[0].questions[0];sales.plays[0].questions[0]='QA_DIALOGUE_KANONISK';
+assert.ok(view.supportBody(D,h,sales.plays[0].id).includes('QA_DIALOGUE_KANONISK'),'Metamorfisk spørsmål');
+sales.plays[0].questions[0]=oldQuestion;
+
 for(const s of sales.scenarios){
  const t=s.training;
  assert.ok(['start','videre','avansert'].includes(t.level),s.id+': nivå');

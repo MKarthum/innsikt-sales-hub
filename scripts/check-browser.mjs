@@ -237,6 +237,28 @@ try {
   assert.equal(await page.locator('a[href="#prompter/meeting-prep"]').count()>0,true,label+': møtebrief finnes');
   assert.equal(await page.locator('.breadcrumb-trail a[href="#kundedialog"]').count(),1,label+': støtte med foreldrenivå');
   assert.ok((await page.locator('.dialogue-support-grid').innerText()).includes('Hva skjer i dag'),label+': konkrete oppfølgingsspørsmål');
+  // P0.3: valg, tre kanoniske spørsmål, neste steg og parøvelse.
+  const dialogueSelect=page.locator('[data-dialogue-support-select]');
+  assert.equal(await dialogueSelect.locator('option').count(),expectedSales.plays.length,label+': ni situasjoner');
+  const supportHash=await page.evaluate(()=>location.hash);
+  for(const p of expectedSales.plays){
+   await dialogueSelect.selectOption(p.id);
+   const body=page.locator('[data-dialogue-support-play="'+p.id+'"]');await body.waitFor();
+   assert.ok((await body.locator('blockquote').innerText()).includes(p.hook),label+': signal '+p.id);
+   assert.deepEqual((await body.locator('[data-dialogue-support-step="questions"] li').allInnerTexts()).map(x=>x.trim()),p.questions.slice(0,3),label+': tre spørsmål '+p.id);
+   assert.equal((await body.locator('[data-dialogue-support-step="caution"] p').innerText()).trim(),p.not,label+': forbehold '+p.id);
+   assert.equal((await body.locator('[data-dialogue-support-step="next"] p').innerText()).trim(),p.next,label+': neste '+p.id);
+   assert.equal(await body.locator('a[href="#muligheter/'+p.id+'"]').count(),1,label+': salgsinngang '+p.id);
+   const scenario=expectedSales.scenarios.find(x=>x.play===p.id);
+   assert.equal(await body.locator('a[href^="#kundedialog/tren-"]').count(),scenario?1:0,label+': trening '+p.id);
+   assert.equal(await page.evaluate(()=>location.hash),supportHash,label+': hash uendret');
+  }
+  assert.equal(await page.locator('.dialogue-support-item').count(),6,label+': seks generelle spørsmål beholdt');
+  await dialogueSelect.selectOption('ki-data');
+  await page.locator('a[href="#kundedialog/tren-scenario-06"]').click();
+  await page.locator('.dialogue-role-sheet').waitFor();
+  assert.equal(await page.evaluate(()=>location.hash),'#kundedialog/tren-scenario-06',label+': relevant øvelse');
+  await page.evaluate(()=>{location.hash='#kundedialog/stotte'});await dialogueSelect.waitFor();
   if(label==='mobil') {
    await page.locator('#menu-toggle').click();
    assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true','mobilmeny åpner');
@@ -588,6 +610,10 @@ try {
  await fixturePage.locator('[data-play-journey-id="rapportering"]').waitFor();
  assert.equal((await fixturePage.locator('[data-play-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Metamorfisk signal på salgsinnganger følger sales.json uten kopiering');
  assert.equal((await fixturePage.locator('[data-play-journey-next] p').innerText()).trim(),'QA_KANONISK_NESTE_HANDLING_FRA_SALES','Metamorfisk neste handling på salgsinnganger følger sales.json uten kopiering');
+ await fixturePage.evaluate(()=>{location.hash='#kundedialog/stotte'});
+ await fixturePage.locator('[data-dialogue-support-play="rapportering"]').waitFor();
+ assert.equal((await fixturePage.locator('[data-dialogue-support-step="questions"] li').first().innerText()).trim(),'QA_KANONISK_SPORSMAL_FRA_SALES','Samtalestøtte følger sales.json questions');
+ assert.equal((await fixturePage.locator('[data-dialogue-support-step="next"] p').innerText()).trim(),'QA_KANONISK_NESTE_HANDLING_FRA_SALES','Samtalestøtte følger sales.json next');
  await fixturePage.evaluate(()=>{location.hash='#teknologi'});
  await fixturePage.locator('[data-tech-journey-play="rapportering"]').waitFor();
  assert.equal((await fixturePage.locator('[data-tech-journey-step="signal"] blockquote').innerText()).trim(),'QA_KANONISK_SIGNAL_FRA_SALES','Teknologikart bruker sales.json hook');
