@@ -93,3 +93,7 @@ Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md) for 16:9-kontrol
 ## 26.10.2026 – ny hovedfortelling v0.18.32
 
 Åtte bilder i rekkefølgen `ai-thousand-analysts`, `ai-capacity-now`, `market-three-forces`, `insight-value-chain`, `ai-two-directions`, `data-meaning-customer`, `market-priorities`, `portal-purpose`. Åpning beholdt; kapasitetsbildet bredere; markedsbildet forankret i SSB og Gartner; nytt fagkart; skalering har nå en multiplikator og tydelig forgreining; «aktiv kunde» bevart; behovsbildet favner ulike innganger; avslutning inviterer til bruk og live promptdemo. `ai-two-extremes` og `ai-pragmatic` er beholdt i biblioteket, men tatt ut av hovedløpet. Gjenstående risiko: kartet kan være tett på projektor, og markedssignaler trenger muntlig forklaring.
+
+### Testkontrakter v0.18.33
+
+Ny `insight-ecosystem` er nå registrert i scenetesten; arkitekturbrowserens lyse palett teller bibliotekobjektene fra kanoniske data og ikke historisk 39. Lysbildet med illustrative kundesignaler kan ikke regnes som kildedokumentert markedspåstand; faktiske markedsbilder beholder kildekrav.

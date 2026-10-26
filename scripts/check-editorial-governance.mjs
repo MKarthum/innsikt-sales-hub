@@ -52,10 +52,12 @@ for(const s of slides){
   if(['impact','list','road','domains'].includes(v.scene)&&!['meeting-brief','conversation-takeaway','bounded-discovery','controlled-comparison','progressive-pilot','discovery-dialogue','guided-question-pause','knowledge-lookup','readiness-contrast'].includes(v.layout))assert.ok(figures.length>0,'Visual with no semantic reusable assets: '+s.id);
  }
 }
-for(const id of ['market-why-now','market-three-forces','market-customer-pressure','market-priorities']) {
+for(const id of ['market-why-now','market-three-forces','market-customer-pressure']) {
  const slide=slides.find(s=>s.id===id);
  assert.ok(slide&&slide.sourceIds.length,'2026 market claim lacks source: '+id);
 }
+const illustrative=slides.find(s=>s.id==='market-priorities');
+assert.equal(illustrative.visual.signalLabel,'ILLUSTRATIVE UTSAGN','Customer utterances must be marked as illustrative, not sourced factual quotes');
 const redirects=read('pages').retiredSlideRedirects||{};
 for(const [oldId,newId] of Object.entries(redirects)){
  assert.ok(!ids.has(oldId),'Retired object still active: '+oldId);

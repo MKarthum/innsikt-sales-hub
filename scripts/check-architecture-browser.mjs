@@ -172,7 +172,7 @@ try{
  await page.locator('#library-tone-mode').selectOption('strong');
  assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"strong\"]').count(),allSlides.length);
  await page.locator('#library-tone-mode').selectOption('light');
- assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"light\"]').count(),39);
+ assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"light\"]').count(),allSlides.length);
  for(const [i,s] of list.entries()){
   await page.evaluate(id=>location.hash='#lysbilder/'+id,s.id);
   await page.waitForFunction(title=>document.querySelector('main h1')?.textContent?.trim()===title,s.title);

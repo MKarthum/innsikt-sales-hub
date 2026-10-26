@@ -83,7 +83,7 @@ for(const s of slides.items){
  if(s.scope==='story'&&!pages.presentationDecks[s.storyId])fail('Ukjent lysbildeeier: '+s.id);
  if(!str(s.title)||!str(s.cue)||!['intro','diagram','metric','case','sector-case','bullets','takeaway','prompt','visual','architecture'].includes(s.type))fail('Ugyldig lysbilde: '+s.id);
  if(s.type==='architecture'&&!architectureProfiles.profiles.some(p=>p.id===s.profileId))fail('Ukjent arkitekturprofil: '+s.id);
- if(s.type==='visual'&&(!s.visual||!['analyst-grid','two-directions','value-system','impact','list','road','business-case','definition','contrast','loop','domains','portal'].includes(s.visual.scene)))fail('Ukjent visuell scene: '+s.id);
+ if(s.type==='visual'&&(!s.visual||!['analyst-grid','two-directions','value-system','impact','list','road','business-case','definition','contrast','loop','domains','portal','insight-ecosystem'].includes(s.visual.scene)))fail('Ukjent visuell scene: '+s.id);
  if(!s.topic)fail('Lysbilde mangler tema: '+s.id);
  if(s.diagram&&!ds.has(s.diagram))fail('Ukjent diagram i lysbilde '+s.id);
  if(s.business&&!bs.has(s.business))fail('Ukjent kundesignal i lysbilde '+s.id);
