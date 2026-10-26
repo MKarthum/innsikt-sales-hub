@@ -13,7 +13,60 @@ try{
    await page.waitForFunction(r=>location.hash==='#'+r,route);
    await page.locator('#main h1').first().waitFor();
   };
-  await page.goto(base+'#prompter/account-research',{waitUntil:'networkidle'});
+  // Demoflyt: kanonisk salgsinngang -> behovsprompt -> valgt instruksjon -> eksakt kopiert tekst.
+  // Utsagnet er syntetisk; ingen kundedata skal lagres i URL eller sessionStorage.
+  const example='Vi bruker mye tid på å samle rapporter i Excel';
+  const promptData=await (await page.request.get(base+'data/prompts.json')).json();
+  const options=promptData.choiceGroups.needSituation.options;
+  const verifyInstruction=options.find(option=>option.id==='verify').instruction;
+  const progressInstruction=options.find(option=>option.id==='progress').instruction;
+  assert.ok(verifyInstruction&&progressInstruction&&verifyInstruction!==progressInstruction,label+': dataeide valginstruksjoner er forskjellige');
+  await page.goto(base+'#muligheter/rapportering',{waitUntil:'networkidle'});
+  const discoveryLink=page.locator('#main a[href="#prompter/discovery"]');
+  assert.equal(await discoveryLink.count(),1,label+': rapportering har én lenke til behovsprompten');
+  await discoveryLink.click();
+  await page.locator('[data-context-var="KUNDENS_UTSAGN"]').waitFor();
+  assert.equal(new URL(page.url()).hash,'#prompter/discovery',label+': lenken åpner riktig oppgave');
+  await page.locator('[data-context-var="KUNDENS_UTSAGN"]').fill(example);
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes(example),label+': anonymisert signal inngår i prompten');
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('[BRANSJE]'),label+': tomt valgfritt felt gir ikke rå plassholder');
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('Bransje:'),label+': tomt bransjefelt gir ikke løs ledetekst');
+  await page.locator('[data-prompt-choice="needSituation"][value="verify"]').check();
+  const verifyText=await page.locator('#prompt-editor').inputValue();
+  assert.ok(verifyText.includes(verifyInstruction),label+': hypotesevalg legger til kanonisk instruksjon');
+  assert.ok(verifyText.includes('Ikke anta at kunden trenger'),label+': prompten lover ikke en løsning');
+  await page.locator('[data-prompt-copy]').click();
+  assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),verifyText,label+': verify kopieres eksakt fra editor');
+  await page.locator('[data-prompt-choice="needSituation"][value="progress"]').check();
+  const progressText=await page.locator('#prompt-editor').inputValue();
+  assert.ok(progressText.includes(progressInstruction),label+': neste-steg-valget legger til kanonisk instruksjon');
+  assert.ok(!progressText.includes(verifyInstruction),label+': forrige instruksjon er fjernet');
+  assert.ok(progressText.includes(example),label+': syntetisk signal beholdes ved valgbytte');
+  await page.locator('[data-prompt-copy]').click();
+  assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),progressText,label+': progress kopieres eksakt fra editor');
+  assert.ok(!page.url().includes(example),label+': fritekst er ikke del av URL');
+  const privateStorage=await page.evaluate(()=>sessionStorage.getItem('innsikt-prompt-context-v1')||'');
+  assert.ok(!privateStorage.includes('KUNDENS_UTSAGN')&&!privateStorage.includes(example),label+': fritekst er ikke persistert');
+  if(label==='desktop'){
+   await (await import('node:fs/promises')).mkdir('artifacts/visual-pilot',{recursive:true});
+   await page.waitForTimeout(2800); // Kopi-toast skal ikke dekke kontrollene i skjermbildet.
+   for(const [w,h] of [[320,700],[390,844],[900,900],[1512,980]]){
+    await page.setViewportSize({width:w,height:h});
+    await page.waitForTimeout(350); // Mobilmenyen animeres ut når desktopviewporten krympes.
+    await page.locator('[data-prompt-choice="needSituation"][value="progress"]').scrollIntoViewIfNeeded();
+    const dimensions=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,viewport:innerWidth}));
+    // 900px har en kjent eldre toppmeny-overflyt (#26); dokumenter, men ikke blokker prompttesten.
+    if(w===900&&dimensions.scrollWidth>dimensions.viewport+2)console.warn('KJENT 900px-overflyt: '+JSON.stringify(dimensions));
+    else assert.ok(dimensions.scrollWidth<=dimensions.viewport+2,label+': ingen horisontal overflyt ved '+w+' '+JSON.stringify(dimensions));
+    await page.screenshot({path:'artifacts/visual-pilot/prompt-discovery-'+w+'.png'});
+   }
+   await page.setViewportSize({width,height});
+  }
+  await page.reload({waitUntil:'networkidle'});
+  assert.equal(await page.locator('[data-context-var="KUNDENS_UTSAGN"]').inputValue(),'',label+': anonymisert fritekst slettes ved reload');
+  assert.ok(!page.url().includes(example),label+': URL inneholder aldri syntetisk fritekst');
+  await navigate('prompter/account-research');
+
   await page.locator('#prompt-editor').waitFor({state:'attached'});
   assert.ok(await page.locator('#prompt-preview-lines .prompt-preview-line').count()>=3,label+': synlig instruksjonsoversikt');
   assert.equal(await page.locator('.prompt-live-panel [data-prompt-copy]').count(),0,label+': ingen kopierknapp i forhåndsvisningen');
