@@ -562,7 +562,7 @@ try {
    await offline.locator('#export-prev').click();
    assert.equal((await offline.locator('#export-counter').innerText()).trim(),'1 / '+expectedSlides,label+': offline tilbake '+deck);
    if(label==='desktop'){
-    for(const viewport of [{width:320,height:700},{width:390,height:844},{width:844,height:390},{width:1512,height:980}]){
+    for(const viewport of [{width:320,height:700},{width:390,height:844},{width:844,height:390},{width:900,height:900},{width:1512,height:980}]){
      await page.setViewportSize(viewport);
      await offline.setViewportSize(viewport);
      await page.screenshot({path:exportArtifacts+'/presenter-'+deck+'-'+viewport.width+'.png'});
