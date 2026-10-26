@@ -263,10 +263,35 @@ try {
   assert.equal(await page.evaluate(()=>location.hash),'#kundedialog/tren-scenario-06',label+': relevant øvelse');
   await page.evaluate(()=>{location.hash='#kundedialog/stotte'});await dialogueSelect.waitFor();
   if(label==='mobil') {
-   await page.locator('#menu-toggle').click();
-   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true','mobilmeny åpner');
-   await page.locator('#sidebar-close').click();
-   assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'false','mobilmeny har egen lukkeknapp');
+   const originalViewport=page.viewportSize();
+   for(const menuWidth of [320,390,820]){
+    await page.setViewportSize({width:menuWidth,height:844});
+    await page.locator('#menu-toggle').click();
+    assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'true','mobilmeny åpner ved '+menuWidth+' px');
+    await page.waitForTimeout(250); // La sidemenyens translate-animasjon avsluttes før geometritest.
+    const placement=await page.evaluate(()=>{
+     const rect=el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right,width:r.width,height:r.height}};
+     const closeEl=document.getElementById('sidebar-close');
+     const r=closeEl.getBoundingClientRect();
+     const target=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+     return {brand:rect(document.querySelector('#sidebar .brand')),close:rect(closeEl),
+      nav:rect(document.getElementById('nav-groups')),sidebar:rect(document.getElementById('sidebar')),
+      hit:target===closeEl||closeEl.contains(target),
+      icon:closeEl.querySelector('svg path')?.getAttribute('d')};
+    });
+    assert.ok(placement.close.top>=placement.brand.bottom+4,'lukk dekker ikke logoen ved '+menuWidth+' px: '+JSON.stringify(placement));
+    assert.ok(placement.close.bottom<=placement.nav.top-2,'lukk dekker ikke menypunktene ved '+menuWidth+' px: '+JSON.stringify(placement));
+    assert.ok(placement.close.left>=placement.sidebar.left&&placement.close.right<=placement.sidebar.right,'lukk er helt inne i sidemenyen ved '+menuWidth+' px');
+    assert.ok(placement.close.height>=44&&placement.close.width>=44&&placement.hit,'lukk er synlig og trykkbar ved '+menuWidth+' px');
+    assert.equal(placement.icon,'M5 5 19 19M19 5 5 19','lukk har kryssikon, ikke reserveikon');
+    if(menuWidth!==820){
+     await (await import('node:fs/promises')).mkdir('artifacts/visual-pilot',{recursive:true});
+     await page.screenshot({path:'artifacts/visual-pilot/sidebar-mobile-'+menuWidth+'.png'});
+    }
+    await page.locator('#sidebar-close').click();
+    assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'false','lukk lukker ved '+menuWidth+' px');
+   }
+   await page.setViewportSize(originalViewport);
    await page.locator('#menu-toggle').click();
    await page.locator('#sidebar-backdrop').click({position:{x:385,y:300},force:true});
    assert.equal(await page.locator('#menu-toggle').getAttribute('aria-expanded'),'false','trykk utenfor lukker mobilmeny');
