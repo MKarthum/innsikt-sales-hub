@@ -473,8 +473,31 @@ try {
     assert.ok(inside(m.modal,{left:0,top:0,right:v.width,bottom:v.height}),label+': modal utenfor viewport '+deck+' '+JSON.stringify(m));
     assert.ok(inside(m.slide,m.stage),label+': slide klippes i stage '+deck+' '+JSON.stringify(m));
     assert.ok(inside(m.slide,m.modal),label+': slide utenfor modal '+deck+' '+JSON.stringify(m));
-    assert.ok(inside(m.next,m.modal)&&inside(m.download,m.modal),label+': kontroller utenfor modal '+deck);
-    assert.ok(m.scrollHeight<=m.clientHeight+3,label+': modal trenger scrolling '+deck+' '+JSON.stringify(m));
+    // Ved kort landskap skal scenen ikke presses sammen av notater/eksport.
+    // Sekundærinformasjon kan rulles frem, mens navigasjonen er synlig.
+    if(v.width===844&&v.height===390){
+     assert.ok(m.stage.height>=170&&m.slide.height>=170,label+': lesbar scene i kort landskap '+deck+' '+JSON.stringify(m));
+     assert.ok(inside(m.next,m.modal),label+': navigasjon synlig i kort landskap '+deck);
+     assert.equal(await page.locator('#present-modal .deck-controls').evaluate(el=>getComputedStyle(el).flexWrap),'nowrap',label+': historier kan rulles horisontalt '+deck);
+     const notes=page.locator('#slide-speaker-notes');
+     assert.ok(await notes.isVisible(),label+': presentatørnotater tilgjengelige '+deck);
+     await notes.scrollIntoViewIfNeeded();
+     const notesVisible=await notes.evaluate(el=>{
+      const r=el.getBoundingClientRect(),m=document.getElementById('present-modal').getBoundingClientRect();
+      return r.height>=35&&r.top>=m.top-3&&r.bottom<=m.bottom+3;
+     });
+     assert.ok(notesVisible,label+': notater kan rulles frem '+deck);
+     await page.locator('#deck-download').scrollIntoViewIfNeeded();
+     const downloadVisible=await page.locator('#deck-download').evaluate(el=>{
+      const r=el.getBoundingClientRect(),m=document.getElementById('present-modal').getBoundingClientRect();
+      return r.top>=m.top-3&&r.bottom<=m.bottom+3;
+     });
+     assert.ok(downloadVisible,label+': eksport kan rulles frem '+deck);
+     await page.locator('#present-modal').evaluate(el=>{el.scrollTop=0;});
+    }else{
+     assert.ok(inside(m.next,m.modal)&&inside(m.download,m.modal),label+': kontroller utenfor modal '+deck);
+     assert.ok(m.scrollHeight<=m.clientHeight+3,label+': modal trenger scrolling '+deck+' '+JSON.stringify(m));
+    }
     assert.ok(Math.abs(m.slide.width/m.slide.height-16/9)<0.02,label+': 16:9 ved '+v.width+'×'+v.height);
    }
   }
