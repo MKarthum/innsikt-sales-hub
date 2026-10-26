@@ -511,7 +511,7 @@
         "lead": "Tenk om virksomheten din fikk",
         "number": "1 000",
         "tail": "nye analytikere i morgen.",
-        "tag": "Kapasitet som aldri før"
+        "tag": "En metafor for muligheter – ikke antall stillinger"
       },
       "speakerBase": "Tusen analytikere er et bilde på tilgjengelig kapasitet, ikke en beregning av hvor mange ansatte KI kan erstatte. Poenget er hastigheten og bredden i oppgaver som allerede kan støttes av KI.",
       "sourceIds": []
@@ -532,12 +532,12 @@
       "title": "Du kan skalere innsikt. Du kan også skalere feil.",
       "visual": {
         "scene": "two-directions",
-        "lead": "Den samme kapasiteten kan ta oss i to retninger.",
-        "positive": "Bedre innsikt",
-        "positiveDetail": "Raskere utforskning med kvalitetssikret grunnlag.",
-        "negative": "Flere feil",
-        "negativeDetail": "Flere overbevisende svar bygget på feil premisser.",
-        "center": "KAPASITET"
+        "lead": "Det er bruken og kvaliteten på grunnlaget som avgjør utfallet.",
+        "positive": "Bedre beslutningsgrunnlag",
+        "positiveDetail": "Relevant datagrunnlag og faglig kontroll gjør analysene nyttige.",
+        "negative": "Feil i større tempo",
+        "negativeDetail": "Uklare premisser kan gi raske, overbevisende – og gale – svar.",
+        "center": "SAMME KAPASITET"
       },
       "speakerBase": "KI øker kapasiteten til analyse og produksjon. Hvor nyttig resultatet blir, avhenger blant annet av problemforståelse, datagrunnlag og kvalitetskontroll. Dette er en faglig vurdering, ikke et dokumentert effektmål.",
       "sourceIds": []
@@ -556,17 +556,17 @@
       "type": "visual",
       "tone": "strong",
       "cue": "HVORFOR INNSIKT?",
-      "title": "Behov, kvalitet og vurdering må virke sammen",
+      "title": "God bruk av analyse og KI krever tre avklaringer",
       "visual": {
         "scene": "value-system",
-        "lead": "Det er samspillet som gjør kapasiteten nyttig.",
-        "core": "VERDI",
-        "business": "Avklar behov og konsekvens",
-        "data": "Sikre et egnet datagrunnlag",
-        "ai": "Vurder kvalitet og risiko",
-        "footer": "Analyse og KI kan bidra på tvers – verdien avgjøres av beslutningen."
+        "lead": "Dette er forutsetninger vi vurderer – ikke tre ulike verktøy.",
+        "core": "GOD BRUK",
+        "business": "Hva skal bli bedre?",
+        "data": "Er dataene egnet?",
+        "ai": "Hva må vi kontrollere?",
+        "footer": "Behov, datakvalitet og risiko vurderes samlet. Analyse og KI kan støtte alle tre."
       },
-      "speakerBase": "Innsikt-faget kombinerer forståelse av virksomhetens behov med dataarbeid, analyse og KI. Dette er ikke en lineær sjekkliste: KI kan også forbedre datagrunnlaget. Riktig omfang og kontroll avhenger av risiko og faktisk behov.",
+      "speakerBase": "Dette selvstendige bibliotekbildet viser tre vurderinger før vi bruker analyse eller KI i beslutninger: hvilket behov som skal løses, om datagrunnlaget er egnet, og hvordan nytte og risiko skal vurderes. Analyse og KI er mulige virkemidler på tvers, ikke én av tre sidestilte byggeklosser. Bildet inngår ikke i den korte hovedfortellingen, fordi den allerede dekker denne sammenhengen.",
       "sourceIds": []
     },
     {
@@ -620,25 +620,25 @@
       "tone": "light",
       "type": "visual",
       "cue": "KVALITET OG FORSTÅELSE",
-      "title": "Én «kunde» kan være flere forskjellige analyseenheter",
+      "title": "«Aktiv kunde» kan telles på flere måter",
       "visual": {
         "scene": "definition",
-        "term": "KUNDE",
+        "term": "AKTIV KUNDE",
         "roles": [
           "Salg",
           "Økonomi",
           "Kundeservice"
         ],
         "meanings": [
-          "Avtaleparten",
-          "Den som mottar faktura",
-          "Den som bruker tjenesten"
+          "Kunder med avtale",
+          "Kunder med faktura",
+          "Kunder med kontakt"
         ],
-        "takeaway": "Alle perspektivene kan være riktige – men de kan ikke telles om hverandre.",
+        "takeaway": "Alle kan være relevante definisjoner. De gir ikke nødvendigvis samme tall.",
         "figureAssetId": "data-semantic"
       },
       "sourceIds": [],
-      "speakerBase": "Kunde er et illustrerende eksempel: Tre deler av virksomheten kan bruke samme ord om forskjellige ting, uten at noen tar feil. Når vi skal analysere data på tvers, må vi forstå definisjonen og situasjonen. Løsningen kan være begrepsavklaring, modellering eller enklere endringer – ikke nødvendigvis en ny plattform.",
+      "speakerBase": "«Aktiv kunde» illustrerer at ulike forretningsprosesser kan bruke ulike kriterier for hvem som regnes som aktiv. Salg kan bruke aktive avtaler, økonomi fakturering og kundeservice registrert kontakt. Dette er eksempler, ikke påstander om en bestemt virksomhet. Avklar definisjon, tidsperiode og analyseenhet før tall sammenlignes eller brukes av KI.",
       "topic": "Kvalitet og forståelse",
       "keywords": []
     },
@@ -669,18 +669,18 @@
       "tone": "light",
       "type": "visual",
       "cue": "FAG OG VERDI",
-      "title": "Verken ukritisk automatisering eller evig opprydding gir verdi",
+      "title": "Ikke automatiser blindt. Ikke vent på perfekte data.",
       "visual": {
         "scene": "contrast",
-        "leftTitle": "«Automatiser nå»",
-        "leftText": "Uten klart behov og tilstrekkelig kontroll",
-        "rightTitle": "«Vent til alt er klart»",
-        "rightText": "Nytten utsettes mens alt skal moderniseres",
+        "leftTitle": "For lite kontroll",
+        "leftText": "Vi automatiserer før behovet, risikoen og kvaliteten er avklart.",
+        "rightTitle": "For stor startpakke",
+        "rightText": "Vi utsetter all læring til alt er modernisert.",
         "bridge": "Velg én viktig oppgave. Test trygt. Forbedre grunnlaget underveis.",
         "figureAssetId": "value-compass"
       },
       "sourceIds": [],
-      "speakerBase": "Det er lett å gjøre diskusjonen for svart-hvitt: Enten tror vi at KI alene løser alt, eller at alt datagrunnlag må være perfekt før vi kan begynne. Begge tilnærmingene kan bli kostbare og trege. Det riktige omfanget av dataarbeid, analyse, plattform og KI avhenger av hva virksomheten ønsker å oppnå og hvilken risiko som er akseptabel.",
+      "speakerBase": "Datakvalitet er nødvendig der beslutningen krever det, men ikke alle bruksområder forutsetter total modernisering. Vi skal verken automatisere ukritisk eller gjøre et stort plattformprogram til forutsetning for enhver nytte. Start med en arbeidsoppgave, avklar konsekvens og risiko og la kontrollert læring styre videre investeringer.",
       "topic": "Fag og verdi",
       "keywords": []
     },
@@ -689,49 +689,42 @@
       "scope": "shared",
       "tone": "strong",
       "type": "visual",
-      "cue": "TEST ÉN OPPGAVE",
-      "title": "Test én oppgave før du bygger en stor løsning",
+      "cue": "GRADVIS ENDRING · FIKTIVT EKSEMPEL",
+      "title": "Forbedre én arbeidsprosess – steg for steg",
       "visual": {
         "scene": "road",
-        "layout": "controlled-comparison",
-        "exampleLabel": "FIKTIVT EKSEMPEL",
-        "problem": "Kundeservice bruker tid på å sortere henvendelser.",
-        "hypothesis": "Kan KI foreslå riktig team?",
-        "baseline": {
-          "label": "DAGENS ARBEID",
-          "title": "Medarbeider sorterer",
-          "detail": "Registrer valg og tidsbruk.",
-          "flow": [
-            "Henvendelse",
-            "Medarbeider velger",
-            "Valgt team"
-          ]
-        },
-        "trial": {
-          "label": "AVGRENSET TEST",
-          "title": "KI foreslår team",
-          "detail": "Medarbeider vurderer hvert forslag.",
-          "flow": [
-            "Henvendelse",
-            "KI foreslår",
-            "Medarbeider avgjør",
-            "Valgt team"
-          ]
-        },
-        "measureLabel": "SAMMENLIGN",
-        "measures": [
-          "Treff mot avtalt fasit",
-          "Tid per henvendelse"
+        "layout": "progressive-pilot",
+        "exampleLabel": "FIKTIVT EKSEMPEL · KUNDESERVICE",
+        "problem": "Henvendelser må fordeles til riktig team.",
+        "steps": [
+          {
+            "label": "1 · KARTLEGG",
+            "title": "Forstå dagens arbeid",
+            "detail": "Hvordan sorteres saker nå, og hvor god er treffsikkerheten?"
+          },
+          {
+            "label": "2 · PRØV",
+            "title": "KI foreslår – ansatte avgjør",
+            "detail": "Test på godkjente saker, uten automatisk videresending."
+          },
+          {
+            "label": "3 · VURDER",
+            "title": "Sammenlign og juster",
+            "detail": "Mål kvalitet og tid. Forbedre, utvid eller stopp."
+          }
         ],
-        "guardrail": "Kun godkjente testdata · ingen automatisk videresending",
-        "decisionLabel": "BESLUTNING ETTER TEST",
-        "decision": "Utvid bare hvis nytte, kvalitet og kontroll holder.",
-        "conclusion": "Begynn lite, men avgjør videre arbeid på faktisk resultat."
+        "measureLabel": "FØLG TO MÅL",
+        "measures": [
+          "Riktig team",
+          "Tidsbruk"
+        ],
+        "guardrail": "Godkjente testdata · menneskelig beslutning i hvert steg",
+        "conclusion": "Start lite og la dokumenterte resultater styre neste steg."
       },
       "sourceIds": [
         "nist-ai-rmf"
       ],
-      "speakerBase": "Tenk på et fiktivt kundeserviceteam som bruker tid på å sortere henvendelser. Før vi velger løsning, avklarer vi hva riktig team betyr, hvem som eier kategoriene, og hvordan dagens kvalitet og tidsbruk måles. Så kan vi teste om KI gir nyttige forslag på et lite, representativt utvalg godkjente testdata. En medarbeider kontrollerer fortsatt hvert forslag; vi automatiserer ikke videresendingen. Sammenlign med dagens arbeidsmåte, vurder feil, risiko og ressursbruk, og utvid bare hvis kvalitet, nytte og kontroll er gode nok. Hvis ikke, juster eller stopp. Dette er et tenkt eksempel, ikke et gjennomført prosjekt eller et dokumentert effektresultat. NIST AI RMF er et frivillig rammeverk for risikostyring og evaluering, ikke en kilde til resultatpåstander i dette eksemplet. Overgang: Under testen kan vi oppdage uklare kategorier eller mangelfulle data. KI kan også hjelpe oss å forbedre dette grunnlaget, med verifisering.",
+      "speakerBase": "I et fiktivt kundeserviceteam fordeles henvendelser manuelt til riktig team. Vi starter med å forstå prosessen og måle dagens kvalitet og tidsbruk. Deretter kan KI foreslå hvilket team en sak hører til på godkjente testdata, men medarbeideren bestemmer fortsatt. Til slutt sammenlignes resultatene og konsekvensene. Kanskje bør vi forbedre definisjoner eller rutiner før videre automatisering, kanskje løsningen gir liten nytte og bør stoppes. Ingen effekt er målt eller lovet. Overgang: En liten test kan også avdekke et behov for bedre datagrunnlag.",
       "topic": "Fag og verdi",
       "keywords": []
     },
@@ -741,13 +734,13 @@
       "tone": "light",
       "type": "visual",
       "cue": "KONTROLLERT FORBEDRING",
-      "title": "KI kan foreslå datakvalitetsgrep – fagfolk må verifisere",
+      "title": "En liten test kan også avdekke hva dataene mangler",
       "visual": {
         "scene": "loop",
         "layout": "verified-quality-loop",
         "exampleLabel": "FIKTIVT EKSEMPEL · HENVENDELSESSORTERING",
         "findingLabel": "TESTEN GIR ET SIGNAL",
-        "finding": "Lignende fakturahenvendelser har ulike teametiketter.",
+        "finding": "Lignende fakturasaker er sendt til forskjellige team.",
         "requestColumnLabel": "Henvendelse",
         "teamColumnLabel": "Registrert team",
         "records": [
@@ -761,20 +754,20 @@
           }
         ],
         "aiLabel": "KI FORESLÅR Å UNDERSØKE",
-        "aiProposal": "Bør disse sakene følge samme kategoriregel?",
+        "aiProposal": "Er kriteriene for riktig team tydelige?",
         "reviewLabel": "FAGANSVARLIG VERIFISERER",
-        "review": "Undersøk forskjellen og avklar når hver kategori skal brukes.",
+        "review": "Avklar hvorfor sakene ble fordelt ulikt – det kan være riktig.",
         "resultLabel": "BARE ETTER GODKJENT ENDRING",
-        "result": "Dokumenter regelen og test den mot nye eksempler.",
-        "guardrail": "Ulike etiketter er et signal – ikke bevis på feil.",
-        "conclusion": "Bruk KI til å foreslå hva som bør undersøkes – ikke til å bestemme fasiten."
+        "result": "Dokumenter eventuell ny regel og test den med flere saker.",
+        "guardrail": "Forskjellig team er et signal, ikke et bevis på feil.",
+        "conclusion": "Forbedre arbeidsmåten og datagrunnlaget sammen, med faglig kontroll."
       },
       "sourceIds": [
         "dbt-ai-development",
         "dbt-data-tests",
         "nist-ai-rmf"
       ],
-      "speakerBase": "Vi fortsetter det fiktive eksemplet fra forrige bilde, der KI foreslår hvilket team en henvendelse skal til. I den avgrensede testen ser vi to lignende fakturahenvendelser med ulike teametiketter. Det er ikke i seg selv en feil; det kan finnes saklige forskjeller. KI kan foreslå at dette undersøkes, men skal ikke omklassifisere sakene på egen hånd. En fagansvarlig undersøker eksemplene, avklarer kriteriene og dokumenterer en eventuell godkjent endring. Deretter tester vi regelen mot nye representative eksempler. Datatester kan i tillegg sjekke tillatte verdier og manglende kategorier, men en slik test alene bekrefter ikke at riktig team er valgt. Slik kan KI-assistert utvikling og datakvalitet forbedres sammen – uten å påstå at resultatet er dokumentert eller at KI alltid er nødvendig. dbts produktdokumentasjon viser at KI-assistert generering av tester og dokumentasjon finnes i enkelte verktøy, og beskriver hva datatester faktisk kontrollerer; NIST AI RMF gir prinsipper for verifisering og kontroll. Ingen av kildene dokumenterer dette oppdiktede caset. Overgang: Verdien oppstår når vi kombinerer forretningsforståelse, datagrunnlag, analyse og KI.",
+      "speakerBase": "Vi fortsetter den samme fiktive kundeservicetesten. Under prøvingen dukker to lignende fakturasaker opp med forskjellige teamregistreringer. Dette kan være korrekt, eller skyldes uklare regler. KI kan peke på mulig inkonsistens, men må ikke bestemme hvilken kategori som er riktig. Fagansvarlig undersøker sakene, dokumenterer begrunnelsen og tester en eventuell godkjent forbedring. Poenget er en løkke der prosess, data og KI-støtte utvikles sammen, ikke at KI automatisk reparerer data.",
       "topic": "KI og kapasitet",
       "keywords": []
     },
@@ -995,7 +988,7 @@
       "tone": "strong",
       "type": "visual",
       "cue": "BRUK AV PORTALEN",
-      "title": "Portalen gir en vei fra kundesignal til neste steg",
+      "title": "Én vei gjennom kompleksiteten: finn neste gode spørsmål",
       "visual": {
         "scene": "portal",
         "steps": [
@@ -1003,7 +996,7 @@
           "Finn gode spørsmål",
           "Forbered neste steg"
         ],
-        "footer": "Finn neste gode spørsmål. Ikke selg teknologien før behovet er forstått.",
+        "footer": "Bruk Innsikt som samtalestøtte – gå nå videre til en faktisk oppgave i portalen.",
         "figureAssetId": "product-map",
         "stepAssetIds": [
           "market-signal",
@@ -1012,7 +1005,7 @@
         ]
       },
       "sourceIds": [],
-      "speakerBase": "Portalen er laget for å gi nye og erfarne selgere støtte i det øyeblikket de trenger den. Når vi kjenner igjen et kundebehov, kan vi hente relevant forklaring, formulere kvalifiserende spørsmål og forberede en god samtale. Den erstatter verken kundedialogen eller ekspertene; den hjelper oss å komme bedre forberedt til begge.",
+      "speakerBase": "En selger kan møte rapportering som spriker, forsinkede beslutninger eller et generelt ønske om KI. Det finnes ingen universell startteknologi. Innsikt hjelper med å kjenne igjen behovet, formulere spørsmål, finne fagstoff og forberede en avgrenset oppfølging. Dette bildet er en overgang til demonstrasjon: velg én faktisk oppgave og vis den nå.",
       "topic": "Bruk av portalen",
       "keywords": []
     },
@@ -1309,7 +1302,7 @@
       "tone": "light",
       "type": "visual",
       "cue": "HVA VI SKAL VÆRE GODE PÅ",
-      "title": "Kundens problem avgjør hvor vi starter med data, analyse og KI",
+      "title": "Tre kundesignaler – flere mulige veier videre",
       "topic": "Marked og retning",
       "keywords": [
         "marked",
@@ -1345,7 +1338,7 @@
             "action": "Test forslag til svar med kvalitetssjekk"
           }
         ],
-        "conclusion": "Inngangene er ikke siloer. Ofte trenger kunden flere av dem sammen.",
+        "conclusion": "Inngangene er ikke siloer. Ett behov kan kreve både data, analyse og KI.",
         "figureAssetId": "value-compass"
       }
     },

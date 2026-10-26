@@ -68,3 +68,15 @@ Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md) for 16:9-kontrol
 **Autoritet:** Delte `sources`, `consumers` og `support` finnes kun hos `conceptual`; de to avledede profilene har `baseProfileId` og bare egne særtrekk. `InnsiktContent.expandArchitectureProfiles` gir alle eksisterende profil-/lysbildeforbrukere den samme komplette modellen ved lasting. Metamorfisk test viser at én endring av en felles kilde også endrer begge avledede profiler. Ingen leverandør-/media-ID-er eller eksisterende direkte ruter slettes.
 
 **Kontroller:** PR har release 0.18.8, `node scripts/check.mjs`, Chromium mobil/desktop, eksisterende seks lysbildedetaljer, Presenter, kilde-/assetkontroll og portabel eksport. Siste exact-head CI og faktisk screenshot-vurdering må kontrolleres før merge. Kjente avgrensninger: RAG-/BI-skissene er pedagogiske, ikke komplette tekniske referansearkitekturer; ingen ny, full KI-agentarkitektur er påstått.
+
+## 26.10.2026 – samlet revisjon av hovedfortellingen (v0.18.24)
+
+- Hovedløpet har én sammenhengende kjede: KI-kapasitet → tre markedsdrivere → kvalitet og definisjoner → pragmatisk prosessendring → ulike kundesignaler → én portalbro til demo.
+- Første analytikerrutenettet tegnes med tydelige hoder, skuldre, armer og ben, ikke runde hoder med pilleformede kropper. Illustrasjonen er en metafor, ikke antall stillinger.
+- «Du kan skalere innsikt – og feil» bruker nå en balansert, sammenlignbar todeling uten en dominerende skjematisk linjegraf.
+- Begrepsbildet konkretiserer *aktiv kunde* som tre mulige tellekriterier, ikke tre påstått identiske eller riktige definisjoner.
+- «Fiks alt først» er erstattet med en presis avveining mellom ukritisk automatisering og uhensiktsmessig omfattende forarbeid.
+- Kontrollerte, gradvise endringer i én arbeidsprosess vises i tre forståelige steg. Det påfølgende datakvalitetsbildet viderefører samme fiktive kundeserviceeksempel.
+- Treperspektivbildet om behov/data/KI er tatt ut av hovedhistorien, men forbedret og beholdt i biblioteket.
+- Hovedhistorien slutter med ulike kundesignaler og bare ett portalbilde. Demoen gjennomføres i selve løsningen, ikke som ytterligere statiske lysbilder.
+- Presentasjonstester følger nå kapittel- og objekt-ID-er, ikke dagens plassnummer. Chromium tar bilder av alle hovedfortellingens lysbilder.

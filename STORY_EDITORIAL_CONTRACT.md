@@ -4,7 +4,7 @@ En fortelling er en jobb, ikke en liste med tilgjengelige slides.
 
 | Presentasjon | Selvstendig publikum og jobb | Dramaturgisk poeng | Neste handling |
 |---|---|---|---|
-| Hvorfor Innsikt? | Motivasjon og forståelse for selgere | KI-kapasitet kan gi innsikt eller eskalere feil; data, analyse og pragmatisme avgjør verdien | Still riktigere spørsmål |
+| Hvorfor Innsikt? | Motivasjon og forståelse for selgere | Markedet øker KI-kapasitet og mulige faglige innganger; kundens behov og kvalitet avgjør veien videre | Vis en konkret arbeidsoppgave i Innsikt-portalen |
 | Innsikt, marked og veien videre | Selgere og ledelse som trenger retning | Agenter, semantikk og plattformkonvergens -> kundens faktiske behov -> tre faglige prioriteringer | Vurder datagrunnlag, analyse og KI samlet |
 | Vis løsningen | Kolleger som vil lære selgerportalen | Fra kundesituasjon og prompt til forståelse og neste steg | Vis én konkret oppgave i portalen |
 | Kundeeksempel | Selger med et uavklart behov | Fiktivt rapporteringsproblem -> mulige årsaker -> spørsmål -> avgrenset oppfølging | Planlegg et godt neste møte |

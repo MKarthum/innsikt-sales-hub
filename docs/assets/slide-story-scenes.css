@@ -350,3 +350,20 @@
 .v13-quality-result{background:color-mix(in srgb,var(--pres-fg) 4%,var(--pres-bg));border:1px solid color-mix(in srgb,var(--pres-fg) 23%,transparent)}
 .v13-quality-gate strong{font:750 2.15cqw/1.16 var(--font-display);color:var(--pres-fg)}
 .v13-quality .v5-footer{margin-top:.8cqw;padding-top:.7cqw;min-height:2.8cqw;font-size:1.4cqw}
+
+/* Gradvis prosessforbedring: én arbeidsoppgave, tre kontrollerte steg. */
+.scene-v2.v14-pilot{display:flex;flex-direction:column}
+.v14-pilot-context{display:flex;align-items:baseline;gap:1.7cqw;margin:1.3cqw 0 1.7cqw;min-width:0}
+.v14-pilot-context small{font:770 1.14cqw var(--font-body);letter-spacing:.11em;color:var(--pres-accent);white-space:nowrap}
+.v14-pilot-context strong{font:690 1.78cqw/1.32 var(--font-display);color:var(--pres-fg)}
+.v14-pilot-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6cqw;padding:0;margin:0;list-style:none;min-height:0;flex:1}
+.v14-pilot-steps li{position:relative;display:flex;flex-direction:column;justify-content:center;gap:1.2cqw;padding:2.4cqw;border-radius:1.45cqw;border:1px solid color-mix(in srgb,var(--pres-fg) 14%,transparent);background:color-mix(in srgb,var(--pres-accent) 5%,var(--pres-bg))}
+.v14-pilot-index{font:820 3.3cqw/1 var(--font-display);color:var(--pres-accent)}
+.v14-pilot-steps small{font:790 1.1cqw/1.3 var(--font-body);letter-spacing:.075em;color:var(--pres-accent)}
+.scene-v2 .v14-pilot-steps h3{font:780 2.25cqw/1.1 var(--font-display);letter-spacing:-.04em;color:var(--pres-fg)}
+.scene-v2 .v14-pilot-steps p{font:500 1.48cqw/1.39 var(--font-body);color:var(--pres-muted)}
+.v14-pilot-evidence{display:flex;align-items:center;justify-content:space-between;gap:2cqw;border-top:1px solid color-mix(in srgb,var(--pres-fg) 16%,transparent);padding:1.65cqw 0;margin-top:1.5cqw}
+.v14-pilot-evidence>div{display:flex;align-items:center;gap:1.1cqw}
+.v14-pilot-evidence small{font:780 1.1cqw var(--font-body);letter-spacing:.05em;color:var(--pres-muted)}
+.v14-pilot-evidence strong{font:760 1.68cqw var(--font-display);color:var(--pres-fg)}
+.v14-pilot-evidence p{font:550 1.22cqw/1.3 var(--font-body);color:var(--pres-muted);max-width:38%}

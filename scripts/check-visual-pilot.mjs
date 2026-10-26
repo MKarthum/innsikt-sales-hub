@@ -36,7 +36,7 @@ try{
  await page.locator('[data-slide-reset]').click();
  await page.locator('#present-button').click();
  await page.locator('[data-deck="innsikt"]').click();
- for(let index=1;index<=3;index++){
+ for(let index=1;index<=decks.innsikt.slides.length;index++){
   const slide=page.locator('#slide-body');
   await slide.locator('.story-scene').waitFor();
   const metrics=await slide.evaluate(el=>{
@@ -46,10 +46,11 @@ try{
   });
   assert.ok(Math.abs(metrics.width/metrics.height-16/9)<.02,'Stabilt format '+index);
   assert.ok(metrics.overflowX<=3&&metrics.overflowY<=3,'Ingen avklipping '+index+': '+JSON.stringify(metrics));
-  const artwork=await slide.locator('.scene-analysts-figure, .v5-capacity-layout, .v4-bridge-visual, .scene-duality-graph').first().evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height}});
-  assert.ok(artwork.width>150&&artwork.height>100,'Illustrasjonen må være synlig og stor: '+index+' '+JSON.stringify(artwork));
+  const visual=await slide.locator('.story-scene').first().evaluate(el=>{const rect=el.getBoundingClientRect();return {width:rect.width,height:rect.height,parts:el.children.length,text:(el.textContent||'').trim().length}});
+  assert.ok(visual.width>150&&visual.height>100&&visual.parts>=2&&visual.text>45,
+   'Hvert historiebilde må ha synlig scenestruktur og meningsbærende innhold: '+index+' '+JSON.stringify(visual));
   await slide.screenshot({path:output+'/slide-'+index+'.png'});
-  if(index<3)await page.locator('#slide-next').click();
+  if(index<decks.innsikt.slides.length)await page.locator('#slide-next').click();
  }
  await page.keyboard.press('Escape');
  await page.evaluate(()=>location.hash='#lysbilder/ai-thousand-analysts');

@@ -62,6 +62,13 @@ function render(slide,{v,top,title,escs,assetImage,block,diagram}){
    +'<section class="v9-dialogue-next"><div><small>'+escs(v.nextLabel)+'</small><strong>'+escs(v.nextAction)+'</strong></div><p>'+escs(v.guardrail)+'</p></section>'
    +footer(v.conclusion));
  }
+ case 'progressive-pilot': {
+  return block('special v5-special v14-pilot',top+heading
+   +'<div class="v14-pilot-context"><small>'+escs(v.exampleLabel)+'</small><strong>'+escs(v.problem)+'</strong></div>'
+   +'<ol class="v14-pilot-steps">'+v.steps.map((step,i)=>'<li><span class="v14-pilot-index">'+String(i+1).padStart(2,'0')+'</span><small>'+escs(step.label)+'</small><h3>'+escs(step.title)+'</h3><p>'+escs(step.detail)+'</p></li>').join('')+'</ol>'
+   +'<section class="v14-pilot-evidence"><div><small>'+escs(v.measureLabel)+'</small><strong>'+v.measures.map(escs).join(' · ')+'</strong></div><p>'+escs(v.guardrail)+'</p></section>'
+   +footer(v.conclusion));
+ }
  case 'controlled-comparison': {
   const option=(x,cls)=>section('v8-compare-option '+cls,
    '<small>'+escs(x.label)+'</small><h3>'+escs(x.title)+'</h3><p>'+escs(x.detail)+'</p>'

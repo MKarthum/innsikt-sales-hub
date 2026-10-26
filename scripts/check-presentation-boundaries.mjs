@@ -58,7 +58,12 @@ for(const [id,deck] of Object.entries(pages.presentationDecks)){
  for(let i=1;i<entries.length;i++)if(beats[i]===beats[i-1])assert.equal(model.tone(entries[i],deck,'story'),model.tone(entries[i-1],deck,'story'),
   'No random tone change inside one narrative beat: '+id+'/'+i);
 }
-assert.equal(model.tone(model.resolve(library,pages.presentationDecks.innsikt,'innsikt')[0],pages.presentationDecks.innsikt,'story'),'strong');
-assert.equal(model.tone(model.resolve(library,pages.presentationDecks.innsikt,'innsikt')[2],pages.presentationDecks.innsikt,'story'),'light');
-assert.equal(model.tone(model.resolve(library,pages.presentationDecks.innsikt,'innsikt')[7],pages.presentationDecks.innsikt,'story'),'strong');
+const leadStory=pages.presentationDecks.innsikt;
+const leadEntries=model.resolve(library,leadStory,'innsikt');
+for(const beat of leadStory.narrative.beats){
+ const examples=leadEntries.filter(slide=>slide.beat===beat.id);
+ assert.ok(examples.length>0,'Hvert dramatisk kapittel må ha minst ett bilde: '+beat.id);
+ const expected=leadStory.visualStyle.beats[beat.id]||leadStory.visualStyle.defaultTone;
+ assert.ok(examples.every(slide=>model.tone(slide,leadStory,'story')===expected),'Kapittelstyrt palett: '+beat.id);
+}
 console.log('PASS – offentlig miljø laster ikke privat innhold; internt API er låst til same-origin /internal; gjenbruk, eierregler og kapittelstyrt palett');
