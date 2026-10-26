@@ -49,8 +49,10 @@ try{
   assert.ok(!privateStorage.includes('KUNDENS_UTSAGN')&&!privateStorage.includes(example),label+': fritekst er ikke persistert');
   if(label==='desktop'){
    await (await import('node:fs/promises')).mkdir('artifacts/visual-pilot',{recursive:true});
+   await page.waitForTimeout(2800); // Kopi-toast skal ikke dekke kontrollene i skjermbildet.
    for(const [w,h] of [[320,700],[390,844],[900,900],[1512,980]]){
     await page.setViewportSize({width:w,height:h});
+    await page.waitForTimeout(350); // Mobilmenyen animeres ut når desktopviewporten krympes.
     await page.locator('[data-prompt-choice="needSituation"][value="progress"]').scrollIntoViewIfNeeded();
     const dimensions=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,viewport:innerWidth}));
     // 900px har en kjent eldre toppmeny-overflyt (#26); dokumenter, men ikke blokker prompttesten.
