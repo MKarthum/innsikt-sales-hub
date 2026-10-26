@@ -81,12 +81,12 @@ try{
      await page.evaluate(()=>{location.hash='#oversikt'});
      await page.waitForFunction(()=>location.hash==='#oversikt'&&!!document.querySelector('#main .home-task'));
      await checkTopbar('oversikt',w);
-     await navigate('muligheter/rapportering');
-     await page.locator('#main a[href="#prompter/discovery"]').waitFor();
+     await page.evaluate(()=>{location.hash='#muligheter/rapportering'});
+     await page.waitForFunction(()=>location.hash==='#muligheter/rapportering'&&!!document.querySelector('#main a[href="#prompter/discovery"]'));
      await checkTopbar('muligheter/rapportering',w);
      assert.ok(await page.locator('#crumb a[href="#muligheter"]').count()>0,'detaljruten har klikkbar foreldreside');
-     await navigate('prompter/discovery');
-     await page.locator('[data-context-var="KUNDENS_UTSAGN"]').waitFor();
+     await page.evaluate(()=>{location.hash='#prompter/discovery'});
+     await page.waitForFunction(()=>location.hash==='#prompter/discovery'&&!!document.querySelector('[data-context-var="KUNDENS_UTSAGN"]'));
      for(const id of ['search-button','present-button','feedback-button']){
       await page.locator('#'+id).focus();
       assert.equal(await page.evaluate(()=>document.activeElement?.id),id,id+': tastaturfokus ved 900px');
