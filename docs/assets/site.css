@@ -414,6 +414,26 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
  #present-modal .present-rich .slide-prompt .btn{font-size:11px;min-height:30px;padding:5px 8px}
 }
 
+/* Kort landskap: behold en lesbar scene, la sekundærinformasjon rulle i dialogen.
+   Scenen og navigasjonen prioriteres; notater og eksport er fortsatt tilgjengelige. */
+@media (orientation:landscape) and (max-height:480px) and (min-width:761px){
+ #present-modal:not(.presenter-fullscreen){overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;padding:8px 12px}
+ #present-modal:not(.presenter-fullscreen) .modal-header{margin-bottom:4px}
+ #present-modal:not(.presenter-fullscreen) .modal-header h2{font-size:16px}
+ #present-modal:not(.presenter-fullscreen) .deck-controls{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;gap:5px;margin-bottom:3px;scrollbar-width:thin}
+ #present-modal:not(.presenter-fullscreen) .deck-option{padding:6px 10px;white-space:nowrap;font-size:11px}
+ #present-modal:not(.presenter-fullscreen) .deck-context{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap;margin:0}
+ #present-modal:not(.presenter-fullscreen) .present-stage{flex:0 0 176px;min-height:176px}
+ #present-modal:not(.presenter-fullscreen) .present-controls{position:sticky;bottom:0;z-index:2;background:#fff;margin-top:4px;padding:4px 0;gap:6px}
+ #present-modal:not(.presenter-fullscreen) .present-controls .btn{min-height:32px;padding:5px 10px}
+ #present-modal:not(.presenter-fullscreen) .present-footer{margin-top:4px;gap:12px}
+ #present-modal:not(.presenter-fullscreen) .present-footer>span{display:none}
+ #present-modal:not(.presenter-fullscreen) #slide-speaker-notes{max-height:92px;margin-top:5px;overflow:auto}
+ #present-modal:not(.presenter-fullscreen) .present-export-controls{margin-top:5px;padding-top:5px;gap:6px}
+ #present-modal:not(.presenter-fullscreen) .present-export-controls>span{display:none}
+ #present-modal:not(.presenter-fullscreen) .present-export-controls .btn{min-height:32px;padding:6px 10px}
+}
+
 /* Fullskjerm for Presenter. Hold øvrige kontroller utenfor en ren lysbildeflate. */
 #present-modal .present-controls{gap:10px}
 #present-modal #present-fullscreen-toggle{margin-left:auto;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}

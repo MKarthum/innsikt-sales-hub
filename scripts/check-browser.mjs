@@ -1,6 +1,8 @@
 /* Reelle Chromium-røykprøver for beta. Kjør etter at lokal HTTP-server er startet. */
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {readFileSync as readTechFixture} from 'node:fs';
 import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
@@ -9,7 +11,8 @@ const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','u
 const expectedSlideCount=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.length;
 const expectedSales=JSON.parse(fs.readFileSync('docs/data/sales.json','utf8'));
 const canonicalSlideTitles=new Map(JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.map(x=>[x.id,x.title]));
-const expectedDeckCount=Object.keys(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks).length;
+const expectedDecks=JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks;
+const expectedDeckCount=Object.keys(expectedDecks).length;
 const pages=['oversikt','om-innsikt','ordliste','guide','forretning','muligheter','kundedialog','marked','kompetanse','arkitektur','teknologi','ai','bransje','verktoy','lysbilder','kilder','utvikling','prompter','horisont','trendradar'];
 const details=['forretning/okonomi','forretning/sektor-transport','forretning/case-transport-catering','forretning/case-nett-investering','forretning/sektor-havbruk','muligheter/rapportering','arkitektur/bi','verktoy/first','prompter/account-research'];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
@@ -470,8 +473,31 @@ try {
     assert.ok(inside(m.modal,{left:0,top:0,right:v.width,bottom:v.height}),label+': modal utenfor viewport '+deck+' '+JSON.stringify(m));
     assert.ok(inside(m.slide,m.stage),label+': slide klippes i stage '+deck+' '+JSON.stringify(m));
     assert.ok(inside(m.slide,m.modal),label+': slide utenfor modal '+deck+' '+JSON.stringify(m));
-    assert.ok(inside(m.next,m.modal)&&inside(m.download,m.modal),label+': kontroller utenfor modal '+deck);
-    assert.ok(m.scrollHeight<=m.clientHeight+3,label+': modal trenger scrolling '+deck+' '+JSON.stringify(m));
+    // Ved kort landskap skal scenen ikke presses sammen av notater/eksport.
+    // Sekundærinformasjon kan rulles frem, mens navigasjonen er synlig.
+    if(v.width===844&&v.height===390){
+     assert.ok(m.stage.height>=170&&m.slide.height>=170,label+': lesbar scene i kort landskap '+deck+' '+JSON.stringify(m));
+     assert.ok(inside(m.next,m.modal),label+': navigasjon synlig i kort landskap '+deck);
+     assert.equal(await page.locator('#present-modal .deck-controls').evaluate(el=>getComputedStyle(el).flexWrap),'nowrap',label+': historier kan rulles horisontalt '+deck);
+     const notes=page.locator('#slide-speaker-notes');
+     assert.ok(await notes.isVisible(),label+': presentatørnotater tilgjengelige '+deck);
+     await notes.scrollIntoViewIfNeeded();
+     const notesVisible=await notes.evaluate(el=>{
+      const r=el.getBoundingClientRect(),m=document.getElementById('present-modal').getBoundingClientRect();
+      return r.height>=35&&r.top>=m.top-3&&r.bottom<=m.bottom+3;
+     });
+     assert.ok(notesVisible,label+': notater kan rulles frem '+deck);
+     await page.locator('#deck-download').scrollIntoViewIfNeeded();
+     const downloadVisible=await page.locator('#deck-download').evaluate(el=>{
+      const r=el.getBoundingClientRect(),m=document.getElementById('present-modal').getBoundingClientRect();
+      return r.top>=m.top-3&&r.bottom<=m.bottom+3;
+     });
+     assert.ok(downloadVisible,label+': eksport kan rulles frem '+deck);
+     await page.locator('#present-modal').evaluate(el=>{el.scrollTop=0;});
+    }else{
+     assert.ok(inside(m.next,m.modal)&&inside(m.download,m.modal),label+': kontroller utenfor modal '+deck);
+     assert.ok(m.scrollHeight<=m.clientHeight+3,label+': modal trenger scrolling '+deck+' '+JSON.stringify(m));
+    }
     assert.ok(Math.abs(m.slide.width/m.slide.height-16/9)<0.02,label+': 16:9 ved '+v.width+'×'+v.height);
    }
   }
@@ -523,20 +549,69 @@ try {
   await page.waitForFunction(()=>!document.querySelector('#present-modal.presenter-fullscreen'));
   assert.equal(await page.locator('#present-modal').count(),1,label+': Esc går ut av CSS-fullskjerm uten å lukke Presenter');
   await page.setViewportSize({width,height});
-  await page.locator('[data-deck="portal"]').click();
-  const downloadPromise=page.waitForEvent('download');
-  await page.locator('#deck-download').click();
-  const download=await downloadPromise;
-  assert.ok(download.suggestedFilename().includes(expectedVersion)&&download.suggestedFilename().endsWith('.html'),'versjonert nedlastbar presentasjon');
-  const exported=(await import('node:fs')).readFileSync(await download.path(),'utf8');
-  assert.ok(exported.includes(canonicalSlideTitles.get('portal-opening'))&&exported.includes('Skriv ut / PDF'),'selvstendig HTML-presentasjon');
-  assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,6,'alle seks portal-slides er eksportert');
-  const popupPromise=context.waitForEvent('page');
-  await page.locator('#deck-print').click();
-  const printed=await popupPromise;
-  await printed.waitForFunction(()=>document.querySelectorAll('.export-slide').length===6);
-  assert.ok((await printed.locator('#export-print').count())===1,'utskriftsvisning har PDF-knapp');
-  await printed.close();
+  // Begge demohistorier må kunne eksporteres, åpnes uten portal og skrives ut.
+  // Bruk ekte nedlastet fil, ikke bare tekstsøk i generert HTML.
+  const exportArtifacts='artifacts/visual-pilot';
+  await (await import('node:fs/promises')).mkdir(exportArtifacts,{recursive:true});
+  for(const deck of ['portal','sales']){
+   await page.locator('[data-deck="'+deck+'"]').click();
+   const expectedSlides=expectedDecks[deck].slides.length;
+   const downloadPromise=page.waitForEvent('download');
+   await page.locator('#deck-download').click();
+   const download=await downloadPromise;
+   assert.ok(download.suggestedFilename().includes(expectedVersion)&&download.suggestedFilename().endsWith('.html'),label+': versjonert HTML '+deck);
+   const filePath=path.resolve(exportArtifacts,'offline-'+deck+'.html');
+   await download.saveAs(filePath);
+   const exported=(await import('node:fs')).readFileSync(filePath,'utf8');
+   assert.ok(exported.includes('Skriv ut / PDF')&&exported.includes('class="export-list"'),label+': selvstendig HTML '+deck);
+   assert.equal((exported.match(/class="present-frame present-rich export-slide"/g)||[]).length,expectedSlides,label+': korrekt antall eksporterte slides '+deck);
+   assert.ok(!/<(?:script|link)\b[^>]*\b(?:src|href)\s*=\s*["']https?:/i.test(exported),label+': ingen eksterne kode-/stilavhengigheter '+deck);
+   const offline=await context.newPage();
+   const offlineErrors=[];
+   offline.on('pageerror',e=>offlineErrors.push(e.message));
+   const externalRequests=[];
+   await offline.route(/^https?:\/\//,route=>{externalRequests.push(route.request().url());return route.abort();});
+   await offline.goto(pathToFileURL(filePath).href,{waitUntil:'load'});
+   await offline.locator('.export-slide').first().waitFor();
+   assert.equal(await offline.locator('.export-slide').count(),expectedSlides,label+': faktisk åpnet offline-eksport '+deck);
+   assert.equal((await offline.locator('#export-counter').innerText()).trim(),'1 / '+expectedSlides,label+': startposisjon offline '+deck);
+   assert.equal(await offline.locator('.export-slide:visible').count(),1,label+': ett synlig offline-lysbilde '+deck);
+   if(deck==='sales')assert.ok((await offline.locator('.export-slide').first().innerText()).toLowerCase().includes('fiktiv'),label+': fiktiv-case-merke i offline-eksport');
+   await offline.locator('#export-next').click();
+   assert.equal((await offline.locator('#export-counter').innerText()).trim(),'2 / '+expectedSlides,label+': offline neste-knapp '+deck);
+   await offline.keyboard.press('ArrowRight');
+   assert.equal((await offline.locator('#export-counter').innerText()).trim(),'3 / '+expectedSlides,label+': offline tastaturnavigasjon '+deck);
+   await offline.keyboard.press('ArrowLeft');
+   await offline.locator('#export-prev').click();
+   assert.equal((await offline.locator('#export-counter').innerText()).trim(),'1 / '+expectedSlides,label+': offline tilbake '+deck);
+   if(label==='desktop'){
+    for(const viewport of [{width:320,height:700},{width:390,height:844},{width:844,height:390},{width:900,height:900},{width:1512,height:980}]){
+     await page.setViewportSize(viewport);
+     await offline.setViewportSize(viewport);
+     await page.screenshot({path:exportArtifacts+'/presenter-'+deck+'-'+viewport.width+'.png'});
+     await offline.screenshot({path:exportArtifacts+'/offline-'+deck+'-'+viewport.width+'.png'});
+     assert.ok(await offline.locator('#export-next').isVisible(),label+': offline navigasjon synlig '+deck+' '+viewport.width);
+     const frame=await offline.locator('.export-slide').first().evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height}});
+     assert.ok(Math.abs(frame.width/frame.height-16/9)<0.03,label+': offline 16:9 '+deck+' '+viewport.width+' '+JSON.stringify(frame));
+    }
+    await page.setViewportSize({width,height});
+   }
+   await offline.evaluate(()=>{window.__printCalls=0;window.print=()=>{window.__printCalls++}});
+   await offline.locator('#export-print').click();
+   assert.equal(await offline.evaluate(()=>window.__printCalls),1,label+': offline PDF-/utskriftsknapp '+deck);
+   await offline.emulateMedia({media:'print'});
+   const printLayout=await offline.locator('.export-slide').evaluateAll(nodes=>nodes.map(el=>({display:getComputedStyle(el).display,breakAfter:getComputedStyle(el).breakAfter})));
+   assert.ok(printLayout.every((s,i)=>s.display!=='none'&&(i===printLayout.length-1||s.breakAfter==='page')),label+': alle sider i utskriftsvisning '+deck);
+   assert.deepEqual(offlineErrors,[],label+': offline JavaScript-feil '+deck);
+   assert.deepEqual(externalRequests,[],label+': offline uten nettavhengigheter '+deck);
+   await offline.close();
+   const popupPromise=context.waitForEvent('page');
+   await page.locator('#deck-print').click();
+   const printed=await popupPromise;
+   await printed.waitForFunction(total=>document.querySelectorAll('.export-slide').length===total,expectedSlides);
+   assert.equal(await printed.locator('#export-print').count(),1,label+': utskriftsvindu med PDF-knapp '+deck);
+   await printed.close();
+  }
   await page.locator('#speaker-toggle').check();
   // Kontroller at notatene faktisk inneholder forklaring, eksempel og en bro videre.
   for(const deck of ['portal','sales']){
