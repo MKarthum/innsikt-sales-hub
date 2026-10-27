@@ -20,10 +20,14 @@ for(const f of files){
  const body=f==='site.css'?css.replace(root[0],''):css;
  assert.deepEqual(scan(body),[],f+' literal colors outside :root');
 }
+// Saturation offsets introduce unwanted hue when an organization chooses a neutral role.
+for (const f of files) assert.ok(!/calc\(s\s*[+-]\s*\d/.test(fs.readFileSync('docs/assets/'+f,'utf8')), f+' has additive saturation');
 const exportJS=fs.readFileSync('docs/assets/presenter-export.js','utf8');
 const extra=exportJS.split('const extraCss=[')[1]?.split('].join(')[0];
 assert.ok(extra,'Missing export styles');
+assert.ok(!/calc\(s\s*[+-]\s*\d/.test(extra), 'Export has additive saturation');
 assert.deepEqual(scan(extra),[],'Export styles contain literal colors');
+assert.deepEqual(scan(fs.readFileSync('docs/assets/site.js','utf8')),[], 'Site-generated inline styles contain literal colors');
 assert.deepEqual(scan('.x{color:#aabbcc;background:rgb(1,2,3)}'),['#aabbcc','rgb(1,2,3)']);
 assert.deepEqual(scan('.x{color:hsl(from var(--ink) h s l)}'),[]);
 const fixture=fs.readFileSync('scripts/fixtures/theme-synthetic.css','utf8');

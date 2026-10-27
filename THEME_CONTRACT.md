@@ -18,7 +18,7 @@ Organisasjoner overstyrer bare offentlig deklarerte fargeroller i et **eget stil
 
 Presenter har egne roller `--slide-{strong,light}-{bg,fg,muted,accent,warning}` (10 totalt). I standardpaletten arves `--slide-strong-bg` fra `--navy` og `--slide-light-bg` fra `--surface`. Rollene kan også overstyres selvstendig.
 
-**17 grunnroller og 10 lysbilderoller** er offentlig kontrakt; historiske nyanser beregnes relativt via `hsl(from var(...) ...)`, `rgb(from ...)` eller `color-mix()`. Dermed følger de endringer av paletten. `--teal`, `--lime` og `--surface-secondary` er bakoverkompatible aliaser til `--accent`, `--accent-soft` og `--surface-alt`; ikke overstyr dem. `--arch-muted` er en privat, avledet komponentvariant. Fonter, radius og skyggestørrelse ligger utenfor fargekontrakten.
+**17 grunnroller og 10 lysbilderoller** er offentlig kontrakt; historiske nyanser beregnes relativt via `hsl(from var(...) ...)`, `rgb(from ...)` eller `color-mix()`. Dermed følger de endringer av paletten. Nøytrale roller (metning 0) gir også nøytrale avledede nyanser, uten utilsiktet fargestikk. `--teal`, `--lime` og `--surface-secondary` er bakoverkompatible aliaser til `--accent`, `--accent-soft` og `--surface-alt`; ikke overstyr dem. `--arch-muted` er en privat, avledet komponentvariant. Fonter, radius og skyggestørrelse ligger utenfor fargekontrakten.
 
 ## Organisasjonsstilark
 

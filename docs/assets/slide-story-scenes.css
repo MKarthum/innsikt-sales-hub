@@ -5,7 +5,7 @@
 .v5-heading .v2-headline{font:810 4.15cqw/1.10 var(--font-display);letter-spacing:-.046em;text-wrap:balance;color:var(--pres-fg);max-width:94%}
 .v5-special .v5-footer{box-sizing:border-box;flex:0 0 auto;border-top:1px solid color-mix(in srgb,var(--pres-fg) 20%,transparent);margin:1.3cqw 0 0;padding:1.1cqw 0 .15cqw;font:690 1.62cqw/1.23 var(--font-body);color:var(--pres-muted);min-height:3.8cqw}
 .v5-special small{font:780 1.08cqw/1.18 var(--font-body);letter-spacing:.07em;color:var(--pres-accent)}
-.v5-special .v5-icon,.v5-truth-icon,.v5-gate-icon,.v5-role-icon,.v5-artifact-icon{display:block;object-fit:contain;background:hsl(from var(--paper) calc(h - 4) calc(s + 10.256) calc(l - 0.392));border-radius:.7cqw;box-sizing:border-box;padding:.5cqw;flex:0 0 auto}
+.v5-special .v5-icon,.v5-truth-icon,.v5-gate-icon,.v5-role-icon,.v5-artifact-icon{display:block;object-fit:contain;background:hsl(from var(--paper) calc(h - 4) calc(s * 1.4444267) calc(l - 0.392));border-radius:.7cqw;box-sizing:border-box;padding:.5cqw;flex:0 0 auto}
 .v5-special strong,.v5-special h3{color:var(--pres-fg)}
 /* Portal in-context illustration: explicit input, process, output; not a fake UI screenshot. */
 .v5-product-surface{flex:1;min-height:0;border:1px solid color-mix(in srgb,var(--pres-accent) 36%,transparent);border-radius:1.2cqw;background:color-mix(in srgb,var(--pres-fg) 3%,var(--pres-bg));overflow:hidden;display:flex;flex-direction:column}
