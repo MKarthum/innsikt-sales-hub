@@ -37,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -45,11 +47,18 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Installer Chromium og nettleseravhengigheter
         run: npx playwright install --with-deps chromium
-      - name: Test faktisk mobil- og desktopvisning
+      - name: Start lokal testserver
         run: |
           python3 -m http.server 8769 --bind 127.0.0.1 > /tmp/innsikt-http.log 2>&1 &
           sleep 2
-          npm run check:browser
+      - name: Verifiser tema mot forrige release i Chromium
+        run: |
+          git worktree add --detach /tmp/innsikt-theme-previous HEAD^
+          python3 -m http.server 8770 --bind 127.0.0.1 --directory /tmp/innsikt-theme-previous > /tmp/innsikt-theme-previous-http.log 2>&1 &
+          sleep 2
+          INNSIKT_THEME_BASE_URL=http://127.0.0.1:8770/docs/ node scripts/check-theme-browser.mjs
+      - name: Test faktisk mobil- og desktopvisning
+        run: npm run check:browser
 
       - name: Kontroller visuell presentasjon og lag skjermbilder
         if: always()
@@ -72,5 +81,6 @@ jobs:
             artifacts/visual-pilot/*.png
             artifacts/library-v1/*.png
             artifacts/architecture/*.png
+            artifacts/theme/*.png
           retention-days: 5
           if-no-files-found: warn

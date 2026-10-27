@@ -126,3 +126,7 @@ Kun to aktive fortellinger: produktdemonstrasjon og kort, selvstendig eksempel. 
 ## Oppdatering 25.10.2026 – kjerne og utvidelser
 
 Navigasjon i v0.18.0: Ikke hardkod offentlige menypunkter i HTML; bruk pages.json.navigationSections. Behold eksisterende ruter. Interne organisasjonssider og egne verktøy leveres bare fra beskyttet innholdspakke, aldri fra offentlig kilde. Test v1/v2, ID-kollisjoner og nav-ruter. Se CORE_ORG_BOUNDARY.md.
+
+## Farger og organisasjonspaletter (v0.18.35)
+
+[THEME_CONTRACT.md](THEME_CONTRACT.md) er bindende. Ingen bokstavelige CSS-farger utenfor `site.css` sin `:root`, også i lysbilder og HTML-eksport. Bruk semantiske roller og relative nyanser; kontroller begge presentatørtoner. Ingen organisasjonspalett i offentlig kjerne.

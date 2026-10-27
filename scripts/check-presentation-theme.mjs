@@ -1,7 +1,7 @@
 /* Standardprofilen skal ikke produsere lys tekst på lys flate. */
 import fs from 'node:fs';
 const css=fs.readFileSync('docs/assets/site.css','utf8');
-const root=css.match(/:root\{([^}]*)\}/)?.[1]||'';
+const root=css.match(/:root\s*\{([^}]*)\}/)?.[1]||'';
 const tokens=new Map([...root.matchAll(/(--[a-z0-9-]+):([^;}]*)/g)].map(([,k,v])=>[k,v.trim()]));
 function resolve(name,seen=new Set()){
  if(seen.has(name))throw Error('Sirkel i temavariabel '+name);
