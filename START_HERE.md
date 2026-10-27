@@ -159,3 +159,7 @@ Når produktets førsteside, oppgavekort eller prioriterte funksjoner endres, m�
 ## Oppdatering 25.10.2026 – kjerne og utvidelser
 
 Navigasjon i v0.18.0 eies av docs/data/pages.json.navigationSections. Produktintroduksjonen #om-innsikt og fagkurset #guide er forskjellige. Ordliste ligger på #ordliste. Interne tillegg skal kun komme fra tilgangsstyrt separat repository og schemaVersion 2, se CORE_ORG_BOUNDARY.md.
+
+## Temakontrakt (v0.18.35)
+
+Se [THEME_CONTRACT.md](THEME_CONTRACT.md) før endringer av farger, CSS-komponenter og presentasjoner. Offentlige fargeroller defineres bare i `site.css` sin `:root`; bruk relative avledninger i komponenter. Organisasjoner overstyrer bare disse rollene i et separat stilark lastet sist. Kjør temakontraktstest samt palett-/nettestene.
