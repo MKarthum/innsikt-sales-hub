@@ -393,7 +393,7 @@
 }
 .slide-library-fullscreen-details{
  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
- color:hsl(from var(--on-dark) calc(h - 167.143) calc(s * 0.0000000) calc(l - 7.843));text-decoration:underline;text-underline-offset:3px;
+ color:hsl(from var(--accent-soft) calc(h + 43.588707) calc(s * 0.5719512) calc(l + 5.294255));text-decoration:underline;text-underline-offset:3px;
  font:650 12px var(--font-body);white-space:nowrap
 }
 .slide-library-fullscreen-details:focus-visible{

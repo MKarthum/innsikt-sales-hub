@@ -91,7 +91,7 @@ async function measureText(page){
 }
 // Neutralizing tinted shades derived from pure white necessarily changes a small number
 // of standard-palette pixels; retain a tight average-channel limit as well as the footprint limit.
-const pixelFootprintLimit=.025;
+const pixelFootprintLimit=.008;
 let peakChanged=0,peakAverage=0,pixelComparisons=0;
 function trackDiff(diff){if(!diff.reason){peakChanged=Math.max(peakChanged,diff.changed);peakAverage=Math.max(peakAverage,diff.average);pixelComparisons++}}
 let routeCount=0,aaCount=0,slides=0;
@@ -115,7 +115,7 @@ try{
     const reference=await old.screenshot({animations:'disabled'});
     const diff=await pixelDiff(reference,shot,now);
     trackDiff(diff);
-    assert.ok(!diff.reason&&diff.changed<=pixelFootprintLimit&&diff.average<=.50,
+    assert.ok(!diff.reason&&diff.changed<=pixelFootprintLimit&&diff.average<=.35,
      name+' visual regression '+JSON.stringify(diff));
    }
    const defaultContrast=await measureText(now);
@@ -147,7 +147,7 @@ try{
     const reference=await old.locator('#slide-body').screenshot({animations:'disabled'});
     const diff=await pixelDiff(reference,shot,now);
     trackDiff(diff);
-    assert.ok(!diff.reason&&diff.changed<=pixelFootprintLimit&&diff.average<=.50,
+    assert.ok(!diff.reason&&diff.changed<=pixelFootprintLimit&&diff.average<=.35,
      viewport.name+' presenter '+tone+' visual regression '+JSON.stringify(diff));
    }
    const style=await now.addStyleTag({content:synthetic});
