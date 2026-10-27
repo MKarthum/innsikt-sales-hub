@@ -90,9 +90,9 @@
 .vp-tier{box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;border-radius:.55cqw;padding:1.0cqw 1.05cqw;gap:.5cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 27%,transparent);background:color-mix(in srgb,var(--pres-fg) 5%,var(--pres-bg))}
 .vp-tier>span{font:790 1.35cqw/1.15 var(--font-display)}
 .vp-tier small{font:570 1.02cqw var(--font-body);color:var(--pres-muted)}
-.vp-tier-0{border-left:4px solid hsl(from var(--warn) calc(h - 9.027) calc(s - 27.628) calc(l + 14.314))}
-.vp-tier-1{border-left:4px solid hsl(from var(--muted) calc(h + 8.453) calc(s + 5.139) calc(l + 12.157))}
-.vp-tier-2{border-left:4px solid hsl(from var(--warn) calc(h + 4.962) calc(s - 6.15) calc(l + 20.196))}
+.vp-tier-0{border-left:4px solid hsl(from var(--warn) calc(h - 9.027) calc(s * 0.6073916) calc(l + 14.314))}
+.vp-tier-1{border-left:4px solid hsl(from var(--muted) calc(h + 8.453) calc(s * 1.4306128) calc(l + 12.157))}
+.vp-tier-2{border-left:4px solid hsl(from var(--warn) calc(h + 4.962) calc(s * 0.9126053) calc(l + 20.196))}
 .vp-db-outputs .vp-atom{min-height:0}
 
 /* A single view preference, available at library overview and slide detail. */

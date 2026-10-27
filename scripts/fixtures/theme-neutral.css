@@ -1,0 +1,30 @@
+/* Fully neutral synthetic palette for browser regression tests. Not an organization profile. */
+:root {
+  --ink: #252525;
+  --muted: #787878;
+  --faint: #aaaaaa;
+  --paper: #f9f9f9;
+  --surface: #ffffff;
+  --surface-alt: #f2f2f2;
+  --border: #e5e5e5;
+  --navy: #292929;
+  --navy2: #202020;
+  --accent: #575757;
+  --accent-soft: #e3e3e3;
+  --blue: #848484;
+  --ok: #606060;
+  --warn: #777777;
+  --on-dark: #ffffff;
+  --on-accent: #ffffff;
+  --focus: #b3b3b3;
+  --slide-strong-bg: #292929;
+  --slide-strong-fg: #ffffff;
+  --slide-strong-muted: #dedede;
+  --slide-strong-accent: #e6e6e6;
+  --slide-strong-warning: #d7d7d7;
+  --slide-light-bg: #ffffff;
+  --slide-light-fg: #252525;
+  --slide-light-muted: #6c6c6c;
+  --slide-light-accent: #555555;
+  --slide-light-warning: #656565;
+}
