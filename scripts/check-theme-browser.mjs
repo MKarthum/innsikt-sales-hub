@@ -159,6 +159,7 @@ try{
   }
   await ctx.close();
  }
+ if(previous)assert.equal(pixelComparisons,viewports.length*(pages.length+2),'Missing prior-release pixel comparisons');
  assert.ok(aaCount>=200,'Too few WCAG text samples: '+aaCount);
  assert.deepEqual(violations.slice(0,50),[],violations.length+' WCAG AA regressions (first 50 shown)');
  console.log('PASS – '+routeCount+' mobile/desktop route screenshots; '+slides+' Presenter tone screenshots; '+aaCount+' WCAG AA text pairs; '+(previous?('pixel comparison '+pixelComparisons+' views, max changed '+(peakChanged*100).toFixed(3)+'%, max avg channel delta '+peakAverage.toFixed(4)+'/255'):'prior-version pixel comparison not configured'));
