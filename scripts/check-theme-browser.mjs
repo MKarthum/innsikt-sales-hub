@@ -85,11 +85,12 @@ async function measureText(page){
    if(!b||f[3]!==255)return null;
    const weight=parseInt(cs.fontWeight)||400,size=parseFloat(cs.fontSize);
    const required=(size>=24||(size>=18.667&&weight>=700))?3:4.5;
-   return {i,required,ratio:contrast(f,b),text:el.textContent.trim().slice(0,60)};
+   return {i,required,ratio:contrast(f,b),text:el.textContent.trim().slice(0,60),element:el.tagName.toLowerCase()+'.'+String(el.className).slice(0,80),fg:f,bg:b};
   }).filter(Boolean);
  });
 }
 let routeCount=0,aaCount=0,slides=0;
+const violations=[];
 try{
  for(const viewport of viewports){
   const ctx=await browser.newContext({viewport:{width:viewport.width,height:viewport.height}});
@@ -119,8 +120,7 @@ try{
     const before=defaultContrast[i],after=changedContrast[i];
     if(before.ratio>=before.required+.01){
      aaCount++;
-     assert.ok(after.ratio>=after.required-.005,
-      name+' WCAG regression '+before.text+' '+before.ratio.toFixed(2)+' => '+after.ratio.toFixed(2));
+     if(after.ratio<after.required-.005)violations.push({route:name,text:before.text,element:before.element,fg:before.fg,bg:before.bg,afterFg:after.fg,afterBg:after.bg,before:before.ratio.toFixed(2),after:after.ratio.toFixed(2)});
     }
    }
    if(route==='oversikt'||route==='arkitektur'||route==='lysbilder')
@@ -153,6 +153,7 @@ try{
   await ctx.close();
  }
  assert.ok(aaCount>=200,'Too few WCAG text samples: '+aaCount);
+ assert.deepEqual(violations.slice(0,50),[],violations.length+' WCAG AA regressions (first 50 shown)');
  console.log('PASS – '+routeCount+' mobile/desktop route screenshots; '+slides+' Presenter tone screenshots; '+aaCount+' WCAG AA text pairs; '+(previous?'pixel regression passed':'prior-version pixel comparison not configured'));
 }finally{await browser.close()}
 

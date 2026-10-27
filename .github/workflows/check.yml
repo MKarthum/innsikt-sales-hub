@@ -47,6 +47,12 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Installer Chromium og nettleseravhengigheter
         run: npx playwright install --with-deps chromium
+      - name: Verifiser tema mot forrige release i Chromium
+        run: |
+          git worktree add --detach /tmp/innsikt-theme-previous HEAD^
+          python3 -m http.server 8770 --bind 127.0.0.1 --directory /tmp/innsikt-theme-previous > /tmp/innsikt-theme-previous-http.log 2>&1 &
+          sleep 2
+          INNSIKT_THEME_BASE_URL=http://127.0.0.1:8770/docs/ node scripts/check-theme-browser.mjs
       - name: Test faktisk mobil- og desktopvisning
         run: |
           python3 -m http.server 8769 --bind 127.0.0.1 > /tmp/innsikt-http.log 2>&1 &
@@ -65,12 +71,6 @@ jobs:
       - name: Kontroller og render hele biblioteket
         if: always()
         run: node scripts/check-library-v1-browser.mjs
-      - name: Verifiser tema mot forrige release i Chromium
-        run: |
-          git worktree add --detach /tmp/innsikt-theme-previous HEAD^
-          python3 -m http.server 8770 --bind 127.0.0.1 --directory /tmp/innsikt-theme-previous > /tmp/innsikt-theme-previous-http.log 2>&1 &
-          sleep 2
-          INNSIKT_THEME_BASE_URL=http://127.0.0.1:8770/docs/ node scripts/check-theme-browser.mjs
       - name: Behold skjermbilder for designgjennomgang
         if: always()
         uses: actions/upload-artifact@v4
