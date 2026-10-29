@@ -31,6 +31,7 @@ const deck=data.items.find(x=>x.id==='deck-outline');
 assert.ok(deck.placeholders.includes('FORMIDLINGSFORMÅL')&&!deck.placeholders.includes('MØTEFORMÅL'),'presentasjon må ha eget formidlingsformål');
 const followup=data.items.find(x=>x.id==='followup');
 assert.ok(followup.choiceGroups.includes('contactChannel'),'oppfølging og førstekontakt skal dele kanalvalg');
+assert.equal(ctx.getChoice(followup,'contactChannel'),'email','oppfølging beholder e-post som standardkanal');
 ctx.setChoice(followup,'contactChannel','phone');
 assert.ok(ctx.composeTask(followup,data).includes('muntlig samtaleåpning'),'telefonoppfølging må ikke bli en e-post');
 ctx.setChoice(followup,'contactChannel','email');

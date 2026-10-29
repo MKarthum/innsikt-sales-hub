@@ -293,6 +293,7 @@ try{
   assert.ok(!storedCandidate.includes('CV_KONSULENTNAVN')&&!storedCandidate.includes('CV_FORESPØRSEL'),label+': konsulentnavn og forespørsel er bare i minnet');
   await navigate('prompter');
   await navigate('prompter/followup');
+  assert.equal(await page.locator('[data-prompt-choice="contactChannel"][value="email"]').isChecked(),true,label+': oppfølging beholder e-post som standard');
   await page.locator('[data-prompt-choice="contactChannel"][value="phone"]').check();
   assert.ok((await page.locator('#prompt-preview-lines').innerText()).includes('Telefon'),label+': oppfølging kan være telefon');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('muntlig samtaleåpning'),label+': kanalvalg endrer oppfølging');

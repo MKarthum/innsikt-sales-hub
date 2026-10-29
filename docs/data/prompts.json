@@ -829,7 +829,10 @@
         "NESTE_STEG",
         "MOTTAKERROLLE"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "choiceDefaults": {
+        "contactChannel": "email"
+      }
     },
     {
       "id": "objection-coach",
@@ -1047,9 +1050,9 @@
     },
     {
       "id": "MØTELENGDE",
-      "label": "Møtelengde",
+      "label": "Varighet",
       "group": "meeting",
-      "hint": "Eksempel: 45 minutter",
+      "hint": "For eksempel 45 minutter eller 2 timer",
       "multiline": false,
       "retention": "session",
       "maxLength": 180,
