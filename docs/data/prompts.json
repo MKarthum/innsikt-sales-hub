@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.7.0",
+    "version": "1.8.0",
     "reviewed": "2026-10-29",
     "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
   },
@@ -327,16 +327,17 @@
       "id": "market-prospecting",
       "category": "Forstå kunden",
       "title": "Kartlegg markedet og finn nye kunder",
-      "summary": "Prioriter konkrete virksomheter, dokumenter kjøpssignaler og finn relevante kontaktveier til nye salgsdialoger.",
-      "when": "Når du vil gå fra bransjeresearch til en kort, etterprøvbar liste over hvem som bør kontaktes, hvorfor og hvordan.",
-      "audience": "Salg / marked · 15–30 min",
+      "summary": "Fra bransjesignaler til prioriterte mulige behov og kunder – med valgfri ringeliste og CRM-berikelse.",
+      "when": "Når du vil forstå mulige behov i et helt marked og få konkrete innganger til salgsdialoger.",
+      "audience": "Salg / marked",
       "sourceMode": "public",
       "placeholders": [
         "BRANSJE",
         "GEOGRAFI",
         "SEGMENT",
         "KUNDETYPE",
-        "FAGLIG_FOKUS"
+        "FAGLIG_FOKUS",
+        "ANTALL_VIRKSOMHETER"
       ],
       "essentialPlaceholders": [
         "BRANSJE"
@@ -346,12 +347,19 @@
         "GEOGRAFI",
         "SEGMENT",
         "KUNDETYPE",
-        "FAGLIG_FOKUS"
+        "FAGLIG_FOKUS",
+        "ANTALL_VIRKSOMHETER"
       ],
       "contextVariables": [
         "KUNDEKONTEKST"
       ],
-      "choiceGroups": [],
+      "choiceGroups": [
+        "prospectMode",
+        "prospectCount",
+        "prospectCoverage",
+        "prospectEvidence",
+        "prospectContactQuality"
+      ],
       "formats": [
         "plain",
         "markdown"
@@ -360,21 +368,47 @@
       "reviewed": "2026-10-29",
       "evidence": "assessment",
       "before": [
-        "Oppgi bransje. Norge er standard; segment, kundetype og faglig fokus er valgfrie.",
-        "Bruk et KI-verktøy med ferskt nettsøk. Godkjent CRM-lesetilgang er valgfritt og må være reelt tilgjengelig."
+        "Velg bransje. Norge er standard. Du kan avgrense område, segment, størrelse og faglig fokus.",
+        "Ringeliste er på som standard. Slå den av for en raskere analyse av virksomheter og mulige behov."
       ],
       "review": [
-        "Kontroller at bedrifter, navngitte personer, profiler og kontaktveier har egne, åpne og oppdaterte kilder.",
-        "Ikke kontakt en virksomhet som kan ha intern relasjonsansvarlig før dette er avklart i godkjent miljø.",
-        "Kontroller personvern, markedsføringsregler og kildens bruksvilkår før kontaktdata tas i bruk."
+        "Kan hvert prioritert selskap knyttes til kildebelagt signal, testbar behovshypotese og godt åpningsspørsmål?",
+        "Har resultatet god dekning og tydelige motargumenter uten å forveksle potensial med bekreftet kjøpsbehov?",
+        "Når ringeliste er valgt: kontroller stilling, arbeidsgiver, kilde, kontaktkanal og manuelle søkelenker før bruk.",
+        "Når CRM er valgt: bekreft faktisk tilgang og dokumentert filter før konklusjoner om relasjoner."
       ],
       "promptParts": [
-        "Du er en kildekritisk rådgiver som hjelper konsulentselgere å finne nye, relevante kunder innen dataplattform, datateknikk, analyse, BI og KI. Målet er konkrete, prioriterte salgsdialoger – ikke en lang bransjerapport. Bruk Norge som geografisk standard.\n{{?BRANSJE}}Bransje: [BRANSJE].{{/BRANSJE}}\n{{?GEOGRAFI}}Geografisk avgrensning (overstyrer Norge): [GEOGRAFI].{{/GEOGRAFI}}\n{{?SEGMENT}}Segment: [SEGMENT].{{/SEGMENT}}\n{{?KUNDETYPE}}Type virksomhet: [KUNDETYPE].{{/KUNDETYPE}}\n{{?FAGLIG_FOKUS}}Faglig fokus: [FAGLIG_FOKUS].{{/FAGLIG_FOKUS}}\n",
+        "Du er en kildekritisk salgsanalytiker innen data, dataplattform, datateknikk, BI, analyse og KI. Svar på norsk bokmål. Kartlegg mulige behov og salgsinnganger i HELE markedet, ikke bare selskaper i CRM. Ikke skriv en lang generell bransjerapport. Norge er standard geografi.\n{{?BRANSJE}}Bransje: [BRANSJE].{{/BRANSJE}}\n{{?GEOGRAFI}}Geografisk område: [GEOGRAFI].{{/GEOGRAFI}}\n{{?SEGMENT}}Segment: [SEGMENT].{{/SEGMENT}}\n{{?KUNDETYPE}}Prioritert størrelse/type: [KUNDETYPE].{{/KUNDETYPE}}\n{{?FAGLIG_FOKUS}}Faglig fokus: [FAGLIG_FOKUS].{{/FAGLIG_FOKUS}}\n{{?ANTALL_VIRKSOMHETER}}Egendefinert antall virksomheter (overstyrer valget ved gyldig positivt heltall): [ANTALL_VIRKSOMHETER].{{/ANTALL_VIRKSOMHETER}}\n",
         {
           "$content": "prompt-rule:verified-public",
           "variant": "normal"
         },
-        "\nARBEIDSMÅTE\n1. Undersøk først ferske, etterprøvbare offentlige kilder: bransjemyndigheter, selskapenes rapporter/nettsider, børsmeldinger, nyheter og offentlig utlyste stillinger. Sjekk publiseringsdato og hva kilden faktisk viser. Oppgi kilde-URL og dato for hvert vesentlig signal. Bruk eldre kilder bare når relevant og marker alder. Hvis du mangler nettsøk eller troverdige kilder, forklar begrensningen og lag en verifiseringsplan i stedet for å dikte opp funn.\n2. Forklar kort de viktigste bransjeendringene, delmarkedene og operative utfordringene. Se etter muligheter i forretningsprosessene før du foreslår teknologi. Identifiser kandidater med dokumenterte signaler som strategiske prioriteringer, investeringer, omorganisering eller relevante stillingsutlysninger. Slike signaler er IKKE bevis på behov, budsjett eller kjøpsvilje. Se aktivt etter motargumenter: sterke interne miljøer, etablerte leverandører, nylig fullført satsing eller usikker økonomi.\n3. Undersøk om du i denne autoriserte KI-arbeidsøkten faktisk har godkjent lesetilgang til relevant CRM. Ikke anta integrasjon eller be om å få konfidensielle data kopiert inn i en offentlig portal. Hvis du har tilgang, slå opp bare de aktuelle virksomhetene og noter status (eksisterende kunde, tidligere kunde, prospekt, åpen salgsmulighet eller ingen oppføring), dokumentert relasjonsansvarlig, relevante aktiviteter, datakilde og kontrolltid. Oppgi bare opplysninger du har tilgang til, i godkjent internt miljø. CRM-funn må ikke eksporteres til offentlig repo, delbare lenker eller ubeskyttede filer. Hvis tilgang mangler: skriv «CRM ikke undersøkt – tilgang ikke tilgjengelig», aldri «ingen relasjon». Hvis oppslag ble forsøkt, men er ufullstendig: skriv «CRM delvis undersøkt» og hva som mangler. Hvis oppslag er gjennomført uten treff: skriv «Ingen oppføring funnet i undersøkt CRM», med kildetid og avgrensning, ikke «ingen relasjon». Ingen CRM-skriving, opprettelse av kontaktbase eller automatisk utsending.\n4. Finn faktiske, nåværende kontaktpersoner som eier relevante forretningsprosesser, data/teknologi eller beslutninger. For hver person: navn, dokumentert nåværende stilling, virksomhet og lenke til kilde. Legg til eksakt LinkedIn-profil bare når du kan verifisere at den gjelder rett person; aldri gjett profil-URL eller mønster for e-post. Finn bare lovlig brukbare profesjonelle kontaktveier: «Verifisert – offisiell kilde», «Ubekreftet offentlig oppføring», «Sentralbord» eller «Ingen dokumentert kontaktvei». Merk telefonnummer, type, kilde og kontrolltid; ikke presenter sentralbord som direktelinje. Oppgi manuell kontroll via 1881.no eller tilsvarende bare som kontrollmulighet, ikke som verifisering uten faktisk oppslag. Ikke hent private mobilnumre, omgå vilkår eller skrap sosiale nettverk. Ved usikkerhet: bruk offentlig bedriftssentralbord eller LinkedIn-kontakt uten oppdiktede detaljer. Vurder behandlingsgrunnlag, reservasjoner og markedsføringsregler før oppsøkende kontakt.\n5. Prioriter etter dokumentert relevans, konkret og aktuelt signal, sannsynlig forretningseier, mulighet for å få dialog og vesentlige motargumenter. Når CRM er undersøkt, la aktiv salgsmulighet og intern relasjonsansvarlig styre neste steg; anbefal intern avklaring fremfor parallell kald kontakt. Ikke lag kunstig tallscore. Merk hver vurdering som FAKTA, HYPOTESE eller IKKE UNDERSØKT, og forklar usikkerheten.\nLEVERANSE (hold den kort og operativ)\nA. Markedsbilde på maksimalt åtte linjer med 2–4 kilder og datoer.\nB. Rangert kandidatliste med normalt 5–8 reelle virksomheter, eller færre hvis kildene ikke holder: hvorfor nå, kilde/år, mulig datadrevet forretningsproblem, hva som taler mot, usikkerhet og CRM-status. Skill dokumentert signal fra hypotetisk salgsmulighet.\nC. Prioritert ringeliste med inntil fem faktiske personer eller, der navn mangler, eksplisitte roller. For hver: virksomhet, navn/rolle, begrunnelse, eksakt verifisert LinkedIn-lenke eller «ikke verifisert», telefon/kontaktvei med kvalitetsklasse og kilde eller «ikke funnet», en konkret respektfull samtaleinngang knyttet til dokumentert signal, og neste steg (inkludert eventuell intern avklaring). Oppgi ikke oppdiktede personer, telefonnumre eller tomme lenker. Skill direkte kontakt fra sentralbord.\nD. Avslutt med tre umiddelbare handlinger og de viktigste kontrollspørsmålene før første kontakt. Angi eksplisitt om CRM er undersøkt, mangler eller er delvis undersøkt. Ikke fyll kvoter med svake kandidater. Resultatet er en foreslått ringeliste i dette KI-svaret, ikke en lagret eller oppdatert CRM-liste."
+        "\nMETODE\n1. Forklar kort 2–4 betydningsfulle trender, regulatoriske forhold og prosessutfordringer i bransjen, med etterprøvbare, oppdaterte kilder.\n2. Finn først et bredere univers av reelle virksomheter (gjerne dobbelt så mange som ønsket sluttantall), fordelt på relevante delsegmenter. Velg deretter de mest interessante. Relevant nabogeografi kan inkluderes når det er naturlig, men merk avgrensningen. Ikke la CRM, kjente merkenavn eller en stillingsannonse alene styre utvalget.\n3. For HVER prioritert kandidat: dokumentert signal (URL og publiseringsdato) → konkret forretningsprosess → mulig behov (merket FAKTA eller HYPOTESE) → antatte datakrav → relevant TYPE bistand → ett åpningsspørsmål til forretningseier → sterkeste motargument. Oppgi ikke konkrete referansecaser, teknologivalg eller leveransekapasitet uten dokumentasjon. At kunden rekrutterer kan bety at den bygger eget miljø.\n4. Åpne hele viktige primærkilder (ledelsessider, årsrapporter, pressemeldinger og relevante stillingsannonser) når verktøyene tillater det; ikke konkluder på avkortede søkeutdrag. Prioriter primærkilder og daterte troverdige sekundærkilder fremfor SEO/aggregatorer. Vis KILDEKVALITET (høy/middels/svak), PUBLISERINGSDATO (eller ukjent) og KONTROLLDATO hver for seg. Gamle kilder eller søketreff bekrefter ikke nåværende ansatte. Motstridende opplysninger krever kryssjekk. Skill FAKTA, HYPOTESE og IKKE UNDERSØKT. Ikke finn på selskap, person, behov eller økonomi.\n5. Ranger Høy/Middels/Lav kommersiell relevans etter signal, forretningsproblem, mulig inngang, alternativ forklaring og usikkerhet. Dette er IKKE sannsynlighet for salg. Ikke bruk kunstig tallscore.\nLEVERANSE\nA. Markedsbilde på maks åtte linjer, med 2–4 kilde-URL-er og datoer.\nB. PRIORITERT MARKEDSTABELL: selskap/segment, dokumentert signal + kilde/dato, forretningsprosess, hypotese, datakrav, relevant bistandstype, konkret åpningsspørsmål, motargument og prioritet. Lag klikkbare kildelenker; når opplysningen ikke kan dokumenteres, merk den, ikke bruk oppdiktet URL.\nC. Tre praktiske neste steg, hva som ikke er undersøkt, og kort metodenotat: søkeomfang, kilder, dato, antall identifisert/vurdert/prioritert. Hvis målantallet ikke kan fylles troverdig, lever færre eller del opp arbeidet. Ingen varsler, planlagte oppgaver, kontaktbase eller automatisk utsending. Regneark/CSV kan lages på eksplisitt forespørsel hvis KI-verktøyet støtter filgenerering; aldri påstå at fil finnes uten å ha laget den.\n"
+      ],
+      "choiceDefaults": {
+        "prospectMode": "quick",
+        "prospectCount": "standard",
+        "prospectCoverage": "market",
+        "prospectEvidence": "balanced",
+        "prospectContactQuality": "candidates",
+        "ringelist": true,
+        "crmLookup": false,
+        "format": "markdown",
+        "handoff": false
+      },
+      "toggles": [
+        {
+          "id": "ringelist",
+          "label": "Lag prioritert ringeliste",
+          "hint": "Kan slås av for raskere behovskartlegging uten personresearch.",
+          "instruction": "RINGELISTE: Lag en prioritert tabell med inntil 6–8 konkrete kontaktmuligheter hos toppkandidatene. Kolonner: virksomhet, navn/rolle og status (bekreftet eller kandidat), primærkilde og dato, LinkedIn (verifisert profil hvis faktisk bekreftet, ellers kandidat-URL tydelig merket + manuell søkelenke), profesjonell kontaktvei med type og kilde (direkte arbeidsnummer, sentralbord eller kontaktside), konkret samtaleinngang, neste steg og søkelogg. Åpne hele selskapets ledelsesside når mulig; sjekk ny jobb når persondata kommer fra eldre annonser. Bruk aldri pressetelefon, HR-rekrutteringsnummer eller privat mobil som ordinær salgsinngang. Konstruer aldri personprofil, direkte telefonnummer eller e-postmønster. Lag ved usikkerhet en klikkbar LinkedIn-personsøkslenke med korrekt kodede navn/virksomhet og lenke til https://www.1881.no/ for manuelt oppslag; de er søkeinnganger, ikke bekreftelser. Hvis du ikke kan verifisere en profil eller et nummer, vis likevel den reelle kilden/søket, status og nødvendig manuell kontroll. Følg kildenes vilkår og gjeldende personvern- og markedsføringsregler; ikke skrap eller omgå begrensninger. Ingen tomme felt uten eksplisitt status."
+        },
+        {
+          "id": "crmLookup",
+          "label": "Sjekk godkjent CRM (kun lesing)",
+          "hint": "Valgfritt. Ingen CRM-data i den offentlige portalen.",
+          "instruction": "CRM SOM BERIKELSE, IKKE FILTER: Undersøk markedet bredt før CRM. Hvis KI-verktøyet faktisk har godkjent lesetilgang til CRM via tilgjengelige verktøy/MCP, sjekk de aktuelle selskapene og angi CRM-navn, status, relasjonsansvarlig hvis bekreftet, åpne muligheter, siste aktivitet, kontrolltid og avgrensning. Før du hevder null åpne avtaler, kontroller CRM-skjema, gyldige statusverdier og filter; hvis dette ikke kan verifiseres, skriv «filter ikke verifisert». Skill «CRM ikke undersøkt», «CRM delvis undersøkt» og «Ingen oppføring funnet i undersøkt CRM». Fravær av treff betyr ikke at det aldri har vært kontakt. Selskaper med relasjon kan fortsatt være interessante; anbefal intern avklaring før direkte henvendelse. Gi eventuelle datakvalitetsfunn bare som forslag til manuell kontroll, ikke som CRM-oppdateringer. Ingen skriving, opprettelse, sletting eller utsending. Vis interne detaljer kun i godkjent KI-miljø, aldri i offentlig repo."
+        }
       ]
     },
     {
@@ -1003,7 +1037,14 @@
       "hint": "F.eks. stor industribedrift, mellomstor kommune",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Alle størrelser",
+        "Store konsern",
+        "Mellomstore virksomheter",
+        "Vekstselskaper",
+        "Små og mellomstore bedrifter"
+      ]
     },
     {
       "id": "KUNDENS_UTSAGN",
@@ -1309,7 +1350,14 @@
       "hint": "Standard er Norge. Oppgi annet land eller område ved behov.",
       "multiline": false,
       "retention": "session",
-      "maxLength": 140
+      "maxLength": 140,
+      "suggestions": [
+        "Norge",
+        "Oslo og Akershus",
+        "Bergen og omegn",
+        "Trondheim og Trøndelag",
+        "Norden"
+      ]
     },
     {
       "id": "SEGMENT",
@@ -1318,7 +1366,15 @@
       "hint": "F.eks. banker, forsikring eller kapitalforvaltning.",
       "multiline": false,
       "retention": "session",
-      "maxLength": 160
+      "maxLength": 160,
+      "suggestions": [
+        "Bank",
+        "Forsikring",
+        "Kapitalforvaltning",
+        "Fintech og betaling",
+        "Energi og nett",
+        "Helse"
+      ]
     },
     {
       "id": "FAGLIG_FOKUS",
@@ -1327,7 +1383,23 @@
       "hint": "F.eks. dataplattform, BI eller ansvarlig bruk av KI.",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Hele Innsikt-området",
+        "Dataplattform og datateknikk",
+        "BI og analyse",
+        "KI og automatisering",
+        "Datastyring og kvalitet"
+      ]
+    },
+    {
+      "id": "ANTALL_VIRKSOMHETER",
+      "label": "Egendefinert antall (valgfritt)",
+      "group": "meeting",
+      "hint": "Overstyr nedtrekksvalget, f.eks. 18",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 3
     }
   ],
   "choiceGroups": {
@@ -1616,6 +1688,106 @@
           "id": "standard",
           "label": "Utvidet, ca. 4–5 sider",
           "instruction": "Sikt mot 4–5 sider når dokumentert prosjekterfaring krever det. Behold en leservennlig prioritering og unngå fyllstoff."
+        }
+      ]
+    },
+    "prospectMode": {
+      "label": "Arbeidsform",
+      "hint": "Styrer KI-arbeidet, ikke automatisk bytte av ChatGPT-modus.",
+      "options": [
+        {
+          "id": "quick",
+          "label": "Rask kartlegging",
+          "instruction": "Arbeid i vanlig chat med tilgjengelig nettsøk og åpne kilder. Ikke start grafisk nettleser eller Work. Les primærkilder når mulig, ikke bare søkeutdrag. Hvis søk ikke finnes, oppgi begrensningen og skill uverifiserte forslag fra funn."
+        },
+        {
+          "id": "extended",
+          "label": "Grundig research",
+          "instruction": "Gjør flere søk, åpne hele primærkilder og kryssjekk personer. Nettleser eller Work kan brukes bare fordi dette valget er aktivert, dersom klienten støtter og tillater det. Et kopiert prompt kan ikke selv bytte chatmodus; si fra hvis brukeren må velge Work manuelt. Omgå aldri nettsteders vilkår."
+        }
+      ]
+    },
+    "prospectCount": {
+      "label": "Hvor mange virksomheter?",
+      "hint": "Antallet er et mål, ikke en kvote. Egendefinert antall overstyrer.",
+      "control": "select",
+      "options": [
+        {
+          "id": "standard",
+          "label": "12–15 virksomheter",
+          "instruction": "Sikt mot 12–15 relevante virksomheter i hovedoversikten. Kartlegg først et bredere univers. Vis færre dersom grunnlaget ikke holder."
+        },
+        {
+          "id": "few",
+          "label": "6–8 virksomheter",
+          "instruction": "Sikt mot 6–8 særlig interessante virksomheter. Ikke fyll med svake kandidater."
+        },
+        {
+          "id": "broad",
+          "label": "20–25 virksomheter",
+          "instruction": "Sikt mot 20–25 relevante virksomheter og bred segmentdekning. Hold hovedtabellen kort; undersøk de sterkeste nærmere. Del arbeidet i etapper hvis nødvendig."
+        }
+      ]
+    },
+    "prospectCoverage": {
+      "label": "Hvem skal prioriteres?",
+      "hint": "CRM skal aldri begrense markedsuniverset.",
+      "control": "select",
+      "options": [
+        {
+          "id": "market",
+          "label": "Hele markedet",
+          "instruction": "Finn relevante virksomheter på tvers av delsegmenter og størrelser, også de som ikke finnes i CRM. Legg vekt på reelle forretningssignaler."
+        },
+        {
+          "id": "whitespace",
+          "label": "Nye relasjoner først",
+          "instruction": "Prioriter nye mulige innganger, men merk «hvitflate» som bekreftet bare hvis godkjent CRM-oppslag faktisk er utført. Manglende CRM-oppslag betyr ukjent status, ikke hvitflate."
+        },
+        {
+          "id": "large",
+          "label": "Store virksomheter først",
+          "instruction": "Prioriter større virksomheter med komplekse data-/beslutningsprosesser, men ikke anta høyere kjøpsvilje bare fra størrelse."
+        }
+      ]
+    },
+    "prospectEvidence": {
+      "label": "Krav til grunnlag for behov",
+      "hint": "Hypoteser må alltid merkes, også i utforskende modus.",
+      "control": "select",
+      "options": [
+        {
+          "id": "balanced",
+          "label": "Fakta + begrunnede hypoteser",
+          "instruction": "Ta med dokumenterte forhold og tydelig merkede, begrunnede behovshypoteser. Skill observerte signaler fra antatt problem, budsjett og kjøpsvilje; foreslå spørsmål som avklarer."
+        },
+        {
+          "id": "strict",
+          "label": "Bare dokumenterte signaler",
+          "instruction": "Ranger virksomheter bare etter konkret dokumenterte og aktuelle forhold. Samtalehypoteser kan nevnes, men holdes adskilt fra dokumenterte behov."
+        },
+        {
+          "id": "exploratory",
+          "label": "Utforsk også mulige behov",
+          "instruction": "Ta med faglig plausible behov selv uten direkte kundesignal. Merk som HYPOTESE, gi alternativ forklaring og avkreftende spørsmål. Aldri gjett virksomhetsfakta."
+        }
+      ]
+    },
+    "prospectContactQuality": {
+      "label": "Kvalitet på personfunn",
+      "hint": "Vises bare når ringeliste er valgt.",
+      "control": "select",
+      "dependsOn": "ringelist",
+      "options": [
+        {
+          "id": "candidates",
+          "label": "Bekreftede + mulige personer",
+          "instruction": "Ta med både bekreftede kontaktpersoner og mulige kandidater, men merk tydelig «bekreftet nåværende rolle», «mulig kandidat» eller «ikke kontrollert/utdatert». Ta med kilde og søkelenke; en kandidat er ikke en verifisert kontakt."
+        },
+        {
+          "id": "strict",
+          "label": "Bare bekreftede personer",
+          "instruction": "Navngi bare personer med dokumentert nåværende stilling og arbeidsgiver. Ellers oppgi relevant rolle og manuell søkevei, uten oppdiktet navn eller nummer."
         }
       ]
     }

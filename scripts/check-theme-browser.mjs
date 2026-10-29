@@ -11,7 +11,8 @@ let promptOverviewChanged=false;
 if(previous){
  const prev=JSON.parse(execFileSync('git',['show','HEAD^:docs/data/prompts.json'],{encoding:'utf8'}));
  const currentPrompts=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8'));
- promptOverviewChanged=JSON.stringify(prev.page.primaryIds)!==JSON.stringify(currentPrompts.page.primaryIds);
+ const cards=d=>d.page.primaryIds.map(id=>{const x=d.items.find(y=>y.id===id);return x&&[x.id,x.title,x.summary,x.category,x.audience]});
+ promptOverviewChanged=JSON.stringify(cards(prev))!==JSON.stringify(cards(currentPrompts));
 }
 const synthetic=fs.readFileSync('scripts/fixtures/theme-synthetic.css','utf8');
 const dir='artifacts/theme';

@@ -6,8 +6,9 @@ const card=(x,e,page)=>'<a class="prompt-card" href="#prompter/'+e(x.id)+'"><div
 const toolbar=(p,e,ico)=>'<div class="prompt-context-toolbar"><div><strong>'+e(p.variableUi.toolbarTitle)+'</strong><p>'+e(p.variableUi.toolbarDescription)+'</p></div><a href="#prompter/variabler" class="btn subtle">'+ico('layers')+' '+e(p.variableUi.openOverview)+'</a></div>';
 function variableField(x,p,e,ico,linked=false){
  const ui=p.variableUi;
+ const choices=x.suggestions?.length?'<datalist id="prompt-suggestions-'+e(x.id)+'">'+x.suggestions.map(v=>'<option value="'+e(v)+'"></option>').join('')+'</datalist>':'';
  const field=x.multiline?'<textarea class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'" rows="3" maxlength="'+e(x.maxLength||2000)+'" placeholder="'+e(x.hint||ui.emptyHint)+'">'+e(x.value)+'</textarea>'
-  :'<input type="text" class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'" maxlength="'+e(x.maxLength||2000)+'" value="'+e(x.value)+'" placeholder="'+e(x.hint||ui.emptyHint)+'" autocomplete="off"/>';
+  :'<input type="text" class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'" maxlength="'+e(x.maxLength||2000)+'" value="'+e(x.value)+'" placeholder="'+e(x.hint||ui.emptyHint)+'"'+(choices?' list="prompt-suggestions-'+e(x.id)+'"':'')+' autocomplete="off"/>'+choices;
  return '<div class="prompt-var-field"><div class="prompt-var-head"><label for="context-'+e(x.id)+'">'+e(x.label)+'</label><span class="prompt-var-retention">'+e(x.retention==='session'?ui.sessionHint:ui.memoryHint)+'</span></div>'
  +'<div class="prompt-var-controls">'+field+'<button type="button" class="btn subtle prompt-var-clear" data-context-clear="'+e(x.id)+'" aria-label="'+e(ui.clearOne)+' '+e(x.label)+'">'+ico('close')+' <span>'+e(ui.clearOne)+'</span></button></div>'
  +(linked&&x.usedBy.length?'<div class="prompt-var-links">'+e(ui.usedBy)+' '+x.usedBy.map(y=>'<a href="#prompter/'+e(y.id)+'">'+e(y.title)+'</a>').join(' · ')+'</div>':'')
@@ -17,15 +18,16 @@ function choiceField(item,p,key,e){
  const ctx=context(),g=key==='depth'||key==='format'?p.outputSettings[key]:p.choiceGroups[key];
  if(!g)return '';
  const validOptions=ctx.options(item,key);
- // Alle tillatte formater finnes i DOM; utilgjengelige er skjult.
  const choices=key==='format'&&item.cvOutput?g.options.filter(o=>item.formats.includes(o.id)):validOptions;
  const allowed=new Set(validOptions.map(o=>o.id));
- return '<fieldset class="prompt-choice-field"><legend>'+e(g.label)+'</legend>'
-  +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')
-  +'<div class="prompt-choice-options">'+choices.map(o=>{
+ const options=g.control==='select'
+  ?'<select class="input prompt-choice-select" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" aria-label="'+e(g.label)+'">'+choices.map(o=>'<option value="'+e(o.id)+'"'+(ctx.getChoice(item,key)===o.id?' selected':'')+'>'+e(o.label)+'</option>').join('')+'</select>'
+  :'<div class="prompt-choice-options">'+choices.map(o=>{
    const checked=ctx.getChoice(item,key)===o.id;
    return '<label class="prompt-choice-option"'+(allowed.has(o.id)?'':' hidden')+'><input type="radio" name="prompt-choice-'+e(key)+'" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" value="'+e(o.id)+'" '+(checked?'checked':'')+'><span>'+e(o.label)+'</span></label>';
-  }).join('')+'</div></fieldset>';
+  }).join('')+'</div>';
+ return '<fieldset class="prompt-choice-field"'+(g.dependsOn?' data-prompt-depends="'+e(g.dependsOn)+'"'+(ctx.getChoice(item,g.dependsOn)?'':' hidden'):'')+'><legend>'+e(g.label)+'</legend>'
+  +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')+options+'</fieldset>';
 }
 function library(d,h,category){
  const {esc:e,ico,sourceLinks}=h,p=d.prompts,ui=p.page.variableUi;
@@ -76,6 +78,7 @@ function detail(d,h,id){
  +'<div class="prompt-var-grid">'+used.map(v=>variableField(v,p,e,ico)).join('')+'</div>'
  +'<div class="prompt-options"><h2>'+e(ui.choicesTitle)+'</h2>'
  +(x.choiceGroups||[]).map(k=>choiceField(x,d.prompts,k,e)).join('')+cvExtra
+ +(x.toggles||[]).map(t=>checkbox(t.id,t.label,t.hint)).join('')
  +choiceField(x,d.prompts,'depth',e)+choiceField(x,d.prompts,'format',e)+formatSubChoice
  +'<p class="prompt-format-notice">'+e(ui.formatNotice)+'</p>'
  +checkbox('handoff',ui.handoffLabel,ui.handoffDescription)
