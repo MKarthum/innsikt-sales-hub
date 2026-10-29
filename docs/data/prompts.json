@@ -1561,12 +1561,12 @@
         {
           "id": "phone",
           "label": "Telefon",
-          "instruction": "Lag en kort, naturlig muntlig åpning, 1–2 åpne spørsmål og en rolig avslutning. Tilpass om dette er første kontakt eller oppfølging; ikke skriv en e-post."
+          "instruction": "Lag en kort, naturlig muntlig samtaleåpning, 1–2 åpne spørsmål og en rolig avslutning. Tilpass om dette er første kontakt eller oppfølging; ikke skriv en e-post."
         },
         {
           "id": "email",
           "label": "E-post",
-          "instruction": "Skriv en kort, naturlig e-post med konkret emne, faktisk relevans, tydelig neste steg og lavterskel invitasjon. Tilpass om det er første kontakt eller oppfølging, uten salgsfloskler."
+          "instruction": "Skriv et kort, naturlig e-postutkast med konkret emne, faktisk relevans, tydelig neste steg og lavterskel invitasjon. Tilpass om det er første kontakt eller oppfølging, uten salgsfloskler."
         },
         {
           "id": "linkedin",
