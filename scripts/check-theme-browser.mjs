@@ -1,9 +1,18 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 
 const current=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const previous=process.env.INNSIKT_THEME_BASE_URL||'';
+// Endret oppgaveliste er en bevisst innholdsendring, ikke en temaregresjon.
+// Sammenlign de øvrige rutene piksel for piksel og behold kontrasttest også her.
+let promptOverviewChanged=false;
+if(previous){
+ const prev=JSON.parse(execFileSync('git',['show','HEAD^:docs/data/prompts.json'],{encoding:'utf8'}));
+ const currentPrompts=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8'));
+ promptOverviewChanged=JSON.stringify(prev.page.primaryIds)!==JSON.stringify(currentPrompts.page.primaryIds);
+}
 const synthetic=fs.readFileSync('scripts/fixtures/theme-synthetic.css','utf8');
 const dir='artifacts/theme';
 fs.mkdirSync(dir,{recursive:true});
@@ -111,7 +120,7 @@ try{
    const name=viewport.name+'-'+route.replaceAll('/','-');
    const shot=await now.screenshot({animations:'disabled'});
    fs.writeFileSync(dir+'/'+name+'.png',shot);
-   if(old){
+   if(old&&!(route==='prompter'&&promptOverviewChanged)){
     const reference=await old.screenshot({animations:'disabled'});
     const diff=await pixelDiff(reference,shot,now);
     trackDiff(diff);
@@ -159,7 +168,9 @@ try{
   }
   await ctx.close();
  }
- if(previous)assert.equal(pixelComparisons,viewports.length*(pages.length+2),'Missing prior-release pixel comparisons');
+ if(previous)assert.equal(pixelComparisons,viewports.length*(pages.length+2-(promptOverviewChanged?1:0)),
+  'Missing prior-release pixel comparisons');
+ if(promptOverviewChanged)console.log('INFO – bevisst endret promptoversikt er skjermbildet og kontrasttestet; pikseleksakt sammenligning utelatt for denne ruten');
  assert.ok(aaCount>=200,'Too few WCAG text samples: '+aaCount);
  assert.deepEqual(violations.slice(0,50),[],violations.length+' WCAG AA regressions (first 50 shown)');
  console.log('PASS – '+routeCount+' mobile/desktop route screenshots; '+slides+' Presenter tone screenshots; '+aaCount+' WCAG AA text pairs; '+(previous?('pixel comparison '+pixelComparisons+' views, max changed '+(peakChanged*100).toFixed(3)+'%, max avg channel delta '+peakAverage.toFixed(4)+'/255'):'prior-version pixel comparison not configured'));

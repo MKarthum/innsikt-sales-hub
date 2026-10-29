@@ -10,9 +10,9 @@ Kontakt omfatter første henvendelse, nye personer hos eksisterende kunder, refe
 
 ## Oppgaver fremfor mange promptkort
 
-På `#prompter` vises syv prioriterte oppgaver samlet under «Velg en oppgave», uten en kunstig intern rangering. Forsiden kan vise tre snarveier til disse. Øvrige oppgaver ligger under «Vis flere oppgaver» og via kategorifilter. Antall oppgaver er ikke et kvalitetsmål. Lag en ny oppgave først når det er forskjellig formål eller resultat, ikke bare ny situasjon; tilføy ellers en redaksjonelt vedlikeholdt variant.
+På `#prompter` vises åtte prioriterte oppgaver samlet under «Velg en oppgave», uten en kunstig intern rangering. Forsiden kan vise tre snarveier til disse. Øvrige oppgaver ligger under «Vis flere oppgaver» og via kategorifilter. Antall oppgaver er ikke et kvalitetsmål. Lag en ny oppgave først når det er forskjellig formål eller resultat, ikke bare ny situasjon; tilføy ellers en redaksjonelt vedlikeholdt variant.
 
-Prioriterte innganger: Innsikt-rettet kundeanalyse, kundekontakt, møteforberedelse, behovssamtale, mulighetskvalifisering, kundeoppfølging og kompetanseavklaring. Spesialiserte prompter (pilot, workshop, presentasjon, notat, partnerdialog, kritisk vurdering) finnes fortsatt.
+Prioriterte innganger: Innsikt-rettet kundeanalyse, markedsprospektering med prioritert ringeliste, kundekontakt, møteforberedelse, behovssamtale, mulighetskvalifisering, kundeoppfølging og kompetanseavklaring. Spesialiserte prompter (pilot, workshop, presentasjon, notat, partnerdialog, kritisk vurdering) finnes fortsatt.
 
 ## Komposisjon og ansvar
 
@@ -94,3 +94,9 @@ CV-vurdering har standardvalget choiceDefaults.handoff=false for kort og relevan
 ## Utvidbare regresjonstester (v0.11.9)
 
 Antall oppgavekort i den fullstendige oversikten kontrolleres mot faktiske oppgaver i prompts.json, ikke mot et hardkodet antall. Dette skal fremdeles oppdage utilsiktede duplikater, men godta nye bevisst publiserte oppgaver. Nettleserkjøringen kontrollerer både promptbiblioteket og alle øvrige sider på mobil og desktop.
+
+## Bransjeanalyse og salgsprospektering (v0.18.39)
+
+«Kartlegg markedet og finn nye kunder» er en egen oppgave med et annet sluttprodukt enn «Utforsk behov i en bransje» (typiske problemer) og «Analyser en kunde – Innsikt» (enkeltvirksomhet). Den gir et prioritert utvalg og en midlertidig ringeliste i KI-svaret. Bransje er eneste nødvendige felt; Norge er standard, mens geografi, segment, kundetype og faglig fokus er valgfrie felles variabler i `prompts.json`.
+
+Malen må fungere med offentlig nettsøk alene. Kun en faktisk tilgjengelig, godkjent CRM-lesekobling i KI-verktøyet kan berike funn med relasjonsstatus. «Ikke undersøkt», «delvis undersøkt» og «ingen oppføring funnet i undersøkt CRM» må holdes fra hverandre. Ingen persistert kontaktbase, CRM-skriving, integrasjon eller sending inngår. Offentlig repo inneholder bare generisk metodikk, aldri CRM-uttrekk eller reelle ringelister.

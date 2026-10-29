@@ -7,7 +7,9 @@ import {readFileSync as readTechFixture} from 'node:fs';
 import { chromium } from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const expectedVersion=JSON.parse(fs.readFileSync('docs/data/site.json','utf8')).version;
-const expectedPromptCount=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8')).items.length;
+const expectedPrompts=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8'));
+const expectedPromptCount=expectedPrompts.items.length;
+const expectedPrimaryCount=expectedPrompts.page.primaryIds.length;
 const expectedSlideCount=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.length;
 const expectedSales=JSON.parse(fs.readFileSync('docs/data/sales.json','utf8'));
 const canonicalSlideTitles=new Map(JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.map(x=>[x.id,x.title]));
@@ -306,7 +308,8 @@ try {
   await page.locator('.diagram-flow-up').waitFor();
   assert.equal(await page.locator('.diagram-flow-up').evaluate(el=>getComputedStyle(el).flexDirection),'column-reverse',label+': diagram leses nedenfra og opp');
   await page.evaluate(()=>{location.hash='#prompter'});await page.locator('.prompt-primary').waitFor();
-  assert.equal(await page.locator('.prompt-primary .prompt-card').count(),7,label+': syv prioriterte oppgaver i én samlet seksjon');
+  assert.equal(await page.locator('.prompt-primary .prompt-card').count(),expectedPrimaryCount,
+   label+': antall prioriterte oppgaver skal følge datafilen');
   assert.equal(await page.locator('.prompt-featured').count(),0,label+': ingen kunstig oppdeling av vanlige oppgaver');
   assert.equal(await page.locator('#main .prompt-card').count(),expectedPromptCount,label+': alle oppgaver, også de bak utvidet visning, uten duplikater');
   await page.evaluate(()=>{location.hash='#muligheter/rapportering'});await page.locator('.related-prompt a[href="#prompter/discovery"]').waitFor();

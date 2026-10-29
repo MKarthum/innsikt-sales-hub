@@ -303,6 +303,32 @@ try{
   await page.reload({waitUntil:'networkidle'});
   assert.equal(await page.locator('[data-context-var="KUNDENS_UTSAGN"]').inputValue(),'',label+': memory-only borte etter refresh');
   assert.equal(await page.locator('[data-context-var="BRANSJE"]').inputValue(),'Energi',label+': generisk verdi huskes');
+  // Finans-eksempel: oppgave synlig, bransje eneste nødvendige input og ingen CRM-kopling.
+  await navigate('prompter');
+  assert.equal(await page.locator('.prompt-primary .prompt-card[href="#prompter/market-prospecting"]').count(),1,label+': prospektering er prioritert');
+  await navigate('prompter/market-prospecting');
+  for(const id of ['BRANSJE','GEOGRAFI','SEGMENT','KUNDETYPE','FAGLIG_FOKUS'])
+   assert.equal(await page.locator('[data-context-var="'+id+'"]').count(),1,label+': felt '+id+' finnes');
+  await page.locator('[data-context-var="BRANSJE"]').fill('Finans');
+  let prospect=await page.locator('#prompt-editor').inputValue();
+  assert.ok(prospect.includes('Bransje: Finans.')&&prospect.includes('Norge som geografisk standard'),
+   label+': kun bransje gir komplett norsk finans-prompt');
+  assert.ok(prospect.includes('CRM ikke undersøkt – tilgang ikke tilgjengelig'),
+   label+': ingen automatisk CRM-status når CRM ikke er tilkoblet');
+  await page.locator('[data-context-var="GEOGRAFI"]').fill('Norden');
+  await page.locator('[data-context-var="SEGMENT"]').fill('Forsikring');
+  await page.locator('[data-context-var="FAGLIG_FOKUS"]').fill('BI');
+  prospect=await page.locator('#prompt-editor').inputValue();
+  assert.ok(prospect.includes('Geografisk avgrensning (overstyrer Norge): Norden')&&
+   prospect.includes('Segment: Forsikring')&&prospect.includes('Faglig fokus: BI'),
+   label+': valgfrie avgrensninger føres inn');
+  await page.locator('[data-prompt-copy]').click();
+  assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),prospect,label+': prospektering kopieres eksakt');
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),
+   label+': ingen horisontal overflyt i prospekteringsprompten');
+  await page.locator('[data-context-var="BRANSJE"]').fill('Energi');
+  for(const id of ['GEOGRAFI','SEGMENT','FAGLIG_FOKUS'])await page.locator('[data-context-var="'+id+'"]').fill('');
+
   await navigate('prompter/variabler');
   await page.locator('.prompt-overview-grid').first().waitFor();
   assert.equal(await page.locator('[data-context-var="KUNDENAVN"]').inputValue(),'Byttet navn',label+': redigering fra oversikten');
