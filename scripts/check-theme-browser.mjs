@@ -19,6 +19,13 @@ if(previous){
   return {item,variables:d.variables.filter(v=>used.has(v.id)||(v.aliases||[]).some(a=>used.has(a)))};
  };
  accountPromptChanged=JSON.stringify(account(prev))!==JSON.stringify(account(currentPrompts));
+ // Når den felles feltkomponenten får et eksplisitt valgpanelet, er forskjellen
+ // på denne detaljruten tilsiktet. Fortsett med kontrast- og skjermbildetest.
+ const previousRenderer=execFileSync('git',['show','HEAD^:docs/assets/prompts.js'],{encoding:'utf8'});
+ const rendererChanged=previousRenderer!==fs.readFileSync('docs/assets/prompts.js','utf8');
+ const accountItems=currentPrompts.items.find(x=>x.id==='account-research');
+ if(rendererChanged&&accountItems?.placeholders?.some(id=>currentPrompts.variables.some(v=>v.suggestions?.length&&(v.id===id||(v.aliases||[]).includes(id)))))
+  accountPromptChanged=true;
 }
 const synthetic=fs.readFileSync('scripts/fixtures/theme-synthetic.css','utf8');
 const dir='artifacts/theme';

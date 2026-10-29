@@ -861,6 +861,30 @@ function refreshPromptFromContext(){
  editor.value=window.InnsiktPromptContext.composeTask(item,D.prompts);
  if(status)status.textContent=ui.cleanMessage;
 }
+function promptSuggestionPanel(id){
+ return [...document.querySelectorAll('[data-prompt-suggestion-panel]')].find(el=>el.dataset.promptSuggestionPanel===id)||null;
+}
+function closePromptSuggestions(exceptId=''){
+ document.querySelectorAll('[data-prompt-suggestion-panel]').forEach(panel=>{
+  if(panel.dataset.promptSuggestionPanel===exceptId)return;
+  panel.hidden=true;
+  const trigger=document.querySelector('[data-prompt-suggest-toggle="'+panel.dataset.promptSuggestionPanel+'"]');
+  if(trigger)trigger.setAttribute('aria-expanded','false');
+ });
+}
+function filterPromptSuggestions(input){
+ const panel=promptSuggestionPanel(input.dataset.contextVar);
+ if(!panel||panel.hidden)return;
+ const term=input.value.trim().toLocaleLowerCase('nb');
+ let matches=0;
+ panel.querySelectorAll('[data-prompt-suggestion]').forEach(btn=>{
+  const visible=btn.dataset.promptSuggestionValue.toLocaleLowerCase('nb').includes(term);
+  btn.hidden=!visible;
+  if(visible)matches++;
+ });
+ const empty=panel.querySelector('[data-prompt-suggestion-empty]');
+ if(empty)empty.hidden=matches!==0;
+}
 function initPromptContextEvents(){
  document.addEventListener('input',e=>{if(e.target.matches?.('[data-slide-search]')){libraryFilters.query=e.target.value;updateSlideLibrary()}});
  document.addEventListener('change',e=>{
@@ -872,6 +896,7 @@ function initPromptContextEvents(){
   const field=e.target.closest('[data-context-var]');
   if(field){
    window.InnsiktPromptContext.set(field.dataset.contextVar,field.value);
+   filterPromptSuggestions(field);
    document.querySelectorAll('[data-context-count]').forEach(el=>el.textContent=window.InnsiktPromptContext.entries().filter(x=>x.value.trim()).length);
    refreshPromptFromContext();
    return;
@@ -885,6 +910,32 @@ function initPromptContextEvents(){
   }
  });
  document.addEventListener('click',e=>{
+  const toggle=e.target.closest('[data-prompt-suggest-toggle]');
+  if(toggle){
+   const id=toggle.dataset.promptSuggestToggle,panel=promptSuggestionPanel(id),opening=!!panel?.hidden;
+   closePromptSuggestions();
+   if(panel&&opening){
+    panel.hidden=false;
+    toggle.setAttribute('aria-expanded','true');
+    panel.querySelectorAll('[data-prompt-suggestion]').forEach(btn=>{btn.hidden=false});
+    const empty=panel.querySelector('[data-prompt-suggestion-empty]');
+    if(empty)empty.hidden=true;
+    panel.scrollIntoView({block:'nearest',behavior:'instant'});
+   }
+   return;
+  }
+  const selected=e.target.closest('[data-prompt-suggestion]');
+  if(selected){
+   const id=selected.dataset.promptSuggestion;
+   const field=[...document.querySelectorAll('[data-context-var]')].find(el=>el.dataset.contextVar===id);
+   if(field){
+    field.value=selected.dataset.promptSuggestionValue;
+    field.dispatchEvent(new Event('input',{bubbles:true}));
+   }
+   closePromptSuggestions();
+   return;
+  }
+  if(!e.target.closest('[data-prompt-suggestion-panel]')&&!e.target.closest('[data-context-var]'))closePromptSuggestions();
   const btn=e.target.closest('[data-context-clear]');
   if(btn){
    const id=btn.dataset.contextClear;
@@ -902,6 +953,12 @@ function initPromptContextEvents(){
    window.InnsiktPromptContext.clearAll();
    render();
    toast(D.prompts.page.variableUi.allClearedMessage);
+  }
+ });
+ document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.querySelector('[data-prompt-suggestion-panel]:not([hidden])')){
+   closePromptSuggestions();
+   e.preventDefault();
   }
  });
 }

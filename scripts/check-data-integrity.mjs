@@ -190,6 +190,7 @@ if(!str(prompts.outputSettings.missingEssentialInstruction)||!prompts.outputSett
 
 for(const key of ['groupPrefix','depthPrefix','formatPrefix'])if(!str(prompts.outputSettings[key]))fail('Tekstblokk mangler kanonisk overskrift: '+key);
 for(const key of ['startMarker','endMarker'])if(!str(prompts.outputSettings.context?.[key]))fail('Mangler kanonisk kontekstmarkør: '+key);
+for(const key of ['suggestionsLabel','suggestionsEmpty'])if(!str(prompts.page.variableUi?.[key]))fail('Mangler tekst for berøringsvennlige forslag: '+key);
 for(const key of ['previewTitle','previewIntro','previewDirty','copySuccess','copyFailure','copyUnsupported'])if(!str(prompts.page.variableUi?.[key]))fail('Tekst for promptforhåndsvisning mangler: '+key);
 if(!str(prompts.page.cardLinkLabel)||!str(prompts.page.filterAriaLabel))fail('Oppgavekort mangler dataeid grensesnittstekst');
 for(const v of prompts.variables||[])if(v.suggestions&&(!Array.isArray(v.suggestions)||v.multiline||v.suggestions.length>20||v.suggestions.some(s=>!str(s)||s.length>120)))fail('Ugyldige variabelforslag '+v.id);
