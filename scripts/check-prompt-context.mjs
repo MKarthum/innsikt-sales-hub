@@ -32,7 +32,7 @@ assert.ok(deck.placeholders.includes('FORMIDLINGSFORMÅL')&&!deck.placeholders.i
 const followup=data.items.find(x=>x.id==='followup');
 assert.ok(followup.choiceGroups.includes('contactChannel'),'oppfølging og førstekontakt skal dele kanalvalg');
 ctx.setChoice(followup,'contactChannel','phone');
-assert.ok(ctx.composeTask(followup,data).includes('muntlig samtaleåpning'),'telefonoppfølging må ikke bli en e-post');
+assert.ok(ctx.composeTask(followup,data).includes('muntlig åpning'),'telefonoppfølging må ikke bli en e-post');
 ctx.setChoice(followup,'contactChannel','email');
 
 assert.ok(followup.placeholders.includes('OPPFØLGINGSGRUNNLAG')&&!followup.placeholders.includes('GODKJENT_OPPSUMMERING'),'oppfølging er bredere enn møtereferat');
