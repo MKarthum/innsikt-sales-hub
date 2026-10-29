@@ -230,4 +230,36 @@ assert.ok(html.includes('prompt-guide-details'),'kvalitetssjekken er tilgjengeli
 assert.ok(!html.includes(data.page.variableUi.whenTitle),'detaljsiden skal ikke gjenta oppgavens bruksformål');
 assert.equal((html.match(/data-preview-key=/g)||[]).length,3,'samlet forklaring viser fagfokus og svarnivå + format uten duplisering av innhold');
 
+// Bransjeprospektering: finans med og uten syntetisk, godkjent CRM-kontekst.
+const market=data.items.find(item=>item.id==='market-prospecting');
+assert.ok(market,'bransjeprospektering skal være egen oppgave');
+assert.ok(data.page.primaryIds.includes(market.id),'oppgaven må være lett å finne');
+assert.deepEqual(market.placeholders,['BRANSJE','GEOGRAFI','SEGMENT','KUNDETYPE','FAGLIG_FOKUS']);
+assert.deepEqual(market.essentialPlaceholders,['BRANSJE']);
+for(const id of market.placeholders)ctx.clear(id);
+ctx.clear('KUNDEKONTEKST');
+const needsIndustry=ctx.composeTask(market,data);
+assert.ok(needsIndustry.includes('Be kort om den'),'bransje må være påkrevd');
+ctx.set('BRANSJE','Finans');
+const noCrm=ctx.composeTask(market,data);
+for(const check of ['Bransje: Finans.','Norge som geografisk standard','CRM ikke undersøkt – tilgang ikke tilgjengelig',
+ 'CRM delvis undersøkt','Ingen oppføring funnet i undersøkt CRM','1881.no',
+ 'Ikke hent private mobilnumre','LinkedIn-profil','FAKTA, HYPOTESE eller IKKE UNDERSØKT',
+ 'Ingen CRM-skriving','ringeliste med inntil fem'])assert.ok(noCrm.includes(check),'finans uten CRM må inkludere '+check);
+assert.ok(!noCrm.includes('Geografisk avgrensning (overstyrer Norge):'),'tom geografi skal ikke generere fritekst');
+assert.ok(!noCrm.includes('--- BEGINN KUNDEKONTEKST'),'ingen CRM skal ikke få kontekstblokk');
+for(const [id,value,phrase] of [['GEOGRAFI','Norden','Geografisk avgrensning (overstyrer Norge): Norden'],
+ ['SEGMENT','Forsikring','Segment: Forsikring'],['KUNDETYPE','Større virksomheter','Type virksomhet: Større virksomheter'],
+ ['FAGLIG_FOKUS','BI','Faglig fokus: BI']]){
+ ctx.set(id,value);assert.ok(ctx.composeTask(market,data).includes(phrase),'valgfritt felt '+id+' mangler');ctx.clear(id);
+}
+ctx.set('KUNDEKONTEKST','Syntetisk test: autorisert CRM kan ha en åpen mulighet som må sjekkes med relasjonsansvarlig.');
+const simulatedCrm=ctx.composeTask(market,data);
+assert.ok(simulatedCrm.includes('Syntetisk test: autorisert CRM'),'godkjent intern kontekst kan brukes som bakgrunnsdata');
+assert.ok(simulatedCrm.includes('Undersøk om du i denne autoriserte KI-arbeidsøkten faktisk har godkjent lesetilgang'),
+ 'innlimt kontekst er ikke bevis for tilgang til CRM');
+assert.ok(!simulatedCrm.includes('CRM-status: eksisterende kunde'),'CRM-status må ikke fylles ut automatisk');
+assert.equal(JSON.parse(storage.get(ctx.storageKey)||'{}').KUNDEKONTEKST,undefined,'fiktiv CRM-kontekst skal kun ligge i minnet');
+ctx.clear('KUNDEKONTEKST');ctx.clear('BRANSJE');
+
 console.log('PASS – alias, gjenbruk, lagringsgrenser, oppfriskning, enkelt-/totalreset, orphan-opprydding og HTML-escaping');

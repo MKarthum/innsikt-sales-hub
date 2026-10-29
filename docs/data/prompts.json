@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "1.6.1",
-    "reviewed": "2026-10-22",
+    "version": "1.7.0",
+    "reviewed": "2026-10-29",
     "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
   },
   "page": {
@@ -101,6 +101,7 @@
     },
     "primaryIds": [
       "account-research",
+      "market-prospecting",
       "contact-prep",
       "meeting-prep",
       "discovery",
@@ -320,6 +321,60 @@
       ],
       "essentialPlaceholders": [
         "BRANSJE"
+      ]
+    },
+    {
+      "id": "market-prospecting",
+      "category": "Forstå kunden",
+      "title": "Kartlegg markedet og finn nye kunder",
+      "summary": "Prioriter konkrete virksomheter, dokumenter kjøpssignaler og finn relevante kontaktveier til nye salgsdialoger.",
+      "when": "Når du vil gå fra bransjeresearch til en kort, etterprøvbar liste over hvem som bør kontaktes, hvorfor og hvordan.",
+      "audience": "Salg / marked · 15–30 min",
+      "sourceMode": "public",
+      "placeholders": [
+        "BRANSJE",
+        "GEOGRAFI",
+        "SEGMENT",
+        "KUNDETYPE",
+        "FAGLIG_FOKUS"
+      ],
+      "essentialPlaceholders": [
+        "BRANSJE"
+      ],
+      "optionalPlaceholders": [
+        "BRANSJE",
+        "GEOGRAFI",
+        "SEGMENT",
+        "KUNDETYPE",
+        "FAGLIG_FOKUS"
+      ],
+      "contextVariables": [
+        "KUNDEKONTEKST"
+      ],
+      "choiceGroups": [],
+      "formats": [
+        "plain",
+        "markdown"
+      ],
+      "priority": 1,
+      "reviewed": "2026-10-29",
+      "evidence": "assessment",
+      "before": [
+        "Oppgi bransje. Norge er standard; segment, kundetype og faglig fokus er valgfrie.",
+        "Bruk et KI-verktøy med ferskt nettsøk. Godkjent CRM-lesetilgang er valgfritt og må være reelt tilgjengelig."
+      ],
+      "review": [
+        "Kontroller at bedrifter, navngitte personer, profiler og kontaktveier har egne, åpne og oppdaterte kilder.",
+        "Ikke kontakt en virksomhet som kan ha intern relasjonsansvarlig før dette er avklart i godkjent miljø.",
+        "Kontroller personvern, markedsføringsregler og kildens bruksvilkår før kontaktdata tas i bruk."
+      ],
+      "promptParts": [
+        "Du er en kildekritisk rådgiver som hjelper konsulentselgere å finne nye, relevante kunder innen dataplattform, datateknikk, analyse, BI og KI. Målet er konkrete, prioriterte salgsdialoger – ikke en lang bransjerapport. Bruk Norge som geografisk standard.\n{{?BRANSJE}}Bransje: [BRANSJE].{{/BRANSJE}}\n{{?GEOGRAFI}}Geografisk avgrensning (overstyrer Norge): [GEOGRAFI].{{/GEOGRAFI}}\n{{?SEGMENT}}Segment: [SEGMENT].{{/SEGMENT}}\n{{?KUNDETYPE}}Type virksomhet: [KUNDETYPE].{{/KUNDETYPE}}\n{{?FAGLIG_FOKUS}}Faglig fokus: [FAGLIG_FOKUS].{{/FAGLIG_FOKUS}}\n",
+        {
+          "$content": "prompt-rule:verified-public",
+          "variant": "normal"
+        },
+        "\nARBEIDSMÅTE\n1. Undersøk først ferske, etterprøvbare offentlige kilder: bransjemyndigheter, selskapenes rapporter/nettsider, børsmeldinger, nyheter og offentlig utlyste stillinger. Sjekk publiseringsdato og hva kilden faktisk viser. Oppgi kilde-URL og dato for hvert vesentlig signal. Bruk eldre kilder bare når relevant og marker alder. Hvis du mangler nettsøk eller troverdige kilder, forklar begrensningen og lag en verifiseringsplan i stedet for å dikte opp funn.\n2. Forklar kort de viktigste bransjeendringene, delmarkedene og operative utfordringene. Se etter muligheter i forretningsprosessene før du foreslår teknologi. Identifiser kandidater med dokumenterte signaler som strategiske prioriteringer, investeringer, omorganisering eller relevante stillingsutlysninger. Slike signaler er IKKE bevis på behov, budsjett eller kjøpsvilje. Se aktivt etter motargumenter: sterke interne miljøer, etablerte leverandører, nylig fullført satsing eller usikker økonomi.\n3. Undersøk om du i denne autoriserte KI-arbeidsøkten faktisk har godkjent lesetilgang til relevant CRM. Ikke anta integrasjon eller be om å få konfidensielle data kopiert inn i en offentlig portal. Hvis du har tilgang, slå opp bare de aktuelle virksomhetene og noter status (eksisterende kunde, tidligere kunde, prospekt, åpen salgsmulighet eller ingen oppføring), dokumentert relasjonsansvarlig, relevante aktiviteter, datakilde og kontrolltid. Oppgi bare opplysninger du har tilgang til, i godkjent internt miljø. CRM-funn må ikke eksporteres til offentlig repo, delbare lenker eller ubeskyttede filer. Hvis tilgang mangler: skriv «CRM ikke undersøkt – tilgang ikke tilgjengelig», aldri «ingen relasjon». Hvis oppslag ble forsøkt, men er ufullstendig: skriv «CRM delvis undersøkt» og hva som mangler. Hvis oppslag er gjennomført uten treff: skriv «Ingen oppføring funnet i undersøkt CRM», med kildetid og avgrensning, ikke «ingen relasjon». Ingen CRM-skriving, opprettelse av kontaktbase eller automatisk utsending.\n4. Finn faktiske, nåværende kontaktpersoner som eier relevante forretningsprosesser, data/teknologi eller beslutninger. For hver person: navn, dokumentert nåværende stilling, virksomhet og lenke til kilde. Legg til eksakt LinkedIn-profil bare når du kan verifisere at den gjelder rett person; aldri gjett profil-URL eller mønster for e-post. Finn bare lovlig brukbare profesjonelle kontaktveier: «Verifisert – offisiell kilde», «Ubekreftet offentlig oppføring», «Sentralbord» eller «Ingen dokumentert kontaktvei». Merk telefonnummer, type, kilde og kontrolltid; ikke presenter sentralbord som direktelinje. Oppgi manuell kontroll via 1881.no eller tilsvarende bare som kontrollmulighet, ikke som verifisering uten faktisk oppslag. Ikke hent private mobilnumre, omgå vilkår eller skrap sosiale nettverk. Ved usikkerhet: bruk offentlig bedriftssentralbord eller LinkedIn-kontakt uten oppdiktede detaljer. Vurder behandlingsgrunnlag, reservasjoner og markedsføringsregler før oppsøkende kontakt.\n5. Prioriter etter dokumentert relevans, konkret og aktuelt signal, sannsynlig forretningseier, mulighet for å få dialog og vesentlige motargumenter. Når CRM er undersøkt, la aktiv salgsmulighet og intern relasjonsansvarlig styre neste steg; anbefal intern avklaring fremfor parallell kald kontakt. Ikke lag kunstig tallscore. Merk hver vurdering som FAKTA, HYPOTESE eller IKKE UNDERSØKT, og forklar usikkerheten.\nLEVERANSE (hold den kort og operativ)\nA. Markedsbilde på maksimalt åtte linjer med 2–4 kilder og datoer.\nB. Rangert kandidatliste med normalt 5–8 reelle virksomheter, eller færre hvis kildene ikke holder: hvorfor nå, kilde/år, mulig datadrevet forretningsproblem, hva som taler mot, usikkerhet og CRM-status. Skill dokumentert signal fra hypotetisk salgsmulighet.\nC. Prioritert ringeliste med inntil fem faktiske personer eller, der navn mangler, eksplisitte roller. For hver: virksomhet, navn/rolle, begrunnelse, eksakt verifisert LinkedIn-lenke eller «ikke verifisert», telefon/kontaktvei med kvalitetsklasse og kilde eller «ikke funnet», en konkret respektfull samtaleinngang knyttet til dokumentert signal, og neste steg (inkludert eventuell intern avklaring). Oppgi ikke oppdiktede personer, telefonnumre eller tomme lenker. Skill direkte kontakt fra sentralbord.\nD. Avslutt med tre umiddelbare handlinger og de viktigste kontrollspørsmålene før første kontakt. Angi eksplisitt om CRM er undersøkt, mangler eller er delvis undersøkt. Ikke fyll kvoter med svake kandidater. Resultatet er en foreslått ringeliste i dette KI-svaret, ikke en lagret eller oppdatert CRM-liste."
       ]
     },
     {
@@ -856,14 +911,14 @@
   "rules": [
     {
       "id": "verified-public",
-      "text": "Bruk bare offentlig tilgjengelige og verifiserbare opplysninger. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke dikt opp kundedata, kontaktpersoner, eksisterende prosjekter eller leveransekapasitet.",
+      "text": "Bruk bare offentlig tilgjengelige og verifiserbare opplysninger, med mindre den aktuelle oppgaven uttrykkelig tillater lesing av godkjente interne kilder i en tilgangsstyrt KI-arbeidsøkt. Oppgi kildelenker og dato der påstander er viktige. Skill fakta, mulige hypoteser og spørsmål som må avklares. Ikke anta intern tilgang eller dikt opp kundedata, kontaktpersoner, relasjoner, eksisterende prosjekter eller leveransekapasitet.",
       "evidence": "assessment",
       "sourceIds": [
         "openaiPrompting",
         "microsoftSalesPrompts",
         "microsoftSalesAgent"
       ],
-      "reviewed": "2026-10-14",
+      "reviewed": "2026-10-29",
       "visibility": "presented"
     }
   ],
@@ -1246,6 +1301,33 @@
       "multiline": true,
       "retention": "memory",
       "maxLength": 4000
+    },
+    {
+      "id": "GEOGRAFI",
+      "label": "Geografi (valgfritt)",
+      "group": "meeting",
+      "hint": "Standard er Norge. Oppgi annet land eller område ved behov.",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 140
+    },
+    {
+      "id": "SEGMENT",
+      "label": "Segment (valgfritt)",
+      "group": "meeting",
+      "hint": "F.eks. banker, forsikring eller kapitalforvaltning.",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 160
+    },
+    {
+      "id": "FAGLIG_FOKUS",
+      "label": "Faglig fokus (valgfritt)",
+      "group": "meeting",
+      "hint": "F.eks. dataplattform, BI eller ansvarlig bruk av KI.",
+      "multiline": false,
+      "retention": "session",
+      "maxLength": 180
     }
   ],
   "choiceGroups": {
