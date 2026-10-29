@@ -58,3 +58,7 @@ MØTEFORMÅL brukes bare når oppgaven handler om et møte. ANALYSESPØRSMÅL br
 ## CV-sammenligning (v0.11.7)
 
 CV_KONSULENTNAVN og CV_FORESPØRSEL er kun frivillige hjelpedata for eksternt, godkjent KI-verktøy og skal ha retention: memory. Den faktiske CV-en og fullstendig forespørsel legges ved i KI-samtalen eller leses fra de kildene verktøyet er autorisert for. Portalen utfører ingen opplasting, dokumentsøk, kandidatmatching eller lagring av CV. Ikke legg personidentifiserende opplysninger eller fortrolige kundekrav i en åpen KI-tjeneste.
+
+## Valg for markedsprospektering (v0.18.40)
+
+`choiceGroups[].control: "select"` (representert som egenskap på en navngitt valggruppe) er et nedtrekksvalg; radio er standard. `dependsOn` kan vise valg bare når en tilhørende toggle er på. `items[].toggles` er datastyrte boolske valg med id, label, hint og instruksjon. Standardverdier ligger i `items[].choiceDefaults`; de er bare lokale UI-valg og blir ikke lagret. `variables[].suggestions` lager en redigerbar datalist for fritekstfelt, ikke en låst kategori. `ANTALL_VIRKSOMHETER` er et generisk session-felt som overstyrer nedtrekksvalgets mål hvis brukeren fyller inn et gyldig antall. CRM-status eller persondata skal aldri føres inn i disse offentlige feltene.

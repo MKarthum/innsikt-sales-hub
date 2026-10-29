@@ -70,13 +70,13 @@ function options(item,key){
  return group.options;
 }
 function getChoice(item,key){
- if(key==='handoff'||key==='context'||key==='organizationTemplates'||key==='clientTemplate')return choices.has(item.id+':'+key)?choices.get(item.id+':'+key):(item.choiceDefaults?.[key]??key!=='clientTemplate');
+ if(key==='handoff'||key==='context'||key==='organizationTemplates'||key==='clientTemplate'||(item.toggles||[]).some(t=>t.id===key))return choices.has(item.id+':'+key)?choices.get(item.id+':'+key):(item.choiceDefaults?.[key]??key!=='clientTemplate');
  const opts=options(item,key);
  const current=choices.get(item.id+':'+key);
- return opts.some(o=>o.id===current)?current:(key==='depth'?'useful':(opts[0]?.id||''));
+ return opts.some(o=>o.id===current)?current:(opts.some(o=>o.id===item.choiceDefaults?.[key])?item.choiceDefaults[key]:(key==='depth'?'useful':(opts[0]?.id||'')));
 }
 function setChoice(item,key,value){
- if(key==='handoff'||key==='context'||key==='organizationTemplates'||key==='clientTemplate'){choices.set(item.id+':'+key,value===true);return}
+ if(key==='handoff'||key==='context'||key==='organizationTemplates'||key==='clientTemplate'||(item.toggles||[]).some(t=>t.id===key)){choices.set(item.id+':'+key,value===true);return}
  if(options(item,key).some(o=>o.id===value))choices.set(item.id+':'+key,value);
 }
 function isCvDraft(item){
@@ -98,12 +98,14 @@ function selectedBlocks(item,prompts=promptData){
  const selected=key=>options(item,key).find(o=>o.id===getChoice(item,key));
  for(const key of item.choiceGroups||[]){
   const o=selected(key),g=prompts.choiceGroups[key];
+  if(g?.dependsOn&&!getChoice(item,g.dependsOn))continue;
   if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings.groupPrefix+' – '+g.label});
  }
  if(isCvDraft(item)){
   const key=item.cvOutput.lengthGroup,o=selected(key),g=prompts.choiceGroups[key];
   if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings.groupPrefix+' – '+g.label});
  }
+ for(const t of item.toggles||[])if(getChoice(item,t.id))blocks.push({key:t.id,label:t.label,option:t.label,instruction:t.instruction,prefix:prompts.outputSettings.groupPrefix+' – '+t.label});
  for(const key of ['depth','format']){
   const o=selected(key),g=prompts.outputSettings[key];
   if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings[key+'Prefix']});

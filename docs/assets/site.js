@@ -839,6 +839,7 @@ function refreshPromptLive(item){
    input.checked=input.value===selected;
   });
  }
+ document.querySelectorAll('[data-prompt-depends]').forEach(el=>{el.hidden=!ctx.getChoice(item,el.dataset.promptDepends)});
  const subChoice=document.querySelector('[data-prompt-format-subchoice]');
  if(subChoice)subChoice.hidden=!ctx.supportsOrganizationTemplates(item,D.prompts);
  const dirty=document.getElementById('prompt-preview-dirty'),editor=document.getElementById('prompt-editor');

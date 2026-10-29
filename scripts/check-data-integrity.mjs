@@ -190,10 +190,12 @@ for(const key of ['groupPrefix','depthPrefix','formatPrefix'])if(!str(prompts.ou
 for(const key of ['startMarker','endMarker'])if(!str(prompts.outputSettings.context?.[key]))fail('Mangler kanonisk kontekstmarkør: '+key);
 for(const key of ['previewTitle','previewIntro','previewDirty','copySuccess','copyFailure','copyUnsupported'])if(!str(prompts.page.variableUi?.[key]))fail('Tekst for promptforhåndsvisning mangler: '+key);
 if(!str(prompts.page.cardLinkLabel)||!str(prompts.page.filterAriaLabel))fail('Oppgavekort mangler dataeid grensesnittstekst');
+for(const v of prompts.variables||[])if(v.suggestions&&(!Array.isArray(v.suggestions)||v.multiline||v.suggestions.length>20||v.suggestions.some(s=>!str(s)||s.length>120)))fail('Ugyldige variabelforslag '+v.id);
 const choiceGroups=prompts.choiceGroups||{},allFormatIds=new Set(prompts.outputSettings.format.options.map(o=>o.id));
 for(const [id,g] of Object.entries({...choiceGroups,depth:prompts.outputSettings.depth,format:prompts.outputSettings.format})){
  if(!str(g.label)||!Array.isArray(g.options)||g.options.length<2)fail('Ufullstendig valggruppe '+id);
  const optionIds=new Set();
+ if(g.control&&g.control!=='select')fail('Ukjent valgkontroll '+id);
  for(const o of g.options){if(!str(o.id)||optionIds.has(o.id)||!str(o.label)||!str(o.instruction))fail('Ugyldig valgalternativ '+id+'/'+o.id);optionIds.add(o.id)}
 }
 for(const t of prompts.items){
@@ -219,6 +221,10 @@ for(const t of prompts.items){
 
  if(new Set(t.choiceGroups).size!==t.choiceGroups.length)fail('Dupliserte valggrupper '+t.id);
  for(const key of t.choiceGroups)if(!choiceGroups[key])fail('Ukjent valggruppe '+key+' i '+t.id);
+ const toggleIds=new Set();
+ for(const toggle of t.toggles||[]){if(!str(toggle.id)||toggleIds.has(toggle.id)||!str(toggle.label)||!str(toggle.hint)||!str(toggle.instruction)||['depth','format','handoff','context','organizationTemplates','clientTemplate'].includes(toggle.id))fail('Ugyldig avkryssingsvalg '+t.id);toggleIds.add(toggle.id)}
+ for(const key of t.choiceGroups)if(choiceGroups[key]?.dependsOn&&!toggleIds.has(choiceGroups[key].dependsOn))fail('Valg uten avhengighet '+key);
+ for(const [key,value] of Object.entries(t.choiceDefaults||{})){if(toggleIds.has(key)||['handoff','context','organizationTemplates','clientTemplate'].includes(key)){if(typeof value!=='boolean')fail('Ugyldig standardtoggle '+key)}else if(![...t.choiceGroups,'depth','format'].includes(key)||!(key==='depth'?prompts.outputSettings.depth:key==='format'?prompts.outputSettings.format:choiceGroups[key])?.options.some(o=>o.id===value))fail('Ugyldig standardvalg '+key+' i '+t.id)}
  for(const f of t.formats)if(!allFormatIds.has(f))fail('Ukjent svarformat '+f+' i '+t.id);
  if(!t.contextVariables.includes('KUNDEKONTEKST'))fail('Mangler felles kundekontekst i '+t.id);
 }
