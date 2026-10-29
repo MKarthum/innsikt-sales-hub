@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.8.0",
+    "version": "1.9.0",
     "reviewed": "2026-10-29",
     "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
   },
@@ -354,7 +354,6 @@
         "KUNDEKONTEKST"
       ],
       "choiceGroups": [
-        "prospectMode",
         "prospectCount",
         "prospectCoverage",
         "prospectEvidence",
@@ -368,8 +367,8 @@
       "reviewed": "2026-10-29",
       "evidence": "assessment",
       "before": [
-        "Velg bransje. Norge er standard. Du kan avgrense område, segment, størrelse og faglig fokus.",
-        "Ringeliste er på som standard. Slå den av for en raskere analyse av virksomheter og mulige behov."
+        "Velg bransje, område og eventuelt størrelse eller faglig fokus. Stedsvalgene inkluderer nærområder, ikke bare kommunegrensen.",
+        "Ringeliste, CRM-lesing og kontekst til neste oppgave er på som standard. Slå av unødvendig research før kopiering."
       ],
       "review": [
         "Kan hvert prioritert selskap knyttes til kildebelagt signal, testbar behovshypotese og godt åpningsspørsmål?",
@@ -378,7 +377,7 @@
         "Når CRM er valgt: bekreft faktisk tilgang og dokumentert filter før konklusjoner om relasjoner."
       ],
       "promptParts": [
-        "Du er en kildekritisk salgsanalytiker innen data, dataplattform, datateknikk, BI, analyse og KI. Svar på norsk bokmål. Kartlegg mulige behov og salgsinnganger i HELE markedet, ikke bare selskaper i CRM. Ikke skriv en lang generell bransjerapport. Norge er standard geografi.\n{{?BRANSJE}}Bransje: [BRANSJE].{{/BRANSJE}}\n{{?GEOGRAFI}}Geografisk område: [GEOGRAFI].{{/GEOGRAFI}}\n{{?SEGMENT}}Segment: [SEGMENT].{{/SEGMENT}}\n{{?KUNDETYPE}}Prioritert størrelse/type: [KUNDETYPE].{{/KUNDETYPE}}\n{{?FAGLIG_FOKUS}}Faglig fokus: [FAGLIG_FOKUS].{{/FAGLIG_FOKUS}}\n{{?ANTALL_VIRKSOMHETER}}Egendefinert antall virksomheter (overstyrer valget ved gyldig positivt heltall): [ANTALL_VIRKSOMHETER].{{/ANTALL_VIRKSOMHETER}}\n",
+        "Du er en kildekritisk salgsanalytiker innen data, dataplattform, datateknikk, BI, analyse og KI. Svar på norsk bokmål. Kartlegg mulige behov og salgsinnganger i HELE markedet, ikke bare selskaper i CRM. Ikke skriv en lang generell bransjerapport. Norge er standard geografi. Geografiske valg er markedsområder, ikke rigide kommunegrenser: Oslo omfatter også relevante nærliggende virksomheter i Akershus, for eksempel Bærum, Lysaker, Fornebu og Lillestrøm; gjør tilsvarende praktiske vurderinger for andre byer. Merk avvik når det er relevant.\nI standardoppsettet: utfør undersøkelser med tilgjengelige tekstbaserte nettsøk og kildeoppslag. Ikke start grafisk nettleser, utvidet agentarbeid eller kostbare automatiserte undersøkelser med mindre brukeren har valgt «Utvidet research». Arbeid uansett videre dersom slike funksjoner ikke finnes. Ikke anta noen bestemt KI-plattform.\n\n{{?BRANSJE}}Bransje: [BRANSJE].{{/BRANSJE}}\n{{?GEOGRAFI}}Geografisk område: [GEOGRAFI].{{/GEOGRAFI}}\n{{?SEGMENT}}Segment: [SEGMENT].{{/SEGMENT}}\n{{?KUNDETYPE}}Prioritert størrelse/type: [KUNDETYPE].{{/KUNDETYPE}}\n{{?FAGLIG_FOKUS}}Faglig fokus: [FAGLIG_FOKUS].{{/FAGLIG_FOKUS}}\n{{?ANTALL_VIRKSOMHETER}}Eget antall prioriterte virksomheter: [ANTALL_VIRKSOMHETER].{{/ANTALL_VIRKSOMHETER}}\n",
         {
           "$content": "prompt-rule:verified-public",
           "variant": "normal"
@@ -386,15 +385,16 @@
         "\nMETODE\n1. Forklar kort 2–4 betydningsfulle trender, regulatoriske forhold og prosessutfordringer i bransjen, med etterprøvbare, oppdaterte kilder.\n2. Finn først et bredere univers av reelle virksomheter (gjerne dobbelt så mange som ønsket sluttantall), fordelt på relevante delsegmenter. Velg deretter de mest interessante. Relevant nabogeografi kan inkluderes når det er naturlig, men merk avgrensningen. Ikke la CRM, kjente merkenavn eller en stillingsannonse alene styre utvalget.\n3. For HVER prioritert kandidat: dokumentert signal (URL og publiseringsdato) → konkret forretningsprosess → mulig behov (merket FAKTA eller HYPOTESE) → antatte datakrav → relevant TYPE bistand → ett åpningsspørsmål til forretningseier → sterkeste motargument. Oppgi ikke konkrete referansecaser, teknologivalg eller leveransekapasitet uten dokumentasjon. At kunden rekrutterer kan bety at den bygger eget miljø.\n4. Åpne hele viktige primærkilder (ledelsessider, årsrapporter, pressemeldinger og relevante stillingsannonser) når verktøyene tillater det; ikke konkluder på avkortede søkeutdrag. Prioriter primærkilder og daterte troverdige sekundærkilder fremfor SEO/aggregatorer. Vis KILDEKVALITET (høy/middels/svak), PUBLISERINGSDATO (eller ukjent) og KONTROLLDATO hver for seg. Gamle kilder eller søketreff bekrefter ikke nåværende ansatte. Motstridende opplysninger krever kryssjekk. Skill FAKTA, HYPOTESE og IKKE UNDERSØKT. Ikke finn på selskap, person, behov eller økonomi.\n5. Ranger Høy/Middels/Lav kommersiell relevans etter signal, forretningsproblem, mulig inngang, alternativ forklaring og usikkerhet. Dette er IKKE sannsynlighet for salg. Ikke bruk kunstig tallscore.\nLEVERANSE\nA. Markedsbilde på maks åtte linjer, med 2–4 kilde-URL-er og datoer.\nB. PRIORITERT MARKEDSTABELL: selskap/segment, dokumentert signal + kilde/dato, forretningsprosess, hypotese, datakrav, relevant bistandstype, konkret åpningsspørsmål, motargument og prioritet. Lag klikkbare kildelenker; når opplysningen ikke kan dokumenteres, merk den, ikke bruk oppdiktet URL.\nC. Tre praktiske neste steg, hva som ikke er undersøkt, og kort metodenotat: søkeomfang, kilder, dato, antall identifisert/vurdert/prioritert. Hvis målantallet ikke kan fylles troverdig, lever færre eller del opp arbeidet. Ingen varsler, planlagte oppgaver, kontaktbase eller automatisk utsending. Regneark/CSV kan lages på eksplisitt forespørsel hvis KI-verktøyet støtter filgenerering; aldri påstå at fil finnes uten å ha laget den.\n"
       ],
       "choiceDefaults": {
-        "prospectMode": "quick",
         "prospectCount": "standard",
         "prospectCoverage": "market",
         "prospectEvidence": "balanced",
         "prospectContactQuality": "candidates",
         "ringelist": true,
-        "crmLookup": false,
-        "format": "markdown",
-        "handoff": false
+        "crmLookup": true,
+        "format": "plain",
+        "handoff": true,
+        "context": true,
+        "extendedResearch": false
       },
       "toggles": [
         {
@@ -404,9 +404,15 @@
           "instruction": "RINGELISTE: Lag en prioritert tabell med inntil 6–8 konkrete kontaktmuligheter hos toppkandidatene. Kolonner: virksomhet, navn/rolle og status (bekreftet eller kandidat), primærkilde og dato, LinkedIn (verifisert profil hvis faktisk bekreftet, ellers kandidat-URL tydelig merket + manuell søkelenke), profesjonell kontaktvei med type og kilde (direkte arbeidsnummer, sentralbord eller kontaktside), konkret samtaleinngang, neste steg og søkelogg. Åpne hele selskapets ledelsesside når mulig; sjekk ny jobb når persondata kommer fra eldre annonser. Bruk aldri pressetelefon, HR-rekrutteringsnummer eller privat mobil som ordinær salgsinngang. Konstruer aldri personprofil, direkte telefonnummer eller e-postmønster. Lag ved usikkerhet en klikkbar LinkedIn-personsøkslenke med korrekt kodede navn/virksomhet og lenke til https://www.1881.no/ for manuelt oppslag; de er søkeinnganger, ikke bekreftelser. Hvis du ikke kan verifisere en profil eller et nummer, vis likevel den reelle kilden/søket, status og nødvendig manuell kontroll. Følg kildenes vilkår og gjeldende personvern- og markedsføringsregler; ikke skrap eller omgå begrensninger. Ingen tomme felt uten eksplisitt status."
         },
         {
+          "id": "extendedResearch",
+          "label": "Utvidet research med nettleser eller agent",
+          "hint": "Valgfritt. Kan øke tids- og verktøybruken; må støttes av KI-verktøyet.",
+          "instruction": "UTVIDET RESEARCH: Gjennomfør grundigere søk og kryssjekk flere primærkilder, særlig kontaktpersoner og stillingshistorikk. Dersom valgt KI-verktøy har støtte for agent-/nettleserbasert arbeid, kan disse funksjonene brukes i denne kjøringen. Prompten kan ikke selv starte eller bytte arbeidsmodus; bruk funksjonene kun når de er tilgjengelige og autorisert. Omgå aldri nettsteders vilkår. Begrens grafisk nettlesing til kilder som faktisk trenger det."
+        },
+        {
           "id": "crmLookup",
           "label": "Sjekk godkjent CRM (kun lesing)",
-          "hint": "Valgfritt. Ingen CRM-data i den offentlige portalen.",
+          "hint": "På som standard. Utfør kun godkjente leseoppslag hvis tilkoblingen finnes.",
           "instruction": "CRM SOM BERIKELSE, IKKE FILTER: Undersøk markedet bredt før CRM. Hvis KI-verktøyet faktisk har godkjent lesetilgang til CRM via tilgjengelige verktøy/MCP, sjekk de aktuelle selskapene og angi CRM-navn, status, relasjonsansvarlig hvis bekreftet, åpne muligheter, siste aktivitet, kontrolltid og avgrensning. Før du hevder null åpne avtaler, kontroller CRM-skjema, gyldige statusverdier og filter; hvis dette ikke kan verifiseres, skriv «filter ikke verifisert». Skill «CRM ikke undersøkt», «CRM delvis undersøkt» og «Ingen oppføring funnet i undersøkt CRM». Fravær av treff betyr ikke at det aldri har vært kontakt. Selskaper med relasjon kan fortsatt være interessante; anbefal intern avklaring før direkte henvendelse. Gi eventuelle datakvalitetsfunn bare som forslag til manuell kontroll, ikke som CRM-oppdateringer. Ingen skriving, opprettelse, sletting eller utsending. Vis interne detaljer kun i godkjent KI-miljø, aldri i offentlig repo."
         }
       ]
@@ -809,7 +815,7 @@
       "evidence": "assessment",
       "choiceGroups": [
         "followupSituation",
-        "followupChannel"
+        "contactChannel"
       ],
       "contextVariables": [
         "KUNDEKONTEKST"
@@ -998,7 +1004,18 @@
       "hint": "Eksempel: energi, finans eller handel",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Bank, finans og forsikring",
+        "Energi og kraft",
+        "Helse og omsorg",
+        "Offentlig sektor",
+        "Industri og produksjon",
+        "Handel og logistikk",
+        "Bygg og eiendom",
+        "Telekom og medier",
+        "Sjømat og havbruk"
+      ]
     },
     {
       "id": "MØTEFORMÅL",
@@ -1019,7 +1036,14 @@
       "hint": "Rolle(r), ikke navn. F.eks. leder for data og analyse",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "IT-direktør",
+        "Forretningsleder",
+        "Digitaliseringsleder",
+        "Data- og analyseleder",
+        "Produkteier"
+      ]
     },
     {
       "id": "MØTELENGDE",
@@ -1028,7 +1052,19 @@
       "hint": "Eksempel: 45 minutter",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "30 minutter",
+        "45 minutter",
+        "60 minutter",
+        "90 minutter",
+        "2 timer",
+        "Halv dag",
+        "Hel dag"
+      ],
+      "aliases": [
+        "VARIGHET"
+      ]
     },
     {
       "id": "KUNDETYPE",
@@ -1039,11 +1075,12 @@
       "retention": "session",
       "maxLength": 180,
       "suggestions": [
-        "Alle størrelser",
+        "Alle virksomheter",
         "Store konsern",
         "Mellomstore virksomheter",
         "Vekstselskaper",
-        "Små og mellomstore bedrifter"
+        "Små og mellomstore virksomheter",
+        "Offentlig virksomhet"
       ]
     },
     {
@@ -1188,7 +1225,14 @@
       "hint": "Eksempel: neste kvartal",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Innen 1 måned",
+        "1–3 måneder",
+        "3–6 måneder",
+        "6–12 måneder",
+        "Ikke avklart"
+      ]
     },
     {
       "id": "PLATTFORM",
@@ -1197,7 +1241,16 @@
       "hint": "Eksempel: Snowflake eller Fabric",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Microsoft Fabric",
+        "Snowflake",
+        "Databricks",
+        "Azure",
+        "AWS",
+        "Google Cloud",
+        "Ikke bestemt"
+      ]
     },
     {
       "id": "STATUS",
@@ -1206,7 +1259,14 @@
       "hint": "Hva er faktisk kjent om saken eller teknologivalget?",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Tidlig dialog",
+        "Behovskartlegging",
+        "Under vurdering",
+        "Avventer avklaring",
+        "Ingen avklaring ennå"
+      ]
     },
     {
       "id": "MULIG_TILTAK",
@@ -1224,16 +1284,14 @@
       "hint": "Eksempel: datakvalitet",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
-    },
-    {
-      "id": "VARIGHET",
-      "label": "Varighet",
-      "group": "delivery",
-      "hint": "Eksempel: 2 timer",
-      "multiline": false,
-      "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Dataplattform",
+        "BI og analyse",
+        "Datakvalitet og styring",
+        "KI og automatisering",
+        "Forretningsbehov og prioritering"
+      ]
     },
     {
       "id": "DELTAKERE",
@@ -1251,7 +1309,14 @@
       "hint": "Eksempel: 6",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "5",
+        "8",
+        "10",
+        "12",
+        "15"
+      ]
     },
     {
       "id": "MÅLGRUPPE",
@@ -1260,7 +1325,14 @@
       "hint": "Eksempel: virksomhetsledelsen",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Ledelse",
+        "Ledergruppe og fagpersoner",
+        "Forretningssiden",
+        "Teknologi- og datamiljø",
+        "Blandet målgruppe"
+      ]
     },
     {
       "id": "NESTE_STEG",
@@ -1278,7 +1350,14 @@
       "hint": "Eksempel: økonomisjef",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "Kundeansvarlig",
+        "Fagleder",
+        "Innkjøpsansvarlig",
+        "Prosjekteier",
+        "Digitaliseringsleder"
+      ]
     },
     {
       "id": "KONTAKTROLLE",
@@ -1287,7 +1366,15 @@
       "hint": "Eksempel: økonomidirektør (ikke nødvendig med personnavn)",
       "multiline": false,
       "retention": "session",
-      "maxLength": 180
+      "maxLength": 180,
+      "suggestions": [
+        "CIO / IT-direktør",
+        "CDO / datadirektør",
+        "Leder for analyse og BI",
+        "Forretningsområdeleder",
+        "Digitaliseringsleder",
+        "Produkteier"
+      ]
     },
     {
       "id": "KONTAKTFORMÅL",
@@ -1352,10 +1439,16 @@
       "retention": "session",
       "maxLength": 140,
       "suggestions": [
-        "Norge",
-        "Oslo og Akershus",
+        "Hele Norge",
+        "Oslo og omegn",
         "Bergen og omegn",
-        "Trondheim og Trøndelag",
+        "Stavanger og omegn",
+        "Trondheim og omegn",
+        "Kristiansand og omegn",
+        "Østlandet",
+        "Vestlandet",
+        "Sørlandet",
+        "Trøndelag",
         "Norden"
       ]
     },
@@ -1371,9 +1464,11 @@
         "Bank",
         "Forsikring",
         "Kapitalforvaltning",
-        "Fintech og betaling",
+        "Betaling og fintech",
+        "Offentlig forvaltning",
         "Energi og nett",
-        "Helse"
+        "Helse",
+        "Logistikk og handel"
       ]
     },
     {
@@ -1385,21 +1480,25 @@
       "retention": "session",
       "maxLength": 180,
       "suggestions": [
-        "Hele Innsikt-området",
+        "Hele data- og innsiktsområdet",
         "Dataplattform og datateknikk",
         "BI og analyse",
         "KI og automatisering",
-        "Datastyring og kvalitet"
+        "Datastyring og datakvalitet",
+        "Dataarkitektur og integrasjon"
       ]
     },
     {
       "id": "ANTALL_VIRKSOMHETER",
-      "label": "Egendefinert antall (valgfritt)",
+      "label": "Eget antall virksomheter",
       "group": "meeting",
-      "hint": "Overstyr nedtrekksvalget, f.eks. 18",
+      "hint": "Skriv et heltall, f.eks. 18",
       "multiline": false,
       "retention": "session",
-      "maxLength": 3
+      "maxLength": 3,
+      "inputType": "number",
+      "min": 1,
+      "max": 100
     }
   ],
   "choiceGroups": {
@@ -1456,23 +1555,23 @@
       ]
     },
     "contactChannel": {
-      "label": "Kanal",
-      "hint": "Velg hvordan du skal kontakte personen.",
+      "label": "Kontaktkanal",
+      "hint": "Brukes både ved første kontakt og oppfølging. Velg en kanal som passer situasjonen.",
       "options": [
         {
           "id": "phone",
           "label": "Telefon",
-          "instruction": "Lag én muntlig, naturlig åpning på maks 25 sekunder, to åpne spørsmål, respons ved liten interesse og en rolig avslutning med mulig møteforespørsel. Ikke skriv manus som høres opplest ut."
+          "instruction": "Lag en kort, naturlig muntlig åpning, 1–2 åpne spørsmål og en rolig avslutning. Tilpass om dette er første kontakt eller oppfølging; ikke skriv en e-post."
         },
         {
           "id": "email",
           "label": "E-post",
-          "instruction": "Skriv et kort og personlig e-postutkast med konkret emne, tydelig relevans og lavterskel invitasjon, uten salgsfloskler eller udokumenterte påstander."
+          "instruction": "Skriv en kort, naturlig e-post med konkret emne, faktisk relevans, tydelig neste steg og lavterskel invitasjon. Tilpass om det er første kontakt eller oppfølging, uten salgsfloskler."
         },
         {
           "id": "linkedin",
           "label": "LinkedIn",
-          "instruction": "Lag en kort LinkedIn-melding som er naturlig for kanalen, ikke pågående, og ikke later som det finnes en nær relasjon."
+          "instruction": "Skriv en kort LinkedIn-melding som passer første kontakt eller oppfølging og ikke later som det finnes en relasjon som ikke er dokumentert."
         }
       ]
     },
@@ -1633,27 +1732,6 @@
         }
       ]
     },
-    "followupChannel": {
-      "label": "Hvordan følger du opp?",
-      "hint": "Velg kanal. Oppfølgingen skal være naturlig og respektfull.",
-      "options": [
-        {
-          "id": "email",
-          "label": "E-post",
-          "instruction": "Skriv en kort, naturlig e-post med et presist emnefelt og relevant oppfølging. Ikke pynt på hva som er avtalt."
-        },
-        {
-          "id": "phone",
-          "label": "Telefon",
-          "instruction": "Lag en kort, muntlig samtaleåpning, to relevante spørsmål og en vennlig avrunding. Ikke skriv en ferdig e-post."
-        },
-        {
-          "id": "linkedin",
-          "label": "LinkedIn",
-          "instruction": "Lag en kort, personlig melding som passer LinkedIn og bygger på oppgitt dialog, uten en pågående tone."
-        }
-      ]
-    },
     "cvDeliverable": {
       "label": "Hva skal KI levere?",
       "hint": "Vurder først om konsulenten er riktig kandidat. Produksjon av CV er et eget valg.",
@@ -1691,25 +1769,9 @@
         }
       ]
     },
-    "prospectMode": {
-      "label": "Arbeidsform",
-      "hint": "Styrer KI-arbeidet, ikke automatisk bytte av ChatGPT-modus.",
-      "options": [
-        {
-          "id": "quick",
-          "label": "Rask kartlegging",
-          "instruction": "Arbeid i vanlig chat med tilgjengelig nettsøk og åpne kilder. Ikke start grafisk nettleser eller Work. Les primærkilder når mulig, ikke bare søkeutdrag. Hvis søk ikke finnes, oppgi begrensningen og skill uverifiserte forslag fra funn."
-        },
-        {
-          "id": "extended",
-          "label": "Grundig research",
-          "instruction": "Gjør flere søk, åpne hele primærkilder og kryssjekk personer. Nettleser eller Work kan brukes bare fordi dette valget er aktivert, dersom klienten støtter og tillater det. Et kopiert prompt kan ikke selv bytte chatmodus; si fra hvis brukeren må velge Work manuelt. Omgå aldri nettsteders vilkår."
-        }
-      ]
-    },
     "prospectCount": {
       "label": "Hvor mange virksomheter?",
-      "hint": "Antallet er et mål, ikke en kvote. Egendefinert antall overstyrer.",
+      "hint": "Velg antall eller skriv et eget tall. Antallet er et mål, ikke en kvote.",
       "control": "select",
       "options": [
         {
@@ -1726,12 +1788,23 @@
           "id": "broad",
           "label": "20–25 virksomheter",
           "instruction": "Sikt mot 20–25 relevante virksomheter og bred segmentdekning. Hold hovedtabellen kort; undersøk de sterkeste nærmere. Del arbeidet i etapper hvis nødvendig."
+        },
+        {
+          "id": "custom",
+          "label": "Eget antall …",
+          "instruction": "Finn det antallet virksomheter brukeren oppgir i feltet Eget antall virksomheter. Dersom feltet mangler et gyldig heltall, be kort om antallet. Et minimum av kildedekning gjelder fortsatt."
         }
-      ]
+      ],
+      "customInput": {
+        "optionId": "custom",
+        "variable": "ANTALL_VIRKSOMHETER",
+        "label": "Eget antall virksomheter",
+        "hint": "Skriv ønsket antall (1–100)."
+      }
     },
     "prospectCoverage": {
       "label": "Hvem skal prioriteres?",
-      "hint": "CRM skal aldri begrense markedsuniverset.",
+      "hint": "Avgrens størrelse i «Type virksomhet» dersom du vil prioritere store eller små.",
       "control": "select",
       "options": [
         {
@@ -1743,11 +1816,6 @@
           "id": "whitespace",
           "label": "Nye relasjoner først",
           "instruction": "Prioriter nye mulige innganger, men merk «hvitflate» som bekreftet bare hvis godkjent CRM-oppslag faktisk er utført. Manglende CRM-oppslag betyr ukjent status, ikke hvitflate."
-        },
-        {
-          "id": "large",
-          "label": "Store virksomheter først",
-          "instruction": "Prioriter større virksomheter med komplekse data-/beslutningsprosesser, men ikke anta høyere kjøpsvilje bare fra størrelse."
         }
       ]
     },
@@ -1821,7 +1889,7 @@
         {
           "id": "plain",
           "label": "Ren tekst",
-          "instruction": "Lever et lettlest svar i ren tekst med tydelige overskrifter, uten Markdown-kodeblokker eller spesialformatering."
+          "instruction": "Lever et lettlest svar i ren tekst med tydelige overskrifter og enkle, lesbare tabeller når det er nyttig. Ikke bruk kodeblokker, og ikke krev Markdown-spesialformatering."
         },
         {
           "id": "markdown",

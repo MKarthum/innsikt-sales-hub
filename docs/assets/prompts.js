@@ -8,13 +8,13 @@ function variableField(x,p,e,ico,linked=false){
  const ui=p.variableUi;
  const choices=x.suggestions?.length?'<datalist id="prompt-suggestions-'+e(x.id)+'">'+x.suggestions.map(v=>'<option value="'+e(v)+'"></option>').join('')+'</datalist>':'';
  const field=x.multiline?'<textarea class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'" rows="3" maxlength="'+e(x.maxLength||2000)+'" placeholder="'+e(x.hint||ui.emptyHint)+'">'+e(x.value)+'</textarea>'
-  :'<input type="text" class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'" maxlength="'+e(x.maxLength||2000)+'" value="'+e(x.value)+'" placeholder="'+e(x.hint||ui.emptyHint)+'"'+(choices?' list="prompt-suggestions-'+e(x.id)+'"':'')+' autocomplete="off"/>'+choices;
+  :'<input type="'+(x.inputType==='number'?'number':'text')+'" class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'"'+(x.inputType==='number'?' min="'+e(x.min)+'" max="'+e(x.max)+'" step="1"':' maxlength="'+e(x.maxLength||2000)+'"')+' value="'+e(x.value)+'" placeholder="'+e(x.hint||ui.emptyHint)+'"'+(choices?' list="prompt-suggestions-'+e(x.id)+'"':'')+' autocomplete="off"/>'+choices;
  return '<div class="prompt-var-field"><div class="prompt-var-head"><label for="context-'+e(x.id)+'">'+e(x.label)+'</label><span class="prompt-var-retention">'+e(x.retention==='session'?ui.sessionHint:ui.memoryHint)+'</span></div>'
  +'<div class="prompt-var-controls">'+field+'<button type="button" class="btn subtle prompt-var-clear" data-context-clear="'+e(x.id)+'" aria-label="'+e(ui.clearOne)+' '+e(x.label)+'">'+ico('close')+' <span>'+e(ui.clearOne)+'</span></button></div>'
  +(linked&&x.usedBy.length?'<div class="prompt-var-links">'+e(ui.usedBy)+' '+x.usedBy.map(y=>'<a href="#prompter/'+e(y.id)+'">'+e(y.title)+'</a>').join(' · ')+'</div>':'')
  +'</div>';
 }
-function choiceField(item,p,key,e){
+function choiceField(item,p,key,e,ico){
  const ctx=context(),g=key==='depth'||key==='format'?p.outputSettings[key]:p.choiceGroups[key];
  if(!g)return '';
  const validOptions=ctx.options(item,key);
@@ -26,8 +26,11 @@ function choiceField(item,p,key,e){
    const checked=ctx.getChoice(item,key)===o.id;
    return '<label class="prompt-choice-option"'+(allowed.has(o.id)?'':' hidden')+'><input type="radio" name="prompt-choice-'+e(key)+'" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" value="'+e(o.id)+'" '+(checked?'checked':'')+'><span>'+e(o.label)+'</span></label>';
   }).join('')+'</div>';
+ const custom=g.customInput;
+ const customEntry=custom?ctx.entries().find(v=>v.id===custom.variable):null;
+ const customField=customEntry?'<div class="prompt-choice-custom" data-prompt-custom-group="'+e(key)+'"'+(ctx.getChoice(item,key)===custom.optionId?'':' hidden')+'>'+variableField(customEntry,p.page,e,ico)+'</div>':'';
  return '<fieldset class="prompt-choice-field"'+(g.dependsOn?' data-prompt-depends="'+e(g.dependsOn)+'"'+(ctx.getChoice(item,g.dependsOn)?'':' hidden'):'')+'><legend>'+e(g.label)+'</legend>'
-  +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')+options+'</fieldset>';
+  +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')+options+customField+'</fieldset>';
 }
 function library(d,h,category){
  const {esc:e,ico,sourceLinks}=h,p=d.prompts,ui=p.page.variableUi;
@@ -49,7 +52,8 @@ function detail(d,h,id){
  const {esc:e,ico}=h,x=d.prompts.items.find(t=>t.id===id);
  if(!x)return library(d,h,'Alle');
  const p=d.prompts.page,ui=p.variableUi,ctx=context();
- const used=ctx.entries().filter(v=>x.placeholders.some(n=>n===v.id||(v.aliases||[]).includes(n))&&v.id!=='KUNDEKONTEKST');
+ const attached=new Set((x.choiceGroups||[]).map(k=>d.prompts.choiceGroups[k]?.customInput?.variable).filter(Boolean));
+ const used=ctx.entries().filter(v=>x.placeholders.some(n=>n===v.id||(v.aliases||[]).includes(n))&&v.id!=='KUNDEKONTEKST'&&!attached.has(v.id));
  const shared=ctx.entries().find(v=>v.id==='KUNDEKONTEKST');
  const hasContext=(x.contextVariables||[]).includes('KUNDEKONTEKST')&&shared;
  const prompt=ctx.composeTask(x,d.prompts),blocks=ctx.selectedBlocks(x,d.prompts);
@@ -63,7 +67,7 @@ function detail(d,h,id){
  const formatSubChoice='<div class="prompt-format-subchoice" data-prompt-format-subchoice'+(ctx.supportsOrganizationTemplates(x,d.prompts)?'':' hidden')+'>'
   +checkbox('organizationTemplates',firmalayout.label,firmalayout.hint)+'</div>';
  const cv=x.cvOutput,cvExtra=cv?'<div class="prompt-cv-options" data-prompt-cv-options'+(ctx.isCvDraft(x)?'':' hidden')+'>'
-  +choiceField({...x,choiceGroups:[...x.choiceGroups,cv.lengthGroup]},d.prompts,cv.lengthGroup,e)
+  +choiceField({...x,choiceGroups:[...x.choiceGroups,cv.lengthGroup]},d.prompts,cv.lengthGroup,e,ico)
   +checkbox('clientTemplate',cv.template.label,cv.template.hint)+'</div>':'';
 
 
@@ -77,9 +81,9 @@ function detail(d,h,id){
  +'</div></details></aside><section class="prompt-main-panel"><div class="prompt-edit-head"><div><h2>'+e(ui.fieldsTitle)+'</h2><p>'+e(ui.fieldsIntro)+'</p></div><a class="prompt-overview-link" href="#prompter/variabler">'+e(ui.openOverview)+' →</a></div>'
  +'<div class="prompt-var-grid">'+used.map(v=>variableField(v,p,e,ico)).join('')+'</div>'
  +'<div class="prompt-options"><h2>'+e(ui.choicesTitle)+'</h2>'
- +(x.choiceGroups||[]).map(k=>choiceField(x,d.prompts,k,e)).join('')+cvExtra
+ +(x.choiceGroups||[]).map(k=>choiceField(x,d.prompts,k,e,ico)).join('')+cvExtra
  +(x.toggles||[]).map(t=>checkbox(t.id,t.label,t.hint)).join('')
- +choiceField(x,d.prompts,'depth',e)+choiceField(x,d.prompts,'format',e)+formatSubChoice
+ +choiceField(x,d.prompts,'depth',e,ico)+choiceField(x,d.prompts,'format',e,ico)+formatSubChoice
  +'<p class="prompt-format-notice">'+e(ui.formatNotice)+'</p>'
  +checkbox('handoff',ui.handoffLabel,ui.handoffDescription)
  +(hasContext?checkbox('context',ui.contextInclude,ui.contextNote):'')

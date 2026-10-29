@@ -620,6 +620,10 @@ textarea.prompt-var-input{min-height:78px}
 .prompt-choice-option input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;z-index:1;cursor:pointer}
 .prompt-choice-option span{display:block;border:1px solid hsl(from var(--accent-soft) calc(h + 11.784) calc(s * 0.3652812) calc(l - 3.529));border-radius:9px;background:var(--surface);color:hsl(from var(--accent) calc(h + 2.226) calc(s * 0.4306688) calc(l - 1.176));font-size:12px;line-height:1.4;padding:8px 12px;font-weight:650;transition:background .15s,border-color .15s}
 .prompt-choice-option input:checked+span{background:hsl(from var(--border) calc(h - 33.176) calc(s * 2.0731500) calc(l + 1.765));border-color:hsl(from var(--accent) calc(h - 2.946) calc(s * 0.7079248) calc(l + 5.098));color:hsl(from var(--navy) calc(h - 39.864) calc(s * 1.0213663) calc(l + 7.059));box-shadow:inset 0 0 0 1px hsl(from var(--accent) calc(h - 2.946) calc(s * 0.7079248) calc(l + 5.098))}
+.prompt-choice-custom{margin-top:11px;max-width:310px}
+.prompt-choice-custom .prompt-var-field{margin:0}
+.prompt-choice-custom .prompt-var-controls input[type="number"]{width:100%;min-width:0}
+.prompt-choice-custom[hidden]{display:none}
 .prompt-choice-option input:focus-visible+span{outline:3px solid hsl(from var(--focus) calc(h + 1.544) calc(s * 0.7289713) calc(l + 1.176));outline-offset:2px}
 .prompt-format-notice{font-size:11px;line-height:1.55;color:hsl(from var(--muted) calc(h - 36.844) calc(s * 0.9555059) calc(l - 2.941));margin:-6px 0 16px}
 .prompt-checkbox{display:flex;align-items:flex-start;gap:10px;padding:10px 0;cursor:pointer;color:hsl(from var(--ink) calc(h - 30.677) calc(s * 0.8235200) calc(l + 8.431))}

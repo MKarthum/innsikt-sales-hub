@@ -168,6 +168,8 @@ for(const v of prompts.variables||[]){
  variables.set(v.id,v);
  if(!str(v.label)||!groups.has(v.group)||!['session','memory'].includes(v.retention))fail('Ufullstendig variabel '+v.id);
  if(!Number.isInteger(v.maxLength)||v.maxLength<1||v.maxLength>4000)fail('Ugyldig maksimal tekstlengde '+v.id);
+ if(v.inputType&&v.inputType!=='number')fail('Ukjent inndatatype '+v.id);
+ if(v.inputType==='number'&&(v.multiline||!Number.isInteger(v.min)||!Number.isInteger(v.max)||v.min<1||v.max<v.min))fail('Ugyldig tallfelt '+v.id);
  for(const name of [v.id,...(v.aliases||[])]){
   if(!/^[A-ZÆØÅ][A-ZÆØÅ0-9_]*$/.test(name)||aliasToId.has(name))fail('Ugyldig eller kolliderende variabelalias '+name);
   aliasToId.set(name,v.id);
@@ -196,6 +198,9 @@ for(const [id,g] of Object.entries({...choiceGroups,depth:prompts.outputSettings
  if(!str(g.label)||!Array.isArray(g.options)||g.options.length<2)fail('Ufullstendig valggruppe '+id);
  const optionIds=new Set();
  if(g.control&&g.control!=='select')fail('Ukjent valgkontroll '+id);
+ if(g.customInput){const c=g.customInput;
+  if(g.control!=='select'||!str(c.optionId)||!g.options.some(o=>o.id===c.optionId)||!str(c.variable)||!variables.has(c.variable)||!str(c.label)||!str(c.hint)||variables.get(c.variable).inputType!=='number')fail('Ugyldig egendefinert valg '+id);
+ }
  for(const o of g.options){if(!str(o.id)||optionIds.has(o.id)||!str(o.label)||!str(o.instruction))fail('Ugyldig valgalternativ '+id+'/'+o.id);optionIds.add(o.id)}
 }
 for(const t of prompts.items){
@@ -224,6 +229,7 @@ for(const t of prompts.items){
  const toggleIds=new Set();
  for(const toggle of t.toggles||[]){if(!str(toggle.id)||toggleIds.has(toggle.id)||!str(toggle.label)||!str(toggle.hint)||!str(toggle.instruction)||['depth','format','handoff','context','organizationTemplates','clientTemplate'].includes(toggle.id))fail('Ugyldig avkryssingsvalg '+t.id);toggleIds.add(toggle.id)}
  for(const key of t.choiceGroups)if(choiceGroups[key]?.dependsOn&&!toggleIds.has(choiceGroups[key].dependsOn))fail('Valg uten avhengighet '+key);
+ for(const key of t.choiceGroups){const c=choiceGroups[key]?.customInput;if(c&&!t.placeholders.includes(c.variable))fail('Egendefinert valg uten plassholder '+key+' i '+t.id)}
  for(const [key,value] of Object.entries(t.choiceDefaults||{})){if(toggleIds.has(key)||['handoff','context','organizationTemplates','clientTemplate'].includes(key)){if(typeof value!=='boolean')fail('Ugyldig standardtoggle '+key)}else if(![...t.choiceGroups,'depth','format'].includes(key)||!(key==='depth'?prompts.outputSettings.depth:key==='format'?prompts.outputSettings.format:choiceGroups[key])?.options.some(o=>o.id===value))fail('Ugyldig standardvalg '+key+' i '+t.id)}
  for(const f of t.formats)if(!allFormatIds.has(f))fail('Ukjent svarformat '+f+' i '+t.id);
  if(!t.contextVariables.includes('KUNDEKONTEKST'))fail('Mangler felles kundekontekst i '+t.id);

@@ -62,3 +62,11 @@ CV_KONSULENTNAVN og CV_FORESPØRSEL er kun frivillige hjelpedata for eksternt, g
 ## Valg for markedsprospektering (v0.18.40)
 
 `choiceGroups[].control: "select"` (representert som egenskap på en navngitt valggruppe) er et nedtrekksvalg; radio er standard. `dependsOn` kan vise valg bare når en tilhørende toggle er på. `items[].toggles` er datastyrte boolske valg med id, label, hint og instruksjon. Standardverdier ligger i `items[].choiceDefaults`; de er bare lokale UI-valg og blir ikke lagret. `variables[].suggestions` lager en redigerbar datalist for fritekstfelt, ikke en låst kategori. `ANTALL_VIRKSOMHETER` er et generisk session-felt som overstyrer nedtrekksvalgets mål hvis brukeren fyller inn et gyldig antall. CRM-status eller persondata skal aldri føres inn i disse offentlige feltene.
+
+## Kontroll- og registreringskontrakt ved valgbart antall (v0.18.41)
+
+`variables[].suggestions` gir en datalist med valg og egen fritekst i samme felt, uten å endre felles-ID, alias, lagringstype eller oppgaveinstruksjon. Forslagene valideres maskinelt og kan vises i både promptdetalj og variabeloversikt. Feltet `ANTALL_VIRKSOMHETER` er et `inputType: number` (1–100) med `retention: session`.
+
+En navngitt valggruppe kan deklarere `customInput: {optionId,variable,label,hint}` for et numerisk felt i samme blokk som nedtrekksvalget. Det skal kun vises for valgt `optionId` og bare påvirke promptens betingede tekst mens dette valget er aktivt. Ugyldige tall gir ingen verdi. Variabler som brukes i dette mønsteret skal ikke også vises som fritekst øverst på prompten, men fortsatt være oppført i totaloversikten.
+
+`MØTELENGDE` er kanonisk også for workshopvarighet; eldre placeholder `VARIGHET` er alias. Kjent alias i `sessionStorage` flyttes til kanonisk ID ved lasting. Ukjente gamle ID-er blir fortsatt synlige for eksplisitt opprydding. Felles kontaktkanal `contactChannel` brukes av både `contact-prep` og `followup`; `followupChannel` er fjernet som semantisk duplikat. Kontrakttester dekker endringene og kontroll av at ingenting sendes til en server.
