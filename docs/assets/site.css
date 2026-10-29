@@ -576,6 +576,16 @@ svg[aria-hidden="true"]{width:1em;height:1em;display:inline-block;vertical-align
 .prompt-var-input{width:100%;min-width:0;flex:1;min-height:37px;padding:9px 10px;border:1px solid hsl(from var(--accent-soft) calc(h + 15.732) calc(s * 0.3404422) calc(l - 5.686));border-radius:8px;background:var(--surface);color:hsl(from var(--ink) calc(h - 23.87) calc(s * 0.7083400) calc(l + 3.922));font:500 12px/1.55 inherit;font-family:inherit;font-size:12px;line-height:1.55;resize:vertical}
 textarea.prompt-var-input{min-height:78px}
 .prompt-var-input:focus-visible{outline:2px solid hsl(from var(--focus) calc(h - 2.944) calc(s * 0.9292892) calc(l - 1.765));outline-offset:1px}
+/* Egen berøringsvennlig forslagsliste i stedet for iOS Safari sin upålitelige datalist. */
+.prompt-var-suggest-toggle{min-height:37px;display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;padding:6px 9px!important;font-size:11px!important}
+.prompt-var-suggest-toggle svg{height:14px;width:14px;flex:none}
+.prompt-var-suggest-toggle[aria-expanded="true"]{background:var(--accent-soft);outline:2px solid var(--focus);outline-offset:1px}
+.prompt-var-suggestions{margin-top:8px;max-height:230px;overflow-y:auto;overscroll-behavior:contain;padding:5px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+.prompt-var-suggestions[hidden],.prompt-var-suggestion[hidden],.prompt-var-suggestion-empty[hidden]{display:none}
+.prompt-var-suggestion{width:100%;display:block;text-align:left;padding:10px 12px;min-height:44px;cursor:pointer;background:transparent;color:var(--ink);font:inherit;font-size:13px;border:0;border-radius:6px;white-space:normal}
+.prompt-var-suggestion:hover,.prompt-var-suggestion:focus-visible{background:var(--accent-soft);outline:2px solid var(--focus);outline-offset:-2px}
+.prompt-var-suggestion-empty{font-size:12px;color:var(--muted);margin:9px}
+@media(max-width:640px){.prompt-var-suggest-toggle{min-width:43px}.prompt-var-suggest-toggle span{font-size:11px}.prompt-var-suggestions{max-height:205px}}
 .prompt-var-clear{min-height:37px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;padding:6px 9px!important;font-size:11px!important}
 .prompt-var-clear svg{height:13px;width:13px}
 .prompt-var-links{border-top:1px solid hsl(from var(--border) calc(h - 33.818) calc(s * 1.2222000) calc(l + 0.98));margin-top:10px;padding-top:9px;color:hsl(from var(--muted) calc(h - 26.144) calc(s * 0.8229452) calc(l - 3.725));font-size:11px;line-height:1.8}

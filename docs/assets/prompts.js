@@ -5,12 +5,17 @@ const context=()=>window.InnsiktPromptContext;
 const card=(x,e,page)=>'<a class="prompt-card" href="#prompter/'+e(x.id)+'"><div class="prompt-top"><span class="prompt-chip">'+e(x.category)+'</span></div><h3>'+e(x.title)+'</h3><p>'+e(x.summary)+'</p><div class="prompt-card-foot"><span>'+e(x.audience)+'</span><strong>'+e(page.cardLinkLabel)+' →</strong></div></a>';
 const toolbar=(p,e,ico)=>'<div class="prompt-context-toolbar"><div><strong>'+e(p.variableUi.toolbarTitle)+'</strong><p>'+e(p.variableUi.toolbarDescription)+'</p></div><a href="#prompter/variabler" class="btn subtle">'+ico('layers')+' '+e(p.variableUi.openOverview)+'</a></div>';
 function variableField(x,p,e,ico,linked=false){
- const ui=p.variableUi;
- const choices=x.suggestions?.length?'<datalist id="prompt-suggestions-'+e(x.id)+'">'+x.suggestions.map(v=>'<option value="'+e(v)+'"></option>').join('')+'</datalist>':'';
+ const ui=p.variableUi,hasSuggestions=!!x.suggestions?.length;
  const field=x.multiline?'<textarea class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'" rows="3" maxlength="'+e(x.maxLength||2000)+'" placeholder="'+e(x.hint||ui.emptyHint)+'">'+e(x.value)+'</textarea>'
-  :'<input type="'+(x.inputType==='number'?'number':'text')+'" class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'"'+(x.inputType==='number'?' min="'+e(x.min)+'" max="'+e(x.max)+'" step="1"':' maxlength="'+e(x.maxLength||2000)+'"')+' value="'+e(x.value)+'" placeholder="'+e(x.hint||ui.emptyHint)+'"'+(choices?' list="prompt-suggestions-'+e(x.id)+'"':'')+' autocomplete="off"/>'+choices;
+  :'<input type="'+(x.inputType==='number'?'number':'text')+'" class="prompt-var-input" data-context-var="'+e(x.id)+'" id="context-'+e(x.id)+'"'+(x.inputType==='number'?' min="'+e(x.min)+'" max="'+e(x.max)+'" step="1"':' maxlength="'+e(x.maxLength||2000)+'"')+' value="'+e(x.value)+'" placeholder="'+e(x.hint||ui.emptyHint)+'" autocomplete="off"/>';
+ // Bruk vår egen, synlige forslagsliste: iOS Safari/WebKit er upålitelig med native datalist.
+ const toggle=hasSuggestions?'<button type="button" class="btn subtle prompt-var-suggest-toggle" data-prompt-suggest-toggle="'+e(x.id)+'" aria-expanded="false" aria-controls="prompt-suggestions-'+e(x.id)+'" aria-label="'+e(ui.suggestionsLabel)+' – '+e(x.label)+'">'+ico('chevron-down')+' <span>'+e(ui.suggestionsLabel)+'</span></button>':'';
+ const panel=hasSuggestions?'<div class="prompt-var-suggestions" id="prompt-suggestions-'+e(x.id)+'" data-prompt-suggestion-panel="'+e(x.id)+'" role="group" aria-label="'+e(ui.suggestionsLabel)+' – '+e(x.label)+'" hidden>'
+  +x.suggestions.map(v=>'<button type="button" class="prompt-var-suggestion" data-prompt-suggestion="'+e(x.id)+'" data-prompt-suggestion-value="'+e(v)+'">'+e(v)+'</button>').join('')
+  +'<p class="prompt-var-suggestion-empty" data-prompt-suggestion-empty hidden>'+e(ui.suggestionsEmpty)+'</p></div>':'';
  return '<div class="prompt-var-field"><div class="prompt-var-head"><label for="context-'+e(x.id)+'">'+e(x.label)+'</label><span class="prompt-var-retention">'+e(x.retention==='session'?ui.sessionHint:ui.memoryHint)+'</span></div>'
- +'<div class="prompt-var-controls">'+field+'<button type="button" class="btn subtle prompt-var-clear" data-context-clear="'+e(x.id)+'" aria-label="'+e(ui.clearOne)+' '+e(x.label)+'">'+ico('close')+' <span>'+e(ui.clearOne)+'</span></button></div>'
+ +'<div class="prompt-var-controls">'+field+toggle+'<button type="button" class="btn subtle prompt-var-clear" data-context-clear="'+e(x.id)+'" aria-label="'+e(ui.clearOne)+' '+e(x.label)+'">'+ico('close')+' <span>'+e(ui.clearOne)+'</span></button></div>'
+ +panel
  +(linked&&x.usedBy.length?'<div class="prompt-var-links">'+e(ui.usedBy)+' '+x.usedBy.map(y=>'<a href="#prompter/'+e(y.id)+'">'+e(y.title)+'</a>').join(' · ')+'</div>':'')
  +'</div>';
 }

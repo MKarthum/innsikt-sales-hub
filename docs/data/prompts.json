@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.9.0",
+    "version": "1.9.1",
     "reviewed": "2026-10-29",
     "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
   },
@@ -97,7 +97,9 @@
       "templateChoiceNote": "Bare for dokumenter og presentasjoner",
       "templateDisabledNote": "Denne innstillingen gjelder ikke ren tekst eller Markdown.",
       "fieldOptionalHint": "La feltet stå tomt om det ikke er relevant – da utelates hele opplysningen fra prompten.",
-      "guideToggle": "Tips og kvalitetssjekk"
+      "guideToggle": "Tips og kvalitetssjekk",
+      "suggestionsLabel": "Forslag",
+      "suggestionsEmpty": "Ingen forslag passer. Du kan skrive din egen verdi."
     },
     "primaryIds": [
       "account-research",

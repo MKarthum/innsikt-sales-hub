@@ -70,3 +70,7 @@ CV_KONSULENTNAVN og CV_FORESPØRSEL er kun frivillige hjelpedata for eksternt, g
 En navngitt valggruppe kan deklarere `customInput: {optionId,variable,label,hint}` for et numerisk felt i samme blokk som nedtrekksvalget. Det skal kun vises for valgt `optionId` og bare påvirke promptens betingede tekst mens dette valget er aktivt. Ugyldige tall gir ingen verdi. Variabler som brukes i dette mønsteret skal ikke også vises som fritekst øverst på prompten, men fortsatt være oppført i totaloversikten.
 
 `MØTELENGDE` er kanonisk også for workshopvarighet; eldre placeholder `VARIGHET` er alias. Kjent alias i `sessionStorage` flyttes til kanonisk ID ved lasting. Ukjente gamle ID-er blir fortsatt synlige for eksplisitt opprydding. Felles kontaktkanal `contactChannel` brukes av både `contact-prep` og `followup`; `followupChannel` er fjernet som semantisk duplikat. Kontrakttester dekker endringene og kontroll av at ingenting sendes til en server.
+
+## Forslagsmeny på mobil (v0.18.42)
+
+`suggestions` eies fortsatt av det kanoniske variabelregisteret i `docs/data/prompts.json`, men `variableField` bruker ikke lenger native `datalist`. Alle enheter får en synlig knapp «Forslag» og en selvstendig liste med min. 44 px høye trykkflater. Valg oppdaterer eksisterende `data-context-var` og følger dermed retention, reset, promptoppdatering og sikkerhetsregler uendret. Fritekst og filtrering er fortsatt tillatt. Den samme komponenten gjenbrukes i promptdetalj og variabeloversikt, uten enhetsspesifikk logikk i datamodellen.

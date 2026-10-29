@@ -5,7 +5,7 @@ const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 try{
  for(const {label,width,height} of [{label:'desktop',width:1440,height:900},{label:'mobil',width:390,height:844}]){
-  const context=await browser.newContext({viewport:{width,height},permissions:['clipboard-read','clipboard-write']});
+  const context=await browser.newContext({viewport:{width,height},hasTouch:label==='mobil',isMobile:label==='mobil',permissions:['clipboard-read','clipboard-write']});
   const page=await context.newPage(),errors=[];
   page.on('pageerror',err=>errors.push(err.message));
   const navigate=async route=>{
@@ -310,13 +310,39 @@ try{
   await navigate('prompter/market-prospecting');
   for(const id of ['BRANSJE','GEOGRAFI','SEGMENT','KUNDETYPE','FAGLIG_FOKUS','ANTALL_VIRKSOMHETER'])
    assert.equal(await page.locator('[data-context-var="'+id+'"]').count(),1,label+': felt '+id);
-  for(const id of ['BRANSJE','GEOGRAFI','KUNDETYPE','FAGLIG_FOKUS'])
-   assert.ok(await page.locator('#prompt-suggestions-'+id+' option').count()>4,label+': forslag i '+id);
-  const geography=await page.locator('#prompt-suggestions-GEOGRAFI option').evaluateAll(os=>os.map(o=>o.value));
+  for(const id of ['BRANSJE','GEOGRAFI','KUNDETYPE','FAGLIG_FOKUS']){
+   assert.ok(await page.locator('[data-prompt-suggestion-panel="'+id+'"] button').count()>4,label+': forslag i '+id);
+   assert.equal(await page.locator('[data-prompt-suggest-toggle="'+id+'"]').isVisible(),true,label+': synlig forslag-knapp '+id);
+  }
+  assert.equal(await page.locator('datalist').count(),0,label+': ingen native datalist');
+  const geography=await page.locator('[data-prompt-suggestion="GEOGRAFI"]').evaluateAll(os=>os.map(o=>o.dataset.promptSuggestionValue));
   for(const area of ['Hele Norge','Oslo og omegn','Bergen og omegn','Stavanger og omegn','Trondheim og omegn','Kristiansand og omegn'])
-   assert.ok(geography.includes(area),label+': mangler valgfri geografi '+area);
-  await page.locator('[data-context-var="BRANSJE"]').fill('Finans');
+   assert.ok(geography.includes(area),label+': mangler geografiforslag '+area);
+  const clickSuggestion=async (id,value)=>{
+   const open=page.locator('[data-prompt-suggest-toggle="'+id+'"]');
+   if(label==='mobil')await open.tap();else await open.click();
+   assert.equal(await open.getAttribute('aria-expanded'),'true',label+': liste åpnet '+id);
+   const panel=page.locator('[data-prompt-suggestion-panel="'+id+'"]');
+   assert.equal(await panel.isVisible(),true,label+': forslag vist '+id);
+   const option=page.locator('[data-prompt-suggestion="'+id+'"][data-prompt-suggestion-value="'+value+'"]');
+   if(label==='mobil')await option.tap();else await option.click();
+   assert.equal(await page.locator('[data-context-var="'+id+'"]').inputValue(),value,label+': forslag valgt '+id);
+   assert.equal(await panel.isVisible(),false,label+': forslag lukket '+id);
+  };
+  await clickSuggestion('GEOGRAFI','Oslo og omegn');
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('Geografisk område: Oslo og omegn.'),label+': valgt geografi i prompt');
+  await clickSuggestion('KUNDETYPE','Mellomstore virksomheter');
+  await page.locator('[data-prompt-suggest-toggle="GEOGRAFI"]').click();
+  await page.locator('[data-context-var="GEOGRAFI"]').fill('Krist');
+  assert.equal(await page.locator('[data-prompt-suggestion="GEOGRAFI"]:visible').count(),1,label+': filtrering i forslag');
+  await page.locator('[data-context-var="GEOGRAFI"]').fill('Egendefinert region');
+  assert.equal(await page.locator('[data-prompt-suggestion="GEOGRAFI"]:visible').count(),0,label+': ingen treff');
+  assert.equal(await page.locator('[data-prompt-suggestion-empty]:visible').count(),1,label+': fri tekst forklart');
+  await page.locator('[data-context-var="GEOGRAFI"]').press('Escape');
+  assert.equal(await page.locator('[data-prompt-suggestion-panel="GEOGRAFI"]').isVisible(),false,label+': Escape lukker');
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('Geografisk område: Egendefinert region.'),label+': fri tekst i prompt');
   await page.locator('[data-context-var="GEOGRAFI"]').fill('Oslo og omegn');
+  await page.locator('[data-context-var="BRANSJE"]').fill('Finans');
   assert.equal(await page.locator('[data-prompt-choice="prospectCount"]').inputValue(),'standard',label+': default 12–15');
   assert.equal(await page.locator('[data-prompt-choice="format"][value="plain"]').isChecked(),true,label+': ren tekst standard');
   assert.equal(await page.locator('[data-prompt-toggle="ringelist"]').isChecked(),true,label+': ringeliste på');
@@ -362,6 +388,12 @@ try{
   await navigate('prompter/variabler');
   await page.locator('.prompt-overview-grid').first().waitFor();
   assert.equal(await page.locator('[data-context-var="KUNDENAVN"]').inputValue(),'Byttet navn',label+': redigering fra oversikten');
+  const offer=page.locator('[data-prompt-suggest-toggle="GEOGRAFI"]');
+  assert.equal(await offer.isVisible(),true,label+': samme forslag på oversikten');
+  await offer.click();
+  assert.equal(await page.locator('[data-prompt-suggestion-panel="GEOGRAFI"]').isVisible(),true,label+': liste åpnes på oversikten');
+  await page.locator('[data-prompt-suggestion="GEOGRAFI"][data-prompt-suggestion-value="Hele Norge"]').click();
+  assert.equal(await page.locator('[data-context-var="GEOGRAFI"]').inputValue(),'Hele Norge',label+': felles kontekst settes');
   assert.equal(await page.locator('.prompt-no-orphans').count(),1,label+': ingen døde variabler');
   await page.evaluate(()=>{
    const key='innsikt-prompt-context-v1';
