@@ -29,8 +29,13 @@ function configure(prompts){
  values=Object.create(null);storage=null;choices=new Map();
  try{if(typeof sessionStorage!=='undefined'){storage=sessionStorage;const raw=JSON.parse(storage.getItem(STORAGE_KEY)||'{}');
   if(raw&&typeof raw==='object'&&!Array.isArray(raw))for(const [id,value] of Object.entries(raw))if(typeof value==='string'&&value.length<=4000){
-   if(!byId.has(id)||byId.get(id).retention==='session')values[id]=value;
+   const canonicalId=aliases.get(id)||id;
+   const def=byId.get(canonicalId);
+   if(def?.retention==='session'){
+    if(!values[canonicalId]||id===canonicalId)values[canonicalId]=value;
+   }else if(!def)values[id]=value;
   }
+  persist();
  }}catch{/* Ved blokkert lagring brukes bare minnet */}
 }
 const canonical=id=>aliases.get(id)||id;
@@ -38,8 +43,10 @@ const get=id=>values[canonical(id)]||'';
 function set(id,value){
  id=canonical(id);
  if(!byId.has(id))return;
- const v=String(value??'').slice(0,byId.get(id).maxLength||2000);
- if(v.trim())values[id]=v;else delete values[id];
+ const d=byId.get(id);
+ const v=String(value??'').slice(0,d.maxLength||2000);
+ if(d.inputType==='number'&&(!Number.isInteger(Number(v))||!v.trim()||Number(v)<d.min||Number(v)>d.max))delete values[id];
+ else if(v.trim())values[id]=v;else delete values[id];
  persist();
 }
 function clear(id){delete values[canonical(id)];persist()}
@@ -85,11 +92,15 @@ function isCvDraft(item){
 function supportsOrganizationTemplates(item,prompts=promptData){
  return !!prompts?.outputSettings?.organizationTemplates?.formats?.includes(getChoice(item,'format'))&&!(isCvDraft(item)&&getChoice(item,'clientTemplate'));
 }
+function isActiveCustomVariable(item,id){
+ const specs=(item.choiceGroups||[]).map(key=>({key,custom:promptData?.choiceGroups?.[key]?.customInput})).filter(g=>g.custom?.variable===id);
+ return !specs.length||specs.some(g=>getChoice(item,g.key)===g.custom.optionId);
+}
 function renderTaskInput(item){
  // Editorially controlled optional spans are fully removed when a field is empty.
  // This also removes their labels; the copied prompt never contains an empty placeholder.
  const conditional=/\{\{\?([A-ZÆØÅ][A-ZÆØÅ0-9_]*)\}\}([\s\S]*?)\{\{\/\1\}\}/g;
- const expanded=String(item.prompt||'').replace(conditional,(_,id,block)=>get(id).trim()?block:'');
+ const expanded=String(item.prompt||'').replace(conditional,(_,id,block)=>get(id).trim()&&isActiveCustomVariable(item,id)?block:'');
  return compose(expanded,item.placeholders).replace(/\n[ \t]*\n[ \t]*\n+/g,'\n\n').replace(/[ \t]+\n/g,'\n').trim();
 }
 function selectedBlocks(item,prompts=promptData){
@@ -99,7 +110,12 @@ function selectedBlocks(item,prompts=promptData){
  for(const key of item.choiceGroups||[]){
   const o=selected(key),g=prompts.choiceGroups[key];
   if(g?.dependsOn&&!getChoice(item,g.dependsOn))continue;
-  if(o&&g)blocks.push({key,label:g.label,option:o.label,instruction:o.instruction,prefix:prompts.outputSettings.groupPrefix+' – '+g.label});
+  if(o&&g){
+   const custom=g.customInput;
+   const value=custom&&getChoice(item,key)===custom.optionId?get(custom.variable).trim():'';
+   const instruction=value?o.instruction+' Egendefinert antall: '+value+'.':o.instruction;
+   blocks.push({key,label:g.label,option:o.label,instruction,prefix:prompts.outputSettings.groupPrefix+' – '+g.label});
+  }
  }
  if(isCvDraft(item)){
   const key=item.cvOutput.lengthGroup,o=selected(key),g=prompts.choiceGroups[key];

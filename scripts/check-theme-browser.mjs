@@ -7,12 +7,18 @@ const current=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const previous=process.env.INNSIKT_THEME_BASE_URL||'';
 // Endret oppgaveliste er en bevisst innholdsendring, ikke en temaregresjon.
 // Sammenlign de øvrige rutene piksel for piksel og behold kontrasttest også her.
-let promptOverviewChanged=false;
+let promptOverviewChanged=false,accountPromptChanged=false;
 if(previous){
  const prev=JSON.parse(execFileSync('git',['show','HEAD^:docs/data/prompts.json'],{encoding:'utf8'}));
  const currentPrompts=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8'));
  const cards=d=>d.page.primaryIds.map(id=>{const x=d.items.find(y=>y.id===id);return x&&[x.id,x.title,x.summary,x.category,x.audience]});
  promptOverviewChanged=JSON.stringify(cards(prev))!==JSON.stringify(cards(currentPrompts));
+ const account=d=>{
+  const item=d.items.find(x=>x.id==='account-research');
+  const used=new Set(item?.placeholders||[]);
+  return {item,variables:d.variables.filter(v=>used.has(v.id)||(v.aliases||[]).some(a=>used.has(a)))};
+ };
+ accountPromptChanged=JSON.stringify(account(prev))!==JSON.stringify(account(currentPrompts));
 }
 const synthetic=fs.readFileSync('scripts/fixtures/theme-synthetic.css','utf8');
 const dir='artifacts/theme';
@@ -121,7 +127,7 @@ try{
    const name=viewport.name+'-'+route.replaceAll('/','-');
    const shot=await now.screenshot({animations:'disabled'});
    fs.writeFileSync(dir+'/'+name+'.png',shot);
-   if(old&&!(route==='prompter'&&promptOverviewChanged)){
+   if(old&&!(route==='prompter'&&promptOverviewChanged)&&!(route==='prompter/account-research'&&accountPromptChanged)){
     const reference=await old.screenshot({animations:'disabled'});
     const diff=await pixelDiff(reference,shot,now);
     trackDiff(diff);
@@ -169,9 +175,10 @@ try{
   }
   await ctx.close();
  }
- if(previous)assert.equal(pixelComparisons,viewports.length*(pages.length+2-(promptOverviewChanged?1:0)),
+ if(previous)assert.equal(pixelComparisons,viewports.length*(pages.length+2-(promptOverviewChanged?1:0)-(accountPromptChanged?1:0)),
   'Missing prior-release pixel comparisons');
- if(promptOverviewChanged)console.log('INFO – bevisst endret promptoversikt er skjermbildet og kontrasttestet; pikseleksakt sammenligning utelatt for denne ruten');
+ if(promptOverviewChanged)console.log('INFO – bevisst endret promptoversikt: skjermbilde og kontrast testet, pikseleksakt sammenligning utelatt');
+ if(accountPromptChanged)console.log('INFO – redigerbare forslag endret kundeanalyse-input: skjermbilde og kontrast testet, pikseleksakt sammenligning utelatt');
  assert.ok(aaCount>=200,'Too few WCAG text samples: '+aaCount);
  assert.deepEqual(violations.slice(0,50),[],violations.length+' WCAG AA regressions (first 50 shown)');
  console.log('PASS – '+routeCount+' mobile/desktop route screenshots; '+slides+' Presenter tone screenshots; '+aaCount+' WCAG AA text pairs; '+(previous?('pixel comparison '+pixelComparisons+' views, max changed '+(peakChanged*100).toFixed(3)+'%, max avg channel delta '+peakAverage.toFixed(4)+'/255'):'prior-version pixel comparison not configured'));

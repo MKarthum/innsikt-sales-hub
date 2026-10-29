@@ -293,7 +293,8 @@ try{
   assert.ok(!storedCandidate.includes('CV_KONSULENTNAVN')&&!storedCandidate.includes('CV_FORESPØRSEL'),label+': konsulentnavn og forespørsel er bare i minnet');
   await navigate('prompter');
   await navigate('prompter/followup');
-  await page.locator('[data-prompt-choice="followupChannel"][value="phone"]').check();
+  assert.equal(await page.locator('[data-prompt-choice="contactChannel"][value="email"]').isChecked(),true,label+': oppfølging beholder e-post som standard');
+  await page.locator('[data-prompt-choice="contactChannel"][value="phone"]').check();
   assert.ok((await page.locator('#prompt-preview-lines').innerText()).includes('Telefon'),label+': oppfølging kan være telefon');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('muntlig samtaleåpning'),label+': kanalvalg endrer oppfølging');
   await navigate('prompter/discovery');
@@ -303,40 +304,60 @@ try{
   await page.reload({waitUntil:'networkidle'});
   assert.equal(await page.locator('[data-context-var="KUNDENS_UTSAGN"]').inputValue(),'',label+': memory-only borte etter refresh');
   assert.equal(await page.locator('[data-context-var="BRANSJE"]').inputValue(),'Energi',label+': generisk verdi huskes');
-  // Finans – valg, bransjedekning, kildekrav, personfunn og kopiering på begge skjermstørrelser.
+  // Felles felt – redigerbare forslag kan velges eller skrives over.
   await navigate('prompter');
   assert.equal(await page.locator('.prompt-primary .prompt-card[href="#prompter/market-prospecting"]').count(),1,label+': prospektering prioritert');
   await navigate('prompter/market-prospecting');
   for(const id of ['BRANSJE','GEOGRAFI','SEGMENT','KUNDETYPE','FAGLIG_FOKUS','ANTALL_VIRKSOMHETER'])
    assert.equal(await page.locator('[data-context-var="'+id+'"]').count(),1,label+': felt '+id);
-  assert.ok(await page.locator('datalist#prompt-suggestions-KUNDETYPE option').count()>2,label+': redigerbare forslag');
+  for(const id of ['BRANSJE','GEOGRAFI','KUNDETYPE','FAGLIG_FOKUS'])
+   assert.ok(await page.locator('#prompt-suggestions-'+id+' option').count()>4,label+': forslag i '+id);
+  const geography=await page.locator('#prompt-suggestions-GEOGRAFI option').evaluateAll(os=>os.map(o=>o.value));
+  for(const area of ['Hele Norge','Oslo og omegn','Bergen og omegn','Stavanger og omegn','Trondheim og omegn','Kristiansand og omegn'])
+   assert.ok(geography.includes(area),label+': mangler valgfri geografi '+area);
   await page.locator('[data-context-var="BRANSJE"]').fill('Finans');
+  await page.locator('[data-context-var="GEOGRAFI"]').fill('Oslo og omegn');
   assert.equal(await page.locator('[data-prompt-choice="prospectCount"]').inputValue(),'standard',label+': default 12–15');
-  assert.equal(await page.locator('[data-prompt-choice="format"][value="markdown"]').isChecked(),true,label+': tabellformat default');
+  assert.equal(await page.locator('[data-prompt-choice="format"][value="plain"]').isChecked(),true,label+': ren tekst standard');
   assert.equal(await page.locator('[data-prompt-toggle="ringelist"]').isChecked(),true,label+': ringeliste på');
-  assert.equal(await page.locator('[data-prompt-toggle="crmLookup"]').isChecked(),false,label+': CRM av');
-  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('RINGELISTE:'));
-  await page.locator('[data-prompt-toggle="ringelist"]').uncheck();
-  assert.equal(await page.locator('[data-prompt-depends="ringelist"]').isVisible(),false,label+': personvalg skjules');
+  assert.equal(await page.locator('[data-prompt-toggle="crmLookup"]').isChecked(),true,label+': CRM på');
+  assert.equal(await page.locator('[data-prompt-toggle="handoff"]').isChecked(),true,label+': kontekstoverlevering på');
+  assert.equal(await page.locator('[data-prompt-toggle="context"]').isChecked(),true,label+': kundekontekst inkluderes');
+  assert.equal(await page.locator('[data-prompt-toggle="extendedResearch"]').isChecked(),false,label+': utvidet research av');
+  assert.equal(await page.locator('[data-prompt-custom-group="prospectCount"]').isVisible(),false,label+': egendefinert antall skjult');
   let prospect=await page.locator('#prompt-editor').inputValue();
-  assert.ok(!prospect.includes('RINGELISTE:')&&!prospect.includes('Ta med både bekreftede kontaktpersoner'),label+': bare behov');
-  await page.locator('[data-prompt-choice="prospectCount"]').selectOption('broad');
-  await page.locator('[data-prompt-choice="prospectMode"][value="extended"]').check();
-  await page.locator('[data-prompt-toggle="crmLookup"]').check();
-  await page.locator('[data-context-var="KUNDETYPE"]').fill('Mellomstore virksomheter');
+  assert.ok(prospect.includes('CRM SOM BERIKELSE')&&prospect.includes('KONTEKST TIL NESTE PROMPT'),label+': standard kontekstvalg');
+  assert.ok(prospect.includes('Oslo omfatter også relevante nærliggende virksomheter'),label+': fleksible storbyområder');
+  await page.locator('[data-prompt-choice="prospectCount"]').selectOption('custom');
+  assert.equal(await page.locator('[data-prompt-custom-group="prospectCount"]').isVisible(),true,label+': egendefinert tall synlig');
   await page.locator('[data-context-var="ANTALL_VIRKSOMHETER"]').fill('18');
   prospect=await page.locator('#prompt-editor').inputValue();
-  assert.ok(prospect.includes('20–25')&&prospect.includes('Egendefinert antall virksomheter')&&prospect.includes('CRM SOM BERIKELSE'),label+': valg og fritekst');
-  await page.locator('[data-prompt-toggle="ringelist"]').check();
-  assert.equal(await page.locator('[data-prompt-depends="ringelist"]').isVisible(),true,label+': personvalg vises');
-  await page.locator('[data-prompt-choice="prospectContactQuality"]').selectOption('strict');
+  assert.ok(prospect.includes('Eget antall prioriterte virksomheter: 18.')&&prospect.includes('Egendefinert antall: 18.'),label+': UI overstyrer antall');
+  assert.ok(!prospect.includes('Sikt mot 12–15'),label+': ingen motstridende antall');
+  await page.locator('[data-prompt-choice="prospectCount"]').selectOption('broad');
   prospect=await page.locator('#prompt-editor').inputValue();
-  assert.ok(prospect.includes('Navngi bare personer med dokumentert'),label+': personkrav styrer output');
+  assert.ok(prospect.includes('20–25')&&!prospect.includes('Eget antall prioriterte virksomheter: 18.'),label+': egendefinert antall tas bort');
+  await page.locator('[data-prompt-toggle="ringelist"]').uncheck();
+  assert.equal(await page.locator('[data-prompt-depends="ringelist"]').isVisible(),false,label+': personkvalitet skjules');
+  prospect=await page.locator('#prompt-editor').inputValue();
+  assert.ok(!prospect.includes('RINGELISTE:'),label+': bare behov');
+  await page.locator('[data-prompt-toggle="extendedResearch"]').check();
+  assert.ok((await page.locator('#prompt-editor').inputValue()).includes('UTVIDET RESEARCH'),label+': verktøyvalg er eksplisitt');
+  await page.locator('[data-prompt-toggle="ringelist"]').check();
+  await page.locator('[data-prompt-choice="prospectContactQuality"]').selectOption('strict');
+  assert.equal(await page.locator('[data-prompt-depends="ringelist"]').isVisible(),true,label+': personkvalitet vises');
+  await page.locator('[data-prompt-toggle="crmLookup"]').uncheck();
+  assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('CRM SOM BERIKELSE'),label+': CRM kan utelates');
+  await page.locator('[data-prompt-toggle="crmLookup"]').check();
+  prospect=await page.locator('#prompt-editor').inputValue();
+  assert.ok(prospect.includes('Navngi bare personer med dokumentert')&&prospect.includes('CRM SOM BERIKELSE'),label+': alle valg påvirker prompten');
   await page.locator('[data-prompt-copy]').click();
   assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),prospect,label+': eksakt kopiering');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),label+': ingen horisontal overflyt');
   await page.locator('[data-context-var="BRANSJE"]').fill('Energi');
-  for(const id of ['GEOGRAFI','SEGMENT','FAGLIG_FOKUS','ANTALL_VIRKSOMHETER','KUNDETYPE'])await page.locator('[data-context-var="'+id+'"]').fill('');
+  for(const id of ['GEOGRAFI','SEGMENT','FAGLIG_FOKUS','KUNDETYPE'])await page.locator('[data-context-var="'+id+'"]').fill('');
+  await page.locator('[data-prompt-choice="prospectCount"]').selectOption('custom');
+  await page.locator('[data-context-var="ANTALL_VIRKSOMHETER"]').fill('');
 
   await navigate('prompter/variabler');
   await page.locator('.prompt-overview-grid').first().waitFor();
