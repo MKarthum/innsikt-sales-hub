@@ -811,6 +811,7 @@ function refreshPromptWorkload(item){
  const ui=D.prompts.workloadUi;
  const info=window.InnsiktPromptWorkload.estimate(item,D.prompts,window.InnsiktPromptContext,editor.value,editor.dataset.dirty==='true');
  panel.dataset.level=String(info.levelIndex);
+ panel.dataset.score=String(info.score);
  panel.querySelector('[data-prompt-load-level]').textContent=info.level;
  panel.querySelectorAll('[data-prompt-load-segment]').forEach((node,i)=>node.classList.toggle('active',i<info.segments));
  panel.querySelector('[data-prompt-load-overflow]').hidden=!info.overflow;
