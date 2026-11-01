@@ -116,6 +116,15 @@ try{
   await navigate('prompter/account-research');
 
   await page.locator('#prompt-editor').waitFor({state:'attached'});
+  const resource=page.locator('[data-prompt-load]');
+  assert.equal(await resource.count(),1,label+': én kompakt ressursindikator');
+  assert.equal(await resource.evaluate(el=>el.open),false,label+': detaljene er skjult som standard');
+  assert.equal(await resource.locator('[data-prompt-load-segment]').count(),6,label+': fast skala');
+  await resource.locator('summary').click();
+  assert.equal(await resource.evaluate(el=>el.open),true,label+': forklaring kan åpnes');
+  assert.ok((await resource.locator('[data-prompt-load-details]').innerText()).includes('kilde'),label+': arbeidsoperasjoner forklares');
+  await page.keyboard.press('Escape');
+  assert.equal(await resource.evaluate(el=>el.open),false,label+': Escape lukker forklaringen');
   assert.ok(await page.locator('#prompt-preview-lines .prompt-preview-line').count()>=3,label+': synlig instruksjonsoversikt');
   assert.equal(await page.locator('.prompt-live-panel [data-prompt-copy]').count(),0,label+': ingen kopierknapp i forhåndsvisningen');
   assert.equal(await page.locator('#main [data-prompt-copy]').count(),1,label+': bare én kopierknapp');
@@ -344,6 +353,8 @@ try{
   await page.locator('[data-context-var="GEOGRAFI"]').fill('Oslo og omegn');
   await page.locator('[data-context-var="BRANSJE"]').fill('Finans');
   assert.equal(await page.locator('[data-prompt-choice="prospectCount"]').inputValue(),'standard',label+': default 12–15');
+  const loadScore=()=>page.locator('[data-prompt-load]').getAttribute('data-score').then(Number);
+  const standardLoad=await loadScore();
   assert.equal(await page.locator('[data-prompt-choice="format"][value="plain"]').isChecked(),true,label+': ren tekst standard');
   assert.equal(await page.locator('[data-prompt-toggle="ringelist"]').isChecked(),true,label+': ringeliste på');
   assert.equal(await page.locator('[data-prompt-toggle="crmLookup"]').isChecked(),true,label+': CRM på');
@@ -360,14 +371,19 @@ try{
   prospect=await page.locator('#prompt-editor').inputValue();
   assert.ok(prospect.includes('Eget antall prioriterte virksomheter: 18.')&&prospect.includes('Egendefinert antall: 18.'),label+': UI overstyrer antall');
   assert.ok(!prospect.includes('Sikt mot 12–15'),label+': ingen motstridende antall');
+  assert.ok((await loadScore())>standardLoad,label+': egendefinert høyere antall øker estimatet');
   await page.locator('[data-prompt-choice="prospectCount"]').selectOption('broad');
   prospect=await page.locator('#prompt-editor').inputValue();
   assert.ok(prospect.includes('20–25')&&!prospect.includes('Eget antall prioriterte virksomheter: 18.'),label+': egendefinert antall tas bort');
+  const broadLoad=await loadScore();
   await page.locator('[data-prompt-toggle="ringelist"]').uncheck();
+  assert.ok((await loadScore())<broadLoad,label+': ringeliste påvirker kilde- og personarbeid');
   assert.equal(await page.locator('[data-prompt-depends="ringelist"]').isVisible(),false,label+': personkvalitet skjules');
   prospect=await page.locator('#prompt-editor').inputValue();
   assert.ok(!prospect.includes('RINGELISTE:'),label+': bare behov');
+  const withoutExtended=await loadScore();
   await page.locator('[data-prompt-toggle="extendedResearch"]').check();
+  assert.ok((await loadScore())>withoutExtended,label+': utvidet research påvirker arbeidet');
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('UTVIDET RESEARCH'),label+': verktøyvalg er eksplisitt');
   await page.locator('[data-prompt-toggle="ringelist"]').check();
   await page.locator('[data-prompt-choice="prospectContactQuality"]').selectOption('strict');
