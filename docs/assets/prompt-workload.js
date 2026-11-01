@@ -1,10 +1,10 @@
 /* Oppgavebasert belastningsestimat. Ingen modellkatalog, nettverkskall eller brukerlagring. */
 (()=>{
 'use strict';
-const levels=['Svært lett','Lett','Moderat','Krevende','Svært krevende','Ekstremt krevende','Over skala'];
 const cutoffs=[14,32,68,130,280,460];
 const ceiling=(n)=>Math.max(0,Math.ceil(Number(n)||0));
 function estimate(item,prompts,ctx,actualText='',edited=false){
+ const levels=prompts.workloadUi.levels;
  const profile=item.workload;
  if(!profile||!profile.base)throw Error('Mangler vurdert arbeidsprofil for '+item.id);
  const mode=key=>ctx.getChoice(item,key);
@@ -64,5 +64,5 @@ function estimate(item,prompts,ctx,actualText='',edited=false){
   fileWork:fileOps>0,inputTokens,edited:Boolean(edited)
  };
 }
-window.InnsiktPromptWorkload={estimate,levels,cutoffs};
+window.InnsiktPromptWorkload={estimate,cutoffs};
 })();
