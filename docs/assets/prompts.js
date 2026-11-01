@@ -51,7 +51,7 @@ function workloadDescription(info,prompts){
 function workloadIndicator(item,prompts,ctx,prompt,e,ico){
  const info=window.InnsiktPromptWorkload.estimate(item,prompts,ctx,prompt,false),ui=prompts.workloadUi;
  const segments=Array.from({length:6},(_,n)=>'<i data-prompt-load-segment'+(n<info.segments?' class="active"':'')+'></i>').join('');
- return '<details class="prompt-workload" data-prompt-load data-level="'+info.levelIndex+'">'
+ return '<details class="prompt-workload" data-prompt-load data-level="'+info.levelIndex+'" data-score="'+info.score+'">'
  +'<summary aria-label="'+e(ui.label+': '+info.level+'. '+ui.action)+'"><span class="prompt-workload-name">'+e(ui.label)+'</span>'
  +'<strong data-prompt-load-level>'+e(info.level)+'</strong><span class="prompt-workload-meter" aria-hidden="true">'+segments+'</span>'
  +'<span data-prompt-load-overflow'+(info.overflow?'':' hidden')+' aria-hidden="true">+</span>'
