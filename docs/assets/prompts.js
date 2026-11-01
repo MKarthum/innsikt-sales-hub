@@ -29,13 +29,15 @@ function choiceField(item,p,key,e,ico){
   ?'<select class="input prompt-choice-select" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" aria-label="'+e(g.label)+'">'+choices.map(o=>'<option value="'+e(o.id)+'"'+(ctx.getChoice(item,key)===o.id?' selected':'')+'>'+e(o.label)+'</option>').join('')+'</select>'
   :'<div class="prompt-choice-options">'+choices.map(o=>{
    const checked=ctx.getChoice(item,key)===o.id;
-   return '<label class="prompt-choice-option"'+(allowed.has(o.id)?'':' hidden')+'><input type="radio" name="prompt-choice-'+e(key)+'" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" value="'+e(o.id)+'" '+(checked?'checked':'')+'><span>'+e(o.label)+'</span></label>';
+   const md=key==='format'&&o.id==='markdown';
+   return '<label class="prompt-choice-option"'+(allowed.has(o.id)?'':' hidden')+(md?' title="'+e(p.page.variableUi.markdownHelp)+'"':'')+'><input type="radio" name="prompt-choice-'+e(key)+'" data-prompt-choice="'+e(key)+'" data-prompt-item="'+e(item.id)+'" value="'+e(o.id)+'" '+(checked?'checked':'')+'><span>'+e(o.label)+(md?'<small class="prompt-markdown-info" aria-hidden="true">ⓘ</small>':'')+'</span></label>';
   }).join('')+'</div>';
+ const markdownHelp=key==='format'?'<p class="prompt-markdown-help" data-prompt-markdown-help'+(ctx.getChoice(item,'format')==='markdown'?'':' hidden')+'>'+e(p.page.variableUi.markdownHelp)+'</p>':'';
  const custom=g.customInput;
  const customEntry=custom?ctx.entries().find(v=>v.id===custom.variable):null;
  const customField=customEntry?'<div class="prompt-choice-custom" data-prompt-custom-group="'+e(key)+'"'+(ctx.getChoice(item,key)===custom.optionId?'':' hidden')+'>'+variableField(customEntry,p.page,e,ico)+'</div>':'';
  return '<fieldset class="prompt-choice-field"'+(g.dependsOn?' data-prompt-depends="'+e(g.dependsOn)+'"'+(ctx.getChoice(item,g.dependsOn)?'':' hidden'):'')+'><legend>'+e(g.label)+'</legend>'
-  +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')+options+customField+'</fieldset>';
+  +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')+options+markdownHelp+customField+'</fieldset>';
 }
 function workloadDescription(info,prompts){
  const ui=prompts.workloadUi,part=(template,count)=>template.replace('{count}',String(count));
