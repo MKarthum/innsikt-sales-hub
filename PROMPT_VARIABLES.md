@@ -74,3 +74,7 @@ En navngitt valggruppe kan deklarere `customInput: {optionId,variable,label,hint
 ## Forslagsmeny på mobil (v0.18.42)
 
 `suggestions` eies fortsatt av det kanoniske variabelregisteret i `docs/data/prompts.json`, men `variableField` bruker ikke lenger native `datalist`. Alle enheter får en synlig knapp «Forslag» og en selvstendig liste med min. 44 px høye trykkflater. Valg oppdaterer eksisterende `data-context-var` og følger dermed retention, reset, promptoppdatering og sikkerhetsregler uendret. Fritekst og filtrering er fortsatt tillatt. Den samme komponenten gjenbrukes i promptdetalj og variabeloversikt, uten enhetsspesifikk logikk i datamodellen.
+
+## Ressursestimat ved promptendringer (v0.18.43)
+
+`items[].workload` er obligatorisk for alle aktive promptmaler. Profilens `base.sources`, `base.reviews` og `base.outputs` beskriver konkret antatt grunnarbeid fra oppgaveteksten, også med tomme valgfelt. Globale valg som researchnivå, ringeliste, CRM, dybde, format og malproduksjon suppleres dynamisk i `docs/assets/prompt-workload.js`. Beregningen bruker den nøyaktige redigerbare promptteksten ved visning og kopiering. Ikke legg inn hardkodet poengsum per valg eller en lokal modellkatalog. Etter endringer i instruksjoner må arbeidsprofilen vurderes og tilhørende fingeravtrykk regenereres; `check-prompt-workload.mjs` stopper ellers publisering. Alle brukerrettede etiketter eies av `prompts.json.workloadUi`.
