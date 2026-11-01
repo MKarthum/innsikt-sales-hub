@@ -59,6 +59,7 @@ Les [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) og [PROMPT_WORKFLOW.md](PROMPT_WO
 ## Promptbibliotek
 
 - `prompts.json` er autoritativ kilde. Alle maler har rolle/oppgave, anvendelse, generiske inputfelt, forventet resultat, kontrollpunkter og kildedisiplin.
+- Nye eller endrede prompter krever kontroll av `items[].workload` mot faktisk arbeidsomfang og oppdatert fingeravtrykk etter endringer i instruksjonene. `scripts/check-prompt-workload.mjs` håndhever dette som del av `scripts/check.mjs`. Fingeravtrykket er en vedlikeholdsport, ikke en automatisk kvalitetsvurdering.
 - Ikke legg inn kundenavn/ansatte/CRM-innhold/Drive-innhold, konfidensielle partneropplysninger eller ekte intern kapasitet i det offentlige repoet.
 - Ikke hev at KI-agenten har kobling til HubSpot, Drive eller CV-/bemanningssystem. En integrasjon skal bare omtales som mulig etter godkjent intern flytting.
 - In-browser redigering er lokal; den skal ikke lagre eller sende innhold, og er ikke et sikkert sted for kundedata.
