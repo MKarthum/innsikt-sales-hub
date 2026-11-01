@@ -37,6 +37,29 @@ function choiceField(item,p,key,e,ico){
  return '<fieldset class="prompt-choice-field"'+(g.dependsOn?' data-prompt-depends="'+e(g.dependsOn)+'"'+(ctx.getChoice(item,g.dependsOn)?'':' hidden'):'')+'><legend>'+e(g.label)+'</legend>'
   +(g.hint?'<p class="prompt-choice-hint">'+e(g.hint)+'</p>':'')+options+customField+'</fieldset>';
 }
+function workloadDescription(info,prompts){
+ const ui=prompts.workloadUi,part=(template,count)=>template.replace('{count}',String(count));
+ const notes=[];
+ if(info.sources)notes.push(part(ui.source,info.sources));
+ if(info.reviews)notes.push(part(ui.review,info.reviews));
+ if(info.contacts)notes.push(part(ui.contacts,info.contacts));
+ if(info.crm)notes.push(part(ui.crm,info.crm));
+ if(info.fileWork)notes.push(ui.file);
+ if(info.edited)notes.push(ui.edited);
+ return notes.join('. ')+(notes.length?'.':'');
+}
+function workloadIndicator(item,prompts,ctx,prompt,e,ico){
+ const info=window.InnsiktPromptWorkload.estimate(item,prompts,ctx,prompt,false),ui=prompts.workloadUi;
+ const segments=Array.from({length:6},(_,n)=>'<i data-prompt-load-segment'+(n<info.segments?' class="active"':'')+'></i>').join('');
+ return '<details class="prompt-workload" data-prompt-load data-level="'+info.levelIndex+'">'
+ +'<summary aria-label="'+e(ui.label+': '+info.level+'. '+ui.action)+'"><span class="prompt-workload-name">'+e(ui.label)+'</span>'
+ +'<strong data-prompt-load-level>'+e(info.level)+'</strong><span class="prompt-workload-meter" aria-hidden="true">'+segments+'</span>'
+ +'<span data-prompt-load-overflow'+(info.overflow?'':' hidden')+' aria-hidden="true">+</span>'
+ +'<span class="prompt-workload-icon">'+ico('info')+'</span></summary>'
+ +'<div class="prompt-workload-popup"><p data-prompt-load-details>'+e(workloadDescription(info,prompts))+'</p>'
+ +'<p data-prompt-load-tokens>'+e(ui.tokens.replace('{count}',String(info.inputTokens)))+'</p>'
+ +'<p>'+e(ui.model)+'</p></div></details>';
+}
 function library(d,h,category){
  const {esc:e,ico,sourceLinks}=h,p=d.prompts,ui=p.page.variableUi;
  const primary=p.page.primaryIds.map(id=>p.items.find(x=>x.id===id)).filter(Boolean);
@@ -62,6 +85,7 @@ function detail(d,h,id){
  const shared=ctx.entries().find(v=>v.id==='KUNDEKONTEKST');
  const hasContext=(x.contextVariables||[]).includes('KUNDEKONTEKST')&&shared;
  const prompt=ctx.composeTask(x,d.prompts),blocks=ctx.selectedBlocks(x,d.prompts);
+  const load=workloadIndicator(x,d.prompts,ctx,prompt,e,ico);
  const previewRow=b=>b.key==='organizationTemplates'?'':'<div class="prompt-preview-line" data-preview-key="'+e(b.key)+'"><strong>'+e(b.option)+'</strong><p>'+e(b.instruction)+'</p></div>';
  const preview='<section class="prompt-live-panel" aria-label="'+e(ui.previewTitle)+'"><h2>'+e(ui.previewTitle)+'</h2><p class="prompt-preview-intro">'+e(ui.previewIntro)+'</p>'
   +'<div class="prompt-preview-lines" id="prompt-preview-lines" aria-live="polite">'+blocks.map(previewRow).join('')+'</div>'
@@ -78,7 +102,7 @@ function detail(d,h,id){
 
  return '<a href="#prompter" class="back-link">'+ico('arrow-left')+' '+e(ui.allPrompts)+'</a>'
  +'<header class="page-header prompt-detail-head"><div class="eyebrow">'+e(x.category)+' · '+e(x.audience)+'</div><h1 class="page-title">'+e(x.title)+'</h1><p class="page-desc">'+e(x.summary)+'</p></header>'
- +'<div class="prompt-detail-layout"><aside class="prompt-detail-aside">'+preview
+ +load+'<div class="prompt-detail-layout"><aside class="prompt-detail-aside">'+preview
  +'<details class="prompt-guide-details"><summary>'+e(ui.guideToggle)+'</summary>'
  +'<div class="prompt-side-panel"><h3>'+e(ui.beforeTitle)+'</h3><ul>'+x.before.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul>'
  +'<h3>'+e(p.reviewTitle)+'</h3><ul>'+x.review.map(y=>'<li>'+e(y)+'</li>').join('')+'</ul>'
@@ -118,5 +142,5 @@ function overview(d,h){
  +form
  +(unused.length?'<section class="prompt-var-group prompt-orphans"><h2>'+e(ui.unusedTitle)+'</h2><p>'+e(ui.unusedIntro)+'</p><div class="prompt-overview-grid">'+unused.map(v=>v.orphan?'<div class="prompt-var-field"><strong>'+e(v.id)+'</strong><p>'+e(ui.orphanDescription)+'</p><button type="button" class="btn subtle" data-context-clear="'+e(v.id)+'">'+e(ui.clearOne)+'</button></div>':'<div class="prompt-var-field"><strong>'+e(v.label)+'</strong><p>'+e(ui.unusedDefined)+'</p></div>').join('')+'</div></section>':'<p class="prompt-no-orphans">'+e(ui.noUnused)+'</p>');
 }
-window.InnsiktPrompts={library,detail,overview,card};
+window.InnsiktPrompts={library,detail,overview,card,workloadDescription};
 })();
