@@ -1090,3 +1090,8 @@ textarea.prompt-var-input{min-height:78px}
  .prompt-workload-meter i{width:10px;height:8px}
 }
 @media(prefers-reduced-motion:reduce){.prompt-workload,.prompt-workload *{scroll-behavior:auto}}
+
+/* Diskret Markdown-hjelp. Den tar bare plass når Markdown er valgt. */
+.prompt-markdown-info{display:inline-block;margin-left:6px;font-size:12px;font-weight:500;vertical-align:baseline;color:var(--muted)}
+.prompt-markdown-help{font-size:12px;line-height:1.55;color:var(--muted);margin:9px 0 12px;max-width:58ch}
+.prompt-markdown-help[hidden]{display:none}

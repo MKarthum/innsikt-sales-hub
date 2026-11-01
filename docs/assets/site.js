@@ -858,6 +858,8 @@ function refreshPromptLive(item){
   const key=el.dataset.promptCustomGroup;
   el.hidden=ctx.getChoice(item,key)!==D.prompts.choiceGroups[key]?.customInput?.optionId;
  });
+ const markdownHelp=document.querySelector('[data-prompt-markdown-help]');
+ if(markdownHelp)markdownHelp.hidden=ctx.getChoice(item,'format')!=='markdown';
  const subChoice=document.querySelector('[data-prompt-format-subchoice]');
  if(subChoice)subChoice.hidden=!ctx.supportsOrganizationTemplates(item,D.prompts);
  const dirty=document.getElementById('prompt-preview-dirty'),editor=document.getElementById('prompt-editor');

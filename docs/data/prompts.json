@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "1.9.1",
-    "reviewed": "2026-10-29",
+    "version": "1.9.2",
+    "reviewed": "2026-11-01",
     "publication": "Offentlig arbeidsutgave med generiske prompter. Ingen intern datatilkobling."
   },
   "page": {
@@ -99,7 +99,8 @@
       "fieldOptionalHint": "La feltet stå tomt om det ikke er relevant – da utelates hele opplysningen fra prompten.",
       "guideToggle": "Tips og kvalitetssjekk",
       "suggestionsLabel": "Forslag",
-      "suggestionsEmpty": "Ingen forslag passer. Du kan skrive din egen verdi."
+      "suggestionsEmpty": "Ingen forslag passer. Du kan skrive din egen verdi.",
+      "markdownHelp": "Markdown er vanlig tekst med enkle tegn for formatering, for eksempel **fet skrift**, # overskrift og - punktliste. Velg det når du vil kopiere eller redigere innholdet videre."
     },
     "primaryIds": [
       "account-research",
