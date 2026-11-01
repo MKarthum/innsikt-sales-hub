@@ -224,10 +224,15 @@ try{
   assert.ok((await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': dokumentformat ber om organisasjonens tilgjengelige maler');
   await templateChoice.uncheck();
   assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': teksten fjernes når firmamaler skrus av');
+  assert.equal(await page.locator('[data-prompt-markdown-help]').isVisible(),false,label+': Markdown-hjelp er skjult når formatet ikke er valgt');
   await page.locator('[data-prompt-choice="format"][value="markdown"]').check();
+  assert.equal(await page.locator('[data-prompt-markdown-help]').isVisible(),true,label+': Markdown forklares direkte ved valg');
+  assert.ok((await page.locator('[data-prompt-markdown-help]').innerText()).includes('**fet skrift**'),label+': forklaring har konkret eksempel');
+  assert.equal(await page.locator('.prompt-markdown-info').count(),1,label+': diskret informasjonsmarkør ved formatet');
   assert.equal(await templateSubchoice.isVisible(),false,label+': firmamalvalget forsvinner ved Markdown');
   assert.ok(!(await page.locator('#prompt-editor').inputValue()).includes('virksomhetens egne dokument- eller presentasjonsmaler'),label+': ingen malinstruks ved Markdown');
   await page.locator('[data-prompt-choice="format"][value="pdf"]').check();
+  assert.equal(await page.locator('[data-prompt-markdown-help]').isVisible(),false,label+': Markdown-forklaringen forsvinner ved annet format');
   assert.equal(await templateSubchoice.isVisible(),true,label+': firmamaler gjelder også PDF');
   assert.equal(await templateChoice.isChecked(),false,label+': bevisst avhaking bevares');
   await templateChoice.check();
