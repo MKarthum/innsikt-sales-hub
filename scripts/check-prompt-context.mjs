@@ -211,6 +211,7 @@ ctx.set('BRANSJE','<img src=x onerror=alert(1)>');
 const output=ctx.compose(research.prompt,research.placeholders);
 assert.ok(output.includes('<img'), 'ren komposisjon skal bevare bokstavelig verdi');
 const htmlSandbox={window:{InnsiktPromptContext:ctx}};
+vm.runInNewContext(fs.readFileSync('docs/assets/prompt-workload.js','utf8'),htmlSandbox,{filename:'prompt-workload.js'});
 vm.runInNewContext(fs.readFileSync('docs/assets/prompts.js','utf8'),htmlSandbox,{filename:'prompts.js'});
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const html=htmlSandbox.window.InnsiktPrompts.detail({prompts:data},{esc,ico:()=>'',sourceLinks:()=>''},'account-research');

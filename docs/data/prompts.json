@@ -181,7 +181,16 @@
       ],
       "essentialPlaceholders": [
         "KUNDENAVN"
-      ]
+      ],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 9,
+          "reviews": 6,
+          "outputs": 5
+        },
+        "fingerprint": "78f9862c"
+      }
     },
     {
       "id": "contact-prep",
@@ -222,7 +231,16 @@
         "KONTAKTROLLE",
         "KONTAKTFORMÅL"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 1,
+          "reviews": 2,
+          "outputs": 2
+        },
+        "fingerprint": "f1ba12a9"
+      }
     },
     {
       "id": "meeting-prep",
@@ -275,7 +293,16 @@
         "MØTELENGDE",
         "MÅL"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 2,
+          "reviews": 5,
+          "outputs": 5
+        },
+        "fingerprint": "2225245f"
+      }
     },
     {
       "id": "industry-discovery",
@@ -323,7 +350,16 @@
       ],
       "essentialPlaceholders": [
         "BRANSJE"
-      ]
+      ],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 5,
+          "reviews": 7,
+          "outputs": 6
+        },
+        "fingerprint": "78d8e177"
+      }
     },
     {
       "id": "market-prospecting",
@@ -417,7 +453,16 @@
           "hint": "På som standard. Utfør kun godkjente leseoppslag hvis tilkoblingen finnes.",
           "instruction": "CRM SOM BERIKELSE, IKKE FILTER: Undersøk markedet bredt før CRM. Hvis KI-verktøyet faktisk har godkjent lesetilgang til CRM via tilgjengelige verktøy/MCP, sjekk de aktuelle selskapene og angi CRM-navn, status, relasjonsansvarlig hvis bekreftet, åpne muligheter, siste aktivitet, kontrolltid og avgrensning. Før du hevder null åpne avtaler, kontroller CRM-skjema, gyldige statusverdier og filter; hvis dette ikke kan verifiseres, skriv «filter ikke verifisert». Skill «CRM ikke undersøkt», «CRM delvis undersøkt» og «Ingen oppføring funnet i undersøkt CRM». Fravær av treff betyr ikke at det aldri har vært kontakt. Selskaper med relasjon kan fortsatt være interessante; anbefal intern avklaring før direkte henvendelse. Gi eventuelle datakvalitetsfunn bare som forslag til manuell kontroll, ikke som CRM-oppdateringer. Ingen skriving, opprettelse, sletting eller utsending. Vis interne detaljer kun i godkjent KI-miljø, aldri i offentlig repo."
         }
-      ]
+      ],
+      "workload": {
+        "kind": "market",
+        "base": {
+          "sources": 6,
+          "reviews": 3,
+          "outputs": 3
+        },
+        "fingerprint": "0be79aae"
+      }
     },
     {
       "id": "discovery",
@@ -458,7 +503,16 @@
         "KUNDENS_UTSAGN",
         "BRANSJE"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 1,
+          "reviews": 4,
+          "outputs": 4
+        },
+        "fingerprint": "6126e015"
+      }
     },
     {
       "id": "cv-request-match",
@@ -521,6 +575,15 @@
       },
       "choiceDefaults": {
         "handoff": false
+      },
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 1,
+          "reviews": 8,
+          "outputs": 4
+        },
+        "fingerprint": "8eb90e7b"
       }
     },
     {
@@ -560,7 +623,16 @@
         "BEHOVSBESKRIVELSE",
         "KOMPETANSEPROFILER"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 1,
+          "reviews": 6,
+          "outputs": 4
+        },
+        "fingerprint": "74583f79"
+      }
     },
     {
       "id": "opportunity-map",
@@ -604,7 +676,16 @@
         "ØNSKET_FORBEDRING",
         "TIDSVINDU"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 2,
+          "reviews": 6,
+          "outputs": 5
+        },
+        "fingerprint": "16a43566"
+      }
     },
     {
       "id": "poc-design",
@@ -648,7 +729,16 @@
         "FORRETNINGSVERDI",
         "DATAKILDER"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 2,
+          "reviews": 7,
+          "outputs": 6
+        },
+        "fingerprint": "6a072b76"
+      }
     },
     {
       "id": "meeting-agenda",
@@ -693,7 +783,16 @@
         "VARIGHET",
         "DELTAKERE"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 1,
+          "reviews": 3,
+          "outputs": 4
+        },
+        "fingerprint": "19b8b0c9"
+      }
     },
     {
       "id": "deck-outline",
@@ -747,7 +846,16 @@
         "FORMIDLINGSFORMÅL",
         "ANTALL_LYSBILDER"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 2,
+          "reviews": 5,
+          "outputs": 8
+        },
+        "fingerprint": "78634062"
+      }
     },
     {
       "id": "exec-summary",
@@ -788,7 +896,16 @@
         "FORRETNINGSUTFORDRING",
         "MULIG_TILTAK"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 1,
+          "reviews": 5,
+          "outputs": 3
+        },
+        "fingerprint": "8903f29a"
+      }
     },
     {
       "id": "followup",
@@ -834,6 +951,15 @@
       "essentialPlaceholders": [],
       "choiceDefaults": {
         "contactChannel": "email"
+      },
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 0,
+          "reviews": 2,
+          "outputs": 2
+        },
+        "fingerprint": "569e42c4"
       }
     },
     {
@@ -870,7 +996,16 @@
       "optionalPlaceholders": [
         "INNVENDING"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 1,
+          "reviews": 4,
+          "outputs": 3
+        },
+        "fingerprint": "9cccd732"
+      }
     },
     {
       "id": "partner-intake",
@@ -911,7 +1046,16 @@
         "PLATTFORM",
         "STATUS"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 2,
+          "reviews": 5,
+          "outputs": 4
+        },
+        "fingerprint": "ce2a98a4"
+      }
     },
     {
       "id": "critical-review",
@@ -950,7 +1094,16 @@
         "HYPOTESE",
         "GRUNNLAG"
       ],
-      "essentialPlaceholders": []
+      "essentialPlaceholders": [],
+      "workload": {
+        "kind": "fixed",
+        "base": {
+          "sources": 2,
+          "reviews": 5,
+          "outputs": 4
+        },
+        "fingerprint": "8429bbcc"
+      }
     }
   ],
   "rules": [
@@ -1944,5 +2097,26 @@
       "instruction": "Før du lager en fil, undersøk om denne arbeidsøkten har tilgang til virksomhetens egne dokument- eller presentasjonsmaler, designprofil og relevante designressurser eller ferdigheter (skills). Bruk tilgjengelige firmamaler og tilhørende verktøy aktivt ved utforming og eksport, uten å be om opplasting av fortrolige maler. Dersom slike ressurser ikke er tilgjengelige, lag en ryddig, nøytral utgave og opplys kort at firmamal ikke kunne brukes. Ikke finn på logo, farger, skrifttyper, malfiler eller tilgang, og ikke påstå at en fil er opprettet hvis verktøyet ikke kan lage den."
     },
     "missingEssentialInstruction": "For å utføre denne oppgaven spesifikt mangler en nødvendig opplysning: {fields}. Be kort om den før du gir et konkret svar. Ikke finn på informasjonen. Andre opplysninger som mangler, kan du håndtere med tydelige forbehold."
+  },
+  "workloadUi": {
+    "label": "Estimert ressursbruk",
+    "action": "Vis hvorfor oppgaven har dette nivået",
+    "source": "Omtrent {count} kilde- og søkeoperasjoner",
+    "review": "Omtrent {count} analyse- og kontrolltrinn",
+    "contacts": "Inntil {count} kontaktmuligheter må undersøkes",
+    "crm": "CRM-oppslag for opptil {count} virksomheter, hvis tilgjengelig",
+    "file": "Filproduksjon, layout og kvalitetskontroll kommer i tillegg",
+    "edited": "Promptteksten er redigert manuelt. Anslaget er mer usikkert.",
+    "model": "Faktisk ressursbruk varierer med KI-modell, arbeidsmodus og tilgjengelige verktøy.",
+    "tokens": "Kopiert prompt: omtrent {count} input-tokens (grovt anslag).",
+    "levels": [
+      "Svært lett",
+      "Lett",
+      "Moderat",
+      "Krevende",
+      "Svært krevende",
+      "Ekstremt krevende",
+      "Over skala"
+    ]
   }
 }

@@ -805,6 +805,20 @@ function copyLearningTemplate(id){
  navigator.clipboard.writeText(window.InnsiktLearning.templateText(t)).then(()=>toast('Malen er kopiert.')).catch(()=>toast('Kopiering er blokkert.'));
 }
 function copyGuide(id){let p=D.plays.find(x=>x.id===id);if(!p)return;let txt=`${p.name}\n\nKundesignal: ${p.hook}\n\nHva kan dette bety?\n${p.why}\n\nSpørsmål:\n${p.questions.map((q,i)=>`${i+1}. ${q}`).join('\n')}\n\nNeste steg: ${p.next}\n\nUnngå: ${p.not}\n`;navigator.clipboard?.writeText(txt).then(()=>toast('Samtaleguide kopiert.')).catch(()=>toast('Kunne ikke kopiere – nettleseren blokkerte funksjonen.'))}
+function refreshPromptWorkload(item){
+ const panel=document.querySelector('[data-prompt-load]'),editor=document.getElementById('prompt-editor');
+ if(!panel||!editor||!item||!window.InnsiktPromptWorkload)return;
+ const ui=D.prompts.workloadUi;
+ const info=window.InnsiktPromptWorkload.estimate(item,D.prompts,window.InnsiktPromptContext,editor.value,editor.dataset.dirty==='true');
+ panel.dataset.level=String(info.levelIndex);
+ panel.dataset.score=String(info.score);
+ panel.querySelector('[data-prompt-load-level]').textContent=info.level;
+ panel.querySelectorAll('[data-prompt-load-segment]').forEach((node,i)=>node.classList.toggle('active',i<info.segments));
+ panel.querySelector('[data-prompt-load-overflow]').hidden=!info.overflow;
+ panel.querySelector('[data-prompt-load-details]').textContent=window.InnsiktPrompts.workloadDescription(info,D.prompts);
+ panel.querySelector('[data-prompt-load-tokens]').textContent=ui.tokens.replace('{count}',String(info.inputTokens));
+ panel.querySelector('summary').setAttribute('aria-label',ui.label+': '+info.level+'. '+ui.action);
+}
 function rebuildPromptEditor(item,ask){
  const editor=document.getElementById('prompt-editor');
  if(!editor||!item)return;
@@ -848,6 +862,7 @@ function refreshPromptLive(item){
  if(subChoice)subChoice.hidden=!ctx.supportsOrganizationTemplates(item,D.prompts);
  const dirty=document.getElementById('prompt-preview-dirty'),editor=document.getElementById('prompt-editor');
  if(dirty)dirty.hidden=editor?.dataset.dirty!=='true';
+ refreshPromptWorkload(item);
 }
 function refreshPromptFromContext(){
  const editor=document.getElementById('prompt-editor');
@@ -859,6 +874,7 @@ function refreshPromptFromContext(){
  refreshPromptLive(item);
  if(editor.dataset.dirty==='true'){if(status)status.textContent=ui.dirtyWarning;return}
  editor.value=window.InnsiktPromptContext.composeTask(item,D.prompts);
+ refreshPromptWorkload(item);
  if(status)status.textContent=ui.cleanMessage;
 }
 function promptSuggestionPanel(id){
@@ -910,6 +926,8 @@ function initPromptContextEvents(){
   }
  });
  document.addEventListener('click',e=>{
+  const openLoad=document.querySelector('.prompt-workload[open]');
+  if(openLoad&&!e.target.closest('.prompt-workload'))openLoad.open=false;
   const toggle=e.target.closest('[data-prompt-suggest-toggle]');
   if(toggle){
    const id=toggle.dataset.promptSuggestToggle,panel=promptSuggestionPanel(id),opening=!!panel?.hidden;
@@ -956,6 +974,10 @@ function initPromptContextEvents(){
   }
  });
  document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+   const load=document.querySelector('.prompt-workload[open]');
+   if(load){load.open=false;load.querySelector('summary')?.focus();e.preventDefault();return;}
+  }
   if(e.key==='Escape'&&document.querySelector('[data-prompt-suggestion-panel]:not([hidden])')){
    closePromptSuggestions();
    e.preventDefault();

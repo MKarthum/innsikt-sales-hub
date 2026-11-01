@@ -50,7 +50,7 @@ assert.ok(ending.test(viewScript),'Kan ikke instrumentere reelle visninger');
 function getViews(data){
  const sandbox={console,window:{},localStorage:{getItem:()=>null},__fixture:data};
  vm.createContext(sandbox);
- for(const n of ['content','learning','prompt-context','prompts','horizon'])vm.runInContext(js(n),sandbox,{timeout:3000});
+ for(const n of ['content','learning','prompt-context','prompt-workload','prompts','horizon'])vm.runInContext(js(n),sandbox,{timeout:3000});
  sandbox.__fixture=sandbox.window.InnsiktContent.materialize(data);
  sandbox.window.InnsiktPromptContext.configure(sandbox.__fixture.prompts);
  const injected=viewScript.replace(ending,

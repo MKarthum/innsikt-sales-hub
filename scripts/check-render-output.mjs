@@ -66,6 +66,7 @@ vm.createContext(sandbox);
 vm.runInContext(read('docs/assets/learning.js'),sandbox,{timeout:3000,filename:'learning.js'});
 vm.runInContext(read('docs/assets/prompt-context.js'),sandbox,{timeout:3000,filename:'prompt-context.js'});
 sandbox.window.InnsiktPromptContext.configure(fixture.prompts);
+vm.runInContext(read('docs/assets/prompt-workload.js'),sandbox,{timeout:3000,filename:'prompt-workload.js'});
 vm.runInContext(read('docs/assets/prompts.js'),sandbox,{timeout:3000,filename:'prompts.js'});
 vm.runInContext(read('docs/assets/horizon.js'),sandbox,{timeout:3000,filename:'horizon.js'});
 vm.runInContext(read('docs/assets/slide-model.js'),sandbox,{timeout:3000,filename:'slide-model.js'});
