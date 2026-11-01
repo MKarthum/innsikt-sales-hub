@@ -2108,6 +2108,15 @@
     "file": "Filproduksjon, layout og kvalitetskontroll kommer i tillegg",
     "edited": "Promptteksten er redigert manuelt. Anslaget er mer usikkert.",
     "model": "Faktisk ressursbruk varierer med KI-modell, arbeidsmodus og tilgjengelige verktøy.",
-    "tokens": "Kopiert prompt: omtrent {count} input-tokens (grovt anslag)."
+    "tokens": "Kopiert prompt: omtrent {count} input-tokens (grovt anslag).",
+    "levels": [
+      "Svært lett",
+      "Lett",
+      "Moderat",
+      "Krevende",
+      "Svært krevende",
+      "Ekstremt krevende",
+      "Over skala"
+    ]
   }
 }
