@@ -442,6 +442,7 @@ function feedback(){modal('Gi innspill til neste versjon',`<p class="fineprint">
 function saveFeedback(){const t=document.getElementById('feedback-note')?.value.trim();if(!t){toast('Skriv et innspill først.');return}notes.push({page:names[current],text:t,date:new Date().toISOString().slice(0,10)});try{localStorage.setItem('innsikt-feedback-v1',JSON.stringify(notes))}catch{toast('Lagring er blokkert i nettleseren. Kopier innspillet manuelt.');return}closeModal();toast('Innspillet er lagret lokalt. Eksporter før du bytter enhet.');if(current==='utvikling')render()}
 function exportFeedback(){const txt='# Innspill – Innsikt\n\n'+notes.map((n,i)=>`## ${i+1}. ${n.page} (${n.date})\n\n${n.text}\n`).join('\n');const b=new Blob([txt],{type:'text/markdown;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='innsikt-innspill.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Eksportert som Markdown.')}
 let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null,presentationThemeMode=(()=>{try{const value=localStorage.getItem('innsikt-presentation-tone');return ['light','strong','story'].includes(value)?value:'light'}catch{return 'light'}})();
+let presentationMotionMode=(()=>{try{const value=localStorage.getItem('innsikt-presentation-motion');return ['on','off'].includes(value)?value:'on'}catch{return 'on'}})();
 let libraryFilters={query:'',topic:'all',story:'all',scope:'all'},libraryFullscreenOpener=null;
 let fullscreenOpenGuardUntil=0;
 function libraryTone(s,deckId){
@@ -454,6 +455,26 @@ function toneSelect(id){
   +[['light',t.toneLight],['strong',t.toneDark],['story',t.toneStory]].map(([id,text])=>
    '<option value="'+id+'"'+(presentationThemeMode===id?' selected':'')+'>'+esc(text)+'</option>').join('')
   +'</select></label>';
+}
+function motionSelect(){
+ const ui=D.pages.slideLibraryUi;
+ return '<label class="library-tone-field" for="present-motion-mode">'+esc(ui.motionLabel)
+  +'<select id="present-motion-mode" aria-label="'+esc(ui.motionLabel)+'">'
+  +[['on',ui.motionOn],['off',ui.motionOff]].map(([id,label])=>'<option value="'+id+'"'+(presentationMotionMode===id?' selected':'')+'>'+esc(label)+'</option>').join('')
+  +'</select></label>';
+}
+function setPresentationMotion(value){
+ if(!['on','off'].includes(value))return;
+ presentationMotionMode=value;
+ try{localStorage.setItem('innsikt-presentation-motion',value)}catch{}
+ const selector=document.getElementById('present-motion-mode');
+ if(selector)selector.value=value;
+ const frame=document.getElementById('slide-body');
+ if(frame){
+  frame.setAttribute?.('data-motion',value);
+  frame.classList?.remove('slide-entrance');
+  if(value==='on'&&frame.classList){void frame.offsetWidth;frame.classList.add('slide-entrance')}
+ }
 }
 function updatePreviewTones(){
  document.querySelectorAll('[data-library-slide-id][data-library-deck-id]').forEach(el=>{
@@ -741,7 +762,12 @@ function showSlide(){
  const slides=presentationSlides(),s=slides[slide];if(!s)return;
  const frame=document.getElementById('slide-body');
  if(frame.setAttribute)frame.setAttribute('data-tone',window.InnsiktSlides.tone(s,D.pages.presentationDecks[selectedDeck],presentationThemeMode));
+ const placement=D.pages.presentationDecks[selectedDeck].slides[slide]||{};
+ frame.setAttribute?.('data-motion',presentationMotionMode);
+ frame.setAttribute?.('data-transition',placement.transition||'fade');
+ frame.classList?.remove('slide-entrance');
  frame.innerHTML=slideMarkup(s,slide,selectedDeck,false,showSlideNumbers);
+ if(presentationMotionMode==='on'&&frame.classList){void frame.offsetWidth;frame.classList.add('slide-entrance')}
  window.InnsiktGlossary?.enhance(document.getElementById('slide-body'));
  document.getElementById('slide-counter').textContent=(slide+1)+' av '+slides.length;
  document.getElementById('slide-prev').disabled=slide===0;
@@ -752,6 +778,7 @@ function showSlide(){
  if(note)note.innerHTML=showSpeakerNotes&&s.note?'<strong>Presentatørnotat</strong><p>'+esc(s.note)+'</p>':'';
  if(note)note.hidden=!showSpeakerNotes||!s.note;
  const themeSelector=document.getElementById('present-tone-mode');if(themeSelector)themeSelector.value=presentationThemeMode;
+ const motionSelector=document.getElementById('present-motion-mode');if(motionSelector)motionSelector.value=presentationMotionMode;
  const numberSelector=document.getElementById('slide-number-toggle');if(numberSelector)numberSelector.checked=showSlideNumbers;
  document.querySelectorAll('[data-deck]').forEach(b=>{
   b.classList.toggle('active',b.dataset.deck===selectedDeck);
@@ -772,6 +799,8 @@ function exportPresentation(mode){
   id:selectedDeck,label:deck.label,notice:deck.intro||'',version:D.meta.version,
   slides:presentationSlides().map((s,i)=>slideMarkup(s,i,selectedDeck,false,showSlideNumbers)),
   tones:presentationSlides().map(s=>window.InnsiktSlides.tone(s,deck,presentationThemeMode)),
+  transitions:deck.slides.map(entry=>entry.transition||'fade'),motion:presentationMotionMode,
+  motionUi:{label:D.pages.slideLibraryUi.motionLabel,on:D.pages.slideLibraryUi.motionOn,off:D.pages.slideLibraryUi.motionOff},
   classification:deck.classification==='internal'?'internal':'public'
  },mode).then(()=>{if(mode==='html')toast('Presentasjonen er lastet ned som HTML.');})
  .catch(e=>toast('Kunne ikke eksportere: '+e.message));
@@ -782,7 +811,7 @@ function presentation(deckId='innsikt',initialSlide=0){
   '<button class="deck-option '+(id===selectedDeck?'active':'')+'" type="button" data-deck="'+esc(id)+'" aria-pressed="'+(id===selectedDeck)+'">'+(d.classification==='internal'?'Internt · ':'')+esc(d.label)+'</button>'
  ).join('');
  const markup='<div class="deck-controls" role="group" aria-label="Velg presentasjonsløp">'+choices+'</div>'
-  +'<div class="present-display-options">'+toneSelect('present-tone-mode')+'<span>'+esc(D.pages.slideLibraryUi.toneHelp)+'</span></div>'
+  +'<div class="present-display-options">'+toneSelect('present-tone-mode')+motionSelect()+'<span>'+esc(D.pages.slideLibraryUi.motionHelp)+'</span></div>'
   +'<p id="deck-context" class="deck-context"></p>'
   +'<div class="present-stage" id="present-stage"><div class="present-frame present-rich" id="slide-body" aria-live="polite"></div></div>'
   +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev" aria-label="Forrige lysbilde">'+ico('arrow-left')+' <span>Forrige</span></button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next" aria-label="Neste lysbilde"><span>Neste</span> '+ico('arrow-right')+'</button><button class="btn subtle" type="button" id="present-fullscreen-toggle" aria-label="Vis i fullskjerm" aria-pressed="false" title="Vis i fullskjerm">'+ico('maximize')+' <span>Fullskjerm</span></button></div>'
@@ -907,6 +936,7 @@ function initPromptContextEvents(){
  document.addEventListener('input',e=>{if(e.target.matches?.('[data-slide-search]')){libraryFilters.query=e.target.value;updateSlideLibrary()}});
  document.addEventListener('change',e=>{
   if(e.target.id==='present-tone-mode'||e.target.id==='library-tone-mode'){setPresentationTone(e.target.value);return;}
+  if(e.target.id==='present-motion-mode'){setPresentationMotion(e.target.value);return;}
   const select=e.target.closest?.('[data-slide-filter]');
   if(select){libraryFilters[select.dataset.slideFilter]=select.value;updateSlideLibrary();}
  });

@@ -116,6 +116,13 @@ function render(slide,{v,top,title,escs,assetImage,block,diagram}){
    +'<div class="v5-handoff-flow">'+v.roles.map((x,i)=>'<div class="v5-role">'+icon(x.assetId,'v5-role-icon')+'<small>'+escs(x.name)+'</small><h3>'+escs(x.title)+'</h3><p>'+escs(x.detail)+'</p></div>'
     +(i===0?'<div class="v5-handoff-arrow" aria-hidden="true">→</div>':'')).join('')+'</div>'
    +'<div class="v5-handoff-artifact">'+icon('business-decision','v5-artifact-icon')+'<span>'+escs(v.handoff)+'</span></div>'+footer(v.conclusion));
+ case 'convergence-hero':
+  return block('special v5-special v14-market',top
+   +'<div class="v14-market-heading">'+heading+'</div>'
+   +'<div class="v14-market-layout"><section class="v14-market-stat"><small>'+escs(v.focus.label)+'</small>'
+   +'<strong>'+escs(v.focus.title)+'</strong><p>'+escs(v.focus.detail)+'</p></section>'
+   +'<div class="v14-market-trends">'+v.items.map((name,i)=>'<section class="v14-market-trend"><span>0'+(i+1)+'</span><div><h3>'+escs(name)+'</h3><p>'+escs(v.detail[i])+'</p></div></section>').join('')+'</div></div>'
+   +footer(v.conclusion));
  case 'convergence':
   return block('special v5-special v5-convergence',top+heading
    +'<div class="v5-convergence-layout"><div class="v5-forces">'

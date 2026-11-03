@@ -55,6 +55,13 @@ function render(slide,esc,position={}){
   +'<p class="scene-analysts-tail">'+esc(v.tail)+'</p></div>'
   +'<div class="scene-analysts-figure">'+gridPeople()+'</div></div>'
   +'<div class="scene-bottomline"><span class="scene-kicker-mark"></span>'+esc(v.tag)+'</div></div>';
+ if(kind==='two-directions'&&v.variant==='editorial-split')return '<div class="story-scene scene-duality-editorial">'
+  +'<div class="scene-topline">'+label+counter+'</div>'
+  +'<header class="scene-editorial-intro"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p></header>'
+  +'<div class="scene-editorial-capacity"><span>'+esc(v.center)+'</span></div>'
+  +'<div class="scene-editorial-outcomes">'
+  +'<section class="scene-editorial-good"><span class="scene-editorial-glyph" aria-hidden="true">+</span><h3>'+esc(v.positive)+'</h3><p>'+esc(v.positiveDetail)+'</p></section>'
+  +'<section class="scene-editorial-risk"><span class="scene-editorial-glyph" aria-hidden="true">−</span><h3>'+esc(v.negative)+'</h3><p>'+esc(v.negativeDetail)+'</p></section></div></div>';
  if(kind==='two-directions')return '<div class="story-scene scene-duality">'
   +'<div class="scene-topline">'+label+counter+'</div>'
   +'<header class="scene-duality-intro"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p></header>'

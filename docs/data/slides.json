@@ -537,7 +537,8 @@
         "positiveDetail": "Flere relevante spørsmål og bedre begrunnede valg.",
         "negative": "Flere feil",
         "negativeDetail": "Uklare begreper og svake data i større skala.",
-        "center": "× KAPASITET"
+        "center": "× KAPASITET",
+        "variant": "editorial-split"
       },
       "speakerBase": "Kapasitet kan forsterke både godt og svakt grunnlag. En faglig illustrasjon uten kvantifiserte effektpåstander.",
       "sourceIds": []
@@ -1308,7 +1309,7 @@
           "data-semantic",
           "product-map"
         ],
-        "layout": "convergence",
+        "layout": "convergence-hero",
         "focus": {
           "label": "SSB · NORSKE FORETAK · 2026",
           "title": "48 %",

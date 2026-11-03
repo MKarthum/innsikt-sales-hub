@@ -5,8 +5,11 @@ const diagrams=JSON.parse(fs.readFileSync('docs/data/learning.json','utf8')).dia
 const profiles=JSON.parse(fs.readFileSync('docs/data/architecture-profiles.json','utf8')).profiles;
 const expected=new Set(slides.map(s=>s.id));
 assert.ok(slides.length>0,'Slide library must not be empty');
-const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road','progressive-pilot':'road','discovery-dialogue':'road','guided-question-pause':'road','knowledge-lookup':'road','verified-quality-loop':'loop','readiness-contrast':'impact'};
+const layouts={bridge:'impact',cards:'list',voices:'list',questions:'list',path:'list',steps:'road','product-preview':'impact','case-quote':'impact','two-truths':'impact','capacity-gate':'impact',handoff:'impact',convergence:'domains','convergence-hero':'domains','customer-voices':'list','cause-map':'list','prompt-example':'road','risk-ladder':'domains','priority-pathways':'domains','meeting-brief':'road','conversation-takeaway':'road','capability-journey':'domains','bounded-discovery':'road','controlled-comparison':'road','progressive-pilot':'road','discovery-dialogue':'road','guided-question-pause':'road','knowledge-lookup':'road','verified-quality-loop':'loop','readiness-contrast':'impact'};
 const accepted=new Set(Object.keys(layouts));
+for(const [storyId,deck] of Object.entries(JSON.parse(fs.readFileSync('docs/data/pages.json','utf8')).presentationDecks)){
+ for(const entry of deck.slides||[])assert.ok(!entry.transition||['fade','reveal'].includes(entry.transition),'Unsupported story transition '+storyId+'/'+entry.slideId);
+}
 const seen=new Set();
 for(const s of slides){
  assert.ok(s.title&&s.title.length<=98,'Headline must be direct and readable: '+s.id);
@@ -44,7 +47,7 @@ for(const s of slides){
  if(v.layout==='two-truths')assert.ok(v.truths?.length===2&&v.truths.every(x=>x.label&&x.title&&x.text&&x.assetId),'Change/continuity needs two clear propositions');
  if(v.layout==='capacity-gate')assert.ok(v.capabilities?.length===3&&v.gateCue&&v.gateTitle&&v.gateText,'Capacity needs a verification gate');
  if(v.layout==='handoff')assert.ok(v.roles?.length===2&&v.handoff&&v.roles.every(x=>x.name&&x.title&&x.detail&&x.assetId),'Handoff needs roles and deliverable');
- if(v.layout==='convergence')assert.ok(v.focus?.title&&v.focus?.detail&&v.items?.length===3&&v.itemAssetIds?.length===3,'Convergence requires three supported forces');
+ if(['convergence','convergence-hero'].includes(v.layout))assert.ok(v.focus?.title&&v.focus?.detail&&v.items?.length===3&&v.itemAssetIds?.length===3,'Convergence requires three supported forces');
  if(v.layout==='customer-voices')assert.ok(v.signalLabel&&v.responseLabel&&v.items?.length===3&&v.detail?.length===3,'Customer needs voices and questions');
  if(v.layout==='cause-map')assert.ok(v.symptom&&v.symptomLabel&&v.causesLabel&&v.items?.length===3&&v.detail?.length===3,'Hypothesis slide must distinguish symptom from cause');
  if(v.layout==='prompt-example')assert.ok(v.exampleLabel&&v.example&&v.context&&v.transfer&&v.outputLabel&&v.review&&v.questions?.length===3,'Prompt example must distinguish fictional input from reviewed questions');

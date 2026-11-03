@@ -367,7 +367,8 @@
           "slideId": "ai-thousand-analysts",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "Tenk dere at virksomheten får tusen nye analytikere i morgen. Ikke mennesker på lønningslisten, men et bilde på en kraftig økning i kapasitet til å undersøke, lage utkast og prøve ideer. Dette er et tankeeksperiment, ikke en prognose om stillinger. Hva ville vi satt dem til å gjøre? Og hvorfor stoppe med analytikerne? Overgang: Det samme skjer i flere deler av arbeidslivet."
+          "note": "Tenk dere at virksomheten får tusen nye analytikere i morgen. Ikke mennesker på lønningslisten, men et bilde på en kraftig økning i kapasitet til å undersøke, lage utkast og prøve ideer. Dette er et tankeeksperiment, ikke en prognose om stillinger. Hva ville vi satt dem til å gjøre? Og hvorfor stoppe med analytikerne? Overgang: Det samme skjer i flere deler av arbeidslivet.",
+          "transition": "fade"
         },
         {
           "slideId": "ai-capacity-now",
@@ -379,7 +380,8 @@
           "slideId": "market-three-forces",
           "beat": "possibility",
           "delivery": "tell",
-          "note": "SSB sier at 48 prosent av norske foretak med minst ti ansatte, uten finans, oppgir bruk av en eller flere KI-teknologier i 2026. Det er et utbredelsestall, ikke et mål på gevinst. Gartner peker på agenter, semantikk og konvergerende plattformer som viktige utviklingstrekk. Det er analytikervurderinger, ikke bevis for at alle kunder trenger dette. Overgang: Når teknologien sprer seg, hva er egentlig det faglige arbeidet den skal understøtte?"
+          "note": "SSB sier at 48 prosent av norske foretak med minst ti ansatte, uten finans, oppgir bruk av en eller flere KI-teknologier i 2026. Det er et utbredelsestall, ikke et mål på gevinst. Gartner peker på agenter, semantikk og konvergerende plattformer som viktige utviklingstrekk. Det er analytikervurderinger, ikke bevis for at alle kunder trenger dette. Overgang: Når teknologien sprer seg, hva er egentlig det faglige arbeidet den skal understøtte?",
+          "transition": "fade"
         },
         {
           "slideId": "insight-value-chain",
@@ -391,7 +393,8 @@
           "slideId": "ai-two-directions",
           "beat": "tension",
           "delivery": "tell",
-          "note": "Se på den samme KI-kapasiteten som en multiplikator. Gode spørsmål og godt datagrunnlag kan gi flere undersøkelser og bedre beslutningsgrunnlag. Uklare premisser og svak kvalitet kan bli til flere overbevisende, men feilaktige svar. Poenget er ikke å bremse teknologi, men å sikre at vi forstår hva vi akselererer. Overgang: Et lite begrep viser hvor lett dette kan skje."
+          "note": "Se på den samme KI-kapasiteten som en multiplikator. Gode spørsmål og godt datagrunnlag kan gi flere undersøkelser og bedre beslutningsgrunnlag. Uklare premisser og svak kvalitet kan bli til flere overbevisende, men feilaktige svar. Poenget er ikke å bremse teknologi, men å sikre at vi forstår hva vi akselererer. Overgang: Et lite begrep viser hvor lett dette kan skje.",
+          "transition": "reveal"
         },
         {
           "slideId": "data-meaning-customer",
@@ -964,7 +967,11 @@
     "toneHelp": "Lys er standard. Fortellingsstyrt veksler bare når historien skifter del.",
     "notFound": "Ukjent lysbilde",
     "numberToggleLabel": "Vis nummer på lysbildene",
-    "numberToggleInfo": "Numrene viser plassering i valgt historie. Bibliotekobjekter har ikke nummer."
+    "numberToggleInfo": "Numrene viser plassering i valgt historie. Bibliotekobjekter har ikke nummer.",
+    "motionLabel": "Bevegelse",
+    "motionOn": "På",
+    "motionOff": "Av",
+    "motionHelp": "Animasjoner og overganger kan slås av uten å endre lysbildene."
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",

@@ -74,6 +74,41 @@
 .v5-force-focus{display:flex;flex-direction:column;justify-content:center;gap:2cqw;padding:2.8cqw;background:color-mix(in srgb,var(--pres-accent) 10%,var(--pres-bg));border:1px solid color-mix(in srgb,var(--pres-accent) 46%,transparent);border-radius:1cqw}
 .v5-force-focus h3{font:860 6.2cqw/1.04 var(--font-display);letter-spacing:-.045em}
 .v5-force-focus p{font:550 1.72cqw/1.32 var(--font-body);color:var(--pres-muted)}
+
+/* Editorial market evidence: metric dominates, trends act as context, no cards or baked-in brand colors. */
+.v14-market{
+ position:relative;background:
+ radial-gradient(ellipse at 14% 70%,color-mix(in srgb,var(--pres-accent) 11%,transparent),transparent 50%),var(--pres-bg)!important;
+}
+.v14-market-heading{position:relative;z-index:2;margin:1.6cqw 0 1.4cqw}
+.v14-market .v14-market-heading .v2-headline{
+ font:820 3.75cqw/1.09 var(--font-display);letter-spacing:-.052em;max-width:92%;
+}
+#present-modal .present-rich .v14-market .v14-market-heading .v2-headline,
+.export-slide .v14-market .v14-market-heading .v2-headline{font-size:3.75cqw}
+.v14-market-layout{position:relative;z-index:1;display:grid;grid-template-columns:54% 43%;gap:3%;flex:1;min-height:0}
+.v14-market-stat{position:relative;min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:1.4cqw 0}
+.v14-market-stat::before{
+ content:'';position:absolute;width:47cqw;height:47cqw;border:1px solid color-mix(in srgb,var(--pres-accent) 23%,transparent);
+ border-radius:50%;top:46%;left:38%;transform:translate(-50%,-50%);z-index:-1;
+ box-shadow:0 0 0 4.2cqw color-mix(in srgb,var(--pres-accent) 4%,transparent),
+  0 0 0 9cqw color-mix(in srgb,var(--pres-accent) 3%,transparent);
+}
+.v14-market-stat small{font:790 1.16cqw/1.25 var(--font-body);letter-spacing:.09em;color:var(--pres-accent);max-width:87%}
+.v14-market-stat strong{
+ display:block;font:860 14.2cqw/1.15 var(--font-display);letter-spacing:-.092em;
+ color:var(--pres-accent);white-space:nowrap;margin:1.2cqw 0 1.5cqw -.8cqw;
+ text-shadow:0 1cqw 5cqw color-mix(in srgb,var(--pres-accent) 12%,transparent);
+}
+.story-scene .v14-market-stat p{font:640 1.83cqw/1.33 var(--font-body);color:var(--pres-fg);max-width:42cqw}
+.v14-market-trends{min-height:0;display:flex;flex-direction:column;justify-content:center}
+.v14-market-trend{display:grid;grid-template-columns:4.5cqw minmax(0,1fr);gap:1.25cqw;align-items:start;padding:1.9cqw 0}
+.v14-market-trend+.v14-market-trend{border-top:1px solid color-mix(in srgb,var(--pres-fg) 20%,transparent)}
+.v14-market-trend>span{font:820 2cqw/1.15 var(--font-display);color:var(--pres-accent)}
+.v14-market-trend h3{font:780 2.15cqw/1.1 var(--font-display);letter-spacing:-.025em;color:var(--pres-fg)}
+.story-scene .v14-market-trend p{font:540 1.46cqw/1.27 var(--font-body);color:var(--pres-muted);margin-top:.7cqw}
+.v14-market .v5-footer{position:relative;z-index:2;margin-top:1.15cqw}
+
 /* Customer language -> diagnostic question, one clear pairing per row. */
 .v5-voices-layout{flex:1;min-height:0;display:flex;flex-direction:column;gap:.55cqw}
 .v5-voice-line{display:grid;grid-template-columns:47% 6% 47%;align-items:stretch;flex:1;min-height:0}
@@ -367,3 +402,34 @@
 .v14-pilot-evidence small{font:780 1.1cqw var(--font-body);letter-spacing:.05em;color:var(--pres-muted)}
 .v14-pilot-evidence strong{font:760 1.68cqw var(--font-display);color:var(--pres-fg)}
 .v14-pilot-evidence p{font:550 1.22cqw/1.3 var(--font-body);color:var(--pres-muted);max-width:38%}
+
+
+/* Motion is presentation state, not content or skin. Static render is always complete. */
+@keyframes insight-slide-fade{from{opacity:.35;filter:blur(.45cqw)}to{opacity:1;filter:blur(0)}}
+@keyframes insight-slide-reveal{from{opacity:.4;clip-path:inset(0 0 5% 0)}to{opacity:1;clip-path:inset(0)}}
+@keyframes insight-float-in{from{opacity:0;transform:translateY(1.7cqw)}to{opacity:1;transform:translateY(0)}}
+@keyframes insight-drift-left{from{opacity:0;transform:translateX(-1.9cqw)}to{opacity:1;transform:translateX(0)}}
+@keyframes insight-drift-right{from{opacity:0;transform:translateX(1.9cqw)}to{opacity:1;transform:translateX(0)}}
+@keyframes insight-figure-appear{from{opacity:.15;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+#slide-body[data-motion="on"].slide-entrance[data-transition="fade"]{animation:insight-slide-fade .43s ease-out both}
+#slide-body[data-motion="on"].slide-entrance[data-transition="reveal"]{animation:insight-slide-reveal .48s ease-out both}
+.export-slide[data-motion="on"]:not([hidden])[data-transition="fade"]{animation:insight-slide-fade .43s ease-out both}
+.export-slide[data-motion="on"]:not([hidden])[data-transition="reveal"]{animation:insight-slide-reveal .48s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .scene-analysts-lead{animation:insight-float-in .55s .13s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .scene-analysts-number{animation:insight-float-in .65s .30s cubic-bezier(.2,.8,.2,1) both}
+:is(#slide-body,.export-slide)[data-motion="on"] .scene-analysts-tail{animation:insight-float-in .55s .53s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .scene-analysts-figure{animation:insight-figure-appear 1.05s .17s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .v14-market-stat strong{animation:insight-float-in .7s .17s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .v14-market-stat p{animation:insight-float-in .5s .42s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .v14-market-trend:nth-child(1){animation:insight-drift-right .5s .29s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .v14-market-trend:nth-child(2){animation:insight-drift-right .5s .42s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .v14-market-trend:nth-child(3){animation:insight-drift-right .5s .55s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .scene-editorial-good{animation:insight-drift-left .56s .22s ease-out both}
+:is(#slide-body,.export-slide)[data-motion="on"] .scene-editorial-risk{animation:insight-drift-right .56s .39s ease-out both}
+@media(prefers-reduced-motion:reduce){
+ #slide-body.slide-entrance,.export-slide,
+ :is(#slide-body,.export-slide)[data-motion="on"] .story-scene *{animation:none!important;transition:none!important}
+}
+@media print{
+ .export-slide,.export-slide *{animation:none!important;transition:none!important}
+}

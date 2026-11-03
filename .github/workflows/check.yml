@@ -71,6 +71,8 @@ jobs:
         run: node scripts/check-architecture-browser.mjs
       - name: Kontroller palettvalg, eksport og beskyttet innhold
         run: node scripts/check-presentation-mode-browser.mjs
+      - name: Kontroller animasjoner, gjenbruk og organisasjonsskin
+        run: node scripts/check-presentation-motion-browser.mjs
       - name: Kontroller og render hele biblioteket
         if: always()
         run: node scripts/check-library-v1-browser.mjs

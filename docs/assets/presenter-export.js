@@ -10,6 +10,7 @@ const extraCss=[
 '.export-slide{width:100%;height:auto;min-height:0;aspect-ratio:16/9;margin:0 auto 25px;display:flex;flex-direction:column;justify-content:center;padding:4.5% 6%;border-radius:12px;overflow:hidden}',
 '.export-slide[hidden]{display:none}',
 '.export-slide{touch-action:pan-y}',
+'.export-toolbar #export-motion[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}',
 '.export-slide .slide-case,.export-slide .slide-events span,.export-slide .present-flow-step,.export-slide .slide-prompt{color:hsl(from var(--ink) calc(h - 10.105) calc(s * 0.7142800) calc(l + 7.059))}',
 '.export-slide .slide-prompt button{display:none}',
 '.export-meta{font-size:12px;color:hsl(from var(--muted) calc(h - 8.276) calc(s * 1.3575452) calc(l - 12.549));margin:6px 0 18px}',
@@ -27,6 +28,10 @@ const script=[
 'const slides=[...document.querySelectorAll(".export-slide")],counter=document.getElementById("export-counter");',
 'let current=0;',
 'let swipeStart=null;',
+'const motionButton=document.getElementById("export-motion");',
+'let motionMode=slides[0]?.dataset.motion||"off";',
+'function setMotion(value){motionMode=value;slides.forEach(s=>{s.dataset.motion=value;});motionButton.setAttribute("aria-pressed",String(value==="on"));motionButton.textContent=motionButton.dataset.label+": "+motionButton.dataset[value==="on"?"on":"off"];}',
+'motionButton.addEventListener("click",()=>setMotion(motionMode==="on"?"off":"on"));',
 'function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.hidden=i!==current);counter.textContent=(current+1)+" / "+slides.length;}',
 'document.getElementById("export-prev").addEventListener("click",()=>show(current-1));',
 'document.getElementById("export-next").addEventListener("click",()=>show(current+1));',
@@ -37,16 +42,16 @@ const script=[
 'document.querySelector(".export-list").addEventListener("touchcancel",()=>{swipeStart=null;},{passive:true});',
 'window.addEventListener("beforeprint",()=>slides.forEach(s=>s.hidden=false));',
 'window.addEventListener("afterprint",()=>show(current));',
-'show(0);',
+'setMotion(motionMode);show(0);',
 '})();'
 ].join('\n');
 const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function build(data,stylesheet){
  const style=stylesheet.replaceAll('</style','<\\/style');
  return '<!doctype html><html lang="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+safe(data.label)+' · Innsikt v'+safe(data.version)+'</title><style>'+style+'\n'+extraCss+'</style></head><body class="export-document">'
- +'<nav class="export-toolbar" aria-label="Presentasjonskontroller"><strong>'+safe(data.label)+' · v'+safe(data.version)+'</strong><div><button type="button" id="export-prev">Forrige</button> <span id="export-counter"></span> <button type="button" id="export-next">Neste</button> <button type="button" id="export-print">Skriv ut / PDF</button></div></nav>'
+ +'<nav class="export-toolbar" aria-label="Presentasjonskontroller"><strong>'+safe(data.label)+' · v'+safe(data.version)+'</strong><div><button type="button" id="export-prev">Forrige</button> <span id="export-counter"></span> <button type="button" id="export-next">Neste</button> <button type="button" id="export-motion" data-label="'+safe(data.motionUi?.label||'Bevegelse')+'" data-on="'+safe(data.motionUi?.on||'På')+'" data-off="'+safe(data.motionUi?.off||'Av')+'">Bevegelse</button> <button type="button" id="export-print">Skriv ut / PDF</button></div></nav>'
  +'<main class="export-list"><p class="export-meta">'+(data.classification==='internal'?'INTERNT · ':'')+safe(data.notice)+'</p>'
- +data.slides.map((html,i)=>'<section class="present-frame present-rich export-slide" data-tone="'+safe(data.tones?.[i]||'strong')+'">'+html+'</section>').join('')
+ +data.slides.map((html,i)=>'<section class="present-frame present-rich export-slide" data-tone="'+safe(data.tones?.[i]||'strong')+'" data-motion="'+safe(data.motion==='on'?'on':'off')+'" data-transition="'+safe(data.transitions?.[i]||'fade')+'">'+html+'</section>').join('')
  +'</main><script>'+script.replaceAll('</script','<\\/script')+'</script></body></html>';
 }
 async function inlineLibraryImages(html){
@@ -61,6 +66,21 @@ async function inlineLibraryImages(html){
  }));
  for(const [path,uri] of substitutions)html=html.replaceAll('src="'+path+'"','src="'+uri+'"');
  return html;
+}
+// A copy can supply its own palette by linking CSS last with data-innsikt-skin.
+ // Legacy organization/theme.css links are also recognized, without changing core styles.
+async function organizationSkinCss(){
+ const elements=[...document.querySelectorAll('link[rel="stylesheet"][data-innsikt-skin],link[rel="stylesheet"][href*="organization/"],style[data-innsikt-skin]')];
+ const styles=[];
+ for(const el of elements){
+  if(el.tagName==='STYLE'){styles.push(el.textContent||'');continue;}
+  const url=new URL(el.href,window.location.href);
+  if(url.origin!==window.location.origin)throw Error('Organisasjonens stilark må ligge på samme domene for offline-eksport');
+  const response=await fetch(url.href,{cache:'no-store'});
+  if(!response.ok)throw Error('Kunne ikke hente organisasjonens stilark: '+url.pathname);
+  styles.push(await response.text());
+ }
+ return styles.join('\n');
 }
 async function exportDeck(data,mode='html'){
  let win=null;
@@ -79,7 +99,8 @@ async function exportDeck(data,mode='html'){
   if(!architectureCss.ok)throw Error('Kunne ikke hente arkitekturens stiler');
   const vendorCss=await fetch('./assets/vendor-architectures.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!vendorCss.ok)throw Error('Kunne ikke hente leverandørdiagramstiler');
-  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())));
+  const skin=await organizationSkinCss();
+  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())+'\n'+skin));
   if(mode==='print'){win.document.open();win.document.write(html);win.document.close();win.focus();return;}
   const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
   const link=document.createElement('a');link.href=url;link.download='innsikt-'+data.id+'-v'+data.version+'.html';

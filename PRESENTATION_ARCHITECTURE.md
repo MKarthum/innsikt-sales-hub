@@ -94,3 +94,12 @@ Gjeldende implementering for detaljsidens lysbildefullskjerm bruker dedikerte he
 ## v0.18.32 – hovedfortellingen
 
 `innsikt` har åtte kuraterte bilder. Ny `insight-ecosystem`-scene tegner en pedagogisk sammenheng fra virksomhetsbehov gjennom dataplattform, datateknikk/modellering, analyse/BI og KI/arbeidsflyt til handling; det er ikke en ny teknisk referansearkitektur. Data og ikon-ID-er eies av `slides.json` og assetregisteret. `architecture-conceptual` eier fortsatt teknisk utdypning. Ingen fiktive pilotbilder eller teknisk dypdykk i hovedløpet.
+
+
+## Selvstendige redaksjonelle scener og valgfri bevegelse
+
+Piloten fra november 2026 beholder stabile lysbilde-ID-er, dataeide tekster, kilde-ID-er og presentatørnotater. Tre lysbilder får ulike sceniske uttrykk: stor kapasitetsmetafor, typografisk KI-utbredelse og todelt konsekvensscene. Visuell forskjell er bevisst; de bruker samme semantiske fargeroller og kan gjenbrukes i flere fortellinger.
+
+Presenter har et separat valg for Bevegelse: På/Av, uavhengig av Lys, Mørk og Fortellingsstyrt. Selve lysbildet eier eventuelle oppbyggingsanimasjoner (som aldri er nødvendig for å forstå bildet); fortellingen kan oppgi transition: fade eller reveal på plasseringen. Uten angitt overgang brukes fade. Biblioteket er statisk. prefers-reduced-motion har forrang; PDF/print er statisk. Ingen fagfakta eller sluttilstander skal være skjult uten animasjon.
+
+Kopiløsninger kan laste et ekstra organisasjonsstilark etter de delte stilarkene; merk lenken data-innsikt-skin for at HTML-eksporten skal hente og bygge inn CSS fra samme domene. Historisk organization/-sti oppdages også. Organisasjonen eier paletten, kjernen eier struktur og animasjon. Se THEME_CONTRACT.md.

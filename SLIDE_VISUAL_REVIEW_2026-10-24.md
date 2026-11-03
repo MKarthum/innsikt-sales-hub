@@ -112,3 +112,10 @@ B har sammenlignet faktisk før/etter-rendering av bilde 4 ved 960×540 intern 1
 ## Visuell etterkontroll v0.18.34
 
 Skjermbilde fra Actions v0.18.33 viste avklippede etiketter i den avsluttende portalillustrasjonen, selv om container-scrolltestene var grønne. Rettet scenevinduets `box-sizing`, redusert node-/ikonstørrelse og frigjort høyde i den felles portalrendereren. Ny nettleserregresjon måler at alle tre tekstetiketter faktisk ligger innenfor visningsvinduet i både lys og mørk på 1280×720, 844×390 og 390×844. Dette er en reell visuell akseptport fremfor bare kontroll av scroll-dimensjoner.
+
+
+## Visuell pilot – 3. november 2026
+
+Tre eksisterende, selvstendige lysbilde-ID-er er gitt bevisst ulike komposisjoner uten å endre fagtekst, kilder, notater eller gjenbruk: ai-thousand-analysts har en scenisk typografisk metafor, market-three-forces en tallstyrt komposisjon med tre sekundære markedssignaler, og ai-two-directions kontrasterende redaksjonelle felt. Ingen av scenene inneholder hardkodede Webstep-/leverandørfarger; organisasjonspaletten styres fortsatt gjennom de offentlige --slide-* rollene.
+
+Innholdsoppbygging kan animeres, men alle elementer er fullt synlige når bevegelse er avslått, i biblioteket, ved systeminnstillingen reduced-motion og i utskrift. Fortellingen eier overgangene; eksportert HTML inkluderer valgt skinn-CSS og egen bevegelsesbryter. Kontroller: node scripts/check.mjs, check-presentation-mode-browser.mjs og check-presentation-motion-browser.mjs. Full gjennomgang av øvrige lysbilder er ikke implisert av denne piloten.

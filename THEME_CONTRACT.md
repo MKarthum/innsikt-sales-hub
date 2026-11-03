@@ -22,10 +22,10 @@ Presenter har egne roller `--slide-{strong,light}-{bg,fg,muted,accent,warning}` 
 
 ## Organisasjonsstilark
 
-Legg `organization/theme.css` etter samtlige kjernefiler:
+Legg organisasjonens theme.css etter samtlige kjernefiler. Merk lenken med data-innsikt-skin for at Presenter skal inkludere temaet i nedlastet HTML. Eksisterende organization/-lenker støttes også:
 
 ```html
-<link rel="stylesheet" href="./organization/theme.css">
+<link rel="stylesheet" href="./organization/theme.css" data-innsikt-skin>
 ```
 
 ```css
@@ -45,3 +45,10 @@ Fullstendig syntetisk palett ligger i `scripts/fixtures/theme-synthetic.css` (te
 `node scripts/check-theme-contract.mjs` stanser nye bokstavelige hex-/rgb-/hsl-farger utenfor `:root` i alle seks CSS-filer og eksportens ekstra CSS. Unntakslisten er tom; separate SVG-er med dokumenterte leverandørfarger er utenfor CSS-kontrakten. `node scripts/check-theme-browser.mjs` tester syntetisk palett og skjermbilder fra alle hovedsider, mobil/desktop og begge presentatørtoner. Sett `INNSIKT_THEME_BASE_URL` for pikselvis sammenligning mot forrige release.
 
 WCAG AA krever normalt 4,5:1 for vanlig tekst og 3:1 for stor/fet tekst. Nye komponenter skal bruke eksisterende roller og relative nyanser, ikke kopiere fargekonstanter. Nye offentlige tokens må begrunnes i nye semantiske roller.
+
+
+## Design og bevegelse på tvers av kopiløsninger
+
+De tre redaksjonelle pilotene (analytiker-metaforen, KI-utbredelse og kvalitetsutfall) bruker bare --pres-* som peker til de offentlige --slide-*-rollene. Lys, mørk og syntetisk/organisasjonsspesifikk palett skal fungere uten å endre scenene. Stiler og innhold er atskilt. Organisasjonen skal kunne overstyre temaet, ikke duplisere lysbildene.
+
+Bevegelse (på/av) er en selvstendig Presenter-innstilling, lagret lokalt i nettleseren. Lysbildet eier innholdsanimasjon; fortellingen eier overgangstype per plassering. Statisk bibliotek, bevegelse av, prefers-reduced-motion og utskrift viser alltid alt viktig innhold. Eksporterte HTML-filer inneholder både valgt palett, skinn-CSS og en bryter for bevegelse. Ikke overstyr transform på den skalerte 16:9-rammen.
