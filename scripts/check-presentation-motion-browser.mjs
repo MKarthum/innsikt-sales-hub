@@ -4,7 +4,7 @@ import {chromium} from 'playwright';
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 try{
  const page=await browser.newPage({viewport:{width:1440,height:900},acceptDownloads:true});
- await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:19765/docs/',{waitUntil:'networkidle'});
+ await page.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
  await page.locator('#present-button').click();
  const frame=page.locator('#slide-body');
  assert.equal(await page.locator('#present-motion-mode').inputValue(),'on');
