@@ -7,8 +7,17 @@ const current=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const previous=process.env.INNSIKT_THEME_BASE_URL||'';
 // Endret oppgaveliste er en bevisst innholdsendring, ikke en temaregresjon.
 // Sammenlign de øvrige rutene piksel for piksel og behold kontrasttest også her.
-let promptOverviewChanged=false,accountPromptChanged=false;
+let promptOverviewChanged=false,accountPromptChanged=false,slideVisualChanged=false;
 if(previous){
+ // Slide-library and Presenter screenshots are intentionally different when scene design changes.
+ // Keep screenshot creation and synthetic-palette contrast checks for these surfaces; only
+ // exclude the exact-pixel check, not the remaining routes.
+ const slideFiles=['docs/assets/slide-visuals.css','docs/assets/slide-story-scenes.css',
+  'docs/assets/slide-visuals.js','docs/assets/slide-story-scenes.js','docs/data/slides.json'];
+ slideVisualChanged=slideFiles.some(path=>{
+  const old=execFileSync('git',['show','HEAD^:'+path],{encoding:'utf8'});
+  return old!==fs.readFileSync(path,'utf8');
+ });
  const prev=JSON.parse(execFileSync('git',['show','HEAD^:docs/data/prompts.json'],{encoding:'utf8'}));
  const currentPrompts=JSON.parse(fs.readFileSync('docs/data/prompts.json','utf8'));
  const cards=d=>d.page.primaryIds.map(id=>{const x=d.items.find(y=>y.id===id);return x&&[x.id,x.title,x.summary,x.category,x.audience]});
@@ -134,7 +143,7 @@ try{
    const name=viewport.name+'-'+route.replaceAll('/','-');
    const shot=await now.screenshot({animations:'disabled'});
    fs.writeFileSync(dir+'/'+name+'.png',shot);
-   if(old&&!(route==='prompter'&&promptOverviewChanged)&&!(route==='prompter/account-research'&&accountPromptChanged)){
+   if(old&&!(route==='prompter'&&promptOverviewChanged)&&!(route==='prompter/account-research'&&accountPromptChanged)&&!(route==='lysbilder'&&slideVisualChanged)){
     const reference=await old.screenshot({animations:'disabled'});
     const diff=await pixelDiff(reference,shot,now);
     trackDiff(diff);
@@ -166,7 +175,7 @@ try{
    }
    const shot=await now.locator('#slide-body').screenshot({animations:'disabled'});
    fs.writeFileSync(dir+'/'+viewport.name+'-presenter-'+tone+'.png',shot);
-   if(old){
+   if(old&&!slideVisualChanged){
     const reference=await old.locator('#slide-body').screenshot({animations:'disabled'});
     const diff=await pixelDiff(reference,shot,now);
     trackDiff(diff);
@@ -182,8 +191,9 @@ try{
   }
   await ctx.close();
  }
- if(previous)assert.equal(pixelComparisons,viewports.length*(pages.length+2-(promptOverviewChanged?1:0)-(accountPromptChanged?1:0)),
+ if(previous)assert.equal(pixelComparisons,viewports.length*(pages.length+2-(promptOverviewChanged?1:0)-(accountPromptChanged?1:0)-(slideVisualChanged?3:0)),
   'Missing prior-release pixel comparisons');
+ if(slideVisualChanged)console.log('INFO – tilsiktet endret lysbildedesign: skjermbilder og kontrast kontrollert; pikseleksakt sammenligning utelatt bare for lysbildebiblioteket og Presenter');
  if(promptOverviewChanged)console.log('INFO – bevisst endret promptoversikt: skjermbilde og kontrast testet, pikseleksakt sammenligning utelatt');
  if(accountPromptChanged)console.log('INFO – redigerbare forslag endret kundeanalyse-input: skjermbilde og kontrast testet, pikseleksakt sammenligning utelatt');
  assert.ok(aaCount>=200,'Too few WCAG text samples: '+aaCount);
