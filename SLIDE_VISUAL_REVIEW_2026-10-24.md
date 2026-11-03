@@ -129,3 +129,8 @@ Den tidligere repeterende robotmatrisen er erstattet av et felt med nøyaktig 1 
 ## Eksportkorreksjon – 3. november 2026
 
 Et virkelig PNG-uttak av analytikersliden viste en svart ellipse i stedet for punktillustrasjonen, selv om den så riktig ut i presentasjonsmodus. Årsaken var manglende arvet SVG-fyll ved HTML-til-bilde-serialisering. Rettelsen fryser beregnede SVG-presentasjonsverdier i eksportklonen. Regresjonstesten avviser nå store svarte flater i eksportert PNG.
+
+
+## Ny selvstendig verdimodell-slide – 3. november 2026
+
+`ai-value-in-context` beholder stabil ID og kildegrenser, men har fått redaksjonell headline, tre datadrevne spørsmål (Behov, Data, Kontroll), nytt sentrum (Verdi i praksis), semantiske vektorikoner og radial forbindelsesmodell. Visuelle overganger følger den felles bevegelsesinnstillingen. Lysbildet kan brukes i enhver fortelling uten å duplisere fagtekst. De første to temaene og syntetisk skin kontrolleres i Chromium; fysisk iOS-test er ikke del av denne revisjonen.

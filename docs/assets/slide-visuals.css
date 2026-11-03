@@ -553,3 +553,126 @@ body.slide-fullscreen-view #main{
 }
 /* No position:fixed, 100dvh, overflow:hidden page clipping, layered
    overlay, synthetic touch handler or pointer-events interception on exits. */
+
+
+/* VALUE IN PRACTICE / 2026: semantic, data-owned visual composition.
+   No fixed organization palette, image assets, or typography embedded as a picture.
+   The old .scene-system renderer remains available for older copies. */
+.scene-system-editorial{
+ display:flex;flex-direction:column;padding:5% 6%;
+ background:
+  radial-gradient(ellipse at 76% 50%,color-mix(in srgb,var(--pres-accent) 15%,transparent),transparent 45%),
+  radial-gradient(ellipse at 3% 103%,color-mix(in srgb,var(--pres-accent) 8%,transparent),transparent 37%),
+  var(--pres-bg);
+}
+.scene-system-editorial::before,.scene-system-editorial::after{
+ content:'';position:absolute;pointer-events:none;z-index:0;
+ border:1px solid color-mix(in srgb,var(--pres-accent) 24%,transparent);
+ border-radius:50%;transform:rotate(-18deg);
+}
+.scene-system-editorial::before{width:68cqw;height:12cqw;bottom:-8.5cqw;left:-12cqw}
+.scene-system-editorial::after{width:50cqw;height:9cqw;right:-19cqw;top:-6.5cqw}
+.scene-system-editorial .scene-topline{position:relative;z-index:2}
+.scene-value-layout{
+ flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,48%) minmax(0,52%);
+ align-items:center;gap:0;position:relative;z-index:1;
+}
+.scene-value-story{
+ display:flex;flex-direction:column;justify-content:center;min-width:0;
+ padding:1.4cqw 1.6cqw 1cqw 0;gap:0;
+}
+.story-scene .scene-value-story h2{
+ font:840 4.53cqw/1.1 var(--font-display);letter-spacing:-.054em;
+ color:var(--pres-fg);text-wrap:balance;max-width:43cqw;
+}
+.story-scene .scene-value-story h2 em{
+ font-style:normal;color:var(--pres-accent);
+}
+.story-scene .scene-value-lead{
+ max-width:40cqw;margin:2.2cqw 0 0;
+ font:490 1.77cqw/1.38 var(--font-body);color:var(--pres-muted);
+}
+.story-scene .scene-value-takeaway{
+ margin:3.2cqw 0 0;padding:1.15cqw 1.4cqw;
+ font:670 1.48cqw/1.36 var(--font-body);color:var(--pres-fg);
+ border-left:.44cqw solid var(--pres-accent);border-radius:.18cqw .65cqw .65cqw .18cqw;
+ background:linear-gradient(105deg,color-mix(in srgb,var(--pres-accent) 13%,var(--pres-bg)),color-mix(in srgb,var(--pres-accent) 4%,var(--pres-bg)));
+ box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--pres-accent) 16%,transparent);
+ max-width:40.5cqw;
+}
+.scene-value-stage{
+ width:100%;height:44.5cqw;max-height:100%;position:relative;min-width:0;
+ isolation:isolate;
+}
+.scene-value-halo{
+ position:absolute;z-index:-1;left:50%;top:51%;transform:translate(-50%,-50%);
+ width:36cqw;height:36cqw;border-radius:50%;
+ background:radial-gradient(circle,color-mix(in srgb,var(--pres-accent) 18%,transparent) 0%,color-mix(in srgb,var(--pres-accent) 7%,transparent) 45%,transparent 70%);
+}
+.story-scene svg.scene-value-geometry{
+ position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;
+ color:var(--pres-accent);z-index:0;pointer-events:none;
+}
+.scene-value-orbit{fill:none;stroke:currentColor;stroke-width:1.25;stroke-dasharray:4 10;opacity:.56}
+.scene-value-orbit-inner{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.25}
+.scene-value-link{fill:none;stroke:currentColor;stroke-width:2.2;opacity:.82;stroke-linecap:round}
+.scene-value-core{
+ position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);
+ width:18.2cqw;height:18.2cqw;border-radius:50%;
+ border:.25cqw solid var(--pres-accent);box-sizing:border-box;
+ display:grid;place-items:center;text-align:center;
+ background:radial-gradient(circle at 20% 17%,color-mix(in srgb,var(--pres-accent) 35%,var(--pres-bg)),
+  color-mix(in srgb,var(--pres-accent) 15%,var(--pres-bg)) 47%,
+  color-mix(in srgb,var(--pres-accent) 7%,var(--pres-bg)) 94%);
+ box-shadow:0 0 0 .8cqw color-mix(in srgb,var(--pres-accent) 9%,transparent),
+  0 0 4cqw color-mix(in srgb,var(--pres-accent) 18%,transparent),
+  inset 0 0 2cqw color-mix(in srgb,var(--pres-accent) 12%,transparent);
+}
+.scene-value-core span{
+ max-width:13.5cqw;color:var(--pres-fg);
+ font:830 2.72cqw/1.09 var(--font-display);letter-spacing:-.04em;
+ text-wrap:balance;
+}
+.scene-value-node{
+ position:absolute;z-index:3;width:15.5cqw;min-width:0;
+ display:flex;flex-direction:column;align-items:center;text-align:center;
+ color:var(--pres-fg);
+}
+.scene-value-node--need{top:0;left:50%;transform:translateX(-50%)}
+.scene-value-node--data{bottom:.2cqw;left:20%;transform:translateX(-50%)}
+.scene-value-node--control{bottom:.2cqw;left:80%;transform:translateX(-50%)}
+.scene-value-icon{
+ width:5.3cqw;height:5.3cqw;display:grid;place-items:center;box-sizing:border-box;
+ border:.23cqw solid var(--pres-accent);border-radius:50%;
+ background:linear-gradient(135deg,color-mix(in srgb,var(--pres-accent) 45%,var(--pres-bg)),
+   color-mix(in srgb,var(--pres-accent) 22%,var(--pres-bg)));
+ color:var(--pres-fg);
+ box-shadow:0 0 2.7cqw color-mix(in srgb,var(--pres-accent) 25%,transparent);
+}
+.story-scene svg.scene-value-icon-svg{
+ display:block;width:3.25cqw;height:3.25cqw;overflow:visible;
+ stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;
+}
+.scene-value-node h3{
+ width:11.8cqw;box-sizing:border-box;margin:.42cqw 0 0;padding:.43cqw .5cqw .48cqw;
+ border:.16cqw solid var(--pres-accent);border-radius:4cqw;
+ background:color-mix(in srgb,var(--pres-accent) 12%,var(--pres-bg));
+ color:var(--pres-fg);font:760 1.93cqw/1.12 var(--font-display);
+}
+.story-scene .scene-value-node p{
+ margin:.55cqw 0 0;max-width:15cqw;
+ color:var(--pres-fg);font:565 1.32cqw/1.27 var(--font-body);
+ text-wrap:balance;
+}
+@keyframes value-system-arrive{from{opacity:0;transform:translateY(1cqw)}to{opacity:1;transform:translateY(0)}}
+@keyframes value-system-core-arrive{from{opacity:.3;transform:translate(-50%,-50%) scale(.9)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+:is(#slide-body,.export-slide)[data-motion="on"] .scene-system-editorial .scene-value-core{
+ animation:value-system-core-arrive .7s .18s ease-out both;
+}
+:is(#slide-body,.export-slide)[data-motion="on"] .scene-system-editorial .scene-value-takeaway{
+ animation:value-system-arrive .55s .45s ease-out both;
+}
+@media (prefers-reduced-motion:reduce){
+ :is(#slide-body,.export-slide)[data-motion="on"] .scene-system-editorial *{animation:none!important}
+}
+@media print{.scene-system-editorial *{animation:none!important}}

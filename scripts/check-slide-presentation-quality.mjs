@@ -81,6 +81,14 @@ for(const s of slides){
  if(v.layout==='controlled-comparison')assert.ok(v.exampleLabel&&v.problem&&v.hypothesis&&v.baseline?.label&&v.baseline?.title&&v.baseline?.detail&&v.trial?.label&&v.trial?.title&&v.trial?.detail&&v.baseline?.flow?.length===3&&v.trial?.flow?.length===4&&v.baseline.flow.every(Boolean)&&v.trial.flow.every(Boolean)&&v.measureLabel&&v.measures?.length===2&&v.measures.every(x=>typeof x==='string'&&x.length>3)&&v.guardrail&&v.decisionLabel&&v.decision&&v.conclusion,'Controlled comparison needs two comparable methods, two measures, explicit controls and a decision gate');
  if(v.layout==='bounded-discovery')assert.ok(v.sources?.length===2&&v.sourceTitle&&v.checkTitle&&v.result&&v.inScope&&v.later&&v.conclusion,'Discovery needs a bounded investigation and an explicit exclusion');
  if(v.scene==='insight-ecosystem')assert.ok(v.stages?.length===4&&v.stages.every(x=>x.title&&x.detail&&x.assetId)&&v.guardrails?.length===3&&v.input&&v.output&&v.conclusion,'Fagkartet må vise arbeidskjede og tverrgående kvalitet');
+ if(v.scene==='value-system'&&v.variant==='editorial-triad'){
+  assert.equal(v.nodes?.length,3,'Value slide must contain three distinct assessments: '+s.id);
+  assert.deepEqual(v.nodes.map(n=>n.key),['need','data','control'],'Value assessment order and semantic positions: '+s.id);
+  assert.deepEqual(v.nodes.map(n=>n.icon),['target','database','shield'],'Each icon is a simple CSS-recolorable vector: '+s.id);
+  assert.ok(v.nodes.every(n=>n.label?.trim()&&n.question?.trim()),'Value nodes need complete labels and questions: '+s.id);
+  assert.ok(v.core&&v.lead&&v.footer&&v.highlight&&s.title.includes(v.highlight),'Value narrative must be self-contained: '+s.id);
+  assert.ok(!v.business&&!v.ai,'New scene must not duplicate old schema content: '+s.id);
+ }
  if(v.scene==='analyst-grid')assert.equal(v.number,'1 000','Preserve metaphor');
 }
 const market=slides.find(s=>s.id==='market-customer-pressure');

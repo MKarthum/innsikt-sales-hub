@@ -80,6 +80,41 @@ function render(slide,esc,position={}){
   +'<div class="scene-duality-fork" aria-hidden="true"><span>↙</span><span>↘</span></div>'
   +'<div class="scene-duality-outcomes"><div class="scene-duality-good"><span class="scene-duality-symbol">+</span><h3>'+esc(v.positive)+'</h3><p>'+esc(v.positiveDetail)+'</p></div>'
   +'<div class="scene-duality-risk"><span class="scene-duality-symbol">−</span><h3>'+esc(v.negative)+'</h3><p>'+esc(v.negativeDetail)+'</p></div></div></div></div>';
+ // Illustrations are structural SVG/icons, labels and questions are exclusively data-driven.
+ if(kind==='value-system'&&v.variant==='editorial-triad'){
+  const nodes=v.nodes||[];
+  if(nodes.length!==3||nodes.map(n=>n.key).join(',')!=='need,data,control')throw Error('Three value nodes required: '+slide.id);
+  const glyph=type=>{
+   const paths={
+    target:'<circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="6"/><circle cx="16" cy="16" r="1.4"/><path d="M20 12l9-9M24 3h5v5"/>',
+    database:'<ellipse cx="16" cy="7" rx="10" ry="4"/><path d="M6 7v17c0 2.5 4.5 4.5 10 4.5s10-2 10-4.5V7M6 15c0 2.5 4.5 4.5 10 4.5s10-2 10-4.5M6 22c0 2.5 4.5 4.5 10 4.5s10-2 10-4.5"/>',
+    shield:'<path d="M16 3l11 4v8c0 7-4 11-11 14C9 26 5 22 5 15V7z"/><path d="M11 16l3.5 3.5L22 12"/>'
+   };
+   if(!paths[type])throw Error('Unknown value icon '+type);
+   return '<svg viewBox="0 0 32 32" class="scene-value-icon-svg" aria-hidden="true" focusable="false">'+paths[type]+'</svg>';
+  };
+  const titleText=String(slide.title),highlight=String(v.highlight||'');
+  const emphasis=highlight&&titleText.includes(highlight)
+   ?esc(titleText.slice(0,titleText.indexOf(highlight)))+'<em>'+esc(highlight)+'</em>'+esc(titleText.slice(titleText.indexOf(highlight)+highlight.length))
+   :esc(titleText);
+  const node=n=>'<div class="scene-value-node scene-value-node--'+n.key+'">'
+   +'<span class="scene-value-icon" aria-hidden="true">'+glyph(n.icon)+'</span>'
+   +'<h3>'+esc(n.label)+'</h3><p>'+esc(n.question)+'</p></div>';
+  return '<div class="story-scene scene-system-editorial">'
+   +'<div class="scene-topline">'+label+counter+'</div>'
+   +'<div class="scene-value-layout"><div class="scene-value-story"><h2>'+emphasis+'</h2>'
+   +'<p class="scene-value-lead">'+esc(v.lead)+'</p>'
+   +'<p class="scene-value-takeaway">'+esc(v.footer)+'</p></div>'
+   +'<div class="scene-value-stage" role="group" aria-label="'+esc(v.core)+': '+nodes.map(n=>n.label+' – '+n.question).map(esc).join('; ')+'">'
+   +'<div class="scene-value-halo" aria-hidden="true"></div>'
+   +'<svg class="scene-value-geometry" viewBox="0 0 500 445" aria-hidden="true" focusable="false">'
+   +'<circle class="scene-value-orbit" cx="250" cy="224" r="193"/>'
+   +'<circle class="scene-value-orbit-inner" cx="250" cy="224" r="155"/>'
+   +'<path class="scene-value-link" d="M250 80 V156 M182 278 L116 324 M318 278 L384 324"/>'
+   +'</svg>'
+   +'<div class="scene-value-core"><span>'+esc(v.core)+'</span></div>'
+   +nodes.map(node).join('')+'</div></div></div>';
+ }
  if(kind==='value-system')return '<div class="story-scene scene-system">'
   +'<div class="scene-topline">'+label+counter+'</div>'
   +'<div class="scene-system-layout"><div class="scene-system-story"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p><div class="scene-system-foot">'+esc(v.footer)+'</div></div>'

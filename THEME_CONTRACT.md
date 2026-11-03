@@ -52,3 +52,8 @@ WCAG AA krever normalt 4,5:1 for vanlig tekst og 3:1 for stor/fet tekst. Nye kom
 De tre redaksjonelle pilotene (analytiker-metaforen, KI-utbredelse og kvalitetsutfall) bruker bare --pres-* som peker til de offentlige --slide-*-rollene. Lys, mørk og syntetisk/organisasjonsspesifikk palett skal fungere uten å endre scenene. Stiler og innhold er atskilt. Organisasjonen skal kunne overstyre temaet, ikke duplisere lysbildene.
 
 Bevegelse (på/av) er en selvstendig Presenter-innstilling, lagret lokalt i nettleseren. Lysbildet eier innholdsanimasjon; fortellingen eier overgangstype per plassering. Statisk bibliotek, bevegelse av, prefers-reduced-motion og utskrift viser alltid alt viktig innhold. Eksporterte HTML-filer inneholder både valgt palett, skinn-CSS og en bryter for bevegelse. Ikke overstyr transform på den skalerte 16:9-rammen.
+
+
+### Ny verdimodell-slide (0.18.51)
+
+`ai-value-in-context` er en gjenbrukbar SVG/HTML-scene, **ikke et bakgrunnsbilde**. Visningen henter alle fagtekster fra JSON. Linjer, ikoner og glød følger `--pres-accent`, `--pres-fg`, `--pres-muted` og `--pres-bg` fra de eksisterende tema-rollene. Når en kopiløsning endrer kun de dokumenterte `--slide-strong-*`/`--slide-light-*`-rollene, følger hele figuren med, inkludert SVG-strekene. Ingen ny CSS-skin-kontrakt er nødvendig.

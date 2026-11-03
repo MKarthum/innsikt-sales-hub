@@ -133,3 +133,12 @@ Fullskjermvisning i biblioteket er nå en **egen, ordinær dokumentvisning**, ik
 Både inngang via lysbildekort, direkte dyplenke, full sidelasting, nettleserens tilbakeknapp, lukkelenke, klikk utenfor, Esc, mobile liggende/stående layouter og eksport kontrolleres nå. Andre URL-parametere som brukes av kopiløsninger, beholdes. Regresjonstester kontrollerer at fullskjerm ikke har fastplasserte underkomponenter og at vanlige ruter aldri feilaktig aktiverer fullskjerm. Tredjeparts kopier kan fortsette å overstyre CSS-rollene; ingen nettleser- eller organisasjonsspesifikke inline-farger er innført.
 
 **Verifikasjonsbegrensning:** Linux Chromium-emulering er ikke fysisk iOS Safari/WebKit. Funksjonen kan først kalles bekreftet på iPhone etter faktisk enhetstest.
+
+
+## Redaksjonell pilot: behov, data og kontroll (0.18.51)
+
+Det stabile, selvstendige lysbildet `ai-value-in-context` bruker nå datadrevne noder under `visual.nodes`, i én klart avgrenset layoutvariant `editorial-triad`. Det formidler at verdi i praksis forutsetter sammenheng mellom virksomhetsbehov, pålitelig datagrunnlag og trygg kontroll. Overskrift, spørsmål, sentrum, forklaring og budskap ligger kun i `docs/data/slides.json`, ikke i SVG-illustrasjon, CSS eller fortellinger. Presenter-notater og ID beholdes, og `value-system` har gammel layout som kompatibilitetsfallback for eldre innhold.
+
+Scenen tegner sirkler, sammenhengslinjer og tre ikoner med enkel HTML/SVG. CSS bruker bare felles `--pres-*`-roller som følger de offentlige `--slide-strong-*` og `--slide-light-*`-rollene. Den har ingen fast leverandørpalett, rasterbilde eller klippende overflate. Kopiløsninger kan omsette kun CSS-roller og samtidig beholde innhold, layout, 16:9, metadata, kildegrense og nedlasting. Frivillig animasjon er kun tilleggsopplevelse. Biblioteket, eksportert PNG/PDF/PPTX og redusert bevegelse fungerer statisk.
+
+Regresjon: `scripts/check-value-system-browser.mjs` validerer begge temaer, tre tekstnoder, geometrien i riktig størrelse, ingen klippet tekst, syntetisk tredjepartspalett og faktisk eksportert PNG. I tillegg gjelder bibliotek-, temakontrakt-, eksport- og fullskjermtestene.

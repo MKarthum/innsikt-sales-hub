@@ -557,17 +557,36 @@
       "type": "visual",
       "tone": "strong",
       "cue": "HVORFOR INNSIKT?",
-      "title": "God bruk av analyse og KI krever tre avklaringer",
+      "title": "Analyse og KI skaper verdi når tre ting henger sammen",
       "visual": {
         "scene": "value-system",
-        "lead": "Dette er forutsetninger vi vurderer – ikke tre ulike verktøy.",
-        "core": "GOD BRUK",
-        "business": "Hva skal bli bedre?",
-        "data": "Er dataene egnet?",
-        "ai": "Hva må vi kontrollere?",
-        "footer": "Behov, datakvalitet og risiko vurderes samlet. Analyse og KI kan støtte alle tre."
+        "lead": "Verdien oppstår når behov, datagrunnlag og kontroll fungerer sammen.",
+        "core": "VERDI I PRAKSIS",
+        "footer": "Behov, data og kontroll må virke sammen for å gi trygg og nyttig bruk av analyse og KI.",
+        "variant": "editorial-triad",
+        "highlight": "tre ting henger sammen",
+        "nodes": [
+          {
+            "key": "need",
+            "label": "Behov",
+            "question": "Hva skal bli bedre?",
+            "icon": "target"
+          },
+          {
+            "key": "data",
+            "label": "Data",
+            "question": "Har vi data vi kan stole på?",
+            "icon": "database"
+          },
+          {
+            "key": "control",
+            "label": "Kontroll",
+            "question": "Hvordan sikrer vi trygg bruk?",
+            "icon": "shield"
+          }
+        ]
       },
-      "speakerBase": "Dette selvstendige bibliotekbildet viser tre vurderinger før vi bruker analyse eller KI i beslutninger: hvilket behov som skal løses, om datagrunnlaget er egnet, og hvordan nytte og risiko skal vurderes. Analyse og KI er mulige virkemidler på tvers, ikke én av tre sidestilte byggeklosser. Bildet inngår ikke i den korte hovedfortellingen, fordi den allerede dekker denne sammenhengen.",
+      "speakerBase": "Dette lysbildet er selvstendig og kan brukes i flere fortellinger. Start med virksomhetens behov: hvilken forbedring vil vi oppnå? Sjekk deretter at dataene finnes, er relevante og pålitelige. Vurder til slutt risiko, ansvar, sikkerhet og kontroll for trygg bruk. Alle tre må henge sammen for å skape varig verdi med analyse og KI. Behovet setter retningen; data og kontroll gjør bruken mulig og forsvarlig. Ikke presenter de tre som tre verktøy eller en universell fasit.",
       "sourceIds": []
     },
     {
