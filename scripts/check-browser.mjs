@@ -393,9 +393,11 @@ try {
   await page.locator('.slide-library-detail-stage .present-frame').waitFor();
   // The detail page remains the first step; only its slide is fullscreen-capable.
   await page.locator('[data-slide-preview-open]').click();
-  await page.locator('#slide-library-fullscreen .present-frame').waitFor();
-  await page.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
-  assert.equal(await page.locator('#slide-library-fullscreen').count(),0,label+': close returns to slide details');
+  await page.locator('#slide-library-fullscreen-page .present-frame').waitFor();
+  await page.locator('.slide-fullscreen-close').click();
+  await page.locator('#slide-library-fullscreen-page').waitFor({state:'detached'});
+  await page.locator('.slide-library-info').waitFor();
+  assert.equal(await page.locator('#slide-library-fullscreen-page').count(),0,label+': close returns to slide details');
   assert.ok(await page.locator('.slide-library-info').isVisible(),label+': notes and sources retained on detail page');
   assert.equal(await page.locator('.slide-library-detail-stage .text-source').count(),0,label+': ingen kildeliste på åpningsbildet');
   const tonePair=await page.locator('.slide-library-detail-stage .present-frame').evaluate(el=>{

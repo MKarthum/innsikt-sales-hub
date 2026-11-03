@@ -13,111 +13,131 @@ try{
  await p.evaluate(()=>location.hash='#lysbilder');
  await p.locator('.slide-library-card').first().waitFor();
  assert.equal(await p.locator('.slide-library-card').count(),items.length,'Complete library');
+ assert.equal(await p.evaluate(()=>document.body.classList.contains('slide-fullscreen-view')),false,'Library route is not fullscreen');
+ await p.evaluate(()=>location.hash='#oversikt');
+ await p.waitForTimeout(150);
+ await p.evaluate(()=>location.hash='#lysbilder');
+ await p.locator('.slide-library-card').first().waitFor();
+ assert.equal(await p.evaluate(()=>document.body.classList.contains('slide-fullscreen-view')),false,'Repeated library route cannot toggle fullscreen on');
+ assert.ok(await p.locator('#present-button').isVisible(),'Normal navigation remains available');
+
  assert.equal(await p.locator('.slide-library-card .scene-id,.slide-library-card .slide-placement-number').count(),0,'Independent library cards have no presentation numbers');
  await p.screenshot({path:out+'/library.png',fullPage:false});
  // Detail page is mandatory first step; its actual 16:9 slide opens fullscreen.
  const card=p.locator('.slide-library-card').first();
  const slideId=await card.getAttribute('href').then(h=>h.split('/').at(-1));
- const originalHash=await p.evaluate(()=>location.hash);
  await card.click();
- assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Card opens its detailed content page');
- assert.equal(await p.locator('.slide-library-detail-stage .scene-id,.slide-library-detail-stage .slide-placement-number').count(),0,'Independent detail preview has no presentation numbers');
- await p.locator('.slide-library-info').waitFor();
- assert.ok(await p.locator('.slide-library-info h2').count()>=2,'Speaker notes, sources and use remain on detail page');
+ assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Card opens details');
  const opener=p.locator('[data-slide-preview-open]');
+ await p.locator('.slide-library-info').waitFor();
+ assert.ok(await p.locator('.slide-library-info').isVisible(),'Speaker notes and sources retained');
  assert.equal(await opener.getAttribute('data-slide-preview-open'),slideId);
  await opener.click();
- const full=p.locator('#slide-library-fullscreen');
+ const full=p.locator('#slide-library-fullscreen-page');
  await full.waitFor();
- assert.equal(await p.locator('.slide-library-exit').getAttribute('href'),'#lysbilder/'+slideId,'Close uses native URL navigation');
- assert.equal(await p.locator('.slide-library-exit').evaluate(el=>el.tagName),'A','Exit is a standard hyperlink, not a JavaScript-only button');
- assert.ok((await p.locator('.slide-library-exit').innerText()).includes('Lukk'),'Exit label is real text, not a pseudo-element');
- assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId+'~fullskjerm','Fullscreen has its own routable URL');
+ assert.equal(await p.evaluate(()=>new URL(location.href).searchParams.get('fullslide')),slideId,'Fullscreen loads as a separate browser document');
+ assert.equal(await p.locator('#overlay-root .overlay').count(),0,'Fullscreen no longer creates a modal overlay');
+ assert.ok(await p.evaluate(()=>document.body.classList.contains('slide-fullscreen-view')),'Full page owns fullscreen state');
+ assert.equal(await p.locator('body > .overlay').count(),0,'No overlay attached to body');
+
+ assert.ok((await p.locator('.slide-fullscreen-close').getAttribute('href')).endsWith('/#lysbilder/'+slideId),'Close is a full-document navigation link, not hash-only');
+ assert.equal(await p.locator('.slide-fullscreen-close').evaluate(el=>el.tagName),'A');
+ assert.ok((await p.locator('.slide-fullscreen-close').innerText()).includes('Lukk'));
  assert.equal(await full.locator('.present-frame').getAttribute('data-library-slide-id'),slideId);
- assert.equal(await full.locator('.scene-id,.slide-placement-number').count(),0,'Fullscreen of an independent slide stays unnumbered');
+ assert.equal(await full.locator('.scene-id,.slide-placement-number').count(),0,'Independent slide stays unnumbered');
  const geometry=await full.evaluate(el=>{
   const slide=el.querySelector('.slide-library-fullscreen-stage').getBoundingClientRect();
-  return {slide:{width:slide.width,height:slide.height,left:slide.left,right:slide.right}};
+  const close=el.querySelector('.slide-fullscreen-close').getBoundingClientRect();
+  const fixed=[...el.querySelectorAll('*')].filter(x=>getComputedStyle(x).position==='fixed').length;
+  return {slide:{width:slide.width,height:slide.height,left:slide.left,right:slide.right},close:{top:close.top,bottom:close.bottom},fixed};
  });
+ assert.equal(geometry.fixed,0,'No fixed-position descendants in fullscreen view');
  assert.ok(Math.abs(geometry.slide.width/geometry.slide.height-16/9)<0.02,'Fullscreen slide retains 16:9 ratio');
- assert.ok(geometry.slide.left>=0&&geometry.slide.right<=1536,'Fullscreen stage fits desktop');
+ assert.ok(geometry.slide.left>=0&&geometry.slide.right<=1536,'Slide fits desktop');
  await full.screenshot({path:out+'/fullscreen-desktop.png'});
+ // Escape navigates to the details page.
  await p.keyboard.press('Escape');
  await full.waitFor({state:'detached'});
- assert.equal(await full.count(),0,'Escape exits fullscreen');
- assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Exit returns to details');
- assert.ok(await opener.evaluate(x=>document.activeElement===x),'Focus returns to detail-page preview');
- // Safari may emit a late compatibility click directed at the exposed preview.
- await opener.evaluate(x=>x.click());
- assert.equal(await full.count(),0,'Late click after Escape must not reopen');
- await p.waitForTimeout(950);
- await opener.focus();
- await p.keyboard.press('Enter');
- await full.waitFor();
- await p.evaluate(()=>{const anchor=document.querySelector('.slide-library-exit');anchor.addEventListener('click',e=>e.stopImmediatePropagation(),{capture:true,once:true});});
- await p.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
+ assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId);
+ assert.ok(await opener.isVisible(),'Escape returns to slide details');
+ // Normal click on the native anchor closes, without any handler.
+ await opener.focus();await p.keyboard.press('Enter');await full.waitFor();
+ await p.evaluate(()=>{
+  const a=document.querySelector('.slide-fullscreen-close');
+  a.addEventListener('click',e=>e.stopImmediatePropagation(),{capture:true,once:true});
+ });
+ await p.locator('.slide-fullscreen-close').click();
  await full.waitFor({state:'detached'});
- assert.equal(await full.count(),0,'Explicit close button works');
- await opener.evaluate(x=>x.click());
- assert.equal(await full.count(),0,'Late click after button close does not reopen');
- await p.waitForTimeout(950);
+ await p.locator('.slide-library-info').waitFor();
+ assert.ok(await opener.isVisible(),'Native close works when JS bubbling is disabled');
  await p.setViewportSize({width:390,height:844});
+ await opener.click();await full.waitFor();
+ const mobile=await full.evaluate(el=>{
+  const frame=el.querySelector('.slide-library-fullscreen-stage').getBoundingClientRect();
+  const close=el.querySelector('.slide-fullscreen-close').getBoundingClientRect();
+  return {frame:{left:frame.left,right:frame.right,width:frame.width,height:frame.height,bottom:frame.bottom},close:{left:close.left,right:close.right,top:close.top,bottom:close.bottom},viewport:innerWidth,
+    inFlow:getComputedStyle(el.querySelector('.slide-fullscreen-close')).position!=='fixed'};
+ });
+ assert.ok(mobile.frame.left>=0&&mobile.frame.right<=mobile.viewport+1,'Slide fits portrait mobile');
+ assert.ok(mobile.close.left>=0&&mobile.close.right<=mobile.viewport+1,'Close fits portrait mobile');
+ assert.ok(mobile.close.top>mobile.frame.bottom,'Close is in flow, below slide');
+ assert.ok(mobile.inFlow,'Close is not fixed');
+ assert.ok(Math.abs(mobile.frame.width/mobile.frame.height-16/9)<0.02,'Mobile slide retains 16:9');
+ await full.screenshot({path:out+'/fullscreen-mobile.png'});
+ await p.locator('.slide-fullscreen-close').click();await full.waitFor({state:'detached'});
  await opener.click();
  await full.waitFor();
- const mobile=await full.evaluate(el=>{
-  const body=el.querySelector('.slide-library-fullscreen-stage').getBoundingClientRect();
-  const close=document.querySelector('.slide-library-fullscreen-overlay > .slide-library-exit').getBoundingClientRect();
-  return {stageLeft:body.left,stageRight:body.right,stageWidth:body.width,stageHeight:body.height,
-    closeTop:close.top,closeRight:close.right,innerWidth:window.innerWidth};
- });
- assert.ok(mobile.stageLeft>=0&&mobile.stageRight<=mobile.innerWidth+1,'Fullscreen stage fits mobile viewport');
- assert.ok(mobile.closeTop>=0&&mobile.closeRight<=mobile.innerWidth+1,'Exit button fits mobile viewport');
- assert.ok(mobile.closeTop>mobile.stageHeight,'Mobile exit stays below the stage instead of covering slide content');
- assert.ok(Math.abs(mobile.stageWidth/mobile.stageHeight-16/9)<0.02,'Mobile fullscreen slide remains 16:9');
- await full.screenshot({path:out+'/fullscreen-mobile.png'});
- await p.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
- await full.waitFor({state:'detached'});
- assert.equal(await full.count(),0,'Mobile close works');
- await p.evaluate(id=>location.hash='#lysbilder/'+id+'~fullskjerm',slideId);
- await full.waitFor();
  await p.evaluate(()=>history.back());
- await p.waitForFunction(id=>location.hash==='#lysbilder/'+id&&document.querySelector('#slide-library-fullscreen')===null,slideId);
- assert.ok(await opener.isVisible(),'Browser Back closes a directly routable fullscreen');
+ await full.waitFor({state:'detached'});
+ assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Browser Back closes fullscreen');
  await p.setViewportSize({width:1536,height:1040});
-
- // Simulate actual touch gestures and check *after* synthetic clicks have fired.
+ // Touch the controls in a portrait-phone viewport and test surrounding
+ // normal-flow native links, with no fixed overlay hit-testing.
  const ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:2});
  const tp=await ctx.newPage();
  tp.on('pageerror',e=>problems.push('Touch JavaScript: '+e.message));
  await tp.goto(process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/',{waitUntil:'networkidle'});
- await tp.evaluate(()=>location.hash='#lysbilder');
- await tp.locator('.slide-library-card').first().tap();
+ await tp.evaluate(id=>location.hash='#lysbilder/'+id,slideId);
+ await tp.locator('[data-slide-preview-open]').tap();
+ const touchFull=tp.locator('#slide-library-fullscreen-page');await touchFull.waitFor();
+ await tp.locator('.slide-fullscreen-close').tap();await touchFull.waitFor({state:'detached'});
+ assert.equal(await tp.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Touch close is a native link');
+ await tp.waitForTimeout(500);
+ assert.equal(await touchFull.count(),0,'No ghost opening after touch');
+ await tp.locator('[data-slide-preview-open]').tap();await touchFull.waitFor();
+ const stage=await touchFull.locator('.slide-library-fullscreen-stage').boundingBox();
+ await tp.touchscreen.tap(stage.x+stage.width/2,stage.y+stage.height/2);
+ assert.equal(await touchFull.count(),1,'Touching image does not close');
+ await tp.locator('.slide-fullscreen-page > .slide-fullscreen-empty').first().tap();
+ await touchFull.waitFor({state:'detached'});
+ assert.equal(await tp.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Outside top closes using plain link');
+ await tp.locator('[data-slide-preview-open]').tap();await touchFull.waitFor();
+ await tp.locator('.slide-fullscreen-page > .slide-fullscreen-empty').last().tap();
+ await touchFull.waitFor({state:'detached'});
+ assert.equal(await tp.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Outside bottom closes using plain link');
+ await tp.setViewportSize({width:844,height:390});
+ await tp.locator('[data-slide-preview-open]').tap();await touchFull.waitFor();
+ await tp.locator('.slide-fullscreen-body > .slide-fullscreen-empty').first().tap();
+ await touchFull.waitFor({state:'detached'});
+ assert.equal(await tp.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Outside side closes using plain link');
+ await tp.goto((process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'?fullslide='+slideId,{waitUntil:'networkidle'});
+ await touchFull.waitFor();
+ assert.ok(await tp.locator('.slide-fullscreen-close').isVisible(),'Direct deep link works after page reload');
+ await tp.locator('.slide-fullscreen-close').tap();
+ await touchFull.waitFor({state:'detached'});
  await tp.locator('.slide-library-info').waitFor();
- const touchOpener=tp.locator('[data-slide-preview-open]');
- await touchOpener.tap();
- const touchFull=tp.locator('#slide-library-fullscreen');await touchFull.waitFor();
- await tp.locator('.slide-library-fullscreen-overlay > .slide-library-exit').tap();
+ assert.ok(await tp.locator('.slide-library-info').isVisible(),'Deep link closes to canonical detail');
+ // Organization/copy-specific URL query parameters survive both navigations.
+ await tp.goto((process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/')+'?skin=customer-test#lysbilder/'+slideId,{waitUntil:'networkidle'});
+ await tp.locator('[data-slide-preview-open]').tap();
+ await touchFull.waitFor();
+ assert.equal(await tp.evaluate(()=>new URL(location.href).searchParams.get('skin')),'customer-test','Copy query parameter is preserved when opening');
+ await tp.locator('.slide-fullscreen-close').tap();
  await touchFull.waitFor({state:'detached'});
- await tp.waitForTimeout(150);
- assert.equal(await touchFull.count(),0,'Touch close stays dismissed after compatibility click');
- assert.ok(await tp.locator('.slide-library-info').isVisible(),'Touch returns to details');
- await touchOpener.evaluate(x=>x.click());
- assert.equal(await touchFull.count(),0,'Delayed touch compatibility click does not reopen');
- await tp.waitForTimeout(950);
- await touchOpener.tap();await touchFull.waitFor();
- const frame=await touchFull.locator('.slide-library-fullscreen-stage').boundingBox();
- await tp.touchscreen.tap(frame.x+frame.width/2,frame.y+frame.height/2);
- assert.equal(await touchFull.count(),1,'Tapping slide does not dismiss fullscreen');
- assert.ok(await tp.locator('.slide-library-backdrop-exit').getAttribute('href')?.then(h=>h.endsWith(slideId)),'Backdrop uses native exit link');
- await tp.touchscreen.tap(18,130);
- await touchFull.waitFor({state:'detached'});
- await tp.waitForTimeout(150);
- assert.equal(await touchFull.count(),0,'Touch outside stays dismissed after synthetic click');
- assert.ok(await tp.locator('.slide-library-info').isVisible(),'Outside tap returns to details');
- await tp.locator('#menu-toggle').tap();
- assert.equal(await tp.locator('#menu-toggle').getAttribute('aria-expanded'),'true');
- await tp.locator('#sidebar-close').tap();
- assert.equal(await tp.locator('#menu-toggle').getAttribute('aria-expanded'),'false','Touch menu exit');
+ assert.equal(await tp.evaluate(()=>new URL(location.href).searchParams.get('skin')),'customer-test','Copy query parameter is preserved when closing');
+ assert.equal(await tp.evaluate(()=>new URL(location.href).searchParams.has('fullslide')),false,'Viewer query parameter removed on close');
+
+
  await ctx.close();
  await p.evaluate(()=>location.hash='#lysbilder');
  await p.locator('.slide-library-card').first().waitFor();
