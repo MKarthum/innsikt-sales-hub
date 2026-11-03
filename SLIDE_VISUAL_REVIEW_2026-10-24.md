@@ -54,6 +54,9 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | market-customer-pressure | Tre kundeutsagn overlappet med market-priorities | KI-strategien kan være foran gjennomføringsevnen | Asymmetrisk Deloitte-kontrast: 42 % strategi vs. fire kvalitativt lavere vurderte operative områder; spørsmål og metodeforbehold uten falsk prosentgap |
 | market-priorities | Tre faglige prioriteringer som henger sammen | Innsikt bør prioritere data, analyse og KI i samspill | Tre faglige områder står separat med en felles, synlig konklusjon |
 | market-next-moves | Begynn med behovet. Lær. Utvid ved verdi. | Start avgrenset, mål effekt og bygg videre | Viser hvert handlingstrinn og hvorfor det gjøres |
+| ai-context-for-agents | En selvstendig konseptuell flyt der kontekst beriker data før svar. Ingen konferansebilder eller kopiert produktgrafikk. |
+| ai-development-workflow | Original kodeeditor, kodeforslag og menneskelig godkjenning. Ingen påståtte faktiske testresultater. |
+| ai-natural-language-bi | Skille mellom ad hoc og gjenbrukbar BI, med fiktive eksempeltall og allerede registrerte logoassets. |
 
 ## Begrunnet tilbakeholdenhet
 
