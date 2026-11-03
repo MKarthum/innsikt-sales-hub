@@ -29,7 +29,10 @@ try{
  await opener.click();
  const full=p.locator('#slide-library-fullscreen');
  await full.waitFor();
- assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Fullscreen does not change details route');
+ assert.equal(await p.locator('.slide-library-exit').getAttribute('href'),'#lysbilder/'+slideId,'Close uses native URL navigation');
+ assert.equal(await p.locator('.slide-library-exit').evaluate(el=>el.tagName),'A','Exit is a standard hyperlink, not a JavaScript-only button');
+ assert.ok((await p.locator('.slide-library-exit').innerText()).includes('Lukk'),'Exit label is real text, not a pseudo-element');
+ assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId+'~fullskjerm','Fullscreen has its own routable URL');
  assert.equal(await full.locator('.present-frame').getAttribute('data-library-slide-id'),slideId);
  assert.equal(await full.locator('.scene-id,.slide-placement-number').count(),0,'Fullscreen of an independent slide stays unnumbered');
  const geometry=await full.evaluate(el=>{
@@ -40,6 +43,7 @@ try{
  assert.ok(geometry.slide.left>=0&&geometry.slide.right<=1536,'Fullscreen stage fits desktop');
  await full.screenshot({path:out+'/fullscreen-desktop.png'});
  await p.keyboard.press('Escape');
+ await full.waitFor({state:'detached'});
  assert.equal(await full.count(),0,'Escape exits fullscreen');
  assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Exit returns to details');
  assert.ok(await opener.evaluate(x=>document.activeElement===x),'Focus returns to detail-page preview');
@@ -50,7 +54,9 @@ try{
  await opener.focus();
  await p.keyboard.press('Enter');
  await full.waitFor();
+ await p.evaluate(()=>{const anchor=document.querySelector('.slide-library-exit');anchor.addEventListener('click',e=>e.stopImmediatePropagation(),{capture:true,once:true});});
  await p.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
+ await full.waitFor({state:'detached'});
  assert.equal(await full.count(),0,'Explicit close button works');
  await opener.evaluate(x=>x.click());
  assert.equal(await full.count(),0,'Late click after button close does not reopen');
@@ -70,7 +76,13 @@ try{
  assert.ok(Math.abs(mobile.stageWidth/mobile.stageHeight-16/9)<0.02,'Mobile fullscreen slide remains 16:9');
  await full.screenshot({path:out+'/fullscreen-mobile.png'});
  await p.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
+ await full.waitFor({state:'detached'});
  assert.equal(await full.count(),0,'Mobile close works');
+ await p.evaluate(id=>location.hash='#lysbilder/'+id+'~fullskjerm',slideId);
+ await full.waitFor();
+ await p.evaluate(()=>history.back());
+ await p.waitForFunction(id=>location.hash==='#lysbilder/'+id&&document.querySelector('#slide-library-fullscreen')===null,slideId);
+ assert.ok(await opener.isVisible(),'Browser Back closes a directly routable fullscreen');
  await p.setViewportSize({width:1536,height:1040});
 
  // Simulate actual touch gestures and check *after* synthetic clicks have fired.
@@ -85,6 +97,7 @@ try{
  await touchOpener.tap();
  const touchFull=tp.locator('#slide-library-fullscreen');await touchFull.waitFor();
  await tp.locator('.slide-library-fullscreen-overlay > .slide-library-exit').tap();
+ await touchFull.waitFor({state:'detached'});
  await tp.waitForTimeout(150);
  assert.equal(await touchFull.count(),0,'Touch close stays dismissed after compatibility click');
  assert.ok(await tp.locator('.slide-library-info').isVisible(),'Touch returns to details');
@@ -95,7 +108,9 @@ try{
  const frame=await touchFull.locator('.slide-library-fullscreen-stage').boundingBox();
  await tp.touchscreen.tap(frame.x+frame.width/2,frame.y+frame.height/2);
  assert.equal(await touchFull.count(),1,'Tapping slide does not dismiss fullscreen');
+ assert.ok(await tp.locator('.slide-library-backdrop-exit').getAttribute('href')?.then(h=>h.endsWith(slideId)),'Backdrop uses native exit link');
  await tp.touchscreen.tap(18,130);
+ await touchFull.waitFor({state:'detached'});
  await tp.waitForTimeout(150);
  assert.equal(await touchFull.count(),0,'Touch outside stays dismissed after synthetic click');
  assert.ok(await tp.locator('.slide-library-info').isVisible(),'Outside tap returns to details');

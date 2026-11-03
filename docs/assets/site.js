@@ -386,9 +386,9 @@ function dev(){
  +'<section class="subsection"><div class="section-heading"><div><h2>'+esc(ui.feedbackTitle)+'</h2><p>'+esc(D.pages.copy.localFeedbackCaution)+'</p></div><div class="dev-actions"><button class="btn subtle" data-feedback-open="1">'+ico('message-circle')+' '+esc(ui.feedbackAction)+'</button><button class="btn subtle" id="export-notes" '+(notes.length?'':'disabled')+'>'+ico('download')+' '+esc(ui.exportAction)+'</button></div></div>'
  +(notes.length?'<div class="dev-list">'+notes.slice().reverse().map(n=>'<article class="dev-item"><div class="dev-item-meta">'+esc(n.page)+' · '+esc(n.date)+'</div><p class="dev-note">'+esc(n.text)+'</p></article>').join('')+'</div>':'<div class="empty">'+esc(D.pages.copy.feedbackEmpty)+'</div>')+'</section>';
 }
-function render(){const raw=location.hash.slice(1)||'oversikt';const [p,sub]=raw.split('/');const nextId=p==='lysbilder'?D.pages.retiredSlideRedirects?.[sub]:null;if(nextId&&nextId!==sub){location.replace('#lysbilder/'+nextId);return;}if(p==='ordliste'&&sub&&!D.learning.glossary.some(g=>g.id===sub)){location.replace('#ordliste');return;}current=(p==='intern'&&D.internalNavigation?.items?.some(x=>x.id===sub?.split('~')[0]))?'intern':(names[p]?p:'oversikt');
+function render(){const raw=location.hash.slice(1)||'oversikt';const [p,routeSub]=raw.split('/');const isSlideFullscreen=p==='lysbilder'&&routeSub?.endsWith('~fullskjerm');const sub=isSlideFullscreen?routeSub.slice(0,-'~fullskjerm'.length):routeSub;const wasSlideFullscreen=!!document.getElementById('slide-library-fullscreen');if(wasSlideFullscreen)closeModal();const nextId=p==='lysbilder'?D.pages.retiredSlideRedirects?.[sub]:null;if(nextId&&nextId!==sub){location.replace('#lysbilder/'+nextId);return;}if(p==='ordliste'&&sub&&!D.learning.glossary.some(g=>g.id===sub)){location.replace('#ordliste');return;}current=(p==='intern'&&D.internalNavigation?.items?.some(x=>x.id===sub?.split('~')[0]))?'intern':(names[p]?p:'oversikt');
  const internalView=current==='intern'?D.internalNavigation.items.find(x=>x.id===sub?.split('~')[0]):null;
- const parentLabel=current==='intern'?internalView.label:names[current];if(current==='intern')names.intern=parentLabel;let crumb=parentLabel;if(current==='intern'&&sub.includes('~')){const itemId=sub.split('~')[1],item=D.internalCollections[internalView.collection]?.find(x=>x.id===itemId);if(item)crumb+=' / '+item.title;}if(sub&&current!=='intern'){const entity=current==='arkitektur'?D.learning.diagrams.find(x=>x.id===sub):current==='verktoy'?D.learning.templates.find(x=>x.id===sub):current==='prompter'?(sub==='variabler'?{title:D.prompts.page.variableUi.overviewTitle}:D.prompts.items.find(x=>x.id===sub)):current==='muligheter'?D.plays.find(x=>x.id===sub):current==='forretning'?(D.businessSignals.find(x=>x.id===sub)||(sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null)||(sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null)):current==='lysbilder'?D.slides.items.find(x=>x.id===sub):current==='ordliste'?D.learning.glossary.find(x=>x.id===sub):current==='kundedialog'?window.InnsiktDialogue.entity(D,sub):null;if(entity)crumb+=' / '+(entity.title||entity.name||entity.area||entity.term);else if(current==='lysbilder')crumb+=' / '+D.pages.slideLibraryUi.notFound}const trail=document.getElementById('crumb');trail.replaceChildren();trail.removeAttribute('aria-current');if(sub&&crumb!==names[current]){const link=document.createElement('a');link.href=current==='intern'?'#intern/'+internalView.id:'#'+current;link.textContent=parentLabel;const divider=document.createElement('span');divider.className='sep';divider.textContent='/';divider.setAttribute('aria-hidden','true');const leaf=document.createElement('span');leaf.textContent=crumb.slice(parentLabel.length+3);leaf.setAttribute('aria-current','page');trail.append(link,divider,leaf)}else{trail.textContent=names[current];trail.setAttribute('aria-current','page')}updateNavigation(raw,p);setMobileMenuOpen(false);let html='';if(current==='intern'){html=internalPage(sub)}else if(current==='muligheter'&&sub){const pl=D.plays.find(x=>x.id===sub);html=pl?playDetail(pl):plays()}else if(current==='forretning'&&sub){const sector=sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null,caseItem=sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null,b=D.businessSignals.find(x=>x.id===sub);html=sector?industrySectorPage(sector):caseItem?industryCasePage(caseItem):b?businessDetail(b):business()}else if(current==='arkitektur'){html=architecture(sub)}else if(current==='verktoy'){html=toolkit(sub)}else if(current==='prompter'){html=prompts(sub)}else if(current==='lysbilder'){html=slideLibraryPage(sub)}else if(current==='ressurser'){html=resourceLibraryPage()}else{html=({oversikt:overview,guide,'om-innsikt':portalIntro,ordliste:()=>glossary(sub),marked:market,muligheter:plays,kundedialog:()=>dialogue(sub),forretning:business,kompetanse:competence,teknologi:technology,ai:aiProducts,bransje:industry,horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev}[current])()}document.getElementById('main').innerHTML=html;if(current==='lysbilder'&&!sub)updateSlideLibrary();fitLibraryPreviews();window.InnsiktGlossary?.enhance(document.getElementById('main'));window.scrollTo({top:0,behavior:'instant'});if(current==='ordliste'&&sub){requestAnimationFrame(()=>{const summary=[...document.querySelectorAll('.glossary-item')].find(el=>el.dataset.glossaryId===sub)?.querySelector('summary');if(summary){summary.focus({preventScroll:true});summary.scrollIntoView({block:'start',behavior:'instant'});}});}document.title=`${crumb} · ${D.organizationProfile?.name||'Innsikt'}`;}
+ const parentLabel=current==='intern'?internalView.label:names[current];if(current==='intern')names.intern=parentLabel;let crumb=parentLabel;if(current==='intern'&&sub.includes('~')){const itemId=sub.split('~')[1],item=D.internalCollections[internalView.collection]?.find(x=>x.id===itemId);if(item)crumb+=' / '+item.title;}if(sub&&current!=='intern'){const entity=current==='arkitektur'?D.learning.diagrams.find(x=>x.id===sub):current==='verktoy'?D.learning.templates.find(x=>x.id===sub):current==='prompter'?(sub==='variabler'?{title:D.prompts.page.variableUi.overviewTitle}:D.prompts.items.find(x=>x.id===sub)):current==='muligheter'?D.plays.find(x=>x.id===sub):current==='forretning'?(D.businessSignals.find(x=>x.id===sub)||(sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null)||(sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null)):current==='lysbilder'?D.slides.items.find(x=>x.id===sub):current==='ordliste'?D.learning.glossary.find(x=>x.id===sub):current==='kundedialog'?window.InnsiktDialogue.entity(D,sub):null;if(entity)crumb+=' / '+(entity.title||entity.name||entity.area||entity.term);else if(current==='lysbilder')crumb+=' / '+D.pages.slideLibraryUi.notFound}const trail=document.getElementById('crumb');trail.replaceChildren();trail.removeAttribute('aria-current');if(sub&&crumb!==names[current]){const link=document.createElement('a');link.href=current==='intern'?'#intern/'+internalView.id:'#'+current;link.textContent=parentLabel;const divider=document.createElement('span');divider.className='sep';divider.textContent='/';divider.setAttribute('aria-hidden','true');const leaf=document.createElement('span');leaf.textContent=crumb.slice(parentLabel.length+3);leaf.setAttribute('aria-current','page');trail.append(link,divider,leaf)}else{trail.textContent=names[current];trail.setAttribute('aria-current','page')}updateNavigation(raw,p);setMobileMenuOpen(false);let html='';if(current==='intern'){html=internalPage(sub)}else if(current==='muligheter'&&sub){const pl=D.plays.find(x=>x.id===sub);html=pl?playDetail(pl):plays()}else if(current==='forretning'&&sub){const sector=sub.startsWith('sektor-')?D.industrySectors.find(x=>x.id===sub.slice(7)):null,caseItem=sub.startsWith('case-')?D.industryUseCases.find(x=>x.id===sub.slice(5)):null,b=D.businessSignals.find(x=>x.id===sub);html=sector?industrySectorPage(sector):caseItem?industryCasePage(caseItem):b?businessDetail(b):business()}else if(current==='arkitektur'){html=architecture(sub)}else if(current==='verktoy'){html=toolkit(sub)}else if(current==='prompter'){html=prompts(sub)}else if(current==='lysbilder'){html=slideLibraryPage(sub)}else if(current==='ressurser'){html=resourceLibraryPage()}else{html=({oversikt:overview,guide,'om-innsikt':portalIntro,ordliste:()=>glossary(sub),marked:market,muligheter:plays,kundedialog:()=>dialogue(sub),forretning:business,kompetanse:competence,teknologi:technology,ai:aiProducts,bransje:industry,horisont:horizon,trendradar:trendradar,kilder:sources,utvikling:dev}[current])()}document.getElementById('main').innerHTML=html;if(current==='lysbilder'&&!sub)updateSlideLibrary();fitLibraryPreviews();window.InnsiktGlossary?.enhance(document.getElementById('main'));window.scrollTo({top:0,behavior:'instant'});if(current==='ordliste'&&sub){requestAnimationFrame(()=>{const summary=[...document.querySelectorAll('.glossary-item')].find(el=>el.dataset.glossaryId===sub)?.querySelector('summary');if(summary){summary.focus({preventScroll:true});summary.scrollIntoView({block:'start',behavior:'instant'});}});}document.title=`${crumb} · ${D.organizationProfile?.name||'Innsikt'}`;if(isSlideFullscreen)openLibrarySlideFullscreen(sub,document.querySelector('[data-slide-preview-open]'));else if(wasSlideFullscreen)document.querySelector('[data-slide-preview-open]')?.focus({preventScroll:true});}
 function toast(t){document.querySelector('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),2700)}
 function setMobileMenuOpen(open,{restoreFocus=false}={}){
  const menu=document.getElementById('sidebar'),toggle=document.getElementById('menu-toggle');
@@ -420,14 +420,17 @@ function modalEsc(e){
   const controls=[externalClose,...libraryDialog.querySelectorAll('a[href],button:not([disabled])')].filter(Boolean);
   if(controls.length){
    const first=controls[0],last=controls[controls.length-1];
-   if(e.shiftKey&&(document.activeElement===first||!libraryDialog.contains(document.activeElement))){e.preventDefault();last.focus()}
-   else if(!e.shiftKey&&(document.activeElement===last||!libraryDialog.contains(document.activeElement))){e.preventDefault();first.focus()}
+   if(e.shiftKey&&(document.activeElement===first||!(libraryDialog.contains(document.activeElement)||document.activeElement===externalClose))){e.preventDefault();last.focus()}
+   else if(!e.shiftKey&&(document.activeElement===last||!(libraryDialog.contains(document.activeElement)||document.activeElement===externalClose))){e.preventDefault();first.focus()}
   }
  }
  if(e.key==='Escape'){
   if(isPresenterFullscreen()){
    e.preventDefault();
    exitPresenterFullscreen();
+  }else if(libraryDialog){
+   e.preventDefault();
+   location.hash='#lysbilder/'+location.hash.slice(1).split('/')[1].replace(/~fullskjerm$/,'');
   }else closeModal();
   return;
  }
@@ -529,7 +532,13 @@ function slideLibraryResults(){
 }
 function openLibrarySlideFullscreen(id,opener){
  const s=D.slides.items.find(x=>x.id===id);
- if(!s||performance.now()<fullscreenOpenGuardUntil)return;
+ if(!s)return;
+ const fullHash='#lysbilder/'+id+'~fullskjerm';
+ if(location.hash!==fullHash){
+  if(performance.now()<fullscreenOpenGuardUntil)return;
+  location.hash=fullHash;
+  return;
+ }
  const used=window.InnsiktSlides.usage(D.slides,D.pages.presentationDecks,s.id);
  const deckId=used[0]?.deckId||Object.keys(D.pages.presentationDecks)[0];
  const index=used[0]?.index||0;
@@ -543,39 +552,28 @@ function openLibrarySlideFullscreen(id,opener){
  modal(s.title,content,true,'slide-library-fullscreen');
  const overlay=document.querySelector('#overlay-root .overlay');
  overlay?.classList.add('slide-library-fullscreen-overlay');
- // Install real, direct event listeners rather than relying on document click
- // delegation after iOS Safari transforms and retargets touch events.
- // Make the exit a direct fixed child of the overlay, outside the scrolling
- // dialog. This avoids iOS Safari retargeting taps in an overflow:hidden modal.
- const close=overlay?.querySelector('#slide-library-fullscreen .modal-close');
- if(close){
-  close.classList.add('slide-library-exit');
-  overlay.append(close);
+ // Native links provide the primary exit: even iPhone Safari's first tap
+ // can navigate without waiting for a JS click/touch event.
+ const closedHash='#lysbilder/'+id;
+ const oldClose=overlay?.querySelector('#slide-library-fullscreen .modal-close');
+ if(oldClose){
+  const link=document.createElement('a');
+  link.className='modal-close slide-library-exit';
+  link.href=closedHash;
+  link.setAttribute('aria-label','Lukk fullskjerm');
+  link.innerHTML=oldClose.innerHTML+'<span>Lukk</span>';
+  oldClose.remove();
+  overlay.append(link);
  }
- let dismissing=false;
- const dismiss=(event,fromTouch=false)=>{
-  if(dismissing)return;
-  event?.preventDefault();
-  event?.stopImmediatePropagation();
-  dismissing=true;
-  if(fromTouch){
-   fullscreenOpenGuardUntil=performance.now()+1100;
-   libraryFullscreenOpener=null; // Avoid focus/ghost-click on the underlying preview.
-  }
-  closeModal();
- };
- // iOS may focus the control without delivering a click or a matching touchend.
- // Handle the beginning of the tap on the real, top-level exit button.
- close?.addEventListener('touchstart',e=>dismiss(e,true),{passive:false,capture:true});
- close?.addEventListener('click',e=>dismiss(e),{capture:true});
- overlay?.addEventListener('click',e=>{
-  if(e.target.closest('.slide-library-fullscreen-stage,.modal-close,.slide-fullscreen-download'))return;
-  dismiss(e);
- });
- overlay?.addEventListener('touchend',e=>{
-  if(e.target.closest('.slide-library-fullscreen-stage,.modal-close,.slide-fullscreen-download'))return;
-  dismiss(e,true);
- },{passive:false});
+ // The dark space surrounding the slide is also a native exit link.
+ if(overlay){
+  const backgroundLink=document.createElement('a');
+  backgroundLink.className='slide-library-backdrop-exit';
+  backgroundLink.href=closedHash;
+  backgroundLink.setAttribute('aria-label','Lukk fullskjerm ved å trykke utenfor lysbildet');
+  backgroundLink.tabIndex=-1;
+  overlay.prepend(backgroundLink);
+ }
  fitLibraryPreviews();
 }
 function updateSlideLibrary(){

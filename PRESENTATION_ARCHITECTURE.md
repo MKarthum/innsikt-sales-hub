@@ -115,3 +115,10 @@ Detaljsiden i biblioteket og aktiv slide i Presenter tilbyr PNG, JPG, PDF og Pow
 Enkeltlysbilde-eksport serialiserer HTML og innvevd SVG til bilde. Beregnede SVG-farger og `fill:none` fryses kun i eksportklonen før rasterisering, slik at eksterne CSS-skins beholdes uten at arvede SVG-stiler faller bort. Automatisert Chromium-regresjon kontrollerer faktiske PNG-piksler (ikke bare filsignatur), samt PDF, JPEG, PPTX og tilpasset skin.
 
 På iPhone flyttes fullskjermens eneste Lukk-knapp til et fast lag direkte under skjermdekkende overlay, utenfor den rullbare dialogen. `touchstart` håndteres direkte på knappen med `preventDefault` og tidlig opprydding, mens `click` beholder mus/tastaturstøtte. Beskyttelse mot kompatibilitetsklikk/ghost-click hindrer gjenåpning. Berøringsemulering testes både med nedlastingsmenyen åpen og lukket. Ekte iOS Safari må fortsatt verifiseres separat ved anledning.
+
+
+## iPhone: fullskjerm som en egen navigasjonsrute (0.18.49)
+
+Tidligere lukking baserte seg på JavaScript-håndtering av `touchstart`/`click`. Dette fungerte i Chromium-emulering, men brukertest på fysisk iPhone viste at knappen bare ble markert. Derfor er fullskjerm nå en egen intern hash-rute (`#lysbilder/<id>~fullskjerm`); vanlig visning bruker `#lysbilder/<id>`. Lukk-knappen er en ekte `<a href>` som lar Safari navigere direkte til vanlig visning. Det mørke området utenfor lysbildet har også en innebygd, klikkbar navigasjonslenke. Lysbildet og nedlastingsmenyen beholder normal interaksjon. Rutehendelsen bygger opp eller fjerner modalen, og nettleserens tilbakeknapp fungerer også. Ingen spesialhåndterer av touchstart/touchend brukes for dette. Testene verifiserer navigasjon, tilbakeknapp og lukking via vanlige ankerlenker selv om en klikk-lytter stopper videre hendelsesbobling.
+
+Utformingen er fortsatt CSS-basert med åpne `--slide-*`-roller for skinn i kopiløsninger. Endringen er begrenset til biblioteksvisning i fullskjerm og endrer ikke innhold, lysbilde-ID-er eller presentasjonsfortellinger.

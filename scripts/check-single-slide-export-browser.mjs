@@ -14,9 +14,12 @@ try{
  await page.locator('.slide-library-detail-stage .capacity-field').waitFor();
  assert.equal(await page.locator('.slide-single-download [data-slide-download]').count(),4);
  await page.locator('[data-slide-preview-open="ai-thousand-analysts"]').click();
+ await page.locator('#slide-library-fullscreen').waitFor();
+ assert.equal(await page.evaluate(()=>location.hash),'#lysbilder/ai-thousand-analysts~fullskjerm');
  await page.locator('#slide-library-fullscreen .slide-fullscreen-download summary').click();
  assert.equal(await page.locator('#slide-library-fullscreen .slide-single-download [data-slide-download]').count(),4);
  await page.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
+ await page.locator('#slide-library-fullscreen').waitFor({state:'detached'});
  async function download(format,locator='.slide-single-download [data-slide-download="'+format+'"]'){
   const [file]=await Promise.all([page.waitForEvent('download',{timeout:30000}),page.locator(locator).first().click()]);
   assert.ok(file.suggestedFilename().endsWith('.'+format));
@@ -66,6 +69,7 @@ try{
  await mobile.goto(base,{waitUntil:'networkidle'});
  await mobile.evaluate(()=>location.hash='#lysbilder/ai-thousand-analysts');
  await mobile.locator('[data-slide-preview-open="ai-thousand-analysts"]').tap();
+ await mobile.locator('#slide-library-fullscreen').waitFor();
  await mobile.locator('#slide-library-fullscreen .slide-fullscreen-download summary').tap();
  const [mobileExport]=await Promise.all([mobile.waitForEvent('download',{timeout:30000}),mobile.locator('#slide-library-fullscreen [data-slide-download="png"]').tap()]);
  const mobileBytes=fs.readFileSync(await mobileExport.path());

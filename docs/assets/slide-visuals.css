@@ -458,9 +458,11 @@
  color:var(--on-dark);background:hsl(from var(--navy) calc(h - 0.403) calc(s * 0.9069826) calc(l + 4.902));border:1px solid hsl(from var(--muted) calc(h + 1.129) calc(s * 1.4866703) calc(l + 0.98));border-radius:10px;
  font:700 13px var(--font-body);padding:0 13px
 }
-:is(#slide-library-fullscreen .modal-close,.slide-library-fullscreen-overlay > .slide-library-exit)::after{content:"Lukk"}
-:is(#slide-library-fullscreen .modal-close,.slide-library-fullscreen-overlay > .slide-library-exit):hover,
+#slide-library-fullscreen .modal-close::after{content:"Lukk"}
 :is(#slide-library-fullscreen .modal-close,.slide-library-fullscreen-overlay > .slide-library-exit):focus-visible{background:hsl(from var(--slide-light-accent) calc(h + 30.21) calc(s * 0.6249777) calc(l + 4.118));outline:2px solid hsl(from var(--accent-soft) calc(h + 23.232) calc(s * 0.6377098) calc(l - 2.941));outline-offset:2px}
+@media (hover:hover){
+ :is(#slide-library-fullscreen .modal-close,.slide-library-fullscreen-overlay > .slide-library-exit):hover{background:hsl(from var(--slide-light-accent) calc(h + 30.21) calc(s * 0.6249777) calc(l + 4.118));}
+}
 .slide-library-fullscreen-content{
  flex:1;min-height:0;width:100%;box-sizing:border-box;display:flex;
  justify-content:center;align-items:center;padding:60px 12px 34px
@@ -569,4 +571,26 @@
  border:2px solid var(--slide-strong-accent);border-radius:10px;
  touch-action:manipulation;-webkit-tap-highlight-color:transparent;pointer-events:auto;
  font:800 15px var(--font-body);
+}
+
+/* Fullscreen exit is route-driven: native anchors remain usable on iOS
+   even if synthetic click/touch listeners are delayed or suppressed. */
+.slide-library-fullscreen-overlay > .slide-library-backdrop-exit {
+ position:absolute;inset:0;z-index:0;display:block;
+ background:transparent;touch-action:manipulation;
+}
+.slide-library-fullscreen-overlay > #slide-library-fullscreen {
+ z-index:1;pointer-events:none;
+}
+.slide-library-fullscreen-overlay #slide-library-fullscreen .modal-header,
+.slide-library-fullscreen-overlay #slide-library-fullscreen .slide-library-fullscreen-content {
+ pointer-events:none;
+}
+.slide-library-fullscreen-overlay #slide-library-fullscreen .slide-library-fullscreen-stage,
+.slide-library-fullscreen-overlay #slide-library-fullscreen .slide-fullscreen-download,
+.slide-library-fullscreen-overlay #slide-library-fullscreen .slide-library-fullscreen-details {
+ pointer-events:auto;
+}
+.slide-library-fullscreen-overlay > .slide-library-exit{
+ z-index:60;pointer-events:auto;cursor:pointer;text-decoration:none;
 }
