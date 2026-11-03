@@ -729,5 +729,12 @@
     "url": "https://help.tableau.com/current/pro/desktop/en-gb/examples_snowflake.htm",
     "type": "leverandørdokumentasjon",
     "checked": "2026-10-25"
+  },
+  "fabricapps": {
+    "title": "Fabric Apps – KI-assistert utvikling av datadrevne apper og dashboards (preview)",
+    "publisher": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/fabric/apps/overview",
+    "type": "leverandørdokumentasjon · preview",
+    "checked": "2026-11-03"
   }
 }
