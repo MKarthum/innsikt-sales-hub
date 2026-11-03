@@ -1672,6 +1672,226 @@
         "focus": "comparison",
         "version": 2
       }
+    },
+    {
+      "id": "ai-context-for-agents",
+      "scope": "shared",
+      "tone": "strong",
+      "type": "visual",
+      "cue": "KONTEKST FOR AGENTER",
+      "title": "Agenter trenger kontekst – ikke bare data",
+      "body": "Tilgang til data er ikke det samme som forståelse.",
+      "topic": "Semantikk og KI",
+      "keywords": [
+        "semantikk",
+        "ontologi",
+        "kunnskapsgraf",
+        "context layer",
+        "Company Brain"
+      ],
+      "sourceIds": [
+        "gartner-context",
+        "fabricIQ",
+        "dbtsemantic",
+        "fabricOntology"
+      ],
+      "speakerBase": "Rådata alene gir ikke agenten forståelse av virksomheten. Betydning: hvilke definisjoner og måltall gjelder? Sammenheng: hvordan henger hendelser, entiteter og regler sammen? Tillit: hva gjelder nå, hvilke rettigheter har vi, og hvor kommer svaret fra? Semantiske lag, ontologier og kunnskapsgrafer kan bidra på ulike måter, men er ikke synonymer. Company Brain er en metafor, ikke en arkitekturstandard. Fabric IQ er ett leverandøreksempel. Figuren er en pedagogisk modell, ikke en ferdig plattform eller dokumentert kundeleveranse. Den samme konteksten trengs både for KI-assistert utvikling og for ad hoc-spørsmål.",
+      "visual": {
+        "scene": "context-bridge",
+        "dataLabel": "DATA",
+        "dataRows": [
+          "Ordre",
+          "Kostnader",
+          "Kundehendelser"
+        ],
+        "contextLabel": "KONTEKST",
+        "factors": [
+          {
+            "name": "Betydning",
+            "detail": "Begreper og måltall"
+          },
+          {
+            "name": "Sammenheng",
+            "detail": "Relasjoner og regler"
+          },
+          {
+            "name": "Tillit",
+            "detail": "Tilstand, tilgang og sporbarhet"
+          }
+        ],
+        "agentLabel": "AGENT",
+        "question": "Hvorfor falt marginen?",
+        "answer": "Svar med riktig definisjon og kilde",
+        "methods": [
+          "Semantiske lag",
+          "Ontologier",
+          "Kunnskapsgrafer"
+        ]
+      },
+      "design": {
+        "archetype": "system",
+        "focus": "diagram",
+        "version": 2
+      }
+    },
+    {
+      "id": "ai-development-workflow",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "DATAUTVIKLING MED KI",
+      "title": "Samme SQL. En ny måte å utvikle på.",
+      "body": "KI foreslår kode og tester. Fagpersonen vurderer og godkjenner.",
+      "topic": "Datautvikling",
+      "keywords": [
+        "SQL",
+        "dbt",
+        "KI-utvikling",
+        "Cortex Code",
+        "Genie Code",
+        "Fabric Copilot"
+      ],
+      "sourceIds": [
+        "coco",
+        "geniecode",
+        "fabriccopilot",
+        "dbt-data-tests"
+      ],
+      "speakerBase": "Vis eksemplet som illustrasjon, ikke faktisk systemkjøring. Venstre: SQL som utvikleren ellers måtte skrive og vedlikeholde. Høyre: En agent får en bestilling, foreslår endringer og tester. Det er et utkast – en diff er ikke godkjent produksjonskode, og testene er ikke kjørt her. Utvikleren må kontrollere begreper, kilder, datakvalitet, tilgang og testdekning. CoCo fra Snowflake og Genie Code fra Databricks er bredere utvikleragenter; Copilot i Microsoft Fabric-notebooks har mer avgrensede og delvis preview-baserte muligheter. Ingen påstand om målt produktivitetsgevinst.",
+      "visual": {
+        "scene": "ai-dev-workbench",
+        "exampleLabel": "ILLUSTRATIVT EKSEMPEL",
+        "before": "SQL-ARBEID",
+        "after": "KI-ASSISTERT ENDRING",
+        "file": "margin_by_month.sql",
+        "beforeCode": [
+          "SELECT customer_id,",
+          "  SUM(net_sales - cogs)",
+          "    AS contribution",
+          "FROM order_lines",
+          "GROUP BY customer_id;"
+        ],
+        "prompt": "Legg til månedlig gruppering, og foreslå tester.",
+        "diff": [
+          "+ DATE_TRUNC('month', order_date)",
+          "+ SUM(net_sales - cogs) AS margin",
+          "+ GROUP BY customer_id, month"
+        ],
+        "review": "Les endringen · Test · Godkjenn",
+        "tools": [
+          {
+            "name": "CoCo",
+            "assetId": "snowflake"
+          },
+          {
+            "name": "Genie Code",
+            "assetId": "databricks"
+          },
+          {
+            "name": "Copilot i Fabric",
+            "assetId": "fabric"
+          }
+        ]
+      },
+      "design": {
+        "archetype": "workbench",
+        "focus": "artifact",
+        "version": 2
+      }
+    },
+    {
+      "id": "ai-natural-language-bi",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "ANALYSE OG RAPPORTBYGGING",
+      "title": "Naturlig språk endrer analyse og rapportbygging",
+      "body": "Ad hoc-spørsmål og gjenbrukbare dashboards har ulike formål, og begge kan få KI-støtte.",
+      "topic": "BI og analyse",
+      "keywords": [
+        "naturlig språk",
+        "ad hoc",
+        "dashboards",
+        "deterministiske rapporter",
+        "KI"
+      ],
+      "sourceIds": [
+        "cortexagents",
+        "genieone",
+        "pbicopilot",
+        "geniecode",
+        "coco",
+        "fabricapps"
+      ],
+      "speakerBase": "Skillet er viktig: Til venstre stiller brukeren nye spørsmål til datagrunnlaget. Til høyre er et stabilt, gjenbrukbart dashboard som kan bygges med KI-assistert kode eller rapportgenerering. Rapporten kan bli deterministisk etter at kode, definisjoner, data og filtre er testet og versjonert, selv om kodeutviklingen bruker en ikke-deterministisk modell. Eksempelmarginen er fiktiv og ikke basert på kundedata. Snowflake Cortex Agents, Databricks Genie One og Microsoft Copilot er eksempler på spørsmål mot data. CoCo kan bidra til Streamlit, Genie Code til AI/BI Dashboards, og Power BI Copilot til faste rapporter. Microsoft Fabric Apps i preview gir mer fleksible kodeutviklede dataapper og interaktive dashboards; en bredere plattform, ikke bare en ny visualisering. Dette er en vurdering av arbeidsmåter, ikke dokumentasjon for at Power BI mister markedsandeler.",
+      "visual": {
+        "scene": "ai-insight-interfaces",
+        "exampleLabel": "FIKTIVT EKSEMPEL",
+        "askLabel": "AD HOC · SPØR",
+        "buildLabel": "GJENBRUK · BYGG",
+        "question": "Hvorfor falt marginen i oktober?",
+        "answer": "Varekost forklarer mest. Rabatter bidro også.",
+        "reportTitle": "Månedsrapport",
+        "metricLabel": "Bruttomargin",
+        "metric": "18,7 %",
+        "change": "−2,3 pp",
+        "bars": [
+          {
+            "label": "JUN",
+            "value": 22.1
+          },
+          {
+            "label": "JUL",
+            "value": 21.4
+          },
+          {
+            "label": "AUG",
+            "value": 21.8
+          },
+          {
+            "label": "SEP",
+            "value": 21
+          },
+          {
+            "label": "OKT",
+            "value": 18.7
+          }
+        ],
+        "caption": "Samme modell og definisjon ved hver oppdatering",
+        "askTools": [
+          {
+            "name": "Cortex Agents",
+            "assetId": "snowflake"
+          },
+          {
+            "name": "Genie One",
+            "assetId": "databricks"
+          },
+          {
+            "name": "Copilot",
+            "assetId": "power-bi"
+          }
+        ],
+        "buildTools": [
+          {
+            "name": "CoCo",
+            "assetId": "snowflake"
+          },
+          {
+            "name": "Genie Code",
+            "assetId": "databricks"
+          },
+          {
+            "name": "Power BI Copilot",
+            "assetId": "power-bi"
+          }
+        ]
+      },
+      "design": {
+        "archetype": "contrast",
+        "focus": "comparison",
+        "version": 2
+      }
     }
   ]
 }
