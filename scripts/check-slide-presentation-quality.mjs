@@ -89,6 +89,9 @@ for(const s of slides){
   assert.ok(v.core&&v.lead&&v.footer&&v.highlight&&s.title.includes(v.highlight),'Value narrative must be self-contained: '+s.id);
   assert.ok(!v.business&&!v.ai,'New scene must not duplicate old schema content: '+s.id);
  }
+ if(v.scene==='context-bridge')assert.ok(v.dataRows?.length===3&&v.factors?.length===3&&v.factors.every(x=>x.name&&x.detail)&&v.methods?.length===3,'Context must show three functional layers');
+ if(v.scene==='ai-dev-workbench')assert.ok(v.exampleLabel?.includes('ILLUSTRATIVT')&&v.beforeCode?.length>=4&&v.diff?.length===3&&v.tools?.length===3,'Data development must show code, diff and review');
+ if(v.scene==='ai-insight-interfaces')assert.ok(v.exampleLabel?.includes('FIKTIVT')&&v.bars?.length===5&&v.askTools?.length===3&&v.buildTools?.length===3,'BI scene needs two distinct interfaces and fictional numbers');
  if(v.scene==='analyst-grid')assert.equal(v.number,'1 000','Preserve metaphor');
 }
 const market=slides.find(s=>s.id==='market-customer-pressure');
