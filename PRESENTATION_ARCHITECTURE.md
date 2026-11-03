@@ -103,3 +103,8 @@ Piloten fra november 2026 beholder stabile lysbilde-ID-er, dataeide tekster, kil
 Presenter har et separat valg for Bevegelse: På/Av, uavhengig av Lys, Mørk og Fortellingsstyrt. Selve lysbildet eier eventuelle oppbyggingsanimasjoner (som aldri er nødvendig for å forstå bildet); fortellingen kan oppgi transition: fade eller reveal på plasseringen. Uten angitt overgang brukes fade. Biblioteket er statisk. prefers-reduced-motion har forrang; PDF/print er statisk. Ingen fagfakta eller sluttilstander skal være skjult uten animasjon.
 
 Kopiløsninger kan laste et ekstra organisasjonsstilark etter de delte stilarkene; merk lenken data-innsikt-skin for at HTML-eksporten skal hente og bygge inn CSS fra samme domene. Historisk organization/-sti oppdages også. Organisasjonen eier paletten, kjernen eier struktur og animasjon. Se THEME_CONTRACT.md.
+
+
+## Nedlasting av ett lysbilde
+
+Detaljsiden i biblioteket og aktiv slide i Presenter tilbyr PNG, JPG, PDF og PowerPoint (PPTX). Formater genereres fra samme statiske, nummerfrie 16:9-visning med gjeldende lys/mørk/fortellingsstil og eventuelle organisasjonsskins. Eksporten kjøres lokalt i nettleseren, uten ekstern tjeneste. PPTX og PDF inneholder et høyoppløselig bilde (ikke redigerbare PPTX-elementer); dette fremgår i UI. Animasjoner tas ikke med i disse statiske formatene. Eksport fra beskyttede interne presentasjoner krever fortsatt eksplisitt bekreftelse. Implementasjon: scripts/slide-download-entry.mjs, bygget til docs/assets/slide-download.js med npm run build:slide-download.

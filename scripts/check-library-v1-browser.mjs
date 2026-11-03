@@ -171,18 +171,9 @@ try{
     assert.ok(circle.words.every(w=>w.inside&&w.horizontalOffset<=2),'Both definition words must remain centered inside the circle: '+JSON.stringify(circle));
    }
    if(s.id==='ai-thousand-analysts'){
-    const people=await stage.locator('.visual-people-marks').evaluate(el=>{
-     const nodes=[...el.querySelectorAll('g')],first=nodes[0]?.getBoundingClientRect(),nextRow=nodes[12]?.getBoundingClientRect();
-     return {count:nodes.length,feetToHeadGap:nextRow.top-first.bottom,
-      heads:el.querySelectorAll('.visual-ai-head').length,
-      visors:el.querySelectorAll('.visual-ai-visor').length,
-      cores:el.querySelectorAll('.visual-ai-core').length};
-    });
-    assert.equal(people.count,156,'Keep a dense grid of distinct analysts');
-    assert.equal(people.heads,people.count,'Every silhouette has a neutral geometric head');
-    assert.equal(people.visors,people.count,'Every silhouette has a subtle AI visor');
-    assert.equal(people.cores,people.count,'Every silhouette has a restrained digital chest detail');
-    assert.ok(people.feetToHeadGap>1,'Adjacent rows of analysts must not overlap: '+JSON.stringify(people));
+    const count=await stage.locator('.capacity-marks .capacity-dot').count();
+    assert.equal(count,1000,'One data point per hypothetical analyst; no decorative humanoid grid');
+    assert.equal(await stage.locator('.capacity-field').count(),1,'Skin-compatible vector scene');
    }
    if(s.id==='ai-pragmatic'){
     assert.equal(await stage.locator('.v14-pilot-steps li').count(),3,'Three distinct stages');

@@ -536,7 +536,9 @@ function openLibrarySlideFullscreen(id,opener){
  const content='<div class="slide-library-fullscreen-content">'
   +'<div class="slide-library-detail-stage slide-library-fullscreen-stage" data-slide-preview>'
   +'<div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(deckId)+'" data-tone="'+esc(libraryTone(s,deckId))+'">'
-  +slideMarkup(s,index,deckId)+'</div></div></div>';
+  +slideMarkup(s,index,deckId)+'</div></div></div>'
+  +'<details class="slide-fullscreen-download"><summary>'+esc(D.pages.slideLibraryUi.fullscreenExportLabel)+'</summary>'
+  +singleSlideDownloadMarkup(s.id)+'</details>';
  modal(s.title,content,true,'slide-library-fullscreen');
  const overlay=document.querySelector('#overlay-root .overlay');
  overlay?.classList.add('slide-library-fullscreen-overlay');
@@ -560,11 +562,11 @@ function openLibrarySlideFullscreen(id,opener){
  close?.addEventListener('click',e=>dismiss(e));
  close?.addEventListener('touchend',e=>dismiss(e,true),{passive:false});
  overlay?.addEventListener('click',e=>{
-  if(e.target.closest('.slide-library-fullscreen-stage,.modal-close'))return;
+  if(e.target.closest('.slide-library-fullscreen-stage,.modal-close,.slide-fullscreen-download'))return;
   dismiss(e);
  });
  overlay?.addEventListener('touchend',e=>{
-  if(e.target.closest('.slide-library-fullscreen-stage,.modal-close'))return;
+  if(e.target.closest('.slide-library-fullscreen-stage,.modal-close,.slide-fullscreen-download'))return;
   dismiss(e,true);
  },{passive:false});
  fitLibraryPreviews();
@@ -602,6 +604,37 @@ function resourceLibraryPage(){
     }).join('')+'</div></section>';
   }).join('');
 }
+function singleSlideDownloadMarkup(id=''){
+ const ui=D.pages.slideLibraryUi;
+ return '<div class="slide-single-download" role="group" aria-label="'+esc(ui.singleExportLabel)+'">'
+  +'<strong>'+esc(ui.singleExportLabel)+'</strong>'
+  +[['png','PNG'],['jpg','JPG'],['pdf','PDF'],['pptx','PowerPoint']].map(([format,label])=>
+    '<button type="button" data-slide-download="'+esc(format)+'"'+(id?' data-slide-download-id="'+esc(id)+'"':'')+' aria-label="Last ned som '+esc(label)+'">'+esc(label)+'</button>'
+  ).join('')+'<small>'+esc(ui.singleExportInfo)+'</small></div>';
+}
+async function downloadSlideButton(button){
+ if(button.disabled)return;
+ const id=button.dataset.slideDownloadId||presentationSlides()[slide]?.id;
+ const format=button.dataset.slideDownload;
+ const item=D.slides.items.find(x=>x.id===id);
+ if(!item)return;
+ const used=window.InnsiktSlides.usage(D.slides,D.pages.presentationDecks,id);
+ const currentInPresenter=!button.dataset.slideDownloadId;
+ const deckId=currentInPresenter?selectedDeck:(used[0]?.deckId||Object.keys(D.pages.presentationDecks)[0]);
+ const deck=D.pages.presentationDecks[deckId];
+ if((item.classification==='internal'||deck.classification==='internal')
+    &&!window.confirm('Internt innhold: Filen kan deles utenfor den beskyttede løsningen. Vil du fortsette?'))return;
+ const index=currentInPresenter?slide:(used[0]?.index||0);
+ const tone=window.InnsiktSlides.tone(item,deck,presentationThemeMode);
+ button.disabled=true;button.setAttribute('aria-busy','true');
+ try{
+  const module=await import('./slide-download.js?v='+encodeURIComponent(D.meta.version));
+  await module.downloadSingleSlide({id:item.id,title:item.title,html:slideMarkup(item,index,deckId,false,false),tone,format,version:D.meta.version});
+  toast('Lysbildet er lastet ned.');
+ }catch(err){
+  toast(D.pages.slideLibraryUi.singleExportError+' '+(err?.message||''));
+ }finally{button.disabled=false;button.removeAttribute('aria-busy')}
+}
 function slideLibraryPage(id){
  const ui=D.pages.slideLibraryUi,lib=D.slides.items,decks=D.pages.presentationDecks;
  if(!id){
@@ -630,6 +663,7 @@ function slideLibraryPage(id){
  return libraryTabs('slides')+'<a class="text-link" href="#lysbilder">'+ico('arrow-left')+' '+esc(ui.returnLabel)+'</a>'
    +hdr(ui.eyebrow,s.title,(s.classification==='internal'?'INTERNT · ':'')+s.id+' · '+(s.topic||''))
    +toneSelect('library-tone-mode')+'<p class="slide-library-tone-note">'+esc(ui.toneInfo)+'</p>'+'<div class="slide-library-detail-stage slide-library-detail-open" data-slide-preview data-slide-preview-open="'+esc(s.id)+'" role="button" tabindex="0" aria-label="Vis '+esc(s.title)+' i fullskjerm"><div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(previewDeck)+'" data-tone="'+esc(libraryTone(s,previewDeck))+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
+   +singleSlideDownloadMarkup(s.id)
    +'<p class="slide-library-fullscreen-hint" aria-hidden="true">Trykk på lysbildet for fullskjerm</p>'
    +'<div class="slide-library-info"><section><h2>'+esc(ui.speakerLabel)+'</h2>'+(note||'<p class="fineprint">Se notatene i historiene nedenfor.</p>')
    +'<h2>'+esc(ui.sourceLabel)+'</h2>'+sources+'</section>'
@@ -819,6 +853,7 @@ function presentation(deckId='innsikt',initialSlide=0){
   +'<label><input type="checkbox" id="slide-number-toggle" '+(showSlideNumbers?'checked':'')+' /> '+esc(D.pages.slideLibraryUi.numberToggleLabel)+'</label>'
   +'<span>Piltaster bytter lysbilde · Esc lukker</span></div>'
   +'<aside id="slide-speaker-notes" class="slide-speaker" hidden></aside>'
+  +singleSlideDownloadMarkup()
   +'<div class="present-export-controls"><button class="btn subtle" type="button" id="deck-download">'+ico('download')+' Last ned HTML</button>'
   +'<button class="btn subtle" type="button" id="deck-print">'+ico('file-text')+' Skriv ut / PDF</button>'
   +'<span>HTML-filen kan åpnes uten nettilgang. PDF lagres fra utskriftsvinduet.</span></div>';
@@ -1033,6 +1068,8 @@ const pc=e.target.closest('[data-prompt-copy]');
 if(pc){const editor=document.getElementById('prompt-editor');if(editor){if(!navigator.clipboard?.writeText){toast(D.prompts.page.variableUi.copyUnsupported);return}navigator.clipboard.writeText(editor.value).then(()=>toast(D.prompts.page.variableUi.copySuccess)).catch(()=>toast(D.prompts.page.variableUi.copyFailure));}return}
 const pr=e.target.closest('[data-prompt-reset]');
 if(pr){const item=D.prompts.items.find(x=>x.id===pr.dataset.promptReset),editor=document.getElementById('prompt-editor');if(item&&editor){rebuildPromptEditor(item,true)}return}
+const singleDownload=e.target.closest('[data-slide-download]');
+if(singleDownload){e.preventDefault();downloadSlideButton(singleDownload);return}
 const preview=e.target.closest('[data-slide-preview-open]');
 if(preview){e.preventDefault();openLibrarySlideFullscreen(preview.dataset.slidePreviewOpen,preview);return}
 if(e.target.closest('#present-fullscreen-toggle')){togglePresenterFullscreen();return}if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const kindBtn=e.target.closest('[data-tech-journey-kind]');if(kindBtn){techFilter=kindBtn.dataset.techJourneyKind;refreshTechnologyCatalog();document.querySelectorAll('[data-tech-journey-kind]').forEach(btn=>{if(btn.dataset.techJourneyKind===techFilter)btn.focus()});return}if(e.target.closest('[data-tech-journey-reset]')){techFilter='Alle';refreshTechnologyCatalog();document.querySelector('[data-tech-journey-reset]')?.focus();return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;refreshTechnologyCatalog();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}const scopeBtn=e.target.closest('[data-slide-scope]');if(scopeBtn){libraryFilters.scope=scopeBtn.dataset.slideScope;updateSlideLibrary();return}if(e.target.closest('[data-slide-reset]')){libraryFilters={query:'',topic:'all',story:'all',scope:'all'};render();return}

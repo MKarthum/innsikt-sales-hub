@@ -25,3 +25,14 @@ Lenker, dokumentasjon, publiserte rapporter, leverandørutsagn og faglige kilder
 Organisasjonsspesifikke kundehistorier, interne ressurser, bedriftslogoer og andre egne tillegg inngår **ikke** i dette offentlige prosjektets generelle lisens. En intern utgave skal bevare lisensmerknadene for åpen kjerne og særskille interne rettigheter, i henhold til relevante avtaler og gjeldende rett.
 
 Denne oversikten er ikke en generell tillatelse fra tredjeparts rettighetshavere. Ved nye ressurser må opprinnelse, tillatelse og eventuelle vilkår dokumenteres.
+
+
+## Eksport av enkeltlysbilder (nettleser)
+
+Den valgfritt lastede filen docs/assets/slide-download.js bygges fra MIT-lisensierte biblioteker:
+- html-to-image: https://github.com/bubkoo/html-to-image
+- jsPDF: https://github.com/parallax/jsPDF
+- PptxGenJS: https://github.com/gitbrent/PptxGenJS
+- esbuild (byggeverktøy): https://github.com/evanw/esbuild
+
+Versjoner og reproduksjon: package.json, package-lock.json, scripts/slide-download-entry.mjs og npm run build:slide-download. Den genererte filen har tredjeparts lisensnotiser. Bibliotekene lastes kun ved nedlasting; ingen CDN eller server kreves.

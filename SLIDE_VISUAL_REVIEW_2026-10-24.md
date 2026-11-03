@@ -119,3 +119,8 @@ Skjermbilde fra Actions v0.18.33 viste avklippede etiketter i den avsluttende po
 Tre eksisterende, selvstendige lysbilde-ID-er er gitt bevisst ulike komposisjoner uten å endre fagtekst, kilder, notater eller gjenbruk: ai-thousand-analysts har en scenisk typografisk metafor, market-three-forces en tallstyrt komposisjon med tre sekundære markedssignaler, og ai-two-directions kontrasterende redaksjonelle felt. Ingen av scenene inneholder hardkodede Webstep-/leverandørfarger; organisasjonspaletten styres fortsatt gjennom de offentlige --slide-* rollene.
 
 Innholdsoppbygging kan animeres, men alle elementer er fullt synlige når bevegelse er avslått, i biblioteket, ved systeminnstillingen reduced-motion og i utskrift. Fortellingen eier overgangene; eksportert HTML inkluderer valgt skinn-CSS og egen bevegelsesbryter. Kontroller: node scripts/check.mjs, check-presentation-mode-browser.mjs og check-presentation-motion-browser.mjs. Full gjennomgang av øvrige lysbilder er ikke implisert av denne piloten.
+
+
+## Andre revisjon av åpningsslide – 3. november 2026
+
+Den tidligere repeterende robotmatrisen er erstattet av et felt med nøyaktig 1 000 vektorbaserte punkter, romfølelse, bevegelseslinje og bevisst typografisk dominans. Motivet er en visuell metafor for kapasitet og fremstilles ikke som en dokumentert bemanningsendring. Alle farger følger --pres-*, og den selvstendige sliden beholder kilde, note og stabil ID. Evaluer visuelt på 16:9 i både lys og mørk stil, og kontroller 40 lysbilder i bibliotekets Chromium-test.

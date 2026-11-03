@@ -971,7 +971,11 @@
     "motionLabel": "Bevegelse",
     "motionOn": "På",
     "motionOff": "Av",
-    "motionHelp": "Animasjoner og overganger kan slås av uten å endre lysbildene."
+    "motionHelp": "Animasjoner og overganger kan slås av uten å endre lysbildene.",
+    "singleExportLabel": "Last ned enkeltlysbilde",
+    "singleExportInfo": "PNG, JPG, PDF eller PowerPoint. PDF og PowerPoint inneholder et høyoppløselig bilde av lysbildet.",
+    "singleExportError": "Kunne ikke laste ned lysbildet.",
+    "fullscreenExportLabel": "Last ned"
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",

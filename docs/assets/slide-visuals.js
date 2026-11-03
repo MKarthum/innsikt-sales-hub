@@ -1,23 +1,34 @@
 /* Datastyrte SVG-scener. Ingen fagtekst eller merkefarger i visningskoden. */
 (()=>{
 'use strict';
-function gridPeople(){
- let nodes='';
- for(let r=0;r<13;r++)for(let c=0;c<12;c++){
-  const dx=c-5.5,dy=r-6,d=Math.hypot(dx/5.5,dy/6);
-  // Small geometric, gender-neutral humanoids: rounded-square heads and a
-  // subtle digital visor, but recognisably human shoulders, arms and legs.
-  // 29px row pitch leaves a visible gap between heads and feet.
-  const x=36+c*27+(r%2)*6,y=20+r*29;
-  const opacity=Math.max(.18,Math.min(1,1.2-d*.65));
-  nodes+='<g class="visual-ai-worker" transform="translate('+x+' '+y+')" opacity="'+opacity.toFixed(2)+'">'
-   +'<rect class="visual-ai-head" x="-4.5" y="-12" width="9" height="8.5" rx="2.5"/>'
-   +'<rect class="visual-ai-visor" x="-2.65" y="-8.5" width="5.3" height="1.25" rx=".625" fill="var(--pres-bg)" opacity=".84"/>'
-   +'<path d="M-1.6 -3.6 H1.6 V-1.4 H-1.6 Z M-5 -1.6 H5 V8.5 H-5 Z M-5 -1 L-7.3 7 H-5.2 L-3 2 M5 -1 L7.3 7 H5.2 L3 2 M-3.6 8 L-4.8 13 H-1.8 L0 8.5 M3.6 8 L4.8 13 H1.8 L0 8.5 Z"/>'
-   +'<rect class="visual-ai-core" x="-1.25" y="2.1" width="2.5" height="2.5" rx=".55" fill="var(--pres-bg)" opacity=".72"/>'
-   +'</g>';
+/* Exactly one thousand marks, organized as an expanding analytical field.
+   Pure geometry: no external imagery and no brand-specific colors. */
+function capacityField(){
+ let marks='';
+ const total=1000,angle=2.399963229728653;
+ for(let i=0;i<total;i++){
+  const radius=Math.sqrt((i+.5)/total);
+  const theta=i*angle;
+  const wobble=Math.sin(i*.063)*.025;
+  const x=259+208*radius*Math.cos(theta)*(1+wobble);
+  const y=214+169*radius*Math.sin(theta)*(1+wobble);
+  const depth=(1-radius);
+  const size=(.55+1.35*depth).toFixed(2);
+  const opacity=(.30+.68*depth).toFixed(2);
+  const highlight=i%43===0?' capacity-dot--signal':'';
+  marks+='<circle class="capacity-dot'+highlight+'" cx="'+x.toFixed(2)+'" cy="'+y.toFixed(2)+'" r="'+size+'" opacity="'+opacity+'"/>';
  }
- return '<svg viewBox="0 0 405 390" class="visual-people" aria-hidden="true" focusable="false"><circle class="visual-halo" cx="204" cy="193" r="176"/><circle class="visual-orbit" cx="204" cy="193" r="159"/><circle class="visual-orbit visual-orbit--inner" cx="204" cy="193" r="100"/><g class="visual-people-marks">'+nodes+'</g></svg>';
+ return '<svg class="capacity-field" viewBox="0 0 520 430" aria-hidden="true" focusable="false">'
+  +'<defs><radialGradient id="capacity-core"><stop offset="0%" stop-color="var(--pres-accent)" stop-opacity=".32"/><stop offset="65%" stop-color="var(--pres-accent)" stop-opacity=".08"/><stop offset="100%" stop-color="var(--pres-accent)" stop-opacity="0"/></radialGradient></defs>'
+  +'<circle class="capacity-glow" cx="259" cy="214" r="197" fill="url(#capacity-core)"/>'
+  +'<ellipse class="capacity-orbit" cx="259" cy="214" rx="220" ry="178"/>'
+  +'<ellipse class="capacity-orbit capacity-orbit--tilt" cx="259" cy="214" rx="205" ry="86" transform="rotate(-24 259 214)"/>'
+  +'<ellipse class="capacity-orbit capacity-orbit--tilt" cx="259" cy="214" rx="205" ry="86" transform="rotate(24 259 214)"/>'
+  +'<path class="capacity-route" d="M 0 322 C 87 293 112 262 167 226 S 221 191 260 214 S 399 248 520 110"/>'
+  +'<g class="capacity-marks">'+marks+'</g>'
+  +'<circle class="capacity-center-ring" cx="259" cy="214" r="27"/>'
+  +'<circle class="capacity-center" cx="259" cy="214" r="7"/>'
+  +'</svg>';
 }
 function branch(){
  return '<svg class="visual-branch" viewBox="0 0 850 190" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
@@ -53,7 +64,7 @@ function render(slide,esc,position={}){
   +'<h2 class="scene-analysts-lead">'+esc(v.lead)+'</h2>'
   +'<div class="scene-analysts-number">'+esc(v.number)+'</div>'
   +'<p class="scene-analysts-tail">'+esc(v.tail)+'</p></div>'
-  +'<div class="scene-analysts-figure">'+gridPeople()+'</div></div>'
+  +'<div class="scene-analysts-figure">'+capacityField()+'</div></div>'
   +'<div class="scene-bottomline"><span class="scene-kicker-mark"></span>'+esc(v.tag)+'</div></div>';
  if(kind==='two-directions'&&v.variant==='editorial-split')return '<div class="story-scene scene-duality-editorial">'
   +'<div class="scene-topline">'+label+counter+'</div>'
