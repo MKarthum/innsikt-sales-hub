@@ -51,6 +51,23 @@ try{
    assert.ok(g.excessX<=3&&g.excessY<=3,id+'/'+tone+': scene overflows');
   }
  }
+ // The three new standalone scenes require a real, data-bound composition in both themes.
+ for(const [id,selector,parts,count,term] of [
+  ['ai-context-for-agents','.ai-context-scene','.ai-context-factor',3,'question'],
+  ['ai-development-workflow','.ai-work-scene','.ai-work-diff code',3,'prompt'],
+  ['ai-natural-language-bi','.ai-usage-scene','.ai-usage-bar-col',5,'question']
+ ]){
+  await page.goto(BASE+'#lysbilder/'+id,{waitUntil:'networkidle'});
+  const scene=page.locator('.slide-library-detail-stage '+selector);
+  await scene.waitFor();
+  assert.equal(await scene.locator(parts).count(),count,id+': semantic scene elements');
+  assert.ok((await scene.innerText()).includes(items.find(s=>s.id===id).visual[term]),id+': texts must come from canonical JSON');
+  for(const tone of ['light','strong']){
+   await page.locator('#library-tone-mode').selectOption(tone);
+   const g=await scene.evaluate(el=>({x:el.scrollWidth-el.clientWidth,y:el.scrollHeight-el.clientHeight,ratio:el.clientWidth/el.clientHeight}));
+   assert.ok(g.x<=3&&g.y<=3&&Math.abs(g.ratio-16/9)<.03,id+'/'+tone+': no overflow, 16:9');
+  }
+ }
  // A copy changes only public color roles; the diagram is still intact.
  await page.goto(BASE+'#lysbilder/ai-two-directions',{waitUntil:'networkidle'});
  await page.locator('#library-tone-mode').selectOption('strong');
