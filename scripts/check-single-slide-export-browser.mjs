@@ -16,7 +16,7 @@ try{
  await page.locator('[data-slide-preview-open="ai-thousand-analysts"]').click();
  await page.locator('#slide-library-fullscreen .slide-fullscreen-download summary').click();
  assert.equal(await page.locator('#slide-library-fullscreen .slide-single-download [data-slide-download]').count(),4);
- await page.locator('#slide-library-fullscreen .modal-close').click();
+ await page.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
  async function download(format,locator='.slide-single-download [data-slide-download="'+format+'"]'){
   const [file]=await Promise.all([page.waitForEvent('download',{timeout:30000}),page.locator(locator).first().click()]);
   assert.ok(file.suggestedFilename().endsWith('.'+format));
@@ -26,6 +26,22 @@ try{
  assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a','valid PNG');
  assert.equal(png.readUInt32BE(16),1920);
  assert.equal(png.readUInt32BE(20),1080);
+ // Pixel regression: SVG fills must not become a black disk during foreignObject cloning.
+ const blackShare=await page.evaluate(async base64=>{
+  const img=new Image();img.src='data:image/png;base64,'+base64;
+  await img.decode();
+  const canvas=document.createElement('canvas');canvas.width=img.width;canvas.height=img.height;
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0);
+  const pixels=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+  let dark=0,examined=0;
+  for(let y=250;y<900;y+=8)for(let x=1150;x<1850;x+=8){
+   const i=(y*canvas.width+x)*4;examined++;
+   if(pixels[i]<18&&pixels[i+1]<18&&pixels[i+2]<18)dark++;
+  }
+  return dark/examined;
+ },png.toString('base64'));
+ assert.ok(blackShare<.04,'SVG exporter created an opaque black shape: '+blackShare);
+
  const jpeg=await download('jpg');
  assert.equal(jpeg.subarray(0,2).toString('hex'),'ffd8','valid JPEG');
  const pdf=await download('pdf');
@@ -55,7 +71,11 @@ try{
  const mobileBytes=fs.readFileSync(await mobileExport.path());
  assert.equal(mobileBytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a','Mobile download is a valid PNG');
  assert.equal(await mobile.locator('#slide-library-fullscreen').count(),1,'Mobile export does not dismiss fullscreen');
- await mobile.locator('#slide-library-fullscreen .modal-close').tap();
+ await mobile.locator('.slide-library-fullscreen-overlay > .slide-library-exit').tap();
+ await mobile.waitForTimeout(150);
+ assert.equal(await mobile.locator('.slide-library-fullscreen-overlay').count(),0,'Fullscreen close works immediately after download menu use');
+ await mobile.waitForTimeout(1100);
+ assert.equal(await mobile.locator('.slide-library-fullscreen-overlay').count(),0,'No delayed ghost reopening');
  assert.equal(await mobile.locator('#slide-library-fullscreen').count(),0);
  await mobile.close();
  assert.ok(!errors.length,'Browser error: '+errors.join(' | '));

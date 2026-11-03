@@ -50,7 +50,7 @@ try{
  await opener.focus();
  await p.keyboard.press('Enter');
  await full.waitFor();
- await full.locator('.modal-close').click();
+ await p.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
  assert.equal(await full.count(),0,'Explicit close button works');
  await opener.evaluate(x=>x.click());
  assert.equal(await full.count(),0,'Late click after button close does not reopen');
@@ -60,7 +60,7 @@ try{
  await full.waitFor();
  const mobile=await full.evaluate(el=>{
   const body=el.querySelector('.slide-library-fullscreen-stage').getBoundingClientRect();
-  const close=el.querySelector('.modal-close').getBoundingClientRect();
+  const close=document.querySelector('.slide-library-fullscreen-overlay > .slide-library-exit').getBoundingClientRect();
   return {stageLeft:body.left,stageRight:body.right,stageWidth:body.width,stageHeight:body.height,
     closeTop:close.top,closeRight:close.right,innerWidth:window.innerWidth};
  });
@@ -69,7 +69,7 @@ try{
  assert.ok(mobile.closeTop>mobile.stageHeight,'Mobile exit stays below the stage instead of covering slide content');
  assert.ok(Math.abs(mobile.stageWidth/mobile.stageHeight-16/9)<0.02,'Mobile fullscreen slide remains 16:9');
  await full.screenshot({path:out+'/fullscreen-mobile.png'});
- await full.locator('.modal-close').click();
+ await p.locator('.slide-library-fullscreen-overlay > .slide-library-exit').click();
  assert.equal(await full.count(),0,'Mobile close works');
  await p.setViewportSize({width:1536,height:1040});
 
@@ -84,7 +84,7 @@ try{
  const touchOpener=tp.locator('[data-slide-preview-open]');
  await touchOpener.tap();
  const touchFull=tp.locator('#slide-library-fullscreen');await touchFull.waitFor();
- await touchFull.locator('.modal-close').tap();
+ await tp.locator('.slide-library-fullscreen-overlay > .slide-library-exit').tap();
  await tp.waitForTimeout(150);
  assert.equal(await touchFull.count(),0,'Touch close stays dismissed after compatibility click');
  assert.ok(await tp.locator('.slide-library-info').isVisible(),'Touch returns to details');

@@ -39,12 +39,38 @@ async function waitForAssets(frame){
   return new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});});
  }));
 }
+// html-to-image serializes SVG elements inside an SVG foreignObject. In that
+// context external styles and inherited fill:none may disappear (black blobs).
+// Freeze *computed* SVG presentation only in the disposable export clone, so
+// the on-screen SVG and every organization's CSS palette remain unchanged.
+function freezeSvgPresentation(frame){
+ const properties=['fill','stroke','stroke-width','stroke-opacity','fill-opacity','stroke-dasharray','stroke-linecap','stroke-linejoin','opacity','stop-color','stop-opacity'];
+ for(const svg of frame.querySelectorAll('svg')){
+  for(const el of [svg,...svg.querySelectorAll('*')]){
+   const style=getComputedStyle(el);
+   for(const key of properties){
+    const value=style.getPropertyValue(key);
+    if(value&&value!=='normal'&&value!=='initial')el.style.setProperty(key,value);
+   }
+   // Older WebKit can retain an unresolved gradient stop color.
+   if(el.tagName.toLowerCase()==='stop'){
+    const defined=el.getAttribute('stop-color');
+    if(defined?.includes('var(')){
+     const match=defined.match(/var\((--[^)]+)\)/);
+     const value=match&&getComputedStyle(frame).getPropertyValue(match[1]).trim();
+     if(value)el.style.setProperty('stop-color',value);
+    }
+   }
+  }
+ }
+}
 export async function downloadSingleSlide({id,title,html,tone='light',format='png',version=''}){
  if(!formats.has(format))throw Error('Ukjent eksportformat: '+format);
  if(!/^[a-z0-9-]+$/.test(id))throw Error('Ugyldig lysbilde-ID');
  const {host,frame}=captureElement(html,tone);
  try{
   await waitForAssets(frame);
+  freezeSvgPresentation(frame);
   const opts={width:WIDTH,height:HEIGHT,pixelRatio:2,cacheBust:false,skipAutoScale:true};
   const filename='innsikt-'+id+'-'+tone+'-v'+version;
   // All formats are derived from the same static, unnumbered 16:9 rendering.

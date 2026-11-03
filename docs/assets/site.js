@@ -416,7 +416,8 @@ function closeModal(){
 function modalEsc(e){
  const libraryDialog=document.getElementById('slide-library-fullscreen');
  if(libraryDialog&&e.key==='Tab'){
-  const controls=[...libraryDialog.querySelectorAll('a[href],button:not([disabled])')];
+  const externalClose=document.querySelector('.slide-library-fullscreen-overlay > .slide-library-exit');
+  const controls=[externalClose,...libraryDialog.querySelectorAll('a[href],button:not([disabled])')].filter(Boolean);
   if(controls.length){
    const first=controls[0],last=controls[controls.length-1];
    if(e.shiftKey&&(document.activeElement===first||!libraryDialog.contains(document.activeElement))){e.preventDefault();last.focus()}
@@ -544,23 +545,29 @@ function openLibrarySlideFullscreen(id,opener){
  overlay?.classList.add('slide-library-fullscreen-overlay');
  // Install real, direct event listeners rather than relying on document click
  // delegation after iOS Safari transforms and retargets touch events.
+ // Make the exit a direct fixed child of the overlay, outside the scrolling
+ // dialog. This avoids iOS Safari retargeting taps in an overflow:hidden modal.
  const close=overlay?.querySelector('#slide-library-fullscreen .modal-close');
+ if(close){
+  close.classList.add('slide-library-exit');
+  overlay.append(close);
+ }
  let dismissing=false;
  const dismiss=(event,fromTouch=false)=>{
   if(dismissing)return;
-  dismissing=true;
   event?.preventDefault();
   event?.stopImmediatePropagation();
-  // On touchend, keep the overlay mounted for the rest of the gesture.
-  // This prevents the same touch from hitting a newly exposed underlying slide.
+  dismissing=true;
   if(fromTouch){
-   fullscreenOpenGuardUntil=performance.now()+900;
-   libraryFullscreenOpener=null; // Don't focus a new touch target beneath the finger.
-   window.setTimeout(closeModal,0);
-  }else closeModal();
+   fullscreenOpenGuardUntil=performance.now()+1100;
+   libraryFullscreenOpener=null; // Avoid focus/ghost-click on the underlying preview.
+  }
+  closeModal();
  };
- close?.addEventListener('click',e=>dismiss(e));
- close?.addEventListener('touchend',e=>dismiss(e,true),{passive:false});
+ // iOS may focus the control without delivering a click or a matching touchend.
+ // Handle the beginning of the tap on the real, top-level exit button.
+ close?.addEventListener('touchstart',e=>dismiss(e,true),{passive:false,capture:true});
+ close?.addEventListener('click',e=>dismiss(e),{capture:true});
  overlay?.addEventListener('click',e=>{
   if(e.target.closest('.slide-library-fullscreen-stage,.modal-close,.slide-fullscreen-download'))return;
   dismiss(e);

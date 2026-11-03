@@ -124,3 +124,8 @@ Innholdsoppbygging kan animeres, men alle elementer er fullt synlige når bevege
 ## Andre revisjon av åpningsslide – 3. november 2026
 
 Den tidligere repeterende robotmatrisen er erstattet av et felt med nøyaktig 1 000 vektorbaserte punkter, romfølelse, bevegelseslinje og bevisst typografisk dominans. Motivet er en visuell metafor for kapasitet og fremstilles ikke som en dokumentert bemanningsendring. Alle farger følger --pres-*, og den selvstendige sliden beholder kilde, note og stabil ID. Evaluer visuelt på 16:9 i både lys og mørk stil, og kontroller 40 lysbilder i bibliotekets Chromium-test.
+
+
+## Eksportkorreksjon – 3. november 2026
+
+Et virkelig PNG-uttak av analytikersliden viste en svart ellipse i stedet for punktillustrasjonen, selv om den så riktig ut i presentasjonsmodus. Årsaken var manglende arvet SVG-fyll ved HTML-til-bilde-serialisering. Rettelsen fryser beregnede SVG-presentasjonsverdier i eksportklonen. Regresjonstesten avviser nå store svarte flater i eksportert PNG.

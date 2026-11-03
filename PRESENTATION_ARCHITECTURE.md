@@ -108,3 +108,10 @@ Kopiløsninger kan laste et ekstra organisasjonsstilark etter de delte stilarken
 ## Nedlasting av ett lysbilde
 
 Detaljsiden i biblioteket og aktiv slide i Presenter tilbyr PNG, JPG, PDF og PowerPoint (PPTX). Formater genereres fra samme statiske, nummerfrie 16:9-visning med gjeldende lys/mørk/fortellingsstil og eventuelle organisasjonsskins. Eksporten kjøres lokalt i nettleseren, uten ekstern tjeneste. PPTX og PDF inneholder et høyoppløselig bilde (ikke redigerbare PPTX-elementer); dette fremgår i UI. Animasjoner tas ikke med i disse statiske formatene. Eksport fra beskyttede interne presentasjoner krever fortsatt eksplisitt bekreftelse. Implementasjon: scripts/slide-download-entry.mjs, bygget til docs/assets/slide-download.js med npm run build:slide-download.
+
+
+## Eksportkvalitet og iPhone-lukking (0.18.48)
+
+Enkeltlysbilde-eksport serialiserer HTML og innvevd SVG til bilde. Beregnede SVG-farger og `fill:none` fryses kun i eksportklonen før rasterisering, slik at eksterne CSS-skins beholdes uten at arvede SVG-stiler faller bort. Automatisert Chromium-regresjon kontrollerer faktiske PNG-piksler (ikke bare filsignatur), samt PDF, JPEG, PPTX og tilpasset skin.
+
+På iPhone flyttes fullskjermens eneste Lukk-knapp til et fast lag direkte under skjermdekkende overlay, utenfor den rullbare dialogen. `touchstart` håndteres direkte på knappen med `preventDefault` og tidlig opprydding, mens `click` beholder mus/tastaturstøtte. Beskyttelse mot kompatibilitetsklikk/ghost-click hindrer gjenåpning. Berøringsemulering testes både med nedlastingsmenyen åpen og lukket. Ekte iOS Safari må fortsatt verifiseres separat ved anledning.
