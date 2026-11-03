@@ -42,6 +42,9 @@
 | market-customer-pressure | Deloitte 2026: 42 % selvvurdert strategiberedskap mot kvalitativt lavere vurdering av fire operative områder; ingen figurer eller simulerte måltall | marked-retning | Kildestyrt kontrast; forbehold, kundespørsmål og begge paletter må kontrolleres visuelt |
 | market-priorities | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | market-next-moves | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
+| ai-context-for-agents | Ny selvstendig kontekstscene: data, virksomhetsforståelse og agentens svar | bibliotek | Begrepsnyanser, lesbarhet og begge temaer |
+| ai-development-workflow | Ny SQL/kode-diff-komposisjon med illustrativ oppgave og menneskelig kontroll | bibliotek | Monospace-lesbarhet, eksport og tydelig fiktivmerking |
+| ai-natural-language-bi | Ny split-scene med ad hoc-spørsmål og gjenbrukbart, testbart dashboard | bibliotek | Tall, logoopphav, begge temaer og eksport |
 
 ## Beslutninger
 - Fra åtte til fem tydelig forskjellige fortellinger.

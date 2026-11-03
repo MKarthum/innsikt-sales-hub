@@ -149,6 +149,36 @@ function render(slide,esc,position={}){
  const escs=x=>esc(String(x??''));
  const block=(name,inside)=>'<div class="story-scene scene-v2 scene-v2-'+name+'">'+inside+'</div>';
  const title='<h2 class="v2-headline">'+escs(slide.title)+'</h2>';
+
+ // Original, portable data+AI scenes. All meaningful text comes from slides.json.
+ if(kind==='context-bridge'){
+  const data=v.dataRows.map(x=>'<span>'+escs(x)+'</span>').join('');
+  const factors=v.factors.map(x=>'<div class="ai-context-factor"><strong>'+escs(x.name)+'</strong><span>'+escs(x.detail)+'</span></div>').join('');
+  return '<div class="story-scene ai-context-scene"><div class="scene-topline">'+label+counter+'</div><h2>'+escs(slide.title)+'</h2>'
+   +'<div class="ai-context-layout"><section class="ai-context-data"><small>'+escs(v.dataLabel)+'</small>'+data+'</section>'
+   +'<span class="ai-context-arrow" aria-hidden="true">→</span><section class="ai-context-center"><b>'+escs(v.contextLabel)+'</b><div class="ai-context-factors">'+factors+'</div></section>'
+   +'<span class="ai-context-arrow" aria-hidden="true">→</span><section class="ai-context-agent"><small>'+escs(v.agentLabel)+'</small><strong>'+escs(v.question)+'</strong><p>'+escs(v.answer)+'</p></section></div>'
+   +'<footer class="ai-context-footer">'+v.methods.map(x=>'<span>'+escs(x)+'</span>').join('')+'</footer></div>';
+ }
+ if(kind==='ai-dev-workbench'){
+  const code=v.beforeCode.map(x=>'<code>'+escs(x)+'</code>').join(''),diff=v.diff.map(x=>'<code>'+escs(x)+'</code>').join('');
+  const tools=v.tools.map(x=>'<span>'+assetImage(x.assetId,'ai-reuse-icon')+'<b>'+escs(x.name)+'</b></span>').join('');
+  return '<div class="story-scene ai-work-scene"><div class="scene-topline">'+label+counter+'</div><h2>'+escs(slide.title)+'</h2>'
+   +'<div class="ai-work-layout"><section class="ai-work-editor"><div class="ai-work-bar"><small>'+escs(v.before)+'</small><b>'+escs(v.file)+'</b></div><div class="ai-work-code">'+code+'</div></section>'
+   +'<span class="ai-work-arrow" aria-hidden="true">→</span><section class="ai-work-agent"><div class="ai-work-bar"><small>'+escs(v.after)+'</small><b>'+escs(v.exampleLabel)+'</b></div>'
+   +'<p class="ai-work-prompt">'+escs(v.prompt)+'</p><div class="ai-work-diff">'+diff+'</div><strong class="ai-work-review">'+escs(v.review)+'</strong></section></div>'
+   +'<footer class="ai-work-tools">'+tools+'</footer></div>';
+ }
+ if(kind==='ai-insight-interfaces'){
+  const max=Math.max(...v.bars.map(x=>x.value));
+  const bars=v.bars.map((x,i)=>'<span class="ai-usage-bar-col"><i class="'+(i===v.bars.length-1?'ai-usage-last':'')+'" style="height:'+Math.round(x.value/max*85)+'%"></i><b>'+escs(x.label)+'</b></span>').join('');
+  const icons=items=>items.map(x=>'<span>'+assetImage(x.assetId,'ai-reuse-icon')+'<b>'+escs(x.name)+'</b></span>').join('');
+  return '<div class="story-scene ai-usage-scene"><div class="scene-topline">'+label+counter+'</div><h2>'+escs(slide.title)+'</h2>'
+   +'<div class="ai-usage-layout"><section class="ai-usage-panel"><header>'+escs(v.askLabel)+'</header><div class="ai-usage-question">'+escs(v.question)+'</div><div class="ai-usage-answer">'+escs(v.answer)+'</div></section>'
+   +'<section class="ai-usage-panel"><header>'+escs(v.buildLabel)+'</header><div class="ai-usage-report"><small>'+escs(v.reportTitle)+' · '+escs(v.exampleLabel)+'</small><div class="ai-usage-metric"><div><span>'+escs(v.metricLabel)+'</span><strong>'+escs(v.metric)+'</strong><em>'+escs(v.change)+'</em></div><div class="ai-usage-bars">'+bars+'</div></div><p>'+escs(v.caption)+'</p></div></section></div>'
+   +'<footer class="ai-usage-tools"><div>'+icons(v.askTools)+'</div><div>'+icons(v.buildTools)+'</div></footer></div>';
+ }
+
  const special=window.InnsiktStoryScenes.render(slide,{v,top,title,escs,assetImage,block,diagram:position.diagrams?.find(d=>d.id===v.diagramId)});
  if(special)return special;
  if(kind==='insight-ecosystem')return block('ecosystem',top

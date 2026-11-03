@@ -61,3 +61,7 @@ I denne runden har sju lysbilder fått nye HTML/SVG-komposisjoner som faktisk vi
 6. Endrede scener skal ha strukturtester som eksplisitt verifiserer ny visualisering og fravær av tidligere generisk kortoppsett.
 
 Testene omfatter scripts/check-slide-narratives-browser.mjs og eksisterende bibliotek-, tema-, eksport-, navigasjons- og innholdskontroller.
+
+## Gjenbruk fra fagpresentasjon – 0.18.55
+
+Tre nye, selvstendige bibliotekobjekter (`ai-context-for-agents`, `ai-development-workflow`, `ai-natural-language-bi`) er laget ut fra fagbudskapene, ikke kopiert fra Google Slides. Ingen presseutklipp, konferansefoto, kundedata eller nye tredjepartsbilder er tatt inn. Eksisterende 40 lysbilder og fem kuraterte historier er beholdt siden de nye scenene dekker egne forklaringsbehov. Original HTML/CSS, autoritative JSON-felt, kilder og tidligere godkjente logoassets følger designkontrakten. Scenene må vurderes i faktisk 16:9-rendering, lys/mørk og eksport før endelig publisering.
