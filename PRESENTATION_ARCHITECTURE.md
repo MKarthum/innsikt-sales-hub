@@ -142,3 +142,10 @@ Det stabile, selvstendige lysbildet `ai-value-in-context` bruker nå datadrevne 
 Scenen tegner sirkler, sammenhengslinjer og tre ikoner med enkel HTML/SVG. CSS bruker bare felles `--pres-*`-roller som følger de offentlige `--slide-strong-*` og `--slide-light-*`-rollene. Den har ingen fast leverandørpalett, rasterbilde eller klippende overflate. Kopiløsninger kan omsette kun CSS-roller og samtidig beholde innhold, layout, 16:9, metadata, kildegrense og nedlasting. Frivillig animasjon er kun tilleggsopplevelse. Biblioteket, eksportert PNG/PDF/PPTX og redusert bevegelse fungerer statisk.
 
 Regresjon: `scripts/check-value-system-browser.mjs` validerer begge temaer, tre tekstnoder, geometrien i riktig størrelse, ingen klippet tekst, syntetisk tredjepartspalett og faktisk eksportert PNG. I tillegg gjelder bibliotek-, temakontrakt-, eksport- og fullskjermtestene.
+
+
+## Felles designsystem for alle 40 selvstendige lysbilder (0.18.52)
+
+Hele biblioteket er gjennomgått og har nå en eksplisitt, faglig begrunnet `design`-rolle per objekt. `slideWithDesign` legger dataene på en eksisterende sceneflate (`data-editorial`, `data-design-focus`) uten å skape flere kopier eller nytt presentasjonsformat. `docs/assets/slide-editorial-system.css` gir gjennomgående redaksjonelle grep, men ti ulike archetypes for henholdsvis hero, workbench, choice, journey, dialogue, evidence, system, decision, contrast og blueprint. De seks tekniske diagrammene beholder særegen oppbygning, kilde-/brandlogoer og faglige krav. Ingen av rollene krever en bestemt merkepalett.
+
+HTML/offline-eksport bygger det nye stilarket **før** organisasjonens skin. Statisk bilde/PDF/PPTX bruker samme scenemarkup som Presenter. Valgfri oppbyggingsanimasjon er separat fra innhold og tema. Se `SLIDE_DESIGN_SYSTEM.md` for obligatoriske redaksjonelle krav, klassifiseringer og tester.

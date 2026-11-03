@@ -1,0 +1,277 @@
+/* Editorial Design System v2 / 40 standalone slides.
+   All chroma comes from --pres-* roles inherited from the documented
+   --slide-strong-* / --slide-light-* skin contract. Content stays in JSON.
+   CSS applies to exactly one semantic scene; export and Presenter share markup.
+*/
+
+.story-scene[data-editorial]{
+ --ed-accent-soft:color-mix(in srgb,var(--pres-accent) 10%,var(--pres-bg));
+ --ed-accent-raised:color-mix(in srgb,var(--pres-accent) 16%,var(--pres-bg));
+ --ed-rule:color-mix(in srgb,var(--pres-accent) 36%,transparent);
+ --ed-border:color-mix(in srgb,var(--pres-fg) 17%,transparent);
+ --ed-shadow:color-mix(in srgb,var(--pres-fg) 9%,transparent);
+ --ed-muted:var(--pres-muted);
+ box-shadow:inset 0 .28cqw 0 var(--pres-accent);
+}
+.story-scene[data-editorial] .scene-eyebrow{
+ display:inline-flex;align-items:center;gap:1.06cqw;letter-spacing:.16em;
+ font-weight:800;
+}
+.story-scene[data-editorial] .scene-eyebrow::before{
+ content:'';display:inline-block;flex-shrink:0;
+ width:2.6cqw;height:.28cqw;border-radius:2cqw;background:var(--pres-accent);
+}
+.story-scene[data-editorial] .scene-topline{z-index:3}
+.story-scene[data-editorial] .v2-headline,
+.story-scene[data-editorial] .v5-heading h2,
+.story-scene[data-editorial] .da-intro h2,
+.story-scene[data-editorial] .vp-heading h2{
+ text-wrap:balance;
+}
+/* Do not let the ambient depth obscure content or create hidden hit targets. */
+.story-scene[data-editorial] *{scroll-margin:0}
+
+/* HERO: one large claim or a meaningful quotation, rather than a decorative grid. */
+.story-scene[data-editorial="hero"]{
+ background-image:
+ radial-gradient(ellipse at 90% 74%,color-mix(in srgb,var(--pres-accent) 12%,transparent),transparent 50%),
+ linear-gradient(165deg,transparent 55%,color-mix(in srgb,var(--pres-accent) 5%,transparent));
+}
+.story-scene[data-editorial="hero"] .v2-business-quote{
+ background:linear-gradient(100deg,var(--ed-accent-soft),color-mix(in srgb,var(--pres-accent) 3%,var(--pres-bg)) 73%,transparent);
+ border-left:.65cqw solid var(--pres-accent);padding:3.5cqw 3.9cqw;border-radius:.45cqw 1cqw 1cqw .45cqw;
+}
+.story-scene[data-editorial="hero"] .v2-quote-mark{color:var(--pres-accent)}
+.story-scene[data-editorial="hero"] .v2-business-context{
+ border-left:.38cqw solid var(--pres-accent);padding-left:2.1cqw;
+}
+.story-scene[data-editorial="hero"] .v5-quote{
+ border-left:.48cqw solid var(--pres-accent);padding-left:2.4cqw;
+ background:linear-gradient(105deg,var(--ed-accent-soft),transparent 77%);
+}
+.story-scene[data-editorial="hero"] .v5-case-questions{border-radius:.9cqw;overflow:hidden}
+.story-scene[data-editorial="hero"] .scene-analysts-number,
+.story-scene[data-editorial="hero"] .v2-quote-mark{
+ text-shadow:0 1.8cqw 5cqw color-mix(in srgb,var(--pres-accent) 13%,transparent);
+}
+
+/* WORKBENCH: distinguish actual input context from the resulting artifact. */
+.story-scene[data-editorial="workbench"]{
+ background-image:
+ radial-gradient(ellipse at 82% 96%,color-mix(in srgb,var(--pres-accent) 10%,transparent),transparent 47%);
+}
+.story-scene[data-editorial="workbench"] :is(.v5-product-surface,.v7-meeting-body,.v6-prompt-workbench,.v2-portal-window){
+ filter:drop-shadow(0 .8cqw 1.8cqw var(--ed-shadow));
+}
+.story-scene[data-editorial="workbench"] :is(.v7-meeting-paper,.v6-prompt-output,.v5-product-outputs){
+ border-color:var(--ed-rule);
+ background:linear-gradient(145deg,var(--ed-accent-soft),color-mix(in srgb,var(--pres-accent) 3%,var(--pres-bg)));
+}
+.story-scene[data-editorial="workbench"] :is(.v5-product-browser,.v7-meeting-toolbar,.v2-portal-browser){
+ background:var(--ed-accent-soft);border-bottom:.23cqw solid var(--ed-rule);
+}
+.story-scene[data-editorial="workbench"] .v2-portal-node{
+ border-top:.38cqw solid var(--pres-accent);
+}
+
+/* CHOICE: comparable alternatives, readable contrast and clear decision paths. */
+.story-scene[data-editorial="choice"]{
+ background-image:radial-gradient(ellipse at 15% 97%,color-mix(in srgb,var(--pres-accent) 8%,transparent),transparent 42%);
+}
+.story-scene[data-editorial="choice"] :is(.v4-list-card,.v5-cause,.v5-truth,.v2-domain){
+ border:1px solid var(--ed-border);border-top:.5cqw solid var(--pres-accent);
+ background:linear-gradient(155deg,var(--ed-accent-soft),color-mix(in srgb,var(--pres-fg) 2%,var(--pres-bg)) 85%);
+ box-shadow:0 .7cqw 2cqw var(--ed-shadow);
+}
+.story-scene[data-editorial="choice"] .v4-list-index{
+ font-weight:850;letter-spacing:-.04em;
+}
+.story-scene[data-editorial="choice"] :is(.v5-symptom,.v4-list-takeaway){
+ background:var(--ed-accent-soft);border-left:.4cqw solid var(--pres-accent);
+}
+
+/* JOURNEY: the reader's eye follows a visible path; the final step is a result. */
+.story-scene[data-editorial="journey"]{
+ background-image:linear-gradient(155deg,transparent 42%,color-mix(in srgb,var(--pres-accent) 8%,transparent));
+}
+.story-scene[data-editorial="journey"] :is(.v7-discovery-flow,.v14-pilot-steps,.eco-flow,.v4-road-grid){
+ filter:drop-shadow(0 .45cqw .8cqw color-mix(in srgb,var(--pres-fg) 6%,transparent));
+}
+.story-scene[data-editorial="journey"] :is(.v4-road-card,.v14-pilot-steps li,.v7-discovery-check,.eco-stage){
+ border-top:.42cqw solid var(--pres-accent);
+}
+.story-scene[data-editorial="journey"] :is(.v7-discovery-result,.v14-pilot-evidence,.eco-foundation,.v4-road-card:last-child,.v2-road-stage:last-child){
+ background:linear-gradient(135deg,var(--ed-accent-raised),var(--ed-accent-soft));
+ border-color:var(--ed-rule);
+}
+.story-scene[data-editorial="journey"] :is(.v7-discovery-arrow,.v7-capability-arrow,.eco-link){
+ text-shadow:0 .5cqw 1.1cqw var(--ed-shadow);
+}
+
+/* DIALOGUE: customer signal in one voice, question or finding in another. */
+.story-scene[data-editorial="dialogue"]{
+ background-image:radial-gradient(ellipse at 91% 16%,color-mix(in srgb,var(--pres-accent) 12%,transparent),transparent 42%);
+}
+.story-scene[data-editorial="dialogue"] :is(.v5-voice-quote,.v9-dialogue-signal,.v12-pause-answer,.v10-lookup-question){
+ border-left:.6cqw solid var(--pres-accent);
+ background:linear-gradient(105deg,var(--ed-accent-soft),color-mix(in srgb,var(--pres-accent) 3%,var(--pres-bg)));
+}
+.story-scene[data-editorial="dialogue"] :is(.v5-voice-reply,.v9-dialogue-insight,.v12-pause-insight,.v10-lookup-takeaways){
+ background:var(--ed-accent-raised);border-color:var(--ed-rule);
+}
+.story-scene[data-editorial="dialogue"] :is(.v5-voice-line,.v9-dialogue-rows li,.v12-pause-layout){
+ box-shadow:0 .25cqw 1.1cqw color-mix(in srgb,var(--pres-fg) 5%,transparent);
+}
+
+/* EVIDENCE: quantify or label the actual observation, keep risk/sources visible. */
+.story-scene[data-editorial="evidence"]{
+ background-image:
+ radial-gradient(circle at 23% 67%,color-mix(in srgb,var(--pres-accent) 13%,transparent),transparent 43%);
+}
+.story-scene[data-editorial="evidence"] :is(.v14-market-stat,.v11-readiness-strategy,.v2-def-word,.v6-risk-grid){
+ filter:drop-shadow(0 .65cqw 1.45cqw var(--ed-shadow));
+}
+.story-scene[data-editorial="evidence"] :is(.v14-market-stat,.v11-readiness-strategy,.v2-def-word){
+ background:linear-gradient(125deg,var(--ed-accent-raised),color-mix(in srgb,var(--pres-accent) 5%,var(--pres-bg)));
+ border-left:.55cqw solid var(--pres-accent);
+}
+.story-scene[data-editorial="evidence"] :is(.v11-readiness-number,.v14-market-stat strong){
+ text-shadow:0 .7cqw 2.7cqw color-mix(in srgb,var(--pres-accent) 13%,transparent);
+}
+.story-scene[data-editorial="evidence"] :is(.v13-quality-result,.v6-risk-level:last-child,.v14-market-trend:last-child){
+ border-color:var(--ed-rule);
+ background:var(--ed-accent-soft);
+}
+.story-scene[data-editorial="evidence"] .v6-risk-grid{
+ background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--pres-accent) 7%,transparent));
+}
+
+/* SYSTEM: relationship diagrams, not three arbitrary choice cards. */
+.story-scene[data-editorial="system"]{
+ background-image:
+ radial-gradient(ellipse at 70% 49%,color-mix(in srgb,var(--pres-accent) 11%,transparent),transparent 50%);
+}
+.story-scene[data-editorial="system"] :is(.v5-gate,.v7-capability-stage:last-of-type,.eco-foundation){
+ border-color:var(--ed-rule);
+ background:linear-gradient(120deg,var(--ed-accent-raised),var(--ed-accent-soft));
+}
+.story-scene[data-editorial="system"] :is(.v5-capability,.v7-capability-stage,.eco-stage){
+ box-shadow:0 .5cqw 1.5cqw var(--ed-shadow);
+}
+.story-scene[data-editorial="system"] :is(.v5-gate h3,.v7-capability-stage:last-of-type h3){
+ color:var(--pres-fg);
+}
+.story-scene[data-editorial="system"].scene-system-editorial{
+ background-image:
+ radial-gradient(ellipse at 79% 55%,color-mix(in srgb,var(--pres-accent) 12%,transparent),transparent 45%);
+}
+
+/* DECISION: one stronger result/follow-up than its inputs. */
+.story-scene[data-editorial="decision"]{
+ background-image:radial-gradient(ellipse at 83% 77%,color-mix(in srgb,var(--pres-accent) 10%,transparent),transparent 48%);
+}
+.story-scene[data-editorial="decision"] :is(.v7-outcome-question,.v5-handoff-artifact,.v6-priority-response,.scene-duality-outcomes>div,.scene-editorial-outcomes>section){
+ box-shadow:0 .5cqw 2cqw var(--ed-shadow);
+}
+.story-scene[data-editorial="decision"] :is(.v7-outcome-question,.v5-handoff-artifact,.v6-priority-response){
+ border-color:var(--ed-rule);
+ background:linear-gradient(125deg,var(--ed-accent-raised),var(--ed-accent-soft));
+}
+.story-scene[data-editorial="decision"] :is(.v7-outcome-question blockquote,.v6-priority-response h3){
+ letter-spacing:-.045em;
+}
+.story-scene[data-editorial="decision"] .v6-priority-response{
+ border-left:.42cqw solid var(--pres-accent);
+}
+
+/* CONTRAST: the central distinction must dominate the composition. */
+.story-scene[data-editorial="contrast"]{
+ background-image:linear-gradient(155deg,transparent 50%,color-mix(in srgb,var(--pres-accent) 7%,transparent));
+}
+.story-scene[data-editorial="contrast"] :is(.v2-contrast-side,.v5-truth,.scene-editorial-outcomes>section,.scene-duality-outcomes>div){
+ box-shadow:0 .75cqw 2.1cqw var(--ed-shadow);
+}
+.story-scene[data-editorial="contrast"] :is(.v2-contrast-side:first-child,.v5-truth:first-child,.scene-editorial-good,.scene-duality-good){
+ border-top:.52cqw solid var(--pres-accent);
+}
+.story-scene[data-editorial="contrast"] :is(.v2-contrast-side:last-child,.v5-truth:last-child,.scene-editorial-risk,.scene-duality-risk){
+ border-top:.52cqw solid var(--pres-warning);
+}
+.story-scene[data-editorial="contrast"] .v2-contrast-foot{
+ border-top:1px solid var(--ed-rule);padding-top:.8cqw;
+}
+
+/* BLUEPRINT: a technical explanatory picture, never forced into an executive-card layout. */
+.story-scene[data-editorial="blueprint"]{
+ background-image:
+ linear-gradient(90deg,color-mix(in srgb,var(--pres-accent) 2%,transparent) 1px,transparent 1px),
+ linear-gradient(color-mix(in srgb,var(--pres-accent) 2%,transparent) 1px,transparent 1px);
+ background-size:6cqw 6cqw;
+}
+.story-scene[data-editorial="blueprint"] :is(.da-stage,.vp-platform,.vp-lake,.vp-shell,.vp-lakehouse){
+ box-shadow:0 .7cqw 2cqw var(--ed-shadow);
+}
+.story-scene[data-editorial="blueprint"] :is(.da-platform,.vp-platform,.vp-lake,.vp-lakehouse){
+ border-color:var(--ed-rule);
+ background:linear-gradient(128deg,var(--ed-accent-raised),var(--ed-accent-soft));
+}
+.story-scene[data-editorial="blueprint"] :is(.da-source,.da-output,.vp-atom){
+ border-color:var(--ed-border);
+}
+.story-scene[data-editorial="blueprint"] :is(.da-foundation,.vp-foundation){
+ border-top:.25cqw solid var(--pres-accent);
+ background:var(--ed-accent-soft);
+}
+.story-scene[data-editorial="blueprint"] :is(.da-intro,.vp-heading){
+ border-bottom:1px solid var(--ed-rule);
+}
+.story-scene[data-editorial="blueprint"] .da-col-title{color:var(--pres-accent)}
+
+/* Focus tokens indicate the factual star of a slide. They never inject text. */
+.story-scene[data-design-focus="metric"] :is(.scene-analysts-number,.v11-readiness-number,.v14-market-stat strong){
+ letter-spacing:-.08em;
+}
+.story-scene[data-design-focus="artifact"] :is(.v7-meeting-paper,.v5-product-outputs,.v6-prompt-output,.v2-portal-path){
+ outline:.13cqw solid var(--ed-rule);outline-offset:.18cqw;
+}
+.story-scene[data-design-focus="question"] :is(.v7-outcome-question,.v10-lookup-takeaways,.v12-pause-open,.v9-dialogue-next){
+ box-shadow:0 .4cqw 1.7cqw var(--ed-shadow);
+}
+.story-scene[data-design-focus="handoff"] .v5-handoff-artifact{
+ border-top:.32cqw solid var(--pres-accent);
+}
+
+/* Motion is supplemental; library and static exports remain fully readable. */
+@keyframes ed-appear{from{opacity:.28;transform:translateY(1.2cqw)}to{opacity:1;transform:translateY(0)}}
+#slide-body[data-motion="on"] .story-scene[data-editorial="journey"] :is(.v14-pilot-steps li,.v4-road-card,.eco-stage,.v7-discovery-result),
+#slide-body[data-motion="on"] .story-scene[data-editorial="choice"] :is(.v4-list-card,.v5-cause),
+.export-slide[data-motion="on"] .story-scene[data-editorial="journey"] :is(.v14-pilot-steps li,.v4-road-card,.eco-stage,.v7-discovery-result),
+.export-slide[data-motion="on"] .story-scene[data-editorial="choice"] :is(.v4-list-card,.v5-cause){
+ animation:ed-appear .56s ease-out both;
+}
+#slide-body[data-motion="on"] .story-scene[data-editorial] :is(.v4-list-card,.v5-cause,.v14-pilot-steps li,.v4-road-card,.eco-stage):nth-child(2),
+.export-slide[data-motion="on"] .story-scene[data-editorial] :is(.v4-list-card,.v5-cause,.v14-pilot-steps li,.v4-road-card,.eco-stage):nth-child(2){animation-delay:.11s}
+#slide-body[data-motion="on"] .story-scene[data-editorial] :is(.v4-list-card,.v5-cause,.v14-pilot-steps li,.v4-road-card,.eco-stage):nth-child(3),
+.export-slide[data-motion="on"] .story-scene[data-editorial] :is(.v4-list-card,.v5-cause,.v14-pilot-steps li,.v4-road-card,.eco-stage):nth-child(3){animation-delay:.22s}
+@media(prefers-reduced-motion:reduce){.story-scene[data-editorial] *{animation:none!important;transition:none!important}}
+@media print{.story-scene[data-editorial] *{animation:none!important}}
+
+/* The original orbit decorations of this older scene extend beyond its physical
+   viewBox. The meaningful connections remain; avoid export/hit-area overflow. */
+.story-scene.scene-system-editorial[data-editorial]::before,
+.story-scene.scene-system-editorial[data-editorial]::after{display:none}
+
+/* Vendor-specific platform focal points stay structural and label-driven. */
+.story-scene[data-editorial="blueprint"] :is(.vp-snow-shell,.vp-fabric-shell,.vp-db-lake){
+ border-color:var(--ed-rule);
+ border-top:.42cqw solid var(--pres-accent);
+ background:linear-gradient(135deg,var(--ed-accent-raised),var(--ed-accent-soft));
+ box-shadow:0 .85cqw 2.35cqw var(--ed-shadow);
+}
+.story-scene[data-editorial="blueprint"] :is(.vp-snow-core,.vp-fabric-lake,.vp-tier){
+ border-color:color-mix(in srgb,var(--pres-accent) 55%,transparent);
+ background:linear-gradient(100deg,color-mix(in srgb,var(--pres-accent) 18%,var(--pres-bg)),var(--ed-accent-soft));
+}
+.story-scene[data-editorial="blueprint"] .vp-support{
+ border-top:.25cqw solid var(--pres-accent);background:var(--ed-accent-soft);
+}

@@ -641,13 +641,20 @@ function slideLibraryPage(id){
    +'<section><h2>'+esc(ui.useLabel)+'</h2>'+(uses||'<p class="fineprint">Ikke brukt i noen historie ennå.</p>')+'</section></div>';
 }
 function presentationSlides(){return window.InnsiktSlides.resolve(D.slides,D.pages.presentationDecks[selectedDeck],selectedDeck)}
+function slideWithDesign(slide,html){
+ const design=slide.design;
+ if(!design)return html;
+ if(!/^<div class="story-scene [^"]+">/.test(html))throw Error('Editorial slide needs one scene root: '+slide.id);
+ return html.replace('<div class="story-scene ',
+  '<div data-editorial="'+esc(design.archetype)+'" data-design-focus="'+esc(design.focus)+'" class="story-scene ');
+}
 function slideMarkup(s,index,deckId,notes=false,showNumbers=false){
  const position={index,total:D.pages.presentationDecks[deckId].slides.length,showNumbers};
  if(s.type==='architecture'){
   const p=D.architectureProfiles.profiles.find(x=>x.id===s.profileId);
-  return window.InnsiktArchitectureScenes.render(s,esc,p,D.visualAssets,position);
+  return slideWithDesign(s,window.InnsiktArchitectureScenes.render(s,esc,p,D.visualAssets,position));
  }
- if(s.type==='visual')return window.InnsiktSlideVisuals.render(s,esc,{...position,businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams});
+ if(s.type==='visual')return slideWithDesign(s,window.InnsiktSlideVisuals.render(s,esc,{...position,businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams}));
  const deck=D.pages.presentationDecks[deckId],slides=deck.slides;
  let v='<div class="slide-eyebrow">'+esc(s.cue||(showNumbers?deck.label.toUpperCase():s.topic||''))+(showNumbers?'<span class="slide-placement-number"> · '+(index+1)+' / '+slides.length+'</span>':'')+'</div><h2>'+esc(s.title)+'</h2>';
  if(s.type==='metric'){

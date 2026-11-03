@@ -11,7 +11,7 @@
       "title": "Innsikt gjør neste kundesamtale enklere å forberede",
       "body": "Et arbeidsverktøy for kundeansvarlige og fagpersoner: finn en relevant oppgave, bruk innholdet og kom videre.",
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Denne åpningen viser hva portalen skal hjelpe en selger med: gjøre et utydelig signal om treg rapportering til en mer forberedt kundesamtale. Tre eksempler på neste handling illustrerer bruken. Ikke presenter dem som en ferdig diagnose eller som påvist effekt.",
       "topic": "Bruk av portalen",
       "keywords": [],
       "visual": {
@@ -43,6 +43,11 @@
           ],
           "brand": "INNSIKT"
         }
+      },
+      "design": {
+        "archetype": "workbench",
+        "focus": "artifact",
+        "version": 2
       }
     },
     {
@@ -82,6 +87,11 @@
         ],
         "layout": "cards",
         "takeaway": "Tre eksempler på oppgaver. Forsiden har også trening med en kollega."
+      },
+      "design": {
+        "archetype": "choice",
+        "focus": "choice",
+        "version": 2
       }
     },
     {
@@ -132,6 +142,11 @@
         ],
         "review": "Selgeren kvalitetssikrer før bruk",
         "conclusion": "Fra en tilpasset prompt til et kontrollert møteutkast – ikke en automatisk kundediagnose."
+      },
+      "design": {
+        "archetype": "workbench",
+        "focus": "artifact",
+        "version": 2
       }
     },
     {
@@ -179,6 +194,11 @@
         ],
         "layout": "path",
         "takeaway": "Vi vet hva kunden opplever. Årsaken må fortsatt undersøkes."
+      },
+      "design": {
+        "archetype": "journey",
+        "focus": "flow",
+        "version": 2
       }
     },
     {
@@ -208,6 +228,11 @@
         "guardrailLabel": "DETTE VET VI IKKE",
         "guardrail": "Om dokumentene er egnede, tilgangen riktig eller KI er rett tiltak.",
         "conclusion": "Oppslaget gir spørsmål til kunden – ikke en ferdig arkitektur."
+      },
+      "design": {
+        "archetype": "dialogue",
+        "focus": "question",
+        "version": 2
       }
     },
     {
@@ -246,6 +271,11 @@
         ],
         "conclusion": "Bruk trenden til å stille et bedre kundespørsmål, ikke til å konkludere.",
         "figureAssetId": "market-signal"
+      },
+      "design": {
+        "archetype": "contrast",
+        "focus": "comparison",
+        "version": 2
       }
     },
     {
@@ -275,6 +305,11 @@
         "nextLabel": "NESTE HANDLING",
         "nextAction": "Avklar hvem som eier prosessen og hva som bør undersøkes.",
         "conclusion": "Vi vet ennå ikke årsaken. Målet er en bedre samtale, ikke et ferdig løsningsforslag."
+      },
+      "design": {
+        "archetype": "decision",
+        "focus": "question",
+        "version": 2
       }
     },
     {
@@ -287,7 +322,7 @@
       "title": "Et kundesignal er ikke en IT-bestilling",
       "body": "Et fiktivt eksempel fra «Forretningsbehov». Vi skal ikke diagnostisere kunden, men forberede en bedre samtale.",
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Ta kundens utsagn om ulike tall på alvor. Før teknologivalg må vi forstå hvilke tall som er ulike, hvem det påvirker, og konsekvensen i praksis. Eksempelet er fiktivt og illustrerer en strukturert første samtale, ikke et reelt kundecase.",
       "topic": "Kundedialog",
       "keywords": [],
       "visual": {
@@ -310,6 +345,11 @@
         ],
         "conclusion": "Start med tre spørsmål, ikke et produktforslag.",
         "questionLabel": "FØR VI VELGER LØSNING"
+      },
+      "design": {
+        "archetype": "hero",
+        "focus": "quote",
+        "version": 2
       }
     },
     {
@@ -322,12 +362,17 @@
       "title": "«Vi bruker flere dager på månedsavslutning»",
       "business": "okonomi",
       "sourceIds": [],
-      "speakerBase": "",
+      "speakerBase": "Dette er en fiktiv situasjon fra månedsavslutning: flere dager går med, og avdelinger får ulike tall. Formålet er å vekke nysgjerrighet om prosess, datadefinisjoner og ansvar. Tall, årsak og gevinst må avklares med kunden før vi foreslår en løsning.",
       "topic": "Kundedialog",
       "keywords": [],
       "visual": {
         "scene": "business-case",
         "hint": "Fiktiv kundesituasjon: kartlegg årsak før tiltak."
+      },
+      "design": {
+        "archetype": "hero",
+        "focus": "quote",
+        "version": 2
       }
     },
     {
@@ -375,6 +420,11 @@
         "symptomLabel": "OPPLEVD PROBLEM",
         "causesLabel": "MULIGE ÅRSAKER",
         "conclusion": "Hypotesene må testes sammen med kunden – vi vet ikke årsaken ennå."
+      },
+      "design": {
+        "archetype": "choice",
+        "focus": "hypothesis",
+        "version": 2
       }
     },
     {
@@ -418,6 +468,11 @@
         ],
         "guardrail": "Fortsatt ukjent: årsak og riktig tiltak.",
         "conclusion": "Bruk svaret til å velge neste spørsmål – ikke en teknologi."
+      },
+      "design": {
+        "archetype": "dialogue",
+        "focus": "question",
+        "version": 2
       }
     },
     {
@@ -453,6 +508,11 @@
         "review": "Kvalitetssikres av selgeren før bruk",
         "conclusion": "Prompten strukturerer samtalen. Den kan ikke bekrefte årsaken til problemet.",
         "figureAssetId": "customer-dialogue"
+      },
+      "design": {
+        "archetype": "workbench",
+        "focus": "artifact",
+        "version": 2
       }
     },
     {
@@ -491,6 +551,11 @@
         "laterLabel": "UTSETTES",
         "later": "Valg av plattform og et større prosjekt",
         "conclusion": "Første leveranse kan være en avklart årsak – eller en presis hypotese som må testes."
+      },
+      "design": {
+        "archetype": "journey",
+        "focus": "flow",
+        "version": 2
       }
     },
     {
@@ -514,7 +579,12 @@
         "tag": "En metafor for muligheter – ikke antall stillinger"
       },
       "speakerBase": "Tusen analytikere er et bilde på tilgjengelig kapasitet, ikke en beregning av hvor mange ansatte KI kan erstatte. Poenget er hastigheten og bredden i oppgaver som allerede kan støttes av KI.",
-      "sourceIds": []
+      "sourceIds": [],
+      "design": {
+        "archetype": "hero",
+        "focus": "metric",
+        "version": 2
+      }
     },
     {
       "id": "ai-two-directions",
@@ -541,7 +611,12 @@
         "variant": "editorial-split"
       },
       "speakerBase": "Kapasitet kan forsterke både godt og svakt grunnlag. En faglig illustrasjon uten kvantifiserte effektpåstander.",
-      "sourceIds": []
+      "sourceIds": [],
+      "design": {
+        "archetype": "contrast",
+        "focus": "comparison",
+        "version": 2
+      }
     },
     {
       "id": "ai-value-in-context",
@@ -587,7 +662,12 @@
         ]
       },
       "speakerBase": "Dette lysbildet er selvstendig og kan brukes i flere fortellinger. Start med virksomhetens behov: hvilken forbedring vil vi oppnå? Sjekk deretter at dataene finnes, er relevante og pålitelige. Vurder til slutt risiko, ansvar, sikkerhet og kontroll for trygg bruk. Alle tre må henge sammen for å skape varig verdi med analyse og KI. Behovet setter retningen; data og kontroll gjør bruken mulig og forsvarlig. Ikke presenter de tre som tre verktøy eller en universell fasit.",
-      "sourceIds": []
+      "sourceIds": [],
+      "design": {
+        "archetype": "system",
+        "focus": "diagram",
+        "version": 2
+      }
     },
     {
       "id": "ai-capacity-now",
@@ -634,7 +714,12 @@
       ],
       "speakerBase": "KI kan bistå med ulike kunnskaps- og utviklingsoppgaver. Dette er en illustrasjon av bruksområder, ikke dokumentert produktivitetsgevinst eller erstatning av ansatte.",
       "topic": "KI og kapasitet",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "system",
+        "focus": "capability",
+        "version": 2
+      }
     },
     {
       "id": "data-meaning-customer",
@@ -662,7 +747,12 @@
       "sourceIds": [],
       "speakerBase": "«Aktiv kunde» illustrerer at ulike forretningsprosesser kan bruke ulike kriterier for hvem som regnes som aktiv. Salg kan bruke aktive avtaler, økonomi fakturering og kundeservice registrert kontakt. Dette er eksempler, ikke påstander om en bestemt virksomhet. Avklar definisjon, tidsperiode og analyseenhet før tall sammenlignes eller brukes av KI.",
       "topic": "Kvalitet og forståelse",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "evidence",
+        "focus": "definition",
+        "version": 2
+      }
     },
     {
       "id": "ai-good-vs-fast",
@@ -683,7 +773,12 @@
       "sourceIds": [],
       "speakerBase": "Et polert svar er ikke nødvendigvis et godt beslutningsgrunnlag. Datagrunnlaget kan være ufullstendig, begreper kan tolkes feil eller svaret kan løse feil problem. Vi trenger derfor evnen til å teste antakelser, stille oppfølgingsspørsmål og bruke faglig skjønn. KI er et hjelpemiddel også i denne kvalitetssikringen.",
       "topic": "Kvalitet og forståelse",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "contrast",
+        "focus": "comparison",
+        "version": 2
+      }
     },
     {
       "id": "ai-two-extremes",
@@ -704,7 +799,12 @@
       "sourceIds": [],
       "speakerBase": "Datakvalitet er nødvendig der beslutningen krever det, men ikke alle bruksområder forutsetter total modernisering. Vi skal verken automatisere ukritisk eller gjøre et stort plattformprogram til forutsetning for enhver nytte. Start med en arbeidsoppgave, avklar konsekvens og risiko og la kontrollert læring styre videre investeringer.",
       "topic": "Fag og verdi",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "contrast",
+        "focus": "comparison",
+        "version": 2
+      }
     },
     {
       "id": "ai-pragmatic",
@@ -748,7 +848,12 @@
       ],
       "speakerBase": "I et fiktivt kundeserviceteam fordeles henvendelser manuelt til riktig team. Vi starter med å forstå prosessen og måle dagens kvalitet og tidsbruk. Deretter kan KI foreslå hvilket team en sak hører til på godkjente testdata, men medarbeideren bestemmer fortsatt. Til slutt sammenlignes resultatene og konsekvensene. Kanskje bør vi forbedre definisjoner eller rutiner før videre automatisering, kanskje løsningen gir liten nytte og bør stoppes. Den kan også avdekke uklare kategorier eller datagrunnlag som bør undersøkes. Ingen effekt er målt eller lovet. Overgang: En liten test kan også avdekke et behov for bedre datagrunnlag.",
       "topic": "Fag og verdi",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "journey",
+        "focus": "flow",
+        "version": 2
+      }
     },
     {
       "id": "ai-improve-data",
@@ -791,7 +896,12 @@
       ],
       "speakerBase": "Vi fortsetter den samme fiktive kundeservicetesten. Under prøvingen dukker to lignende fakturasaker opp med forskjellige teamregistreringer. Dette kan være korrekt, eller skyldes uklare regler. KI kan peke på mulig inkonsistens, men må ikke bestemme hvilken kategori som er riktig. Fagansvarlig undersøker sakene, dokumenterer begrunnelsen og tester en eventuell godkjent forbedring. Poenget er en løkke der prosess, data og KI-støtte utvikles sammen, ikke at KI automatisk reparerer data.",
       "topic": "KI og kapasitet",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "evidence",
+        "focus": "proof",
+        "version": 2
+      }
     },
     {
       "id": "insight-value-chain",
@@ -851,7 +961,12 @@
         "digdir",
         "nist-ai-rmf"
       ],
-      "speakerBase": "Pedagogisk oversikt, ikke en referansearkitektur. Behovet avgjør inngang og prioritering. Datateknikk, modellering, analyse, BI og KI kan kombineres på ulike måter; datakvalitet og sikkerhet er tverrgående hensyn. Teknisk utdypning finnes i kanonisk konseptuell arkitektur."
+      "speakerBase": "Pedagogisk oversikt, ikke en referansearkitektur. Behovet avgjør inngang og prioritering. Datateknikk, modellering, analyse, BI og KI kan kombineres på ulike måter; datakvalitet og sikkerhet er tverrgående hensyn. Teknisk utdypning finnes i kanonisk konseptuell arkitektur.",
+      "design": {
+        "archetype": "system",
+        "focus": "flow",
+        "version": 2
+      }
     },
     {
       "id": "insight-three-disciplines",
@@ -897,7 +1012,12 @@
         "Felles begreper og relevante data gir et grunnlag vi kan forstå.",
         "Analyse hjelper oss å forklare avvik og prioritere tiltak.",
         "KI kan støtte utvalgte oppgaver, men resultatene må verifiseres."
-      ]
+      ],
+      "design": {
+        "archetype": "system",
+        "focus": "capability",
+        "version": 2
+      }
     },
     {
       "id": "risk-and-trust",
@@ -940,7 +1060,12 @@
       ],
       "speakerBase": "Eksemplene viser hvorfor samme KI-løsning kan trenge ulik kontroll i ulike sammenhenger. Konsekvens, sannsynlighet, datagrunnlag, berørte personer og faktisk bruk må vurderes samlet. Dette er ikke en formell risikoklassifisering. NIST AI RMF gir rammeverk for å styre, kartlegge, måle og håndtere risiko. Formålet er proporsjonale kontroller, dokumentert ansvar og løpende oppfølging – ikke å bruke én standardliste ukritisk.",
       "topic": "Kvalitet og forståelse",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "evidence",
+        "focus": "risk",
+        "version": 2
+      }
     },
     {
       "id": "seller-signals",
@@ -976,7 +1101,12 @@
       "sourceIds": [],
       "speakerBase": "Et kundesignal høres sjelden ut som en bestilling på en bestemt dataplattform eller analysemetode. Det kan være frustrasjon over rapportering, tungvinte prosesser eller ønske om å utnytte KI. Oppgaven vår er å forstå hva som faktisk skjer og hvilke mulige konsekvenser det har, ikke å bestemme løsning før vi har undersøkt.",
       "topic": "Kundedialog",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "dialogue",
+        "focus": "signal",
+        "version": 2
+      }
     },
     {
       "id": "seller-better-questions",
@@ -1022,7 +1152,12 @@
       ],
       "speakerBase": "Dette er en fiktiv samtale, ikke en kundereferanse. Kunden sier at forsinkede leveranser oppdages for sent. Det første spørsmålet avklarer hvorfor det betyr noe: de rekker ikke å omprioritere. Det andre gir en hypotese om hvor vi bør lete: status kommer fra flere systemer, men vi vet ennå ikke om systemene er årsaken. Det tredje gir et mulig målepunkt: hvor tidlig en relevant risiko kan varsles før fristen. Ingen av svarene dokumenterer en faktisk diagnose eller effekt. Vi kan nå foreslå å undersøke én leveranseflyt med prosesseier og dataansvarlig – uten å foreslå dataplattform eller KI på forhånd. Kildene støtter metoden med oppfølgingsspørsmål og meningsfulle målepunkter, ikke dette oppdiktede eksemplet. Overgang: Selgerportalen kan hjelpe oss å forberede nettopp slike spørsmål og finne faglig støtte.",
       "topic": "Kundedialog",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "dialogue",
+        "focus": "question",
+        "version": 2
+      }
     },
     {
       "id": "seller-specialist",
@@ -1062,7 +1197,12 @@
       "sourceIds": [],
       "speakerBase": "En selger trenger ikke velge mellom Snowflake, Fabric, KI-agenter og en mer tradisjonell analyse før første møte er over. En god oppfølging begynner med å tydeliggjøre behov og betydning for virksomheten. Da kan riktig kompetanse involveres og et mulig første tiltak defineres sammen med kunden.",
       "topic": "Kundedialog",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "decision",
+        "focus": "handoff",
+        "version": 2
+      }
     },
     {
       "id": "portal-purpose",
@@ -1089,7 +1229,12 @@
       "sourceIds": [],
       "speakerBase": "Portalen gir oppgaveinnganger, kvalifisering, fagstoff og redigerbare prompter. Den kjører ikke KI-modeller selv. Demonstrer promptbiblioteket live, og inviter til konkrete tidlige innspill.",
       "topic": "Bruk av portalen",
-      "keywords": []
+      "keywords": [],
+      "design": {
+        "archetype": "workbench",
+        "focus": "artifact",
+        "version": 2
+      }
     },
     {
       "id": "architecture-conceptual",
@@ -1112,7 +1257,12 @@
       "sourceIds": [
         "architecture-fabric-lifecycle",
         "architecture-databricks-scope"
-      ]
+      ],
+      "design": {
+        "archetype": "blueprint",
+        "focus": "platform",
+        "version": 2
+      }
     },
     {
       "id": "architecture-modern",
@@ -1135,7 +1285,12 @@
       "sourceIds": [
         "architecture-fabric-lifecycle",
         "architecture-databricks-scope"
-      ]
+      ],
+      "design": {
+        "archetype": "blueprint",
+        "focus": "platform",
+        "version": 2
+      }
     },
     {
       "id": "architecture-ai",
@@ -1158,7 +1313,12 @@
       "sourceIds": [
         "architecture-databricks-scope",
         "architecture-fabric-lifecycle"
-      ]
+      ],
+      "design": {
+        "archetype": "blueprint",
+        "focus": "platform",
+        "version": 2
+      }
     },
     {
       "id": "architecture-snowflake",
@@ -1188,7 +1348,12 @@
         "snowflake-dashboards-retired",
         "sigma-snowflake-connector",
         "tableau-snowflake-connector"
-      ]
+      ],
+      "design": {
+        "archetype": "blueprint",
+        "focus": "platform",
+        "version": 2
+      }
     },
     {
       "id": "architecture-fabric",
@@ -1213,7 +1378,12 @@
         "architecture-fabric-lifecycle",
         "fabric-rti",
         "fabric-icons"
-      ]
+      ],
+      "design": {
+        "archetype": "blueprint",
+        "focus": "platform",
+        "version": 2
+      }
     },
     {
       "id": "architecture-databricks",
@@ -1237,7 +1407,12 @@
         "architecture-databricks",
         "architecture-databricks-scope",
         "databricks-unity"
-      ]
+      ],
+      "design": {
+        "archetype": "blueprint",
+        "focus": "platform",
+        "version": 2
+      }
     },
     {
       "id": "market-why-now",
@@ -1286,6 +1461,11 @@
           }
         ],
         "conclusion": "Mer kraft gir muligheter – ikke automatisk bedre beslutninger."
+      },
+      "design": {
+        "archetype": "contrast",
+        "focus": "comparison",
+        "version": 2
       }
     },
     {
@@ -1335,6 +1515,11 @@
           "detail": "Bruker minst én KI-teknologi. Foretak med minst ti ansatte, uten finans."
         },
         "conclusion": "Utbredelse er dokumentert; verdien for kunden må undersøkes."
+      },
+      "design": {
+        "archetype": "evidence",
+        "focus": "metric",
+        "version": 2
       }
     },
     {
@@ -1377,6 +1562,11 @@
         "question": "Hvor stopper ambisjonene opp i faktisk arbeid hos dere?",
         "caveat": "Global lederundersøkelse – ikke en diagnose av norske enkeltkunder.",
         "conclusion": "Bruk markedssignalet til å undersøke gjennomføringsevne, ikke til å velge teknologi."
+      },
+      "design": {
+        "archetype": "evidence",
+        "focus": "metric",
+        "version": 2
       }
     },
     {
@@ -1421,6 +1611,11 @@
         ],
         "conclusion": "Første inngang er ikke en diagnose. Behov overlapper.",
         "figureAssetId": "value-compass"
+      },
+      "design": {
+        "archetype": "decision",
+        "focus": "choice",
+        "version": 2
       }
     },
     {
@@ -1454,7 +1649,12 @@
         "Formuler ett konkret problem og en testbar hypotese.",
         "Avklar mål og rammer med ansvarlige før testing.",
         "Utvid kun dersom effekt og kvalitet gir grunnlag for det."
-      ]
+      ],
+      "design": {
+        "archetype": "decision",
+        "focus": "comparison",
+        "version": 2
+      }
     }
   ]
 }

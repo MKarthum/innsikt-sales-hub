@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 
-const files=['site.css','slide-visuals.css','slide-story-scenes.css','architecture-visuals.css','architecture-explorer.css','vendor-architectures.css'];
+const files=['site.css','slide-visuals.css','slide-story-scenes.css','architecture-visuals.css','architecture-explorer.css','vendor-architectures.css','slide-editorial-system.css'];
 const roles=['ink','muted','faint','paper','surface','surface-alt','border','navy','navy2','accent','accent-soft','blue','ok','warn','on-dark','on-accent','focus'];
 const slides=['strong','light'].flatMap(t=>['bg','fg','muted','accent','warning'].map(r=>'slide-'+t+'-'+r));
 const all=[...roles,...slides];

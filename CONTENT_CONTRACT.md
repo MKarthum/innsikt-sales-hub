@@ -95,3 +95,8 @@ Valgbeskrivelsene vises samlet i én forhåndsvisning, ikke i tillegg under hver
 ## Betinget CV-produksjon i promptbiblioteket (v0.11.7)
 
 prompts.json kan definere et cvOutput-objekt på en oppgave: modeGroup/draftValue, reviewFormats/draftFormats, lengthGroup og datastyrt template.label/hint/instruction. Renderermodulene skal aldri eie den redaksjonelle matchprompten eller malinstruksjonen. En analyse gir bare ren tekst/Markdown. CV-utkast åpner Word/PDF, lengde og eventuell påkrevd kundemal; påkrevd kundemal overstyrer general firmamal. Manglende kildefiler håndteres av instruksen til KI, ikke ved fiktiv innlesning i portalen.
+
+
+## Redaksjonelt designsystem for hele lysbildebiblioteket (0.18.52)
+
+Alle aktive lysbilder i `slides.json` eier sin egen `design`-klassifisering (`archetype`, `focus`, `version`). Den er metadata for visningslaget, ikke et eget faginnhold eller en kopi av en historie. Den semantiske figuren eies av eksisterende scene-renderer, mens `slide-editorial-system.css` styrer hierarki, rytme og valgfri animasjon via CSS-roller. Organisasjoner kopierer løsningen og legger kun til sitt eget CSS-skin; de skal ikke måtte omskrive JSON, SVG eller JS for å beholde design, eksport og fortelling. Se bindende detaljer og testkrav i `SLIDE_DESIGN_SYSTEM.md`.

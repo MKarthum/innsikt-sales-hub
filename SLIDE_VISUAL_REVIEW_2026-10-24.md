@@ -134,3 +134,10 @@ Et virkelig PNG-uttak av analytikersliden viste en svart ellipse i stedet for pu
 ## Ny selvstendig verdimodell-slide – 3. november 2026
 
 `ai-value-in-context` beholder stabil ID og kildegrenser, men har fått redaksjonell headline, tre datadrevne spørsmål (Behov, Data, Kontroll), nytt sentrum (Verdi i praksis), semantiske vektorikoner og radial forbindelsesmodell. Visuelle overganger følger den felles bevegelsesinnstillingen. Lysbildet kan brukes i enhver fortelling uten å duplisere fagtekst. De første to temaene og syntetisk skin kontrolleres i Chromium; fysisk iOS-test er ikke del av denne revisjonen.
+
+
+## Helhetlig designrevisjon – 3. november 2026
+
+Alle 40 selvstendige objekter har fått egen redaksjonell rolle gjennom `design.archetype` og `design.focus`. Ti visuelle strategier erstatter tanken om én kortmal: poeng/hero, artefakt/workbench, reelle valg, prosess/journey, kundesamtale/dialogue, dokumentasjon/evidence, sammenheng/system, beslutning/decision, premissforskjell/contrast og teknisk/blueprint. Eksisterende figurer og kilder er bevart. Tre objekter som manglet presentatørnotater, har fått selvstendige notater (portal-opening, sales-opening, sales-finance-case). Den nye CSS-kontrakten kan omsettes til et annet skin uten innholds- eller rendererendring.
+
+Individuell evaluering: Alle 40 er kontrollert mot før-bilder; samtlige er faktisk endret. Dette er en felles kvalitetsrunde som skal gi tydeligere uttrykk, ikke en påstand om at hvert enkelt lysbilde nå har optimal faglig dramaturgi. Teksttunge fagslider og leverandørarkitekturer skal fortsatt vurderes individuelt når ny tilbakemelding foreligger. Se `SLIDE_DESIGN_SYSTEM.md`.

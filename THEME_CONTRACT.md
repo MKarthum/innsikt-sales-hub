@@ -57,3 +57,8 @@ Bevegelse (på/av) er en selvstendig Presenter-innstilling, lagret lokalt i nett
 ### Ny verdimodell-slide (0.18.51)
 
 `ai-value-in-context` er en gjenbrukbar SVG/HTML-scene, **ikke et bakgrunnsbilde**. Visningen henter alle fagtekster fra JSON. Linjer, ikoner og glød følger `--pres-accent`, `--pres-fg`, `--pres-muted` og `--pres-bg` fra de eksisterende tema-rollene. Når en kopiløsning endrer kun de dokumenterte `--slide-strong-*`/`--slide-light-*`-rollene, følger hele figuren med, inkludert SVG-strekene. Ingen ny CSS-skin-kontrakt er nødvendig.
+
+
+### Redaksjonelt designsystem, v0.18.52
+
+`slide-editorial-system.css` har ingen bokstavelige merkefarger og avleder alle flater, linjer, fokus og skygger fra allerede dokumenterte `--pres-*`-roller. Nye lysbildeklasser kommer fra kanonisk metadata, ikke en privat organisasjonsskin-fil. Et eget CSS-skin kan fortsatt overstyre kun `--slide-strong-*` og `--slide-light-*`; fargeendringen går gjennom i alle 40 lysbilder, HTML-eksport og bildebasert enkeltslideeksport uten at figuren må gjenskapes.

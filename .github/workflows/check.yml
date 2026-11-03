@@ -81,6 +81,8 @@ jobs:
         run: node scripts/check-single-slide-export-browser.mjs
       - name: Kontroller verdi-slide og organisasjonskins
         run: node scripts/check-value-system-browser.mjs
+      - name: Kontroller redaksjonelt designsystem for alle lysbilder
+        run: node scripts/check-slide-editorial-browser.mjs
       - name: Kontroller og render hele biblioteket
         if: always()
         run: node scripts/check-library-v1-browser.mjs
