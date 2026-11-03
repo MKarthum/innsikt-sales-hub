@@ -62,3 +62,8 @@ Bevegelse (på/av) er en selvstendig Presenter-innstilling, lagret lokalt i nett
 ### Redaksjonelt designsystem, v0.18.52
 
 `slide-editorial-system.css` har ingen bokstavelige merkefarger og avleder alle flater, linjer, fokus og skygger fra allerede dokumenterte `--pres-*`-roller. Nye lysbildeklasser kommer fra kanonisk metadata, ikke en privat organisasjonsskin-fil. Et eget CSS-skin kan fortsatt overstyre kun `--slide-strong-*` og `--slide-light-*`; fargeendringen går gjennom i alle 40 lysbilder, HTML-eksport og bildebasert enkeltslideeksport uten at figuren må gjenskapes.
+
+
+### Nye komposisjoner uten skin-binding (0.18.53)
+
+`slide-visual-narratives.css` er et nytt, strukturelt stilark for sju dataeide scenevarianter. Det ligger etter alle kjerne-CSS-filer, men før enhver organisasjons CSS-skin, både på nettstedet og i portable HTML-eksporter. Alle synlige farger, SVG-streker, ikonbakgrunner og skygger er definert via semantiske `--pres-*`-roller, avledet fra offentlige `--slide-strong-*` og `--slide-light-*`-roller. Ingen egen tokenkontrakt eller bildebasert styling kreves for kopiløsninger.

@@ -66,6 +66,27 @@ function render(slide,esc,position={}){
   +'<p class="scene-analysts-tail">'+esc(v.tail)+'</p></div>'
   +'<div class="scene-analysts-figure">'+capacityField()+'</div></div>'
   +'<div class="scene-bottomline"><span class="scene-kicker-mark"></span>'+esc(v.tag)+'</div></div>';
+ if(kind==='two-directions'&&v.variant==='amplifier-flow'){
+  const side=(which,input,detail,outcome,description)=>'<div class="scene-amplifier-input scene-amplifier-'+which+'-input"><small>'+esc(v.inputLabel)+'</small>'
+   +'<strong>'+esc(input)+'</strong><span>'+esc(detail)+'</span></div>'
+   +'<section class="scene-amplifier-result scene-amplifier-'+which+'-result"><small>'+esc(v.resultLabel)+'</small>'
+   +'<h3>'+esc(outcome)+'</h3><p>'+esc(description)+'</p></section>';
+  return '<div class="story-scene scene-amplifier">'
+   +'<div class="scene-topline">'+label+counter+'</div>'
+   +'<header class="scene-amplifier-intro"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p></header>'
+   +'<div class="scene-amplifier-diagram" role="group" aria-label="'+esc(v.positiveInput)+' og '+esc(v.negativeInput)+' forsterkes av '+esc(v.center)+' til henholdsvis '+esc(v.positive)+' og '+esc(v.negative)+'">'
+   +'<svg class="scene-amplifier-paths" viewBox="0 0 900 380" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
+   +'<path class="scene-amplifier-track scene-amplifier-track-good" d="M166 140 C312 140 332 172 450 164 S586 140 745 140"/>'
+   +'<path class="scene-amplifier-track scene-amplifier-track-risk" d="M166 245 C312 245 332 213 450 218 S586 245 745 245"/>'
+   +'<path class="scene-amplifier-route-core" d="M450 164 V218"/>'
+   +'<circle class="scene-amplifier-point-good" cx="166" cy="140" r="6"/><circle class="scene-amplifier-point-good" cx="745" cy="140" r="6"/>'
+   +'<circle class="scene-amplifier-point-risk" cx="166" cy="245" r="6"/><circle class="scene-amplifier-point-risk" cx="745" cy="245" r="6"/>'
+   +'</svg><div class="scene-amplifier-halo" aria-hidden="true"></div>'
+   +side('good',v.positiveInput,v.positiveInputDetail,v.positive,v.positiveDetail)
+   +side('risk',v.negativeInput,v.negativeInputDetail,v.negative,v.negativeDetail)
+   +'<div class="scene-amplifier-engine"><span class="scene-amplifier-engine-symbol" aria-hidden="true">×</span><strong>'+esc(String(v.center).replace(/^×\s*/,''))+'</strong></div>'
+   +'</div><p class="scene-amplifier-takeaway">'+esc(v.takeaway)+'</p></div>';
+ }
  if(kind==='two-directions'&&v.variant==='editorial-split')return '<div class="story-scene scene-duality-editorial">'
   +'<div class="scene-topline">'+label+counter+'</div>'
   +'<header class="scene-editorial-intro"><h2>'+esc(slide.title)+'</h2><p>'+esc(v.lead)+'</p></header>'
@@ -153,6 +174,32 @@ function render(slide,esc,position={}){
     +'<div class="v2-footline"><b></b><span>INNSIKT</span></div>');
  }
  if(kind==='list'){
+  if(v.variant==='editorial-choices'){
+   const items=v.items||[];
+   if(items.length!==3)throw Error('Three task entry points required: '+slide.id);
+   return block('list v15-choices',top
+    +'<div class="v15-choices-layout"><div class="v15-choices-intro">'+title
+    +'</div>'
+    +'<ol class="v15-choices-options">'+items.map((t,i)=>'<li><span class="v15-choices-number">'+String(i+1).padStart(2,'0')+'</span>'
+     +assetImage((v.itemAssetIds||[])[i],'v15-choices-icon')
+     +'<div><h3>'+escs(t)+'</h3><p>'+escs((v.detail||[])[i])+'</p></div></li>').join('')+'</ol></div>'
+    +'<p class="v15-choices-takeaway">'+escs(v.takeaway)+'</p>');
+  }
+  if(v.variant==='editorial-journey'){
+   const steps=v.items||[];
+   if(steps.length!==3)throw Error('Three customer discovery stages required: '+slide.id);
+   return block('list v15-journey',top
+    +'<header class="v15-journey-intro">'+title+'</header>'
+    +'<div class="v15-journey-track">'
+    +'<svg class="v15-journey-connector" viewBox="0 0 850 180" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
+    +'<path d="M100 92 C245 92 250 92 425 92 S680 92 750 92"/><path d="M740 85 L750 92 L740 99"/>'
+    +'</svg>'
+    +steps.map((t,i)=>'<section class="v15-journey-step"><div class="v15-journey-node">'
+    +'<span>'+String(i+1).padStart(2,'0')+'</span>'+assetImage((v.itemAssetIds||[])[i],'v15-journey-icon')
+    +'</div><h3>'+escs(t)+'</h3><p>'+escs((v.detail||[])[i])+'</p></section>').join('')
+    +'</div><p class="v15-journey-footer">'+escs(slide.body||v.takeaway||'')+'</p>');
+  }
+
   if(['cards','voices','questions','path'].includes(v.layout)){
    const items=(v.items||[]).map((item,i)=>'<li class="v4-list-card">'
     +'<div class="v4-list-card-top"><span class="v4-list-index">0'+(i+1)+'</span>'
@@ -197,6 +244,28 @@ function render(slide,esc,position={}){
    +'<div class="v2-def-main"><div class="v2-def-word">'+String(v.term||'').trim().split(/\s+/).map(word=>'<span>'+escs(word)+'</span>').join('')+'</div>'
    +'<div class="v2-def-lenses">'+(v.roles||[]).map((role,i)=>'<div class="v2-def-lens"><small>'+escs(role)+'</small><strong>'+escs((v.meanings||[])[i])+'</strong></div>').join('')+'</div></div>'
    +'<p class="v2-def-footer">'+escs(v.takeaway||'')+'</p>');
+ }
+ if(kind==='contrast'&&v.variant==='editorial-equation'){
+  return block('contrast v15-equation',top
+   +'<header class="v15-contrast-header">'+title+'</header>'
+   +'<div class="v15-equation-layout"><div class="v15-equation-side v15-equation-appearance">'
+   +'<span class="v15-contrast-overline">'+escs(v.leftTitle)+'</span><h3>'+escs(v.leftText)+'</h3></div>'
+   +'<div class="v15-equation-sign" aria-hidden="true">'+escs(v.contrastSymbol)+'</div>'
+   +'<div class="v15-equation-side v15-equation-substance"><span class="v15-contrast-overline">'+escs(v.rightTitle)+'</span>'
+   +'<h3>'+escs(v.rightText)+'</h3></div></div>'
+   +'<div class="v15-equation-bottom"><span class="v15-bottom-line" aria-hidden="true"></span><p>'+escs(v.bridge)+'</p></div>');
+ }
+ if(kind==='contrast'&&v.variant==='editorial-balance'){
+  return block('contrast v15-balance',top
+   +'<header class="v15-contrast-header">'+title+'</header>'
+   +'<div class="v15-balance-layout">'
+   +'<div class="v15-balance-extreme v15-balance-left"><span class="v15-balance-sign" aria-hidden="true">−</span>'
+   +'<h3>'+escs(v.leftTitle)+'</h3><p>'+escs(v.leftText)+'</p></div>'
+   +'<div class="v15-balance-middle"><div class="v15-balance-point"><span class="v15-balance-check" aria-hidden="true">✓</span>'
+   +'<strong>'+escs(v.balanceLabel)+'</strong></div><span class="v15-balance-line" aria-hidden="true"></span></div>'
+   +'<div class="v15-balance-extreme v15-balance-right"><span class="v15-balance-sign" aria-hidden="true">−</span>'
+   +'<h3>'+escs(v.rightTitle)+'</h3><p>'+escs(v.rightText)+'</p></div></div>'
+   +'<p class="v15-balance-bottom">'+escs(v.bridge)+'</p>');
  }
  if(kind==='contrast'){
   return block('contrast',top+'<div class="v2-contrast-head">'+title+'</div>'

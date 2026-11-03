@@ -20,11 +20,11 @@ try{
  assert.equal(await frame.locator('.v14-market-trend').count(),3);
  await page.locator('#slide-next').click();await page.locator('#slide-next').click();
  assert.equal(await frame.getAttribute('data-transition'),'reveal');
- assert.equal(await frame.locator('.scene-duality-editorial').count(),1);
- assert.equal(await frame.locator('.scene-editorial-outcomes h3').count(),2);
+ assert.equal(await frame.locator('.scene-amplifier').count(),1,'Main story shows actual amplifier, not two cards');
+ assert.equal(await frame.locator('.scene-amplifier-result h3').count(),2);
  await page.locator('#present-motion-mode').selectOption('on');
  await page.emulateMedia({reducedMotion:'reduce'});
- assert.equal(await frame.locator('.scene-editorial-risk').evaluate(el=>getComputedStyle(el).animationName),'none','System reduced-motion must override motion enabled');
+ assert.equal(await frame.locator('.scene-amplifier-engine').evaluate(el=>getComputedStyle(el).animationName),'none','System reduced-motion must override motion enabled');
  await page.emulateMedia({reducedMotion:'no-preference'});
  await page.locator('[data-deck="portal"]').click();
  assert.equal(await frame.getAttribute('data-motion'),'on','Motion kept across stories');

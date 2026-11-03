@@ -39,4 +39,22 @@ assert.ok(exporter.includes('(await editorial.text())'),'Offline export is missi
 assert.ok(index.includes('site.js?v='),'Site versioning contract missing');
 const rules=read('SLIDE_DESIGN_SYSTEM.md');
 assert.ok(rules.includes('CSS-skin')&&rules.includes('Ett hovedpoeng'),'Rules must describe content and skin portability');
+const structuralVariants={
+ 'ai-two-directions':'amplifier-flow',
+ 'ai-good-vs-fast':'editorial-equation',
+ 'ai-two-extremes':'editorial-balance',
+ 'portal-market':'editorial-relation',
+ 'market-why-now':'editorial-relation',
+ 'portal-three-ways':'editorial-choices',
+ 'portal-customer-signal':'editorial-journey',
+};
+for(const [id,variant] of Object.entries(structuralVariants)){
+ const s=slides.find(x=>x.id===id);
+ assert.equal(s?.visual?.variant,variant,'Required structural scene: '+id);
+}
+const narratives=read('docs/assets/slide-visual-narratives.css');
+assert.ok(read('docs/index.html').includes('slide-visual-narratives.css?v='),'Real scenes must load in browser');
+assert.ok(exporter.includes('slide-visual-narratives.css?v='),'Real scenes must be available in offline export');
+for(const selector of ['scene-amplifier','v15-equation','v15-balance','v15-relation','v15-choices','v15-journey'])assert.ok(narratives.includes(selector),'Real scene CSS missing '+selector);
+assert.ok(read('SLIDE_REDESIGN_AUDIT_2026-11-03.md').includes('0.18.52'),'Must preserve acknowledgement of metadata-only redesign');
 console.log('PASS – '+slides.length+' individually typed design scenes, '+map.size+' archetypes, skin-only styles, motion and portable HTML');

@@ -43,3 +43,10 @@ Hvert enkelt objekt må begrunnes gjennom klassifiseringen i \`slides.json\`. Ny
 \`scripts/check-slide-design-system.mjs\` håndhever alle aktive lysbilders metadata, gyldige rollenavn, original kilde- og note-autoritet, styling uten faste merkefarger, innlasting i web/HTML-eksport og at en ny scene ikke ligger utenfor kontrakten. \`scripts/check-slide-editorial-browser.mjs\` kontrollerer per lysbilde at klassifiseringen faktisk er overført til scenen, at lys/mørk og alternativt skin virker, at figurer ikke klippes, og at bevegelse kan slås helt av. \`check-library-v1-browser.mjs\` rendrer hele biblioteket i tillegg; \`check-presentation-motion-browser.mjs\` kontrollerer eksisterende animations-/overgangskontrakt og offline-eksport.
 
 **Redaksjonell kvalitetsport:** Et objekt kan ikke godkjennes bare fordi det er pikselforskjellig fra forgjengeren. Det må være lettere å forstå budskapet på noen sekunder. Hvis et lysbilde er informasjonsrikt av faglige grunner, er tydelig lesbarhet viktigere enn dramatiske effekter.
+
+
+## Skjerpet kontroll: faktisk komposisjon, ikke ny pynt (v0.18.53)
+
+En ren endring i palett, lys/mørk, skygger, border-radius, aksentstreker eller `design.archetype` **kan ikke rapporteres som en fullført redesign**. Før en slide markeres ferdig må den viktigste faglige sammenhengen tegnes om der den gamle komposisjonen ikke formidler budskapet godt nok. Kontroller visuelt at den nye scenen er mer forklarende, ikke bare annerledes. Følg oversikten per lysbilde i `SLIDE_REDESIGN_AUDIT_2026-11-03.md`.
+
+Nye dataeide scenevarianter må teste eksplisitt at den nye HTML/SVG-strukturen finnes, at den gamle generiske kortstrukturen ikke gjengis, at synlig tekst eies av JSON, og at lys/mørk, kopiskin, statisk eksport og mobil fullskjerm fungerer. `scripts/check-slide-narratives-browser.mjs` håndhever denne kontrakten for de første sju. Andre lysbilder forblir åpne arbeidsoppgaver til de faktisk har fått en redaksjonell vurdering og eventuell ny komposisjon.

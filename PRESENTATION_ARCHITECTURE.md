@@ -149,3 +149,10 @@ Regresjon: `scripts/check-value-system-browser.mjs` validerer begge temaer, tre 
 Hele biblioteket er gjennomgått og har nå en eksplisitt, faglig begrunnet `design`-rolle per objekt. `slideWithDesign` legger dataene på en eksisterende sceneflate (`data-editorial`, `data-design-focus`) uten å skape flere kopier eller nytt presentasjonsformat. `docs/assets/slide-editorial-system.css` gir gjennomgående redaksjonelle grep, men ti ulike archetypes for henholdsvis hero, workbench, choice, journey, dialogue, evidence, system, decision, contrast og blueprint. De seks tekniske diagrammene beholder særegen oppbygning, kilde-/brandlogoer og faglige krav. Ingen av rollene krever en bestemt merkepalett.
 
 HTML/offline-eksport bygger det nye stilarket **før** organisasjonens skin. Statisk bilde/PDF/PPTX bruker samme scenemarkup som Presenter. Valgfri oppbyggingsanimasjon er separat fra innhold og tema. Se `SLIDE_DESIGN_SYSTEM.md` for obligatoriske redaksjonelle krav, klassifiseringer og tester.
+
+
+## Korrigering: ikke alle 40 var strukturelt redesignet (v0.18.53)
+
+Forrige release, 0.18.52, forbedret et felles CSS-uttrykk, men komposisjonene var i hovedsak uendret. Vurderingen «alle 40 redesignet» var derfor misvisende. Denne versjonen bygger konkret om sju scenevarianter: kapasitetsforsterker, kvalitetsulikhet, balansert pilot, to sammenhengsfigurer og to portaloppgaver/prosessbilder. Figurer og tekster er dataeid og bruker semantiske tema-/skinroller. Eldre scener forblir kompatibilitetsfallback, ikke aktiv visning for disse objektene.
+
+Det gjenstår redaksjonelt arbeid på flere lysbilder. Individuell prioritering og de reviderte godkjenningskravene ligger i `SLIDE_REDESIGN_AUDIT_2026-11-03.md` og `SLIDE_DESIGN_SYSTEM.md`. Ingen omtale av fullført redesign uten faktisk komposisjons- og skjermbildekontroll av hvert objekt.

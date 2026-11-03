@@ -52,5 +52,5 @@ try{
  assert.equal(custom,'rgb(232, 174, 76)');
  assert.equal(await sample.getAttribute('data-editorial'),'blueprint','Data survives skin override');
  assert.deepEqual(errors,[],'Browser runtime errors');
- console.log('PASS – '+slides.length+' standalone redesigned slides, 10 archetypes, mobile-safe 16:9, dark/light and CSS-only company skin');
+ console.log('PASS – '+slides.length+' standalone slides with editorial roles, 10 archetypes, mobile-safe 16:9, dark/light and CSS-only company skin');
 }finally{await browser.close()}

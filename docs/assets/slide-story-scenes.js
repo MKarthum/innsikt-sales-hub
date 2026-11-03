@@ -101,6 +101,17 @@ function render(slide,{v,top,title,escs,assetImage,block,diagram}){
    +(v.questions||[]).map((q,i)=>'<div><em>'+String(i+1).padStart(2,'0')+'</em><strong>'+escs(q)+'</strong></div>').join('')+'</div></div>'
    +footer(v.conclusion));
  case 'two-truths':
+  if(v.variant==='editorial-relation'){
+   if(v.truths?.length!==2)throw Error('Two relationships expected: '+slide.id);
+   return block('special v15-relation',top+heading
+    +'<div class="v15-relation-stage">'
+    +v.truths.map((x,i)=>'<section class="v15-relation-idea v15-relation-'+i+'">'
+      +'<div class="v15-relation-identity"><span class="v15-relation-number">0'+(i+1)+'</span>'
+      +icon(x.assetId||v.figureAssetId,'v15-relation-icon')+'</div>'
+      +'<small>'+escs(x.label)+'</small><h3>'+escs(x.title)+'</h3><p>'+escs(x.text)+'</p></section>'
+    ).join('<div class="v15-relation-bridge" aria-hidden="true"><span>'+escs(v.relationMarker)+'</span></div>')
+    +'</div><p class="v15-relation-conclusion">'+escs(v.conclusion)+'</p>');
+  }
   return block('special v5-special v5-truths',top+heading
    +'<div class="v5-truths-layout">'+v.truths.map((x,i)=>section('v5-truth v5-truth-'+i,
     '<small>'+escs(x.label)+'</small>'+icon(x.assetId||v.figureAssetId,'v5-truth-icon')+'<h3>'+escs(x.title)+'</h3><p>'+escs(x.text)+'</p>'

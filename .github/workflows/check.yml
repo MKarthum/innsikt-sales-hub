@@ -83,6 +83,8 @@ jobs:
         run: node scripts/check-value-system-browser.mjs
       - name: Kontroller redaksjonelt designsystem for alle lysbilder
         run: node scripts/check-slide-editorial-browser.mjs
+      - name: Kontroller reelt ombygde, datadrevne lysbilder
+        run: node scripts/check-slide-narratives-browser.mjs
       - name: Kontroller og render hele biblioteket
         if: always()
         run: node scripts/check-library-v1-browser.mjs

@@ -86,7 +86,8 @@
           "data-semantic"
         ],
         "layout": "cards",
-        "takeaway": "Tre eksempler på oppgaver. Forsiden har også trening med en kollega."
+        "takeaway": "Tre eksempler på oppgaver. Forsiden har også trening med en kollega.",
+        "variant": "editorial-choices"
       },
       "design": {
         "archetype": "choice",
@@ -193,7 +194,8 @@
           "value-compass"
         ],
         "layout": "path",
-        "takeaway": "Vi vet hva kunden opplever. Årsaken må fortsatt undersøkes."
+        "takeaway": "Vi vet hva kunden opplever. Årsaken må fortsatt undersøkes.",
+        "variant": "editorial-journey"
       },
       "design": {
         "archetype": "journey",
@@ -270,7 +272,9 @@
           }
         ],
         "conclusion": "Bruk trenden til å stille et bedre kundespørsmål, ikke til å konkludere.",
-        "figureAssetId": "market-signal"
+        "figureAssetId": "market-signal",
+        "variant": "editorial-relation",
+        "relationMarker": "→"
       },
       "design": {
         "archetype": "contrast",
@@ -608,9 +612,16 @@
         "negative": "Flere feil",
         "negativeDetail": "Uklare begreper og svake data i større skala.",
         "center": "× KAPASITET",
-        "variant": "editorial-split"
+        "variant": "amplifier-flow",
+        "positiveInput": "Gode premisser",
+        "positiveInputDetail": "Klare begreper og pålitelige data",
+        "negativeInput": "Svake premisser",
+        "negativeInputDetail": "Uklare begreper og usikre data",
+        "inputLabel": "UTGANGSPUNKT",
+        "resultLabel": "FORSTERKET UTFALL",
+        "takeaway": "Kapasitet er ikke kvalitet. Det er grunnlaget som avgjør hva vi forsterker."
       },
-      "speakerBase": "Kapasitet kan forsterke både godt og svakt grunnlag. En faglig illustrasjon uten kvantifiserte effektpåstander.",
+      "speakerBase": "Illustrer samme kapasitetsøkning på to utgangspunkter. Med tydelige begreper, et relevant datagrunnlag og faglig kontroll kan vi få flere gode spørsmål og bedre begrunnede beslutninger. Med uklare begreper eller usikre data kan feil derimot gjentas eller spres raskere. Dette er en kvalitativ modell, ikke en målt gevinst eller feilrate. Begynn derfor med formål, datakvalitet og kontroll før kapasiteten skaleres.",
       "sourceIds": [],
       "design": {
         "archetype": "contrast",
@@ -768,7 +779,9 @@
         "rightTitle": "Holder mål",
         "rightText": "Riktig premiss, data og tolkning",
         "bridge": "Test premisser og datagrunnlag før du handler på svaret.",
-        "figureAssetId": "verified-analysis"
+        "figureAssetId": "verified-analysis",
+        "variant": "editorial-equation",
+        "contrastSymbol": "≠"
       },
       "sourceIds": [],
       "speakerBase": "Et polert svar er ikke nødvendigvis et godt beslutningsgrunnlag. Datagrunnlaget kan være ufullstendig, begreper kan tolkes feil eller svaret kan løse feil problem. Vi trenger derfor evnen til å teste antakelser, stille oppfølgingsspørsmål og bruke faglig skjønn. KI er et hjelpemiddel også i denne kvalitetssikringen.",
@@ -794,7 +807,9 @@
         "rightTitle": "For stor startpakke",
         "rightText": "Vi utsetter all læring til alt er modernisert.",
         "bridge": "Velg én viktig oppgave. Test trygt. Forbedre grunnlaget underveis.",
-        "figureAssetId": "value-compass"
+        "figureAssetId": "value-compass",
+        "variant": "editorial-balance",
+        "balanceLabel": "KONTROLLERT LÆRING"
       },
       "sourceIds": [],
       "speakerBase": "Datakvalitet er nødvendig der beslutningen krever det, men ikke alle bruksområder forutsetter total modernisering. Vi skal verken automatisere ukritisk eller gjøre et stort plattformprogram til forutsetning for enhver nytte. Start med en arbeidsoppgave, avklar konsekvens og risiko og la kontrollert læring styre videre investeringer.",
@@ -1460,7 +1475,9 @@
             "assetId": "value-compass"
           }
         ],
-        "conclusion": "Mer kraft gir muligheter – ikke automatisk bedre beslutninger."
+        "conclusion": "Mer kraft gir muligheter – ikke automatisk bedre beslutninger.",
+        "variant": "editorial-relation",
+        "relationMarker": "+"
       },
       "design": {
         "archetype": "contrast",
