@@ -348,7 +348,7 @@
 .ai-work-review{margin-top:auto;padding:1.15cqw 1.4cqw;font:750 1.4cqw var(--font-body);border-top:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent)}
 .ai-work-tools{flex:0 0 auto;display:flex;justify-content:space-around;gap:1.5cqw;padding:1.0cqw 0 0;border-top:1px solid color-mix(in srgb,var(--pres-fg) 18%,transparent)}
 .ai-work-tools>span{display:flex;align-items:center;gap:.7cqw;font:710 1.43cqw var(--font-body)}
-.ai-reuse-icon{width:3.2cqw;height:2.5cqw;object-fit:contain;padding:.2cqw;background:white;border-radius:.3cqw;box-sizing:border-box}
+.ai-reuse-icon{width:3.2cqw;height:2.5cqw;object-fit:contain;padding:.2cqw;background:var(--pres-bg);border-radius:.3cqw;box-sizing:border-box}
 .ai-usage-layout{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:2.3cqw}
 .ai-usage-panel{min-width:0;min-height:0;display:flex;flex-direction:column;border-radius:1cqw;overflow:hidden;border:1px solid color-mix(in srgb,var(--pres-fg) 21%,transparent)}
 .ai-usage-panel header{background:var(--pres-fg);color:var(--pres-bg);padding:1.05cqw 1.4cqw;font:780 1.45cqw var(--font-body)}
