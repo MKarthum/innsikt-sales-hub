@@ -1,0 +1,54 @@
+/* Optional, reusable scene-art objects. This layer is always non-interactive and decorative.
+   Text, definitions, provenance and company-specific typography stay in the native slide. */
+.scene-art{position:absolute;inset:0;pointer-events:none;overflow:hidden;isolation:isolate;
+ --scene-art-saturation:1;--scene-art-brightness:1;--scene-art-hue:0deg;
+ --scene-art-veil:color-mix(in srgb,var(--pres-bg) 9%,transparent);
+ --scene-art-glow:color-mix(in srgb,var(--pres-warning) 35%,transparent);
+ --scene-art-shape:color-mix(in srgb,var(--pres-accent) 30%,transparent)}
+.scene-art-object{position:absolute;pointer-events:none;left:var(--sa-x);top:var(--sa-y);
+ width:var(--sa-w);height:var(--sa-h);opacity:var(--sa-alpha);
+ transform:rotate(var(--sa-rotate)) scale(var(--sa-scale));transform-origin:center;
+ background-repeat:no-repeat}
+.scene-art-image{display:block;width:100%;height:100%;max-width:none;max-height:none;
+ filter:saturate(var(--scene-art-saturation)) brightness(var(--scene-art-brightness)) hue-rotate(var(--scene-art-hue))}
+.scene-art-image[data-scene-fit="fill"]{object-fit:fill}
+.scene-art-image[data-scene-fit="cover"]{object-fit:cover}
+.scene-art-image[data-scene-fit="contain"]{object-fit:contain}
+.scene-art-image[data-scene-style="muted"]{filter:saturate(calc(var(--scene-art-saturation) * .55)) brightness(var(--scene-art-brightness))}
+.scene-art-image[data-scene-style="corporate"]{filter:grayscale(.45) saturate(var(--scene-art-saturation))}
+.scene-art-object--glow{border-radius:50%;
+ background:radial-gradient(ellipse,var(--scene-art-glow),transparent 72%)}
+.scene-art-object--shape{background:var(--scene-art-shape)}
+.scene-art-object--shape[data-scene-role="accent"]{background:var(--pres-accent)}
+.scene-art-object--shape:has(img){background:none}
+.scene-art-object[data-scene-mode="illustrated"]{display:none}
+.story-scene[data-art-direction="illustrated"] .scene-art-object[data-scene-mode="illustrated"]{display:block}
+.story-scene[data-art-direction="illustrated"] .scene-art-object[data-scene-mode="standard"]{display:none}
+.story-scene[data-art-direction="standard"] .scene-art-object[data-scene-mode="standard"]{display:block}
+/* Context scene: photographic-style art is an independent composition, not a screenshot. */
+.story-scene.scene-context-platforms .cp-landscape{position:absolute;inset:0;width:100%;height:100%;
+ mask-image:none;opacity:1;z-index:0}
+.story-scene.scene-context-platforms .cp-landscape .scene-art{width:100%;height:100%;
+ opacity:.22;mask-image:linear-gradient(90deg,transparent 0%,transparent 56%,var(--pres-fg) 94%);
+ --scene-art-saturation:.62;--scene-art-brightness:.72}
+.story-scene.scene-context-platforms[data-art-direction="illustrated"] .cp-landscape .scene-art{
+ opacity:1;mask-image:none;--scene-art-saturation:1;--scene-art-brightness:1}
+.story-scene.scene-context-platforms[data-art-direction="illustrated"] .cp-landscape::after{
+ content:'';position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(90deg,
+  color-mix(in srgb,var(--pres-bg) 86%,transparent) 0%,
+  color-mix(in srgb,var(--pres-bg) 74%,transparent) 35%,
+  color-mix(in srgb,var(--pres-bg) 31%,transparent) 70%,
+  transparent 100%);z-index:1}
+.story-scene.scene-context-platforms[data-art-direction="illustrated"] .cp-diagram{width:75.2%;margin-left:.2cqw}
+.story-scene.scene-context-platforms[data-art-direction="illustrated"] .cp-title{max-width:79cqw}
+.story-scene.scene-context-platforms[data-art-direction="illustrated"] .cp-context{
+ background:linear-gradient(104deg,
+ color-mix(in srgb,var(--pres-accent) 24%,var(--pres-bg)),
+ color-mix(in srgb,var(--pres-bg) 75%,var(--pres-accent)));
+ backdrop-filter:blur(.55cqw)}
+.story-scene.scene-context-platforms[data-art-direction="illustrated"] .cp-source{
+ background:color-mix(in srgb,var(--pres-bg) 85%,var(--pres-accent));
+ backdrop-filter:blur(.35cqw)}
+@media(prefers-reduced-motion:reduce){.scene-art *{animation:none!important;transition:none!important}}
+@media print{.scene-art *{animation:none!important;transition:none!important}}
