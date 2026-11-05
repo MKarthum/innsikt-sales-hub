@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="flag" x1="0" y1="0" x2="1" y2=".5"><stop stop-color="#9ee7d7"/><stop offset="1" stop-color="#ddf8d9"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="11"/></filter></defs>
- <ellipse cx="1461" cy="148" rx="81" ry="83" fill="#ffe6b8" opacity=".28" filter="url(#glow)"/>
- <path d="M1454 174V98" stroke="#112e37" stroke-width="7" stroke-linecap="round"/>
- <path d="M1454 174V98" stroke="#eef9ed" stroke-width="3.1" stroke-linecap="round"/>
- <path d="M1456 100Q1491 88 1535 111L1513 135Q1486 116 1456 123Z" fill="url(#flag)" stroke="#f2f9e9" stroke-width="1.5"/>
- <circle cx="1454" cy="98" r="4.2" fill="#f6f9e8"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="banner" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#8fe9ce"/><stop offset=".6" stop-color="#d1f5ce"/><stop offset="1" stop-color="#fff2ce"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="12"/></filter></defs>
+<ellipse cx="1453" cy="123" rx="78" ry="78" fill="#fff1c8" opacity=".25" filter="url(#g)"/>
+<path d="M1452 177V85" stroke="#123946" stroke-width="10" stroke-linecap="round"/><path d="M1452 177V85" stroke="#ecf6e7" stroke-width="4" stroke-linecap="round"/>
+<path d="M1455 91Q1493 76 1541 101L1518 132Q1484 112 1455 120Z" fill="url(#banner)" stroke="#f1ffe7" stroke-width="1.7"/>
+<path d="M1457 94Q1499 89 1526 104" fill="none" stroke="#fff7e3" opacity=".62" stroke-width="2"/><circle cx="1452" cy="83" r="4.8" fill="#fff7e1"/></svg>
