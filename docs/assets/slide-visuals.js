@@ -154,9 +154,9 @@ function render(slide,esc,position={}){
 
  // Reusable context ecosystem: all visible words are owned by slides.json.
  if(kind==='context-platforms'){
-  const tiles=(list,cls)=>list.map((item,i)=>'<div class="cp-tile '+cls+'"><span class="cp-tile-no" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span><div class="cp-tile-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div></div>').join('');
+  const tiles=(list,cls)=>list.map((item,i)=>'<div class="cp-tile '+cls+'">'+(item.assetId?'<span class="cp-icon">'+assetImage(item.assetId,'cp-icon-image')+'</span>':'')+'<div class="cp-tile-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div></div>').join('');
   const links=()=>'<div class="cp-links" aria-hidden="true"><i></i><i></i><i></i></div>';
-  const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div>'+(i===v.cycle.length-1?'':'<span class="cp-cycle-arrow" aria-hidden="true">→</span>')).join('');
+  const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step">'+(item.assetId?assetImage(item.assetId,'cp-cycle-icon'):'')+'<span class="cp-cycle-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>'+(i===v.cycle.length-1?'':'<span class="cp-cycle-arrow" aria-hidden="true">→</span>')).join('');
   const scenery=window.InnsiktSceneArt.render(v.artwork,position.assets,escs);
   return '<div class="story-scene scene-context-platforms">'
    +'<div class="cp-landscape" aria-hidden="true">'+scenery+'</div>'

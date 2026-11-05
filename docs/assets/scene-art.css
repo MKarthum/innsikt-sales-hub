@@ -55,3 +55,31 @@
 .scene-art-object--shape[data-scene-shape="disc"]{border-radius:50%}
 .scene-art-object--shape[data-scene-shape="panel"]{border-radius:1.8cqw}
 .scene-art-object--shape[data-scene-shape="rule"]{height:min(var(--sa-h),.2cqw);border-radius:2cqw}
+
+/* 2027 visual hierarchy: semantic icons are separate catalog assets and remain native HTML. */
+.scene-context-platforms .cp-tile{gap:.8cqw}
+.scene-context-platforms .cp-icon{display:flex;align-items:center;justify-content:center;flex:0 0 2.5cqw;width:2.5cqw;height:2.5cqw;
+ background:color-mix(in srgb,var(--pres-accent) 11%,transparent);border:1px solid color-mix(in srgb,var(--pres-accent) 26%,transparent);
+ border-radius:.9cqw}
+.scene-context-platforms .cp-icon-image{display:block;width:1.68cqw;height:1.68cqw;object-fit:contain;opacity:.92;
+ filter:brightness(0) invert(1)}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumer{padding:.65cqw .8cqw}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumer .cp-icon{
+ border:0;background:none;width:2.8cqw;flex-basis:2.8cqw;height:2.8cqw}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumer .cp-icon-image{width:2.4cqw;height:2.4cqw}
+.scene-context-platforms .cp-facet .cp-icon{background:none;border:0;flex-basis:2.2cqw;width:2.2cqw}
+.scene-context-platforms .cp-facet .cp-icon-image{width:1.8cqw;height:1.8cqw}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-context{
+ border-radius:3.7cqw 4.1cqw 3.1cqw 3.6cqw / 3.1cqw 3.6cqw 3.9cqw 3.4cqw;
+ background:
+ radial-gradient(ellipse at 38% 2%,color-mix(in srgb,var(--pres-accent) 31%,transparent),transparent 76%),
+ linear-gradient(108deg,color-mix(in srgb,var(--pres-bg) 78%,var(--pres-accent)),color-mix(in srgb,var(--pres-bg) 69%,var(--pres-accent)))}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-context::before{
+ content:'';pointer-events:none;position:absolute;inset:.45cqw .8cqw auto;height:20%;
+ border-top:1px solid color-mix(in srgb,var(--pres-fg) 27%,transparent);border-radius:50%}
+.scene-context-platforms .cp-cycle-step{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:.7cqw}
+.scene-context-platforms .cp-cycle-icon{width:1.85cqw;height:1.85cqw;flex:0 0 1.85cqw;
+ filter:brightness(0) invert(1);opacity:.88}
+.scene-context-platforms .cp-cycle-copy{display:flex;flex-direction:column;gap:.15cqw;align-items:flex-start;text-align:left}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-diagram{width:73.8%;margin-left:0}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-title h2{letter-spacing:-.055em}

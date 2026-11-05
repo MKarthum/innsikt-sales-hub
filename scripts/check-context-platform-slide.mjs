@@ -18,6 +18,7 @@ for(const key of ['consumers','facets','sources','cycle']) {
  assert.ok(slide.visual[key].every(x=>x.label&&x.detail),key+' labels must be data-owned');
 }
 assert.ok(slide.visual.governance.length>=4);
+for(const key of ['consumers','facets','sources','cycle'])assert.ok(slide.visual[key].every(x=>x.assetId),'Every semantic role has a swappable icon');
 const sandbox={window:{InnsiktStoryScenes:{render:()=>null}}};
 vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),sandbox);
 vm.runInNewContext(fs.readFileSync('docs/assets/scene-art.js','utf8'),sandbox);
