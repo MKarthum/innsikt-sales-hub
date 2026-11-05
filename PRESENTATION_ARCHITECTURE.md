@@ -178,3 +178,10 @@ Ny renderer `docs/assets/scene-art.js` har en minimal, gjenbrukbar objektkontrak
 ## 0.18.59 – to illustrasjonsnivåer, ett faginnhold
 
 «Enkel illustrasjon» (`illustrated`) består fortsatt av seks separate vektorlag. «Rik illustrasjon» (`illustrated-rich`) benytter et separat KI-generert og registrert WebP-bakteppe, som aktiveres med `mode: rich` i samme `visual.artwork`-liste. Renderer, data og innholdsobjekter er felles. Ingen tittel, begrep, boks, kilde, styringspunkt eller semantisk pil finnes i bakgrunnsbildet. To horisontale piler og en tydelig returforbindelse er native SVG-elementer og inngår i alle visningsstilene. Visningsvalg og bildekomposisjon kan dermed endres uavhengig av selskapets fullstendige CSS-skin-kontrakt for tekst og fagobjekter.
+
+
+## 0.18.60 – robust eksport og mer helhetlig kontekstscene
+
+Nedlasting av enkeltlysbildet bruker nå faktisk valgt og rendret lysbilde fra bibliotek, fullskjerm eller Presenter i stedet for å generere en ny standardvisning. `slide-export-prep.js` pakker lokale, katalogførte bilder og SVG-ressurser inn som data-URI før PNG/JPG/PDF/PowerPoint-capture. Ukjente ressursbaner eller manglende rik bakgrunn avvises eksplisitt. Dette bevarer både art direction, bildefiler og skin i det eksporterte resultatet.
+
+I `ai-context-platforms-2027` er kilde- og handlingslaget knyttet sammen med en enkelt nedoverrettet, native SVG-pil (ikke en villedende én-til-én-relasjon mellom kildekolonner og prosessledd). Tre nye, native og dataeide verdi-kort vises til høyre: bedre beslutninger, mer målrettet handling og læring underveis. Kortene er konseptuelle muligheter, ikke garanterte effekter. Bakgrunnens fotografi, lys, dybde og skygger er fortsatt dekorative og kan byttes uten å endre faginnholdet.

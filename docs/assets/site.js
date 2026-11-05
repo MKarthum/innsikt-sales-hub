@@ -600,11 +600,22 @@ async function downloadSlideButton(button){
  if((item.classification==='internal'||deck.classification==='internal')
     &&!window.confirm('Internt innhold: Filen kan deles utenfor den beskyttede løsningen. Vil du fortsette?'))return;
  const index=currentInPresenter?slide:(used[0]?.index||0);
- const tone=window.InnsiktSlides.tone(item,deck,presentationThemeMode);
+ // Export the *visible* slide, including its selected art direction, not a fresh
+ // default-mode render. Details, fullscreen and Presenter share this single path.
+ const candidates=currentInPresenter
+  ?[document.getElementById('slide-body')]
+  :[...document.querySelectorAll('.slide-library-fullscreen-stage .present-frame,.slide-library-detail-stage .present-frame')];
+ const visible=candidates.find(el=>el?.querySelector('.story-scene')
+   &&(currentInPresenter||el.dataset.librarySlideId===item.id));
+ const fallback=slideMarkup(item,index,deckId,false,false);
+ const rendered=visible?.querySelector('.story-scene')?visible.innerHTML:fallback;
+ const tone=visible?.dataset.tone||window.InnsiktSlides.tone(item,deck,presentationThemeMode);
  button.disabled=true;button.setAttribute('aria-busy','true');
  try{
+  const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
+  const html=await prep.prepareSlideMarkupForExport(rendered);
   const module=await import('./slide-download.js?v='+encodeURIComponent(D.meta.version));
-  await module.downloadSingleSlide({id:item.id,title:item.title,html:slideMarkup(item,index,deckId,false,false),tone,format,version:D.meta.version});
+  await module.downloadSingleSlide({id:item.id,title:item.title,html,tone,format,version:D.meta.version});
   toast('Lysbildet er lastet ned.');
  }catch(err){
   toast(D.pages.slideLibraryUi.singleExportError+' '+(err?.message||''));

@@ -156,6 +156,9 @@ function render(slide,esc,position={}){
  if(kind==='context-platforms'){
   const tiles=(list,cls)=>list.map((item,i)=>'<div class="cp-tile '+cls+'">'+(item.assetId?'<span class="cp-icon">'+assetImage(item.assetId,'cp-icon-image')+'</span>':'')+'<div class="cp-tile-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div></div>').join('');
   const links=()=>'<div class="cp-links" aria-hidden="true"><i></i><i></i><i></i></div>';
+  const actionLink='<div class="cp-action-link" aria-hidden="true"><svg viewBox="0 0 36 36" focusable="false"><path d="M18 2V29M10 21L18 29L26 21"/></svg></div>';
+  const outcomes=(v.outcomes||[]).map(item=>'<div class="cp-outcome">'+(item.assetId?assetImage(item.assetId,'cp-outcome-icon'):'')+'<span><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>').join('');
+
   const stepArrow='<svg class="cp-cycle-arrow" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 16H27M18 7L27 16L18 25"/></svg>';
   const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step">'+(item.assetId?assetImage(item.assetId,'cp-cycle-icon'):'')+'<span class="cp-cycle-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>'+(i===v.cycle.length-1?'':stepArrow)).join('');
   const feedback='<svg class="cp-feedback-return" viewBox="0 0 1000 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="cp-feedback-track" d="M945 7V29Q945 49 922 49H78Q55 49 55 29V7"/><path class="cp-feedback-head" d="M38 23L55 5L72 23"/></svg>';
@@ -170,9 +173,12 @@ function render(slide,esc,position={}){
    +'<div class="cp-facets">'+tiles(v.facets,'cp-facet')+'</div></section>'
    +links()
    +'<section class="cp-sources" aria-label="Kilder og systemer">'+tiles(v.sources,'cp-source')+'</section>'
+   +actionLink
    +'<section class="cp-cycle" aria-label="Beslutning, kontrollert handling og oppdatert kontekst">'+cycle+feedback+'</section>'
    +'<footer class="cp-governance"><strong>'+escs(v.governanceLabel)+'</strong><span>'+v.governance.map(escs).join(' · ')+'</span></footer>'
-   +'</div></div>';
+   +'</div>'
+   +(outcomes?'<aside class="cp-outcomes" aria-label="'+escs(v.outcomesTitle||'Mulig verdi')+'"><small class="cp-outcomes-title">'+escs(v.outcomesTitle||'Mulig verdi')+'</small>'+outcomes+'</aside>':'')
+   +'</div>';
  }
 
  if(kind==='context-bridge'){

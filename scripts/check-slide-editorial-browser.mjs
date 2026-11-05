@@ -76,6 +76,32 @@ try{
  assert.equal(await platform.locator('[data-scene-object="rich-mountain-background"]').evaluate(el=>getComputedStyle(el).display),'block');
  assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Factual text is identical in both illustration modes');
  await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-rich.png'});
+ // The actual downloaded PNG must contain the selected, data-owned photographic layer.
+ const button=page.locator('[data-slide-download="png"][data-slide-download-id="ai-context-platforms-2027"]').first();
+ const [download]=await Promise.all([page.waitForEvent('download',{timeout:60000}),button.click()]);
+ const exported=fs.readFileSync(await download.path());
+ assert.equal(exported.subarray(1,4).toString(),'PNG','Downloaded bytes must be PNG');
+ const photo=await page.evaluate(async base64=>{
+  const image=new Image();
+  image.src='data:image/png;base64,'+base64;
+  await image.decode();
+  const canvas=document.createElement('canvas');canvas.width=80;canvas.height=45;
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(image,0,0,80,45);
+  const pixels=ctx.getImageData(0,0,80,45).data;
+  let warm=0,variance=0;
+  const samples=[];
+  for(let y=3;y<35;y+=2)for(let x=64;x<79;x+=2){
+   const i=(y*80+x)*4,r=pixels[i],g=pixels[i+1],b=pixels[i+2];
+   if(r>130&&r>g*1.06&&r>b*1.18)warm++;
+   samples.push((r+g+b)/3);
+  }
+  const avg=samples.reduce((a,b)=>a+b,0)/samples.length;
+  variance=samples.reduce((a,b)=>a+(b-avg)**2,0)/samples.length;
+  return {warm,variance,width:image.width,height:image.height};
+ },exported.toString('base64'));
+ assert.ok(photo.warm>=8&&photo.variance>350,'Exported PNG lost the scenic image: '+JSON.stringify(photo));
+ fs.writeFileSync('artifacts/visual-pilot/context-platforms-downloaded.png',exported);
+
  const richEx=await platform.evaluate(el=>({w:el.scrollWidth-el.clientWidth,h:el.scrollHeight-el.clientHeight}));
  assert.ok(richEx.w<=3&&richEx.h<=3,'Rich illustration stays inside 16:9');
  await page.locator('#library-tone-mode').selectOption('light');

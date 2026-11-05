@@ -82,3 +82,8 @@ Fagtekst, tabeller og kontroller fortsetter å følge selskapets CSS-skin fullt 
 ### Rik illustrasjon med eget bildeobjekt – v0.18.59
 
 Kjernens selskapsprofil er obligatorisk for alle tekster, kort, piler, typografi og andre meningsbærende objekter. Den rike scenen har et separat katalogført, KI-generert bakgrunnsbilde og tillater moderat avvik i natur- og illustrasjonsfarger. Begrenset overstyring av dekorative flater skjer via eksisterende `--scene-art-*`-roller. «Rik illustrasjon» er ikke et alternativ til selskapets designkontrakt, men en art direction med kontrollerte frihetsgrader. I alternativ lys/mørk/fortellingsstyrt brukes bare native visning, uten kopiering av faginnhold.
+
+
+### 0.18.60: eksport og native verdi-kort
+
+Alle tekstkort, piler, ikoner og begreper i verdifeltet følger uendret `--pres-*`-kontrakt. Rik illustrasjon kan fortsatt ha en egen dekorativ palett. Eksport av enkeltlysbilder tar med valgt scenemodus og integrerte lokale bilder, slik at resultatet skal gjengi samme komposisjon som visningen i bibliotek eller Presenter.

@@ -540,3 +540,44 @@
 .scene-context-platforms[data-art-direction="rich"] .cp-feedback-track,
 .scene-context-platforms[data-art-direction="rich"] .cp-feedback-head{
  stroke:color-mix(in srgb,var(--pres-fg) 45%,var(--pres-accent))}
+
+
+/* Native connector between information sources and the operational feedback loop.
+   Single connection avoids implying a false one-to-one source-to-step mapping. */
+.scene-context-platforms .cp-diagram{
+ grid-template-rows:17% 4% 31% 4% 17% 4% 16% 7%;
+}
+.scene-context-platforms .cp-action-link{
+ display:flex;align-items:center;justify-content:center;pointer-events:none;
+}
+.scene-context-platforms .cp-action-link svg{
+ display:block;width:2.5cqw;height:100%;overflow:visible;
+ fill:none;stroke:var(--pres-accent);stroke-width:3.5;
+ stroke-linejoin:round;stroke-linecap:round;
+}
+.scene-context-platforms .cp-cycle{margin-top:0}
+.scene-context-platforms .cp-outcomes{
+ position:absolute;right:2.6%;top:44%;width:21.3%;z-index:3;
+ display:flex;flex-direction:column;gap:1.0cqw;
+}
+.scene-context-platforms .cp-outcomes-title{
+ text-transform:uppercase;letter-spacing:.11em;
+ font:760 .95cqw/1.2 var(--font-body);
+ color:var(--pres-accent);margin-bottom:.15cqw;
+ text-shadow:0 1px 8px color-mix(in srgb,var(--pres-bg) 50%,transparent);
+}
+.scene-context-platforms .cp-outcome{
+ display:flex;align-items:center;gap:.8cqw;
+ min-height:6.25cqw;padding:.8cqw 1.05cqw;
+ background:color-mix(in srgb,var(--pres-bg) 70%,transparent);
+ border:1px solid color-mix(in srgb,var(--pres-accent) 48%,var(--pres-fg));
+ border-radius:1.15cqw;backdrop-filter:blur(.45cqw);
+ box-shadow:0 .5cqw 1.8cqw color-mix(in srgb,var(--pres-bg) 18%,transparent);
+}
+.scene-context-platforms .cp-outcome-icon{
+ width:2.2cqw;height:2.2cqw;object-fit:contain;flex:0 0 2.2cqw;
+ filter:brightness(0) invert(1);opacity:.85;
+}
+.scene-context-platforms .cp-outcome span{display:flex;flex-direction:column;gap:.3cqw;min-width:0}
+.scene-context-platforms .cp-outcome strong{font:790 1.14cqw/1.08 var(--font-body);color:var(--pres-fg)}
+.scene-context-platforms .cp-outcome small{font:540 .95cqw/1.15 var(--font-body);color:var(--pres-muted)}

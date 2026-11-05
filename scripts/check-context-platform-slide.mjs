@@ -20,6 +20,9 @@ for(const key of ['consumers','facets','sources','cycle']) {
  assert.ok(slide.visual[key].every(x=>x.label&&x.detail),key+' labels must be data-owned');
 }
 assert.ok(slide.visual.governance.length>=4);
+assert.equal(slide.visual.outcomes.length,3,'Three independent value callouts');
+assert.ok(slide.visual.outcomes.every(x=>x.label&&x.detail&&x.assetId));
+
 for(const key of ['consumers','facets','sources','cycle'])assert.ok(slide.visual[key].every(x=>x.assetId),'Every semantic role has a swappable icon');
 const sandbox={window:{InnsiktStoryScenes:{render:()=>null}}};
 vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),sandbox);
@@ -36,6 +39,9 @@ for(const token of [slide.title,slide.visual.contextLabel,...slide.visual.consum
 assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[]).length,8);
 assert.equal((html.match(/class="cp-cycle-arrow"/g)||[]).length,2,'Both bottom process arrows are native SVG');
 assert.ok(html.includes('class="cp-feedback-return"'),'Native return connection exists');
+assert.ok(html.includes('class="cp-action-link"'),'Sources and operating loop must be visibly connected');
+assert.equal((html.match(/class="cp-outcome"/g)||[]).length,3);
+
 assert.ok(html.includes('data-scene-object="flag"'),'Focal object is independently addressable');
 assert.ok(!html.includes('cp-landscape-svg'),'Legacy monolithic artwork must be removed');
 assert.ok(!html.includes('#fff')&&!html.includes('#000'),'Renderer must not hardcode palette');
