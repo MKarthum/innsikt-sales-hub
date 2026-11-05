@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><defs>
+ <linearGradient id="rock" x1=".2" y1="0" x2=".9" y2="1"><stop stop-color="#c9cfc5"/><stop offset=".18" stop-color="#7b9998"/><stop offset=".52" stop-color="#295967"/><stop offset="1" stop-color="#112e3c"/></linearGradient>
+ <linearGradient id="lit" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#f7e7d3"/><stop offset=".31" stop-color="#a9c2c1"/><stop offset="1" stop-color="#3c7680"/></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7d4c6"/><stop offset="1" stop-color="#456d77"/></linearGradient>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="4" seed="5"/><feColorMatrix type="saturate" values=".3"/><feComponentTransfer><feFuncA type="linear" slope=".08"/></feComponentTransfer></filter>
+ </defs>
+ <path d="M975 900L1120 699 1215 549 1304 428 1394 262 1454 152 1512 286 1600 457V900Z" fill="url(#rock)"/>
+ <path d="M1143 900L1313 581 1401 343 1454 152 1483 289 1550 406 1600 457V900Z" fill="url(#lit)" opacity=".75"/>
+ <path d="M1358 360L1413 263 1454 152 1505 274 1538 347 1506 330 1491 349 1468 299 1445 336 1417 309 1395 350Z" fill="#ebeeea" opacity=".92"/>
+ <path d="M1398 353L1454 152 1430 315 1409 301 1392 355Z" fill="#fff6e6" opacity=".76"/>
+ <path d="M1463 307L1501 350 1536 453 1501 399 1478 418 1474 359Z" fill="#5b8289" opacity=".56"/>
+ <path d="M1235 691L1404 338 1333 592 1300 544ZM1517 428L1545 603 1476 481Z" fill="#153e4e" opacity=".45"/>
+ <path d="M1296 682L1432 369 1400 532 1355 556Z" fill="url(#edge)" opacity=".34"/>
+ <path d="M1215 548L1264 571 1305 428 1331 491 1352 443" stroke="#c3ddd6" stroke-opacity=".35" stroke-width="4" fill="none"/>
+ <path d="M1381 442L1343 550M1472 468L1510 581M1430 568L1377 697M1271 731L1196 830M1491 612L1540 735" stroke="#123949" stroke-opacity=".48" stroke-width="5" fill="none"/>
+ <path d="M975 900L1120 699 1215 549 1304 428 1394 262 1454 152 1512 286 1600 457V900Z" filter="url(#grain)"/></svg>
