@@ -567,7 +567,12 @@ try {
   await page.waitForFunction(()=>document.querySelector('#present-modal.presenter-fullscreen'));
   assert.equal(await page.evaluate(()=>document.fullscreenElement),null,label+': CSS-reserve uten Fullscreen API');
   await page.setViewportSize({width:844,height:390});
-  await page.waitForTimeout(90);
+  // Fullscreen resizes after requestAnimationFrame; wait for layout, not a fixed 90 ms.
+  await page.waitForFunction(()=>{
+   const stage=document.getElementById('present-stage')?.getBoundingClientRect();
+   const slide=document.getElementById('slide-body')?.getBoundingClientRect();
+   return !!(stage&&slide&&slide.x>=stage.x-3&&slide.y>=stage.y-3&&slide.right<=stage.right+3&&slide.bottom<=stage.bottom+3);
+  },null,{timeout:7000});
   const compact=await page.evaluate(()=>{
    const stage=document.getElementById('present-stage').getBoundingClientRect();
    const slide=document.getElementById('slide-body').getBoundingClientRect();
