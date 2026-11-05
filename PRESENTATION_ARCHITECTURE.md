@@ -161,3 +161,8 @@ Det gjenstår redaksjonelt arbeid på flere lysbilder. Individuell prioritering 
 ## 0.18.56 – AI Context Platforms som selvstendig 2027-scene
 
 `ai-context-platforms-2027` er et delt, selvstendig objekt i lysbildebiblioteket, ikke automatisk lagt inn i en eksisterende historie. Det har egen scene `context-platforms` i `slide-visuals.js`, scene-CSS i `slide-visual-narratives.css`, og alle brukerrettede tekster, kilder og notater i `slides.json`. Landskapet med vei og flagg er en dekorativ, lokalt generert SVG med temastyrte streker og flater; ingen fargede PNG-er, ekstern hosting eller organisasjonspalett. Visuell intensitet følger `--pres-*` og fungerer i lyst, mørkt og organisasjonsskin. Dette er en logisk fremtidsmodell og innebærer ikke én sentral kontekstplattform. Eksisterende løp og det enklere `ai-context-for-agents` er uendret. Nye nettleserskjermbilder må fortsatt vurderes før redaksjonell godkjenning.
+
+
+## 0.18.57 – alternativ illustrert art direction
+
+AI Context Platforms-scenen har fått et lagdelt vektorlandskap. Et nytt valg «Illustrert» aktiverer `data-art-direction="illustrated"` på samme scene-root; `tone()` gjenbruker mørk palett. Lys, mørk og fortellingsstyrt er beholdt. Innhold, kilder og notater er fremdeles kanonisk dataeid og portable gjennom eksisterende renderer. Ingen øvrige lysbilder eller kuraterte historier er omskrevet.

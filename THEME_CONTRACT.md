@@ -67,3 +67,8 @@ Bevegelse (på/av) er en selvstendig Presenter-innstilling, lagret lokalt i nett
 ### Nye komposisjoner uten skin-binding (0.18.53)
 
 `slide-visual-narratives.css` er et nytt, strukturelt stilark for sju dataeide scenevarianter. Det ligger etter alle kjerne-CSS-filer, men før enhver organisasjons CSS-skin, både på nettstedet og i portable HTML-eksporter. Alle synlige farger, SVG-streker, ikonbakgrunner og skygger er definert via semantiske `--pres-*`-roller, avledet fra offentlige `--slide-strong-*` og `--slide-light-*`-roller. Ingen egen tokenkontrakt eller bildebasert styling kreves for kopiløsninger.
+
+
+### Illustrert art direction (0.18.57)
+
+«Illustrert» er et valgfritt uttrykk for lysbilder med `visual.artDirections: ["illustrated"]`. Det er ikke et nytt offentlig fargetema: visningen gjenbruker `--slide-strong-*` og avledede `--pres-*`-roller. Landskap, himmel, snø, sti og flagg er dekorativ SVG uten fagtekst. Andre lysbilder vises i mørk standard ved dette valget. CSS-skins trenger ingen endringer. Det valgte uttrykket skal følge med eksport uten å duplisere lysbildeinnhold.
