@@ -391,7 +391,7 @@
 }
 .cp-landscape{
  position:absolute;z-index:0;right:-1%;top:0;width:43%;height:100%;pointer-events:none;
- opacity:.88;mask-image:linear-gradient(90deg,transparent 0%,transparent 5%,black 35%);
+ opacity:.88;mask-image:linear-gradient(90deg,transparent 0%,transparent 5%,var(--pres-fg) 35%);
 }
 .story-scene svg.cp-landscape-svg{width:100%;height:100%;display:block}
 .cp-sun{fill:var(--pres-warning);opacity:.28}
