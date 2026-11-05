@@ -959,12 +959,12 @@
       "Kundedialog",
       "Bruk av portalen"
     ],
-    "toneInfo": "Lys og mørk bruker samme innhold med ulik palett. Illustrert gir utvalgte lysbilder rikere scenografi; andre lysbilder vises mørkt. Fargene følger fortsatt CSS-skin.",
+    "toneInfo": "Lys og mørk følger selskapets profil. Enkel illustrasjon bruker uavhengige vektorobjekter, mens rik illustrasjon har en egen bildebakgrunn med redigerbare diagramkomponenter oppå.",
     "toneLabel": "Visningsstil",
     "toneLight": "Lys (standard)",
     "toneDark": "Mørk",
     "toneStory": "Fortellingsstyrt",
-    "toneHelp": "Illustrert er en visuell variant for utvalgte scener, ikke en ny organisasjonspalett.",
+    "toneHelp": "Illustrerte varianter er tilgjengelige på utvalgte lysbilder. Faginnhold og kilder er alltid de samme.",
     "notFound": "Ukjent lysbilde",
     "numberToggleLabel": "Vis nummer på lysbildene",
     "numberToggleInfo": "Numrene viser plassering i valgt historie. Bibliotekobjekter har ikke nummer.",
@@ -976,7 +976,8 @@
     "singleExportInfo": "PNG, JPG, PDF eller PowerPoint. PDF og PowerPoint inneholder et høyoppløselig bilde av lysbildet.",
     "singleExportError": "Kunne ikke laste ned lysbildet.",
     "fullscreenExportLabel": "Last ned",
-    "toneIllustrated": "Illustrert (utvalgte slides)"
+    "toneIllustrated": "Enkel illustrasjon",
+    "toneIllustratedRich": "Rik illustrasjon"
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",
