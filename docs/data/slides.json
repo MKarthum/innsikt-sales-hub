@@ -1859,6 +1859,20 @@
               "mode": "rich"
             },
             {
+              "id": "rich-valley-ranges",
+              "type": "asset",
+              "assetId": "context-ridges",
+              "role": "distance",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 0.22,
+              "fit": "fill",
+              "style": "natural",
+              "mode": "rich"
+            },
+            {
               "id": "sky",
               "type": "asset",
               "assetId": "context-atmosphere",

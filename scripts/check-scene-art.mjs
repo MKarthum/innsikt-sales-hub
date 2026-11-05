@@ -13,7 +13,7 @@ assert.ok(ctx.window.InnsiktAssets.usedBy('context-flag',{},read('docs/data/slid
 assert.equal(renderer.validate(art,assets),true);
 const esc=x=>String(x).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
 const html=renderer.render(art,assets,esc);
-assert.equal((html.match(/scene-art-object--asset/g)||[]).length,7,'Six independent vectors plus one replaceable scenic image');
+assert.equal((html.match(/scene-art-object--asset/g)||[]).length,8,'Six simple vectors plus two rich scenic layers');
 assert.ok(html.includes('data-scene-mode="rich"'),'Rich art mode is an independent scene object');
 assert.equal((html.match(/scene-art-object--glow/g)||[]).length,1,'Atmospheric effect is an independent object');
 for(const id of ['sky','distant-ranges','summit','route','foreground','flag']){
