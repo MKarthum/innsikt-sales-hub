@@ -157,14 +157,23 @@ function render(slide,esc,position={}){
   const tiles=(list,cls)=>list.map((item,i)=>'<div class="cp-tile '+cls+'"><span class="cp-tile-no" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span><div class="cp-tile-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div></div>').join('');
   const links=()=>'<div class="cp-links" aria-hidden="true"><i></i><i></i><i></i></div>';
   const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div>'+(i===v.cycle.length-1?'':'<span class="cp-cycle-arrow" aria-hidden="true">→</span>')).join('');
-  const scenery='<svg class="cp-landscape-svg" viewBox="0 0 420 540" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'
-   +'<circle class="cp-sun" cx="345" cy="138" r="78"/>'
-   +'<path class="cp-ridge-back" d="M0 416 L52 361 L93 395 L148 305 L206 356 L266 288 L330 338 L383 274 L420 300 V540 H0Z"/>'
-   +'<path class="cp-ridge-mid" d="M0 506 L87 391 L157 450 L230 308 L276 365 L345 174 L420 295 V540 H0Z"/>'
-   +'<path class="cp-ridge-front" d="M50 540 L162 440 L226 491 L315 282 L345 174 L420 288 V540Z"/>'
-   +'<path class="cp-path-shadow" d="M411 542 Q351 520 373 488 Q403 447 362 421 Q315 396 352 371 Q385 351 352 325 Q320 308 342 292 Q365 276 343 258 Q326 244 345 231 L345 175"/>'
-   +'<path class="cp-path" d="M411 542 Q351 520 373 488 Q403 447 362 421 Q315 396 352 371 Q385 351 352 325 Q320 308 342 292 Q365 276 343 258 Q326 244 345 231 L345 175"/>'
-   +'<path class="cp-flagpole" d="M345 174 V126"/><path class="cp-flag" d="M347 126 Q371 121 393 133 L381 148 Q364 139 347 144Z"/>'
+  // Decorative, layered vector landscape. Structure and labels remain separate HTML.
+  const scenery='<svg class="cp-landscape-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'
+   +'<path class="cp-atmosphere" d="M0 330 C330 180 540 265 740 155 S1170 110 1600 200 V900 H0Z"/>'
+   +'<circle class="cp-halo" cx="1445" cy="170" r="220"/><circle class="cp-sun" cx="1445" cy="170" r="85"/>'
+   +'<path class="cp-cloud" d="M890 160 C950 142 1012 151 1059 160 S1173 179 1276 145 M1070 254 C1190 232 1305 236 1440 224"/>'
+   +'<path class="cp-horizon-far" d="M0 661 L112 592 L210 628 L322 522 L396 581 L504 493 L626 585 L739 510 L869 602 L978 494 L1057 567 L1197 415 L1308 522 L1465 375 L1600 455 V900 H0Z"/>'
+   +'<path class="cp-horizon-near" d="M0 777 L136 648 L250 720 L390 565 L476 686 L634 579 L751 690 L884 565 L1014 682 L1153 516 L1252 630 L1416 351 L1600 565 V900 H0Z"/>'
+   +'<path class="cp-mountain-shadow" d="M860 900 L1103 717 L1264 490 L1356 329 L1446 172 L1523 334 L1600 470 V900Z"/>'
+   +'<path class="cp-mountain-face" d="M1005 900 L1200 743 L1288 573 L1372 370 L1446 172 L1600 479 V900Z"/>'
+   +'<path class="cp-mountain-light" d="M1367 550 L1402 369 L1446 172 L1474 335 L1562 522 L1514 449 L1467 394 L1430 344Z"/>'
+   +'<path class="cp-snowcap" d="M1367 377 L1400 307 L1446 172 L1492 295 L1522 351 L1494 334 L1475 354 L1456 301 L1430 333 L1410 315Z"/>'
+   +'<path class="cp-rock" d="M1314 573 L1411 372 L1367 554 M1474 352 L1516 554 M1380 694 L1447 483 L1462 588 M1245 666 L1319 535 M1539 620 L1492 507"/>'
+   +'<path class="cp-foreground" d="M0 859 L143 801 L263 864 L383 758 L520 837 L667 745 L790 846 L943 756 L1069 887 L1252 774 L1385 872 L1492 759 L1600 810 V900 H0Z"/>'
+   +'<path class="cp-trail-shadow" d="M1563 927 C1500 878 1547 840 1500 811 C1459 787 1515 748 1470 711 C1422 677 1494 633 1472 588 C1456 550 1408 547 1425 509 C1446 475 1498 460 1489 421 C1481 386 1411 374 1418 341 C1422 313 1483 305 1479 273 C1476 243 1444 233 1446 209 L1446 173"/>'
+   +'<path class="cp-trail" d="M1563 927 C1500 878 1547 840 1500 811 C1459 787 1515 748 1470 711 C1422 677 1494 633 1472 588 C1456 550 1408 547 1425 509 C1446 475 1498 460 1489 421 C1481 386 1411 374 1418 341 C1422 313 1483 305 1479 273 C1476 243 1444 233 1446 209 L1446 173"/>'
+   +'<path class="cp-trail-core" d="M1563 927 C1500 878 1547 840 1500 811 C1459 787 1515 748 1470 711 C1422 677 1494 633 1472 588 C1456 550 1408 547 1425 509 C1446 475 1498 460 1489 421 C1481 386 1411 374 1418 341 C1422 313 1483 305 1479 273 C1476 243 1444 233 1446 209 L1446 173"/>'
+   +'<path class="cp-flagpole" d="M1446 174 V120"/><path class="cp-flag" d="M1448 122 Q1482 111 1531 134 L1508 158 Q1470 140 1448 146Z"/>'
    +'</svg>';
   return '<div class="story-scene scene-context-platforms">'
    +'<div class="cp-landscape" aria-hidden="true">'+scenery+'</div>'
