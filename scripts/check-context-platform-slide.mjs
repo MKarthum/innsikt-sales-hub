@@ -19,14 +19,20 @@ for(const key of ['consumers','facets','sources','cycle']) {
 }
 assert.ok(slide.visual.governance.length>=4);
 const sandbox={window:{InnsiktStoryScenes:{render:()=>null}}};
+vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),sandbox);
+vm.runInNewContext(fs.readFileSync('docs/assets/scene-art.js','utf8'),sandbox);
+const assets=JSON.parse(fs.readFileSync('docs/data/visual-assets.json','utf8'));
+sandbox.window.InnsiktSceneArt.validate(slide.visual.artwork,assets);
 vm.runInNewContext(fs.readFileSync('docs/assets/slide-visuals.js','utf8'),sandbox);
 const escape=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
-const html=sandbox.window.InnsiktSlideVisuals.render(slide,escape,{index:0,total:1,showNumbers:false});
+const html=sandbox.window.InnsiktSlideVisuals.render(slide,escape,{index:0,total:1,showNumbers:false,assets});
 assert.ok(html.startsWith('<div class="story-scene scene-context-platforms">'));
 for(const token of [slide.title,slide.visual.contextLabel,...slide.visual.consumers.map(x=>x.label),...slide.visual.facets.map(x=>x.label),...slide.visual.sources.map(x=>x.label),...slide.visual.cycle.map(x=>x.label)]) {
  assert.ok(html.includes(token),'Missing visible data '+token);
 }
-assert.ok(html.includes('cp-landscape-svg'),'Scene should include local, decorative vector landscape');
+assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[]).length,6);
+assert.ok(html.includes('data-scene-object="flag"'),'Focal object is independently addressable');
+assert.ok(!html.includes('cp-landscape-svg'),'Legacy monolithic artwork must be removed');
 assert.ok(!html.includes('#fff')&&!html.includes('#000'),'Renderer must not hardcode palette');
 const css=fs.readFileSync('docs/assets/slide-visual-narratives.css','utf8');
 assert.ok(css.includes('.scene-context-platforms')&&css.includes('var(--pres-accent)'),'Scene should follow theme roles');

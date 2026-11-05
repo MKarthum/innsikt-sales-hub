@@ -1756,7 +1756,7 @@
         "gartner-context",
         "gartner-data26"
       ],
-      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet.",
+      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet. Illustrasjonsobjektene for himmel, bakgrunnsfjell, fjelltopp, vei, skog og flagg kan byttes og posisjoneres uavhengig av faglige diagramkomponenter. Den illustrerte varianten kan tones gjennom CSS uten å endre kjernens datamodell.",
       "visual": {
         "scene": "context-platforms",
         "period": "2027 og videre",
@@ -1827,7 +1827,100 @@
         ],
         "artDirections": [
           "illustrated"
-        ]
+        ],
+        "artwork": {
+          "version": 1,
+          "objects": [
+            {
+              "id": "sky",
+              "type": "asset",
+              "assetId": "context-atmosphere",
+              "role": "atmosphere",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "sun-glow",
+              "type": "glow",
+              "role": "haze",
+              "x": 73,
+              "y": 4,
+              "w": 26,
+              "h": 38,
+              "opacity": 0.25
+            },
+            {
+              "id": "distant-ranges",
+              "type": "asset",
+              "assetId": "context-ridges",
+              "role": "distance",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 0.9,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "summit",
+              "type": "asset",
+              "assetId": "context-summit",
+              "role": "summit",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "route",
+              "type": "asset",
+              "assetId": "context-path",
+              "role": "route",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "foreground",
+              "type": "asset",
+              "assetId": "context-forest",
+              "role": "foreground",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 0.84,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "flag",
+              "type": "asset",
+              "assetId": "context-flag",
+              "role": "goal",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural"
+            }
+          ]
+        }
       },
       "design": {
         "archetype": "blueprint",

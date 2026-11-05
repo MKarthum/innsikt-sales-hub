@@ -56,8 +56,10 @@ try{
  const platform=page.locator('.slide-library-detail-stage .story-scene');await platform.waitFor();
  await page.locator('#library-tone-mode').selectOption('illustrated');
  assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
- assert.equal(await platform.locator('.cp-landscape-svg').count(),1);
+ assert.equal(await platform.locator('.scene-art-object--asset').count(),6);
+ assert.equal(await platform.locator('.scene-art-object--glow').count(),1);
  fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
+ await platform.locator('.scene-art-object--asset img').first().evaluate(img=>img.decode());
  await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-illustrated.png'});
  assert.equal(await page.locator('.slide-library-detail-stage .present-frame').getAttribute('data-tone'),'strong');
  const ex=await platform.evaluate(el=>({w:el.scrollWidth-el.clientWidth,h:el.scrollHeight-el.clientHeight}));

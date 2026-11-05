@@ -43,7 +43,7 @@ function render(art,catalog,escape){
  validate(art,catalog);
  const out=art.objects.map(o=>{
   const style='--sa-x:'+fmt(o.x)+'%;--sa-y:'+fmt(o.y)+'%;--sa-w:'+fmt(o.w)+'%;--sa-h:'+fmt(o.h)+'%;--sa-alpha:'+fmt(o.opacity??1)+';--sa-scale:'+fmt(o.scale??1)+';--sa-rotate:'+fmt(o.rotate??0)+'deg';
-  const attrs=' data-scene-object="'+escape(o.id)+'" data-scene-role="'+escape(o.role)+'" data-scene-mode="'+escape(o.mode||'all')+'"';
+  const attrs=' data-scene-object="'+escape(o.id)+'" data-scene-role="'+escape(o.role)+'" data-scene-mode="'+escape(o.mode||'all')+'"'+(o.type==='shape'?' data-scene-shape="'+escape(o.shape)+'"':'');
   const cls='scene-art-object scene-art-object--'+o.type;
   let inner='';
   if(o.type==='asset'){

@@ -166,3 +166,10 @@ Det gjenstår redaksjonelt arbeid på flere lysbilder. Individuell prioritering 
 ## 0.18.57 – alternativ illustrert art direction
 
 AI Context Platforms-scenen har fått et lagdelt vektorlandskap. Et nytt valg «Illustrert» aktiverer `data-art-direction="illustrated"` på samme scene-root; `tone()` gjenbruker mørk palett. Lys, mørk og fortellingsstyrt er beholdt. Innhold, kilder og notater er fremdeles kanonisk dataeid og portable gjennom eksisterende renderer. Ingen øvrige lysbilder eller kuraterte historier er omskrevet.
+
+
+## 0.18.58 – komponerbare sceneobjekter
+
+Ny renderer `docs/assets/scene-art.js` har en minimal, gjenbrukbar objektkontrakt: `asset` (vektor eller bilde fra canonical `visual-assets.json`), `glow` (temastyrt lyseffekt) og `shape` (temastyrte former). Hvert objekt har selvstendig `id`, `role`, posisjon og størrelse i prosent av 16:9-flaten samt valgfri rotasjon, skalering, opasitet og `mode`. Objektene rendres i valgt rekkefølge som uavhengige, semantisk dekorative HTML-objekter med `aria-hidden`. De kan byttes, skjules, flyttes eller tones uten å endre fagtekst eller opprette kopier av lysbildet.
+
+`ai-context-platforms-2027` er første migrerte scene. Den gamle, monolittiske SVG-strengen er erstattet med seks katalogførte illustrasjonsressurser: himmel, fjell i bakgrunnen, fjelltopp, vei, skog og flagg. Databoksene og handlingssløyfen er fortsatt separate, native komponenter. `scene-art.css` lastes i Presenter og eksport og eksponerer få visuelle kunstneriske parametre, mens company-skin-kontrakten for tekst og layout består. Nye scener kan gjenbruke rendererens objekttyper, men må selv definere hvorfor og hvordan motivene underbygger historien.

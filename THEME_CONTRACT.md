@@ -72,3 +72,8 @@ Bevegelse (på/av) er en selvstendig Presenter-innstilling, lagret lokalt i nett
 ### Illustrert art direction (0.18.57)
 
 «Illustrert» er et valgfritt uttrykk for lysbilder med `visual.artDirections: ["illustrated"]`. Det er ikke et nytt offentlig fargetema: visningen gjenbruker `--slide-strong-*` og avledede `--pres-*`-roller. Landskap, himmel, snø, sti og flagg er dekorativ SVG uten fagtekst. Andre lysbilder vises i mørk standard ved dette valget. CSS-skins trenger ingen endringer. Det valgte uttrykket skal følge med eksport uten å duplisere lysbildeinnhold.
+
+
+### Scenegrafikk som egne objekter – v0.18.58
+
+Fagtekst, tabeller og kontroller fortsetter å følge selskapets CSS-skin fullt ut. Illustrerte objekter kan ha egen, bevisst kunstnerisk palett og trenger ikke treffe organisasjonens profilfarger nøyaktig. Et valgfritt skin kan likevel overstyre **kun** `--scene-art-saturation`, `--scene-art-brightness`, `--scene-art-hue`, `--scene-art-veil` og `--scene-art-glow` i `.scene-art`, uten å duplisere scene eller endre illustrasjonens faktainnhold. Disse variablene gjelder dekorative objekter, ikke tekst eller sikkerhetsrelevant informasjon. Illustrasjonslagene er egne SVG/PNG/WebP/JPG-filer oppført i ressurssamlingen. Konkrete posisjoner og layer-rekkefølge eies av `slides.json`. HTML-eksport må inkludere CSS og alle lokale illustrasjonsressurser.

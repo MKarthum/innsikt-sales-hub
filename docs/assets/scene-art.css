@@ -52,3 +52,6 @@
  backdrop-filter:blur(.35cqw)}
 @media(prefers-reduced-motion:reduce){.scene-art *{animation:none!important;transition:none!important}}
 @media print{.scene-art *{animation:none!important;transition:none!important}}
+.scene-art-object--shape[data-scene-shape="disc"]{border-radius:50%}
+.scene-art-object--shape[data-scene-shape="panel"]{border-radius:1.8cqw}
+.scene-art-object--shape[data-scene-shape="rule"]{height:min(var(--sa-h),.2cqw);border-radius:2cqw}
