@@ -518,3 +518,6 @@
  border-radius:0;background:linear-gradient(180deg,color-mix(in srgb,var(--pres-bg) 74%,var(--pres-accent)),transparent);
  box-shadow:none;padding:.7cqw 1.2cqw;margin-top:.85cqw;backdrop-filter:none;
 }
+
+/* Override blueprint's tiled background-size: those 6cqw tiles cause a checkerboard when scenic gradients are applied. */
+.story-scene[data-editorial="blueprint"].scene-context-platforms{background-size:100% 100%;background-repeat:no-repeat}
