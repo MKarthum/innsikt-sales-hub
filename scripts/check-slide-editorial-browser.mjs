@@ -56,7 +56,7 @@ try{
  const platform=page.locator('.slide-library-detail-stage .story-scene');await platform.waitFor();
  await page.locator('#library-tone-mode').selectOption('illustrated');
  assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
- assert.equal(await platform.locator('.scene-art-object--asset').count(),6);
+ assert.equal(await platform.locator('.scene-art-object--asset').count(),7);
  assert.equal(await platform.locator('.scene-art-object--glow').count(),1);
  fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
  await platform.locator('.scene-art-object--asset img').first().evaluate(img=>img.decode());
@@ -64,6 +64,20 @@ try{
  assert.equal(await page.locator('.slide-library-detail-stage .present-frame').getAttribute('data-tone'),'strong');
  const ex=await platform.evaluate(el=>({w:el.scrollWidth-el.clientWidth,h:el.scrollHeight-el.clientHeight}));
  assert.ok(ex.w<=3&&ex.h<=3,'Illustration stays inside slide');
+ // The rich scene must have a real, separately loaded photo. No text or semantic connections may change.
+ const simpleText=await platform.locator('.cp-diagram').innerText();
+ await page.locator('#library-tone-mode').selectOption('illustrated-rich');
+ assert.equal(await platform.getAttribute('data-art-direction'),'rich');
+ assert.equal(await platform.locator('.cp-cycle-arrow').count(),2,'Both lower process arrows must be present');
+ assert.equal(await platform.locator('.cp-feedback-return').count(),1,'Closed feedback path is present');
+ const image=platform.locator('[data-scene-object="rich-mountain-background"] img');
+ await image.evaluate(img=>img.decode());
+ assert.equal(await image.evaluate(img=>img.naturalWidth>0),true,'Rich photo loads');
+ assert.equal(await platform.locator('[data-scene-object="rich-mountain-background"]').evaluate(el=>getComputedStyle(el).display),'block');
+ assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Factual text is identical in both illustration modes');
+ await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-rich.png'});
+ const richEx=await platform.evaluate(el=>({w:el.scrollWidth-el.clientWidth,h:el.scrollHeight-el.clientHeight}));
+ assert.ok(richEx.w<=3&&richEx.h<=3,'Rich illustration stays inside 16:9');
  await page.locator('#library-tone-mode').selectOption('light');
  assert.equal(await platform.getAttribute('data-art-direction'),'standard');
  await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-standard.png'});

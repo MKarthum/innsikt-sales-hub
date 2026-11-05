@@ -28,6 +28,12 @@ try{
  await page.locator('#library-tone-mode').selectOption('illustrated');
  assert.equal(await contextSlide.getAttribute('data-art-direction'),'illustrated');
  await contextSlide.screenshot({path:output+'/context-illustrated.png'});
+ await page.locator('#library-tone-mode').selectOption('illustrated-rich');
+ assert.equal(await contextSlide.getAttribute('data-art-direction'),'rich');
+ await contextSlide.locator('[data-scene-object="rich-mountain-background"] img').evaluate(img=>img.decode());
+ assert.equal(await contextSlide.locator('svg.cp-cycle-arrow').count(),2);
+ assert.equal(await contextSlide.locator('svg.cp-feedback-return').count(),1);
+ await contextSlide.screenshot({path:output+'/context-rich.png'});
  await page.locator('#library-tone-mode').selectOption('light');
  assert.equal(await contextSlide.getAttribute('data-art-direction'),'standard');
  await contextSlide.screenshot({path:output+'/context-standard.png'});
