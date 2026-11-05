@@ -140,7 +140,7 @@ try{
   };
  },{before:richScreenshot.toString('base64'),after:exported.toString('base64'),plain:standardDarkScreenshot.toString('base64')});
  assert.ok(parity.photoDifference.mae>22,'Rich illustration visually indistinguishable from standard: '+JSON.stringify(parity));
- assert.ok(parity.entire.mae<38&&parity.right.mae<40&&parity.entire.largeFraction<.27,
+ assert.ok(parity.entire.mae<15&&parity.right.mae<18&&parity.entire.largeFraction<.07,
   'Export differs visually from the on-screen slide: '+JSON.stringify(parity));
  console.log('PASS – visual export parity '+JSON.stringify(parity));
 
