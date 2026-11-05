@@ -175,7 +175,8 @@ try{
  await page.evaluate(()=>location.hash='#lysbilder');
  await page.locator('.slide-library-card').first().waitFor();
  assert.equal(await page.locator('.slide-library-card').count(),allSlides.length);
- assert.equal(await page.locator('#library-tone-mode').inputValue(),'light');
+ assert.equal(await page.locator('#library-tone-mode').inputValue(),'story');
+  assert.equal(await page.locator('#library-art-mode').inputValue(),'auto');
  await page.locator('#library-tone-mode').selectOption('strong');
  assert.equal(await page.locator('.slide-library-card .present-frame[data-tone=\"strong\"]').count(),allSlides.length);
  await page.locator('#library-tone-mode').selectOption('light');

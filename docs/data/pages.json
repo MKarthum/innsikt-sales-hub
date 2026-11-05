@@ -959,12 +959,12 @@
       "Kundedialog",
       "Bruk av portalen"
     ],
-    "toneInfo": "Lys og mørk følger selskapets profil. Enkel illustrasjon bruker uavhengige vektorobjekter, mens rik illustrasjon har en egen bildebakgrunn med redigerbare diagramkomponenter oppå.",
-    "toneLabel": "Visningsstil",
+    "toneInfo": "Fargeprofil og illustrasjonsstil velges uavhengig. «Anbefalt» viser det rike fjellmotivet på 2027-sliden. Lys fargeprofil prioriterer ren diagramvisning når illustrasjonsstil står på Anbefalt.",
+    "toneLabel": "Fargeprofil",
     "toneLight": "Lys (standard)",
     "toneDark": "Mørk",
     "toneStory": "Fortellingsstyrt",
-    "toneHelp": "Illustrerte varianter er tilgjengelige på utvalgte lysbilder. Faginnhold og kilder er alltid de samme.",
+    "toneHelp": "Rik illustrasjon har et separat fotoobjekt. Alle tekster, bokser og piler forblir redigerbare.",
     "notFound": "Ukjent lysbilde",
     "numberToggleLabel": "Vis nummer på lysbildene",
     "numberToggleInfo": "Numrene viser plassering i valgt historie. Bibliotekobjekter har ikke nummer.",
@@ -977,7 +977,11 @@
     "singleExportError": "Kunne ikke laste ned lysbildet.",
     "fullscreenExportLabel": "Last ned",
     "toneIllustrated": "Enkel illustrasjon",
-    "toneIllustratedRich": "Rik illustrasjon"
+    "toneIllustratedRich": "Rik illustrasjon (foto)",
+    "toneAuto": "Anbefalt per lysbilde",
+    "artLabel": "Illustrasjonsstil",
+    "artAuto": "Anbefalt per lysbilde",
+    "artStandard": "Uten illustrasjon"
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",
