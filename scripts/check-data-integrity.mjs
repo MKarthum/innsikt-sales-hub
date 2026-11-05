@@ -77,6 +77,14 @@ const deployment=read('deployment');
 if(deployment.mode!=='public'||deployment.protectedPresentationContent!==null)fail('GitHub Pages skal være offentlig og uten intern datakilde');
 if(slides.items.some(x=>x.classification==='internal')||Object.values(pages.presentationDecks||{}).some(x=>x.classification==='internal'))
  fail('Internt lysbilde eller historie må ikke leveres i offentlig repo');
+const artSandbox={window:{}};
+vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),artSandbox);
+vm.runInNewContext(fs.readFileSync('docs/assets/scene-art.js','utf8'),artSandbox);
+const artAssets=read('visual-assets');
+for(const slide of slides.items){
+ if(slide.visual?.artwork)try{artSandbox.window.InnsiktSceneArt.validate(slide.visual.artwork,artAssets)}
+ catch(e){fail('Ugyldig sceneillustrasjon: '+slide.id+' / '+e.message)}
+}
 const slideIds=ids(slides.items,'Lysbildebibliotek'),slidesById=new Map(slides.items.map(x=>[x.id,x]));
 for(const s of slides.items){
  if(!['shared','story'].includes(s.scope))fail('Ugyldig lysbildescope: '+s.id);

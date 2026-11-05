@@ -103,8 +103,10 @@ async function exportDeck(data,mode='html'){
   if(!editorial.ok)throw Error('Kunne ikke hente presentasjonens redaksjonelle designsystem');
   const narrative=await fetch('./assets/slide-visual-narratives.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!narrative.ok)throw Error('Kunne ikke hente faglige lysbildescener');
+  const art=await fetch('./assets/scene-art.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
+  if(!art.ok)throw Error('Kunne ikke hente illustrasjonsobjektenes CSS');
   const skin=await organizationSkinCss();
-  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())+'\n'+(await editorial.text())+'\n'+(await narrative.text())+'\n'+skin));
+  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())+'\n'+(await editorial.text())+'\n'+(await narrative.text())+'\n'+(await art.text())+'\n'+skin));
   if(mode==='print'){win.document.open();win.document.write(html);win.document.close();win.focus();return;}
   const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
   const link=document.createElement('a');link.href=url;link.download='innsikt-'+data.id+'-v'+data.version+'.html';

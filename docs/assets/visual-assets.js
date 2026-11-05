@@ -16,7 +16,7 @@ function usedBy(assetId,profiles,slides){
   return false;
  }
  const ids=new Set((profiles?.profiles||[]).filter(hasRef).map(p=>p.id));
- return (slides?.items||[]).filter(s=>ids.has(s.profileId)).map(s=>({id:s.id,title:s.title}));
+ return (slides?.items||[]).filter(s=>ids.has(s.profileId)||hasRef(s.visual?.artwork)).map(s=>({id:s.id,title:s.title}));
 }
 
 window.InnsiktAssets={get,src,usedBy};

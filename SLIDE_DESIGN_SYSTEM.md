@@ -55,3 +55,8 @@ Nye dataeide scenevarianter må teste eksplisitt at den nye HTML/SVG-strukturen 
 ## Valgfri illustrert fremstilling (0.18.57)
 
 «Illustrert» er en tredje uttrykksretning for utvalgte scener, ikke en tredje fargepalett. Samme JSON og HTML-komponenter brukes, med opt-in via `visual.artDirections` og `data-art-direction`. Dekorativ SVG skal ikke eie informasjon. Landskap skal kun brukes der det tilfører fremdrift eller mening, ikke som pynt på alle slides. Kontroller 16:9, mobil, syntetisk skin og eksport som normalt.
+
+
+## Scenekomposisjon med uavhengige illustrasjonsobjekter (v0.18.58)
+
+En illustrert slide kan bestå av tre logiske lag: (1) frittstående dekorative ressurser, (2) kontrollerte overlegg og stemning, og (3) native diagram, tekst, piler og begreper. Dekorative ressurser skal være registrert med rettigheter og sjekksum i `visual-assets.json`, og sammensetningen skal ligge i `visual.artwork` i `slides.json` – aldri som et ferdig skjermbilde med tekst. Velg illustrasjoner fordi de understøtter budskapet. Bruk endringsvennlige, adskilte SVG-/rasterobjekter fremfor å gjenta all illustrasjonsgeometri som en stor JS-streng. I lys/mørk prioriteres selskapets skin, mens illustrert fremstilling tåler en mer selvstendig kunstnerisk palett. Bevar alltid lesbarhet, kildegrunnlag og eksport.

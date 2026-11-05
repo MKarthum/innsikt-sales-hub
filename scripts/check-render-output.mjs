@@ -71,6 +71,7 @@ vm.runInContext(read('docs/assets/prompts.js'),sandbox,{timeout:3000,filename:'p
 vm.runInContext(read('docs/assets/horizon.js'),sandbox,{timeout:3000,filename:'horizon.js'});
 vm.runInContext(read('docs/assets/slide-model.js'),sandbox,{timeout:3000,filename:'slide-model.js'});
 vm.runInContext(read('docs/assets/visual-assets.js'),sandbox,{timeout:3000,filename:'visual-assets.js'});
+vm.runInContext(read('docs/assets/scene-art.js'),sandbox,{timeout:3000,filename:'scene-art.js'});
 vm.runInContext(read('docs/assets/vendor-architectures.js'),sandbox,{timeout:3000,filename:'vendor-architectures.js'});
 vm.runInContext(read('docs/assets/architecture-visuals.js'),sandbox,{timeout:3000,filename:'architecture-visuals.js'});
 vm.runInContext(read('docs/assets/architecture-explorer.js'),sandbox,{timeout:3000,filename:'architecture-explorer.js'});

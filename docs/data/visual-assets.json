@@ -427,6 +427,60 @@
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
       "sha256": "84617457512591b8bea0ef0aafcdc7ac60526a41a623ebbcc50d6e7853cab2fe"
+    },
+    {
+      "id": "context-atmosphere",
+      "label": "Lys og atmosfære",
+      "category": "original-figure",
+      "path": "assets/library/original/context-atmosphere.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
+      "sha256": "0cceb6d97192c173dcff7e9aab3c46a19e01f40b3ff13a7016785962dad8e997"
+    },
+    {
+      "id": "context-ridges",
+      "label": "Distant fjell og tåke",
+      "category": "original-figure",
+      "path": "assets/library/original/context-ridges.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
+      "sha256": "f81b57b69a1747f30b1817f0ae02c4837368482c0aab3e047231a0dae6a9d38a"
+    },
+    {
+      "id": "context-summit",
+      "label": "Fjelltopp og snø",
+      "category": "original-figure",
+      "path": "assets/library/original/context-summit.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
+      "sha256": "5535279d571bfc9497d33b67e8d7ad5d4bd5a351435370a842815b307e07206f"
+    },
+    {
+      "id": "context-path",
+      "label": "Lysende vei mot målet",
+      "category": "original-figure",
+      "path": "assets/library/original/context-path.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
+      "sha256": "a831552afa3bef0a7320985dfcaee3f097ecedfc943969dcea22f6b0b458c93e"
+    },
+    {
+      "id": "context-forest",
+      "label": "Skog og forgrunn",
+      "category": "original-figure",
+      "path": "assets/library/original/context-forest.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
+      "sha256": "1c6829711ee721f70891cd54d08d9ebfdaaf1901090343d4402998bf2fd50554"
+    },
+    {
+      "id": "context-flag",
+      "label": "Målflagg",
+      "category": "original-figure",
+      "path": "assets/library/original/context-flag.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
+      "sha256": "6292cce0031409f33c4d30dd00fb33b7ed8a5f6d4e41f8fd5289c0647da3a845"
     }
   ]
 }

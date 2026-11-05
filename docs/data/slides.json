@@ -1756,22 +1756,25 @@
         "gartner-context",
         "gartner-data26"
       ],
-      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet.",
+      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet. Illustrasjonsobjektene for himmel, bakgrunnsfjell, fjelltopp, vei, skog og flagg kan byttes og posisjoneres uavhengig av faglige diagramkomponenter. Den illustrerte varianten kan tones gjennom CSS uten å endre kjernens datamodell.",
       "visual": {
         "scene": "context-platforms",
         "period": "2027 og videre",
         "consumers": [
           {
             "label": "Mennesker",
-            "detail": "Innsikt og beslutninger"
+            "detail": "Innsikt og beslutninger",
+            "assetId": "customer-dialogue"
           },
           {
             "label": "Applikasjoner",
-            "detail": "Produkter og prosesser"
+            "detail": "Produkter og prosesser",
+            "assetId": "consume-app"
           },
           {
             "label": "KI-agenter",
-            "detail": "Analyse, anbefaling og handling"
+            "detail": "Analyse, anbefaling og handling",
+            "assetId": "ai-agent"
           }
         ],
         "contextLabel": "Virksomhetskontekst",
@@ -1779,43 +1782,52 @@
         "facets": [
           {
             "label": "Betydning",
-            "detail": "Begreper og relasjoner"
+            "detail": "Begreper og relasjoner",
+            "assetId": "data-semantic"
           },
           {
             "label": "Situasjon",
-            "detail": "Tilstand, hendelser og historikk"
+            "detail": "Tilstand, hendelser og historikk",
+            "assetId": "market-signal"
           },
           {
             "label": "Rammer",
-            "detail": "Regler, tilgang og kilder"
+            "detail": "Regler, tilgang og kilder",
+            "assetId": "governance-shield"
           }
         ],
         "sources": [
           {
             "label": "Dataplattformer",
-            "detail": "Lakehouse, data og analyse"
+            "detail": "Lakehouse, data og analyse",
+            "assetId": "tabler-database"
           },
           {
             "label": "Operative systemer",
-            "detail": "Prosesser og tjenester"
+            "detail": "Prosesser og tjenester",
+            "assetId": "source-erp"
           },
           {
             "label": "Eksterne kilder",
-            "detail": "Partnere, offentlige data og API-er"
+            "detail": "Partnere, offentlige data og API-er",
+            "assetId": "source-api"
           }
         ],
         "cycle": [
           {
             "label": "Beslutning",
-            "detail": "Menneske eller KI"
+            "detail": "Menneske eller KI",
+            "assetId": "business-decision"
           },
           {
             "label": "Kontrollert handling",
-            "detail": "I operative systemer"
+            "detail": "I operative systemer",
+            "assetId": "delivery-loop"
           },
           {
             "label": "Oppdatert kontekst",
-            "detail": "Ny tilstand og effekt"
+            "detail": "Ny tilstand og effekt",
+            "assetId": "support-observe"
           }
         ],
         "governanceLabel": "Styring og tillit",
@@ -1827,7 +1839,100 @@
         ],
         "artDirections": [
           "illustrated"
-        ]
+        ],
+        "artwork": {
+          "version": 1,
+          "objects": [
+            {
+              "id": "sky",
+              "type": "asset",
+              "assetId": "context-atmosphere",
+              "role": "atmosphere",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "sun-glow",
+              "type": "glow",
+              "role": "haze",
+              "x": 73,
+              "y": 4,
+              "w": 26,
+              "h": 38,
+              "opacity": 0.25
+            },
+            {
+              "id": "distant-ranges",
+              "type": "asset",
+              "assetId": "context-ridges",
+              "role": "distance",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 0.9,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "summit",
+              "type": "asset",
+              "assetId": "context-summit",
+              "role": "summit",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "route",
+              "type": "asset",
+              "assetId": "context-path",
+              "role": "route",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "foreground",
+              "type": "asset",
+              "assetId": "context-forest",
+              "role": "foreground",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 0.84,
+              "fit": "fill",
+              "style": "natural"
+            },
+            {
+              "id": "flag",
+              "type": "asset",
+              "assetId": "context-flag",
+              "role": "goal",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural"
+            }
+          ]
+        }
       },
       "design": {
         "archetype": "blueprint",
