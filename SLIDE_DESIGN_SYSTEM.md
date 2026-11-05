@@ -65,3 +65,8 @@ En illustrert slide kan bestå av tre logiske lag: (1) frittstående dekorative 
 ## Enkel og rik illustrasjon (0.18.59)
 
 Valg av «Enkel illustrasjon» eller «Rik illustrasjon» skal kun påvirke dekorativ scenografi og presentasjonsuttrykk, aldri fagtekst eller forbindelser. Enkel er rendret med individuelle vektorobjekter som følger organisasjonens semantiske fargevariabler; rik bruker et selvstendig foto-/bildeobjekt som kan byttes uten å gjenskape slide. Bokser, tekst, ikoner og alle piler er native og forvaltes i scene og JSON. Kvalitetssikres mot samme tekst- og layoutkontrakt, 16:9 og eksport.
+
+
+## 0.18.60 – helhet og eksportsamsvar
+
+Tre native verdi-kort til høyre (dataeide `visual.outcomes`) løfter mulig forretningsverdi uten å bli et statisk bilde. Kilde-, kontekst- og handlingslag skal ha synlige, logisk korrekte forbindelser. Bruk en enkelt pil fra kilde-/systemlaget til beslutningsløkken, ikke tre piler som impliserer én-til-én-mapping av kilder mot prosessledd. Verifiser alltid faktisk nedlastet PNG/JPG med samme art direction og visuelle ressurser, i tillegg til nettleserens skjermbilde.
