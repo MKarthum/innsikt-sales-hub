@@ -77,7 +77,7 @@ try{
  assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Factual text is identical in both illustration modes');
  await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-rich.png'});
  // The actual downloaded PNG must contain the selected, data-owned photographic layer.
- const button=page.locator('.slide-library-detail-stage [data-slide-download="png"][data-slide-download-id="ai-context-platforms-2027"]');
+ const button=page.locator('[data-slide-download="png"][data-slide-download-id="ai-context-platforms-2027"]').first();
  const [download]=await Promise.all([page.waitForEvent('download',{timeout:60000}),button.click()]);
  const exported=fs.readFileSync(await download.path());
  assert.equal(exported.subarray(1,4).toString(),'PNG','Downloaded bytes must be PNG');
