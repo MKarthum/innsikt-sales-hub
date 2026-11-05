@@ -62,7 +62,7 @@ try{
  assert.equal(await page.locator('#library-art-mode').inputValue(),'auto');
  await page.locator('#library-art-mode').selectOption('illustrated');
  assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
- assert.equal(await platform.locator('.scene-art-object--asset').count(),8);
+ assert.equal(await platform.locator('.scene-art-object--asset').count(),7,'Six simple layers and one rich image');
  assert.equal(await platform.locator('.scene-art-object--glow').count(),1);
  fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
  await platform.locator('.scene-art-object--asset img').first().evaluate(img=>img.decode());
