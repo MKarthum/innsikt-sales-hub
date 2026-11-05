@@ -25,6 +25,10 @@ try{
  await page.evaluate(()=>{location.hash='#lysbilder/ai-context-platforms-2027'});
  const contextSlide=page.locator('.slide-library-detail-stage .story-scene');
  await contextSlide.waitFor();
+ await page.locator('#library-tone-mode').selectOption('strong');
+ await page.locator('#library-art-mode').selectOption('auto');
+ assert.equal(await contextSlide.getAttribute('data-art-direction'),'rich','Recommended scene is rich');
+ await contextSlide.screenshot({path:output+'/context-auto-rich.png'});
  await page.locator('#library-art-mode').selectOption('illustrated');
  assert.equal(await contextSlide.getAttribute('data-art-direction'),'illustrated');
  await contextSlide.screenshot({path:output+'/context-illustrated.png'});

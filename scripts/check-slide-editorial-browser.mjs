@@ -54,6 +54,12 @@ try{
  // The illustrated option uses exactly the same slide data and can be switched back.
  await page.evaluate(()=>location.hash='#lysbilder/ai-context-platforms-2027');
  const platform=page.locator('.slide-library-detail-stage .story-scene');await platform.waitFor();
+ // Palette and art direction are separate, and auto makes the rich photo visible.
+ await page.locator('#library-tone-mode').selectOption('strong');
+ await page.locator('#library-art-mode').selectOption('auto');
+ assert.equal(await platform.getAttribute('data-art-direction'),'rich','Auto selects the recommended rich scene');
+ assert.equal(await page.locator('#library-tone-mode').inputValue(),'strong');
+ assert.equal(await page.locator('#library-art-mode').inputValue(),'auto');
  await page.locator('#library-art-mode').selectOption('illustrated');
  assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
  assert.equal(await platform.locator('.scene-art-object--asset').count(),8);
@@ -75,8 +81,13 @@ try{
  assert.equal(await image.evaluate(img=>img.naturalWidth>0),true,'Rich photo loads');
  assert.equal(await platform.locator('[data-scene-object="rich-mountain-background"]').evaluate(el=>getComputedStyle(el).display),'block');
  assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Factual text is identical in both illustration modes');
- await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-rich.png'});
- // The actual downloaded PNG must contain the selected, data-owned photographic layer.
+ const richScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-rich.png'});
+ // A dark palette with Standard art direction must not display the same photo.
+ await page.locator('#library-art-mode').selectOption('standard');
+ const standardDarkScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-dark-standard.png'});
+ await page.locator('#library-art-mode').selectOption('rich');
+ assert.equal(await platform.getAttribute('data-art-direction'),'rich','Dark palette must retain rich art');
+ // The actual downloaded PNG must match the selected rendering, not just contain some warm pixels.
  const button=page.locator('[data-slide-download="png"][data-slide-download-id="ai-context-platforms-2027"]').first();
  const [download]=await Promise.all([page.waitForEvent('download',{timeout:60000}),button.click()]);
  const exported=fs.readFileSync(await download.path());
@@ -101,6 +112,37 @@ try{
  },exported.toString('base64'));
  assert.ok(photo.warm>=8&&photo.variance>350,'Exported PNG lost the scenic image: '+JSON.stringify(photo));
  fs.writeFileSync('artifacts/visual-pilot/context-platforms-downloaded.png',exported);
+
+ // Compare entire decoded screen and exported image (same palette, same art).
+ // This catches dropped backgrounds, wrong art direction and stale slide captures.
+ const parity=await page.evaluate(async data=>{
+  const read=async base64=>{
+   const im=new Image();im.src='data:image/png;base64,'+base64;await im.decode();
+   const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
+   const context=canvas.getContext('2d',{willReadFrequently:true});
+   context.drawImage(im,0,0,160,90);
+   return context.getImageData(0,0,160,90).data;
+  };
+  const [before,after,plain]=await Promise.all([read(data.before),read(data.after),read(data.plain)]);
+  const measure=(a,b,rect)=>{
+   let total=0,large=0,count=0;
+   for(let y=rect.y;y<rect.y+rect.h;y++)for(let x=rect.x;x<rect.x+rect.w;x++){
+    const k=(y*160+x)*4;
+    const d=(Math.abs(a[k]-b[k])+Math.abs(a[k+1]-b[k+1])+Math.abs(a[k+2]-b[k+2]))/3;
+    total+=d;if(d>64)large++;count++;
+   }
+   return {mae:total/count,largeFraction:large/count};
+  };
+  return {
+   entire:measure(before,after,{x:4,y:4,w:151,h:82}),
+   right:measure(before,after,{x:110,y:5,w:46,h:74}),
+   photoDifference:measure(before,plain,{x:120,y:7,w:35,h:52})
+  };
+ },{before:richScreenshot.toString('base64'),after:exported.toString('base64'),plain:standardDarkScreenshot.toString('base64')});
+ assert.ok(parity.photoDifference.mae>22,'Rich illustration visually indistinguishable from standard: '+JSON.stringify(parity));
+ assert.ok(parity.entire.mae<38&&parity.right.mae<40&&parity.entire.largeFraction<.27,
+  'Export differs visually from the on-screen slide: '+JSON.stringify(parity));
+ console.log('PASS – visual export parity '+JSON.stringify(parity));
 
  const richEx=await platform.evaluate(el=>({w:el.scrollWidth-el.clientWidth,h:el.scrollHeight-el.clientHeight}));
  assert.ok(richEx.w<=3&&richEx.h<=3,'Rich illustration stays inside 16:9');
