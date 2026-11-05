@@ -156,7 +156,9 @@ function render(slide,esc,position={}){
  if(kind==='context-platforms'){
   const tiles=(list,cls)=>list.map((item,i)=>'<div class="cp-tile '+cls+'">'+(item.assetId?'<span class="cp-icon">'+assetImage(item.assetId,'cp-icon-image')+'</span>':'')+'<div class="cp-tile-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div></div>').join('');
   const links=()=>'<div class="cp-links" aria-hidden="true"><i></i><i></i><i></i></div>';
-  const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step">'+(item.assetId?assetImage(item.assetId,'cp-cycle-icon'):'')+'<span class="cp-cycle-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>'+(i===v.cycle.length-1?'':'<span class="cp-cycle-arrow" aria-hidden="true">→</span>')).join('');
+  const stepArrow='<svg class="cp-cycle-arrow" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 16H27M18 7L27 16L18 25"/></svg>';
+  const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step">'+(item.assetId?assetImage(item.assetId,'cp-cycle-icon'):'')+'<span class="cp-cycle-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>'+(i===v.cycle.length-1?'':stepArrow)).join('');
+  const feedback='<svg class="cp-feedback-return" viewBox="0 0 1000 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="cp-feedback-track" d="M945 7V29Q945 49 922 49H78Q55 49 55 29V7"/><path class="cp-feedback-head" d="M38 23L55 5L72 23"/></svg>';
   const scenery=window.InnsiktSceneArt.render(v.artwork,position.assets,escs);
   return '<div class="story-scene scene-context-platforms">'
    +'<div class="cp-landscape" aria-hidden="true">'+scenery+'</div>'
@@ -168,7 +170,7 @@ function render(slide,esc,position={}){
    +'<div class="cp-facets">'+tiles(v.facets,'cp-facet')+'</div></section>'
    +links()
    +'<section class="cp-sources" aria-label="Kilder og systemer">'+tiles(v.sources,'cp-source')+'</section>'
-   +'<section class="cp-cycle" aria-label="Beslutning, handling og oppdatert kontekst">'+cycle+'</section>'
+   +'<section class="cp-cycle" aria-label="Beslutning, kontrollert handling og oppdatert kontekst">'+cycle+feedback+'</section>'
    +'<footer class="cp-governance"><strong>'+escs(v.governanceLabel)+'</strong><span>'+v.governance.map(escs).join(' · ')+'</span></footer>'
    +'</div></div>';
  }

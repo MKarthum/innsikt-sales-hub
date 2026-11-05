@@ -77,3 +77,8 @@ Bevegelse (på/av) er en selvstendig Presenter-innstilling, lagret lokalt i nett
 ### Scenegrafikk som egne objekter – v0.18.58
 
 Fagtekst, tabeller og kontroller fortsetter å følge selskapets CSS-skin fullt ut. Illustrerte objekter kan ha egen, bevisst kunstnerisk palett og trenger ikke treffe organisasjonens profilfarger nøyaktig. Et valgfritt skin kan likevel overstyre **kun** `--scene-art-saturation`, `--scene-art-brightness`, `--scene-art-hue`, `--scene-art-veil` og `--scene-art-glow` i `.scene-art`, uten å duplisere scene eller endre illustrasjonens faktainnhold. Disse variablene gjelder dekorative objekter, ikke tekst eller sikkerhetsrelevant informasjon. Illustrasjonslagene er egne SVG/PNG/WebP/JPG-filer oppført i ressurssamlingen. Konkrete posisjoner og layer-rekkefølge eies av `slides.json`. HTML-eksport må inkludere CSS og alle lokale illustrasjonsressurser.
+
+
+### Rik illustrasjon med eget bildeobjekt – v0.18.59
+
+Kjernens selskapsprofil er obligatorisk for alle tekster, kort, piler, typografi og andre meningsbærende objekter. Den rike scenen har et separat katalogført, KI-generert bakgrunnsbilde og tillater moderat avvik i natur- og illustrasjonsfarger. Begrenset overstyring av dekorative flater skjer via eksisterende `--scene-art-*`-roller. «Rik illustrasjon» er ikke et alternativ til selskapets designkontrakt, men en art direction med kontrollerte frihetsgrader. I alternativ lys/mørk/fortellingsstyrt brukes bare native visning, uten kopiering av faginnhold.

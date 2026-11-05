@@ -6,7 +6,7 @@ const roles=new Set(['atmosphere','distance','landscape','summit','route','foreg
 const fits=new Set(['fill','cover','contain']);
 const shapes=new Set(['disc','panel','rule']);
 const styles=new Set(['natural','muted','corporate']);
-const modes=new Set(['all','illustrated','standard']);
+const modes=new Set(['all','illustrated','standard','rich']);
 const validId=id=>typeof id==='string'&&/^[a-z][a-z0-9-]{1,63}$/.test(id);
 const number=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
 function validate(art,catalog){

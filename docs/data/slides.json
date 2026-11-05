@@ -1756,7 +1756,7 @@
         "gartner-context",
         "gartner-data26"
       ],
-      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet. Illustrasjonsobjektene for himmel, bakgrunnsfjell, fjelltopp, vei, skog og flagg kan byttes og posisjoneres uavhengig av faglige diagramkomponenter. Den illustrerte varianten kan tones gjennom CSS uten å endre kjernens datamodell.",
+      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet. Illustrasjonsobjektene for himmel, bakgrunnsfjell, fjelltopp, vei, skog og flagg kan byttes og posisjoneres uavhengig av faglige diagramkomponenter. Den illustrerte varianten kan tones gjennom CSS uten å endre kjernens datamodell. Enkel og rik illustrasjon deler eksakt samme faginnhold og diagram. De to nivåene bytter bare dekorative sceneobjekter; den rike varianten bruker en tekstfri generert bildebakgrunn, den enkle separate SVG-objekter.",
       "visual": {
         "scene": "context-platforms",
         "period": "2027 og videre",
@@ -1838,11 +1838,40 @@
           "Sporbarhet"
         ],
         "artDirections": [
-          "illustrated"
+          "illustrated",
+          "rich"
         ],
         "artwork": {
           "version": 1,
           "objects": [
+            {
+              "id": "rich-mountain-background",
+              "type": "asset",
+              "assetId": "context-rich-background",
+              "role": "atmosphere",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
+              "fit": "fill",
+              "style": "natural",
+              "mode": "rich"
+            },
+            {
+              "id": "rich-valley-ranges",
+              "type": "asset",
+              "assetId": "context-ridges",
+              "role": "distance",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 0.22,
+              "fit": "fill",
+              "style": "natural",
+              "mode": "rich"
+            },
             {
               "id": "sky",
               "type": "asset",
@@ -1854,7 +1883,8 @@
               "h": 100,
               "opacity": 1,
               "fit": "fill",
-              "style": "natural"
+              "style": "natural",
+              "mode": "illustrated"
             },
             {
               "id": "sun-glow",
@@ -1864,7 +1894,8 @@
               "y": 4,
               "w": 26,
               "h": 38,
-              "opacity": 0.25
+              "opacity": 0.25,
+              "mode": "illustrated"
             },
             {
               "id": "distant-ranges",
@@ -1877,7 +1908,8 @@
               "h": 100,
               "opacity": 0.9,
               "fit": "fill",
-              "style": "natural"
+              "style": "natural",
+              "mode": "illustrated"
             },
             {
               "id": "summit",
@@ -1890,7 +1922,8 @@
               "h": 100,
               "opacity": 1,
               "fit": "fill",
-              "style": "natural"
+              "style": "natural",
+              "mode": "illustrated"
             },
             {
               "id": "route",
@@ -1903,7 +1936,8 @@
               "h": 100,
               "opacity": 1,
               "fit": "fill",
-              "style": "natural"
+              "style": "natural",
+              "mode": "illustrated"
             },
             {
               "id": "foreground",
@@ -1916,7 +1950,8 @@
               "h": 100,
               "opacity": 0.84,
               "fit": "fill",
-              "style": "natural"
+              "style": "natural",
+              "mode": "illustrated"
             },
             {
               "id": "flag",
@@ -1929,7 +1964,8 @@
               "h": 100,
               "opacity": 1,
               "fit": "fill",
-              "style": "natural"
+              "style": "natural",
+              "mode": "illustrated"
             }
           ]
         }

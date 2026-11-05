@@ -481,6 +481,15 @@
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
       "sha256": "6292cce0031409f33c4d30dd00fb33b7ed8a5f6d4e41f8fd5289c0647da3a845"
+    },
+    {
+      "id": "context-rich-background",
+      "label": "Rikt alpint målbilde (generert)",
+      "category": "original-figure",
+      "path": "assets/library/original/context-rich-background.webp",
+      "rights": "KI-generert landskapsmotiv, bearbeidet til et separat bildeobjekt uten fagtekst.",
+      "notes": "Separat KI-generert landskapsressurs, bearbeidet uten fagtekst, 800×450 WebP. Rik illustrasjon; kan byttes uavhengig av diagram, piler og øvrig innhold.",
+      "sha256": "089c6bd043116ee1e2b41151933b6c52b246556811980cdc5644afcf33fded56"
     }
   ]
 }

@@ -60,3 +60,8 @@ Nye dataeide scenevarianter må teste eksplisitt at den nye HTML/SVG-strukturen 
 ## Scenekomposisjon med uavhengige illustrasjonsobjekter (v0.18.58)
 
 En illustrert slide kan bestå av tre logiske lag: (1) frittstående dekorative ressurser, (2) kontrollerte overlegg og stemning, og (3) native diagram, tekst, piler og begreper. Dekorative ressurser skal være registrert med rettigheter og sjekksum i `visual-assets.json`, og sammensetningen skal ligge i `visual.artwork` i `slides.json` – aldri som et ferdig skjermbilde med tekst. Velg illustrasjoner fordi de understøtter budskapet. Bruk endringsvennlige, adskilte SVG-/rasterobjekter fremfor å gjenta all illustrasjonsgeometri som en stor JS-streng. I lys/mørk prioriteres selskapets skin, mens illustrert fremstilling tåler en mer selvstendig kunstnerisk palett. Bevar alltid lesbarhet, kildegrunnlag og eksport.
+
+
+## Enkel og rik illustrasjon (0.18.59)
+
+Valg av «Enkel illustrasjon» eller «Rik illustrasjon» skal kun påvirke dekorativ scenografi og presentasjonsuttrykk, aldri fagtekst eller forbindelser. Enkel er rendret med individuelle vektorobjekter som følger organisasjonens semantiske fargevariabler; rik bruker et selvstendig foto-/bildeobjekt som kan byttes uten å gjenskape slide. Bokser, tekst, ikoner og alle piler er native og forvaltes i scene og JSON. Kvalitetssikres mot samme tekst- og layoutkontrakt, 16:9 og eksport.
