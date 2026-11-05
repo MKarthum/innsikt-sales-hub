@@ -36,3 +36,13 @@ Den valgfritt lastede filen docs/assets/slide-download.js bygges fra MIT-lisensi
 - esbuild (byggeverktøy): https://github.com/evanw/esbuild
 
 Versjoner og reproduksjon: package.json, package-lock.json, scripts/slide-download-entry.mjs og npm run build:slide-download. Den genererte filen har tredjeparts lisensnotiser. Bibliotekene lastes kun ved nedlasting; ingen CDN eller server kreves.
+
+### Rich context-platform landscape (0.18.61)
+The local image context-rich-photo-v2.webp is an editorial adaptation of two photographs
+distributed under the Unsplash License (https://unsplash.com/license):
+- Photograph of mountains surrounded by mist, Artem Sapegin,
+  https://unsplash.com/photos/GP3EdRRvu2Q
+- A mountain with a trail going up the side of it, Maty Podrouzek,
+  https://unsplash.com/photos/nX8OPOeV0YY
+The photographs have been cropped, color-graded and blended. This file contains no
+presentation copy or diagram objects, and is replaceable in the content catalog.

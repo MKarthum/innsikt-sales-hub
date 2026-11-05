@@ -36,7 +36,7 @@ assert.ok(html.startsWith('<div class="story-scene scene-context-platforms">'));
 for(const token of [slide.title,slide.visual.contextLabel,...slide.visual.consumers.map(x=>x.label),...slide.visual.facets.map(x=>x.label),...slide.visual.sources.map(x=>x.label),...slide.visual.cycle.map(x=>x.label)]) {
  assert.ok(html.includes(token),'Missing visible data '+token);
 }
-assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[]).length,8);
+assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[]).length,9);
 assert.equal((html.match(/class="cp-cycle-arrow"/g)||[]).length,2,'Both bottom process arrows are native SVG');
 assert.ok(html.includes('class="cp-feedback-return"'),'Native return connection exists');
 assert.ok(html.includes('class="cp-action-link"'),'Sources and operating loop must be visibly connected');

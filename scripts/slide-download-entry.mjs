@@ -34,9 +34,17 @@ function captureElement(html,tone){
 }
 async function waitForAssets(frame){
  await document.fonts?.ready;
- await Promise.all([...frame.querySelectorAll('img')].map(img=>{
-  if(img.complete)return;
-  return new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});});
+ // An HTTP 404 sets complete=true, so complete alone is not a validity check.
+ await Promise.all([...frame.querySelectorAll('img')].map(async img=>{
+  const source=img.getAttribute('src')||'';
+  try {
+   if(!img.complete)await new Promise((resolve,reject)=>{
+    img.addEventListener('load',resolve,{once:true});
+    img.addEventListener('error',()=>reject(Error('Ressursen ble ikke lastet')),{once:true});
+   });
+   if(img.decode)await img.decode();
+   if(!img.naturalWidth||!img.naturalHeight)throw Error('Tom bildeflate');
+  }catch(error){throw Error('Kan ikke eksportere lysbilde med manglende illustrasjon: '+source.slice(0,80)+' / '+error.message);}
  }));
 }
 // html-to-image serializes SVG elements inside an SVG foreignObject. In that
@@ -64,7 +72,7 @@ function freezeSvgPresentation(frame){
   }
  }
 }
-export async function downloadSingleSlide({id,title,html,tone='light',format='png',version=''}){
+export async function downloadSingleSlide({id,title,html,tone='light',artDirection='standard',format='png',version=''}){
  if(!formats.has(format))throw Error('Ukjent eksportformat: '+format);
  if(!/^[a-z0-9-]+$/.test(id))throw Error('Ugyldig lysbilde-ID');
  const {host,frame}=captureElement(html,tone);
@@ -72,7 +80,8 @@ export async function downloadSingleSlide({id,title,html,tone='light',format='pn
   await waitForAssets(frame);
   freezeSvgPresentation(frame);
   const opts={width:WIDTH,height:HEIGHT,pixelRatio:2,cacheBust:false,skipAutoScale:true};
-  const filename='innsikt-'+id+'-'+tone+'-v'+version;
+  const direction=['standard','illustrated','rich'].includes(artDirection)?artDirection:'standard';
+ const filename='innsikt-'+id+'-'+tone+'-'+direction+'-v'+version;
   // All formats are derived from the same static, unnumbered 16:9 rendering.
   if(format==='png'){
    const data=await toPng(frame,opts);

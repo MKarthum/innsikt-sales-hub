@@ -185,3 +185,10 @@ Ny renderer `docs/assets/scene-art.js` har en minimal, gjenbrukbar objektkontrak
 Nedlasting av enkeltlysbildet bruker nå faktisk valgt og rendret lysbilde fra bibliotek, fullskjerm eller Presenter i stedet for å generere en ny standardvisning. `slide-export-prep.js` pakker lokale, katalogførte bilder og SVG-ressurser inn som data-URI før PNG/JPG/PDF/PowerPoint-capture. Ukjente ressursbaner eller manglende rik bakgrunn avvises eksplisitt. Dette bevarer både art direction, bildefiler og skin i det eksporterte resultatet.
 
 I `ai-context-platforms-2027` er kilde- og handlingslaget knyttet sammen med en enkelt nedoverrettet, native SVG-pil (ikke en villedende én-til-én-relasjon mellom kildekolonner og prosessledd). Tre nye, native og dataeide verdi-kort vises til høyre: bedre beslutninger, mer målrettet handling og læring underveis. Kortene er konseptuelle muligheter, ikke garanterte effekter. Bakgrunnens fotografi, lys, dybde og skygger er fortsatt dekorative og kan byttes uten å endre faginnholdet.
+
+
+## 0.18.61 – fotografisk bakgrunn og trofast nedlasting
+
+Den rike kontekstsliden bruker et fullt 1600 × 900 fotolag (to bearbeidede fotografier med dokumentert Unsplash License), kombinert med selvstendige SVG-objekter for sti, flagg og lys. Diagram, definisjoner, boksinnhold, verdipunkter, piler og retursløyfe er fortsatt native og hentes fra kanonisk JSON. Den enkle illustrasjonen er uendret.
+
+Enkeltlysbildets nedlasting validerer valgt art direction og feiler eksplisitt hvis den rike scenen ikke er aktiv. Den minifiserte nedlasteren venter på vellykket bilde-dekoding før generering, og filnavnet inneholder art direction for å unngå forveksling med eldre eksporter.

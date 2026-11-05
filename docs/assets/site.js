@@ -608,6 +608,11 @@ async function downloadSlideButton(button){
  const visible=candidates.find(el=>el?.querySelector('.story-scene')
    &&(currentInPresenter||el.dataset.librarySlideId===item.id));
  const fallback=slideMarkup(item,index,deckId,false,false);
+ const displayedMode=visible?.querySelector('.story-scene')?.dataset.artDirection;
+ const desiredMode=artDirection(item);
+ // Never quietly export the default mode if the selected rich scene is not visible.
+ if(desiredMode==='rich'&&displayedMode!=='rich')
+  throw Error('Rik illustrasjon er ikke synlig i eksportgrunnlaget. Åpne lysbildet og prøv igjen.');
  const rendered=visible?.querySelector('.story-scene')?visible.innerHTML:fallback;
  const tone=visible?.dataset.tone||window.InnsiktSlides.tone(item,deck,presentationThemeMode);
  button.disabled=true;button.setAttribute('aria-busy','true');
@@ -615,7 +620,7 @@ async function downloadSlideButton(button){
   const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
   const html=await prep.prepareSlideMarkupForExport(rendered);
   const module=await import('./slide-download.js?v='+encodeURIComponent(D.meta.version));
-  await module.downloadSingleSlide({id:item.id,title:item.title,html,tone,format,version:D.meta.version});
+  await module.downloadSingleSlide({id:item.id,title:item.title,html,tone,artDirection:displayedMode||desiredMode,format,version:D.meta.version});
   toast('Lysbildet er lastet ned.');
  }catch(err){
   toast(D.pages.slideLibraryUi.singleExportError+' '+(err?.message||''));
@@ -993,141 +998,3 @@ function initPromptContextEvents(){
    const id=toggle.dataset.promptSuggestToggle,panel=promptSuggestionPanel(id),opening=!!panel?.hidden;
    closePromptSuggestions();
    if(panel&&opening){
-    panel.hidden=false;
-    toggle.setAttribute('aria-expanded','true');
-    panel.querySelectorAll('[data-prompt-suggestion]').forEach(btn=>{btn.hidden=false});
-    const empty=panel.querySelector('[data-prompt-suggestion-empty]');
-    if(empty)empty.hidden=true;
-    panel.scrollIntoView({block:'nearest',behavior:'instant'});
-   }
-   return;
-  }
-  const selected=e.target.closest('[data-prompt-suggestion]');
-  if(selected){
-   const id=selected.dataset.promptSuggestion;
-   const field=[...document.querySelectorAll('[data-context-var]')].find(el=>el.dataset.contextVar===id);
-   if(field){
-    field.value=selected.dataset.promptSuggestionValue;
-    field.dispatchEvent(new Event('input',{bubbles:true}));
-   }
-   closePromptSuggestions();
-   return;
-  }
-  if(!e.target.closest('[data-prompt-suggestion-panel]')&&!e.target.closest('[data-context-var]'))closePromptSuggestions();
-  const btn=e.target.closest('[data-context-clear]');
-  if(btn){
-   const id=btn.dataset.contextClear;
-   window.InnsiktPromptContext.clear(id);
-   if(location.hash==='#prompter/variabler')render();
-   else {
-    document.querySelectorAll('[data-context-var]').forEach(el=>{if(el.dataset.contextVar===id)el.value=''});
-    refreshPromptFromContext();
-    toast(D.prompts.page.variableUi.clearedMessage);
-   }
-   return;
-  }
-  if(e.target.closest('[data-context-clear-all]')){
-   if(!window.confirm(D.prompts.page.variableUi.confirmClearAll))return;
-   window.InnsiktPromptContext.clearAll();
-   render();
-   toast(D.prompts.page.variableUi.allClearedMessage);
-  }
- });
- document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-   const load=document.querySelector('.prompt-workload[open]');
-   if(load){load.open=false;load.querySelector('summary')?.focus();e.preventDefault();return;}
-  }
-  if(e.key==='Escape'&&document.querySelector('[data-prompt-suggestion-panel]:not([hidden])')){
-   closePromptSuggestions();
-   e.preventDefault();
-  }
- });
-}
-function initEvents(){
- document.addEventListener('fullscreenchange',presenterFullscreenChanged);
- // Fullscreen has its own direct handlers, installed on the dialog. This
- // global handler must not alter the DOM mid-touch and risk a Safari ghost click.
- document.addEventListener('click',e=>{
-  if(e.target.closest('#sidebar-close,#sidebar-backdrop')){
-   setMobileMenuOpen(false,{restoreFocus:true});return;
-  }
-  // An outside tap always dismisses the drawer, without changing the active page.
-  if(document.getElementById('sidebar')?.classList.contains('open')
-   &&!e.target.closest('#sidebar,#menu-toggle'))setMobileMenuOpen(false);
-  const pf=e.target.closest('[data-prompt-filter]');
-if(pf){promptFilter=pf.dataset.promptFilter;render();return}
-const pc=e.target.closest('[data-prompt-copy]');
-if(pc){const editor=document.getElementById('prompt-editor');if(editor){if(!navigator.clipboard?.writeText){toast(D.prompts.page.variableUi.copyUnsupported);return}navigator.clipboard.writeText(editor.value).then(()=>toast(D.prompts.page.variableUi.copySuccess)).catch(()=>toast(D.prompts.page.variableUi.copyFailure));}return}
-const pr=e.target.closest('[data-prompt-reset]');
-if(pr){const item=D.prompts.items.find(x=>x.id===pr.dataset.promptReset),editor=document.getElementById('prompt-editor');if(item&&editor){rebuildPromptEditor(item,true)}return}
-const singleDownload=e.target.closest('[data-slide-download]');
-if(singleDownload){e.preventDefault();downloadSlideButton(singleDownload);return}
-const preview=e.target.closest('[data-slide-preview-open]');
-if(preview){e.preventDefault();openLibrarySlideFullscreen(preview.dataset.slidePreviewOpen,preview);return}
-if(e.target.closest('#present-fullscreen-toggle')){togglePresenterFullscreen();return}if(e.target.closest('#deck-download')){exportPresentation('html');return}if(e.target.closest('#deck-print')){exportPresentation('print');return}const dp=e.target.closest('[data-deck-prompt]');if(dp){copyDeckPrompt(dp.dataset.deckPrompt);return}const deck=e.target.closest('[data-deck]');if(deck){selectedDeck=deck.dataset.deck;slide=0;showSlide();return}const template=e.target.closest('[data-copy-template]');if(template){copyLearningTemplate(template.dataset.copyTemplate);return}const kindBtn=e.target.closest('[data-tech-journey-kind]');if(kindBtn){techFilter=kindBtn.dataset.techJourneyKind;refreshTechnologyCatalog();document.querySelectorAll('[data-tech-journey-kind]').forEach(btn=>{if(btn.dataset.techJourneyKind===techFilter)btn.focus()});return}if(e.target.closest('[data-tech-journey-reset]')){techFilter='Alle';refreshTechnologyCatalog();document.querySelector('[data-tech-journey-reset]')?.focus();return}const tf=e.target.closest('[data-tech-filter]');if(tf){techFilter=tf.dataset.techFilter;refreshTechnologyCatalog();return}const af=e.target.closest('[data-ai-filter]');if(af){aiFilter=af.dataset.aiFilter;render();return}const filterBtn=e.target.closest('[data-filter]');if(filterBtn){filter=filterBtn.dataset.filter;render();return}const cp=e.target.closest('[data-copy]');if(cp){copyGuide(cp.dataset.copy);return}if(e.target.closest('[data-feedback-open]')){feedback();return}if(e.target.closest('#export-notes')){exportFeedback();return}if(e.target.closest('#save-feedback')){saveFeedback();return}if(e.target.closest('#search-button')){search();return}if(e.target.closest('#feedback-button')){feedback();return}if(e.target.closest('#present-button')){presentation();return}const scopeBtn=e.target.closest('[data-slide-scope]');if(scopeBtn){libraryFilters.scope=scopeBtn.dataset.slideScope;updateSlideLibrary();return}if(e.target.closest('[data-slide-reset]')){libraryFilters={query:'',topic:'all',story:'all',scope:'all'};render();return}
-const openSlide=e.target.closest('[data-slide-open]');
-if(openSlide){const deckId=openSlide.dataset.deckOpen,deck=D.pages.presentationDecks[deckId];const index=deck?.slides.findIndex(x=>x.slideId===openSlide.dataset.slideOpen)??-1;if(index>=0)presentation(deckId,index);return}if(e.target.closest('#slide-next')){slide=Math.min(slide+1,presentationSlides().length-1);showSlide();return}if(e.target.closest('#slide-prev')){slide=Math.max(slide-1,0);showSlide();return}const share=e.target.closest('[data-dialogue-copy]');if(share){const target=location.origin+location.pathname+'#kundedialog/kunde-'+share.dataset.dialogueCopy;const ui=D.pages.dialogueUi.seller;if(navigator.clipboard?.writeText)navigator.clipboard.writeText(target).then(()=>toast(ui.shareSuccess)).catch(()=>toast(ui.shareFailure));else toast(ui.shareFailure);return}if(e.target.closest('[data-search-select]')){closeModal();return}if(e.target.closest('[data-dismiss]')&&(e.target.matches('.overlay')||e.target.closest('.modal-close'))){closeModal();return}if(e.target.closest('#menu-toggle')){const open=!document.getElementById('sidebar').classList.contains('open');setMobileMenuOpen(open);return}});document.addEventListener('change',e=>{
-const dialogueSelect=e.target.closest('[data-dialogue-support-select]');
-if(dialogueSelect){const body=document.querySelector('[data-dialogue-support-body]');if(body)body.innerHTML=window.InnsiktDialogue.supportBody(D,{esc,ico},dialogueSelect.value);return;}
-const traceSelect=e.target.closest('[data-source-trace-select]');
-if(traceSelect){
- const item=sourceTraceItems().find(x=>x.id===traceSelect.value);
- if(item){sourceTraceId=item.id;const body=document.querySelector('[data-source-trace-body]');if(body)body.innerHTML=sourceTraceBody(item);}
- return;
-}
-const techSelect=e.target.closest('[data-tech-journey-select]');
-if(techSelect){const path=D.pages.technologyJourneyUi.paths.find(x=>x.playId===techSelect.value),play=D.plays.find(x=>x.id===techSelect.value);if(path&&play){techJourneyPlayId=play.id;techFilter='Alle';refreshTechnologyCatalog();const status=document.querySelector('[data-tech-journey-status]');if(status)status.textContent=D.pages.technologyJourneyUi.statusPrefix+' '+play.name;}return;}
-const playSelect=e.target.closest('[data-play-journey-select]');
-if(playSelect){
- const play=D.plays.find(p=>p.id===playSelect.value);
- if(play){
-  playJourneyId=play.id;
-  const body=document.querySelector('[data-play-journey-body]');
-  if(body)body.innerHTML=playJourneyBody(play.id);
-  const status=document.querySelector('[data-play-journey-status]');
-  if(status)status.textContent=D.pages.playJourneyUi.statusPrefix+' '+play.name;
- }
- return;
-}
-const competenceSelect=e.target.closest('[data-competence-audience]');
-if(competenceSelect){
- const audience=D.audiences.find(x=>x.id===competenceSelect.value);
- if(audience){
-  const body=document.querySelector('[data-competence-body]');
-  if(body)body.innerHTML=competenceJourneyBody(audience.id);
-  const status=document.querySelector('[data-competence-status]');
-  if(status)status.textContent=D.pages.competenceJourneyUi.statusPrefix+' '+audience.label;
- }
- return;
-}
-const selected=e.target.closest('[data-prompt-choice]');
-if(selected){
- const item=D.prompts.items.find(x=>x.id===selected.dataset.promptItem);
- if(item){window.InnsiktPromptContext.setChoice(item,selected.dataset.promptChoice,selected.value);refreshPromptFromContext()}
- return;
-}
-const toggled=e.target.closest('[data-prompt-toggle]');
-if(toggled){
- const item=D.prompts.items.find(x=>x.id===toggled.dataset.promptItem);
- if(item){window.InnsiktPromptContext.setChoice(item,toggled.dataset.promptToggle,toggled.checked);refreshPromptFromContext()}
- return;
-}
-if(e.target.matches('#slide-number-toggle')){showSlideNumbers=e.target.checked;try{localStorage.setItem('innsikt-present-numbers-v1',String(showSlideNumbers))}catch{}showSlide();return}
-if(e.target.matches('#speaker-toggle')){showSpeakerNotes=e.target.checked;showSlide();return}});document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-slide-preview-open]')){e.preventDefault();openLibrarySlideFullscreen(e.target.dataset.slidePreviewOpen,e.target);return}if(e.key==='Escape'&&document.body.classList.contains('slide-fullscreen-view')){e.preventDefault();const back=document.querySelector('.slide-fullscreen-close');if(back)location.assign(back.href);return;}if(e.key==='Escape'&&!document.querySelector('.overlay')&&document.getElementById('sidebar')?.classList.contains('open')){e.preventDefault();setMobileMenuOpen(false,{restoreFocus:true});return}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(!document.querySelector('.overlay'))search()}});window.addEventListener('hashchange',render)}
-async function init(){document.querySelectorAll('[data-icon]').forEach(x=>x.innerHTML=ico(x.dataset.icon));try{const namesOfFiles=['site','pages','sources','market','sales','technologies','backlog','learning','prompts','horizon','slides','visual-assets','architecture-profiles'];const files=await Promise.all(namesOfFiles.map(async name=>{const response=await fetch('./data/'+name+'.json',{cache:'no-store'});if(!response.ok)throw new Error(name+': HTTP '+response.status);return response.json()}));const [meta,pages,sources,market,sales,technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles]=files;
- const deploymentResponse=await fetch('./data/deployment.json',{cache:'no-store'});
- if(!deploymentResponse.ok)throw Error('Mangler distribusjonskonfigurasjon');
- const deployment=await deploymentResponse.json();
- const protectedContent=await window.InnsiktPresentationContent.load(deployment);
- const raw={meta,pages,sources,...market,...sales,...technologies,backlog,learning,prompts,horizon,slides,visualAssets,architectureProfiles};
- D=window.InnsiktContent.materialize(window.InnsiktPresentationContent.combine(raw,protectedContent));
- const workMode=document.querySelector('.workmode span:last-child');
- if(workMode)workMode.textContent=protectedContent?'Intern arbeidsflate':'Åpent arbeidsgrunnlag';
- const footerScope=document.getElementById('footer-data-scope');
- if(footerScope)footerScope.textContent=protectedContent?'Internt innhold krever godkjent tilgang':'Kun offentlig kildegrunnlag';
- const brandSubtitle=document.querySelector('.brand small');
- if(brandSubtitle&&D.organizationProfile)brandSubtitle.textContent=D.organizationProfile.brandSubtitle||D.organizationProfile.name;
- names=D.pages.navigation;buildNavigation();document.querySelectorAll('[data-nav-label]').forEach(el=>{el.textContent=names[el.dataset.navLabel]||''});document.querySelectorAll('[data-nav-group]').forEach(el=>el.textContent=D.pages.navigationGroups[el.dataset.navGroup]||'');document.getElementById('sidebar-notice').textContent=protectedContent?'Intern arbeidsflate – vis og del bare innenfor godkjente områder.':D.pages.site.publicNotice;document.getElementById('version-label').textContent=D.meta.version;document.getElementById('footer-status').textContent='Oppdatert '+D.meta.released;const counter=document.getElementById('backlog-count');if(counter)counter.textContent=D.backlog.filter(x=>x.status!=='lukket').length;window.InnsiktPromptContext.configure(D.prompts);initEvents();initPromptContextEvents();enablePresenterSwipe();window.InnsiktGlossary?.init(D.learning.glossary);render()}catch(e){document.getElementById('main').innerHTML=`<section class="panel"><h1>Kunne ikke laste nettsidens data</h1><p>Start en lokal webserver i prosjektmappen, for eksempel <code>python3 -m http.server 8000</code>. Åpne deretter <code>http://localhost:8000/docs/</code>.</p><p class="fineprint">${esc(e.message)}</p></section>`;console.error(e)}}
-init();
-})();
