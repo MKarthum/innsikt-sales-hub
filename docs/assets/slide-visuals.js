@@ -163,13 +163,14 @@ function render(slide,esc,position={}){
   const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step">'+(item.assetId?assetImage(item.assetId,'cp-cycle-icon'):'')+'<span class="cp-cycle-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>'+(i===v.cycle.length-1?'':stepArrow)).join('');
   const feedback='<svg class="cp-feedback-return" viewBox="0 0 1000 64" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="cp-feedback-track" d="M945 7V29Q945 49 922 49H78Q55 49 55 29V7"/><path class="cp-feedback-head" d="M38 23L55 5L72 23"/></svg>';
   const scenery=window.InnsiktSceneArt.render(v.artwork,position.assets,escs);
+  const emblem='<div class="cp-context-emblem" aria-hidden="true"><svg viewBox="0 0 200 180" focusable="false"><defs><linearGradient id="context-planes" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".55"/><stop offset="1" stop-color="currentColor" stop-opacity=".12"/></linearGradient></defs><path class="cp-emblem-halo" d="M100 10L180 48L100 88L20 48Z"/><path d="M22 87L100 127L179 87L100 48Z" fill="url(#context-planes)"/><path d="M22 118L100 160L179 118L100 78Z" fill="url(#context-planes)"/><path d="M22 48L100 88L179 48L100 8Z" fill="url(#context-planes)"/><path d="M22 48L100 88L179 48L100 8Z M22 87L100 127L179 87 M22 118L100 160L179 118" stroke="currentColor" stroke-width="3" stroke-linejoin="round" fill="none"/></svg></div>';
   return '<div class="story-scene scene-context-platforms">'
    +'<div class="cp-landscape" aria-hidden="true">'+scenery+'</div>'
    +'<header class="cp-heading"><div class="scene-topline">'+label+counter+'</div><div class="cp-title"><h2>'+escs(slide.title)+'</h2><span>'+escs(v.period)+'</span></div></header>'
    +'<div class="cp-diagram" role="group" aria-label="'+escs(v.contextLabel)+'">'
    +'<section class="cp-consumers" aria-label="Konsumenter">'+tiles(v.consumers,'cp-consumer')+'</section>'
    +links()
-   +'<section class="cp-context"><div class="cp-core-head"><h3>'+escs(v.contextLabel)+'</h3><p>'+escs(v.contextLead)+'</p></div>'
+   +'<section class="cp-context">'+emblem+'<div class="cp-core-head"><h3>'+escs(v.contextLabel)+'</h3><p>'+escs(v.contextLead)+'</p></div>'
    +'<div class="cp-facets">'+tiles(v.facets,'cp-facet')+'</div></section>'
    +links()
    +'<section class="cp-sources" aria-label="Kilder og systemer">'+tiles(v.sources,'cp-source')+'</section>'

@@ -608,6 +608,11 @@ async function downloadSlideButton(button){
  const visible=candidates.find(el=>el?.querySelector('.story-scene')
    &&(currentInPresenter||el.dataset.librarySlideId===item.id));
  const fallback=slideMarkup(item,index,deckId,false,false);
+ const displayedMode=visible?.querySelector('.story-scene')?.dataset.artDirection;
+ const desiredMode=artDirection(item);
+ // Never quietly export the default mode if the selected rich scene is not visible.
+ if(desiredMode==='rich'&&displayedMode!=='rich')
+  throw Error('Rik illustrasjon er ikke synlig i eksportgrunnlaget. Åpne lysbildet og prøv igjen.');
  const rendered=visible?.querySelector('.story-scene')?visible.innerHTML:fallback;
  const tone=visible?.dataset.tone||window.InnsiktSlides.tone(item,deck,presentationThemeMode);
  button.disabled=true;button.setAttribute('aria-busy','true');
@@ -615,7 +620,7 @@ async function downloadSlideButton(button){
   const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
   const html=await prep.prepareSlideMarkupForExport(rendered);
   const module=await import('./slide-download.js?v='+encodeURIComponent(D.meta.version));
-  await module.downloadSingleSlide({id:item.id,title:item.title,html,tone,format,version:D.meta.version});
+  await module.downloadSingleSlide({id:item.id,title:item.title,html,tone,artDirection:displayedMode||desiredMode,format,version:D.meta.version});
   toast('Lysbildet er lastet ned.');
  }catch(err){
   toast(D.pages.slideLibraryUi.singleExportError+' '+(err?.message||''));

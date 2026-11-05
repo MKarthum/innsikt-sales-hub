@@ -153,3 +153,67 @@
  background:color-mix(in srgb,var(--pres-bg) 60%,transparent);
  border-color:color-mix(in srgb,var(--pres-fg) 25%,var(--pres-accent));
 }
+
+/* 0.18.61. Full-bleed photography; real image object rather than flattened diagram.
+   Meaningful copy, outlines and directional arrows still use --pres-* company tokens. */
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-landscape .scene-art{
+ opacity:1;mask-image:none;--scene-art-saturation:1;--scene-art-brightness:1;
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-landscape::after{
+ background:linear-gradient(90deg,
+  color-mix(in srgb,var(--pres-bg) 17%,transparent) 0%,
+  color-mix(in srgb,var(--pres-bg) 7%,transparent) 45%,
+  color-mix(in srgb,var(--pres-bg) 6%,transparent) 75%,
+  transparent 100%);
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-diagram{width:74.8%;margin-left:0;}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-context{
+ position:relative;
+ background:linear-gradient(128deg,
+  color-mix(in srgb,var(--pres-bg) 81%,transparent),
+  color-mix(in srgb,var(--pres-bg) 67%,transparent));
+ border:2px solid color-mix(in srgb,var(--pres-accent) 77%,var(--pres-fg));
+ box-shadow:0 0 1.1cqw color-mix(in srgb,var(--pres-accent) 29%,transparent),
+  0 .85cqw 2.4cqw color-mix(in srgb,var(--pres-bg) 46%,transparent),
+  inset 0 1px 0 color-mix(in srgb,var(--pres-fg) 18%,transparent);
+ border-radius:5cqw;backdrop-filter:blur(.65cqw);
+}
+.scene-context-platforms .cp-context-emblem{display:none}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-context-emblem{
+ display:block;position:absolute;left:1.4%;top:14%;width:19%;height:76%;
+ color:var(--pres-accent);pointer-events:none;
+ filter:drop-shadow(0 0 .65cqw color-mix(in srgb,var(--pres-accent) 45%,transparent));
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-context-emblem svg{width:100%;height:100%;overflow:visible}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-emblem-halo{
+ fill:color-mix(in srgb,var(--pres-accent) 10%,transparent);
+ filter:drop-shadow(0 0 .35cqw currentColor);
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-core-head{margin-left:18%;width:82%;text-align:left;}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-facets{margin-left:19%;width:81%;gap:.5cqw;}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-facet{
+ padding:.62cqw .63cqw;border-radius:.9cqw;
+ background:color-mix(in srgb,var(--pres-bg) 59%,transparent);
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-facet .cp-tile-copy strong{font-size:1.19cqw}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-facet .cp-tile-copy small{font-size:.93cqw}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-consumer,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-source,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-outcome{
+ background:color-mix(in srgb,var(--pres-bg) 65%,transparent);
+ border:1px solid color-mix(in srgb,var(--pres-accent) 50%,var(--pres-fg));
+ backdrop-filter:blur(.5cqw);
+ box-shadow:inset 0 1px 0 color-mix(in srgb,var(--pres-fg) 10%,transparent),
+  0 .4cqw 1.6cqw color-mix(in srgb,var(--pres-bg) 32%,transparent);
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-cycle{
+ background:color-mix(in srgb,var(--pres-bg) 72%,transparent);
+ border:1.6px solid color-mix(in srgb,var(--pres-accent) 70%,var(--pres-fg));
+ box-shadow:0 .3cqw 1.8cqw color-mix(in srgb,var(--pres-bg) 24%,transparent);
+ backdrop-filter:blur(.36cqw);
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-cycle-arrow,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-feedback-track,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-feedback-head{stroke:var(--pres-accent)}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-outcomes{top:40%;gap:1.0cqw}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-outcome{border-radius:1.4cqw;min-height:6.2cqw}

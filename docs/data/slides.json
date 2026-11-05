@@ -1847,7 +1847,7 @@
             {
               "id": "rich-mountain-background",
               "type": "asset",
-              "assetId": "context-rich-background",
+              "assetId": "context-rich-photo-v2",
               "role": "atmosphere",
               "x": 0,
               "y": 0,
@@ -1859,15 +1859,40 @@
               "mode": "rich"
             },
             {
-              "id": "rich-valley-ranges",
+              "id": "rich-sun-glow",
+              "type": "glow",
+              "role": "haze",
+              "x": 76,
+              "y": -6,
+              "w": 27,
+              "h": 39,
+              "opacity": 0.36,
+              "mode": "rich"
+            },
+            {
+              "id": "rich-trail-light",
               "type": "asset",
-              "assetId": "context-ridges",
-              "role": "distance",
+              "assetId": "context-path",
+              "role": "route",
               "x": 0,
               "y": 0,
               "w": 100,
               "h": 100,
-              "opacity": 0.37,
+              "opacity": 0.64,
+              "fit": "fill",
+              "style": "natural",
+              "mode": "rich"
+            },
+            {
+              "id": "rich-summit-flag",
+              "type": "asset",
+              "assetId": "context-flag",
+              "role": "goal",
+              "x": 0,
+              "y": 0,
+              "w": 100,
+              "h": 100,
+              "opacity": 1,
               "fit": "fill",
               "style": "natural",
               "mode": "rich"

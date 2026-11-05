@@ -490,6 +490,18 @@
       "rights": "KI-generert landskapsmotiv, bearbeidet til et separat bildeobjekt uten fagtekst.",
       "notes": "Separat KI-generert landskapsressurs, bearbeidet uten fagtekst, 800×450 WebP. Rik illustrasjon; kan byttes uavhengig av diagram, piler og øvrig innhold.",
       "sha256": "089c6bd043116ee1e2b41151933b6c52b246556811980cdc5644afcf33fded56"
+    },
+    {
+      "id": "context-rich-photo-v2",
+      "label": "Fotografisk fjellandskap – rik illustrasjon",
+      "category": "licensed-external",
+      "path": "assets/library/external/context-rich-photo-v2.webp",
+      "origin": "https://unsplash.com/photos/GP3EdRRvu2Q",
+      "license": "Unsplash License – bearbeidet kompositt av Artem Sapegin og Maty Podrouzek",
+      "termsUrl": "https://unsplash.com/license",
+      "rights": "Unsplash License, to fotografier bearbeidet til egen 16:9-komposisjon; kilder i THIRD_PARTY_NOTICES.md.",
+      "notes": "Heldigitalt 1600×900-fotolag med tåke og fjell. Ingen tekst, piler, ikoner eller bokser. Art direction rich.",
+      "sha256": "85853913a3df0313c7001c745c257b66d2156c90e44fc1e5316245ad1f12590d"
     }
   ]
 }
