@@ -9,6 +9,7 @@ const ctx={window:{}};
 vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),ctx);
 vm.runInNewContext(fs.readFileSync('docs/assets/scene-art.js','utf8'),ctx);
 const renderer=ctx.window.InnsiktSceneArt,art=slide.visual.artwork;
+assert.ok(ctx.window.InnsiktAssets.usedBy('context-flag',{},read('docs/data/slides.json')).some(x=>x.id==='ai-context-platforms-2027'),'Asset library lists scene references');
 assert.equal(renderer.validate(art,assets),true);
 const esc=x=>String(x).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
 const html=renderer.render(art,assets,esc);
