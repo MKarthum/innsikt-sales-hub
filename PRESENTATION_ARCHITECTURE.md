@@ -190,3 +190,8 @@ I `ai-context-platforms-2027` er kilde- og handlingslaget knyttet sammen med en 
 ## 0.18.61 – synlig anbefalt motiv og eksportsamsvar
 
 Visningsmodusen `auto` er nå standard bare når brukeren ikke har lagret et eksplisitt valg. Den følger lysbildets `visual.preferredArtDirection`; for `ai-context-platforms-2027` er dette `rich`. Alle andre lysbilder følger den eksisterende, fortellingsstyrte paletten. Eksplisitte valg av lys, mørk, enkel eller rik overstyrer alltid anbefalingen og beholdes. I rik variant er alle de flate vektor-fjellene fjernet, slik at bare ett fullformat fotografisk bakgrunnsobjekt vises. All tekst, piler, kildefelt og verdikort ligger uendret i HTML/JSON. PNG-regresjonstesten sammenligner faktisk skjermbilde med nedlastet bilde, ikke bare om det finnes varme piksler.
+
+
+### 0.18.61 – palette og art direction er uavhengige
+
+For å unngå at «Mørk» skjuler den rike illustrasjonen er fargeprofil (`light`, `strong`, `story`) skilt fra illustrasjonsstil (`auto`, `standard`, `illustrated`, `rich`). Tidligere ble disse valgene feilaktig blandet i én dropdown. Gamle lagrede fargevalg migreres til de nye palette- og art-nøklene. Velger man mørk palett og «Anbefalt», vises den rike scenen på 2027-lysbildet. Eksplisitte illustrasjonsvalg overstyrer anbefalingen. Den samme strukturen rendres og eksporteres uansett valgt kombinasjon.

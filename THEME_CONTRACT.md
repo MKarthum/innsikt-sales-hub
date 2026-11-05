@@ -92,3 +92,8 @@ Alle tekstkort, piler, ikoner og begreper i verdifeltet følger uendret `--pres-
 ### 0.18.61 – automatisk redaksjonelt valg
 
 `auto` respekterer en lysbildespesifikk `preferredArtDirection` uten å endre eller overstyre selskapets fargekontrakt for native fagkomponenter. Individuelt valgt lys/mørk/illustrert er alltid autoritativt. Fotografisk bilde brukes bare av opt-in-scener, og er ikke en global bakgrunn for hele nettstedet.
+
+
+### 0.18.61 – separate brukerpreferanser
+
+Selskapets CSS-fargeprofil (`--pres-*`) og dekorativ art direction er selvstendige dimensjoner. Brukervalg persisteres separat som `innsikt-presentation-palette` og `innsikt-presentation-art`. Mørk fargeprofil skal ikke fjerne rik illustrasjon; `auto` bestemmer bare art direction på lysbildenivå.

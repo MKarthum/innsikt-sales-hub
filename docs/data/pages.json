@@ -959,12 +959,12 @@
       "Kundedialog",
       "Bruk av portalen"
     ],
-    "toneInfo": "Anbefalt viser illustrert fjellandskap på 2027-sliden, og følger det valgte designsystemet på andre lysbilder. Velg Lys, Mørk, Enkel eller Rik for å overstyre.",
-    "toneLabel": "Visningsstil",
+    "toneInfo": "Fargeprofil og illustrasjonsstil velges uavhengig. «Anbefalt» viser det rike fjellmotivet på 2027-sliden. Lys fargeprofil prioriterer ren diagramvisning når illustrasjonsstil står på Anbefalt.",
+    "toneLabel": "Fargeprofil",
     "toneLight": "Lys (standard)",
     "toneDark": "Mørk",
     "toneStory": "Fortellingsstyrt",
-    "toneHelp": "Rik illustrasjon er en selvstendig bildekomponent bak redigerbare dataobjekter. Nedlastinger beholder aktiv visningsstil.",
+    "toneHelp": "Rik illustrasjon har et separat fotoobjekt. Alle tekster, bokser og piler forblir redigerbare.",
     "notFound": "Ukjent lysbilde",
     "numberToggleLabel": "Vis nummer på lysbildene",
     "numberToggleInfo": "Numrene viser plassering i valgt historie. Bibliotekobjekter har ikke nummer.",
@@ -978,7 +978,10 @@
     "fullscreenExportLabel": "Last ned",
     "toneIllustrated": "Enkel illustrasjon",
     "toneIllustratedRich": "Rik illustrasjon (foto)",
-    "toneAuto": "Anbefalt per lysbilde"
+    "toneAuto": "Anbefalt per lysbilde",
+    "artLabel": "Illustrasjonsstil",
+    "artAuto": "Anbefalt per lysbilde",
+    "artStandard": "Uten illustrasjon"
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",

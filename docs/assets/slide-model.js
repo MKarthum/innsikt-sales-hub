@@ -25,6 +25,7 @@ function tone(slide,deck,mode='story'){
  if(mode==='light'||mode==='strong')return mode;
  if(mode==='illustrated'||mode==='illustrated-rich')return 'strong';
  if(mode==='auto')return slide?.visual?.preferredArtDirection==='rich'?'strong':tone(slide,deck,'story');
+ // Art direction is no longer a palette choice; retained here for legacy embeds.
  if(mode!=='story')throw Error('Ukjent presentasjonsvisning: '+mode);
  return deck?.visualStyle?.beats?.[slide.beat]||deck?.visualStyle?.defaultTone||slide.tone||'strong';
 }

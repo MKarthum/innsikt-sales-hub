@@ -54,7 +54,7 @@ try{
  // The illustrated option uses exactly the same slide data and can be switched back.
  await page.evaluate(()=>location.hash='#lysbilder/ai-context-platforms-2027');
  const platform=page.locator('.slide-library-detail-stage .story-scene');await platform.waitFor();
- await page.locator('#library-tone-mode').selectOption('illustrated');
+ await page.locator('#library-art-mode').selectOption('illustrated');
  assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
  assert.equal(await platform.locator('.scene-art-object--asset').count(),8);
  assert.equal(await platform.locator('.scene-art-object--glow').count(),1);
@@ -66,7 +66,7 @@ try{
  assert.ok(ex.w<=3&&ex.h<=3,'Illustration stays inside slide');
  // The rich scene must have a real, separately loaded photo. No text or semantic connections may change.
  const simpleText=await platform.locator('.cp-diagram').innerText();
- await page.locator('#library-tone-mode').selectOption('illustrated-rich');
+ await page.locator('#library-art-mode').selectOption('rich');
  assert.equal(await platform.getAttribute('data-art-direction'),'rich');
  assert.equal(await platform.locator('.cp-cycle-arrow').count(),2,'Both lower process arrows must be present');
  assert.equal(await platform.locator('.cp-feedback-return').count(),1,'Closed feedback path is present');
@@ -104,7 +104,7 @@ try{
 
  const richEx=await platform.evaluate(el=>({w:el.scrollWidth-el.clientWidth,h:el.scrollHeight-el.clientHeight}));
  assert.ok(richEx.w<=3&&richEx.h<=3,'Rich illustration stays inside 16:9');
- await page.locator('#library-tone-mode').selectOption('light');
+ await page.locator('#library-art-mode').selectOption('standard');
  assert.equal(await platform.getAttribute('data-art-direction'),'standard');
  await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-standard.png'});
  assert.equal(await platform.locator('.cp-core-head h3').textContent(),'Virksomhetskontekst');
