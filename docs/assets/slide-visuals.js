@@ -151,6 +151,36 @@ function render(slide,esc,position={}){
  const title='<h2 class="v2-headline">'+escs(slide.title)+'</h2>';
 
  // Original, portable data+AI scenes. All meaningful text comes from slides.json.
+
+ // Reusable context ecosystem: all visible words are owned by slides.json.
+ if(kind==='context-platforms'){
+  const tiles=(list,cls)=>list.map((item,i)=>'<div class="cp-tile '+cls+'"><span class="cp-tile-no" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span><div class="cp-tile-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div></div>').join('');
+  const links=()=>'<div class="cp-links" aria-hidden="true"><i></i><i></i><i></i></div>';
+  const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div>'+(i===v.cycle.length-1?'':'<span class="cp-cycle-arrow" aria-hidden="true">→</span>')).join('');
+  const scenery='<svg class="cp-landscape-svg" viewBox="0 0 420 540" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'
+   +'<circle class="cp-sun" cx="345" cy="138" r="78"/>'
+   +'<path class="cp-ridge-back" d="M0 416 L52 361 L93 395 L148 305 L206 356 L266 288 L330 338 L383 274 L420 300 V540 H0Z"/>'
+   +'<path class="cp-ridge-mid" d="M0 506 L87 391 L157 450 L230 308 L276 365 L345 174 L420 295 V540 H0Z"/>'
+   +'<path class="cp-ridge-front" d="M50 540 L162 440 L226 491 L315 282 L345 174 L420 288 V540Z"/>'
+   +'<path class="cp-path-shadow" d="M411 542 Q351 520 373 488 Q403 447 362 421 Q315 396 352 371 Q385 351 352 325 Q320 308 342 292 Q365 276 343 258 Q326 244 345 231 L345 175"/>'
+   +'<path class="cp-path" d="M411 542 Q351 520 373 488 Q403 447 362 421 Q315 396 352 371 Q385 351 352 325 Q320 308 342 292 Q365 276 343 258 Q326 244 345 231 L345 175"/>'
+   +'<path class="cp-flagpole" d="M345 174 V126"/><path class="cp-flag" d="M347 126 Q371 121 393 133 L381 148 Q364 139 347 144Z"/>'
+   +'</svg>';
+  return '<div class="story-scene scene-context-platforms">'
+   +'<div class="cp-landscape" aria-hidden="true">'+scenery+'</div>'
+   +'<header class="cp-heading"><div class="scene-topline">'+label+counter+'</div><div class="cp-title"><h2>'+escs(slide.title)+'</h2><span>'+escs(v.period)+'</span></div></header>'
+   +'<div class="cp-diagram" role="group" aria-label="'+escs(v.contextLabel)+'">'
+   +'<section class="cp-consumers" aria-label="Konsumenter">'+tiles(v.consumers,'cp-consumer')+'</section>'
+   +links()
+   +'<section class="cp-context"><div class="cp-core-head"><h3>'+escs(v.contextLabel)+'</h3><p>'+escs(v.contextLead)+'</p></div>'
+   +'<div class="cp-facets">'+tiles(v.facets,'cp-facet')+'</div></section>'
+   +links()
+   +'<section class="cp-sources" aria-label="Kilder og systemer">'+tiles(v.sources,'cp-source')+'</section>'
+   +'<section class="cp-cycle" aria-label="Beslutning, handling og oppdatert kontekst">'+cycle+'</section>'
+   +'<footer class="cp-governance"><strong>'+escs(v.governanceLabel)+'</strong><span>'+v.governance.map(escs).join(' · ')+'</span></footer>'
+   +'</div></div>';
+ }
+
  if(kind==='context-bridge'){
   const data=v.dataRows.map(x=>'<span>'+escs(x)+'</span>').join('');
   const factors=v.factors.map(x=>'<div class="ai-context-factor"><strong>'+escs(x.name)+'</strong><span>'+escs(x.detail)+'</span></div>').join('');

@@ -42,6 +42,7 @@
 | market-customer-pressure | Deloitte 2026: 42 % selvvurdert strategiberedskap mot kvalitativt lavere vurdering av fire operative områder; ingen figurer eller simulerte måltall | marked-retning | Kildestyrt kontrast; forbehold, kundespørsmål og begge paletter må kontrolleres visuelt |
 | market-priorities | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | market-next-moves | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
+| ai-context-platforms-2027 | Egen systemscene med datadrevet virksomhetskontekst, tre logiske kilder og kontrollert handling; fjell og flagg er dekor | bibliotek | Må vurderes i 16:9, lyst/mørkt skin, syntetisk palett og eksport før endelig godkjenning |
 | ai-context-for-agents | Ny selvstendig kontekstscene: data, virksomhetsforståelse og agentens svar | bibliotek | Begrepsnyanser, lesbarhet og begge temaer |
 | ai-development-workflow | Ny SQL/kode-diff-komposisjon med illustrativ oppgave og menneskelig kontroll | bibliotek | Monospace-lesbarhet, eksport og tydelig fiktivmerking |
 | ai-natural-language-bi | Ny split-scene med ad hoc-spørsmål og gjenbrukbart, testbart dashboard | bibliotek | Tall, logoopphav, begge temaer og eksport |
@@ -100,3 +101,8 @@ Se [SLIDE_QUALITY_REVIEW_V017.md](SLIDE_QUALITY_REVIEW_V017.md) for 16:9-kontrol
 ### Testkontrakter v0.18.33
 
 Ny `insight-ecosystem` er nå registrert i scenetesten; arkitekturbrowserens lyse palett teller bibliotekobjektene fra kanoniske data og ikke historisk 39. Lysbildet med illustrative kundesignaler kan ikke regnes som kildedokumentert markedspåstand; faktiske markedsbilder beholder kildekrav.
+
+
+## Tillegg 5.11.2026 – AI Context Platforms (v0.18.56)
+
+Nytt delt lysbilde `ai-context-platforms-2027` i biblioteket. Selvstendig, kildebelagt konseptuell fremtidsarkitektur; en ny scene, ikke gjenbruk av den enklere `context-bridge`. Tekst og farge atskilt fra renderer, dekorativ SVG bygget fra temaroller. Har logisk sammenheng mellom konsumenter, virksomhetskontekst, dataplattformer, operative systemer, eksterne kilder og kontrollert handling. Redaksjonell visuell godkjenning av lys/mørk, alternativt skin, eksport og mobil gjenstår til faktiske nettleserskjermbilder er kontrollert.

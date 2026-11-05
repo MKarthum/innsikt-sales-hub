@@ -156,3 +156,8 @@ HTML/offline-eksport bygger det nye stilarket **før** organisasjonens skin. Sta
 Forrige release, 0.18.52, forbedret et felles CSS-uttrykk, men komposisjonene var i hovedsak uendret. Vurderingen «alle 40 redesignet» var derfor misvisende. Denne versjonen bygger konkret om sju scenevarianter: kapasitetsforsterker, kvalitetsulikhet, balansert pilot, to sammenhengsfigurer og to portaloppgaver/prosessbilder. Figurer og tekster er dataeid og bruker semantiske tema-/skinroller. Eldre scener forblir kompatibilitetsfallback, ikke aktiv visning for disse objektene.
 
 Det gjenstår redaksjonelt arbeid på flere lysbilder. Individuell prioritering og de reviderte godkjenningskravene ligger i `SLIDE_REDESIGN_AUDIT_2026-11-03.md` og `SLIDE_DESIGN_SYSTEM.md`. Ingen omtale av fullført redesign uten faktisk komposisjons- og skjermbildekontroll av hvert objekt.
+
+
+## 0.18.56 – AI Context Platforms som selvstendig 2027-scene
+
+`ai-context-platforms-2027` er et delt, selvstendig objekt i lysbildebiblioteket, ikke automatisk lagt inn i en eksisterende historie. Det har egen scene `context-platforms` i `slide-visuals.js`, scene-CSS i `slide-visual-narratives.css`, og alle brukerrettede tekster, kilder og notater i `slides.json`. Landskapet med vei og flagg er en dekorativ, lokalt generert SVG med temastyrte streker og flater; ingen fargede PNG-er, ekstern hosting eller organisasjonspalett. Visuell intensitet følger `--pres-*` og fungerer i lyst, mørkt og organisasjonsskin. Dette er en logisk fremtidsmodell og innebærer ikke én sentral kontekstplattform. Eksisterende løp og det enklere `ai-context-for-agents` er uendret. Nye nettleserskjermbilder må fortsatt vurderes før redaksjonell godkjenning.

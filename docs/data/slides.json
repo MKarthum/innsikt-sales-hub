@@ -1735,6 +1735,104 @@
       }
     },
     {
+      "id": "ai-context-platforms-2027",
+      "scope": "shared",
+      "tone": "strong",
+      "type": "visual",
+      "cue": "DATAARKITEKTUR · FREMTIDSBILDE",
+      "title": "AI Context Platforms",
+      "body": "Kontekst gjør virksomhetens kunnskap anvendelig for mennesker, applikasjoner og KI – i riktig situasjon.",
+      "topic": "Dataarkitektur",
+      "keywords": [
+        "AI Context Platforms",
+        "kontekst",
+        "semantikk",
+        "KI-agenter",
+        "arkitektur",
+        "styring"
+      ],
+      "sourceIds": [
+        "gartner27",
+        "gartner-context",
+        "gartner-data26"
+      ],
+      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet.",
+      "visual": {
+        "scene": "context-platforms",
+        "period": "2027 og videre",
+        "consumers": [
+          {
+            "label": "Mennesker",
+            "detail": "Innsikt og beslutninger"
+          },
+          {
+            "label": "Applikasjoner",
+            "detail": "Produkter og prosesser"
+          },
+          {
+            "label": "KI-agenter",
+            "detail": "Analyse, anbefaling og handling"
+          }
+        ],
+        "contextLabel": "Virksomhetskontekst",
+        "contextLead": "Riktig kunnskap og kontekst i riktig situasjon",
+        "facets": [
+          {
+            "label": "Betydning",
+            "detail": "Begreper og relasjoner"
+          },
+          {
+            "label": "Situasjon",
+            "detail": "Tilstand, hendelser og historikk"
+          },
+          {
+            "label": "Rammer",
+            "detail": "Regler, tilgang og kilder"
+          }
+        ],
+        "sources": [
+          {
+            "label": "Dataplattformer",
+            "detail": "Lakehouse, data og analyse"
+          },
+          {
+            "label": "Operative systemer",
+            "detail": "Prosesser og tjenester"
+          },
+          {
+            "label": "Eksterne kilder",
+            "detail": "Partnere, offentlige data og API-er"
+          }
+        ],
+        "cycle": [
+          {
+            "label": "Beslutning",
+            "detail": "Menneske eller KI"
+          },
+          {
+            "label": "Kontrollert handling",
+            "detail": "I operative systemer"
+          },
+          {
+            "label": "Oppdatert kontekst",
+            "detail": "Ny tilstand og effekt"
+          }
+        ],
+        "governanceLabel": "Styring og tillit",
+        "governance": [
+          "Kvalitet",
+          "Eierskap",
+          "Tilgang og kontroll",
+          "Sporbarhet"
+        ]
+      },
+      "design": {
+        "archetype": "blueprint",
+        "focus": "platform",
+        "version": 2
+      }
+    },
+    {
       "id": "ai-development-workflow",
       "scope": "shared",
       "tone": "light",
