@@ -20,6 +20,20 @@ try{
  await page.locator('.slide-library-card').first().waitFor();
  assert.equal(await page.locator('.slide-library-card').count(),library.length,'Alle selvstendige lysbilder');
  await page.screenshot({path:output+'/library-desktop.png',fullPage:false});
+
+ // Capture the opt-in art direction early, independently of the later full-browser checks.
+ await page.evaluate(()=>{location.hash='#lysbilder/ai-context-platforms-2027'});
+ const contextSlide=page.locator('.slide-library-detail-stage .story-scene');
+ await contextSlide.waitFor();
+ await page.locator('#library-tone-mode').selectOption('illustrated');
+ assert.equal(await contextSlide.getAttribute('data-art-direction'),'illustrated');
+ await contextSlide.screenshot({path:output+'/context-illustrated.png'});
+ await page.locator('#library-tone-mode').selectOption('light');
+ assert.equal(await contextSlide.getAttribute('data-art-direction'),'standard');
+ await contextSlide.screenshot({path:output+'/context-standard.png'});
+ await page.evaluate(()=>{location.hash='#lysbilder'});
+ await page.locator('.slide-library-card').first().waitFor();
+
  await page.locator('[data-slide-filter="topic"]').selectOption('KI og kapasitet');
  assert.equal(await page.locator('.slide-library-card').count(),4,'Temafilter');
  await page.locator('[data-slide-filter="topic"]').selectOption('all');

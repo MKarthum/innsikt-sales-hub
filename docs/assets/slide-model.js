@@ -23,6 +23,7 @@ function resolve(library,deck,deckId){
 }
 function tone(slide,deck,mode='story'){
  if(mode==='light'||mode==='strong')return mode;
+ if(mode==='illustrated')return 'strong';
  if(mode!=='story')throw Error('Ukjent presentasjonsvisning: '+mode);
  return deck?.visualStyle?.beats?.[slide.beat]||deck?.visualStyle?.defaultTone||slide.tone||'strong';
 }

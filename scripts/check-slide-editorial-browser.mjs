@@ -51,6 +51,21 @@ try{
  assert.notEqual(original,custom,'CSS-only replacement changes the technical slide');
  assert.equal(custom,'rgb(232, 174, 76)');
  assert.equal(await sample.getAttribute('data-editorial'),'blueprint','Data survives skin override');
+ // The illustrated option uses exactly the same slide data and can be switched back.
+ await page.evaluate(()=>location.hash='#lysbilder/ai-context-platforms-2027');
+ const platform=page.locator('.slide-library-detail-stage .story-scene');await platform.waitFor();
+ await page.locator('#library-tone-mode').selectOption('illustrated');
+ assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
+ assert.equal(await platform.locator('.cp-landscape-svg').count(),1);
+ fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
+ await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-illustrated.png'});
+ assert.equal(await page.locator('.slide-library-detail-stage .present-frame').getAttribute('data-tone'),'strong');
+ const ex=await platform.evaluate(el=>({w:el.scrollWidth-el.clientWidth,h:el.scrollHeight-el.clientHeight}));
+ assert.ok(ex.w<=3&&ex.h<=3,'Illustration stays inside slide');
+ await page.locator('#library-tone-mode').selectOption('light');
+ assert.equal(await platform.getAttribute('data-art-direction'),'standard');
+ await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-standard.png'});
+ assert.equal(await platform.locator('.cp-core-head h3').textContent(),'Virksomhetskontekst');
  assert.deepEqual(errors,[],'Browser runtime errors');
  console.log('PASS – '+slides.length+' standalone slides with editorial roles, 10 archetypes, mobile-safe 16:9, dark/light and CSS-only company skin');
 }finally{await browser.close()}

@@ -427,17 +427,18 @@ function searchResults(q){const needle=q.toLocaleLowerCase('no').trim();let a=[.
 function feedback(){modal('Gi innspill til neste versjon',`<p class="fineprint">${esc(D.pages.copy.feedbackModalNotice)}</p><label class="input-label" for="feedback-note">Hva bør endres eller undersøkes?</label><textarea class="input" id="feedback-note" placeholder="Eksempel: Spørsmål 3 i salgsinngang 2 er for teknisk. Foreslå et enklere alternativ."></textarea><div class="detail-actions"><span class="fineprint">Side: ${esc(names[current])}</span><button class="btn dark" id="save-feedback">Lagre lokalt ${ico('check')}</button></div>`);document.getElementById('feedback-note').focus()}
 function saveFeedback(){const t=document.getElementById('feedback-note')?.value.trim();if(!t){toast('Skriv et innspill først.');return}notes.push({page:names[current],text:t,date:new Date().toISOString().slice(0,10)});try{localStorage.setItem('innsikt-feedback-v1',JSON.stringify(notes))}catch{toast('Lagring er blokkert i nettleseren. Kopier innspillet manuelt.');return}closeModal();toast('Innspillet er lagret lokalt. Eksporter før du bytter enhet.');if(current==='utvikling')render()}
 function exportFeedback(){const txt='# Innspill – Innsikt\n\n'+notes.map((n,i)=>`## ${i+1}. ${n.page} (${n.date})\n\n${n.text}\n`).join('\n');const b=new Blob([txt],{type:'text/markdown;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='innsikt-innspill.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Eksportert som Markdown.')}
-let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null,presentationThemeMode=(()=>{try{const value=localStorage.getItem('innsikt-presentation-tone');return ['light','strong','story'].includes(value)?value:'light'}catch{return 'light'}})();
+let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null,presentationThemeMode=(()=>{try{const value=localStorage.getItem('innsikt-presentation-tone');return ['light','strong','story','illustrated'].includes(value)?value:'light'}catch{return 'light'}})();
 let presentationMotionMode=(()=>{try{const value=localStorage.getItem('innsikt-presentation-motion');return ['on','off'].includes(value)?value:'on'}catch{return 'on'}})();
 let libraryFilters={query:'',topic:'all',story:'all',scope:'all'};
 function libraryTone(s,deckId){
  return window.InnsiktSlides.tone(s,D.pages.presentationDecks[deckId],presentationThemeMode);
 }
+function artDirection(slide){return presentationThemeMode==='illustrated'&&slide?.visual?.artDirections?.includes('illustrated')?'illustrated':'standard'}
 function toneSelect(id){
  const t=D.pages.slideLibraryUi;
  return '<label class="library-tone-field" for="'+esc(id)+'">'+esc(t.toneLabel)
   +'<select id="'+esc(id)+'" aria-label="'+esc(t.toneLabel)+'">'
-  +[['light',t.toneLight],['strong',t.toneDark],['story',t.toneStory]].map(([id,text])=>
+  +[['light',t.toneLight],['strong',t.toneDark],['story',t.toneStory],['illustrated',t.toneIllustrated]].map(([id,text])=>
    '<option value="'+id+'"'+(presentationThemeMode===id?' selected':'')+'>'+esc(text)+'</option>').join('')
   +'</select></label>';
 }
@@ -465,11 +466,11 @@ function updatePreviewTones(){
  document.querySelectorAll('[data-library-slide-id][data-library-deck-id]').forEach(el=>{
   const s=D.slides.items.find(x=>x.id===el.dataset.librarySlideId);
   const deck=D.pages.presentationDecks[el.dataset.libraryDeckId];
-  if(s&&deck)el.setAttribute('data-tone',window.InnsiktSlides.tone(s,deck,presentationThemeMode));
+  if(s&&deck){el.setAttribute('data-tone',window.InnsiktSlides.tone(s,deck,presentationThemeMode));el.querySelector('.story-scene')?.setAttribute('data-art-direction',artDirection(s))}
  });
 }
 function setPresentationTone(value){
- if(!['light','strong','story'].includes(value))return;
+ if(!['light','strong','story','illustrated'].includes(value))return;
  presentationThemeMode=value;
  try{localStorage.setItem('innsikt-presentation-tone',value)}catch{}
  document.querySelectorAll('#library-tone-mode,#present-tone-mode').forEach(el=>el.value=value);
@@ -646,7 +647,7 @@ function slideWithDesign(slide,html){
  if(!design)return html;
  if(!/^<div class="story-scene [^"]+">/.test(html))throw Error('Editorial slide needs one scene root: '+slide.id);
  return html.replace('<div class="story-scene ',
-  '<div data-editorial="'+esc(design.archetype)+'" data-design-focus="'+esc(design.focus)+'" class="story-scene ');
+  '<div data-art-direction="'+artDirection(slide)+'" data-editorial="'+esc(design.archetype)+'" data-design-focus="'+esc(design.focus)+'" class="story-scene ');
 }
 function slideMarkup(s,index,deckId,notes=false,showNumbers=false){
  const position={index,total:D.pages.presentationDecks[deckId].slides.length,showNumbers};

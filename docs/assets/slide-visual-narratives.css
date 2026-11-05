@@ -458,3 +458,66 @@
 .cp-governance strong{color:var(--pres-fg);font-weight:800}
 @media(prefers-reduced-motion:reduce){.scene-context-platforms *{animation:none!important;transition:none!important}}
 @media print{.scene-context-platforms *{animation:none!important}}
+
+/* 0.18.57: opt-in scenic treatment built from semantic skin roles. */
+.story-scene[data-editorial="blueprint"].scene-context-platforms{
+ background-image:radial-gradient(ellipse at 89% 17%,color-mix(in srgb,var(--pres-warning) 12%,transparent),transparent 32%),linear-gradient(135deg,var(--pres-bg),color-mix(in srgb,var(--pres-accent) 9%,var(--pres-bg)));
+}
+.scene-context-platforms .cp-landscape{inset:0;width:100%;height:100%;opacity:.43;mask-image:linear-gradient(90deg,transparent 0%,transparent 50%,var(--pres-fg) 87%)}
+.scene-context-platforms .cp-atmosphere{fill:color-mix(in srgb,var(--pres-warning) 11%,var(--pres-bg));opacity:.4}
+.scene-context-platforms .cp-halo{fill:var(--pres-warning);opacity:.14}
+.scene-context-platforms .cp-cloud{fill:none;stroke:color-mix(in srgb,var(--pres-warning) 54%,var(--pres-bg));stroke-width:4;opacity:.38;stroke-linecap:round}
+.scene-context-platforms .cp-horizon-far{fill:color-mix(in srgb,var(--pres-accent) 15%,var(--pres-bg))}
+.scene-context-platforms .cp-horizon-near{fill:color-mix(in srgb,var(--pres-accent) 28%,var(--pres-bg))}
+.scene-context-platforms .cp-mountain-shadow{fill:color-mix(in srgb,var(--pres-accent) 37%,var(--pres-bg))}
+.scene-context-platforms .cp-mountain-face{fill:color-mix(in srgb,var(--pres-accent) 53%,var(--pres-bg))}
+.scene-context-platforms .cp-mountain-light{fill:color-mix(in srgb,var(--pres-warning) 23%,var(--pres-accent))}
+.scene-context-platforms .cp-snowcap{fill:color-mix(in srgb,var(--pres-bg) 80%,var(--pres-fg));opacity:.8}
+.scene-context-platforms .cp-rock{fill:none;stroke:color-mix(in srgb,var(--pres-fg) 32%,var(--pres-accent));stroke-width:5;stroke-linecap:round;opacity:.3}
+.scene-context-platforms .cp-foreground{fill:color-mix(in srgb,var(--pres-accent) 40%,var(--pres-bg))}
+.scene-context-platforms .cp-trail-shadow{fill:none;stroke:color-mix(in srgb,var(--pres-bg) 20%,var(--pres-fg));stroke-width:26;stroke-linecap:round;stroke-linejoin:round;opacity:.24}
+.scene-context-platforms .cp-trail{fill:none;stroke:var(--pres-warning);stroke-width:13;stroke-linecap:round;stroke-linejoin:round}
+.scene-context-platforms .cp-trail-core{fill:none;stroke:color-mix(in srgb,var(--pres-warning) 55%,var(--pres-bg));stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.scene-context-platforms .cp-tile-no{display:none}
+.scene-context-platforms .cp-tile{padding-inline:1.28cqw}
+.scene-context-platforms .cp-consumer{border-top:.24cqw solid color-mix(in srgb,var(--pres-accent) 58%,var(--pres-bg))}
+.scene-context-platforms .cp-context{border-radius:2.3cqw;box-shadow:0 .55cqw 2cqw color-mix(in srgb,var(--pres-accent) 13%,transparent)}
+.scene-context-platforms .cp-facet{border-radius:.75cqw}
+.scene-context-platforms .cp-cycle{border-radius:1.6cqw}
+.scene-context-platforms[data-art-direction="illustrated"]{background-image:radial-gradient(ellipse at 87% 19%,color-mix(in srgb,var(--pres-warning) 15%,transparent),transparent 38%),linear-gradient(147deg,var(--pres-bg) 20%,color-mix(in srgb,var(--pres-accent) 17%,var(--pres-bg)) 100%)}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-landscape{opacity:.94;mask-image:linear-gradient(90deg,transparent 0%,color-mix(in srgb,var(--pres-fg) 20%,transparent) 42%,var(--pres-fg) 83%)}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-diagram{width:78%;margin-left:.55cqw}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumer{background:color-mix(in srgb,var(--pres-bg) 82%,var(--pres-fg));border-color:color-mix(in srgb,var(--pres-fg) 22%,transparent);backdrop-filter:blur(.55cqw)}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-context{border:1.8px solid color-mix(in srgb,var(--pres-accent) 75%,var(--pres-fg));border-radius:2.4cqw;background:linear-gradient(117deg,color-mix(in srgb,var(--pres-accent) 20%,var(--pres-bg)),color-mix(in srgb,var(--pres-bg) 86%,var(--pres-accent)));box-shadow:0 1cqw 3.8cqw color-mix(in srgb,var(--pres-bg) 69%,transparent);backdrop-filter:blur(.7cqw)}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-facet{background:color-mix(in srgb,var(--pres-bg) 79%,var(--pres-accent));backdrop-filter:blur(.35cqw)}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-source{background:color-mix(in srgb,var(--pres-bg) 87%,var(--pres-accent));backdrop-filter:blur(.45cqw)}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-cycle{background:color-mix(in srgb,var(--pres-bg) 79%,var(--pres-accent));backdrop-filter:blur(.55cqw)}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-halo{opacity:.27}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-sun{opacity:.32}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-mountain-light{fill:color-mix(in srgb,var(--pres-warning) 33%,var(--pres-accent))}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-trail{stroke-width:16}
+
+/* Scenic composition: fewer equal-weight boxes; preserve semantic components. */
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumers{
+ gap:1.2cqw;border-bottom:1px solid color-mix(in srgb,var(--pres-accent) 32%,transparent);padding-bottom:.35cqw;
+}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumer{
+ border:0;border-left:1px solid color-mix(in srgb,var(--pres-fg) 25%,transparent);
+ border-radius:0;background:none;padding:1.1cqw .85cqw;backdrop-filter:none;
+}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumer:first-child{border-left:0}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-facets{
+ border-top:1px solid color-mix(in srgb,var(--pres-accent) 34%,transparent);padding-top:.75cqw;
+}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-facet{
+ background:none;border:0;border-left:2px solid color-mix(in srgb,var(--pres-accent) 60%,transparent);
+ padding:.55cqw 1.05cqw;border-radius:0;backdrop-filter:none;
+}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-cycle{
+ border:0;border-top:1px solid color-mix(in srgb,var(--pres-accent) 62%,transparent);
+ border-radius:0;background:linear-gradient(180deg,color-mix(in srgb,var(--pres-bg) 74%,var(--pres-accent)),transparent);
+ box-shadow:none;padding:.7cqw 1.2cqw;margin-top:.85cqw;backdrop-filter:none;
+}
+
+/* Override blueprint's tiled background-size: those 6cqw tiles cause a checkerboard when scenic gradients are applied. */
+.story-scene[data-editorial="blueprint"].scene-context-platforms{background-size:100% 100%;background-repeat:no-repeat}

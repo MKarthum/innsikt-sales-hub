@@ -50,3 +50,8 @@ Hvert enkelt objekt må begrunnes gjennom klassifiseringen i \`slides.json\`. Ny
 En ren endring i palett, lys/mørk, skygger, border-radius, aksentstreker eller `design.archetype` **kan ikke rapporteres som en fullført redesign**. Før en slide markeres ferdig må den viktigste faglige sammenhengen tegnes om der den gamle komposisjonen ikke formidler budskapet godt nok. Kontroller visuelt at den nye scenen er mer forklarende, ikke bare annerledes. Følg oversikten per lysbilde i `SLIDE_REDESIGN_AUDIT_2026-11-03.md`.
 
 Nye dataeide scenevarianter må teste eksplisitt at den nye HTML/SVG-strukturen finnes, at den gamle generiske kortstrukturen ikke gjengis, at synlig tekst eies av JSON, og at lys/mørk, kopiskin, statisk eksport og mobil fullskjerm fungerer. `scripts/check-slide-narratives-browser.mjs` håndhever denne kontrakten for de første sju. Andre lysbilder forblir åpne arbeidsoppgaver til de faktisk har fått en redaksjonell vurdering og eventuell ny komposisjon.
+
+
+## Valgfri illustrert fremstilling (0.18.57)
+
+«Illustrert» er en tredje uttrykksretning for utvalgte scener, ikke en tredje fargepalett. Samme JSON og HTML-komponenter brukes, med opt-in via `visual.artDirections` og `data-art-direction`. Dekorativ SVG skal ikke eie informasjon. Landskap skal kun brukes der det tilfører fremdrift eller mening, ikke som pynt på alle slides. Kontroller 16:9, mobil, syntetisk skin og eksport som normalt.

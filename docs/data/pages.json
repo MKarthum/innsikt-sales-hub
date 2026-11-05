@@ -959,12 +959,12 @@
       "Kundedialog",
       "Bruk av portalen"
     ],
-    "toneInfo": "Samme fargevalg gjelder i biblioteket, Presenter og nedlastinger. Fortellingsstyrt følger en historie; et delt lysbilde kan dermed variere etter hvor det brukes.",
+    "toneInfo": "Lys og mørk bruker samme innhold med ulik palett. Illustrert gir utvalgte lysbilder rikere scenografi; andre lysbilder vises mørkt. Fargene følger fortsatt CSS-skin.",
     "toneLabel": "Visningsstil",
     "toneLight": "Lys (standard)",
     "toneDark": "Mørk",
     "toneStory": "Fortellingsstyrt",
-    "toneHelp": "Lys er standard. Fortellingsstyrt veksler bare når historien skifter del.",
+    "toneHelp": "Illustrert er en visuell variant for utvalgte scener, ikke en ny organisasjonspalett.",
     "notFound": "Ukjent lysbilde",
     "numberToggleLabel": "Vis nummer på lysbildene",
     "numberToggleInfo": "Numrene viser plassering i valgt historie. Bibliotekobjekter har ikke nummer.",
@@ -975,7 +975,8 @@
     "singleExportLabel": "Last ned enkeltlysbilde",
     "singleExportInfo": "PNG, JPG, PDF eller PowerPoint. PDF og PowerPoint inneholder et høyoppløselig bilde av lysbildet.",
     "singleExportError": "Kunne ikke laste ned lysbildet.",
-    "fullscreenExportLabel": "Last ned"
+    "fullscreenExportLabel": "Last ned",
+    "toneIllustrated": "Illustrert (utvalgte slides)"
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",

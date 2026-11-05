@@ -7,6 +7,10 @@ assert.ok(slide,'Missing context platform slide');
 assert.equal(slide.scope,'shared');
 assert.equal(slide.type,'visual');
 assert.equal(slide.visual.scene,'context-platforms');
+assert.equal(slide.visual.artDirections?.[0],'illustrated');
+const modelBox={window:{}};
+vm.runInNewContext(fs.readFileSync('docs/assets/slide-model.js','utf8'),modelBox);
+assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'illustrated'),'strong');
 assert.equal(slide.design.archetype,'blueprint');
 assert.ok(slide.sourceIds.includes('gartner27'));
 for(const key of ['consumers','facets','sources','cycle']) {
@@ -26,5 +30,6 @@ assert.ok(html.includes('cp-landscape-svg'),'Scene should include local, decorat
 assert.ok(!html.includes('#fff')&&!html.includes('#000'),'Renderer must not hardcode palette');
 const css=fs.readFileSync('docs/assets/slide-visual-narratives.css','utf8');
 assert.ok(css.includes('.scene-context-platforms')&&css.includes('var(--pres-accent)'),'Scene should follow theme roles');
+assert.ok(css.includes('[data-art-direction="illustrated"]'),'Illustrated art direction should follow semantic roles');
 assert.ok(!/url\(\s*['"]?https?:/.test(css),'No external image/network dependencies');
 console.log('PASS – context-platforms native scene, source-owned content and theme roles');
