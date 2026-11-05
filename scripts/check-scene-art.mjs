@@ -19,7 +19,11 @@ assert.equal((html.match(/scene-art-object--glow/g)||[]).length,1,'Atmospheric e
 for(const id of ['sky','distant-ranges','summit','route','foreground','flag']){
  assert.ok(html.includes('data-scene-object="'+id+'"'),'Missing scene object '+id);
 }
-for(const a of art.objects.filter(o=>o.assetId))assert.ok(html.includes('assets/library/original/'+a.assetId+'.svg'),'Missing asset '+a.assetId);
+for(const a of art.objects.filter(o=>o.assetId)){
+ const registered=assets.items.find(x=>x.id===a.assetId);
+ assert.ok(registered,'Missing catalog reference '+a.assetId);
+ assert.ok(html.includes(registered.path),'Missing asset path '+a.assetId);
+}
 assert.ok(!html.includes(slide.visual.contextLead),'Factual text must not be baked into art assets');
 assert.ok(html.includes('context-rich-background.webp'),'Rich photo is registered and separate');
 assert.ok(ctx.window.InnsiktAssets.usedBy('context-rich-background',{},read('docs/data/slides.json')).some(x=>x.id===slide.id),'Rich asset traceability');
