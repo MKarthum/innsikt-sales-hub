@@ -8,6 +8,9 @@ assert.equal(slide.scope,'shared');
 assert.equal(slide.type,'visual');
 assert.equal(slide.visual.scene,'context-platforms');
 assert.equal(slide.visual.artDirections?.[0],'illustrated');
+const modelBox={window:{}};
+vm.runInNewContext(fs.readFileSync('docs/assets/slide-model.js','utf8'),modelBox);
+assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'illustrated'),'strong');
 assert.equal(slide.design.archetype,'blueprint');
 assert.ok(slide.sourceIds.includes('gartner27'));
 for(const key of ['consumers','facets','sources','cycle']) {
