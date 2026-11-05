@@ -9,10 +9,13 @@ assert.equal(slide.type,'visual');
 assert.equal(slide.visual.scene,'context-platforms');
 assert.equal(slide.visual.artDirections?.[0],'illustrated');
 assert.equal(slide.visual.artDirections?.[1],'rich');
+assert.equal(slide.visual.preferredArtDirection,'rich');
+assert.equal(slide.visual.artwork.objects.some(x=>x.id==='rich-valley-ranges'),false,'No flat vectors in rich view');
 const modelBox={window:{}};
 vm.runInNewContext(fs.readFileSync('docs/assets/slide-model.js','utf8'),modelBox);
 assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'illustrated'),'strong');
 assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'illustrated-rich'),'strong');
+assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'auto'),'strong');
 assert.equal(slide.design.archetype,'blueprint');
 assert.ok(slide.sourceIds.includes('gartner27'));
 for(const key of ['consumers','facets','sources','cycle']) {
@@ -36,7 +39,7 @@ assert.ok(html.startsWith('<div class="story-scene scene-context-platforms">'));
 for(const token of [slide.title,slide.visual.contextLabel,...slide.visual.consumers.map(x=>x.label),...slide.visual.facets.map(x=>x.label),...slide.visual.sources.map(x=>x.label),...slide.visual.cycle.map(x=>x.label)]) {
  assert.ok(html.includes(token),'Missing visible data '+token);
 }
-assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[]).length,8);
+assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[]).length,7);
 assert.equal((html.match(/class="cp-cycle-arrow"/g)||[]).length,2,'Both bottom process arrows are native SVG');
 assert.ok(html.includes('class="cp-feedback-return"'),'Native return connection exists');
 assert.ok(html.includes('class="cp-action-link"'),'Sources and operating loop must be visibly connected');

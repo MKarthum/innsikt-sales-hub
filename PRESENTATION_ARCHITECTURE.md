@@ -185,3 +185,8 @@ Ny renderer `docs/assets/scene-art.js` har en minimal, gjenbrukbar objektkontrak
 Nedlasting av enkeltlysbildet bruker nå faktisk valgt og rendret lysbilde fra bibliotek, fullskjerm eller Presenter i stedet for å generere en ny standardvisning. `slide-export-prep.js` pakker lokale, katalogførte bilder og SVG-ressurser inn som data-URI før PNG/JPG/PDF/PowerPoint-capture. Ukjente ressursbaner eller manglende rik bakgrunn avvises eksplisitt. Dette bevarer både art direction, bildefiler og skin i det eksporterte resultatet.
 
 I `ai-context-platforms-2027` er kilde- og handlingslaget knyttet sammen med en enkelt nedoverrettet, native SVG-pil (ikke en villedende én-til-én-relasjon mellom kildekolonner og prosessledd). Tre nye, native og dataeide verdi-kort vises til høyre: bedre beslutninger, mer målrettet handling og læring underveis. Kortene er konseptuelle muligheter, ikke garanterte effekter. Bakgrunnens fotografi, lys, dybde og skygger er fortsatt dekorative og kan byttes uten å endre faginnholdet.
+
+
+## 0.18.61 – synlig anbefalt motiv og eksportsamsvar
+
+Visningsmodusen `auto` er nå standard bare når brukeren ikke har lagret et eksplisitt valg. Den følger lysbildets `visual.preferredArtDirection`; for `ai-context-platforms-2027` er dette `rich`. Alle andre lysbilder følger den eksisterende, fortellingsstyrte paletten. Eksplisitte valg av lys, mørk, enkel eller rik overstyrer alltid anbefalingen og beholdes. I rik variant er alle de flate vektor-fjellene fjernet, slik at bare ett fullformat fotografisk bakgrunnsobjekt vises. All tekst, piler, kildefelt og verdikort ligger uendret i HTML/JSON. PNG-regresjonstesten sammenligner faktisk skjermbilde med nedlastet bilde, ikke bare om det finnes varme piksler.

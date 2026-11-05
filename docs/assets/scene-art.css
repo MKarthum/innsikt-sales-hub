@@ -153,3 +153,37 @@
  background:color-mix(in srgb,var(--pres-bg) 60%,transparent);
  border-color:color-mix(in srgb,var(--pres-fg) 25%,var(--pres-accent));
 }
+
+
+/* 0.18.61: Rich is one unmasked, full-bleed photographic object — no flat
+   vector ridges stacked in front. All overlays and arrows remain native. */
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-landscape{
+ position:absolute;inset:0;width:100%;height:100%;opacity:1;mask-image:none;
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-landscape .scene-art{
+ position:absolute;inset:0;width:100%;height:100%;opacity:1;mask-image:none;
+ --scene-art-saturation:1.03;--scene-art-brightness:1.06;
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"]
+ .scene-art-object[data-scene-object="rich-mountain-background"]{
+ display:block;left:0;top:0;width:100%;height:100%;opacity:1;transform:none;
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"]
+ .scene-art-object[data-scene-object="rich-mountain-background"] img{
+ display:block;width:100%;height:100%;object-fit:cover;
+ filter:saturate(var(--scene-art-saturation)) brightness(var(--scene-art-brightness));
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-landscape::after{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:linear-gradient(90deg,
+ color-mix(in srgb,var(--pres-bg) 9%,transparent) 0%,
+ color-mix(in srgb,var(--pres-bg) 8%,transparent) 45%,
+ transparent 75%);
+}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-context,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-consumer,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-source,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-outcome,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-cycle{
+ backdrop-filter:blur(.5cqw);
+}

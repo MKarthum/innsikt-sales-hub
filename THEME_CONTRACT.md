@@ -87,3 +87,8 @@ Kjernens selskapsprofil er obligatorisk for alle tekster, kort, piler, typografi
 ### 0.18.60: eksport og native verdi-kort
 
 Alle tekstkort, piler, ikoner og begreper i verdifeltet følger uendret `--pres-*`-kontrakt. Rik illustrasjon kan fortsatt ha en egen dekorativ palett. Eksport av enkeltlysbilder tar med valgt scenemodus og integrerte lokale bilder, slik at resultatet skal gjengi samme komposisjon som visningen i bibliotek eller Presenter.
+
+
+### 0.18.61 – automatisk redaksjonelt valg
+
+`auto` respekterer en lysbildespesifikk `preferredArtDirection` uten å endre eller overstyre selskapets fargekontrakt for native fagkomponenter. Individuelt valgt lys/mørk/illustrert er alltid autoritativt. Fotografisk bilde brukes bare av opt-in-scener, og er ikke en global bakgrunn for hele nettstedet.
