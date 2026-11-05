@@ -496,3 +496,25 @@
 .scene-context-platforms[data-art-direction="illustrated"] .cp-sun{opacity:.32}
 .scene-context-platforms[data-art-direction="illustrated"] .cp-mountain-light{fill:color-mix(in srgb,var(--pres-warning) 33%,var(--pres-accent))}
 .scene-context-platforms[data-art-direction="illustrated"] .cp-trail{stroke-width:16}
+
+/* Scenic composition: fewer equal-weight boxes; preserve semantic components. */
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumers{
+ gap:1.2cqw;border-bottom:1px solid color-mix(in srgb,var(--pres-accent) 32%,transparent);padding-bottom:.35cqw;
+}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumer{
+ border:0;border-left:1px solid color-mix(in srgb,var(--pres-fg) 25%,transparent);
+ border-radius:0;background:none;padding:1.1cqw .85cqw;backdrop-filter:none;
+}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-consumer:first-child{border-left:0}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-facets{
+ border-top:1px solid color-mix(in srgb,var(--pres-accent) 34%,transparent);padding-top:.75cqw;
+}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-facet{
+ background:none;border:0;border-left:2px solid color-mix(in srgb,var(--pres-accent) 60%,transparent);
+ padding:.55cqw 1.05cqw;border-radius:0;backdrop-filter:none;
+}
+.scene-context-platforms[data-art-direction="illustrated"] .cp-cycle{
+ border:0;border-top:1px solid color-mix(in srgb,var(--pres-accent) 62%,transparent);
+ border-radius:0;background:linear-gradient(180deg,color-mix(in srgb,var(--pres-bg) 74%,var(--pres-accent)),transparent);
+ box-shadow:none;padding:.7cqw 1.2cqw;margin-top:.85cqw;backdrop-filter:none;
+}
