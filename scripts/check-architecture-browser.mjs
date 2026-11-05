@@ -163,7 +163,12 @@ try{
  await page.locator('.asset-library-card').first().waitFor();
  assert.equal(await page.locator('.asset-library-card').count(),catalog.items.length,'Asset gallery renders all assets');
  assert.equal(await page.locator('.asset-library-section').count(),3,'Separate categories');
- await page.waitForFunction(()=>[...document.querySelectorAll('.asset-library-thumb img')].every(img=>img.complete&&img.naturalWidth>0));
+ try{
+   await page.waitForFunction(()=>[...document.querySelectorAll('.asset-library-thumb img')].every(img=>img.complete&&img.naturalWidth>0));
+  }catch(error){
+   const details=await page.locator('.asset-library-thumb img').evaluateAll(imgs=>imgs.filter(img=>!img.complete||!img.naturalWidth).map(img=>({src:img.getAttribute('src'),complete:img.complete,naturalWidth:img.naturalWidth})));
+   throw Error('Visuelle ressurser ble ikke lastet: '+JSON.stringify(details)+' / '+error.message);
+  }
  await page.screenshot({path:out+'/asset-library.png',fullPage:false});
  await page.evaluate(()=>location.hash='#lysbilder');
  await page.locator('.slide-library-card').first().waitFor();
