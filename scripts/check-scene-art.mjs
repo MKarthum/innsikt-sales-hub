@@ -13,13 +13,16 @@ assert.ok(ctx.window.InnsiktAssets.usedBy('context-flag',{},read('docs/data/slid
 assert.equal(renderer.validate(art,assets),true);
 const esc=x=>String(x).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
 const html=renderer.render(art,assets,esc);
-assert.equal((html.match(/scene-art-object--asset/g)||[]).length,6,'Six independent sourced vector assets');
+assert.equal((html.match(/scene-art-object--asset/g)||[]).length,7,'Six independent vectors plus one replaceable scenic image');
+assert.ok(html.includes('data-scene-mode="rich"'),'Rich art mode is an independent scene object');
 assert.equal((html.match(/scene-art-object--glow/g)||[]).length,1,'Atmospheric effect is an independent object');
 for(const id of ['sky','distant-ranges','summit','route','foreground','flag']){
  assert.ok(html.includes('data-scene-object="'+id+'"'),'Missing scene object '+id);
 }
 for(const a of art.objects.filter(o=>o.assetId))assert.ok(html.includes('assets/library/original/'+a.assetId+'.svg'),'Missing asset '+a.assetId);
 assert.ok(!html.includes(slide.visual.contextLead),'Factual text must not be baked into art assets');
+assert.ok(html.includes('context-rich-background.webp'),'Rich photo is registered and separate');
+assert.ok(ctx.window.InnsiktAssets.usedBy('context-rich-background',{},read('docs/data/slides.json')).some(x=>x.id===slide.id),'Rich asset traceability');
 const changed=JSON.parse(JSON.stringify(art));
 changed.objects.find(o=>o.id==='flag').assetId='context-forest';
 const altered=renderer.render(changed,assets,esc);

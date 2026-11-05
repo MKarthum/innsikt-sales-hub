@@ -521,3 +521,22 @@
 
 /* Override blueprint's tiled background-size: those 6cqw tiles cause a checkerboard when scenic gradients are applied. */
 .story-scene[data-editorial="blueprint"].scene-context-platforms{background-size:100% 100%;background-repeat:no-repeat}
+
+
+/* Two explicit process arrows and a returning connection: never embedded in background art. */
+.scene-context-platforms .cp-cycle{position:relative;isolation:isolate;padding-bottom:1.55cqw}
+.scene-context-platforms .cp-cycle-step,.scene-context-platforms svg.cp-cycle-arrow{position:relative;z-index:2}
+.scene-context-platforms svg.cp-cycle-arrow{
+ display:block;width:2.2cqw;height:2.2cqw;overflow:visible;
+ fill:none;stroke:var(--pres-accent);stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round}
+.scene-context-platforms .cp-feedback-return{
+ position:absolute;left:0;bottom:-.65cqw;width:100%;height:3.55cqw;
+ overflow:visible;fill:none;z-index:1;pointer-events:none}
+.scene-context-platforms .cp-feedback-track,
+.scene-context-platforms .cp-feedback-head{
+ fill:none;stroke:var(--pres-accent);stroke-width:4.4;
+ stroke-linecap:round;stroke-linejoin:round}
+.scene-context-platforms .cp-governance{position:relative;z-index:2}
+.scene-context-platforms[data-art-direction="rich"] .cp-feedback-track,
+.scene-context-platforms[data-art-direction="rich"] .cp-feedback-head{
+ stroke:color-mix(in srgb,var(--pres-fg) 45%,var(--pres-accent))}

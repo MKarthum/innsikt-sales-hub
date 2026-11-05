@@ -83,3 +83,34 @@
 .scene-context-platforms .cp-cycle-copy{display:flex;flex-direction:column;gap:.15cqw;align-items:flex-start;text-align:left}
 .scene-context-platforms[data-art-direction="illustrated"] .cp-diagram{width:73.8%;margin-left:0}
 .scene-context-platforms[data-art-direction="illustrated"] .cp-title h2{letter-spacing:-.055em}
+
+
+/* Photographic art is only a decorative alternative. All words and semantic arrows remain native. */
+.scene-art-object[data-scene-mode="rich"]{display:none}
+.story-scene[data-art-direction="rich"] .scene-art-object[data-scene-mode="rich"]{display:block}
+.story-scene[data-art-direction="rich"] .scene-art-object[data-scene-mode="illustrated"],
+.story-scene[data-art-direction="rich"] .scene-art-object[data-scene-mode="standard"]{display:none}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-landscape .scene-art{
+ opacity:1;mask-image:none;--scene-art-saturation:1;--scene-art-brightness:1}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-landscape::after{
+ content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:linear-gradient(90deg,
+ color-mix(in srgb,var(--pres-bg) 12%,transparent) 0%,
+ color-mix(in srgb,var(--pres-bg) 12%,transparent) 58%,transparent 82%)}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-diagram{width:75.4%;margin-left:0}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-context{
+ border-radius:3.2cqw;
+ background:linear-gradient(116deg,color-mix(in srgb,var(--pres-bg) 76%,var(--pres-accent)),
+ color-mix(in srgb,var(--pres-bg) 61%,var(--pres-accent)));
+ border:1.5px solid color-mix(in srgb,var(--pres-fg) 58%,var(--pres-accent));
+ box-shadow:0 .9cqw 3.3cqw color-mix(in srgb,var(--pres-bg) 38%,transparent);
+ backdrop-filter:blur(.6cqw)}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-consumer,
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-source{
+ background:color-mix(in srgb,var(--pres-bg) 65%,var(--pres-accent));
+ backdrop-filter:blur(.35cqw);border-color:color-mix(in srgb,var(--pres-fg) 25%,transparent)}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-facet{
+ background:color-mix(in srgb,var(--pres-bg) 68%,var(--pres-accent));backdrop-filter:blur(.35cqw)}
+.story-scene.scene-context-platforms[data-art-direction="rich"] .cp-cycle{
+ border-radius:1.5cqw;background:color-mix(in srgb,var(--pres-bg) 70%,var(--pres-accent));
+ border-color:color-mix(in srgb,var(--pres-fg) 30%,var(--pres-accent));backdrop-filter:blur(.45cqw)}
