@@ -1824,6 +1824,9 @@
           "Eierskap",
           "Tilgang og kontroll",
           "Sporbarhet"
+        ],
+        "artDirections": [
+          "illustrated"
         ]
       },
       "design": {
