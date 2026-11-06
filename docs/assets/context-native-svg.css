@@ -1,0 +1,154 @@
+/* Context Platforms native presentation direction.
+   One semantic slide model. The raster is purely atmospheric and replaceable.
+   All text, shapes and connections are native SVG: no foreignObject layout. */
+
+.scene-context-platforms .cp-native-svg{display:none}
+.scene-context-platforms[data-art-direction="cinematic"] .cp-native-svg{
+ display:block;position:absolute;inset:0;width:100%;height:100%;z-index:7;
+ background:var(--pres-bg);overflow:hidden;
+}
+.scene-context-platforms[data-art-direction="cinematic"] .cp-landscape,
+.scene-context-platforms[data-art-direction="cinematic"] .cp-heading,
+.scene-context-platforms[data-art-direction="cinematic"] .cp-diagram,
+.scene-context-platforms[data-art-direction="cinematic"] .cp-outcomes,
+.scene-context-platforms[data-art-direction="cinematic"] .cp-brand-overlay{
+ display:none!important;
+}
+.scene-context-platforms .cp-native-svg text{
+ font-family:var(--font-body,Arial,sans-serif);
+ fill:var(--pres-fg);paint-order:normal;dominant-baseline:alphabetic;
+}
+.scene-context-platforms .cp-native-svg .cpn-photo{opacity:.98}
+.scene-context-platforms .cp-native-svg .cpn-kicker{
+ font-size:19px;letter-spacing:4.1px;font-weight:780;
+ fill:color-mix(in srgb,var(--pres-fg) 55%,var(--pres-accent));
+}
+.scene-context-platforms .cp-native-svg .cpn-dash{
+ stroke:var(--pres-accent);stroke-width:5;stroke-linecap:round;fill:none;
+}
+.scene-context-platforms .cp-native-svg .cpn-main-title{
+ font-size:66px;letter-spacing:-2.3px;font-weight:840;
+ fill:var(--pres-fg);
+}
+.scene-context-platforms .cp-native-svg .cpn-period{
+ font-size:33px;letter-spacing:-.7px;font-weight:770;fill:var(--pres-accent);
+}
+.scene-context-platforms .cp-native-svg .cpn-ridge--far{
+ fill:color-mix(in srgb,var(--pres-bg) 74%,var(--pres-accent));opacity:.38;
+}
+.scene-context-platforms .cp-native-svg .cpn-ridge--near{
+ fill:color-mix(in srgb,var(--pres-bg) 84%,var(--pres-accent));opacity:.53;
+}
+.scene-context-platforms .cp-native-svg .cpn-foreground{
+ fill:var(--pres-bg);opacity:.38;
+}
+.scene-context-platforms .cp-native-svg .cpn-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 85%,transparent);
+ stroke:color-mix(in srgb,var(--pres-fg) 30%,var(--pres-accent));
+ stroke-width:1.7;filter:url(#cpn-soft-shadow);
+}
+.scene-context-platforms .cp-native-svg .cpn-card .cpn-icon{
+ color:var(--pres-fg);opacity:.86;
+}
+.scene-context-platforms .cp-native-svg .cpn-card-title{
+ font-size:24px;font-weight:790;letter-spacing:-.5px;
+}
+.scene-context-platforms .cp-native-svg .cpn-card-detail{
+ font-size:18px;font-weight:510;fill:var(--pres-muted);
+}
+.scene-context-platforms .cp-native-svg .cpn-core-halo{
+ fill:var(--pres-accent);opacity:.24;filter:url(#cpn-halo);
+}
+.scene-context-platforms .cp-native-svg .cpn-core-glass{
+ fill:url(#cpn-glass);stroke:none;filter:url(#cpn-soft-shadow);
+}
+.scene-context-platforms .cp-native-svg .cpn-core-edge{
+ fill:none;stroke:color-mix(in srgb,var(--pres-fg) 35%,var(--pres-accent));
+ stroke-width:2.1;filter:drop-shadow(0 0 10px color-mix(in srgb,var(--pres-accent) 36%,transparent));
+}
+.scene-context-platforms .cp-native-svg .cpn-core-shine{
+ fill:none;stroke:var(--pres-accent);stroke-width:2.8;opacity:.65;
+}
+.scene-context-platforms .cp-native-svg .cpn-core-title{
+ font-size:39px;font-weight:850;letter-spacing:-1.4px;
+}
+.scene-context-platforms .cp-native-svg .cpn-core-lead{
+ font-size:19px;font-weight:570;fill:var(--pres-fg);opacity:.9;
+}
+.scene-context-platforms .cp-native-svg .cpn-facet-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 69%,var(--pres-accent));
+ stroke:color-mix(in srgb,var(--pres-fg) 40%,var(--pres-accent));
+ stroke-width:1.5;
+}
+.scene-context-platforms .cp-native-svg .cpn-facet .cpn-icon{
+ color:var(--pres-fg);opacity:.93;
+}
+.scene-context-platforms .cp-native-svg .cpn-facet-title{
+ font-size:22px;font-weight:800;letter-spacing:-.5px;
+}
+.scene-context-platforms .cp-native-svg .cpn-facet-detail{
+ font-size:16.5px;font-weight:540;fill:var(--pres-muted);
+}
+.scene-context-platforms .cp-native-svg .cpn-arrow{
+ fill:none;stroke:color-mix(in srgb,var(--pres-accent) 74%,var(--pres-fg));
+ stroke-width:4.4;stroke-linejoin:round;stroke-linecap:round;
+ filter:drop-shadow(0 0 4px color-mix(in srgb,var(--pres-accent) 36%,transparent));
+}
+.scene-context-platforms .cp-native-svg .cpn-arrow--loop{
+ stroke-width:4;stroke:color-mix(in srgb,var(--pres-accent) 66%,var(--pres-fg));opacity:.98;
+}
+.scene-context-platforms .cp-native-svg .cpn-arrow--cycle{stroke-width:4.2}
+.scene-context-platforms .cp-native-svg .cpn-marker-shape{
+ fill:color-mix(in srgb,var(--pres-accent) 74%,var(--pres-fg));
+}
+.scene-context-platforms .cp-native-svg .cpn-cycle-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 83%,var(--pres-accent));
+ stroke:color-mix(in srgb,var(--pres-fg) 31%,var(--pres-accent));
+ stroke-width:1.8;filter:url(#cpn-soft-shadow);
+}
+.scene-context-platforms .cp-native-svg .cpn-cycle-node .cpn-icon{
+ color:var(--pres-fg);opacity:.9;
+}
+.scene-context-platforms .cp-native-svg .cpn-cycle-title{
+ font-size:20px;font-weight:800;letter-spacing:-.5px;
+}
+.scene-context-platforms .cp-native-svg .cpn-cycle-detail{
+ font-size:15.7px;font-weight:540;fill:var(--pres-muted);
+}
+.scene-context-platforms .cp-native-svg .cpn-outcomes-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 81%,transparent);
+ stroke:color-mix(in srgb,var(--pres-fg) 42%,var(--pres-accent));
+ stroke-width:1.6;filter:url(#cpn-soft-shadow);
+}
+.scene-context-platforms .cp-native-svg .cpn-outcomes-header{
+ font-size:26px;font-weight:840;letter-spacing:-.5px;
+}
+.scene-context-platforms .cp-native-svg .cpn-outcome .cpn-icon{
+ color:var(--pres-fg);opacity:.9;
+}
+.scene-context-platforms .cp-native-svg .cpn-outcome-title{
+ font-size:20px;font-weight:790;
+}
+.scene-context-platforms .cp-native-svg .cpn-outcome-detail{
+ font-size:16px;font-weight:520;fill:var(--pres-muted);
+}
+.scene-context-platforms .cp-native-svg .cpn-separator{
+ stroke:color-mix(in srgb,var(--pres-fg) 26%,transparent);stroke-width:1.4;
+}
+.scene-context-platforms .cp-native-svg .cpn-governance-rule{
+ stroke:color-mix(in srgb,var(--pres-fg) 25%,var(--pres-accent));stroke-width:1.4;
+}
+.scene-context-platforms .cp-native-svg .cpn-governance-heading{
+ font-size:17px;font-weight:800;
+}
+.scene-context-platforms .cp-native-svg .cpn-governance-values{
+ font-size:17px;font-weight:540;fill:var(--pres-muted);
+}
+.present-frame[data-tone="light"] .scene-context-platforms .cp-native-svg .cpn-photo{opacity:.16}
+.present-frame[data-tone="light"] .scene-context-platforms .cp-native-svg .cpn-panel,
+.present-frame[data-tone="light"] .scene-context-platforms .cp-native-svg .cpn-outcomes-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 95%,var(--pres-accent));
+}
+.present-frame[data-tone="light"] .scene-context-platforms .cp-native-svg .cpn-facet-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 88%,var(--pres-accent));
+}

@@ -45,7 +45,10 @@ export async function prepareSlideMarkupForExport(markup){
  const scene=parsed.body.querySelector('.story-scene');
  if(!scene)throw Error('Mangler lysbildescene i eksporten');
  const images=[...parsed.body.querySelectorAll('img[src]')];
- const urls=[...new Set(images.map(img=>img.getAttribute('src')).filter(s=>safePath.test(s||'')))];
+ const svgImages=[...parsed.body.querySelectorAll('svg image[href]')];
+ const originals=[...images.map(img=>img.getAttribute('src')),
+  ...svgImages.map(img=>img.getAttribute('href'))];
+ const urls=[...new Set(originals.filter(s=>safePath.test(s||'')))];
  const replacements=new Map(await Promise.all(urls.map(async url=>[url,await toDataUrl(url)])));
  for(const img of images){
   const src=img.getAttribute('src');
@@ -56,6 +59,18 @@ export async function prepareSlideMarkupForExport(markup){
    img.removeAttribute('srcset');
    img.setAttribute('loading','eager');
   }
+ }
+ for(const image of svgImages){
+  const href=image.getAttribute('href');
+  if(href?.startsWith('./assets/library/')&&!safePath.test(href))
+   throw Error('Ugyldig SVG-bildebane ved eksport: '+href);
+  if(replacements.has(href))image.setAttribute('href',replacements.get(href));
+ }
+ const native=scene.querySelector('svg[data-native-slide-scene]');
+ if(native){
+  const photo=native.querySelector('image[data-photo-role="landscape"]');
+  if(!photo?.getAttribute('href')?.startsWith('data:image/png;base64,'))
+   throw Error('Manglende fotografi i eksportens native SVG-scene');
  }
  // A photographic direction without its image is a failed export, not a
  // superficially successful download. This tests generic object roles rather

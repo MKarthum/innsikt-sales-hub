@@ -36,6 +36,7 @@ vm.runInNewContext(fs.readFileSync('docs/assets/scene-art.js','utf8'),sandbox);
 const assets=JSON.parse(fs.readFileSync('docs/data/visual-assets.json','utf8'));
 sandbox.window.InnsiktSceneArt.validate(slide.visual.artwork,assets);
 vm.runInNewContext(fs.readFileSync('docs/assets/slide-graph.js','utf8'),sandbox);
+vm.runInNewContext(fs.readFileSync('docs/assets/context-native-svg.js','utf8'),sandbox);
 vm.runInNewContext(fs.readFileSync('docs/assets/slide-visuals.js','utf8'),sandbox);
 const escape=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const html=sandbox.window.InnsiktSlideVisuals.render(slide,escape,{index:0,total:1,showNumbers:false,assets});
@@ -47,7 +48,7 @@ assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[
 assert.equal((html.match(/class="cp-cycle-arrow"/g)||[]).length,2,'Both bottom process arrows are native SVG');
 assert.ok(html.includes('class="cp-graph-overlay cp-feedback-return"'),'Native return connection exists');
 assert.ok(html.includes('class="cp-action-link"'),'Grid spacer is retained');
-assert.equal((html.match(/data-edge-id="/g)||[]).length,10,'Exactly ten data-driven relations');
+assert.equal((html.match(/data-edge-id="/g)||[]).length,20,'Two synchronized renderers each expose ten semantic relations');
 assert.ok(html.includes('data-from="sources:1" data-to="context"'),'Operational sources feed the context');
 assert.ok(html.includes('data-from="context" data-to="consumers:2"'),'Agents consume shared context');
 assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'Feedback must return into context');
@@ -57,13 +58,17 @@ assert.ok(endRule,'Feedback connector has a path and an arrowhead');
 assert.ok(endRule[1].endsWith('L970 300'),'Feedback route must terminate at the context edge');
 assert.ok(endRule[2].includes('L970 300L'),'Arrowhead tip must coincide with the route endpoint');
 assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
+assert.ok(html.includes('data-native-slide-scene="context-platforms"'),'Composite view needs one native SVG stage');
+assert.ok(html.includes('data-photo-role="landscape"'),'The mountain background must be a first-class SVG image');
+assert.equal((html.match(/class="cpn-arrow/g)||[]).length,10,'The native SVG stage uses exactly the same ten canonical relations');
+assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'The return arrow comes from the same semantic graph');
 const wrongDirection=JSON.parse(JSON.stringify(slide.visual.graph));
-wrongDirection.edges.find(e=>e.id==='systems-context').from='context';
-wrongDirection.edges.find(e=>e.id==='systems-context').to='sources:1';
+wrongDirection.source=wrongDirection.source.replace('sources:1 --> context : informs [systems-context]',
+ 'context --> sources:1 : informs [systems-context]');
 assert.throws(()=>sandbox.window.InnsiktSlideGraph.validate(wrongDirection,slide.visual),
  'A reversed arrow must fail every rendering style');
 const hiddenExtra=JSON.parse(JSON.stringify(slide.visual.graph));
-hiddenExtra.edges.push({id:'hidden-edge',from:'context',to:'sources:0',relation:'provides'});
+hiddenExtra.source+='\ncontext --> sources:0 : provides [hidden-edge]';
 assert.throws(()=>sandbox.window.InnsiktSlideGraph.validate(hiddenExtra,slide.visual),
  'An edge that the renderer cannot draw must fail validation');
 assert.equal((html.match(/class="cp-outcome"/g)||[]).length,3);

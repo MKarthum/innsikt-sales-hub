@@ -77,6 +77,7 @@ vm.runInContext(read('docs/assets/architecture-visuals.js'),sandbox,{timeout:300
 vm.runInContext(read('docs/assets/architecture-explorer.js'),sandbox,{timeout:3000,filename:'architecture-explorer.js'});
 vm.runInContext(read('docs/assets/slide-story-scenes.js'),sandbox,{timeout:3000,filename:'slide-story-scenes.js'});
 vm.runInContext(read('docs/assets/slide-graph.js'),sandbox,{timeout:3000,filename:'slide-graph.js'});
+vm.runInContext(read('docs/assets/context-native-svg.js'),sandbox,{timeout:3000,filename:'context-native-svg.js'});
 vm.runInContext(read('docs/assets/slide-visuals.js'),sandbox,{timeout:3000,filename:'slide-visuals.js'});
 vm.runInContext(read('docs/assets/dialogue.js'),sandbox,{timeout:3000,filename:'dialogue.js'});
 vm.runInContext(instrumented,sandbox,{timeout:3000,filename:'site.js'});

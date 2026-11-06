@@ -31,6 +31,7 @@ function render(data){
  vm.runInContext(file('docs/assets/architecture-visuals.js'),x,{filename:'architecture-visuals.js',timeout:3000});
  vm.runInContext(file('docs/assets/slide-story-scenes.js'),x,{filename:'slide-story-scenes.js',timeout:3000});
  vm.runInContext(file('docs/assets/slide-graph.js'),x,{filename:'slide-graph.js',timeout:3000});
+ vm.runInContext(file('docs/assets/context-native-svg.js'),x,{filename:'context-native-svg.js',timeout:3000});
  vm.runInContext(file('docs/assets/slide-visuals.js'),x,{filename:'slide-visuals.js',timeout:3000});
 vm.runInContext(injected,x,{filename:'site.js',timeout:3000});
  return vm.runInContext('__views()',x,{timeout:3000});

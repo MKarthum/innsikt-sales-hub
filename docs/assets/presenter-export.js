@@ -55,7 +55,10 @@ function build(data,stylesheet){
  +'</main><script>'+script.replaceAll('</script','<\\/script')+'</script></body></html>';
 }
 async function inlineLibraryImages(html){
- const files=[...new Set([...html.matchAll(/src="(\.\/assets\/library\/(?:vendor|external|original)\/[a-z0-9-]+\.(?:svg|png|jpg|jpeg|webp))"/g)].map(m=>m[1]))];
+ const files=[...new Set([
+  ...[...html.matchAll(/src="(\.\/assets\/library\/(?:vendor|external|original)\/[a-z0-9-]+\.(?:svg|png|jpg|jpeg|webp))"/g)].map(m=>m[1]),
+  ...[...html.matchAll(/href="(\.\/assets\/library\/(?:vendor|external|original)\/[a-z0-9-]+\.(?:svg|png|jpg|jpeg|webp))"/g)].map(m=>m[1])
+ ])];
  if(!files.length)return html;
  const substitutions=await Promise.all(files.map(async path=>{
   const r=await fetch(path,{cache:'no-store'});
@@ -65,6 +68,7 @@ async function inlineLibraryImages(html){
   return [path,data];
  }));
  for(const [path,uri] of substitutions)html=html.replaceAll('src="'+path+'"','src="'+uri+'"');
+ for(const [path,uri] of substitutions)html=html.replaceAll('href="'+path+'"','href="'+uri+'"');
  return html;
 }
 // A copy can supply its own palette by linking CSS last with data-innsikt-skin.
@@ -105,8 +109,10 @@ async function exportDeck(data,mode='html'){
   if(!narrative.ok)throw Error('Kunne ikke hente faglige lysbildescener');
   const art=await fetch('./assets/scene-art.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!art.ok)throw Error('Kunne ikke hente illustrasjonsobjektenes CSS');
+  const nativeCss=await fetch('./assets/context-native-svg.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
+  if(!nativeCss.ok)throw Error('Kunne ikke hente kontekstscenens SVG-stiler');
   const skin=await organizationSkinCss();
-  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())+'\n'+(await editorial.text())+'\n'+(await narrative.text())+'\n'+(await art.text())+'\n'+skin));
+  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())+'\n'+(await editorial.text())+'\n'+(await narrative.text())+'\n'+(await art.text())+'\n'+(await nativeCss.text())+'\n'+skin));
   if(mode==='print'){win.document.open();win.document.write(html);win.document.close();win.focus();return;}
   const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
   const link=document.createElement('a');link.href=url;link.download='innsikt-'+data.id+'-v'+data.version+'.html';

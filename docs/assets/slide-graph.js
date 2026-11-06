@@ -4,8 +4,22 @@
 'use strict';
 const valid=id=>/^[a-z][a-z0-9-]*(?::[0-9]+)?$/.test(id||'');
 const coord=i=>Math.round((i+.5)*1000/3);
-function validate(graph,slide){
- if(!graph||graph.version!==1||!Array.isArray(graph.edges))throw Error('Mangler relasjonsmodell v1');
+// Mermaid-like authoring syntax, intentionally not a Mermaid runtime/rendering dependency.
+// Labels and directions are canonical here; scene geometry remains renderer-owned.
+function parse(input){
+ if(input?.version===1&&Array.isArray(input.edges))return input;
+ if(input?.version!==2||typeof input.source!=='string')throw Error('Mangler relasjonsmodell v2');
+ const edges=[];
+ for(const line of input.source.split(/\r?\n/).map(x=>x.trim()).filter(x=>x&&!x.startsWith('#'))){
+  const parts=line.match(/^([a-z][a-z0-9:-]*)\s*-->\s*([a-z][a-z0-9:-]*)\s*:\s*([a-z-]+)\s*\[([a-z][a-z0-9-]*)\]$/);
+  if(!parts)throw Error('Ugyldig relasjonslinje: '+line);
+  edges.push({from:parts[1],to:parts[2],relation:parts[3],id:parts[4]});
+ }
+ return {version:1,edges};
+}
+function validate(input,slide){
+ const graph=parse(input);
+ if(!graph||!Array.isArray(graph.edges))throw Error('Mangler relasjonsmodell');
  const nodes=new Set(['context']);
  for(const collection of ['consumers','sources','cycle']){
   (slide[collection]||[]).forEach((_,i)=>nodes.add(collection+':'+i));
@@ -33,7 +47,7 @@ function validate(graph,slide){
   const expected=required.get(e.from+'>'+e.to);
   if(expected!==e.relation)throw Error('Faglig retning eller relasjonstype stemmer ikke: '+e.id);
  }
- return true;
+ return graph;
 }
 const edge=(graph,from,to)=>{
  const result=graph.edges.filter(e=>e.from===from&&e.to===to);
@@ -45,8 +59,8 @@ const arrow=(x,y,side)=>{
  if(side==='left')return 'M'+(x+10)+' '+(y-8)+'L'+x+' '+y+'L'+(x+10)+' '+(y+8);
  return 'M'+(x-10)+' '+(y-8)+'L'+x+' '+y+'L'+(x-10)+' '+(y+8);
 };
-function renderCanvas(graph,slide,esc){
- validate(graph,slide);
+function renderCanvas(input,slide,esc){
+ const graph=validate(input,slide);
  const paths=[];
  const add=(record,points,side)=>{
   // Geometry and arrowhead have a single source of truth: the final route point.
@@ -68,9 +82,9 @@ function renderCanvas(graph,slide,esc){
  return '<svg class="cp-graph-overlay cp-feedback-return" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
   +paths.join('')+'</svg>';
 }
-function processArrow(graph,from,to,esc){
- const e=edge(graph,'cycle:'+from,'cycle:'+to);
+function processArrow(input,from,to,esc){
+ const e=edge(parse(input),'cycle:'+from,'cycle:'+to);
  return '<svg class="cp-cycle-arrow" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 16H27M18 7L27 16L18 25"/></svg>';
 }
-window.InnsiktSlideGraph={validate,renderCanvas,processArrow};
+window.InnsiktSlideGraph={parse,validate,renderCanvas,processArrow};
 })();

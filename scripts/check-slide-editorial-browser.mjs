@@ -62,7 +62,7 @@ try{
  assert.equal(await page.locator('#library-art-mode').inputValue(),'auto');
  await page.locator('#library-art-mode').selectOption('illustrated');
  assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
- const edgeSignature=()=>platform.locator('[data-edge-id]').evaluateAll(xs=>
+ const edgeSignature=()=>platform.locator('.cp-diagram [data-edge-id]').evaluateAll(xs=>
   xs.map(x=>x.dataset.from+'>'+x.dataset.to+':'+x.dataset.relation).sort());
  const originalEdges=await edgeSignature();
  assert.equal(originalEdges.length,10,'Ten explicit meaningful graph connections');
@@ -100,6 +100,15 @@ try{
  await page.locator('#library-art-mode').selectOption('cinematic');
  assert.equal(await platform.getAttribute('data-art-direction'),'cinematic');
  assert.deepEqual(await edgeSignature(),originalEdges,'Composite skin must use exactly the same graph');
+ const nativeConnections=await platform.locator('svg[data-native-slide-scene] [data-edge-id]').evaluateAll(xs=>
+  xs.map(x=>x.dataset.from+'>'+x.dataset.to+':'+x.dataset.relation).sort());
+ assert.deepEqual(nativeConnections,originalEdges,'Native SVG uses identical relations, direction and count');
+ assert.equal(await platform.locator('svg[data-native-slide-scene] image[data-photo-role="landscape"]').count(),1);
+ assert.equal(await platform.locator('svg[data-native-slide-scene]').evaluate(el=>getComputedStyle(el).display),'block');
+ await page.evaluate(async()=>{
+  const source=document.querySelector('svg[data-native-slide-scene] image[data-photo-role="landscape"]')?.getAttribute('href');
+  const image=new Image();image.src=source;await image.decode();
+ });
  assert.equal(await platform.locator('[data-scene-shape="orbit"]').count(),1,'Filmically luminous ring is separately modeled');
  assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Art direction never changes the meaning');
  const cinematicScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-cinematic.png'});

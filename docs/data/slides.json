@@ -2022,69 +2022,8 @@
         ],
         "preferredArtDirection": "cinematic",
         "graph": {
-          "version": 1,
-          "edges": [
-            {
-              "id": "context-people",
-              "from": "context",
-              "to": "consumers:0",
-              "relation": "provides"
-            },
-            {
-              "id": "context-applications",
-              "from": "context",
-              "to": "consumers:1",
-              "relation": "provides"
-            },
-            {
-              "id": "context-agents",
-              "from": "context",
-              "to": "consumers:2",
-              "relation": "provides"
-            },
-            {
-              "id": "data-context",
-              "from": "sources:0",
-              "to": "context",
-              "relation": "informs"
-            },
-            {
-              "id": "systems-context",
-              "from": "sources:1",
-              "to": "context",
-              "relation": "informs"
-            },
-            {
-              "id": "external-context",
-              "from": "sources:2",
-              "to": "context",
-              "relation": "informs"
-            },
-            {
-              "id": "context-decision",
-              "from": "context",
-              "to": "cycle:0",
-              "relation": "supports"
-            },
-            {
-              "id": "decision-action",
-              "from": "cycle:0",
-              "to": "cycle:1",
-              "relation": "advances"
-            },
-            {
-              "id": "action-update",
-              "from": "cycle:1",
-              "to": "cycle:2",
-              "relation": "advances"
-            },
-            {
-              "id": "updated-context",
-              "from": "cycle:2",
-              "to": "context",
-              "relation": "updates"
-            }
-          ]
+          "version": 2,
+          "source": "# Fra/til og relasjonsrolle. Alle visningsstiler bruker samme graf.\ncontext --> consumers:0 : provides [context-people]\ncontext --> consumers:1 : provides [context-applications]\ncontext --> consumers:2 : provides [context-agents]\nsources:0 --> context : informs [data-context]\nsources:1 --> context : informs [systems-context]\nsources:2 --> context : informs [external-context]\ncontext --> cycle:0 : supports [context-decision]\ncycle:0 --> cycle:1 : advances [decision-action]\ncycle:1 --> cycle:2 : advances [action-update]\ncycle:2 --> context : updates [updated-context]"
         }
       },
       "design": {

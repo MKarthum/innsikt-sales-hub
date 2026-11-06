@@ -164,8 +164,10 @@ function render(slide,esc,position={}){
   const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step">'+(item.assetId?assetImage(item.assetId,'cp-cycle-icon'):'')+'<span class="cp-cycle-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>'+(i===v.cycle.length-1?'':graph.processArrow(v.graph,i,i+1,escs))).join('');
   const feedback=graph.renderCanvas(v.graph,v,escs);
   const scenery=window.InnsiktSceneArt.render(v.artwork,position.assets,escs);
+  const nativeScene=window.InnsiktContextNative.render(slide,v,position.assets,escs);
   return '<div class="story-scene scene-context-platforms">'
    +'<div class="cp-landscape" aria-hidden="true">'+scenery+'</div>'
+   +nativeScene
    +'<header class="cp-heading"><div class="scene-topline">'+label+counter+'</div><div class="cp-title"><h2>'+escs(slide.title)+'</h2><span>'+escs(v.period)+'</span></div></header>'
    +'<div class="cp-diagram" role="group" aria-label="'+escs(v.contextLabel)+'">'
    +'<section class="cp-consumers" aria-label="Konsumenter">'+tiles(v.consumers,'cp-consumer')+'</section>'

@@ -73,6 +73,23 @@ try{
   return prepareSlideMarkupForExport(document.querySelector('.slide-library-detail-stage .present-frame').innerHTML);
  });
  assert.ok(embedded.includes('data:image/png;base64,'),'Photographic source converted into an inline PNG');
+ assert.match(embedded,/data-native-slide-scene="context-platforms"/,'Native semantic scene is exportable');
+ const nativePhotoIsEmbedded=await page.evaluate(markup=>{
+  const doc=new DOMParser().parseFromString(markup,'text/html');
+  return doc.querySelector('svg[data-native-slide-scene] image[data-photo-role="landscape"]')
+   ?.getAttribute('href')?.startsWith('data:image/png;base64,')===true;
+ },embedded);
+ assert.ok(nativePhotoIsEmbedded,'Native SVG background image must be embedded before capture');
+ const nativeProof=await page.evaluate(async encoded=>{
+  const {flattenNativeScene}=await import('./assets/context-native-export.js');
+  const html=await flattenNativeScene(encoded,'strong');
+  const extracted=html.match(/src="(data:image\/png;base64,[^"]+)"/);
+  if(!extracted)return {embedded:false};
+  const img=new Image();img.src=extracted[1];await img.decode();
+  return {embedded:true,width:img.naturalWidth,height:img.naturalHeight};
+ },embedded);
+ assert.deepEqual(nativeProof,{embedded:true,width:1920,height:1080},
+  'Native scene must rasterize completely at 1920x1080');
  assert.equal((embedded.match(/data-scene-mode="cinematic"/g)||[]).length,4,'Independent cinematic accents remain present');
  const sceneScreenshot=await photoScene.screenshot();
  const photoPng=await download('png');

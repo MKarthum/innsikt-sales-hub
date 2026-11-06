@@ -222,3 +222,28 @@ Eksport av lysbildet serialiserer de samme SVG-pilene som nettsiden.
 Se media/README.md for arkiverte masterfiler, gjenskapbar WebP-publisering, budsjett, URL-skille og regler for historiske bilder.
 Kun kilder med et konkret formål beholdes som separate arkivobjekter; normal filhistorikk dekkes av Git.
 En brukerkopi kan legge på logo via CSS-variabler over scenen uten at bakgrunnsbildet regenereres.
+
+
+## Benchmark v0.18.72 – diagrammodell og SVG-komposisjon
+
+Det avanserte 16:9-uttrykket for AI Context Platforms er nå en ekte SVG-scene
+i context-native-svg.js med context-native-svg.css. Denne erstatter
+HTML-bokser og CSS-piler i den sammensatte visningen, men ikke de enklere
+stilvariantene. Alle får navn, beskrivelser, styring og relasjoner fra samme
+kanoniske slides.json. Ingen faglig tekst er lagret i fotografiet.
+
+Relasjonsmodellen bruker et lite Mermaid-inspirert tekstformat på formen
+from --> to : relation [stable-edge-id]. slide-graph.js parser og
+validerer dette, og begge renderere bruker identiske faglige relasjoner.
+Mermaid er ikke en runtime-avhengighet.
+
+Ved nedlasting bygges lokale bilder i SVG <image href> inn som data-PNG
+før den ferdige SVG-en rasteriseres til 1920 × 1080 av
+context-native-export.js. Eksport til PNG/JPG/PDF/PPTX bruker den samme
+rasteren. Dette omgår html-to-image sin SVG foreignObject-rendering,
+som tidligere mistet fjellbildet. HTML-eksport bygger også inn bildene.
+
+En mottaker som ikke støtter den avanserte SVG-komposisjonen kan fortsatt
+velge standard. Scenen har foreløpig en kontrollert, scene-spesifikk
+geometri, ikke en universell automatisk graf-layout. Bilder er dekorative,
+og faglige sammenhenger skal aldri være malt inn i bakgrunnen.

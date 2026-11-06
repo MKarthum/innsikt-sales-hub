@@ -646,7 +646,11 @@ async function downloadSlideButton(button){
  button.disabled=true;button.setAttribute('aria-busy','true');
  try{
   const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
-  const html=await prep.prepareSlideMarkupForExport(rendered);
+  let html=await prep.prepareSlideMarkupForExport(rendered);
+  if(item.visual?.scene==='context-platforms'&&html.includes('data-art-direction="cinematic"')){
+   const native=await import('./context-native-export.js?v='+encodeURIComponent(D.meta.version));
+   html=await native.flattenNativeScene(html,tone);
+  }
   const module=await import('./slide-download.js?v='+encodeURIComponent(D.meta.version));
   await module.downloadSingleSlide({id:item.id,title:item.title,html,tone,format,version:D.meta.version});
   toast('Lysbildet er lastet ned.');
