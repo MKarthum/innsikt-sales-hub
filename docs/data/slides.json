@@ -1987,6 +1987,18 @@
               "fit": "fill",
               "style": "natural",
               "mode": "illustrated"
+            },
+            {
+              "id": "cinematic-orbit",
+              "type": "shape",
+              "shape": "orbit",
+              "role": "accent",
+              "x": 2,
+              "y": 29,
+              "w": 73,
+              "h": 35,
+              "opacity": 0.94,
+              "mode": "cinematic"
             }
           ]
         },

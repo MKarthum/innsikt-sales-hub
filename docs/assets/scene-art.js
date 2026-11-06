@@ -4,7 +4,7 @@
 const types=new Set(['asset','glow','shape','beam']);
 const roles=new Set(['atmosphere','distance','landscape','summit','route','foreground','goal','haze','accent']);
 const fits=new Set(['fill','cover','contain']);
-const shapes=new Set(['disc','panel','rule']);
+const shapes=new Set(['disc','panel','rule','orbit']);
 const styles=new Set(['natural','muted','corporate']);
 const modes=new Set(['all','illustrated','standard','rich','cinematic']);
 const validId=id=>typeof id==='string'&&/^[a-z][a-z0-9-]{1,63}$/.test(id);

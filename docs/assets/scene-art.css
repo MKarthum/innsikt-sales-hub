@@ -254,3 +254,77 @@
 .present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-cycle,
 .present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-context{
  background:color-mix(in srgb,var(--pres-bg) 91%,var(--pres-accent))}
+
+/* Filmisk komposisjon. Alle dekorative farger kommer fra mottakers semantiske skin. */
+.scene-art-object--shape[data-scene-shape="orbit"]{
+ border-radius:50%;border:1.6px solid color-mix(in srgb,var(--pres-accent) 88%,var(--pres-fg));
+ background:radial-gradient(ellipse at 50% 63%,color-mix(in srgb,var(--pres-accent) 40%,transparent),transparent 70%);
+ box-shadow:0 0 1.1cqw color-mix(in srgb,var(--pres-accent) 75%,transparent),
+ 0 0 3cqw color-mix(in srgb,var(--pres-accent) 43%,transparent),
+ inset 0 0 1.5cqw color-mix(in srgb,var(--pres-accent) 43%,transparent)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-consumers{
+ gap:0;padding:.3cqw .55cqw;
+ border:1.5px solid color-mix(in srgb,var(--pres-fg) 71%,transparent);
+ border-radius:3.5cqw;
+ background:linear-gradient(135deg,color-mix(in srgb,var(--pres-bg) 78%,transparent),
+ color-mix(in srgb,var(--pres-accent) 20%,var(--pres-bg)));
+ box-shadow:0 .6cqw 2cqw color-mix(in srgb,var(--pres-bg) 34%,transparent),
+ inset 0 1px 0 color-mix(in srgb,var(--pres-fg) 25%,transparent);
+ backdrop-filter:blur(.5cqw)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-consumer{
+ border:0;border-radius:0;box-shadow:none;background:transparent;backdrop-filter:none;
+ padding:.3cqw .7cqw}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-consumer:not(:last-child){
+ border-right:1px solid color-mix(in srgb,var(--pres-fg) 36%,transparent)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-context{
+ position:relative;isolation:isolate;
+ border-radius:48% / 48%;border-width:2px;
+ background:radial-gradient(ellipse at 50% 0%,
+ color-mix(in srgb,var(--pres-accent) 31%,transparent),transparent 70%),
+ linear-gradient(110deg,color-mix(in srgb,var(--pres-bg) 82%,transparent),
+ color-mix(in srgb,var(--pres-bg) 72%,transparent));
+ box-shadow:0 0 1.5cqw color-mix(in srgb,var(--pres-accent) 74%,transparent),
+ 0 0 3.6cqw color-mix(in srgb,var(--pres-accent) 38%,transparent),
+ inset 0 0 1.5cqw color-mix(in srgb,var(--pres-accent) 25%,transparent)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-context::before{
+ content:"";position:absolute;inset:-.47cqw -.8cqw;border-radius:50%;
+ border:1px solid color-mix(in srgb,var(--pres-accent) 76%,transparent);
+ box-shadow:0 0 1.2cqw color-mix(in srgb,var(--pres-accent) 59%,transparent);
+ pointer-events:none;z-index:0}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-core-head,
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-facets{
+ position:relative;z-index:1}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-facet{
+ background:linear-gradient(155deg,color-mix(in srgb,var(--pres-bg) 73%,transparent),
+ color-mix(in srgb,var(--pres-accent) 19%,var(--pres-bg)));
+ border:1px solid color-mix(in srgb,var(--pres-fg) 46%,transparent);
+ border-radius:1.3cqw;
+ box-shadow:inset 0 1px 0 color-mix(in srgb,var(--pres-fg) 23%,transparent)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-source{
+ border-radius:2cqw;
+ border:1px solid color-mix(in srgb,var(--pres-fg) 48%,transparent)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-cycle{
+ border-radius:3cqw;
+ border:1.6px solid color-mix(in srgb,var(--pres-accent) 80%,var(--pres-fg));
+ box-shadow:0 0 1.1cqw color-mix(in srgb,var(--pres-accent) 43%,transparent)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-outcomes{
+ top:43%;right:2.6%;gap:0;padding:1cqw 1.15cqw .8cqw;
+ border-radius:2cqw;
+ border:1.3px solid color-mix(in srgb,var(--pres-fg) 55%,transparent);
+ background:linear-gradient(155deg,color-mix(in srgb,var(--pres-bg) 79%,transparent),
+ color-mix(in srgb,var(--pres-bg) 70%,transparent));
+ box-shadow:0 .7cqw 2.4cqw color-mix(in srgb,var(--pres-bg) 35%,transparent);
+ backdrop-filter:blur(.5cqw)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-outcomes-title{
+ font-size:1.15cqw;margin-bottom:.5cqw;padding-bottom:.8cqw;
+ border-bottom:1px solid color-mix(in srgb,var(--pres-fg) 34%,transparent)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-outcome{
+ background:transparent;border:0;border-radius:0;
+ box-shadow:none;backdrop-filter:none;
+ min-height:5.1cqw;padding:.7cqw 0}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-outcome:not(:last-child){
+ border-bottom:1px solid color-mix(in srgb,var(--pres-fg) 26%,transparent)}
+/* An explicit light skin remains readable; auto uses the standard direction. */
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-consumers,
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-outcomes{
+ background:color-mix(in srgb,var(--pres-bg) 94%,var(--pres-accent))}

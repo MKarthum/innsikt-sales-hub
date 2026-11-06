@@ -203,3 +203,9 @@ De fire presentasjonsretningene standard, illustrated, rich og cinematic bruker 
 Ved portering leser mottakerens renderer fagdata og generiske kunstobjekter med id, type, rolle, art direction, posisjon, størrelse og effekt. Mottakerens egne semantiske fargetokens avgjør tekst, typografi og komponentuttrykk. Faginnhold krever ikke Innsikt-spesifikke CSS-klasser. En mottaker som ikke støtter de avanserte kunsttypene, kan bruke standard uten tap av faglig innhold. Illustrative bildelag kan beholde sin fotografiske egenart.
 
 Enkeltlysbilde-eksport konverterer lokale rasterressurser til PNG-data i en midlertidig klone for å redusere feil i WebKit/SVG foreignObject. Hver bildekomponent må dekodes før rasterisering, og manglende foto i rik/filmisk stil skal gi en eksportfeil i stedet for en tilsynelatende vellykket fil uten bilde. SVG-ikoner forblir skalerbare data-URI-er. PDF/PPTX av ett lysbilde er fortsatt bildebasert.
+
+## Filmisk komposisjon (v0.18.63)
+
+Filmisk stil kan gjengi et nytt deklarativt formobjekt, orbit. Det er plassert i artwork-data og representerer kun en dekorativ, lysende ring. En mottaker kan rendere dette med sitt eget visuelle system eller utelate objektet helt. Det faglige diagrammet er det samme. Filmisk variant bruker også andre glassflater, en elliptisk kontekstflate og et samlet verdipanel, mens alle faglige tekst- og relasjonsobjekter fortsatt er native HTML/SVG.
+
+Nettlesertesten sammenligner faktiske skjermbilder mellom rik og filmisk stil. Dermed er filmisk modus ikke bare et ekstra valg som tilfeldigvis rendrer identisk.

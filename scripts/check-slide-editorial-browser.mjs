@@ -83,6 +83,33 @@ try{
  assert.equal(await platform.locator('[data-scene-object="rich-mountain-background"]').evaluate(el=>getComputedStyle(el).display),'block');
  assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Factual text is identical in both illustration modes');
  const richScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-rich.png'});
+
+ await page.locator('#library-art-mode').selectOption('cinematic');
+ assert.equal(await platform.getAttribute('data-art-direction'),'cinematic');
+ assert.equal(await platform.locator('[data-scene-shape="orbit"]').count(),1,'Filmically luminous ring is separately modeled');
+ assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Art direction never changes the meaning');
+ const cinematicScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-cinematic.png'});
+ const cinematicDifference=await page.evaluate(async images=>{
+  const read=async base64=>{
+   const img=new Image();img.src='data:image/png;base64,'+base64;await img.decode();
+   const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
+   const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,160,90);
+   return ctx.getImageData(0,0,160,90).data;
+  };
+  const [rich,cinematic]=await Promise.all(images.map(read));
+  let delta=0,n=0;
+  for(let y=14;y<75;y++)for(let x=7;x<149;x++){
+   const i=(y*160+x)*4;
+   for(let channel=0;channel<3;channel++){
+    delta+=Math.abs(rich[i+channel]-cinematic[i+channel]);
+    n++;
+   }
+  }
+  return delta/n;
+ },[richScreenshot.toString('base64'),cinematicScreenshot.toString('base64')]);
+ assert.ok(cinematicDifference>5,'Film style needs visible differentiation from rich: '+cinematicDifference);
+ await page.locator('#library-art-mode').selectOption('rich');
+
  // A dark palette with Standard art direction must not display the same photo.
  await page.locator('#library-art-mode').selectOption('standard');
  const standardDarkScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-dark-standard.png'});
