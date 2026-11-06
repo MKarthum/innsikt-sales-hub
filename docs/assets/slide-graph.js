@@ -59,9 +59,9 @@ function renderCanvas(graph,slide,esc){
   const x=coord(i);add(edge(graph,'sources:'+i,'context'),'M'+x+' 560V520',x,520,'up');
  }
  // The left outside corridor connects context to the decision, avoiding source tiles.
- add(edge(graph,'context','cycle:0'),'M 28 470H -13V 845H 96',96,845,'right');
+ add(edge(graph,'context','cycle:0'),'M 28 300H -13V 845H 96',96,845,'right');
  // The right outside corridor closes the learning loop into the shared context.
- add(edge(graph,'cycle:2','context'),'M 880 844H 988V 402H 970',970,402,'left');
+ add(edge(graph,'cycle:2','context'),'M 880 844H 988V 300H 970',970,402,'left');
  return '<svg class="cp-graph-overlay cp-feedback-return" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
   +paths.join('')+'</svg>';
 }
