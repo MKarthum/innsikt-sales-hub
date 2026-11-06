@@ -79,7 +79,7 @@ export async function flattenNativeScene(html,tone){
   // The downstream PNG/JPG/PDF/PPTX exporter receives one verified raster.
   // No external imagery or SVG foreignObject survives into that pipeline.
   const url=png.replaceAll('&','&amp;').replaceAll('"','&quot;');
-  return '<div class="story-scene scene-context-platforms" style="width:100%;height:100%;margin:0;padding:0;position:relative;display:block">'
+  return '<div class="story-scene scene-context-platforms" style="position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;display:block">'
    +'<img src="'+url+'" alt="" aria-hidden="true" style="display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:fill" decoding="sync" loading="eager">'
    +'</div>';
  }finally{host.remove();}
