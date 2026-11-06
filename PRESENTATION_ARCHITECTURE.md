@@ -195,3 +195,11 @@ Visningsmodusen `auto` er nå standard bare når brukeren ikke har lagret et eks
 ### 0.18.61 – palette og art direction er uavhengige
 
 For å unngå at «Mørk» skjuler den rike illustrasjonen er fargeprofil (`light`, `strong`, `story`) skilt fra illustrasjonsstil (`auto`, `standard`, `illustrated`, `rich`). Tidligere ble disse valgene feilaktig blandet i én dropdown. Gamle lagrede fargevalg migreres til de nye palette- og art-nøklene. Velger man mørk palett og «Anbefalt», vises den rike scenen på 2027-lysbildet. Eksplisitte illustrasjonsvalg overstyrer anbefalingen. Den samme strukturen rendres og eksporteres uansett valgt kombinasjon.
+
+## Portabel filmisk illustrasjon og bildeeksport (v0.18.62)
+
+De fire presentasjonsretningene standard, illustrated, rich og cinematic bruker de samme kanoniske fagfeltene. Filmisk uttrykk gjenbruker det registrerte fotografiet fra rik stil, og legger til selvstendige glow- og beam-objekter i visual.artwork.objects. Ingen tekst, begreper, relasjoner, piler eller kilder rasteriseres som del av illustrasjonen.
+
+Ved portering leser mottakerens renderer fagdata og generiske kunstobjekter med id, type, rolle, art direction, posisjon, størrelse og effekt. Mottakerens egne semantiske fargetokens avgjør tekst, typografi og komponentuttrykk. Faginnhold krever ikke Innsikt-spesifikke CSS-klasser. En mottaker som ikke støtter de avanserte kunsttypene, kan bruke standard uten tap av faglig innhold. Illustrative bildelag kan beholde sin fotografiske egenart.
+
+Enkeltlysbilde-eksport konverterer lokale rasterressurser til PNG-data i en midlertidig klone for å redusere feil i WebKit/SVG foreignObject. Hver bildekomponent må dekodes før rasterisering, og manglende foto i rik/filmisk stil skal gi en eksportfeil i stedet for en tilsynelatende vellykket fil uten bilde. SVG-ikoner forblir skalerbare data-URI-er. PDF/PPTX av ett lysbilde er fortsatt bildebasert.

@@ -60,6 +60,42 @@ try{
  const custom=await download('png');
  assert.notDeepEqual(custom,png,'Custom skin and tone affect exported PNG');
  assert.equal(await page.locator('.slide-single-download [data-slide-download-id="ai-thousand-analysts"]').count(),4);
+ // Regression: decorative WebP must survive conversion to a downloadable PNG.
+ await page.evaluate(()=>location.hash='#lysbilder/ai-context-platforms-2027');
+ const photoScene=page.locator('.slide-library-detail-stage .story-scene');
+ await photoScene.waitFor();
+ await page.locator('#library-tone-mode').selectOption('strong');
+ await page.locator('#library-art-mode').selectOption('cinematic');
+ assert.equal(await photoScene.getAttribute('data-art-direction'),'cinematic');
+ await photoScene.locator('[data-scene-object="rich-mountain-background"] img').evaluate(img=>img.decode());
+ const embedded=await page.evaluate(async()=>{
+  const {prepareSlideMarkupForExport}=await import('./assets/slide-export-prep.js');
+  return prepareSlideMarkupForExport(document.querySelector('.slide-library-detail-stage .present-frame').innerHTML);
+ });
+ assert.ok(embedded.includes('data:image/png;base64,'),'Photographic source converted into an inline PNG');
+ assert.equal((embedded.match(/data-scene-mode="cinematic"/g)||[]).length,3,'Independent cinematic accents remain present');
+ const sceneScreenshot=await photoScene.screenshot();
+ const photoPng=await download('png');
+ assert.equal(photoPng.readUInt32BE(16),1920);
+ assert.equal(photoPng.readUInt32BE(20),1080);
+ const photoComparison=await page.evaluate(async encoded=>{
+  const imageData=async source=>{
+   const img=new Image();img.src='data:image/png;base64,'+source;await img.decode();
+   const canvas=document.createElement('canvas');canvas.width=960;canvas.height=540;
+   const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,960,540);
+   return ctx.getImageData(0,0,960,540).data;
+  };
+  const [live,exported]=await Promise.all(encoded.map(imageData));
+  let difference=0,count=0;
+  // Unobstructed sky: a missing photographic image becomes a flat backdrop.
+  for(let y=18;y<80;y+=3)for(let x=785;x<925;x+=3){
+   const at=(y*960+x)*4;
+   for(let channel=0;channel<3;channel++)difference+=Math.abs(live[at+channel]-exported[at+channel]);
+   count+=3;
+  }
+  return difference/count;
+ },[sceneScreenshot.toString('base64'),photoPng.toString('base64')]);
+ assert.ok(photoComparison<42,'Export omits or significantly changes the photographic background (MAE '+photoComparison.toFixed(1)+')');
  // Presenter offers the currently selected slide, not the entire deck.
  await page.locator('#present-button').click();
  assert.equal(await page.locator('#present-modal .slide-single-download [data-slide-download]').count(),4);

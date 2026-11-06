@@ -9,13 +9,16 @@ assert.equal(slide.type,'visual');
 assert.equal(slide.visual.scene,'context-platforms');
 assert.equal(slide.visual.artDirections?.[0],'illustrated');
 assert.equal(slide.visual.artDirections?.[1],'rich');
-assert.equal(slide.visual.preferredArtDirection,'rich');
+assert.equal(slide.visual.artDirections?.[2],'cinematic');
+assert.equal(slide.visual.preferredArtDirection,'cinematic');
 assert.equal(slide.visual.artwork.objects.some(x=>x.id==='rich-valley-ranges'),false,'No flat vectors in rich view');
 const modelBox={window:{}};
 vm.runInNewContext(fs.readFileSync('docs/assets/slide-model.js','utf8'),modelBox);
 assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'illustrated'),'strong');
 assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'illustrated-rich'),'strong');
 assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'auto'),'strong');
+assert.ok(slide.visual.artwork.objects.some(x=>x.type==='beam'&&x.mode==='cinematic'));
+assert.equal(slide.visual.artwork.objects.filter(x=>x.assetId==='context-rich-background').length,1,'Photo must not be duplicated');
 assert.equal(slide.design.archetype,'blueprint');
 assert.ok(slide.sourceIds.includes('gartner27'));
 for(const key of ['consumers','facets','sources','cycle']) {

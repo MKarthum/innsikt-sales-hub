@@ -437,7 +437,7 @@ let selectedDeck='sales',showSpeakerNotes=false,presenterResizeObserver=null,pre
 let presentationArtMode=(()=>{
  try{
   const value=localStorage.getItem('innsikt-presentation-art');
-  return ['auto','standard','illustrated','rich'].includes(value)?value:'auto';
+  return ['auto','standard','illustrated','rich','cinematic'].includes(value)?value:'auto';
  }catch{return 'auto'}
 })();
 let presentationMotionMode=(()=>{try{const value=localStorage.getItem('innsikt-presentation-motion');return ['on','off'].includes(value)?value:'on'}catch{return 'on'}})();
@@ -465,7 +465,7 @@ function artSelect(id){
  const t=D.pages.slideLibraryUi;
  return '<label class="library-tone-field" for="'+esc(id)+'">'+esc(t.artLabel)
   +'<select id="'+esc(id)+'" aria-label="'+esc(t.artLabel)+'">'
-  +[['auto',t.artAuto],['standard',t.artStandard],['illustrated',t.toneIllustrated],['rich',t.toneIllustratedRich]].map(([value,label])=>
+  +[['auto',t.artAuto],['standard',t.artStandard],['illustrated',t.toneIllustrated],['rich',t.toneIllustratedRich],['cinematic',t.toneIllustratedCinematic]].map(([value,label])=>
     '<option value="'+value+'"'+(presentationArtMode===value?' selected':'')+'>'+esc(label)+'</option>').join('')
   +'</select></label>';
 }
@@ -505,7 +505,7 @@ function setPresentationTone(value){
  if(document.querySelector('#present-modal'))showSlide();
 }
 function setPresentationArtMode(value){
- if(!['auto','standard','illustrated','rich'].includes(value))return;
+ if(!['auto','standard','illustrated','rich','cinematic'].includes(value))return;
  presentationArtMode=value;
  try{localStorage.setItem('innsikt-presentation-art',value)}catch{}
  document.querySelectorAll('#library-art-mode,#present-art-mode').forEach(el=>el.value=value);

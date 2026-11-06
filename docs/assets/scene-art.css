@@ -18,6 +18,10 @@
 .scene-art-image[data-scene-style="corporate"]{filter:grayscale(.45) saturate(var(--scene-art-saturation))}
 .scene-art-object--glow{border-radius:50%;
  background:radial-gradient(ellipse,var(--scene-art-glow),transparent 72%)}
+.scene-art-object--beam{
+ background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--pres-warning) 35%,transparent) 24%,var(--scene-art-glow) 58%,transparent 100%);
+ mask-image:linear-gradient(90deg,transparent 0%,var(--pres-fg) 48%,transparent 100%);
+ border-radius:50%;filter:blur(1.8cqw)}
 .scene-art-object--shape{background:var(--scene-art-shape)}
 .scene-art-object--shape[data-scene-role="accent"]{background:var(--pres-accent)}
 .scene-art-object--shape:has(img){background:none}
@@ -187,3 +191,66 @@
 .story-scene.scene-context-platforms[data-art-direction="rich"] .cp-cycle{
  backdrop-filter:blur(.5cqw);
 }
+
+
+/* Filmisk retning. Foto + egne, redigerbare atmosfæreobjekter uten faglig tekst.
+   Bruker utelukkende mottakers semantiske fargeroller. */
+.scene-art-object[data-scene-mode="cinematic"]{display:none}
+.story-scene[data-art-direction="cinematic"] .scene-art-object[data-scene-mode="cinematic"],
+.story-scene[data-art-direction="cinematic"] .scene-art-object[data-scene-mode="rich"]{display:block}
+.story-scene[data-art-direction="cinematic"] .scene-art-object[data-scene-mode="standard"],
+.story-scene[data-art-direction="cinematic"] .scene-art-object[data-scene-mode="illustrated"]{display:none}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"]{
+ background:radial-gradient(ellipse at 78% 25%,color-mix(in srgb,var(--pres-warning) 22%,transparent),transparent 42%),var(--pres-bg)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-landscape,
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-landscape .scene-art{
+ position:absolute;inset:0;width:100%;height:100%;mask-image:none;opacity:1;
+ --scene-art-saturation:1.12;--scene-art-brightness:1.08}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .scene-art-object[data-scene-object="rich-mountain-background"]{
+ display:block;left:0;top:0;width:100%;height:100%;opacity:1;transform:none}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .scene-art-object[data-scene-object="rich-mountain-background"] img{
+ display:block;width:100%;height:100%;object-fit:cover;
+ filter:saturate(var(--scene-art-saturation)) brightness(var(--scene-art-brightness))}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-landscape::after{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:linear-gradient(0deg,color-mix(in srgb,var(--pres-bg) 28%,transparent) 0%,transparent 22%),
+ linear-gradient(90deg,color-mix(in srgb,var(--pres-bg) 9%,transparent) 0%,color-mix(in srgb,var(--pres-bg) 6%,transparent) 50%,transparent 82%)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-diagram{width:75.4%;margin-left:0}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-title{max-width:81cqw}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-context{
+ border-radius:5cqw;border:1.6px solid color-mix(in srgb,var(--pres-accent) 71%,var(--pres-fg));
+ background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--pres-accent) 32%,transparent),transparent 67%),
+ color-mix(in srgb,var(--pres-bg) 78%,transparent);
+ box-shadow:0 .8cqw 3cqw color-mix(in srgb,var(--pres-bg) 43%,transparent),
+ 0 0 2.1cqw color-mix(in srgb,var(--pres-accent) 36%,transparent),
+ inset 0 1px 0 color-mix(in srgb,var(--pres-fg) 31%,transparent);
+ backdrop-filter:blur(.5cqw)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-consumer,
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-source,
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-outcome{
+ background:color-mix(in srgb,var(--pres-bg) 74%,transparent);
+ border-color:color-mix(in srgb,var(--pres-fg) 35%,transparent);
+ box-shadow:inset 0 1px 0 color-mix(in srgb,var(--pres-fg) 18%,transparent),
+ 0 .5cqw 1.8cqw color-mix(in srgb,var(--pres-bg) 23%,transparent);
+ backdrop-filter:blur(.45cqw)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-facet{
+ background:color-mix(in srgb,var(--pres-bg) 70%,transparent);
+ border-color:color-mix(in srgb,var(--pres-accent) 42%,transparent);
+ backdrop-filter:blur(.35cqw)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-cycle{
+ background:color-mix(in srgb,var(--pres-bg) 77%,transparent);
+ border-color:color-mix(in srgb,var(--pres-accent) 58%,var(--pres-fg));
+ box-shadow:0 .4cqw 1.5cqw color-mix(in srgb,var(--pres-accent) 21%,transparent),
+ inset 0 1px 0 color-mix(in srgb,var(--pres-fg) 18%,transparent);
+ backdrop-filter:blur(.4cqw)}
+.story-scene.scene-context-platforms[data-art-direction="cinematic"] .cp-links i{
+ box-shadow:0 0 .5cqw color-mix(in srgb,var(--pres-accent) 38%,transparent)}
+/* Lys profil skal være lesbar også ved eksplisitt valgt filmisk illustrasjon. */
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-landscape{opacity:.28}
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-consumer,
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-source,
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-outcome,
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-facet,
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-cycle,
+.present-frame[data-tone="light"] .scene-context-platforms[data-art-direction="cinematic"] .cp-context{
+ background:color-mix(in srgb,var(--pres-bg) 91%,var(--pres-accent))}

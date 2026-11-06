@@ -34,9 +34,17 @@ function captureElement(html,tone){
 }
 async function waitForAssets(frame){
  await document.fonts?.ready;
- await Promise.all([...frame.querySelectorAll('img')].map(img=>{
-  if(img.complete)return;
-  return new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});});
+ await Promise.all([...frame.querySelectorAll('img')].map(async img=>{
+  if(!img.complete){
+   await new Promise((resolve,reject)=>{
+    img.addEventListener('load',resolve,{once:true});
+    img.addEventListener('error',()=>reject(Error('Bilde kunne ikke lastes ved eksport')),{once:true});
+   });
+  }
+  if(!img.naturalWidth||!img.naturalHeight)
+   throw Error('Et illustrasjonsbilde mangler i eksporten');
+  if(img.getAttribute('src')?.startsWith('./assets/library/'))
+   throw Error('Et bilde er ikke bygget inn i den portable eksporten');
  }));
 }
 // html-to-image serializes SVG elements inside an SVG foreignObject. In that

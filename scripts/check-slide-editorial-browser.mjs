@@ -54,16 +54,17 @@ try{
  // The illustrated option uses exactly the same slide data and can be switched back.
  await page.evaluate(()=>location.hash='#lysbilder/ai-context-platforms-2027');
  const platform=page.locator('.slide-library-detail-stage .story-scene');await platform.waitFor();
- // Palette and art direction are separate, and auto makes the rich photo visible.
+ // Palette and art direction are separate; auto selects the filmic photo treatment.
  await page.locator('#library-tone-mode').selectOption('strong');
  await page.locator('#library-art-mode').selectOption('auto');
- assert.equal(await platform.getAttribute('data-art-direction'),'rich','Auto selects the recommended rich scene');
+ assert.equal(await platform.getAttribute('data-art-direction'),'cinematic','Auto selects the recommended filmic scene');
  assert.equal(await page.locator('#library-tone-mode').inputValue(),'strong');
  assert.equal(await page.locator('#library-art-mode').inputValue(),'auto');
  await page.locator('#library-art-mode').selectOption('illustrated');
  assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
  assert.equal(await platform.locator('.scene-art-object--asset').count(),7,'Six simple layers and one rich image');
- assert.equal(await platform.locator('.scene-art-object--glow').count(),1);
+ assert.equal(await platform.locator('.scene-art-object--glow').count(),3);
+ assert.equal(await platform.locator('.scene-art-object--beam').count(),1);
  fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
  await platform.locator('.scene-art-object--asset img').first().evaluate(img=>img.decode());
  await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-illustrated.png'});

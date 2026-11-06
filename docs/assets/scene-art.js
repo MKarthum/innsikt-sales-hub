@@ -1,12 +1,12 @@
 /* Composable, data-owned illustration objects. No factual text or brand palette lives here. */
 (()=>{
 'use strict';
-const types=new Set(['asset','glow','shape']);
+const types=new Set(['asset','glow','shape','beam']);
 const roles=new Set(['atmosphere','distance','landscape','summit','route','foreground','goal','haze','accent']);
 const fits=new Set(['fill','cover','contain']);
 const shapes=new Set(['disc','panel','rule']);
 const styles=new Set(['natural','muted','corporate']);
-const modes=new Set(['all','illustrated','standard','rich']);
+const modes=new Set(['all','illustrated','standard','rich','cinematic']);
 const validId=id=>typeof id==='string'&&/^[a-z][a-z0-9-]{1,63}$/.test(id);
 const number=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
 function validate(art,catalog){

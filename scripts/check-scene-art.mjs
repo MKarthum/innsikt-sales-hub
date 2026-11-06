@@ -15,7 +15,9 @@ const esc=x=>String(x).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const html=renderer.render(art,assets,esc);
 assert.equal((html.match(/scene-art-object--asset/g)||[]).length,7,'Six simple vector assets plus one rich scenic photograph');
 assert.ok(html.includes('data-scene-mode="rich"'),'Rich art mode is an independent scene object');
-assert.equal((html.match(/scene-art-object--glow/g)||[]).length,1,'Atmospheric effect is an independent object');
+assert.equal((html.match(/scene-art-object--glow/g)||[]).length,3,'Atmospheric effects are independently addressable');
+assert.equal((html.match(/scene-art-object--beam/g)||[]).length,1,'Cinematic light shaft is a native, replaceable object');
+assert.ok(html.includes('data-scene-mode="cinematic"'),'Cinematic mode is an optional object style');
 for(const id of ['sky','distant-ranges','summit','route','foreground','flag']){
  assert.ok(html.includes('data-scene-object="'+id+'"'),'Missing scene object '+id);
 }
@@ -38,6 +40,7 @@ let x=clone();x.objects.push({...x.objects[0]});fail(x);
 x=clone();x.objects[0].assetId='https://bad.example/resource.svg';fail(x);
 x=clone();x.objects[0].x='0;position:fixed';fail(x);
 x=clone();x.objects[0].type='html';fail(x);
+x=clone();x.objects[0].mode='javascript';fail(x);
 x=clone();x.objects[0].opacity=2;fail(x);
 x=clone();x.objects[0].fit='javascript:alert(1)';fail(x);
 const css=fs.readFileSync('docs/assets/scene-art.css','utf8');
@@ -48,4 +51,4 @@ const index=fs.readFileSync('docs/index.html','utf8'),exporter=fs.readFileSync('
 assert.ok(index.includes('scene-art.js?v=')&&index.includes('scene-art.css?v='),'Browser loads art renderer and styles');
 assert.ok(index.indexOf('scene-art.js?v=')<index.indexOf('slide-visuals.js?v='),'Scene renderer must load before slides');
 assert.ok(exporter.includes('scene-art.css?v=')&&exporter.includes('(await art.text())'),'Portable HTML includes art CSS');
-console.log('PASS – 7 composable scene objects, safe assets, positions, swaps and skins');
+console.log('PASS – 11 composable scene objects, safe assets, positions, swaps and skins');

@@ -27,8 +27,8 @@ try{
  await contextSlide.waitFor();
  await page.locator('#library-tone-mode').selectOption('strong');
  await page.locator('#library-art-mode').selectOption('auto');
- assert.equal(await contextSlide.getAttribute('data-art-direction'),'rich','Recommended scene is rich');
- await contextSlide.screenshot({path:output+'/context-auto-rich.png'});
+ assert.equal(await contextSlide.getAttribute('data-art-direction'),'cinematic','Recommended scene is cinematic');
+ await contextSlide.screenshot({path:output+'/context-auto-cinematic.png'});
  await page.locator('#library-art-mode').selectOption('illustrated');
  assert.equal(await contextSlide.getAttribute('data-art-direction'),'illustrated');
  await contextSlide.screenshot({path:output+'/context-illustrated.png'});
@@ -38,6 +38,9 @@ try{
  assert.equal(await contextSlide.locator('svg.cp-cycle-arrow').count(),2);
  assert.equal(await contextSlide.locator('svg.cp-feedback-return').count(),1);
  await contextSlide.screenshot({path:output+'/context-rich.png'});
+ await page.locator('#library-art-mode').selectOption('cinematic');
+ assert.equal(await contextSlide.getAttribute('data-art-direction'),'cinematic');
+ await contextSlide.screenshot({path:output+'/context-cinematic.png'});
  await page.locator('#library-art-mode').selectOption('standard');
  assert.equal(await contextSlide.getAttribute('data-art-direction'),'standard');
  await contextSlide.screenshot({path:output+'/context-standard.png'});
