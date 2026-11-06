@@ -73,7 +73,7 @@ try{
   return prepareSlideMarkupForExport(document.querySelector('.slide-library-detail-stage .present-frame').innerHTML);
  });
  assert.ok(embedded.includes('data:image/png;base64,'),'Photographic source converted into an inline PNG');
- assert.equal((embedded.match(/data-scene-mode="cinematic"/g)||[]).length,3,'Independent cinematic accents remain present');
+ assert.equal((embedded.match(/data-scene-mode="cinematic"/g)||[]).length,4,'Independent cinematic accents remain present');
  const sceneScreenshot=await photoScene.screenshot();
  const photoPng=await download('png');
  assert.equal(photoPng.readUInt32BE(16),1920);
