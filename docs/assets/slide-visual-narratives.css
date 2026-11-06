@@ -581,3 +581,39 @@
 .scene-context-platforms .cp-outcome span{display:flex;flex-direction:column;gap:.3cqw;min-width:0}
 .scene-context-platforms .cp-outcome strong{font:790 1.14cqw/1.08 var(--font-body);color:var(--pres-fg)}
 .scene-context-platforms .cp-outcome small{font:540 .95cqw/1.15 var(--font-body);color:var(--pres-muted)}
+
+
+/* Context benchmark: all arrow directions originate in visual.graph in slides.json.
+   The same shared SVG renderer is used in every illustration direction. */
+.scene-context-platforms .cp-links{display:block}
+.scene-context-platforms .cp-links i,
+.scene-context-platforms .cp-links i::before,
+.scene-context-platforms .cp-links i::after{display:none}
+.scene-context-platforms .cp-action-link svg{display:none}
+.scene-context-platforms .cp-diagram{isolation:isolate}
+.scene-context-platforms .cp-graph-overlay.cp-feedback-return{
+ position:absolute;inset:0;left:0;top:0;bottom:auto;
+ width:100%;height:100%;z-index:3;overflow:visible;pointer-events:none;
+}
+.scene-context-platforms .cp-graph-track,
+.scene-context-platforms .cp-graph-arrowhead{
+ stroke:var(--pres-accent);stroke-width:4.8;stroke-linecap:round;
+ stroke-linejoin:round;fill:none;
+}
+.scene-context-platforms .cp-graph-arrowhead{stroke-width:5.4}
+.scene-context-platforms[data-art-direction="rich"] .cp-graph-track,
+.scene-context-platforms[data-art-direction="rich"] .cp-graph-arrowhead,
+.scene-context-platforms[data-art-direction="cinematic"] .cp-graph-track,
+.scene-context-platforms[data-art-direction="cinematic"] .cp-graph-arrowhead{
+ stroke:color-mix(in srgb,var(--pres-accent) 68%,var(--pres-fg));
+}
+
+/* Optional organization logo for a copied skin: transparent, independent overlay.
+   Keep corporate branding outside generated scenic imagery. */
+.scene-context-platforms .cp-brand-overlay{
+ display:block;position:absolute;z-index:12;pointer-events:none;
+ top:var(--slide-brand-top,2.7%);right:var(--slide-brand-right,2.5%);
+ width:var(--slide-brand-width,9cqw);height:var(--slide-brand-height,3.4cqw);
+ background-image:var(--slide-brand-logo,none);
+ background-size:contain;background-repeat:no-repeat;background-position:center;
+}

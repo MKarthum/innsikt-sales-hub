@@ -1095,3 +1095,13 @@ textarea.prompt-var-input{min-height:78px}
 .prompt-markdown-info{display:inline-block;margin-left:6px;font-size:12px;font-weight:500;vertical-align:baseline;color:var(--muted)}
 .prompt-markdown-help{font-size:12px;line-height:1.55;color:var(--muted);margin:9px 0 12px;max-width:58ch}
 .prompt-markdown-help[hidden]{display:none}
+
+/* Purpose-oriented gallery: collapsed sections prevent icons/logos from flooding the page. */
+.asset-library-section>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+ gap:1rem;padding:.7rem 0;list-style:none}
+.asset-library-section>summary::-webkit-details-marker{display:none}
+.asset-library-section>summary strong{font-weight:760}
+.asset-library-section>summary small{font-size:.85em;opacity:.75}
+.asset-library-section:not([open])>.asset-library-grid{display:none}
+.asset-library-section[open]>.asset-library-grid{padding-top:.65rem}
+@media(max-width:650px){.asset-library-section>summary{align-items:flex-start;flex-direction:column;gap:.2rem}}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "intent": "Source files for future rebuilding; distributable files are generated into docs only. Do not add auto-snapshots of previous masters.",
+    "historicalVersions": "Git history is the default history; retain distinct masters only when rights, reproducibility or materially different composition require them.",
+    "webMaxBytesPerImage": 512000,
+    "artifactUncompressedLimitBytes": 12582912,
+    "webMaxBytesPerSlide": 600000
+  },
+  "images": [
+    {
+      "id": "context-rich-background",
+      "master": "media/masters/context-rich-background.webp",
+      "public": "docs/assets/library/original/context-rich-background.webp",
+      "kind": "decorative-background",
+      "maxWidth": 1920,
+      "quality": 86,
+      "maxBytes": 512000,
+      "masterSha256": "089c6bd043116ee1e2b41151933b6c52b246556811980cdc5644afcf33fded56",
+      "publicSha256": "089c6bd043116ee1e2b41151933b6c52b246556811980cdc5644afcf33fded56",
+      "masterDimensions": [
+        800,
+        450
+      ],
+      "publicDimensions": [
+        800,
+        450
+      ],
+      "publicBytes": 5460,
+      "notes": "The previous source was only 800×450. It is a legacy low-resolution master, not a reconstructed high-resolution original. Replace with authentic high-resolution art when approved."
+    }
+  ]
+}

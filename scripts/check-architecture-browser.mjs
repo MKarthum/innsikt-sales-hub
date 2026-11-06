@@ -162,7 +162,8 @@ try{
  await page.evaluate(()=>location.hash='#ressurser');
  await page.locator('.asset-library-card').first().waitFor();
  assert.equal(await page.locator('.asset-library-card').count(),catalog.items.length,'Asset gallery renders all assets');
- assert.equal(await page.locator('.asset-library-section').count(),3,'Separate categories');
+ assert.equal(await page.locator('.asset-library-section').count(),catalog.presentationGroups.length,'Separated resource purposes');
+ await page.locator('.asset-library-section:not([open]) summary').evaluateAll(xs=>xs.forEach(x=>x.click()));
  // Asset gallery thumbnails are lazy-loaded. Force all images to load for an exhaustive integrity check.
  await page.locator('.asset-library-thumb img').evaluateAll(imgs=>imgs.forEach(img=>{img.loading='eager'}));
  try{

@@ -35,6 +35,7 @@ vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),sandbo
 vm.runInNewContext(fs.readFileSync('docs/assets/scene-art.js','utf8'),sandbox);
 const assets=JSON.parse(fs.readFileSync('docs/data/visual-assets.json','utf8'));
 sandbox.window.InnsiktSceneArt.validate(slide.visual.artwork,assets);
+vm.runInNewContext(fs.readFileSync('docs/assets/slide-graph.js','utf8'),sandbox);
 vm.runInNewContext(fs.readFileSync('docs/assets/slide-visuals.js','utf8'),sandbox);
 const escape=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const html=sandbox.window.InnsiktSlideVisuals.render(slide,escape,{index:0,total:1,showNumbers:false,assets});
@@ -44,8 +45,23 @@ for(const token of [slide.title,slide.visual.contextLabel,...slide.visual.consum
 }
 assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[]).length,7);
 assert.equal((html.match(/class="cp-cycle-arrow"/g)||[]).length,2,'Both bottom process arrows are native SVG');
-assert.ok(html.includes('class="cp-feedback-return"'),'Native return connection exists');
-assert.ok(html.includes('class="cp-action-link"'),'Sources and operating loop must be visibly connected');
+assert.ok(html.includes('class="cp-graph-overlay cp-feedback-return"'),'Native return connection exists');
+assert.ok(html.includes('class="cp-action-link"'),'Grid spacer is retained');
+assert.equal((html.match(/data-edge-id="/g)||[]).length,10,'Exactly ten data-driven relations');
+assert.ok(html.includes('data-from="sources:1" data-to="context"'),'Operational sources feed the context');
+assert.ok(html.includes('data-from="context" data-to="consumers:2"'),'Agents consume shared context');
+assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'Feedback must return into context');
+assert.ok(!html.includes('cp-feedback-track'),'The old hard-coded reverse-loop must not survive');
+assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
+const wrongDirection=JSON.parse(JSON.stringify(slide.visual.graph));
+wrongDirection.edges.find(e=>e.id==='systems-context').from='context';
+wrongDirection.edges.find(e=>e.id==='systems-context').to='sources:1';
+assert.throws(()=>sandbox.window.InnsiktSlideGraph.validate(wrongDirection,slide.visual),
+ 'A reversed arrow must fail every rendering style');
+const hiddenExtra=JSON.parse(JSON.stringify(slide.visual.graph));
+hiddenExtra.edges.push({id:'hidden-edge',from:'context',to:'sources:0',relation:'provides'});
+assert.throws(()=>sandbox.window.InnsiktSlideGraph.validate(hiddenExtra,slide.visual),
+ 'An edge that the renderer cannot draw must fail validation');
 assert.equal((html.match(/class="cp-outcome"/g)||[]).length,3);
 
 assert.ok(html.includes('data-scene-object="flag"'),'Focal object is independently addressable');

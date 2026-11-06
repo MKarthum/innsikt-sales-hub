@@ -594,9 +594,10 @@ function libraryTabs(which){
 function resourceLibraryPage(){
  const ui=D.pages.resourceLibraryUi,catalog=D.visualAssets,profiles=D.architectureProfiles;
  return hdr(ui.eyebrow,ui.title,ui.intro)+libraryTabs('assets')
-  +catalog.groups.map(g=>{
-   const items=catalog.items.filter(a=>a.category===g.id);
-   return '<section class="asset-library-section"><h2>'+esc(g.label)+' · '+items.length+'</h2>'
+  +catalog.presentationGroups.map(g=>{
+   const items=catalog.items.filter(a=>a.purpose===g.id);
+   return '<details class="asset-library-section"'+(g.id==='background'?' open':'')+'>'
+    +'<summary><strong>'+esc(g.label)+' · '+items.length+'</strong><small>'+esc(g.help)+'</small></summary>'
     +'<div class="asset-library-grid">'+items.map(a=>{
      const used=window.InnsiktAssets.usedBy(a.id,profiles,D.slides);
      const label=used.length?used.map(s=>'<a href="#lysbilder/'+esc(s.id)+'">'+esc(s.title)+'</a>').join(', '):'—';
@@ -608,7 +609,7 @@ function resourceLibraryPage(){
        +'<small>'+esc(ui.used)+': '+used.length+'</small><small>'+label+'</small>'
        +(link?'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">'+esc(ui.origin)+'</a>':'')
        +'</div></article>';
-    }).join('')+'</div></section>';
+    }).join('')+'</div></details>';
   }).join('');
 }
 function singleSlideDownloadMarkup(id=''){

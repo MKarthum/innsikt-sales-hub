@@ -62,6 +62,10 @@ try{
  assert.equal(await page.locator('#library-art-mode').inputValue(),'auto');
  await page.locator('#library-art-mode').selectOption('illustrated');
  assert.equal(await platform.getAttribute('data-art-direction'),'illustrated');
+ const edgeSignature=()=>platform.locator('[data-edge-id]').evaluateAll(xs=>
+  xs.map(x=>x.dataset.from+'>'+x.dataset.to+':'+x.dataset.relation).sort());
+ const originalEdges=await edgeSignature();
+ assert.equal(originalEdges.length,10,'Ten explicit meaningful graph connections');
  assert.equal(await platform.locator('.scene-art-object--asset').count(),7,'Six simple layers and one rich image');
  assert.equal(await platform.locator('.scene-art-object--glow').count(),3);
  assert.equal(await platform.locator('.scene-art-object--beam').count(),1);
@@ -75,6 +79,7 @@ try{
  const simpleText=await platform.locator('.cp-diagram').innerText();
  await page.locator('#library-art-mode').selectOption('rich');
  assert.equal(await platform.getAttribute('data-art-direction'),'rich');
+ assert.deepEqual(await edgeSignature(),originalEdges,'Rich skin must use exactly the same graph');
  assert.equal(await platform.locator('.cp-cycle-arrow').count(),2,'Both lower process arrows must be present');
  assert.equal(await platform.locator('.cp-feedback-return').count(),1,'Closed feedback path is present');
  const image=platform.locator('[data-scene-object="rich-mountain-background"] img');
@@ -86,6 +91,7 @@ try{
 
  await page.locator('#library-art-mode').selectOption('cinematic');
  assert.equal(await platform.getAttribute('data-art-direction'),'cinematic');
+ assert.deepEqual(await edgeSignature(),originalEdges,'Composite skin must use exactly the same graph');
  assert.equal(await platform.locator('[data-scene-shape="orbit"]').count(),1,'Filmically luminous ring is separately modeled');
  assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Art direction never changes the meaning');
  const cinematicScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-cinematic.png'});

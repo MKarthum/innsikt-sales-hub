@@ -2020,7 +2020,72 @@
             "assetId": "support-observe"
           }
         ],
-        "preferredArtDirection": "cinematic"
+        "preferredArtDirection": "cinematic",
+        "graph": {
+          "version": 1,
+          "edges": [
+            {
+              "id": "context-people",
+              "from": "context",
+              "to": "consumers:0",
+              "relation": "provides"
+            },
+            {
+              "id": "context-applications",
+              "from": "context",
+              "to": "consumers:1",
+              "relation": "provides"
+            },
+            {
+              "id": "context-agents",
+              "from": "context",
+              "to": "consumers:2",
+              "relation": "provides"
+            },
+            {
+              "id": "data-context",
+              "from": "sources:0",
+              "to": "context",
+              "relation": "informs"
+            },
+            {
+              "id": "systems-context",
+              "from": "sources:1",
+              "to": "context",
+              "relation": "informs"
+            },
+            {
+              "id": "external-context",
+              "from": "sources:2",
+              "to": "context",
+              "relation": "informs"
+            },
+            {
+              "id": "context-decision",
+              "from": "context",
+              "to": "cycle:0",
+              "relation": "supports"
+            },
+            {
+              "id": "decision-action",
+              "from": "cycle:0",
+              "to": "cycle:1",
+              "relation": "advances"
+            },
+            {
+              "id": "action-update",
+              "from": "cycle:1",
+              "to": "cycle:2",
+              "relation": "advances"
+            },
+            {
+              "id": "updated-context",
+              "from": "cycle:2",
+              "to": "context",
+              "relation": "updates"
+            }
+          ]
+        }
       },
       "design": {
         "archetype": "blueprint",

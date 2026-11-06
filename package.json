@@ -6,7 +6,10 @@
   "scripts": {
     "check": "node scripts/check.mjs",
     "check:browser": "node scripts/check-prompt-browser.mjs && node scripts/check-browser.mjs",
-    "build:slide-download": "esbuild scripts/slide-download-entry.mjs --bundle --format=esm --platform=browser --target=es2020 --minify --legal-comments=eof --outfile=docs/assets/slide-download.js"
+    "build:slide-download": "esbuild scripts/slide-download-entry.mjs --bundle --format=esm --platform=browser --target=es2020 --minify --legal-comments=eof --outfile=docs/assets/slide-download.js",
+    "build:media": "python3 scripts/rebuild-media.py --rebuild",
+    "check:media": "node scripts/check-media-assets.mjs",
+    "build:artifact": "node scripts/package-artifact.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.25.12",

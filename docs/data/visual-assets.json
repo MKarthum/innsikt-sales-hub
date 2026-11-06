@@ -24,7 +24,8 @@
       "rights": "trademark; vendor-defined diagram/educational-use terms",
       "termsUrl": "https://www.snowflake.com/brand-guidelines/",
       "notes": "Bruk som identifikasjon; behold originalfarger og klaring",
-      "sha256": "7e536ef4af002f93f226783cfa475f69e84e9c5b2629507752d23c37aad377e2"
+      "sha256": "7e536ef4af002f93f226783cfa475f69e84e9c5b2629507752d23c37aad377e2",
+      "purpose": "logo"
     },
     {
       "id": "fabric",
@@ -35,7 +36,8 @@
       "rights": "trademark; vendor-defined diagram/educational-use terms",
       "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
       "notes": "Bare arkitektur og opplæring; ingen endringer eller Microsoft-tilknytning",
-      "sha256": "ef80d2edbfc1b045241d2e9550b7930b648d8018e0274116a3df6d6ccf3adbf9"
+      "sha256": "ef80d2edbfc1b045241d2e9550b7930b648d8018e0274116a3df6d6ccf3adbf9",
+      "purpose": "logo"
     },
     {
       "id": "databricks",
@@ -46,7 +48,8 @@
       "rights": "trademark; vendor-defined diagram/educational-use terms",
       "termsUrl": "https://brand.databricks.com/databricks-brand-guidelines/welcome",
       "notes": "Behold originalfarger, proporsjoner og klaring",
-      "sha256": "a28fb11ba8d98ca3138591391ab62c62071d8e0ae2cd5a44b216e9790a42d45a"
+      "sha256": "a28fb11ba8d98ca3138591391ab62c62071d8e0ae2cd5a44b216e9790a42d45a",
+      "purpose": "logo"
     },
     {
       "id": "dbt",
@@ -57,7 +60,8 @@
       "rights": "trademark; vendor-defined diagram/educational-use terms",
       "termsUrl": "https://www.getdbt.com/dbt-assets/dbt-trademark-guidelines",
       "notes": "Logo i stack-sammenheng; vis ved siden av andre logoer og oppgi at dbt Labs ikke er tilknyttet",
-      "sha256": "f050a309c3458f4f94c517a5eb9bb4ed58680c3ddcb51c1e3e8e773fe9c5e116"
+      "sha256": "f050a309c3458f4f94c517a5eb9bb4ed58680c3ddcb51c1e3e8e773fe9c5e116",
+      "purpose": "logo"
     },
     {
       "id": "power-bi",
@@ -68,7 +72,8 @@
       "rights": "trademark; vendor-defined diagram/educational-use terms",
       "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
       "notes": "Bare arkitektur og opplæring; logo skal ikke endres",
-      "sha256": "264abad01f50acaffb697b3ede22215b7d87f387c1af92f0a0b14117d2c2e4f1"
+      "sha256": "264abad01f50acaffb697b3ede22215b7d87f387c1af92f0a0b14117d2c2e4f1",
+      "purpose": "logo"
     },
     {
       "id": "data-factory",
@@ -79,7 +84,8 @@
       "rights": "trademark; vendor-defined diagram/educational-use terms",
       "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
       "notes": "Bare arkitektur og opplæring; logo skal ikke endres",
-      "sha256": "40d52c473c9d79d5e3e7d3219660b64704661f673cec805cf17d1d2d9cb503d4"
+      "sha256": "40d52c473c9d79d5e3e7d3219660b64704661f673cec805cf17d1d2d9cb503d4",
+      "purpose": "logo"
     },
     {
       "id": "source-erp",
@@ -88,7 +94,8 @@
       "path": "assets/library/original/source-erp.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "fb1e558f4445238969c2270c03b408155639875c2ee6775340a41aba56df0349"
+      "sha256": "fb1e558f4445238969c2270c03b408155639875c2ee6775340a41aba56df0349",
+      "purpose": "icon"
     },
     {
       "id": "source-crm",
@@ -97,7 +104,8 @@
       "path": "assets/library/original/source-crm.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "7dd60871ff123bbddb9e8c5f3a030c23276bb4dbd3a5d58c1e16df14e0e7b181"
+      "sha256": "7dd60871ff123bbddb9e8c5f3a030c23276bb4dbd3a5d58c1e16df14e0e7b181",
+      "purpose": "icon"
     },
     {
       "id": "source-stream",
@@ -106,7 +114,8 @@
       "path": "assets/library/original/source-stream.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "86db0416adeaf11acb14caf6a7ffbe09ef458d869488886d36a94b239b0dfe80"
+      "sha256": "86db0416adeaf11acb14caf6a7ffbe09ef458d869488886d36a94b239b0dfe80",
+      "purpose": "icon"
     },
     {
       "id": "source-api",
@@ -115,7 +124,8 @@
       "path": "assets/library/original/source-api.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "3c906657bfe337274983343985d526e775aff0ef249055f348aa9e1df72db209"
+      "sha256": "3c906657bfe337274983343985d526e775aff0ef249055f348aa9e1df72db209",
+      "purpose": "icon"
     },
     {
       "id": "source-files",
@@ -124,7 +134,8 @@
       "path": "assets/library/original/source-files.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "fe92003794e1c16d5e4710f6b546eef1601e860845826a8b331fedb92dafbcb0"
+      "sha256": "fe92003794e1c16d5e4710f6b546eef1601e860845826a8b331fedb92dafbcb0",
+      "purpose": "icon"
     },
     {
       "id": "consume-report",
@@ -133,7 +144,8 @@
       "path": "assets/library/original/consume-report.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "1a71f4740b7dd7e50dc81fdece9584406e13c7cdbc19010ae5038cf926a5426e"
+      "sha256": "1a71f4740b7dd7e50dc81fdece9584406e13c7cdbc19010ae5038cf926a5426e",
+      "purpose": "icon"
     },
     {
       "id": "consume-ai",
@@ -142,7 +154,8 @@
       "path": "assets/library/original/consume-ai.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "779de85ad6b86ab2f15e4442f2b8358f893d063cbcec4882fe05b6ae41f660d8"
+      "sha256": "779de85ad6b86ab2f15e4442f2b8358f893d063cbcec4882fe05b6ae41f660d8",
+      "purpose": "icon"
     },
     {
       "id": "consume-app",
@@ -151,7 +164,8 @@
       "path": "assets/library/original/consume-app.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "fde624ea470daea3f65881de2b910589563330a7d0420d6f09db2558e3299af3"
+      "sha256": "fde624ea470daea3f65881de2b910589563330a7d0420d6f09db2558e3299af3",
+      "purpose": "icon"
     },
     {
       "id": "support-security",
@@ -160,7 +174,8 @@
       "path": "assets/library/original/support-security.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "1d4c949cd31e39faec58d0d762a4a82a8217475801cfe353c476c56dbcd8d872"
+      "sha256": "1d4c949cd31e39faec58d0d762a4a82a8217475801cfe353c476c56dbcd8d872",
+      "purpose": "icon"
     },
     {
       "id": "support-observe",
@@ -169,7 +184,8 @@
       "path": "assets/library/original/support-observe.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "8936e217180670c99f78cabeba748adc4f820842d4e67e80095b4fe60aa6e2e9"
+      "sha256": "8936e217180670c99f78cabeba748adc4f820842d4e67e80095b4fe60aa6e2e9",
+      "purpose": "icon"
     },
     {
       "id": "support-catalog",
@@ -178,7 +194,8 @@
       "path": "assets/library/original/support-catalog.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "fea7a764584b63080719e733839d3eddb0f2082f3f8eb9c6f05eb1acf8581013"
+      "sha256": "fea7a764584b63080719e733839d3eddb0f2082f3f8eb9c6f05eb1acf8581013",
+      "purpose": "icon"
     },
     {
       "id": "support-jobs",
@@ -187,7 +204,8 @@
       "path": "assets/library/original/support-jobs.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "69ca9320aae5b8f8e7768b366932a07bd2182ee5f125d8ce455975e532b4f79b"
+      "sha256": "69ca9320aae5b8f8e7768b366932a07bd2182ee5f125d8ce455975e532b4f79b",
+      "purpose": "icon"
     },
     {
       "id": "support-code",
@@ -196,7 +214,8 @@
       "path": "assets/library/original/support-code.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "76ede3f7ed9da764be139a9e5d552cef11a289f08fcc0399911de760fd87b591"
+      "sha256": "76ede3f7ed9da764be139a9e5d552cef11a289f08fcc0399911de760fd87b591",
+      "purpose": "icon"
     },
     {
       "id": "core-storage",
@@ -205,7 +224,8 @@
       "path": "assets/library/original/core-storage.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "233e14766bae0d5809cdbda69ce4ca4fe888bb1143441aed99a6e4983f0f8669"
+      "sha256": "233e14766bae0d5809cdbda69ce4ca4fe888bb1143441aed99a6e4983f0f8669",
+      "purpose": "icon"
     },
     {
       "id": "core-transform",
@@ -214,7 +234,8 @@
       "path": "assets/library/original/core-transform.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original, self-maintained SVG. Change here to update all consumers.",
-      "sha256": "6a9cf93085b984df9eb7c92b765810f4e4bf050e98c508004090df1e2009e738"
+      "sha256": "6a9cf93085b984df9eb7c92b765810f4e4bf050e98c508004090df1e2009e738",
+      "purpose": "icon"
     },
     {
       "id": "tabler-database",
@@ -226,7 +247,8 @@
       "termsUrl": "https://github.com/tabler/tabler-icons/blob/main/LICENSE",
       "notes": "MIT licensed; do not describe as copyright-free.",
       "sha256": "7cdcca11c1555d48e19c2fcd2fce4420cbec734f3fa3d28274f8167a796ee0d6",
-      "rights": "MIT-lisensiert illustrasjon – kreditér opphav og bevar lisensen"
+      "rights": "MIT-lisensiert illustrasjon – kreditér opphav og bevar lisensen",
+      "purpose": "icon"
     },
     {
       "id": "fabric-onelake",
@@ -237,7 +259,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "23fe33bcc61e703f655ac98753512a780bc2ff71d157d6c25682841ed9b6a825"
+      "sha256": "23fe33bcc61e703f655ac98753512a780bc2ff71d157d6c25682841ed9b6a825",
+      "purpose": "logo"
     },
     {
       "id": "fabric-rti",
@@ -248,7 +271,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "c6aaaf246fb0a611339e9317789d413183267a412f94f7a6fdc8c09c435334fb"
+      "sha256": "c6aaaf246fb0a611339e9317789d413183267a412f94f7a6fdc8c09c435334fb",
+      "purpose": "logo"
     },
     {
       "id": "fabric-warehouse",
@@ -259,7 +283,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://learn.microsoft.com/en-us/fabric/fundamentals/icons",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "738fe66a28684cc58e9c5e211e04774e037cababaef4704f17af136cb5f1edff"
+      "sha256": "738fe66a28684cc58e9c5e211e04774e037cababaef4704f17af136cb5f1edff",
+      "purpose": "logo"
     },
     {
       "id": "streamlit",
@@ -270,7 +295,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://streamlit.io/brand",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "6470810ccb123fd5e4d22ec2a351de7ff79e831645be563fc4a3fb60f05a66b8"
+      "sha256": "6470810ccb123fd5e4d22ec2a351de7ff79e831645be563fc4a3fb60f05a66b8",
+      "purpose": "logo"
     },
     {
       "id": "db-lakeflow",
@@ -281,7 +307,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://www.databricks.com/",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "0da4ab13021c0e807d69d0cf0995aba96767af1409dfd2c34eb112306d3fdf92"
+      "sha256": "0da4ab13021c0e807d69d0cf0995aba96767af1409dfd2c34eb112306d3fdf92",
+      "purpose": "logo"
     },
     {
       "id": "db-unity-catalog",
@@ -292,7 +319,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://www.databricks.com/",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "73ddeca1fe34a22aff33dad0fa3da8c35f17841715db4fe9e9f218e29fad7f0b"
+      "sha256": "73ddeca1fe34a22aff33dad0fa3da8c35f17841715db4fe9e9f218e29fad7f0b",
+      "purpose": "logo"
     },
     {
       "id": "db-mosaic-ai",
@@ -303,7 +331,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://www.databricks.com/",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "22178f022ef601b44f9415d172209d317e8cb361d076451ed5a802e0ebce7553"
+      "sha256": "22178f022ef601b44f9415d172209d317e8cb361d076451ed5a802e0ebce7553",
+      "purpose": "logo"
     },
     {
       "id": "db-genie",
@@ -314,7 +343,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://www.databricks.com/",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "907a2543cf2831421de1bfb19f4afb392d98527c90b9ee7b66d900b7c63db832"
+      "sha256": "907a2543cf2831421de1bfb19f4afb392d98527c90b9ee7b66d900b7c63db832",
+      "purpose": "logo"
     },
     {
       "id": "db-delta-lake",
@@ -325,7 +355,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://www.databricks.com/",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "40dbf63766892f7a46fb99987363b1fb3af04c8f51c4b3b88aaa0b69b6f5fc52"
+      "sha256": "40dbf63766892f7a46fb99987363b1fb3af04c8f51c4b3b88aaa0b69b6f5fc52",
+      "purpose": "logo"
     },
     {
       "id": "db-mlflow",
@@ -336,7 +367,8 @@
       "rights": "trademark; vendor-approved reference diagram or educational use only",
       "termsUrl": "https://www.databricks.com/",
       "notes": "Offisiell uendret produktillustrasjon; på hvit flate, ingen tilknytning implisert",
-      "sha256": "0071359e3ffa197a94604f087fbc8a5fa547723fb0962f581f1682c7b49f0a24"
+      "sha256": "0071359e3ffa197a94604f087fbc8a5fa547723fb0962f581f1682c7b49f0a24",
+      "purpose": "logo"
     },
     {
       "id": "market-signal",
@@ -345,7 +377,8 @@
       "path": "assets/library/original/market-signal.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "77b7e29afab428ed96ca07de1f58995e929447ae0ae0bfbda044c722ccce432f"
+      "sha256": "77b7e29afab428ed96ca07de1f58995e929447ae0ae0bfbda044c722ccce432f",
+      "purpose": "icon"
     },
     {
       "id": "business-decision",
@@ -354,7 +387,8 @@
       "path": "assets/library/original/business-decision.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "314bdd8dfded69589313f1f20d24c403fb52bcdb1807236a4a7b6c066e2a30b6"
+      "sha256": "314bdd8dfded69589313f1f20d24c403fb52bcdb1807236a4a7b6c066e2a30b6",
+      "purpose": "icon"
     },
     {
       "id": "data-semantic",
@@ -363,7 +397,8 @@
       "path": "assets/library/original/data-semantic.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "e89a1b60d60a50516b435508c81bde5a44d7527330b04790beb9dd00001af68c"
+      "sha256": "e89a1b60d60a50516b435508c81bde5a44d7527330b04790beb9dd00001af68c",
+      "purpose": "icon"
     },
     {
       "id": "ai-agent",
@@ -372,7 +407,8 @@
       "path": "assets/library/original/ai-agent.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "8e0355c87b740c0d1c2685d3e7a083daf0581088b1508ba937222ef1fec4037b"
+      "sha256": "8e0355c87b740c0d1c2685d3e7a083daf0581088b1508ba937222ef1fec4037b",
+      "purpose": "icon"
     },
     {
       "id": "governance-shield",
@@ -381,7 +417,8 @@
       "path": "assets/library/original/governance-shield.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "1d4c949cd31e39faec58d0d762a4a82a8217475801cfe353c476c56dbcd8d872"
+      "sha256": "1d4c949cd31e39faec58d0d762a4a82a8217475801cfe353c476c56dbcd8d872",
+      "purpose": "icon"
     },
     {
       "id": "value-compass",
@@ -390,7 +427,8 @@
       "path": "assets/library/original/value-compass.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "9cac203c96e95a63664d34bffae44d21eae7bc4dc4f4996ee65a62919db1a07b"
+      "sha256": "9cac203c96e95a63664d34bffae44d21eae7bc4dc4f4996ee65a62919db1a07b",
+      "purpose": "icon"
     },
     {
       "id": "customer-dialogue",
@@ -399,7 +437,8 @@
       "path": "assets/library/original/customer-dialogue.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "bb8a2d300e74ccf65bafcadab3aeeb570959c4d8997f42dd6138da537018be8b"
+      "sha256": "bb8a2d300e74ccf65bafcadab3aeeb570959c4d8997f42dd6138da537018be8b",
+      "purpose": "icon"
     },
     {
       "id": "delivery-loop",
@@ -408,7 +447,8 @@
       "path": "assets/library/original/delivery-loop.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "4e531a0d5ac11b4702d5051856ff8e32d0a3981a02a10cc2010915769ec55845"
+      "sha256": "4e531a0d5ac11b4702d5051856ff8e32d0a3981a02a10cc2010915769ec55845",
+      "purpose": "icon"
     },
     {
       "id": "product-map",
@@ -417,7 +457,8 @@
       "path": "assets/library/original/product-map.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "39bbf35de91a9ea0cde3e16ff56c877540594608f6816630ac49218e5b128388"
+      "sha256": "39bbf35de91a9ea0cde3e16ff56c877540594608f6816630ac49218e5b128388",
+      "purpose": "icon"
     },
     {
       "id": "verified-analysis",
@@ -426,7 +467,8 @@
       "path": "assets/library/original/verified-analysis.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original SVG, kan oppdateres ett sted og brukes i flere scener",
-      "sha256": "84617457512591b8bea0ef0aafcdc7ac60526a41a623ebbcc50d6e7853cab2fe"
+      "sha256": "84617457512591b8bea0ef0aafcdc7ac60526a41a623ebbcc50d6e7853cab2fe",
+      "purpose": "icon"
     },
     {
       "id": "context-atmosphere",
@@ -435,7 +477,8 @@
       "path": "assets/library/original/context-atmosphere.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
-      "sha256": "0cceb6d97192c173dcff7e9aab3c46a19e01f40b3ff13a7016785962dad8e997"
+      "sha256": "0cceb6d97192c173dcff7e9aab3c46a19e01f40b3ff13a7016785962dad8e997",
+      "purpose": "illustration"
     },
     {
       "id": "context-ridges",
@@ -444,7 +487,8 @@
       "path": "assets/library/original/context-ridges.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
-      "sha256": "f81b57b69a1747f30b1817f0ae02c4837368482c0aab3e047231a0dae6a9d38a"
+      "sha256": "f81b57b69a1747f30b1817f0ae02c4837368482c0aab3e047231a0dae6a9d38a",
+      "purpose": "illustration"
     },
     {
       "id": "context-summit",
@@ -453,7 +497,8 @@
       "path": "assets/library/original/context-summit.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
-      "sha256": "5535279d571bfc9497d33b67e8d7ad5d4bd5a351435370a842815b307e07206f"
+      "sha256": "5535279d571bfc9497d33b67e8d7ad5d4bd5a351435370a842815b307e07206f",
+      "purpose": "illustration"
     },
     {
       "id": "context-path",
@@ -462,7 +507,8 @@
       "path": "assets/library/original/context-path.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
-      "sha256": "a831552afa3bef0a7320985dfcaee3f097ecedfc943969dcea22f6b0b458c93e"
+      "sha256": "a831552afa3bef0a7320985dfcaee3f097ecedfc943969dcea22f6b0b458c93e",
+      "purpose": "illustration"
     },
     {
       "id": "context-forest",
@@ -471,7 +517,8 @@
       "path": "assets/library/original/context-forest.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
-      "sha256": "1c6829711ee721f70891cd54d08d9ebfdaaf1901090343d4402998bf2fd50554"
+      "sha256": "1c6829711ee721f70891cd54d08d9ebfdaaf1901090343d4402998bf2fd50554",
+      "purpose": "illustration"
     },
     {
       "id": "context-flag",
@@ -480,7 +527,8 @@
       "path": "assets/library/original/context-flag.svg",
       "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
       "notes": "Original selvstendig sceneillustrasjon i detaljert landskap; kan oppdateres eller byttes uten a endre faginnhold.",
-      "sha256": "6292cce0031409f33c4d30dd00fb33b7ed8a5f6d4e41f8fd5289c0647da3a845"
+      "sha256": "6292cce0031409f33c4d30dd00fb33b7ed8a5f6d4e41f8fd5289c0647da3a845",
+      "purpose": "illustration"
     },
     {
       "id": "context-rich-background",
@@ -489,7 +537,30 @@
       "path": "assets/library/original/context-rich-background.webp",
       "rights": "KI-generert landskapsmotiv, bearbeidet til et separat bildeobjekt uten fagtekst.",
       "notes": "Separat KI-generert landskapsressurs, bearbeidet uten fagtekst, 800×450 WebP. Rik illustrasjon; kan byttes uavhengig av diagram, piler og øvrig innhold.",
-      "sha256": "089c6bd043116ee1e2b41151933b6c52b246556811980cdc5644afcf33fded56"
+      "sha256": "089c6bd043116ee1e2b41151933b6c52b246556811980cdc5644afcf33fded56",
+      "purpose": "background"
+    }
+  ],
+  "presentationGroups": [
+    {
+      "id": "background",
+      "label": "Bakgrunner",
+      "help": "Optimaliserte bilder som lastes i lysbildene"
+    },
+    {
+      "id": "illustration",
+      "label": "Illustrasjoner og grafiske elementer",
+      "help": "Dekorative vektorillustrasjoner og scenografi"
+    },
+    {
+      "id": "icon",
+      "label": "Ikoner og symboler",
+      "help": "Små, gjenbrukbare figurer for faglig innhold"
+    },
+    {
+      "id": "logo",
+      "label": "Leverandørlogoer",
+      "help": "Varemerker og identifikasjon med egne rettigheter"
     }
   ]
 }

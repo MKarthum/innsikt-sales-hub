@@ -26,10 +26,13 @@ for(const id of applicationIds)assert.ok(load('learning').diagrams.some(d=>d.id=
 
 assert.equal(assets.schemaVersion,1);
 assert.equal(profiles.schemaVersion,1);
+const catalogPurposes=new Set(assets.presentationGroups.map(g=>g.id));
 const ids=new Set();
 for(const a of assets.items){
  assert.ok(!ids.has(a.id),'Duplicated asset '+a.id);ids.add(a.id);
  assert.ok(['vendor-logo','original-figure','licensed-external'].includes(a.category));
+ assert.ok(catalogPurposes.has(a.purpose),'Asset must have a presentation purpose');
+ if(a.purpose==='logo')assert.equal(a.category,'vendor-logo','Only approved vendor assets are shown as logo');
  assert.match(a.path,/^assets\/library\/(vendor|external|original)\/[a-z0-9-]+\.(svg|png|jpg|jpeg|webp)$/);
  assert.equal(a.path.split('/')[2],a.category==='vendor-logo'?'vendor':a.category==='original-figure'?'original':'external');
  const abs=path.join('docs',a.path);assert.ok(fs.existsSync(abs),'Missing '+abs);

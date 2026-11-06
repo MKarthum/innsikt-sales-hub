@@ -209,3 +209,16 @@ Enkeltlysbilde-eksport konverterer lokale rasterressurser til PNG-data i en midl
 Filmisk stil kan gjengi et nytt deklarativt formobjekt, orbit. Det er plassert i artwork-data og representerer kun en dekorativ, lysende ring. En mottaker kan rendere dette med sitt eget visuelle system eller utelate objektet helt. Det faglige diagrammet er det samme. Filmisk variant bruker også andre glassflater, en elliptisk kontekstflate og et samlet verdipanel, mens alle faglige tekst- og relasjonsobjekter fortsatt er native HTML/SVG.
 
 Nettlesertesten sammenligner faktiske skjermbilder mellom rik og filmisk stil. Dermed er filmisk modus ikke bare et ekstra valg som tilfeldigvis rendrer identisk.
+
+
+## Felles faglige relasjoner og kildebildelagring (v0.18.66)
+
+Benchmarksliden har et kanonisk relasjonskart under visual.graph.edges i slides.json:
+fra/til-node, stabil relasjons-ID og relasjonsrolle. Felles modul slide-graph.js validerer noder og bygger SVG-baner og pilhoder.
+Stilene endrer aldri retningen, og ingen faglige piler tegnes i et bakgrunnsbilde.
+Tilbakekoblingen går fra oppdatert kontekst tilbake til virksomhetskontekst, mens datakildene peker inn mot konteksten og konteksten mot brukerne.
+Eksport av lysbildet serialiserer de samme SVG-pilene som nettsiden.
+
+Se media/README.md for arkiverte masterfiler, gjenskapbar WebP-publisering, budsjett, URL-skille og regler for historiske bilder.
+Kun kilder med et konkret formål beholdes som separate arkivobjekter; normal filhistorikk dekkes av Git.
+En brukerkopi kan legge på logo via CSS-variabler over scenen uten at bakgrunnsbildet regenereres.
