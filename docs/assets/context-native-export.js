@@ -11,7 +11,15 @@ const styleFields=[
 
 async function snapshotNativeSvg(source){
  const cloned=source.cloneNode(true);
- const originals=[source,...source.querySelectorAll('*')];
+ // Raster photos embedded in a serialized SVG may be silently omitted by
+ // browser image decoders. Composite the verified PNG directly on canvas.
+ const photo=source.querySelector('image[data-photo-role="landscape"]');
+ const raster=photo?.getAttribute('href');
+ if(!raster?.startsWith('data:image/png;base64,'))
+  throw Error('Fjellbakgrunnen er ikke bygget inn som PNG');
+ const photoOpacity=Number(getComputedStyle(photo).opacity)||1;
+ cloned.querySelector('image[data-photo-role="landscape"]')?.remove();
+ const originals=[source,...source.querySelectorAll('*')].filter(el=>el!==photo);
  const copies=[cloned,...cloned.querySelectorAll('*')];
  if(originals.length!==copies.length)throw Error('SVG-kopien er ufullstendig');
  originals.forEach((item,index)=>{
@@ -42,6 +50,13 @@ async function snapshotNativeSvg(source){
   canvas.width=1920;canvas.height=1080;
   const context=canvas.getContext('2d');
   if(!context)throw Error('Ingen canvas-kontekst tilgjengelig');
+  const background=new Image();background.src=raster;
+  await background.decode();
+  if(background.naturalWidth<1||background.naturalHeight<1)
+   throw Error('Kunne ikke dekode fjellbildet');
+  context.globalAlpha=photoOpacity;
+  context.drawImage(background,0,0,1920,1080);
+  context.globalAlpha=1;
   context.drawImage(image,0,0,1920,1080);
   return canvas.toDataURL('image/png');
  }finally{URL.revokeObjectURL(objectUrl);}

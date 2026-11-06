@@ -59,8 +59,8 @@ function graphEdges(v,esc){
   const x=[270,607,944][i];
   a+=pathFor('sources:'+i,'context','M'+x+' 627V586','cpn-arrow cpn-arrow--supply');
  }
- a+=pathFor('context','cycle:0','M102 493H79Q63 493 63 509V784Q63 800 79 800H202','cpn-arrow cpn-arrow--loop');
- a+=pathFor('cycle:2','context','M1070 800H1168Q1184 800 1184 784V509Q1184 493 1168 493H1145','cpn-arrow cpn-arrow--loop');
+ a+=pathFor('context','cycle:0','M128 566C64 597 66 711 126 766Q153 797 204 800','cpn-arrow cpn-arrow--loop');
+ a+=pathFor('cycle:2','context','M1080 800C1209 779 1213 652 1150 563','cpn-arrow cpn-arrow--loop');
  a+=pathFor('cycle:0','cycle:1','M430 800H495','cpn-arrow cpn-arrow--cycle');
  a+=pathFor('cycle:1','cycle:2','M767 800H833','cpn-arrow cpn-arrow--cycle');
  return a;
@@ -73,7 +73,7 @@ function nativeSvg(slide,v,assets,esc){
  const header='<g class="cpn-header"><path d="M68 58H103" class="cpn-dash"/>'
   +txt(124,65,'DATAARKITEKTUR · FREMTIDSBILDE','cpn-kicker',esc)
   +txt(67,143,slide.title,'cpn-main-title',esc)
-  +txt(682,143,v.period,'cpn-period',esc)
+  +txt(920,143,v.period,'cpn-period',esc)
   +'</g>';
  const cards=(list,y,baseIcon,group)=>{
   const xs=[105,443,781],w=324;
@@ -83,7 +83,7 @@ function nativeSvg(slide,v,assets,esc){
      +panel(x,y,w,88,'cpn-panel')
      +icon(baseIcon+i,x+24,y+27)
      +txt(x+73,y+37,n.label,'cpn-card-title',esc)
-     +detail(x+73,y+61,n.detail,'cpn-card-detail',esc,29)
+     +detail(x+73,y+61,n.detail,'cpn-card-detail',esc,25)
      +'</g>';
   }).join('');
  };
@@ -146,7 +146,6 @@ function nativeSvg(slide,v,assets,esc){
   +'<filter id="cpn-soft-shadow" x="-20%" y="-35%" width="140%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#071e32" flood-opacity=".49"/></filter>'
   +marker('cpn-arrowhead')
   +'</defs>'
-  +'<rect width="1600" height="900" fill="url(#cpn-sky)"/>'
   +background
   +'<rect width="1600" height="900" fill="url(#cpn-vignette)"/>'
   +'<path d="M0 590Q170 544 310 623Q458 540 659 620Q846 518 1120 625Q1300 562 1600 619V900H0Z" class="cpn-ridge cpn-ridge--far"/>'

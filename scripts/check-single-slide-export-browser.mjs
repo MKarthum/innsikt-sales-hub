@@ -93,6 +93,8 @@ try{
  assert.equal((embedded.match(/data-scene-mode="cinematic"/g)||[]).length,4,'Independent cinematic accents remain present');
  const sceneScreenshot=await photoScene.screenshot();
  const photoPng=await download('png');
+ fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
+ fs.writeFileSync('artifacts/visual-pilot/context-platforms-native-export.png',photoPng);
  assert.equal(photoPng.readUInt32BE(16),1920);
  assert.equal(photoPng.readUInt32BE(20),1080);
  const photoComparison=await page.evaluate(async encoded=>{
