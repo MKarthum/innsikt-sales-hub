@@ -66,6 +66,14 @@ try{
   xs.map(x=>x.dataset.from+'>'+x.dataset.to+':'+x.dataset.relation).sort());
  const originalEdges=await edgeSignature();
  assert.equal(originalEdges.length,10,'Ten explicit meaningful graph connections');
+ const aligned=await platform.locator('.cp-graph-overlay g').evaluateAll(groups=>groups.every(g=>{
+  const line=g.querySelector('.cp-graph-track');
+  const head=g.querySelector('.cp-graph-arrowhead');
+  const end=line.getPointAtLength(line.getTotalLength());
+  const match=head.getAttribute('d').match(/L(-?[0-9.]+) (-?[0-9.]+)L/);
+  return !!match&&Math.abs(end.x-Number(match[1]))<.01&&Math.abs(end.y-Number(match[2]))<.01;
+ }));
+ assert.ok(aligned,'All arrow tips end precisely at their graph paths');
  assert.equal(await platform.locator('.scene-art-object--asset').count(),7,'Six simple layers and one rich image');
  assert.equal(await platform.locator('.scene-art-object--glow').count(),3);
  assert.equal(await platform.locator('.scene-art-object--beam').count(),1);

@@ -52,6 +52,10 @@ assert.ok(html.includes('data-from="sources:1" data-to="context"'),'Operational 
 assert.ok(html.includes('data-from="context" data-to="consumers:2"'),'Agents consume shared context');
 assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'Feedback must return into context');
 assert.ok(!html.includes('cp-feedback-track'),'The old hard-coded reverse-loop must not survive');
+const endRule=html.match(/data-edge-id="updated-context"[^>]*><path class="cp-graph-track" d="([^"]+)"\/><path class="cp-graph-arrowhead" d="([^"]+)"/);
+assert.ok(endRule,'Feedback connector has a path and an arrowhead');
+assert.ok(endRule[1].endsWith('L970 300'),'Feedback route must terminate at the context edge');
+assert.ok(endRule[2].includes('L970 300L'),'Arrowhead tip must coincide with the route endpoint');
 assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
 const wrongDirection=JSON.parse(JSON.stringify(slide.visual.graph));
 wrongDirection.edges.find(e=>e.id==='systems-context').from='context';

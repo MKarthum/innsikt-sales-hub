@@ -48,20 +48,23 @@ const arrow=(x,y,side)=>{
 function renderCanvas(graph,slide,esc){
  validate(graph,slide);
  const paths=[];
- const add=(record,d,headX,headY,side)=>{
+ const add=(record,points,side)=>{
+  // Geometry and arrowhead have a single source of truth: the final route point.
+  const d=points.map(([x,y],i)=>(i?'L':'M')+x+' '+y).join('');
+  const [headX,headY]=points.at(-1);
   paths.push('<g data-edge-id="'+esc(record.id)+'" data-from="'+esc(record.from)+'" data-to="'+esc(record.to)+'" data-relation="'+esc(record.relation)+'">'
    +'<path class="cp-graph-track" d="'+d+'"/><path class="cp-graph-arrowhead" d="'+arrow(headX,headY,side)+'"/></g>');
  };
  for(let i=0;i<slide.consumers.length;i++){
-  const x=coord(i);add(edge(graph,'context','consumers:'+i),'M'+x+' 210V170',x,170,'up');
+  const x=coord(i);add(edge(graph,'context','consumers:'+i),[[x,210],[x,170]],'up');
  }
  for(let i=0;i<slide.sources.length;i++){
-  const x=coord(i);add(edge(graph,'sources:'+i,'context'),'M'+x+' 560V520',x,520,'up');
+  const x=coord(i);add(edge(graph,'sources:'+i,'context'),[[x,560],[x,520]],'up');
  }
  // The left outside corridor connects context to the decision, avoiding source tiles.
- add(edge(graph,'context','cycle:0'),'M 28 300H -13V 845H 96',96,845,'right');
+ add(edge(graph,'context','cycle:0'),[[28,300],[-13,300],[-13,845],[96,845]],'right');
  // The right outside corridor closes the learning loop into the shared context.
- add(edge(graph,'cycle:2','context'),'M 880 844H 988V 300H 970',970,402,'left');
+ add(edge(graph,'cycle:2','context'),[[880,844],[988,844],[988,300],[970,300]],'left');
  return '<svg class="cp-graph-overlay cp-feedback-return" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
   +paths.join('')+'</svg>';
 }
