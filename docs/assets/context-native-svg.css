@@ -95,11 +95,12 @@
  filter:drop-shadow(0 0 4px color-mix(in srgb,var(--pres-accent) 36%,transparent));
 }
 .scene-context-platforms .cp-native-svg .cpn-arrow--loop{
- stroke-width:4;stroke:color-mix(in srgb,var(--pres-accent) 66%,var(--pres-fg));opacity:.98;
+ stroke-width:3;stroke:color-mix(in srgb,var(--pres-accent) 66%,var(--pres-fg));opacity:.83;
 }
 .scene-context-platforms .cp-native-svg .cpn-arrow--cycle{stroke-width:4.2}
-.scene-context-platforms .cp-native-svg .cpn-marker-shape{
+.scene-context-platforms .cp-native-svg .cpn-arrow-tip{
  fill:color-mix(in srgb,var(--pres-accent) 74%,var(--pres-fg));
+ stroke:none;opacity:.98;
 }
 .scene-context-platforms .cp-native-svg .cpn-cycle-panel{
  fill:color-mix(in srgb,var(--pres-bg) 83%,var(--pres-accent));

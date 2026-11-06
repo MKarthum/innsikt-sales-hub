@@ -60,7 +60,7 @@ assert.ok(endRule[2].includes('L970 300L'),'Arrowhead tip must coincide with the
 assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
 assert.ok(html.includes('data-native-slide-scene="context-platforms"'),'Composite view needs one native SVG stage');
 assert.ok(html.includes('data-photo-role="landscape"'),'The mountain background must be a first-class SVG image');
-assert.equal((html.match(/class="cpn-arrow/g)||[]).length,10,'The native SVG stage uses exactly the same ten canonical relations');
+assert.equal((html.match(/class="cpn-arrow cpn-arrow--/g)||[]).length,10,'The native SVG stage uses exactly the same ten canonical relations');
 assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'The return arrow comes from the same semantic graph');
 const wrongDirection=JSON.parse(JSON.stringify(slide.visual.graph));
 wrongDirection.source=wrongDirection.source.replace('sources:1 --> context : informs [systems-context]',

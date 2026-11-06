@@ -38,31 +38,43 @@ const icon=(kind,x,y)=>{
 };
 const panel=(x,y,w,h,cls='cpn-panel',radius=20)=>
  '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+radius+'" class="'+cls+'"/>';
-const marker=(id)=>'<marker id="'+id+'" markerWidth="9" markerHeight="9" refX="8" refY="5" viewBox="0 0 10 10" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1L9 5L1 9Z" class="cpn-marker-shape"/></marker>';
-const path=(id,from,to,d,esc,cls='cpn-arrow')=>
- '<path data-edge-id="'+safe(id,esc)+'" data-from="'+safe(from,esc)+'" data-to="'+safe(to,esc)+'" d="'+d+'" class="'+cls+'" marker-end="url(#cpn-arrowhead)"/>';
+// Arrowheads are derived from the geometry of the final segment. This avoids
+// SVG marker scaling/foreignObject inconsistencies on-screen and in downloads.
+const arrowTip=(point,prior)=>{
+ const [x,y]=point,[px,py]=prior,dx=x-px,dy=y-py;
+ const len=Math.hypot(dx,dy);
+ if(len<1)throw Error('Undefined diagram arrow direction');
+ const ux=dx/len,uy=dy/len,back=[x-ux*13,y-uy*13];
+ const a=[back[0]-uy*5.5,back[1]+ux*5.5],b=[back[0]+uy*5.5,back[1]-ux*5.5];
+ const fmt=n=>Number(n.toFixed(2));
+ return 'M'+fmt(x)+' '+fmt(y)+'L'+fmt(a[0])+' '+fmt(a[1])+'L'+fmt(b[0])+' '+fmt(b[1])+'Z';
+};
+const path=(id,from,to,relation,d,point,prior,esc,cls='cpn-arrow')=>
+ '<g data-edge-id="'+safe(id,esc)+'" data-from="'+safe(from,esc)+'" data-to="'+safe(to,esc)+'" data-relation="'+safe(relation,esc)+'">'
+ +'<path d="'+d+'" class="'+cls+'"/>'
+ +'<path d="'+arrowTip(point,prior)+'" class="cpn-arrow-tip"/></g>';
 function graphEdges(v,esc){
  const graph=window.InnsiktSlideGraph.validate(v.graph,v);
  const edges=new Map(graph.edges.map(e=>[e.from+'>'+e.to,e]));
- const pathFor=(from,to,d,cls)=>{
+ const pathFor=(from,to,d,tip,tangent,cls)=>{
   const e=edges.get(from+'>'+to);
   if(!e)throw Error('Missing diagram connection '+from+' -> '+to);
-  return path(e.id,e.from,e.to,d,esc,cls);
+  return path(e.id,e.from,e.to,e.relation,d,tip,tangent,esc,cls);
  };
  let a='';
  // Anchor lines are intentionally behind panels. Rounded turns are outside nodes.
  for(let i=0;i<v.consumers.length;i++){
   const x=[270,607,944][i];
-  a+=pathFor('context','consumers:'+i,'M'+x+' 360V316','cpn-arrow cpn-arrow--supply');
+  a+=pathFor('context','consumers:'+i,'M'+x+' 360V308',[x,308],[x,330],'cpn-arrow cpn-arrow--supply');
  }
  for(let i=0;i<v.sources.length;i++){
   const x=[270,607,944][i];
-  a+=pathFor('sources:'+i,'context','M'+x+' 627V586','cpn-arrow cpn-arrow--supply');
+  a+=pathFor('sources:'+i,'context','M'+x+' 627V586',[x,586],[x,608],'cpn-arrow cpn-arrow--supply');
  }
- a+=pathFor('context','cycle:0','M128 566C64 597 66 711 126 766Q153 797 204 800','cpn-arrow cpn-arrow--loop');
- a+=pathFor('cycle:2','context','M1080 800C1209 779 1213 652 1150 563','cpn-arrow cpn-arrow--loop');
- a+=pathFor('cycle:0','cycle:1','M430 800H495','cpn-arrow cpn-arrow--cycle');
- a+=pathFor('cycle:1','cycle:2','M767 800H833','cpn-arrow cpn-arrow--cycle');
+ a+=pathFor('context','cycle:0','M128 566C64 597 66 711 126 766Q153 797 204 800',[204,800],[153,797],'cpn-arrow cpn-arrow--loop');
+ a+=pathFor('cycle:2','context','M1080 800C1209 779 1213 652 1150 563',[1150,563],[1213,652],'cpn-arrow cpn-arrow--loop');
+ a+=pathFor('cycle:0','cycle:1','M430 800H495',[495,800],[470,800],'cpn-arrow cpn-arrow--cycle');
+ a+=pathFor('cycle:1','cycle:2','M767 800H833',[833,800],[808,800],'cpn-arrow cpn-arrow--cycle');
  return a;
 }
 function nativeSvg(slide,v,assets,esc){
@@ -144,7 +156,6 @@ function nativeSvg(slide,v,assets,esc){
   +'<linearGradient id="cpn-vignette" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--pres-bg)" stop-opacity=".20"/><stop offset=".65" stop-color="var(--pres-bg)" stop-opacity=".30"/><stop offset="1" stop-color="var(--pres-bg)" stop-opacity=".10"/></linearGradient>'
   +'<filter id="cpn-halo" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="19"/></filter>'
   +'<filter id="cpn-soft-shadow" x="-20%" y="-35%" width="140%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#071e32" flood-opacity=".49"/></filter>'
-  +marker('cpn-arrowhead')
   +'</defs>'
   +background
   +'<rect width="1600" height="900" fill="url(#cpn-vignette)"/>'
