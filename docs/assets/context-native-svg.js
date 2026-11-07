@@ -39,12 +39,35 @@ const icon=(kind,x,y)=>{
   '<path d="M7 24a7 7 0 0 1-1-13 10 10 0 0 1 19 2 6 6 0 0 1 0 11Z"/>',
   '<circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="5"/><path d="M16 16L30 2M24 2h6v6"/>',
   '<rect x="4" y="5" width="24" height="22" rx="4"/><path d="M13 10l9 6-9 6z"/>',
-  '<path d="M26 12a10 10 0 0 0-18-4L5 11M5 5v6h6M6 20a10 10 0 0 0 18 4l3-3M21 21h6v6"/>'
+  '<path d="M26 12a10 10 0 0 0-18-4L5 11M5 5v6h6M6 20a10 10 0 0 0 18 4l3-3M21 21h6v6"/>',
+  // Explicit semantic pictograms, matching original 24px SVG assets.
+  '<circle cx="16" cy="9" r="4"/><circle cx="7" cy="12" r="2.8"/><circle cx="25" cy="12" r="2.8"/><path d="M8 29v-3a8 8 0 0 1 16 0v3M1 27v-3a7 7 0 0 1 7-7M31 27v-3a7 7 0 0 0-7-7"/>',
+  '<path d="M3 16h26M8 16V9M16 16v8M24 16V9"/><circle cx="8" cy="6" r="3"/><circle cx="16" cy="27" r="3"/><circle cx="24" cy="6" r="3"/>',
+  '<path d="M16 3v5M16 8L7 16M16 8l9 8M7 16v6M25 16v2"/><rect x="4" y="22" width="8" height="7" rx="2"/><path d="m21 25 3 3 6-9"/>',
+  '<rect x="12" y="3" width="17" height="26" rx="4"/><path d="M3 16h15m-5-5 5 5-5 5m6 2 3 3 5-7"/>',
+  '<ellipse cx="12" cy="7" rx="9" ry="4"/><path d="M3 7v17c0 2.5 4 4 9 4 3 0 6-.6 8-1.8V7M3 16c0 2.5 4 4 9 4 3 0 6-.6 8-1.8M26 16v12M20 22h12"/>',
+  '<rect x="5" y="3" width="22" height="26" rx="3"/><path d="M9 11h9M9 22l4-4 4 2 5-8M10 26h12"/>',
+  '<circle cx="13" cy="16" r="11"/><path d="M2 16h22M13 5c-4 6-4 16 0 22M13 5c4 6 4 16 0 22M23 9l5-5m0 0 3 3m-3-3v5"/>',
+  '<circle cx="5" cy="16" r="3"/><circle cx="16" cy="5" r="3"/><circle cx="27" cy="16" r="3"/><circle cx="16" cy="27" r="3"/><path d="M7 14L14 7M18 7l7 7M25 18l-7 7M14 25l-7-7"/>'
  ];
  const role=['dialogue','application','agent','document','window','signal','clock','check','forward','shield',
-  'database','system','cloud','decision','action','refresh'][kind];
+  'database','system','cloud','decision','action','refresh',
+  'people','timeline','choice','guarded-action','state-update','evidence','external','meaning'][kind];
  if(!role)throw Error('Missing semantic icon kind '+kind);
  return '<g class="cpn-icon" data-icon-role="'+role+'" transform="translate('+x+' '+y+')"><g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round">'+iconPaths[kind]+'</g></g>';
+};
+// Icon identity follows the canonical assetId, never its position in a row.
+const semanticIconKinds=Object.freeze({
+ 'context-people':16,'consume-app':1,'ai-agent':2,
+ 'data-semantic':23,'context-timeline':17,'governance-shield':9,
+ 'tabler-database':10,'source-erp':11,'context-external':22,
+ 'context-choice':18,'context-guarded-action':19,'context-state-update':20,
+ 'verified-analysis':13,'context-evidence':21
+});
+const iconForAsset=(assetId,x,y)=>{
+ const n=semanticIconKinds[assetId];
+ if(!Number.isInteger(n))throw Error('Icon mapping missing for '+assetId);
+ return icon(n,x,y);
 };
 const panel=(x,y,w,h,cls='cpn-panel',radius=20)=>
  '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+radius+'" class="'+cls+'"/>';
@@ -132,7 +155,7 @@ function nativeSvg(slide,v,assets,esc){
   +txt(920,143,v.period,'cpn-period',esc)
   +txt(67,177,slide.body,'cpn-subtitle',esc)
   +'</g>';
- const cards=(list,y,baseIcon,group)=>{
+ const cards=(list,y,group)=>{
   const xs=[105,443,781],w=324,cardHeight=group==='sources'?100:88;
   // One shared glass rail for consumers; sources remain separate systems.
   // Semantics are individual nodes regardless of the outer illustration.
@@ -146,13 +169,13 @@ function nativeSvg(slide,v,assets,esc){
    const x=xs[i];
    return '<g class="cpn-card cpn-card--'+group+'" data-node-id="'+group+':'+i+'">'
      +(group==='consumers'?'':panel(x,y,w,cardHeight,'cpn-panel'))
-     +icon(Array.isArray(baseIcon)?baseIcon[i]:baseIcon+i,x+24,y+27)
+     +iconForAsset(n.assetId,x+24,y+27)
      +txt(x+73,y+37,n.label,'cpn-card-title',esc)
      +detail(x+73,y+61,n.detail,'cpn-card-detail',esc,25)
      +'</g>';
   }).join('');
  };
- const people=cards(v.consumers,215,0,'consumers');
+ const people=cards(v.consumers,215,'consumers');
  const context=
  '<g class="cpn-core" data-node-id="context">'
  +'<path d="'+corePath(-8)+'" class="cpn-core-halo"/>'
@@ -164,19 +187,19 @@ function nativeSvg(slide,v,assets,esc){
    const xs=[129,455,781],x=xs[i];
    return '<g class="cpn-facet" data-node-id="facets:'+i+'">'
      +panel(x,477,310,88,'cpn-facet-panel',17)
-     +icon([3,5,9][i],x+18,497)
+     +iconForAsset(n.assetId,x+18,497)
      +txt(x+65,507,n.label,'cpn-facet-title',esc)
      +detail(x+65,529,n.detail,'cpn-facet-detail',esc,27)
      +'</g>';
  }).join('')+'</g>';
- const sources=cards(v.sources,631,[10,11,12],'sources');
+ const sources=cards(v.sources,631,'sources');
  const cycleX=[228,518,808];
  const cycle='<g class="cpn-cycle-container">'
   +panel(204,759,914,82,'cpn-cycle-panel',28)
   +v.cycle.map((n,i)=>{
     const x=cycleX[i];
     return '<g class="cpn-cycle-node" data-node-id="cycle:'+i+'">'
-      +icon([13,14,15][i],x,783)
+      +iconForAsset(n.assetId,x,783)
       +txt(x+47,790,n.label,'cpn-cycle-title',esc)
       +detail(x+47,811,n.detail,'cpn-cycle-detail',esc,28)
       +'</g>';
@@ -188,7 +211,7 @@ function nativeSvg(slide,v,assets,esc){
   +v.outcomes.map((n,i)=>{
     const y=432+i*120;
     return '<g class="cpn-outcome" data-node-id="outcomes:'+i+'">'
-      +icon([13,14,15][i],1248,y+13)
+      +iconForAsset(n.assetId,1248,y+13)
       +txt(1300,y+26,n.label,'cpn-outcome-title',esc)
       +detail(1300,y+50,n.detail,'cpn-outcome-detail',esc,28)
       +(i<2?'<path d="M1248 '+(y+93)+'H1510" class="cpn-separator"/>':'')
