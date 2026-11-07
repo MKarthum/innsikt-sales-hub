@@ -62,12 +62,12 @@ const arrow=(x,y,side)=>{
 function renderCanvas(input,slide,esc){
  const graph=validate(input,slide);
  const paths=[];
- const add=(record,points,side,curve)=>{
+ const add=(record,points,side,curve,showHead=true)=>{
   // Geometry and arrowhead have a single source of truth: the final route point.
   const d=curve||points.map(([x,y],i)=>(i?'L':'M')+x+' '+y).join('');
   const [headX,headY]=points.at(-1);
   paths.push('<g data-edge-id="'+esc(record.id)+'" data-from="'+esc(record.from)+'" data-to="'+esc(record.to)+'" data-relation="'+esc(record.relation)+'">'
-   +'<path class="cp-graph-track" d="'+d+'"/><path class="cp-graph-arrowhead" d="'+arrow(headX,headY,side)+'"/></g>');
+   +'<path class="cp-graph-track" d="'+d+'"/>'+(showHead?'<path class="cp-graph-arrowhead" d="'+arrow(headX,headY,side)+'"/>':'')+'</g>');
  };
  for(let i=0;i<slide.consumers.length;i++){
   const x=coord(i);add(edge(graph,'context','consumers:'+i),[[x,210],[x,170]],'up');
@@ -78,9 +78,9 @@ function renderCanvas(input,slide,esc){
  for(let i=0;i<slide.sources.length;i++){
   const x=coord(i);
   const d=i===1?'M500 560V520':i===0
-   ?'M167 560V544Q167 540 174 540H494Q500 540 500 533V520'
-   :'M833 560V544Q833 540 826 540H506Q500 540 500 533V520';
-  add(edge(graph,'sources:'+i,'context'),[[x,560],[500,520]],'up',d);
+   ?'M167 560V545Q167 539 174 539H500'
+   :'M833 560V545Q833 539 826 539H500';
+  add(edge(graph,'sources:'+i,'context'),[[x,560],i===1?[500,520]:[500,539]],'up',d,i===1);
  }
  // The left lane starts at the context boundary and ends at the decision rail.
  // It must not terminate on top of the first decision icon.
