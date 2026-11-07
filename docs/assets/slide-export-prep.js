@@ -48,7 +48,7 @@ export async function prepareSlideMarkupForExport(markup){
  // diagram/illustration directions. Leaving it in html-to-image's foreignObject
  // clone causes very expensive SVG serialization in WebKit, despite display:none.
  // Strip only the inactive scene from the disposable export document.
- if(scene.dataset.artDirection!=='cinematic')
+ if(!['cinematic','rich'].includes(scene.dataset.artDirection))
   scene.querySelector('svg[data-native-slide-scene]')?.remove();
  const images=[...parsed.body.querySelectorAll('img[src]')];
  const svgImages=[...parsed.body.querySelectorAll('svg image[href]')];
