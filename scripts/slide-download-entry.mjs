@@ -72,21 +72,59 @@ function freezeSvgPresentation(frame){
   }
  }
 }
+// A fully approved slide is already a precise bitmap. Rasterizing it again
+// via SVG foreignObject produces empty canvases in WebKit/Safari even when the
+// live image is displayed correctly. Composite the image and optional brand
+// overlay on native canvas instead, with no duplicate DOM serialization.
+async function approvedBitmapCanvas(frame){
+ const scene=frame.querySelector('.story-scene.scene-context-image');
+ if(!scene)return null;
+ const bitmap=scene.querySelector('img.cp-approved-image');
+ if(!bitmap||bitmap.naturalWidth<1||bitmap.naturalHeight<1)
+  throw Error('Godkjent illustrasjon mangler eller er ugyldig');
+ const canvas=document.createElement('canvas');
+ canvas.width=WIDTH*2;canvas.height=HEIGHT*2;
+ const context=canvas.getContext('2d');
+ if(!context)throw Error('Canvas er ikke tilgjengelig for bildeeksport');
+ context.drawImage(bitmap,0,0,canvas.width,canvas.height);
+ const overlay=scene.querySelector('.cp-brand-overlay');
+ if(!overlay||getComputedStyle(overlay).display==='none')return canvas;
+ const style=getComputedStyle(overlay),background=style.backgroundImage;
+ if(!background||background==='none')return canvas;
+ const match=background.match(/^url\((["']?)(.+)\1\)$/);
+ if(!match)throw Error('Organisasjonslogo har et bildeformat som ikke kan eksporteres');
+ const src=match[2];
+ const logo=new Image();
+ if(!src.startsWith('data:'))logo.crossOrigin='anonymous';
+ logo.src=src;
+ await logo.decode();
+ if(logo.naturalWidth<1||logo.naturalHeight<1)throw Error('Logo kunne ikke dekodes');
+ const bounds=overlay.getBoundingClientRect(),root=scene.getBoundingClientRect();
+ const x=(bounds.left-root.left)/root.width*canvas.width;
+ const y=(bounds.top-root.top)/root.height*canvas.height;
+ const w=bounds.width/root.width*canvas.width;
+ const h=bounds.height/root.height*canvas.height;
+ const scale=Math.min(w/logo.naturalWidth,h/logo.naturalHeight);
+ const drawW=logo.naturalWidth*scale,drawH=logo.naturalHeight*scale;
+ context.drawImage(logo,x+(w-drawW)/2,y+(h-drawH)/2,drawW,drawH);
+ return canvas;
+}
 export async function downloadSingleSlide({id,title,html,tone='light',format='png',version=''}){
  if(!formats.has(format))throw Error('Ukjent eksportformat: '+format);
  if(!/^[a-z0-9-]+$/.test(id))throw Error('Ugyldig lysbilde-ID');
  const {host,frame}=captureElement(html,tone);
  try{
   await waitForAssets(frame);
-  freezeSvgPresentation(frame);
+  const approvedCanvas=await approvedBitmapCanvas(frame);
+  if(!approvedCanvas)freezeSvgPresentation(frame);
   const opts={width:WIDTH,height:HEIGHT,pixelRatio:2,cacheBust:false,skipAutoScale:true};
   const filename='innsikt-'+id+'-'+tone+'-v'+version;
   // All formats are derived from the same static, unnumbered 16:9 rendering.
   if(format==='png'){
-   const data=await toPng(frame,opts);
+   const data=approvedCanvas?approvedCanvas.toDataURL('image/png'):await toPng(frame,opts);
    save(fromDataUrl(data),filename+'.png');return;
   }
-  const jpeg=await toJpeg(frame,{...opts,quality:.96});
+  const jpeg=approvedCanvas?approvedCanvas.toDataURL('image/jpeg',.96):await toJpeg(frame,{...opts,quality:.96});
   if(format==='jpg'){save(fromDataUrl(jpeg),filename+'.jpg');return;}
   if(format==='pdf'){
    const pdf=new jsPDF({orientation:'landscape',unit:'pt',format:[WIDTH,HEIGHT],compress:true,putOnlyUsedFonts:true});
