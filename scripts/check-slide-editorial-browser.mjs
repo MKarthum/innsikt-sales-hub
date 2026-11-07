@@ -84,7 +84,7 @@ try{
  const ex=await platform.evaluate(el=>({w:el.scrollWidth-el.clientWidth,h:el.scrollHeight-el.clientHeight}));
  assert.ok(ex.w<=3&&ex.h<=3,'Illustration stays inside slide');
  // The rich scene must have a real, separately loaded photo. No text or semantic connections may change.
- const simpleText=await platform.locator('.cp-diagram').innerText();
+ const simpleText=await platform.locator('.cp-diagram').textContent();
  await page.locator('#library-art-mode').selectOption('rich');
  assert.equal(await platform.getAttribute('data-art-direction'),'rich');
  assert.deepEqual(await edgeSignature(),originalEdges,'Rich skin must use exactly the same graph');
@@ -94,7 +94,7 @@ try{
  await image.evaluate(img=>img.decode());
  assert.equal(await image.evaluate(img=>img.naturalWidth>0),true,'Rich photo loads');
  assert.equal(await platform.locator('[data-scene-object="rich-mountain-background"]').evaluate(el=>getComputedStyle(el).display),'block');
- assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Factual text is identical in both illustration modes');
+ assert.equal(await platform.locator('.cp-diagram').textContent(),simpleText,'Factual text is identical in both illustration modes');
  const richScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-rich.png'});
 
  await page.locator('#library-art-mode').selectOption('cinematic');
@@ -110,7 +110,7 @@ try{
   const image=new Image();image.src=source;await image.decode();
  });
  assert.equal(await platform.locator('[data-scene-shape="orbit"]').count(),1,'Filmically luminous ring is separately modeled');
- assert.equal(await platform.locator('.cp-diagram').innerText(),simpleText,'Art direction never changes the meaning');
+ assert.equal(await platform.locator('.cp-diagram').textContent(),simpleText,'Art direction never changes the meaning');
  const cinematicScreenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-cinematic.png'});
  const cinematicDifference=await page.evaluate(async images=>{
   const read=async base64=>{
