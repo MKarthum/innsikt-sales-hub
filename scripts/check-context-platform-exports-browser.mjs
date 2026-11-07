@@ -87,7 +87,7 @@ try{
   const reference=await frame.screenshot();
   fs.writeFileSync(path.join(output,direction+'-screen.png'),reference);
   for(const format of types){
-   const bytes=await read(page.locator('.slide-library-detail-stage [data-slide-download="'+format+'"]'),format);
+   const bytes=await read(page.locator('.slide-single-download [data-slide-download="'+format+'"]'),format);
    fs.writeFileSync(path.join(output,direction+'.'+format),bytes);
    const bitmap=format==='pdf'?pdfImage(bytes):format==='pptx'?await pptxImage(bytes):bytes;
    const metrics=await compare(bitmap,reference,format==='png'?'image/png':'image/jpeg');
