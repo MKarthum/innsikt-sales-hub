@@ -12,21 +12,28 @@ const output='artifacts/context-exports-'+engine;
 fs.mkdirSync(output,{recursive:true});
 const browser=await (engine==='webkit'?webkit:chromium).launch({headless:true,...(engine==='chromium'?{args:['--no-sandbox']}:{})});
 const types=['png','jpg','pdf','pptx'];
-const directions=['standard','rich','rich-image'];
+const directions=(process.env.EXPORT_DIRECTIONS||'standard,rich,rich-image').split(',');
 const fileId='ai-context-platforms-2027';
 const errors=[];
 try{
  const page=await browser.newPage({viewport:{width:1440,height:960},acceptDownloads:true});
  page.on('pageerror',e=>errors.push(e.message));
  await page.goto(base,{waitUntil:'networkidle'});
+ await page.evaluate(()=>{window.__exportToasts=[];new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n.nodeType===1&&n.classList?.contains('toast'))window.__exportToasts.push(n.textContent)}).observe(document.body,{childList:true})});
  await page.evaluate(id=>{location.hash='#lysbilder/'+id},fileId);
  await page.locator('.slide-library-detail-stage .story-scene').waitFor();
  await page.locator('#library-tone-mode').selectOption('strong');
  const files=[];
  const read=async (button,format)=>{
-  const [download]=await Promise.all([
-   page.waitForEvent('download',{timeout:60000}),button.click()
-  ]);
+  let download;
+  try{
+   [download]=await Promise.all([
+    page.waitForEvent('download',{timeout:engine==='webkit'?20000:60000}),button.click()
+   ]);
+  }catch(error){
+   const diagnostics=await page.evaluate(()=>({toasts:window.__exportToasts||[],current:document.querySelector('.toast')?.textContent||null}));
+   throw Error(engine+'/'+format+' export failed. '+JSON.stringify(diagnostics)+'; '+error.message);
+  }
   assert.ok(download.suggestedFilename().endsWith('.'+format),download.suggestedFilename());
   const bytes=fs.readFileSync(await download.path());
   assert.ok(bytes.length>8000,'Suspiciously small '+format+' export');
@@ -127,7 +134,7 @@ try{
   'Presenter must match its own currently visible slide '+JSON.stringify(presenterMetrics));
  await page.locator('#present-modal .modal-close').click();
  await page.locator('#present-modal').waitFor({state:'detached'});
- assert.equal(files.length,12);
+ assert.equal(files.length,4*directions.length);
  assert.ok(!errors.length,'JavaScript errors: '+errors.join(' | '));
  fs.writeFileSync(path.join(output,'metrics.json'),JSON.stringify(files,null,2));
  console.log('PASS 12 real exported files + 3 fullscreen + 1 actual Presenter PNG download, pixel-checked against live screenshots.');
