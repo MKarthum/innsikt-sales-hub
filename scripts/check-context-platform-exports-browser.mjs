@@ -107,6 +107,34 @@ try{
    files.push({direction,format,bytes:bytes.length,metrics});
    console.log('EXPORT '+direction+'/'+format+' '+bytes.length+' bytes; meanDiff='+metrics.meanDiff.toFixed(1)+' stdDev='+metrics.stdDev.toFixed(1));
   }
+  // Brand is an independent overlay in all three modes. Turn it on in the
+  // real browser and inspect bright marker pixels in the *downloaded* PNG.
+  await page.evaluate(()=>{
+   const marker=document.createElement('canvas');
+   marker.width=120;marker.height=48;
+   const context=marker.getContext('2d');
+   context.fillStyle='#ffe100';context.fillRect(0,0,120,48);
+   context.fillStyle='#031526';context.fillRect(9,9,18,30);
+   document.documentElement.style.setProperty('--slide-brand-logo','url("'+marker.toDataURL('image/png')+'")');
+  });
+  const brandedScreen=await frame.screenshot();
+  const brandedExport=await read(page.locator('.slide-single-download [data-slide-download="png"]'),'png');
+  fs.writeFileSync(path.join(output,direction+'-with-brand.png'),brandedExport);
+  const brandedMetrics=await compare(brandedExport,brandedScreen,'image/png');
+  assert.ok(brandedMetrics.meanDiff<48,direction+' independent brand is not exported faithfully '+JSON.stringify(brandedMetrics));
+  const markerPixels=await page.evaluate(async png=>{
+   const img=new Image();img.src='data:image/png;base64,'+png;await img.decode();
+   const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
+   const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,160,90);
+   const pixels=ctx.getImageData(0,0,160,90).data;let count=0;
+   for(let y=1;y<17;y++)for(let x=132;x<160;x++){
+    const i=(y*160+x)*4;
+    if(pixels[i]>220&&pixels[i+1]>160&&pixels[i+2]<65)count++;
+   }
+   return count;
+  },brandedExport.toString('base64'));
+  assert.ok(markerPixels>=9,direction+' separate logo is absent from downloaded PNG: '+markerPixels);
+  await page.evaluate(()=>document.documentElement.style.removeProperty('--slide-brand-logo'));
   // Fullscreen must export the same selected direction, not a stale/detail default.
   await page.locator('[data-slide-preview-open="'+fileId+'"]').click();
   await page.locator('#slide-library-fullscreen-page .story-scene').waitFor();
