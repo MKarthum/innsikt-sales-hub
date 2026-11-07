@@ -32,6 +32,14 @@ Følgende feil er rettet med geometri- og kodekontroller: Den nøkterne visninge
 
 Bildeoppskriften er versjonert til `4`; enhver endring må genereres, undersøkes og registreres med ny filhash før publisering. Vurder fortsatt de reelle skjermbildene i alle tre stiler og eksportene i Chromium og WebKit, ikke bare om JS-/Python-testene er grønne.
 
+## Piktogrammer med entydig betydning
+
+Revisjon av selve figurene viste at flere ikoner var dekorativt konsistente, men faglig svake. En taleboble representerte «Mennesker», et pulssignal representerte «Situasjon», en eske eller et målsymbol representerte «Beslutning», og en avspillingsknapp eller gjentakelsespiler representerte «Kontrollert handling». Det kunne gi feil forståelse av arkitekturen, særlig i eksport der muntlig forklaring mangler.
+
+Vi har derfor innført sju egne, gjenbrukbare SVG-ikoner: `context-people`, `context-timeline`, `context-choice`, `context-guarded-action`, `context-state-update`, `context-evidence` og `context-external`. Disse viser henholdsvis mennesker, hendelser over tid, et valgpunkt, autorisert utførelse, endret tilstand, dokumenterte resultater og eksterne forbindelser. «Oppdatert kontekst» vises bevisst som endret tilstand, ikke som automatisk modelltrening. «Læring underveis» symboliserer sporbar evidens og forbedring, ikke at en KI-modell lærer uten godkjenning.
+
+`slides.json` eier hvert `assetId`. `standard` bruker de registrerte SVG-filene direkte. `rich` velger tilsvarende native SVG-piktogram via `assetId`, og `rich-image` velger et tilsvarende Pillow-piktogram via samme ID. Ingen av disse to rendererene skal velge faglige ikoner ut fra radposisjon, og en ukjent ID skal gi feil i stedet for et tilfeldig symbol. Bildeoppskrift v5 krever ny godkjent filhash. Linjetykkelse og farger følger hvert uttrykk, mens betydningen er felles.
+
 ## Sporbarhet og godkjenning
 
 `docs/assets/presentation-illustrations.js` bygger en normalisert fagmodell med tekster og grafens kanoniske relasjonslinjer, og beregner SHA-256. `docs/data/presentation-illustrations.json` registrerer stil-ID, oppskriftsversjon, `contentHash`, `fileSha256`, masterhash, `approvalStatus`, `approvedAt` og `reviewedBy`. En faglig endring gjør godkjent snapshot utdatert. Endring av logo eller CSS-skin gjør **ikke** det.
