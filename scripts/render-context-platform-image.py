@@ -300,12 +300,14 @@ for i,ic in enumerate(("meaning","situation","shield")):
     txt(d,x+71,468,v["facets"][i]["label"],22,True)
     wrapped(d,x+71,497,v["facets"][i]["detail"],218,15,(230,230,247))
     image.alpha_composite(n)
-# Source connectors, avoid implying direct one-to-one mapping of sources to consumers.
+# Three distinct source relations converge on one common context inlet.
+# Independent vertical arrows wrongly imply that each source owns a facet.
 for i in range(3):
     cx=273+i*337
-    dx=(cx-609.5)/532.5
-    rim=round(453.5+113.5*math.sqrt(1-dx*dx))
-    arrow([(cx,601),(cx,rim)],CYAN,5)
+    if i==0: route=[(cx,601),(cx,588),(610,588),(610,567)]
+    elif i==1: route=[(cx,601),(610,567)]
+    else: route=[(cx,601),(cx,588),(610,588),(610,567)]
+    arrow(route,CYAN,5)
 for i,ic in enumerate(("database","systems","cloud")):
     x=113+i*337
     rounded(x,601,x+320,688,outline=(129,219,237),fill=(13,55,77),opacity=225,r=18,glow=(56,153,193))
