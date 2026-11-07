@@ -53,7 +53,7 @@ assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'Feedback must 
 assert.ok(!html.includes('cp-feedback-track'),'The old hard-coded reverse-loop must not survive');
 const endRule=html.match(/data-edge-id="updated-context"[^>]*><path class="cp-graph-track" d="([^"]+)"\/><path class="cp-graph-arrowhead" d="([^"]+)"/);
 assert.ok(endRule,'Feedback connector has a path and an arrowhead');
-assert.ok(endRule[1].endsWith('L970 300'),'Feedback route must terminate at the context edge');
+assert.ok(endRule[1].endsWith('970 300')&&endRule[1].includes(' C'),'Smooth feedback curve must terminate at the context edge');
 assert.ok(endRule[2].includes('L970 300L'),'Arrowhead tip must coincide with the route endpoint');
 assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
 assert.ok(html.includes('data-native-slide-scene="context-platforms"'),'Composite view needs one native SVG stage');
