@@ -22,7 +22,15 @@ Navnet `rich` er en teknisk stil-ID og tilsvarer «Nøktern illustrasjon» i bru
 
 Den rike visningen er foreløpig **bevisst ferdigrendret**, fordi det gir best samspill mellom lys, perspektiv, glød, figurer og kurvede piler med et lite distribusjonsfotavtrykk. Et hybridlag over denne kan vurderes hvis redigering, tilgjengelighet eller hyppige tekstendringer faktisk krever det. En slik overgang skal ikke antas å gi samme visuelle kvalitet uten skjermbildebasert kontroll.
 
-Bakgrunnen i den rike v2-oppskriften er nå en selvstendig, deterministisk illustrasjon med datanettverk, glassarkitektur og lys, **ikke** landskapsmotivet som brukes i den nøkterne visningen. `scripts/render-context-platform-image.py` tegner hele motivet fra `slides.json`, mens `scripts/presentation-illustrations.mjs` eier import, publiseringskandidat, godkjenning og hash. Oppskriften og kildefilene er ikke del av webdistribusjonen. Den publiserte WebP-filen ligger innenfor grensen på 250 kB. Filstørrelse og SHA kontrolleres av manifestet, ikke av hardkodede tall i denne dokumentasjonen.
+Bakgrunnen i den rike bildeoppskriften er nå en selvstendig, deterministisk illustrasjon med datanettverk, glassarkitektur og lys, **ikke** landskapsmotivet som brukes i den nøkterne visningen. `scripts/render-context-platform-image.py` tegner hele motivet fra `slides.json`, mens `scripts/presentation-illustrations.mjs` eier import, publiseringskandidat, godkjenning og hash. Oppskriften og kildefilene er ikke del av webdistribusjonen. Den publiserte WebP-filen ligger innenfor grensen på 250 kB. Filstørrelse og SHA kontrolleres av manifestet, ikke av hardkodede tall i denne dokumentasjonen.
+
+## Visuell kvalitetssikring av de tre visningene
+
+Gjennomgang av de tre benchmark-visningene viste en tydelig arbeidsdeling: `standard` er den mest lesbare og portable diagramvisningen, `rich` kan gi en roligere hybrid med native semantiske objekter, og `rich-image` har det sterkeste illustrerte uttrykket. Det gir ikke grunnlag for å endre den kanoniske relasjonsmodellen.
+
+Følgende feil er rettet med geometri- og kodekontroller: Den nøkterne visningen benyttet generiske ikoner som ikke samsvarte med dataplattform, system, eksterne kilder eller beslutningsløkken. Den har nå semantisk riktige ikoner som kan spores med `data-icon-role`. De dekorative bølgelinjene gjennom kontekstflaten er fjernet, og fjellfotografiet er tonet kraftig ned for ikke å konkurrere med faginformasjonen. Den rike bildeoppskriften gir lengre forbindelser fra kontekst til mottakere og holder returforbindelsen unna sidepanelet for mulig verdi. Felles kildeinntak beholdes uten tre overlappende pilspisser.
+
+Bildeoppskriften er versjonert til `4`; enhver endring må genereres, undersøkes og registreres med ny filhash før publisering. Vurder fortsatt de reelle skjermbildene i alle tre stiler og eksportene i Chromium og WebKit, ikke bare om JS-/Python-testene er grønne.
 
 ## Sporbarhet og godkjenning
 
