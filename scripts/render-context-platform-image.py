@@ -285,18 +285,18 @@ txt(d,846,105,v["period"],33,True,LAV)
 txt(d,66,155,slide["body"],21,False,(225,227,244))
 image.alpha_composite(head)
 # Shared consumers rail
-rounded(112,206,1130,301,outline=(214,182,250),fill=(24,43,79),opacity=206,r=27,glow=LAV)
+rounded(112,192,1130,286,outline=(214,182,250),fill=(24,43,79),opacity=206,r=27,glow=LAV)
 for k in (454,790):
-    n=layer();d=ImageDraw.Draw(n);d.line((k,226,k,283),fill=(188,205,244,138),width=2);image.alpha_composite(n)
+    n=layer();d=ImageDraw.Draw(n);d.line((k,210,k,269),fill=(188,205,244,138),width=2);image.alpha_composite(n)
 cons=[("people",170),("apps",510),("agent",846)]
 for i,(ic,x) in enumerate(cons):
-    n=layer();d=ImageDraw.Draw(n);icon(d,ic,x,223)
-    txt(d,x+68,223,v["consumers"][i]["label"],22,True)
-    wrapped(d,x+68,253,v["consumers"][i]["detail"],238,15,(220,227,251))
+    n=layer();d=ImageDraw.Draw(n);icon(d,ic,x,209)
+    txt(d,x+68,209,v["consumers"][i]["label"],22,True)
+    wrapped(d,x+68,239,v["consumers"][i]["detail"],238,15,(220,227,251))
     image.alpha_composite(n)
     cx=x+90
     rim=context_rim_y(cx,True)
-    arrow([(cx,rim),(cx,301)],LAV,5)
+    arrow([(cx,rim),(cx,286)],LAV,5)
 # The old ellipse clipped the left and right facet cards at their corners.
 # A superellipse keeps the oval concept while giving every card real padding.
 gl=layer();gd=ImageDraw.Draw(gl);gd.polygon(context_outline(),fill=(173,67,238,130))
@@ -331,14 +331,14 @@ for i,ic in enumerate(("meaning","situation","shield")):
     image.alpha_composite(n)
 # All three sources connect to ONE inlet. The joint is visually shared,
 # with only one arrowhead at the context boundary (no stacked arrows).
-SOURCE_TOP=621
-SOURCE_JOIN=610
+SOURCE_TOP=626
+SOURCE_JOIN=611
 connector([(273,SOURCE_TOP),(273,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
 connector([(947,SOURCE_TOP),(947,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
 arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))],CYAN,5)
 for i,ic in enumerate(("database","systems","cloud")):
     x=113+i*337
-    rounded(x,SOURCE_TOP,x+320,SOURCE_TOP+87,outline=(129,219,237),fill=(13,55,77),opacity=225,r=18,glow=(56,153,193))
+    rounded(x,SOURCE_TOP,x+320,SOURCE_TOP+82,outline=(129,219,237),fill=(13,55,77),opacity=225,r=18,glow=(56,153,193))
     n=layer();d=ImageDraw.Draw(n);icon(d,ic,x+19,SOURCE_TOP+19,CYAN)
     txt(d,x+80,SOURCE_TOP+13,v["sources"][i]["label"],20,True)
     wrapped(d,x+80,SOURCE_TOP+44,v["sources"][i]["detail"],229,15,(229,240,247))
@@ -346,7 +346,7 @@ for i,ic in enumerate(("database","systems","cloud")):
 # Decision/action/results example loop, visibly a separate business flow
 p=bezier((78,483),(10,542),(29,738),(171,778))
 arrow(p,CYAN,5)
-p=bezier((1120,779),(1190,767),(1194,561),(1141,482))
+p=bezier((1120,779),(1166,755),(1160,552),(1141,482))
 arrow(p,CYAN,5)
 rounded(171,735,1120,822,outline=(204,176,248),fill=(24,43,80),opacity=236,r=26,glow=LAV)
 for i,ic in enumerate(("target","action","refresh")):
