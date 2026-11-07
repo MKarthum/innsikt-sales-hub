@@ -47,6 +47,8 @@ Oppskriftsversjonen økes når renderingsoppskriften endres vesentlig. Utkast og
 
 Kildene informerer virksomhetskonteksten. Virksomhetskonteksten tilgjengeliggjøres for mennesker, applikasjoner og KI-agenter. En **separat** løkke viser at en beslutning kan lede til kontrollert/autoriserbar handling, og at resultater kan oppdatere konteksten. Den skal ikke fremstilles som en ubegrenset rett for en KI-agent til å endre systemer.
 
+Pilene er nå geometrisk forankret i faktiske objekter. Den enkle visningen går fra venstre kontekstkant til venstre beslutningskant og fra høyre oppdateringskant tilbake til høyre kontekstkant, uten å peke på beslutningsikonet. Native SVG beregner pilene til og fra den elliptiske kontekstens faktiske omriss, og holder returbanen unna panelet for mulige gevinster. Den rike bildegeneratoren bruker ellipsegeometri og korrigerte inngangs- og utgangspunkter. Dette handler om å unngå at visuelle piler antyder andre relasjoner enn grafmodellen. Nye visuelle varianter skal kontrollere innfestingspunkter og hindringer, ikke bare at pilene har riktig semantisk ID.
+
 `slide-graph.js` eier validering og den enkle diagramvisningens relasjonsruter. Kurvede returforbindelser er lagt til som begrensede, gjenbrukbare SVG-«paths» på de to utvendige korridorene. Native SVG-visningen bruker egne innfestingspunkter tilpasset sin komposisjon, men **samme** ti relasjons-ID-er. Den rike bildeoppskriften validerer relasjonsmengden før den tegner illustrasjonen. Pilene er meningsbærende relasjoner, ikke dekor for symmetri. Ikke innfør automatisk diagrammotor uten et konkret behov.
 
 ## Eksport: én 16:9-scene og tre kontrollerte opptaksmetoder
