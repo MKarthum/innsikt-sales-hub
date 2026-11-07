@@ -35,6 +35,9 @@
 .scene-context-platforms .cp-native-svg .cpn-period{
  font-size:33px;letter-spacing:-.7px;font-weight:770;fill:var(--pres-accent);
 }
+.scene-context-platforms .cp-native-svg .cpn-subtitle{
+ font-size:18px;font-weight:520;fill:var(--pres-muted);opacity:.92;
+}
 .scene-context-platforms .cp-native-svg .cpn-ridge--far{
  fill:color-mix(in srgb,var(--pres-bg) 86%,var(--pres-accent));opacity:.09;
 }
