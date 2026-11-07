@@ -116,7 +116,7 @@ try{
   fs.writeFileSync(path.join(output,direction+'-presenter.png'),presenter);
   const presenterMetrics=await compare(presenter,reference,'image/png');
   assert.ok(presenterMetrics.meanDiff<48,'Presenter direction mismatch '+direction+' '+JSON.stringify(presenterMetrics));
-  await page.locator('#present-close').click();
+  await page.locator('#present-modal .modal-close').click();
   await page.locator('#present-modal').waitFor({state:'detached'});
  }
  assert.equal(files.length,12);
