@@ -28,5 +28,7 @@ jobs:
           git add docs/assets/slide-download.js
           if ! git diff --cached --quiet; then
             git commit -m "build: update slide download bundle"
+            git fetch origin main
+            git rebase origin/main
             git push origin HEAD:main
           fi
