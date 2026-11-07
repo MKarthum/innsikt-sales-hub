@@ -654,7 +654,7 @@ async function downloadSlideButton(button){
  try{
   const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
   let html=await prep.prepareSlideMarkupForExport(rendered);
-  if(item.visual?.scene==='context-platforms'&&html.includes('data-art-direction="cinematic"')){
+  if(item.visual?.scene==='context-platforms'&&/data-art-direction="(?:cinematic|rich)"/.test(html)){
    const native=await import('./context-native-export.js?v='+encodeURIComponent(D.meta.version));
    html=await native.flattenNativeScene(html,tone);
   }
