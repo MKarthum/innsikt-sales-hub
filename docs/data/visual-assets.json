@@ -539,6 +539,76 @@
       "notes": "Separat KI-generert landskapsressurs, bearbeidet uten fagtekst, 800×450 WebP. Rik illustrasjon; kan byttes uavhengig av diagram, piler og øvrig innhold.",
       "sha256": "089c6bd043116ee1e2b41151933b6c52b246556811980cdc5644afcf33fded56",
       "purpose": "background"
+    },
+    {
+      "id": "context-people",
+      "label": "Mennesker",
+      "category": "original-figure",
+      "path": "assets/library/original/context-people.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Reusable, semantic 24x24 outline pictogram for context-platform architecture; must depict the concept, not a decorative metaphor.",
+      "sha256": "57b68dfa054194d7af6bc3dc1ae32f24170e2eefba8ce66a382bd634bcf27592",
+      "purpose": "icon"
+    },
+    {
+      "id": "context-timeline",
+      "label": "Situasjon og historikk",
+      "category": "original-figure",
+      "path": "assets/library/original/context-timeline.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Reusable, semantic 24x24 outline pictogram for context-platform architecture; must depict the concept, not a decorative metaphor.",
+      "sha256": "66f1a913c3865b6ee633f334bf28e3ca2f171454821ad71ec2becc44bdf76c57",
+      "purpose": "icon"
+    },
+    {
+      "id": "context-choice",
+      "label": "Beslutningspunkt",
+      "category": "original-figure",
+      "path": "assets/library/original/context-choice.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Reusable, semantic 24x24 outline pictogram for context-platform architecture; must depict the concept, not a decorative metaphor.",
+      "sha256": "914e364f75af659c7edc96e7f917f3c4dbbae4dbc8ad299d119033bdd7cfe8b1",
+      "purpose": "icon"
+    },
+    {
+      "id": "context-guarded-action",
+      "label": "Kontrollert handling",
+      "category": "original-figure",
+      "path": "assets/library/original/context-guarded-action.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Reusable, semantic 24x24 outline pictogram for context-platform architecture; must depict the concept, not a decorative metaphor.",
+      "sha256": "c5f5e9b1f60380b4c82c27295ba63ae88705a7f69e3b6dd7f0c57fef66af106e",
+      "purpose": "icon"
+    },
+    {
+      "id": "context-state-update",
+      "label": "Oppdatert tilstand",
+      "category": "original-figure",
+      "path": "assets/library/original/context-state-update.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Reusable, semantic 24x24 outline pictogram for context-platform architecture; must depict the concept, not a decorative metaphor.",
+      "sha256": "7dad14cfa22c15f449c1f9b7735b444918056356823ba09a14aead00d844a9cb",
+      "purpose": "icon"
+    },
+    {
+      "id": "context-evidence",
+      "label": "Dokumentert tilbakemelding",
+      "category": "original-figure",
+      "path": "assets/library/original/context-evidence.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Reusable, semantic 24x24 outline pictogram for context-platform architecture; must depict the concept, not a decorative metaphor.",
+      "sha256": "edf509c012e789f5105a680b6181527769ca8980b46317384a6f46ae4b5249de",
+      "purpose": "icon"
+    },
+    {
+      "id": "context-external",
+      "label": "Eksterne datakilder",
+      "category": "original-figure",
+      "path": "assets/library/original/context-external.svg",
+      "rights": "Innsikt original SVG; MIT where licensor holds rights (see LICENSE and THIRD_PARTY_NOTICES.md)",
+      "notes": "Reusable, semantic 24x24 outline pictogram for context-platform architecture; must depict the concept, not a decorative metaphor.",
+      "sha256": "46d4a9648aca88a021a8210e392d7aec23a520388c2cfcd76dd101e5f65ed594",
+      "purpose": "icon"
     }
   ],
   "presentationGroups": [
