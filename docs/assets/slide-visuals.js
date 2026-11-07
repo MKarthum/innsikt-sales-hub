@@ -168,7 +168,7 @@ function render(slide,esc,position={}){
   return '<div class="story-scene scene-context-platforms">'
    +'<div class="cp-landscape" aria-hidden="true">'+scenery+'</div>'
    +nativeScene
-   +'<header class="cp-heading"><div class="scene-topline">'+label+counter+'</div><div class="cp-title"><h2>'+escs(slide.title)+'</h2><span>'+escs(v.period)+'</span></div></header>'
+   +'<header class="cp-heading"><div class="scene-topline">'+label+counter+'</div><div class="cp-title"><h2>'+escs(slide.title)+'</h2><span>'+escs(v.period)+'</span></div><p class="cp-standfirst">'+escs(slide.body)+'</p></header>'
    +'<div class="cp-diagram" role="group" aria-label="'+escs(v.contextLabel)+'">'
    +'<section class="cp-consumers" aria-label="Konsumenter">'+tiles(v.consumers,'cp-consumer')+'</section>'
    +links()
