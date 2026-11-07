@@ -38,6 +38,30 @@ const icon=(kind,x,y)=>{
 };
 const panel=(x,y,w,h,cls='cpn-panel',radius=20)=>
  '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+radius+'" class="'+cls+'"/>';
+// An oval superellipse, with an explicit 10px safety margin around all facets.
+const CORE={cx:609,cy:474,rx:565,ry:128,p:4};
+const coreContains=(x,y,pad=0)=>
+ Math.pow(Math.abs((x-CORE.cx)/(CORE.rx-pad)),CORE.p)+
+ Math.pow(Math.abs((y-CORE.cy)/(CORE.ry-pad)),CORE.p)<=1;
+const corePath=(inset=0,steps=180)=>{
+ const pts=[];
+ for(let i=0;i<steps;i++){
+  const a=2*Math.PI*i/steps,c=Math.cos(a),sn=Math.sin(a);
+  const x=CORE.cx+(CORE.rx-inset)*Math.sign(c)*Math.pow(Math.abs(c),2/CORE.p);
+  const y=CORE.cy+(CORE.ry-inset)*Math.sign(sn)*Math.pow(Math.abs(sn),2/CORE.p);
+  pts.push((i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2));
+ }
+ return pts.join('')+'Z';
+};
+const coreRimY=(x,upper)=>{
+ const ratio=Math.abs((x-CORE.cx)/CORE.rx);
+ const span=CORE.ry*Math.pow(1-Math.pow(ratio,CORE.p),1/CORE.p);
+ return Math.round(CORE.cy+(upper?-span:span));
+};
+const facetRects=[129,455,781].map(x=>[x,477,x+310,565]);
+if(!facetRects.every(([x0,y0,x1,y1])=>
+ [x0,x1].every(x=>[y0,y1].every(y=>coreContains(x,y,10)))))
+ throw Error('Context platform facet cards exceed the enclosing glass shape');
 // Arrowheads are derived from the geometry of the final segment. This avoids
 // SVG marker scaling/foreignObject inconsistencies on-screen and in downloads.
 const arrowTip=(point,prior)=>{
@@ -52,11 +76,10 @@ const arrowTip=(point,prior)=>{
 const path=(id,from,to,relation,d,point,prior,esc,cls='cpn-arrow')=>
  '<g data-edge-id="'+safe(id,esc)+'" data-from="'+safe(from,esc)+'" data-to="'+safe(to,esc)+'" data-relation="'+safe(relation,esc)+'">'
  +'<path d="'+d+'" class="'+cls+'"/>'
- +'<path d="'+arrowTip(point,prior)+'" class="cpn-arrow-tip"/></g>';
+ +(point?'<path d="'+arrowTip(point,prior)+'" class="cpn-arrow-tip"/>':'')+'</g>';
 function graphEdges(v,esc){
  const graph=window.InnsiktSlideGraph.validate(v.graph,v);
- // The glass context is an ellipse; connectors attach to its actual outline.
- const rimY=(x,upper)=>Math.round(474+(upper?-109:109)*Math.sqrt(1-Math.pow((x-609)/553,2)));
+ // All connectors use the actual superellipse boundary.
  const edges=new Map(graph.edges.map(e=>[e.from+'>'+e.to,e]));
  const pathFor=(from,to,d,tip,tangent,cls)=>{
   const e=edges.get(from+'>'+to);
@@ -67,22 +90,23 @@ function graphEdges(v,esc){
  // Anchor lines are intentionally behind panels. Rounded turns are outside nodes.
  for(let i=0;i<v.consumers.length;i++){
   const x=[270,607,944][i];
-  const top=rimY(x,true);
+  const top=coreRimY(x,true);
   a+=pathFor('context','consumers:'+i,'M'+x+' '+top+'V311',[x,311],[x,top],'cpn-arrow cpn-arrow--supply');
  }
+ // Three semantic source relations converge in one shared inlet.
+ const sourceRoutes=[
+  ['M270 631V620Q270 615 277 615H607',null,null],
+  ['M607 631V602',[607,602],[607,631]],
+  ['M944 631V620Q944 615 937 615H607',null,null]
+ ];
  for(let i=0;i<v.sources.length;i++){
-  const x=[270,607,944][i];
-  // The three source edges converge into ONE inlet on the shared context.
-  // Straight per-column arrows would falsely link each source to one facet.
-  const d=i===1?'M607 621V583':i===0
-   ?'M270 621V613Q270 607 277 607H600Q607 607 607 600V583'
-   :'M944 621V613Q944 607 937 607H614Q607 607 607 600V583';
-  a+=pathFor('sources:'+i,'context',d,[607,583],[607,601],'cpn-arrow cpn-arrow--supply');
+  const [d,point,tangent]=sourceRoutes[i];
+  a+=pathFor('sources:'+i,'context',d,point,tangent,'cpn-arrow cpn-arrow--supply');
  }
- a+=pathFor('context','cycle:0','M105 519C35 550 30 715 95 765Q140 800 204 800',[204,800],[140,800],'cpn-arrow cpn-arrow--loop');
+ a+=pathFor('context','cycle:0','M48 519C16 554 18 709 96 766Q142 800 204 800',[204,800],[142,800],'cpn-arrow cpn-arrow--loop');
  // The return path stays in the narrow corridor LEFT of the outcomes panel
  // and terminates on the right-hand context rim, not in empty background.
- a+=pathFor('cycle:2','context','M1118 800C1170 787 1196 734 1193 680C1190 603 1161 541 1114 519',[1114,519],[1161,541],'cpn-arrow cpn-arrow--loop');
+ a+=pathFor('cycle:2','context','M1118 800C1181 792 1193 717 1193 657C1193 586 1180 540 1170 519',[1170,519],[1180,540],'cpn-arrow cpn-arrow--loop');
  a+=pathFor('cycle:0','cycle:1','M430 800H495',[495,800],[470,800],'cpn-arrow cpn-arrow--cycle');
  a+=pathFor('cycle:1','cycle:2','M767 800H833',[833,800],[808,800],'cpn-arrow cpn-arrow--cycle');
  return a;
@@ -120,9 +144,9 @@ function nativeSvg(slide,v,assets,esc){
  const people=cards(v.consumers,215,0,'consumers');
  const context=
  '<g class="cpn-core" data-node-id="context">'
- +'<ellipse cx="609" cy="474" rx="565" ry="119" class="cpn-core-halo"/>'
- +'<ellipse cx="609" cy="474" rx="555" ry="111" class="cpn-core-glass"/>'
- +'<ellipse cx="609" cy="474" rx="553" ry="109" class="cpn-core-edge"/>'
+ +'<path d="'+corePath(-8)+'" class="cpn-core-halo"/>'
+ +'<path d="'+corePath(4)+'" class="cpn-core-glass"/>'
+ +'<path d="'+corePath()+'" class="cpn-core-edge" data-core-shape="superellipse"/>'
  +'<path d="M95 461Q609 311 1124 461" class="cpn-core-shine"/>'
  +'<path d="M96 532Q244 569 390 555T677 559T1106 530" class="cpn-core-wave"/>'
  +'<path d="M100 553Q262 584 438 566T775 567T1116 547" class="cpn-core-wave cpn-core-wave--soft"/>'
@@ -137,7 +161,7 @@ function nativeSvg(slide,v,assets,esc){
      +detail(x+65,529,n.detail,'cpn-facet-detail',esc,27)
      +'</g>';
  }).join('')+'</g>';
- const sources=cards(v.sources,621,3,'sources');
+ const sources=cards(v.sources,631,3,'sources');
  const cycleX=[228,518,808];
  const cycle='<g class="cpn-cycle-container">'
   +panel(204,759,914,82,'cpn-cycle-panel',28)
