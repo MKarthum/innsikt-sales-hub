@@ -69,7 +69,7 @@ function graphEdges(v,esc){
  }
  for(let i=0;i<v.sources.length;i++){
   const x=[270,607,944][i];
-  a+=pathFor('sources:'+i,'context','M'+x+' 627V586',[x,586],[x,608],'cpn-arrow cpn-arrow--supply');
+  a+=pathFor('sources:'+i,'context','M'+x+' 621V586',[x,586],[x,608],'cpn-arrow cpn-arrow--supply');
  }
  a+=pathFor('context','cycle:0','M128 566C64 597 66 711 126 766Q153 797 204 800',[204,800],[153,797],'cpn-arrow cpn-arrow--loop');
  a+=pathFor('cycle:2','context','M1080 800C1209 779 1213 652 1150 563',[1150,563],[1213,652],'cpn-arrow cpn-arrow--loop');
@@ -88,7 +88,7 @@ function nativeSvg(slide,v,assets,esc){
   +txt(920,143,v.period,'cpn-period',esc)
   +'</g>';
  const cards=(list,y,baseIcon,group)=>{
-  const xs=[105,443,781],w=324;
+  const xs=[105,443,781],w=324,cardHeight=group==='sources'?100:88;
   // One shared glass rail for consumers; sources remain separate systems.
   // Semantics are individual nodes regardless of the outer illustration.
   const rail=group==='consumers'
@@ -100,7 +100,7 @@ function nativeSvg(slide,v,assets,esc){
   return rail+list.map((n,i)=>{
    const x=xs[i];
    return '<g class="cpn-card cpn-card--'+group+'" data-node-id="'+group+':'+i+'">'
-     +(group==='consumers'?'':panel(x,y,w,88,'cpn-panel'))
+     +(group==='consumers'?'':panel(x,y,w,cardHeight,'cpn-panel'))
      +icon(baseIcon+i,x+24,y+27)
      +txt(x+73,y+37,n.label,'cpn-card-title',esc)
      +detail(x+73,y+61,n.detail,'cpn-card-detail',esc,25)
@@ -121,13 +121,13 @@ function nativeSvg(slide,v,assets,esc){
  +v.facets.map((n,i)=>{
    const xs=[129,455,781],x=xs[i];
    return '<g class="cpn-facet" data-node-id="facets:'+i+'">'
-     +panel(x,483,310,72,'cpn-facet-panel',17)
-     +icon([3,5,9][i],x+18,503)
-     +txt(x+65,513,n.label,'cpn-facet-title',esc)
-     +detail(x+65,536,n.detail,'cpn-facet-detail',esc,27)
+     +panel(x,477,310,88,'cpn-facet-panel',17)
+     +icon([3,5,9][i],x+18,497)
+     +txt(x+65,507,n.label,'cpn-facet-title',esc)
+     +detail(x+65,529,n.detail,'cpn-facet-detail',esc,27)
      +'</g>';
  }).join('')+'</g>';
- const sources=cards(v.sources,628,3,'sources');
+ const sources=cards(v.sources,621,3,'sources');
  const cycleX=[228,518,808];
  const cycle='<g class="cpn-cycle-container">'
   +panel(204,759,914,82,'cpn-cycle-panel',28)

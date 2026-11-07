@@ -105,6 +105,21 @@ try{
  assert.deepEqual(nativeConnections,originalEdges,'Native SVG uses identical relations, direction and count');
  assert.equal(await platform.locator('svg[data-native-slide-scene] image[data-photo-role="landscape"]').count(),1);
  assert.equal(await platform.locator('svg[data-native-slide-scene]').evaluate(el=>getComputedStyle(el).display),'block');
+ const overflowingLabels=await platform.locator('svg[data-native-slide-scene]').evaluate(svg=>{
+  const results=[];
+  for(const group of svg.querySelectorAll('.cpn-card--sources,.cpn-facet')){
+   const panel=group.querySelector('rect'),bounds=panel?.getBBox();
+   if(!bounds)continue;
+   for(const label of group.querySelectorAll('text')){
+    const box=label.getBBox();
+    if(box.x<bounds.x+6||box.x+box.width>bounds.x+bounds.width-9||
+       box.y<bounds.y+3||box.y+box.height>bounds.y+bounds.height-5)
+      results.push(group.getAttribute('data-node-id')+': '+label.textContent);
+   }
+  }
+  return results;
+ });
+ assert.deepEqual(overflowingLabels,[],'Every source and context facet label must remain inside its panel');
  await page.evaluate(async()=>{
   const source=document.querySelector('svg[data-native-slide-scene] image[data-photo-role="landscape"]')?.getAttribute('href');
   const image=new Image();image.src=source;await image.decode();
