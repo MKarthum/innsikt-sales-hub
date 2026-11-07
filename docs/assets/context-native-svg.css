@@ -47,6 +47,15 @@
  stroke:color-mix(in srgb,var(--pres-fg) 30%,var(--pres-accent));
  stroke-width:1.7;filter:url(#cpn-soft-shadow);
 }
+.scene-context-platforms .cp-native-svg .cpn-consumer-rail-panel{
+ fill:url(#cpn-sheen);
+ stroke:color-mix(in srgb,var(--pres-fg) 55%,var(--pres-accent));
+ stroke-width:1.8;filter:url(#cpn-soft-shadow);
+}
+.scene-context-platforms .cp-native-svg .cpn-rail-divider{
+ fill:none;stroke:color-mix(in srgb,var(--pres-fg) 34%,var(--pres-accent));
+ stroke-width:1.4;
+}
 .scene-context-platforms .cp-native-svg .cpn-card .cpn-icon{
  color:var(--pres-fg);opacity:.86;
 }
@@ -69,6 +78,11 @@
 .scene-context-platforms .cp-native-svg .cpn-core-shine{
  fill:none;stroke:var(--pres-accent);stroke-width:2.8;opacity:.65;
 }
+.scene-context-platforms .cp-native-svg .cpn-core-wave{
+ fill:none;stroke:color-mix(in srgb,var(--pres-accent) 64%,var(--pres-fg));
+ stroke-width:2.1;opacity:.27;
+}
+.scene-context-platforms .cp-native-svg .cpn-core-wave--soft{opacity:.17;stroke-width:1.4}
 .scene-context-platforms .cp-native-svg .cpn-core-title{
  font-size:39px;font-weight:850;letter-spacing:-1.4px;
 }

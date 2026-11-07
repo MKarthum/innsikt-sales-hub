@@ -59,6 +59,8 @@ assert.ok(endRule[1].endsWith('L970 300'),'Feedback route must terminate at the 
 assert.ok(endRule[2].includes('L970 300L'),'Arrowhead tip must coincide with the route endpoint');
 assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
 assert.ok(html.includes('data-native-slide-scene="context-platforms"'),'Composite view needs one native SVG stage');
+assert.ok(html.includes('class="cpn-consumer-rail-panel"'),'Consumer group shares one visual glass panel');
+assert.equal((html.match(/class="cpn-rail-divider"/g)||[]).length,1,'Consumers are separated without duplicate boxes');
 assert.ok(html.includes('data-photo-role="landscape"'),'The mountain background must be a first-class SVG image');
 assert.equal((html.match(/class="cpn-arrow cpn-arrow--/g)||[]).length,10,'The native SVG stage uses exactly the same ten canonical relations');
 assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'The return arrow comes from the same semantic graph');

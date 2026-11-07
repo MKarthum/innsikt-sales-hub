@@ -89,10 +89,18 @@ function nativeSvg(slide,v,assets,esc){
   +'</g>';
  const cards=(list,y,baseIcon,group)=>{
   const xs=[105,443,781],w=324;
-  return list.map((n,i)=>{
+  // One shared glass rail for consumers; sources remain separate systems.
+  // Semantics are individual nodes regardless of the outer illustration.
+  const rail=group==='consumers'
+   ?'<g class="cpn-consumer-rail" aria-hidden="true">'
+      +panel(105,y,1000,88,'cpn-consumer-rail-panel',32)
+      +'<path d="M436 '+(y+15)+'V'+(y+73)+'M774 '+(y+15)+'V'+(y+73)+'" class="cpn-rail-divider"/>'
+      +'</g>'
+   :'';
+  return rail+list.map((n,i)=>{
    const x=xs[i];
    return '<g class="cpn-card cpn-card--'+group+'" data-node-id="'+group+':'+i+'">'
-     +panel(x,y,w,88,'cpn-panel')
+     +(group==='consumers'?'':panel(x,y,w,88,'cpn-panel'))
      +icon(baseIcon+i,x+24,y+27)
      +txt(x+73,y+37,n.label,'cpn-card-title',esc)
      +detail(x+73,y+61,n.detail,'cpn-card-detail',esc,25)
@@ -106,6 +114,8 @@ function nativeSvg(slide,v,assets,esc){
  +'<ellipse cx="609" cy="474" rx="555" ry="111" class="cpn-core-glass"/>'
  +'<ellipse cx="609" cy="474" rx="553" ry="109" class="cpn-core-edge"/>'
  +'<path d="M95 461Q609 311 1124 461" class="cpn-core-shine"/>'
+ +'<path d="M96 532Q244 569 390 555T677 559T1106 530" class="cpn-core-wave"/>'
+ +'<path d="M100 553Q262 584 438 566T775 567T1116 547" class="cpn-core-wave cpn-core-wave--soft"/>'
  +txt(606,419,v.contextLabel,'cpn-core-title',esc,'text-anchor="middle"')
  +txt(606,453,v.contextLead,'cpn-core-lead',esc,'text-anchor="middle"')
  +v.facets.map((n,i)=>{
