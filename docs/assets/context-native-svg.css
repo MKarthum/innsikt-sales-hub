@@ -18,7 +18,9 @@
  font-family:var(--font-body,Arial,sans-serif);
  fill:var(--pres-fg);paint-order:normal;dominant-baseline:alphabetic;
 }
-.scene-context-platforms .cp-native-svg .cpn-photo{opacity:.98}
+/* The original mountain photograph and flag overpowered the architecture.
+   Keep the replaceable image slot, but use it as a quiet texture. */
+.scene-context-platforms .cp-native-svg .cpn-photo{opacity:.13}
 .scene-context-platforms .cp-native-svg .cpn-kicker{
  font-size:19px;letter-spacing:4.1px;font-weight:780;
  fill:color-mix(in srgb,var(--pres-fg) 55%,var(--pres-accent));
@@ -34,13 +36,13 @@
  font-size:33px;letter-spacing:-.7px;font-weight:770;fill:var(--pres-accent);
 }
 .scene-context-platforms .cp-native-svg .cpn-ridge--far{
- fill:color-mix(in srgb,var(--pres-bg) 74%,var(--pres-accent));opacity:.38;
+ fill:color-mix(in srgb,var(--pres-bg) 86%,var(--pres-accent));opacity:.09;
 }
 .scene-context-platforms .cp-native-svg .cpn-ridge--near{
- fill:color-mix(in srgb,var(--pres-bg) 84%,var(--pres-accent));opacity:.53;
+ fill:color-mix(in srgb,var(--pres-bg) 90%,var(--pres-accent));opacity:.10;
 }
 .scene-context-platforms .cp-native-svg .cpn-foreground{
- fill:var(--pres-bg);opacity:.38;
+ fill:var(--pres-bg);opacity:.10;
 }
 .scene-context-platforms .cp-native-svg .cpn-panel{
  fill:color-mix(in srgb,var(--pres-bg) 85%,transparent);
@@ -165,7 +167,7 @@
 .scene-context-platforms .cp-native-svg .cpn-governance-values{
  font-size:17px;font-weight:540;fill:var(--pres-muted);
 }
-.present-frame[data-tone="light"] .scene-context-platforms .cp-native-svg .cpn-photo{opacity:.16}
+.present-frame[data-tone="light"] .scene-context-platforms .cp-native-svg .cpn-photo{opacity:.045}
 .present-frame[data-tone="light"] .scene-context-platforms .cp-native-svg .cpn-panel,
 .present-frame[data-tone="light"] .scene-context-platforms .cp-native-svg .cpn-outcomes-panel{
  fill:color-mix(in srgb,var(--pres-bg) 95%,var(--pres-accent));
