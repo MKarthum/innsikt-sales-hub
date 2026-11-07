@@ -41,7 +41,10 @@ const icon=(kind,x,y)=>{
   '<rect x="4" y="5" width="24" height="22" rx="4"/><path d="M13 10l9 6-9 6z"/>',
   '<path d="M26 12a10 10 0 0 0-18-4L5 11M5 5v6h6M6 20a10 10 0 0 0 18 4l3-3M21 21h6v6"/>'
  ];
- return '<g class="cpn-icon" transform="translate('+x+' '+y+')"><g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round">'+iconPaths[kind%iconPaths.length]+'</g></g>';
+ const role=['dialogue','application','agent','document','window','signal','clock','check','forward','shield',
+  'database','system','cloud','decision','action','refresh'][kind];
+ if(!role)throw Error('Missing semantic icon kind '+kind);
+ return '<g class="cpn-icon" data-icon-role="'+role+'" transform="translate('+x+' '+y+')"><g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round">'+iconPaths[kind]+'</g></g>';
 };
 const panel=(x,y,w,h,cls='cpn-panel',radius=20)=>
  '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+radius+'" class="'+cls+'"/>';
