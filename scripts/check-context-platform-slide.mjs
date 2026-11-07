@@ -39,6 +39,8 @@ vm.runInNewContext(fs.readFileSync('docs/assets/slide-visuals.js','utf8'),sandbo
 const escape=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const html=sandbox.window.InnsiktSlideVisuals.render(slide,escape,{index:0,total:1,showNumbers:false,assets});
 assert.ok(html.startsWith('<div class="story-scene scene-context-platforms">'));
+assert.ok(html.includes('<p class="cp-standfirst">'+escape(slide.body)+'</p>'),'Standard presentation must show the canonical thesis');
+assert.ok(html.includes('class="cpn-subtitle"'),'Native presentation must show the same canonical thesis');
 for(const token of [slide.title,slide.visual.contextLabel,...slide.visual.consumers.map(x=>x.label),...slide.visual.facets.map(x=>x.label),...slide.visual.sources.map(x=>x.label),...slide.visual.cycle.map(x=>x.label)]) {
  assert.ok(html.includes(token),'Missing visible data '+token);
 }
