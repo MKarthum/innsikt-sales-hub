@@ -121,8 +121,10 @@ try{
  // Benchmark is not part of the curated Presenter decks. Compare Presenter
  // against the slide it actually shows, not against a different library slide.
  await page.locator('#present-button').click();
+ await page.locator('#present-motion-mode').selectOption('off');
  const presenterFrame=page.locator('#present-modal .present-frame');
  await presenterFrame.locator('.story-scene').waitFor();
+ await page.waitForTimeout(800); // let the existing entrance blur finish before comparing
  const presenterScreen=await presenterFrame.screenshot();
  fs.writeFileSync(path.join(output,'presenter-screen.png'),presenterScreen);
  const presenter=await read(page.locator('#present-modal [data-slide-download="png"]'),'png');
