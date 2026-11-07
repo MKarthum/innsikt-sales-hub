@@ -173,7 +173,7 @@ def rounded(x0,y0,x1,y1,outline=(174,227,249),fill=(16,45,70),opacity=210,r=24,w
     n=layer();d=ImageDraw.Draw(n)
     d.rounded_rectangle((x0,y0,x1,y1),radius=r,fill=rgba(fill,opacity),outline=rgba(outline,195),width=width)
     image.alpha_composite(n)
-def arrow(points,color=CYAN,width=6,glow=True,alpha=235):
+def connector(points,color=CYAN,width=6,glow=True,alpha=235):
     p=[(float(x),float(y)) for x,y in points]
     if glow:
         n=layer();d=ImageDraw.Draw(n)
@@ -181,6 +181,12 @@ def arrow(points,color=CYAN,width=6,glow=True,alpha=235):
         image.alpha_composite(n.filter(ImageFilter.GaussianBlur(13)))
     n=layer();d=ImageDraw.Draw(n)
     d.line(p,fill=rgba(color,alpha),width=width,joint="curve")
+    image.alpha_composite(n)
+
+def arrow(points,color=CYAN,width=6,glow=True,alpha=235):
+    p=[(float(x),float(y)) for x,y in points]
+    connector(p,color,width,glow,alpha)
+    n=layer();d=ImageDraw.Draw(n)
     x,y=p[-1];px,py=p[-2]
     theta=math.atan2(y-py,x-px)
     dl=18;wing=8
@@ -191,7 +197,27 @@ def arrow(points,color=CYAN,width=6,glow=True,alpha=235):
     image.alpha_composite(n)
 def bezier(a,b,c,d,n=35):
     return [((1-t)**3*a[0]+3*(1-t)**2*t*b[0]+3*(1-t)*t*t*c[0]+t**3*d[0],
-             (1-t)**3*a[1]+3*(1-t)**2*t*b[1]+3*(1-t)*t*t*c[1]+t**3*d[1]) for t in (i/n for i in range(n+1))]
+             (1-t)**3*a[1]+(1-t)**3*a[1]+3*(1-t)**2*t*b[1]+3*(1-t)*t*t*c[1]+t**3*d[1]) for t in (i/n for i in range(n+1))]
+
+# Superellipse: an elliptical silhouette with gently squared sides.
+# All three facet cards must fit fully inside, including their outer corners.
+CONTEXT=(609.5,457.0,532.5,140.0,4)
+FACET_BOXES=[(146+i*328,455,449+i*328,539) for i in range(3)]
+def within_context(x,y,margin=0):
+    cx,cy,rx,ry,n=CONTEXT
+    return (abs((x-cx)/(rx-margin))**n+abs((y-cy)/(ry-margin))**n)<=1
+assert all(within_context(x,y,10) for x0,y0,x1,y1 in FACET_BOXES
+           for x in (x0,x1) for y in (y0,y1)), "Kontekstbokser ligger utenfor glassflaten"
+def context_outline(inset=0,steps=360):
+    cx,cy,rx,ry,p=CONTEXT
+    rx-=inset;ry-=inset
+    return [(cx+rx*math.copysign(abs(math.cos(t))**(2/p),math.cos(t)),
+             cy+ry*math.copysign(abs(math.sin(t))**(2/p),math.sin(t)))
+            for t in (2*math.pi*i/steps for i in range(steps)) ]
+def context_rim_y(x,top):
+    cx,cy,rx,ry,p=CONTEXT
+    f=(1-abs((x-cx)/rx)**p)**(1/p)
+    return round(cy-ry*f if top else cy+ry*f)
 def icon(draw,name,x,y,color=(230,248,255)):
     C=rgba(color,245)
     if name=="people":
@@ -269,15 +295,18 @@ for i,(ic,x) in enumerate(cons):
     wrapped(d,x+68,253,v["consumers"][i]["detail"],238,15,(220,227,251))
     image.alpha_composite(n)
     cx=x+90
-    dx=(cx-609.5)/532.5
-    rim=round(453.5-113.5*math.sqrt(1-dx*dx))
+    rim=context_rim_y(cx,True)
     arrow([(cx,rim),(cx,301)],LAV,5)
-# Context glass halo, layered gradient ellipse
-gl=layer();gd=ImageDraw.Draw(gl);gd.ellipse((70,325,1140,582),fill=(173,67,238,130))
+# The old ellipse clipped the left and right facet cards at their corners.
+# A superellipse keeps the oval concept while giving every card real padding.
+gl=layer();gd=ImageDraw.Draw(gl);gd.polygon(context_outline(),fill=(173,67,238,130))
 image.alpha_composite(gl.filter(ImageFilter.GaussianBlur(26)))
 n=layer();d=ImageDraw.Draw(n)
-d.ellipse((77,340,1142,567),fill=(44,29,102,225),outline=(206,144,255,248),width=4)
-d.ellipse((86,351,1133,553),outline=(117,189,248,120),width=2)
+p=context_outline()
+d.polygon(p,fill=(44,29,102,225))
+d.line(p+[p[0]],fill=(206,144,255,248),width=4,joint="curve")
+inner=context_outline(8)
+d.line(inner+[inner[0]],fill=(117,189,248,120),width=2,joint="curve")
 image.alpha_composite(n)
 # A meaningful dotted information surface rather than expensive SVG geometry.
 n=layer();d=ImageDraw.Draw(n);rng=random.Random(6)
@@ -285,7 +314,7 @@ for i in range(780):
     xx=rng.uniform(115,1095); yy=rng.uniform(463,550)
     t=(xx-610)/535
     cap=531+20*(1-t*t)+8*math.sin(xx*.032)
-    if yy<cap and ((xx-610)/535)**2+((yy-454)/107)**2<1:
+    if yy<cap and within_context(xx,yy,15):
         d.ellipse((xx,yy,xx+1.2,yy+1.2),fill=(155,184,252,rng.randint(25,95)))
 image.alpha_composite(n)
 n=layer();d=ImageDraw.Draw(n)
@@ -300,25 +329,24 @@ for i,ic in enumerate(("meaning","situation","shield")):
     txt(d,x+71,468,v["facets"][i]["label"],22,True)
     wrapped(d,x+71,497,v["facets"][i]["detail"],218,15,(230,230,247))
     image.alpha_composite(n)
-# Three distinct source relations converge on one common context inlet.
-# Independent vertical arrows wrongly imply that each source owns a facet.
-for i in range(3):
-    cx=273+i*337
-    if i==0: route=[(cx,601),(cx,588),(610,588),(610,567)]
-    elif i==1: route=[(cx,601),(610,567)]
-    else: route=[(cx,601),(cx,588),(610,588),(610,567)]
-    arrow(route,CYAN,5)
+# All three sources connect to ONE inlet. The joint is visually shared,
+# with only one arrowhead at the context boundary (no stacked arrows).
+SOURCE_TOP=621
+SOURCE_JOIN=610
+connector([(273,SOURCE_TOP),(273,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
+connector([(947,SOURCE_TOP),(947,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
+arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))],CYAN,5)
 for i,ic in enumerate(("database","systems","cloud")):
     x=113+i*337
-    rounded(x,601,x+320,688,outline=(129,219,237),fill=(13,55,77),opacity=225,r=18,glow=(56,153,193))
-    n=layer();d=ImageDraw.Draw(n);icon(d,ic,x+19,620,CYAN)
-    txt(d,x+80,614,v["sources"][i]["label"],20,True)
-    wrapped(d,x+80,645,v["sources"][i]["detail"],229,15,(229,240,247))
+    rounded(x,SOURCE_TOP,x+320,SOURCE_TOP+87,outline=(129,219,237),fill=(13,55,77),opacity=225,r=18,glow=(56,153,193))
+    n=layer();d=ImageDraw.Draw(n);icon(d,ic,x+19,SOURCE_TOP+19,CYAN)
+    txt(d,x+80,SOURCE_TOP+13,v["sources"][i]["label"],20,True)
+    wrapped(d,x+80,SOURCE_TOP+44,v["sources"][i]["detail"],229,15,(229,240,247))
     image.alpha_composite(n)
 # Decision/action/results example loop, visibly a separate business flow
-p=bezier((96,483),(12,540),(47,737),(171,778))
+p=bezier((78,483),(10,542),(29,738),(171,778))
 arrow(p,CYAN,5)
-p=bezier((1120,779),(1177,771),(1188,568),(1125,482))
+p=bezier((1120,779),(1190,767),(1194,561),(1141,482))
 arrow(p,CYAN,5)
 rounded(171,735,1120,822,outline=(204,176,248),fill=(24,43,80),opacity=236,r=26,glow=LAV)
 for i,ic in enumerate(("target","action","refresh")):
