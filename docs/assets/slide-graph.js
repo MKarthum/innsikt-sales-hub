@@ -72,8 +72,15 @@ function renderCanvas(input,slide,esc){
  for(let i=0;i<slide.consumers.length;i++){
   const x=coord(i);add(edge(graph,'context','consumers:'+i),[[x,210],[x,170]],'up');
  }
+ // Sources join a shared feed into the context. Parallel vertical arrows
+ // would misleadingly pair data platforms with "meaning", systems with
+ // "situation", and external sources with "rules".
  for(let i=0;i<slide.sources.length;i++){
-  const x=coord(i);add(edge(graph,'sources:'+i,'context'),[[x,560],[x,520]],'up');
+  const x=coord(i);
+  const d=i===1?'M500 560V520':i===0
+   ?'M167 560V544Q167 540 174 540H494Q500 540 500 533V520'
+   :'M833 560V544Q833 540 826 540H506Q500 540 500 533V520';
+  add(edge(graph,'sources:'+i,'context'),[[x,560],[500,520]],'up',d);
  }
  // The left lane starts at the context boundary and ends at the decision rail.
  // It must not terminate on top of the first decision icon.
