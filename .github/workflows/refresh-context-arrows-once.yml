@@ -1,0 +1,42 @@
+name: Engangsgenerering av presise piler
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  refresh:
+    if: contains(github.event.head_commit.message, '[refresh-context-arrows]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer bildeavhengighet
+        run: python3 -m pip install --disable-pip-version-check pillow
+      - name: Regenerer godkjent versjon fra kanonisk modell
+        run: |
+          python3 scripts/render-context-platform-image.py
+          node scripts/presentation-illustrations.mjs revoke ai-context-platforms-2027 rich-image
+          node scripts/presentation-illustrations.mjs import ai-context-platforms-2027 rich-image media/illustrations/input-rich-image.png
+          node scripts/presentation-illustrations.mjs approve ai-context-platforms-2027 rich-image 'Assistentens faglige og visuelle gjennomgang. Brukergodkjenning gjenstår' --faglig-ok --visuelt-ok
+      - name: Egen versjon for genererte bildeendringer
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          f=pathlib.Path('docs/data/site.json')
+          t=f.read_text()
+          assert '"0.18.87"' in t
+          f.write_text(t.replace('"0.18.87"','"0.18.88"'))
+          f=pathlib.Path('docs/index.html')
+          t=f.read_text()
+          assert 'v=0.18.87' in t
+          f.write_text(t.replace('v=0.18.87','v=0.18.88'))
+          PY
+      - name: Publiser sammenhengende asset og manifest
+        run: |
+          git config user.name 'Innsikt CI'
+          git config user.email 'actions@users.noreply.github.com'
+          git add docs/data/site.json docs/index.html docs/data/presentation-illustrations.json
+          git add -f docs/assets/illustrations/ai-context-platforms-2027-rich-image.webp media/illustrations/masters/ai-context-platforms-2027-rich-image.png
+          git diff --cached --quiet && exit 0
+          git commit -m 'release 0.18.88: oppdater rike piler og bildemanifest'
+          git push origin HEAD:main
