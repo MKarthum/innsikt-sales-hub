@@ -46,7 +46,7 @@ jobs:
       - name: Commit illustrasjon og bildemanifest
         run: |
           git config user.name 'Innsikt CI'
-          git config user.email "$(printf 'ci\\100users.noreply.github.com')"
+          git config user.email "$(printf 'ci\100users.noreply.github.com')"
           mkdir -p artifacts
           printf '%s\n' "$GITHUB_RUN_ID" > artifacts/context-review-run.txt
           git add docs/data/site.json docs/index.html docs/data/presentation-illustrations.json
@@ -57,7 +57,7 @@ jobs:
         if: failure()
         run: |
           git config user.name 'Innsikt CI'
-          git config user.email "$(printf 'ci\\100users.noreply.github.com')"
+          git config user.email "$(printf 'ci\100users.noreply.github.com')"
           mkdir -p artifacts
           printf '%s\n' "$GITHUB_RUN_ID" > artifacts/context-review-failed-run.txt
           git add -f artifacts/context-review-failed-run.txt
