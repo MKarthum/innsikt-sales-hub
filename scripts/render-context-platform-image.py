@@ -268,7 +268,10 @@ for i,(ic,x) in enumerate(cons):
     txt(d,x+68,223,v["consumers"][i]["label"],22,True)
     wrapped(d,x+68,253,v["consumers"][i]["detail"],238,15,(220,227,251))
     image.alpha_composite(n)
-    arrow([(x+90,337),(x+90,309)],LAV,5)
+    cx=x+90
+    dx=(cx-609.5)/532.5
+    rim=round(453.5-113.5*math.sqrt(1-dx*dx))
+    arrow([(cx,rim),(cx,301)],LAV,5)
 # Context glass halo, layered gradient ellipse
 gl=layer();gd=ImageDraw.Draw(gl);gd.ellipse((70,325,1140,582),fill=(173,67,238,130))
 image.alpha_composite(gl.filter(ImageFilter.GaussianBlur(26)))
@@ -299,7 +302,10 @@ for i,ic in enumerate(("meaning","situation","shield")):
     image.alpha_composite(n)
 # Source connectors, avoid implying direct one-to-one mapping of sources to consumers.
 for i in range(3):
-    cx=273+i*337;arrow([(cx,596),(cx,558)],CYAN,5)
+    cx=273+i*337
+    dx=(cx-609.5)/532.5
+    rim=round(453.5+113.5*math.sqrt(1-dx*dx))
+    arrow([(cx,601),(cx,rim)],CYAN,5)
 for i,ic in enumerate(("database","systems","cloud")):
     x=113+i*337
     rounded(x,601,x+320,688,outline=(129,219,237),fill=(13,55,77),opacity=225,r=18,glow=(56,153,193))
@@ -308,9 +314,9 @@ for i,ic in enumerate(("database","systems","cloud")):
     wrapped(d,x+80,645,v["sources"][i]["detail"],229,15,(229,240,247))
     image.alpha_composite(n)
 # Decision/action/results example loop, visibly a separate business flow
-p=bezier((97,515),(13,570),(70,740),(156,778))
+p=bezier((96,483),(12,540),(47,737),(171,778))
 arrow(p,CYAN,5)
-p=bezier((1124,780),(1225,725),(1174,550),(1126,528))
+p=bezier((1120,779),(1177,771),(1188,568),(1125,482))
 arrow(p,CYAN,5)
 rounded(171,735,1120,822,outline=(204,176,248),fill=(24,43,80),opacity=236,r=26,glow=LAV)
 for i,ic in enumerate(("target","action","refresh")):
