@@ -197,7 +197,7 @@ def arrow(points,color=CYAN,width=6,glow=True,alpha=235):
     image.alpha_composite(n)
 def bezier(a,b,c,d,n=35):
     return [((1-t)**3*a[0]+3*(1-t)**2*t*b[0]+3*(1-t)*t*t*c[0]+t**3*d[0],
-             (1-t)**3*a[1]+(1-t)**3*a[1]+3*(1-t)**2*t*b[1]+3*(1-t)*t*t*c[1]+t**3*d[1]) for t in (i/n for i in range(n+1))]
+             (1-t)**3*a[1]+3*(1-t)**2*t*b[1]+3*(1-t)*t*t*c[1]+t**3*d[1]) for t in (i/n for i in range(n+1))]
 
 # Superellipse: an elliptical silhouette with gently squared sides.
 # All three facet cards must fit fully inside, including their outer corners.
