@@ -24,12 +24,12 @@ jobs:
           import pathlib
           f=pathlib.Path('docs/data/site.json')
           t=f.read_text()
-          assert '"0.18.87"' in t
-          f.write_text(t.replace('"0.18.87"','"0.18.88"'))
+          assert '"0.18.89"' in t
+          f.write_text(t.replace('"0.18.89"','"0.18.90"'))
           f=pathlib.Path('docs/index.html')
           t=f.read_text()
-          assert 'v=0.18.87' in t
-          f.write_text(t.replace('v=0.18.87','v=0.18.88'))
+          assert 'v=0.18.89' in t
+          f.write_text(t.replace('v=0.18.89','v=0.18.90'))
           PY
       - name: Publiser sammenhengende asset og manifest
         run: |
@@ -38,5 +38,5 @@ jobs:
           git add docs/data/site.json docs/index.html docs/data/presentation-illustrations.json
           git add -f docs/assets/illustrations/ai-context-platforms-2027-rich-image.webp media/illustrations/masters/ai-context-platforms-2027-rich-image.png
           git diff --cached --quiet && exit 0
-          git commit -m 'release 0.18.88: oppdater rike piler og bildemanifest'
+          git commit -m 'release 0.18.90: oppdater rike piler og bildemanifest'
           git push origin HEAD:main
