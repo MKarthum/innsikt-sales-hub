@@ -53,8 +53,14 @@ assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'Feedback must 
 assert.ok(!html.includes('cp-feedback-track'),'The old hard-coded reverse-loop must not survive');
 const endRule=html.match(/data-edge-id="updated-context"[^>]*><path class="cp-graph-track" d="([^"]+)"\/><path class="cp-graph-arrowhead" d="([^"]+)"/);
 assert.ok(endRule,'Feedback connector has a path and an arrowhead');
-assert.ok(endRule[1].endsWith('970 300')&&endRule[1].includes(' C'),'Smooth feedback curve must terminate at the context edge');
-assert.ok(endRule[2].includes('L970 300L'),'Arrowhead tip must coincide with the route endpoint');
+assert.ok(endRule[1].startsWith('M1000 843')&&endRule[1].endsWith('1000 350')&&endRule[1].includes(' C'),'The return curve must attach from the final cycle rail to the context boundary');
+assert.ok(endRule[2].includes('L1000 350L'),'Arrowhead tip must coincide with the right context boundary');
+const supportRule=html.match(/data-edge-id="context-decision"[^>]*><path class="cp-graph-track" d="([^"]+)"\/><path class="cp-graph-arrowhead" d="([^"]+)"/);
+assert.ok(supportRule&&supportRule[1].startsWith('M0 350')&&supportRule[1].endsWith('0 843'),'The decision route must attach to the left cycle boundary, not overlap its icon');
+assert.ok(html.includes('M1118 800C1170 787')&&html.includes('1161 541 1114 519'),'The native return route must end on the ellipse and remain left of the outcomes');
+const recipe=fs.readFileSync('scripts/render-context-platform-image.py','utf8');
+assert.ok(recipe.includes('arrow([(cx,rim),(cx,301)]')&&recipe.includes('arrow([(cx,601),(cx,rim)]'),'Bitmap source and target arrows must use actual ellipse intersections');
+assert.ok(recipe.includes('bezier((96,483)')&&recipe.includes('bezier((1120,779)'),'Bitmap feedback must attach at its source/target boundaries');
 assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
 assert.ok(html.includes('data-native-slide-scene="context-platforms"'),'Composite view needs one native SVG stage');
 assert.ok(html.includes('class="cpn-consumer-rail-panel"'),'Consumer group shares one visual glass panel');
