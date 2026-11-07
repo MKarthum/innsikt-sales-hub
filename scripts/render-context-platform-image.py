@@ -35,24 +35,115 @@ def font(size,bold=False):
     raise FileNotFoundError("DejaVu Sans-font mangler. Angi PRESENTATION_FONT_REGULAR og PRESENTATION_FONT_BOLD")
 NAVY=(4,19,38); LIGHT=(243,249,255); MINT=(163,255,246); CYAN=(83,235,244); LAV=(208,158,255)
 image=Image.new("RGBA",(W,H),NAVY+(255,))
-# One genuinely produced mountain landscape: existing licensed original master.
-landscape=Image.open(ROOT/"media/masters/context-rich-background.webp").convert("RGB")
-landscape=landscape.resize((W,H),Image.Resampling.LANCZOS)
-image.alpha_composite(landscape.convert("RGBA"))
-shade=Image.new("RGBA",(W,H));sd=ImageDraw.Draw(shade)
+# Distinctive original illustration, separate from the scenic/mountain direction.
+# The ambient data architecture is generated deterministically from vector primitives.
+# All labels, business connections and process arrows are rendered below from slides.json.
+bg=Image.new("RGBA",(W,H),NAVY+(255,))
+bd=ImageDraw.Draw(bg)
 for y in range(H):
-    s=(y/H)**1.7
-    sd.line((0,y,W,y),fill=(5,12,35,round(16+70*s)),width=1)
-for x in range(1150):
-    sd.line((x,0,x,H),fill=(2,13,34,round(35*(1-x/1150))),width=1)
+    t=y/(H-1)
+    r=round(5+8*t); g=round(19+16*t); b=round(37+25*t)
+    bd.line((0,y,W,y),fill=(r,g,b,255))
+image.alpha_composite(bg)
+
+def ambient_glow(cx,cy,radius,color,alpha=125):
+    global image
+    glow=Image.new("RGBA",(W,H),(0,0,0,0))
+    gd=ImageDraw.Draw(glow)
+    for rad in range(radius,0,-5):
+        intensity=round(alpha*(1-rad/radius)**1.65)
+        gd.ellipse((cx-rad,cy-round(rad*.83),cx+rad,cy+round(rad*.83)),
+                   fill=tuple(color)+(intensity,))
+    image.alpha_composite(glow)
+ambient_glow(1322,174,465,(71,105,225),66)
+ambient_glow(990,420,425,(44,174,204),33)
+ambient_glow(610,460,520,(113,60,196),48)
+
+# A quiet perspectival grid gives the information space architectural depth.
+grid=Image.new("RGBA",(W,H),(0,0,0,0))
+gd=ImageDraw.Draw(grid)
+horizon=450
+for x in range(-400,2200,100):
+    gd.line((780+(x-780)*.10,horizon,x,900),fill=(98,173,216,19),width=2)
+for depth in (.12,.2,.3,.43,.59,.79,1):
+    y=round(horizon+(900-horizon)*depth**1.5)
+    gd.line((0,y,W,y),fill=(91,164,214,round(8+14*depth)),width=2)
+image.alpha_composite(grid)
+
+# Unique right-hand visual: translucent connected glass towers and an orbital
+# knowledge structure. These are atmosphere, not additional semantic nodes.
+city=Image.new("RGBA",(W,H),(0,0,0,0))
+cd=ImageDraw.Draw(city)
+city_rng=random.Random(2027)
+towers=[(1015,340,1148,755),(1120,270,1240,760),(1215,305,1348,759),
+        (1312,230,1446,753),(1440,285,1587,780)]
+for index,(left,top,right,bottom) in enumerate(towers):
+    roof=city_rng.randint(20,52);front=(left+roof,top-roof)
+    cd.polygon([(left,top),(front[0],front[1]),(right+20,top-15),(right,bottom),(left,bottom)],
+               fill=(29+index*4,68+index*4,122+index*5,49),
+               outline=(108,209,253,64))
+    cd.line((front[0],front[1],front[0],bottom-18),fill=(153,210,253,48),width=2)
+    cd.line((right,top,right,bottom),fill=(104,231,247,43),width=2)
+    for y in range(top+35,bottom-12,37):
+        cd.line((left+18,y,right-14,y-7),fill=(122,209,247,27),width=2)
+    for col in range(2):
+        x=left+28+col*38
+        for y in range(top+55,bottom-14,64):
+            if city_rng.random()>.35:
+                cd.rounded_rectangle((x,y,x+6,y+18),radius=2,
+                     fill=(130,242,249,city_rng.randint(45,108)))
+image.alpha_composite(city.filter(ImageFilter.GaussianBlur(2)))
+image.alpha_composite(city)
+
+# Graphic orbit encircles a luminous centre in the upper-right negative space.
+orb=Image.new("RGBA",(W,H),(0,0,0,0))
+od=ImageDraw.Draw(orb)
+cx,cy=1378,162
+for rad in (80,126,167):
+    od.ellipse((cx-rad,cy-rad*.58,cx+rad,cy+rad*.58),
+               outline=(141,190,255,round(100-rad*.30)),width=3)
+od.arc((cx-154,cy-167,cx+154,cy+167),210,515,fill=(192,140,255,110),width=4)
+od.arc((cx-187,cy-90,cx+187,cy+90),-20,170,fill=(91,242,246,118),width=4)
+od.ellipse((cx-14,cy-14,cx+14,cy+14),fill=(204,228,255,200))
+for angle in (25,81,147,211,274,329):
+    a=math.radians(angle)
+    x=round(cx+162*math.cos(a));y=round(cy+94*math.sin(a))
+    od.line((cx,cy,x,y),fill=(119,199,246,35),width=2)
+    od.ellipse((x-4,y-4,x+4,y+4),fill=(150,237,252,170))
+image.alpha_composite(orb.filter(ImageFilter.GaussianBlur(12)))
+image.alpha_composite(orb)
+
+# Ambient structure remains well behind legible source panels and value callouts.
+trace=Image.new("RGBA",(W,H),(0,0,0,0))
+td=ImageDraw.Draw(trace)
+def ambient_curve(a,b,c,d,n=60):
+    return [((1-t)**3*a[0]+3*(1-t)**2*b[0]+3*(1-t)*t*t*c[0]+t**3*d[0],
+             (1-t)**3*a[1]+3*(1-t)**2*b[1]+3*(1-t)*t*t*c[1]+t**3*d[1])
+            for t in (i/n for i in range(n+1))]
+for i in range(6):
+    y=260+i*64
+    p=ambient_curve((635,y),(940,y-60),(1145,y-130),(1460,80+i*24))
+    td.line(p,fill=(102,193,247,28 if i%2 else 40),width=2)
+    for k in (14,32,48):
+        xx,yy=p[k]
+        td.ellipse((xx-3,yy-3,xx+3,yy+3),fill=(176,225,253,70))
+rng=random.Random(40)
+for i in range(170):
+    x=rng.randint(720,W-18);y=rng.randint(12,H-12)
+    if rng.random()<.7:
+        td.ellipse((x,y,x+1,y+1),fill=(146,205,242,rng.randint(18,72)))
+image.alpha_composite(trace)
+
+# The vignette protects typography and reinforces the context platform focal point.
+shade=Image.new("RGBA",(W,H),(0,0,0,0))
+sd=ImageDraw.Draw(shade)
+for x in range(1180):
+    sd.line((x,0,x,H),fill=(2,13,34,round(25*(1-x/1180))),width=1)
+for y in range(H):
+    t=y/(H-1)
+    sd.line((0,y,W,y),fill=(2,8,24,round(6+34*t*t)),width=1)
 image.alpha_composite(shade)
-# Magenta evening atmosphere; distant top right landscape deliberately remains visible.
-aura=Image.new("RGBA",(W,H))
-ad=ImageDraw.Draw(aura)
-for radius in range(370,0,-3):
-    strength=int(17*(1-radius/370)**1.5)
-    ad.ellipse((1440-radius,110-radius*.55,1440+radius,110+radius*.55),fill=(184,82,224,strength))
-image.alpha_composite(aura)
+
 def layer():return Image.new("RGBA",(W,H),(0,0,0,0))
 def rgba(color,alpha):return tuple(color[:3])+(alpha,)
 def txt(draw,x,y,value,size=20,bold=False,color=LIGHT,anchor=None,spacing=5):
