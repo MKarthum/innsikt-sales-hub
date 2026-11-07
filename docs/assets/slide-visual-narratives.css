@@ -405,7 +405,7 @@
 .cp-heading{position:relative;z-index:2;flex:0 0 auto}
 .cp-heading .scene-topline{min-height:1.65cqw}
 .cp-heading .cp-standfirst{margin:.28cqw 0 0;font:520 1.08cqw/1.15 var(--font-body);color:var(--pres-muted)}
-.cp-title{display:flex;align-items:baseline;gap:1.5cqw;margin-top:.35cqw;max-width:95cqw}
+.cp-title{display:flex;align-items:baseline;gap:2.2cqw;margin-top:.35cqw;max-width:95cqw}
 .story-scene .cp-title h2{font:830 4.35cqw/1.07 var(--font-display);letter-spacing:-.056em;color:var(--pres-fg)}
 .cp-title>span{font:760 2.0cqw/1.2 var(--font-display);color:var(--pres-accent);white-space:nowrap}
 .cp-diagram{
@@ -417,7 +417,7 @@
 .cp-tile-no{display:grid;place-items:center;flex:0 0 2.3cqw;height:2.3cqw;border-radius:50%;border:1px solid var(--cp-rule);font:800 1.02cqw var(--font-body);color:var(--pres-accent)}
 .cp-tile-copy{min-width:0;display:flex;flex-direction:column;gap:.4cqw;justify-content:center}
 .cp-tile strong{font:790 1.44cqw/1.14 var(--font-body);letter-spacing:-.02em}
-.cp-tile small{font:515 1.10cqw/1.25 var(--font-body);color:var(--pres-muted)}
+.cp-tile small{font:515 1.10cqw/1.25 var(--font-body);color:var(--pres-muted);text-wrap:balance}
 .cp-consumer{background:color-mix(in srgb,var(--pres-bg) 85%,var(--pres-fg))}
 .cp-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1cqw}
 .cp-links i{position:relative;width:1px;height:100%;justify-self:center;background:color-mix(in srgb,var(--pres-accent) 65%,var(--pres-fg))}
