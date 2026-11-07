@@ -1764,7 +1764,7 @@
           {
             "label": "Mennesker",
             "detail": "Innsikt og beslutninger",
-            "assetId": "customer-dialogue"
+            "assetId": "context-people"
           },
           {
             "label": "Applikasjoner",
@@ -1788,7 +1788,7 @@
           {
             "label": "Situasjon",
             "detail": "Tilstand, hendelser og historikk",
-            "assetId": "market-signal"
+            "assetId": "context-timeline"
           },
           {
             "label": "Rammer",
@@ -1810,24 +1810,24 @@
           {
             "label": "Eksterne kilder",
             "detail": "Partnere, offentlige data og API-er",
-            "assetId": "source-api"
+            "assetId": "context-external"
           }
         ],
         "cycle": [
           {
             "label": "Beslutning",
             "detail": "Menneske eller KI",
-            "assetId": "business-decision"
+            "assetId": "context-choice"
           },
           {
             "label": "Kontrollert handling",
             "detail": "I operative systemer",
-            "assetId": "delivery-loop"
+            "assetId": "context-guarded-action"
           },
           {
             "label": "Oppdatert kontekst",
             "detail": "Ny tilstand og effekt",
-            "assetId": "support-observe"
+            "assetId": "context-state-update"
           }
         ],
         "governanceLabel": "Styring og tillit",
@@ -2011,12 +2011,12 @@
           {
             "label": "Mer målrettet handling",
             "detail": "Fra innsikt til prosess",
-            "assetId": "delivery-loop"
+            "assetId": "context-guarded-action"
           },
           {
             "label": "Læring underveis",
             "detail": "Ny tilstand og effekt",
-            "assetId": "support-observe"
+            "assetId": "context-evidence"
           }
         ],
         "preferredArtDirection": "rich-image",
