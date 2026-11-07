@@ -1756,7 +1756,7 @@
         "gartner-context",
         "gartner-data26"
       ],
-      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet. Illustrasjonsobjektene for himmel, bakgrunnsfjell, fjelltopp, vei, skog og flagg kan byttes og posisjoneres uavhengig av faglige diagramkomponenter. Den illustrerte varianten kan tones gjennom CSS uten å endre kjernens datamodell. Enkel og rik illustrasjon deler eksakt samme faginnhold og diagram. De tre nivåene bytter bare dekorative sceneobjekter: enkel illustrasjon bruker SVG, rik stil et tekstfritt generert bilde, og sammensatt stil kombinerer bildet med selvstendige lys- og dybdeeffekter. De tre punktene til høyre illustrerer mulige gevinster, ikke effekter som oppstår automatisk: bedre beslutninger, mer målrettet handling og læring gjennom oppdatert tilstand.",
+      "speakerBase": "Fremtidsbilde for 2027 og videre, ikke en standardisert referansearkitektur eller et løfte om fullautomatisering. Gartner løfter AI Context Platforms som strategisk trend. Kontekst skal gjøre relevante begreper, relasjoner, operativ tilstand og styringsrammer tilgjengelige for mennesker, applikasjoner og KI. Figuren tar ikke stilling til om dette leveres fra én plattform eller flere samvirkende tjenester. Pilene viser logiske relasjoner, ikke en obligatorisk datarute. Dataplattformer, operative systemer og eksterne kilder kan bidra uten å samles fysisk. Handling må gjennom autoriserte operative grensesnitt, og resultater kan gi ny tilstand og kontekst. Kvalitet, eierskap, tilgangskontroll og sporbarhet er forutsetninger. Det eldre lysbildet «Agenter trenger kontekst – ikke bare data» gir en enklere innføring; dette lysbildet viser det bredere økosystemet. Den faglige modellen kan vises som et portabelt diagram og som særskilt godkjente bildeillustrasjoner. En bildeillustrasjon må oppdateres og godkjennes når betydning, begreper eller pilretninger endres. De tre punktene til høyre illustrerer mulige gevinster, ikke effekter som oppstår automatisk: bedre beslutninger, mer målrettet handling og læring gjennom oppdatert tilstand.",
       "visual": {
         "scene": "context-platforms",
         "period": "2027 og videre",
@@ -1840,7 +1840,9 @@
         "artDirections": [
           "illustrated",
           "rich",
-          "cinematic"
+          "cinematic",
+          "restrained",
+          "rich-image"
         ],
         "artwork": {
           "version": 1,

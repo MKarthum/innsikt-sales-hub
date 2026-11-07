@@ -3,11 +3,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+execFileSync(process.execPath,['scripts/presentation-illustrations.mjs','check'],{stdio:'inherit'});
 import JSZip from 'jszip';
 
 const manifest=JSON.parse(fs.readFileSync('media/images.json','utf8'));
 const assets=JSON.parse(fs.readFileSync('docs/data/visual-assets.json','utf8'));
-const raster=new Set(assets.items.filter(x=>/\.(?:png|jpe?g|webp)$/i.test(x.path)).map(x=>x.path));
+const illustrations=JSON.parse(fs.readFileSync('docs/data/presentation-illustrations.json','utf8'));
+const raster=new Set([...assets.items.filter(x=>/\.(?:png|jpe?g|webp)$/i.test(x.path)).map(x=>x.path),...illustrations.variants.filter(x=>x.approvalStatus==='approved').map(x=>x.publicPath.replace(/^\.\//,''))]);
 const zip=new JSZip();
 let bytes=0,count=0;
 function add(dir){

@@ -48,7 +48,8 @@ for(const slide of slides){
  assert.ok(budget<=manifest.policy.webMaxBytesPerSlide,'Slide image object total too large: '+slide.id+' / '+budget+' bytes');
 }
 const web=walk('docs');
-const publishedRaster=new Set(catalog.items.filter(a=>/\.(?:png|webp|jpe?g)$/i.test(a.path)).map(a=>'docs/'+a.path));
+const illustrations=JSON.parse(fs.readFileSync('docs/data/presentation-illustrations.json','utf8'));
+const publishedRaster=new Set([...catalog.items.filter(a=>/\.(?:png|webp|jpe?g)$/i.test(a.path)).map(a=>'docs/'+a.path),...illustrations.variants.filter(a=>a.approvalStatus==='approved').map(a=>'docs/'+a.publicPath.replace(/^\.\//,''))]);
 for(const file of web.filter(p=>/\.(?:png|webp|jpe?g)$/i.test(p))){
  assert.ok(publishedRaster.has(file),'Unregistered raster image in published website: '+file);
  assert.ok(fs.statSync(file).size<=manifest.policy.webMaxBytesPerImage,'Image exceeds cap: '+file);

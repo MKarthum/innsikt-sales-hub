@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "description": "Godkjente illustrasjoner er versjonerte, faglige snapshots. Ikke-godkjente bildefiler skal aldri ligge i docs/.",
+  "variants": [
+    {
+      "sourceSlideId": "ai-context-platforms-2027",
+      "styleId": "restrained",
+      "renderRecipeVersion": "1",
+      "assetId": "presentation-ai-context-platforms-2027-restrained",
+      "approvalStatus": "awaiting-asset",
+      "contentHash": null,
+      "publicPath": null,
+      "masterPath": null,
+      "masterSha256": null,
+      "draftPath": null,
+      "fileSha256": null,
+      "approvedAt": null,
+      "reviewedBy": null
+    },
+    {
+      "sourceSlideId": "ai-context-platforms-2027",
+      "styleId": "rich-image",
+      "renderRecipeVersion": "1",
+      "assetId": "presentation-ai-context-platforms-2027-rich-image",
+      "approvalStatus": "awaiting-asset",
+      "contentHash": null,
+      "publicPath": null,
+      "masterPath": null,
+      "masterSha256": null,
+      "draftPath": null,
+      "fileSha256": null,
+      "approvedAt": null,
+      "reviewedBy": null
+    }
+  ]
+}

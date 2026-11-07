@@ -1,0 +1,55 @@
+# Bildebaserte presentasjoner
+
+## Prinsipp
+
+Det faglige innholdet eies av docs/data/slides.json. Den samme sliden kan vises som native diagram, nøktern illustrasjon og rik illustrasjon. En bildebasert illustrasjon er et godkjent visuelt snapshot, aldri en alternativ kilde til fagdata. Native diagram kan overta hele mottakerens CSS-skin; et godkjent bilde kan ikke forventes å endre innhold og farger gjennom CSS.
+
+Denne implementasjonen er begrenset til benchmarken ai-context-platforms-2027. Tidligere sceneobjekter beholdes midlertidig for å unngå regresjoner i andre presentasjoner.
+
+## Modell, manifest og statuser
+
+docs/assets/presentation-illustrations.js normaliserer synlige faglige tekstfelt og semantiske fra/til-relasjoner. Denne modellen hashes med SHA-256. Logo, dekorasjon, kilde-ID-er for overlegg og kildefiler inngår ikke i modellhashen. Endringer i faglige tekster og relasjoner påvirker hash og gjør godkjente bilder utdaterte.
+
+docs/data/presentation-illustrations.json registrerer sourceSlideId, styleId, renderRecipeVersion, contentHash, fileSha256, approvalStatus, approvedAt og reviewedBy.
+
+Statusene er awaiting-asset, in-review, approved og rejected. Bare approved med samsvarende modell- og bildefilhash får vises. Bildet krever en faktisk faglig og visuell godkjenning før status endres. En KI-generering er ikke en slik godkjenning.
+
+## Lage og godkjenne en illustrasjon
+
+Legg kildebildet på en autorisert maskin med repoet. Bildet må vise riktig antall kilder, kontekstfacetter, konsumenter og verdipunkter. Kontroller pilretninger og de logiske sammenhengene.
+
+For nøktern illustrasjon:
+
+    node scripts/presentation-illustrations.mjs import ai-context-platforms-2027 restrained /sti/til/bilde.png
+
+For rik illustrasjon byttes restrained til rich-image.
+
+Import lagrer kildeoriginalen i media/illustrations/masters, og et optimalisert WebP-utkast i media/illustrations/drafts. Utkast blir ikke distribuert. ImageMagick eller kompleks runtime-rendering er ikke nødvendig. Pillow optimaliserer til maks 1600 piksler bredde, normalt 250 KB, og oppskalerer aldri et lite bilde.
+
+Etter manuell visuell og faglig kontroll:
+
+    node scripts/presentation-illustrations.mjs approve ai-context-platforms-2027 restrained GODKJENNER --faglig-ok --visuelt-ok
+
+Godkjenner skal være en reell, dokumenterbar reviewer. Kommandoen publiserer den godkjente derivatfilen i docs/assets/illustrations, og registrerer hash og godkjenningsdato.
+
+For å trekke en variant tilbake:
+
+    node scripts/presentation-illustrations.mjs revoke ai-context-platforms-2027 restrained
+
+Kontroller med:
+
+    node scripts/presentation-illustrations.mjs check
+
+## Faglig kontroll av benchmarken
+
+Dataplattformer, operative systemer og eksterne kilder kan bidra med relevant tilstand og kunnskap. Virksomhetskontekst organiserer betydning, situasjon og rammer; mennesker, applikasjoner og KI-agenter benytter dette i ulike arbeidsoppgaver. Beslutninger kan føre til autoriserte handlinger; resultater og endret tilstand kan informere konteksten igjen. Grafen viser logiske relasjoner, ikke én tvungen dataflyt eller en sekvens alle prosesser må følge.
+
+Styring og tillit må omfatte datakvalitet, eierskap, passende tilganger, sporbarhet og menneskelig ansvar. Ingen pil eller illustrasjon må implisere at en KI-agent har ubegrenset handlingsrett.
+
+## Portabilitet, eksport og ressursbudsjett
+
+Native diagram er CSS-skinbart. Et bilde er et selvstendig verk som kan gjenbrukes, erstattes med annen godkjent bildestil eller genereres på nytt. Mottakerens logo holdes som eget overlegg, inkludert i eksport. Bildefiler lastes behovsstyrt og bygges bare inn som data-URI i den midlertidige eksportkopien. Kildeoriginaler under media distribueres ikke.
+
+Sikt mot 100 til 150 KB per bilde og bruk 250 KB som normal maksgrense. Vurder alltid skarphet og lesbarhet visuelt. Faglig godkjenning kan ikke erstattes av hash, størrelse eller en vellykket PNG-eksport.
+
+Claude Artifacts' faktiske begrensninger er ikke verifisert gjennom en import i målplattformen her. En slik ende-til-ende-test må gjennomføres før portabiliteten kan regnes som dokumentert. 20 MB skal ikke brukes som antatt universell grense.

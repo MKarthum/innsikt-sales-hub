@@ -39,7 +39,7 @@ Store originaler som samlet gjør repoet tungt, bør vurderes for separat, versj
 ## Størrelsesrammer
 
 - Standard: maksimal bredde 1920 piksler uten oppskalering, WebP kvalitet 86.
-- Maksimalt 500 KiB per distribuert rasterbilde, og samlet høyst 600 KB for katalogførte bildeobjekter i ett lysbilde, med automatisk kvalitetsreduksjon ved rebuild.
+- Maksimalt 250 KB for nye faglige bildeillustrasjoner (se PRESENTATION_IMAGE_ARCHITECTURE.md). For eksisterende dekorative objekter gjelder inntil videre 500 KiB per distribuert rasterbilde, og samlet høyst 600 KB for katalogførte bildeobjekter i ett lysbilde, med automatisk kvalitetsreduksjon ved rebuild.
 - Hele nettsted-/Artifact-pakken har foreløpig en konservativ unkomprimert ramme på 12 MiB, kontrollert i CI.
 - Et dekorativt bakgrunnsbilde skal ikke inneholde tekst, begreper, forbindelser eller organisasjonslogo.
 - Genererte bilder kan variere. Bildeforbedring må godkjennes visuelt, selv når checksummene stemmer.

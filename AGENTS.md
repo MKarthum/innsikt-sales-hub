@@ -99,6 +99,10 @@ Gjenbruk `docs/assets/glossary.js` både i oversikt, detaljvisninger og dynamisk
 Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til interaktive begreper. Popupen skal fungere på mobil og desktop, kunne brukes med tastatur, lukkes via Escape og uteklikk, føre fokus hensiktsmessig og holdes innenfor skjermen. Oppdater eksisterende innholds- og nettlesertester ved endringer.
 
 
+## Bildearkitektur for presentasjoner
+
+Ferdigrendrede, faglige illustrasjoner er tillatt når de fortsatt bygger på slides.json, har semantisk innholdshash og gjennomgår manuell faglig og visuell godkjenning før publisering. De trenger ikke være CSS-redigerbare. Se PRESENTATION_IMAGE_ARCHITECTURE.md. Legacy-renderere er midlertidige fallback-løsninger. Ikke massekonverter andre slides før benchmarken er godkjent.
+
 ## Presenter- og Artifact-prinsipper
 
 - Presenter har fast 16:9-visningsflate; ikke tilpass lysbildestørrelse etter innholdet. Flytt overløp til notater eller del det på flere lysbilder. Kontrast må verifiseres i både mørke og lyse flater.

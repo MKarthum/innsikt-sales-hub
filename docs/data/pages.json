@@ -976,13 +976,16 @@
     "singleExportInfo": "PNG, JPG, PDF eller PowerPoint. PDF og PowerPoint inneholder et høyoppløselig bilde av lysbildet.",
     "singleExportError": "Kunne ikke laste ned lysbildet.",
     "fullscreenExportLabel": "Last ned",
-    "toneIllustrated": "Enkel illustrasjon",
-    "toneIllustratedRich": "Rik illustrasjon (foto)",
+    "toneIllustrated": "Eldre vektorillustrasjon",
+    "toneIllustratedRich": "Eldre fotoillustrasjon",
     "toneAuto": "Anbefalt per lysbilde",
     "artLabel": "Illustrasjonsstil",
     "artAuto": "Anbefalt per lysbilde",
-    "artStandard": "Uten illustrasjon",
-    "toneIllustratedCinematic": "Sammensatt illustrasjon"
+    "artStandard": "Enkel diagramvisning",
+    "toneIllustratedCinematic": "Eldre sammensatt illustrasjon",
+    "artRestrained": "Nøktern illustrasjon",
+    "artRichImage": "Rik illustrasjon",
+    "imagePending": "Bildevarianten er ikke godkjent. Viser diagramvisning."
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",

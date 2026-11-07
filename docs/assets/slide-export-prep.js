@@ -2,7 +2,7 @@
    WebP inside SVG foreignObject can be omitted by WebKit even when displayed
    normally; convert local raster images to PNG in a disposable export clone.
    Semantic markup and the live DOM are never modified. */
-const safePath=/^\.\/assets\/library\/(?:vendor|external|original)\/[a-z0-9-]+\.(?:svg|png|jpg|jpeg|webp)$/;
+const safePath=/^\.\/assets\/(?:library\/(?:vendor|external|original)\/[a-z0-9-]+\.(?:svg|png|jpg|jpeg|webp)|illustrations\/[a-z0-9-]+\.webp)$/;
 function readAsDataUrl(blob){
  return new Promise((resolve,reject)=>{
   const reader=new FileReader();
@@ -52,7 +52,7 @@ export async function prepareSlideMarkupForExport(markup){
  const replacements=new Map(await Promise.all(urls.map(async url=>[url,await toDataUrl(url)])));
  for(const img of images){
   const src=img.getAttribute('src');
-  if(src?.startsWith('./assets/library/')&&!safePath.test(src))
+  if(src?.startsWith('./assets/')&&!safePath.test(src))
    throw Error('Ugyldig ressursbane ved eksport: '+src);
   if(replacements.has(src)){
    img.setAttribute('src',replacements.get(src));
@@ -62,7 +62,7 @@ export async function prepareSlideMarkupForExport(markup){
  }
  for(const image of svgImages){
   const href=image.getAttribute('href');
-  if(href?.startsWith('./assets/library/')&&!safePath.test(href))
+  if(href?.startsWith('./assets/')&&!safePath.test(href))
    throw Error('Ugyldig SVG-bildebane ved eksport: '+href);
   if(replacements.has(href))image.setAttribute('href',replacements.get(href));
  }
