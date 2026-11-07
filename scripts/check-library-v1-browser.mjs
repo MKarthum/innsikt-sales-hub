@@ -59,6 +59,7 @@ try{
  await p.keyboard.press('Escape');
  await full.waitFor({state:'detached'});
  assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId);
+ await opener.waitFor({state:'visible'});
  assert.ok(await opener.isVisible(),'Escape returns to slide details');
  // Normal click on the native anchor closes, without any handler.
  await opener.focus();await p.keyboard.press('Enter');await full.waitFor();
