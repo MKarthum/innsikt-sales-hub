@@ -109,21 +109,26 @@ try{
   assert.ok(fullMetrics.meanDiff<48,'Fullscreen direction mismatch '+direction+' '+JSON.stringify(fullMetrics));
   await page.locator('.slide-fullscreen-close').click();
   await page.locator('#slide-library-fullscreen-page').waitFor({state:'detached'});
-  // Presenter uses the same underlying slide and selected illustration mode.
-  await page.locator('#present-button').click();
-  await page.locator('#present-modal .story-scene').waitFor();
-  const presenterScene=page.locator('#present-modal .story-scene');
-  assert.equal(await presenterScene.getAttribute('data-art-direction'),direction);
-  const presenter=await read(page.locator('#present-modal [data-slide-download="png"]'),'png');
-  fs.writeFileSync(path.join(output,direction+'-presenter.png'),presenter);
-  const presenterMetrics=await compare(presenter,reference,'image/png');
-  assert.ok(presenterMetrics.meanDiff<48,'Presenter direction mismatch '+direction+' '+JSON.stringify(presenterMetrics));
-  await page.locator('#present-modal .modal-close').click();
-  await page.locator('#present-modal').waitFor({state:'detached'});
  }
+ // Benchmark is not part of the curated Presenter decks. Compare Presenter
+ // against the slide it actually shows, not against a different library slide.
+ await page.locator('#present-button').click();
+ const presenterFrame=page.locator('#present-modal .present-frame');
+ await presenterFrame.locator('.story-scene').waitFor();
+ const presenterScreen=await presenterFrame.screenshot();
+ fs.writeFileSync(path.join(output,'presenter-screen.png'),presenterScreen);
+ const presenter=await read(page.locator('#present-modal [data-slide-download="png"]'),'png');
+ fs.writeFileSync(path.join(output,'presenter.png'),presenter);
+ const presenterMetrics=await compare(presenter,presenterScreen,'image/png');
+ assert.equal(presenterMetrics.w,1920);
+ assert.equal(presenterMetrics.h,1080);
+ assert.ok(presenterMetrics.stdDev>12&&presenterMetrics.meanDiff<48,
+  'Presenter must match its own currently visible slide '+JSON.stringify(presenterMetrics));
+ await page.locator('#present-modal .modal-close').click();
+ await page.locator('#present-modal').waitFor({state:'detached'});
  assert.equal(files.length,12);
  assert.ok(!errors.length,'JavaScript errors: '+errors.join(' | '));
  fs.writeFileSync(path.join(output,'metrics.json'),JSON.stringify(files,null,2));
- console.log('PASS 12 real exported files + 3 fullscreen + 3 Presenter PNG downloads, pixel-checked against live screenshots.');
+ console.log('PASS 12 real exported files + 3 fullscreen + 1 actual Presenter PNG download, pixel-checked against live screenshots.');
  console.log(files.map(f=>f.direction+'/'+f.format+': '+f.bytes+' bytes, difference '+f.metrics.meanDiff.toFixed(1)+', deviation '+f.metrics.stdDev.toFixed(1)).join('\n'));
 }finally{await browser.close()}
