@@ -22,7 +22,7 @@ Navnet `rich` er en teknisk stil-ID og tilsvarer «Nøktern illustrasjon» i bru
 
 Den rike visningen er foreløpig **bevisst ferdigrendret**, fordi det gir best samspill mellom lys, perspektiv, glød, figurer og kurvede piler med et lite distribusjonsfotavtrykk. Et hybridlag over denne kan vurderes hvis redigering, tilgjengelighet eller hyppige tekstendringer faktisk krever det. En slik overgang skal ikke antas å gi samme visuelle kvalitet uten skjermbildebasert kontroll.
 
-Bakgrunnen i den rike v2-oppskriften er nå en selvstendig, deterministisk illustrasjon med datanettverk, glassarkitektur og lys, **ikke** landskapsmotivet som brukes i den nøkterne visningen. `scripts/render-context-platform-image.py` tegner hele motivet fra `slides.json`, mens `scripts/presentation-illustrations.mjs` eier import, publiseringskandidat, godkjenning og hash. Oppskriften og kildefilene er ikke del av webdistribusjonen. Godkjent v2-WebP er 128 286 byte.
+Bakgrunnen i den rike v2-oppskriften er nå en selvstendig, deterministisk illustrasjon med datanettverk, glassarkitektur og lys, **ikke** landskapsmotivet som brukes i den nøkterne visningen. `scripts/render-context-platform-image.py` tegner hele motivet fra `slides.json`, mens `scripts/presentation-illustrations.mjs` eier import, publiseringskandidat, godkjenning og hash. Oppskriften og kildefilene er ikke del av webdistribusjonen. Den publiserte WebP-filen ligger innenfor grensen på 250 kB. Filstørrelse og SHA kontrolleres av manifestet, ikke av hardkodede tall i denne dokumentasjonen.
 
 ## Sporbarhet og godkjenning
 
