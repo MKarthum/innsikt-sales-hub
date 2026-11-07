@@ -1,0 +1,33 @@
+name: Preview kontekstillustrasjon
+on:
+  push:
+    paths:
+      - scripts/render-context-platform-image.py
+      - .github/workflows/preview-context-art.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Installer Pillow
+        run: python -m pip install Pillow==11.3.0
+      - name: Lag bilde fra kanonisk fagmodell
+        run: |
+          python3 scripts/render-context-platform-image.py
+          python3 scripts/optimize-presentation-image.py media/illustrations/input-rich-image.png media/illustrations/preview-rich-image.webp 250000
+      - name: Behold kildesnapshot til visuell kontroll
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: context-rich-design-preview
+          path: |
+            media/illustrations/input-rich-image.png
+            media/illustrations/preview-rich-image.webp
+          retention-days: 5
+          if-no-files-found: warn
