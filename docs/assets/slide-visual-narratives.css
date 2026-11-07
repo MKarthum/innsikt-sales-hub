@@ -403,7 +403,8 @@
 .cp-flagpole{fill:none;stroke:var(--pres-fg);stroke-width:3;stroke-linecap:round}
 .cp-flag{fill:var(--pres-accent);stroke:var(--pres-fg);stroke-width:1}
 .cp-heading{position:relative;z-index:2;flex:0 0 auto}
-.cp-heading .scene-topline{min-height:2cqw}
+.cp-heading .scene-topline{min-height:1.65cqw}
+.cp-heading .cp-standfirst{margin:.28cqw 0 0;font:520 1.08cqw/1.15 var(--font-body);color:var(--pres-muted)}
 .cp-title{display:flex;align-items:baseline;gap:1.5cqw;margin-top:.35cqw;max-width:95cqw}
 .story-scene .cp-title h2{font:830 4.35cqw/1.07 var(--font-display);letter-spacing:-.056em;color:var(--pres-fg)}
 .cp-title>span{font:760 2.0cqw/1.2 var(--font-display);color:var(--pres-accent);white-space:nowrap}
