@@ -44,6 +44,12 @@ export async function prepareSlideMarkupForExport(markup){
  const parsed=new DOMParser().parseFromString(markup,'text/html');
  const scene=parsed.body.querySelector('.story-scene');
  if(!scene)throw Error('Mangler lysbildescene i eksporten');
+ // The native 1600x900 SVG is a dormant alternate renderer for ordinary
+ // diagram/illustration directions. Leaving it in html-to-image's foreignObject
+ // clone causes very expensive SVG serialization in WebKit, despite display:none.
+ // Strip only the inactive scene from the disposable export document.
+ if(scene.dataset.artDirection!=='cinematic')
+  scene.querySelector('svg[data-native-slide-scene]')?.remove();
  const images=[...parsed.body.querySelectorAll('img[src]')];
  const svgImages=[...parsed.body.querySelectorAll('svg image[href]')];
  const originals=[...images.map(img=>img.getAttribute('src')),
