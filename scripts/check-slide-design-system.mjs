@@ -28,7 +28,8 @@ assert.ok(!/url\(\s*['"]?https?:/.test(css),'Design must be self-contained and o
 assert.ok(!/\[data-editorial\][^{]*background:\s*url/.test(css),'Information cannot depend on image backgrounds');
 const app=read('docs/assets/site.js');
 assert.ok(app.includes('data-editorial=')&&app.includes('data-design-focus'),'Renderer needs data-driven CSS roles');
-assert.ok(app.includes('slideWithDesign(s,window.InnsiktSlideVisuals.render('),'Visual slides must use shared design bridge');
+assert.ok(app.includes('window.InnsiktSlideVisuals.render(s,esc')&&app.includes('return slideWithDesign(s,html);'),'Visual slides must use shared design bridge');
+assert.ok(app.includes('window.InnsiktPresentationIllustrations?.render')&&app.includes('return slideWithDesign(s,image);'),'Approved image slides must use the same design bridge');
 assert.ok(app.includes('slideWithDesign(s,window.InnsiktArchitectureScenes.render('),'Architecture slides need same design bridge');
 const index=read('docs/index.html');
 assert.ok(index.includes('slide-editorial-system.css?v='),'Browser CSS missing');
