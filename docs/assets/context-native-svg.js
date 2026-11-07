@@ -130,6 +130,7 @@ function nativeSvg(slide,v,assets,esc){
   +txt(124,65,'DATAARKITEKTUR · FREMTIDSBILDE','cpn-kicker',esc)
   +txt(67,143,slide.title,'cpn-main-title',esc)
   +txt(920,143,v.period,'cpn-period',esc)
+  +txt(67,177,slide.body,'cpn-subtitle',esc)
   +'</g>';
  const cards=(list,y,baseIcon,group)=>{
   const xs=[105,443,781],w=324,cardHeight=group==='sources'?100:88;
