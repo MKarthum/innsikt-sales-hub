@@ -32,7 +32,14 @@ const icon=(kind,x,y)=>{
   '<circle cx="16" cy="16" r="12"/><path d="M16 7v9l7 4M8 26l-5 3"/>',
   '<path d="M7 5h19v20H7zM3 10v19h19M12 16l4 4 6-8"/>',
   '<path d="M7 16h18M18 9l7 7-7 7M7 4v24"/>',
-  '<path d="M17 2l10 5v10c0 8-7 12-10 14C14 29 7 25 7 17V7zM12 16l4 4 7-9"/>'
+  '<path d="M17 2l10 5v10c0 8-7 12-10 14C14 29 7 25 7 17V7zM12 16l4 4 7-9"/>',
+  // Semantic system, source and cycle icons. These must match their labels.
+  '<ellipse cx="16" cy="8" rx="11" ry="4"/><path d="M5 8v18c0 2 5 4 11 4s11-2 11-4V8M5 17c0 2 5 4 11 4s11-2 11-4"/>',
+  '<circle cx="16" cy="16" r="8"/><circle cx="16" cy="16" r="2"/><path d="M16 2v5M16 25v5M2 16h5M25 16h5M6 6l4 4M22 22l4 4M6 26l4-4M22 10l4-4"/>',
+  '<path d="M7 24a7 7 0 0 1-1-13 10 10 0 0 1 19 2 6 6 0 0 1 0 11Z"/>',
+  '<circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="5"/><path d="M16 16L30 2M24 2h6v6"/>',
+  '<rect x="4" y="5" width="24" height="22" rx="4"/><path d="M13 10l9 6-9 6z"/>',
+  '<path d="M26 12a10 10 0 0 0-18-4L5 11M5 5v6h6M6 20a10 10 0 0 0 18 4l3-3M21 21h6v6"/>'
  ];
  return '<g class="cpn-icon" transform="translate('+x+' '+y+')"><g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round">'+iconPaths[kind%iconPaths.length]+'</g></g>';
 };
@@ -135,7 +142,7 @@ function nativeSvg(slide,v,assets,esc){
    const x=xs[i];
    return '<g class="cpn-card cpn-card--'+group+'" data-node-id="'+group+':'+i+'">'
      +(group==='consumers'?'':panel(x,y,w,cardHeight,'cpn-panel'))
-     +icon(baseIcon+i,x+24,y+27)
+     +icon(Array.isArray(baseIcon)?baseIcon[i]:baseIcon+i,x+24,y+27)
      +txt(x+73,y+37,n.label,'cpn-card-title',esc)
      +detail(x+73,y+61,n.detail,'cpn-card-detail',esc,25)
      +'</g>';
@@ -147,9 +154,6 @@ function nativeSvg(slide,v,assets,esc){
  +'<path d="'+corePath(-8)+'" class="cpn-core-halo"/>'
  +'<path d="'+corePath(4)+'" class="cpn-core-glass"/>'
  +'<path d="'+corePath()+'" class="cpn-core-edge" data-core-shape="superellipse"/>'
- +'<path d="M95 461Q609 311 1124 461" class="cpn-core-shine"/>'
- +'<path d="M96 532Q244 569 390 555T677 559T1106 530" class="cpn-core-wave"/>'
- +'<path d="M100 553Q262 584 438 566T775 567T1116 547" class="cpn-core-wave cpn-core-wave--soft"/>'
  +txt(606,432,v.contextLabel,'cpn-core-title',esc,'text-anchor="middle"')
  +txt(606,466,v.contextLead,'cpn-core-lead',esc,'text-anchor="middle"')
  +v.facets.map((n,i)=>{
@@ -161,14 +165,14 @@ function nativeSvg(slide,v,assets,esc){
      +detail(x+65,529,n.detail,'cpn-facet-detail',esc,27)
      +'</g>';
  }).join('')+'</g>';
- const sources=cards(v.sources,631,3,'sources');
+ const sources=cards(v.sources,631,[10,11,12],'sources');
  const cycleX=[228,518,808];
  const cycle='<g class="cpn-cycle-container">'
   +panel(204,759,914,82,'cpn-cycle-panel',28)
   +v.cycle.map((n,i)=>{
     const x=cycleX[i];
     return '<g class="cpn-cycle-node" data-node-id="cycle:'+i+'">'
-      +icon([7,8,6][i],x,783)
+      +icon([13,14,15][i],x,783)
       +txt(x+47,790,n.label,'cpn-cycle-title',esc)
       +detail(x+47,811,n.detail,'cpn-cycle-detail',esc,28)
       +'</g>';
@@ -180,7 +184,7 @@ function nativeSvg(slide,v,assets,esc){
   +v.outcomes.map((n,i)=>{
     const y=432+i*120;
     return '<g class="cpn-outcome" data-node-id="outcomes:'+i+'">'
-      +icon([7,6,9][i],1248,y+13)
+      +icon([13,14,15][i],1248,y+13)
       +txt(1300,y+26,n.label,'cpn-outcome-title',esc)
       +detail(1300,y+50,n.detail,'cpn-outcome-detail',esc,28)
       +(i<2?'<path d="M1248 '+(y+93)+'H1510" class="cpn-separator"/>':'')
