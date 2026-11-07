@@ -212,5 +212,5 @@ function nativeSvg(slide,v,assets,esc){
   +'<g class="cpn-brand-overlay" data-brand-overlay="true" aria-hidden="true"/>'
   +'</svg>';
 }
-window.InnsiktContextNative={render:nativeSvg};
+window.InnsiktContextNative={render:nativeSvg,geometry:{core:CORE,facets:facetRects}};
 })();
