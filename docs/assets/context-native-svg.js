@@ -65,7 +65,7 @@ function graphEdges(v,esc){
  // Anchor lines are intentionally behind panels. Rounded turns are outside nodes.
  for(let i=0;i<v.consumers.length;i++){
   const x=[270,607,944][i];
-  a+=pathFor('context','consumers:'+i,'M'+x+' 360V308',[x,308],[x,330],'cpn-arrow cpn-arrow--supply');
+  a+=pathFor('context','consumers:'+i,'M'+x+' 360V316',[x,316],[x,337],'cpn-arrow cpn-arrow--supply');
  }
  for(let i=0;i<v.sources.length;i++){
   const x=[270,607,944][i];
@@ -93,8 +93,8 @@ function nativeSvg(slide,v,assets,esc){
   // Semantics are individual nodes regardless of the outer illustration.
   const rail=group==='consumers'
    ?'<g class="cpn-consumer-rail" aria-hidden="true">'
-      +panel(105,y,1000,88,'cpn-consumer-rail-panel',32)
-      +'<path d="M436 '+(y+15)+'V'+(y+73)+'M774 '+(y+15)+'V'+(y+73)+'" class="cpn-rail-divider"/>'
+      +panel(105,y-8,1000,104,'cpn-consumer-rail-panel',36)
+      +'<path d="M436 '+(y+8)+'V'+(y+85)+'M774 '+(y+8)+'V'+(y+85)+'" class="cpn-rail-divider"/>'
       +'</g>'
    :'';
   return rail+list.map((n,i)=>{
@@ -116,8 +116,8 @@ function nativeSvg(slide,v,assets,esc){
  +'<path d="M95 461Q609 311 1124 461" class="cpn-core-shine"/>'
  +'<path d="M96 532Q244 569 390 555T677 559T1106 530" class="cpn-core-wave"/>'
  +'<path d="M100 553Q262 584 438 566T775 567T1116 547" class="cpn-core-wave cpn-core-wave--soft"/>'
- +txt(606,419,v.contextLabel,'cpn-core-title',esc,'text-anchor="middle"')
- +txt(606,453,v.contextLead,'cpn-core-lead',esc,'text-anchor="middle"')
+ +txt(606,432,v.contextLabel,'cpn-core-title',esc,'text-anchor="middle"')
+ +txt(606,466,v.contextLead,'cpn-core-lead',esc,'text-anchor="middle"')
  +v.facets.map((n,i)=>{
    const xs=[129,455,781],x=xs[i];
    return '<g class="cpn-facet" data-node-id="facets:'+i+'">'

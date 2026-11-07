@@ -120,6 +120,28 @@ try{
   return results;
  });
  assert.deepEqual(overflowingLabels,[],'Every source and context facet label must remain inside its panel');
+ const otherOverflow=await platform.locator('svg[data-native-slide-scene]').evaluate(svg=>{
+  const errors=[];
+  const rail=svg.querySelector('.cpn-consumer-rail-panel')?.getBBox();
+  const columnBounds=[436,774,1105];
+  for(const [i,group] of [...svg.querySelectorAll('.cpn-card--consumers')].entries()){
+   for(const label of group.querySelectorAll('text')){
+    const box=label.getBBox();
+    if(!rail||box.y<rail.y+5||box.y+box.height>rail.y+rail.height-5||
+       box.x+box.width>columnBounds[i]-8)
+       errors.push('consumer '+i+': '+label.textContent);
+   }
+  }
+  const panel=svg.querySelector('.cpn-outcomes-panel')?.getBBox();
+  for(const label of svg.querySelectorAll('.cpn-outcome text')){
+   const box=label.getBBox();
+   if(!panel||box.x+box.width>panel.x+panel.width-9||
+      box.y+box.height>panel.y+panel.height-8)
+      errors.push('outcome: '+label.textContent);
+  }
+  return errors;
+ });
+ assert.deepEqual(otherOverflow,[],'Consumer and value labels stay inside their panels');
  await page.evaluate(async()=>{
   const source=document.querySelector('svg[data-native-slide-scene] image[data-photo-role="landscape"]')?.getAttribute('href');
   const image=new Image();image.src=source;await image.decode();
