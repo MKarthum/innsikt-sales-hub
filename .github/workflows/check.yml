@@ -134,6 +134,33 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: innsikt-context-exports
-          path: artifacts/context-exports/**
+          path: artifacts/context-exports-chromium/**
+          retention-days: 5
+          if-no-files-found: warn
+
+  context-exports-webkit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Installer testverktøy og WebKit
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx playwright install --with-deps webkit
+      - name: Start lokal testserver
+        run: |
+          python3 -m http.server 8769 --bind 127.0.0.1 > /tmp/innsikt-webkit-http.log 2>&1 &
+          sleep 2
+      - name: Kontroller benchmark-eksporter i WebKit
+        run: EXPORT_BROWSER=webkit node scripts/check-context-platform-exports-browser.mjs
+      - name: Last opp WebKit-baserte eksportfiler og skjermbilder
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: innsikt-context-exports-webkit
+          path: artifacts/context-exports-webkit/**
           retention-days: 5
           if-no-files-found: warn
