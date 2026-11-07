@@ -72,7 +72,7 @@ export async function flattenNativeScene(html,tone){
  frame.innerHTML=html;host.append(frame);document.body.append(host);
  try{
   await document.fonts?.ready;
-  const scene=frame.querySelector('.story-scene[data-art-direction="cinematic"]');
+  const scene=frame.querySelector('.story-scene[data-art-direction="cinematic"],.story-scene[data-art-direction="rich"]');
   const svg=scene?.querySelector('svg[data-native-slide-scene="context-platforms"]');
   if(!svg||getComputedStyle(svg).display==='none')return html;
   const png=await snapshotNativeSvg(svg);
@@ -81,6 +81,6 @@ export async function flattenNativeScene(html,tone){
   const url=png.replaceAll('&','&amp;').replaceAll('"','&quot;');
   return '<div class="story-scene scene-context-platforms" style="position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;display:block">'
    +'<img src="'+url+'" alt="" aria-hidden="true" style="display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:fill" decoding="sync" loading="eager">'
-   +'</div>';
+   +'<div class="cp-brand-overlay" aria-hidden="true"></div></div>';
  }finally{host.remove();}
 }
