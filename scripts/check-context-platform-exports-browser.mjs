@@ -34,7 +34,8 @@ try{
  const pdfImage=bytes=>{
   assert.equal(bytes.subarray(0,4).toString(),'%PDF');
   const src=bytes.toString('latin1');
-  assert.match(src,/\/MediaBox\s*\[\s*0\s+0\s+960\s+540\s*\]/);
+  const media=src.match(/\/MediaBox\s*\[([^\]]+)\]/)?.[1].trim().split(/\s+/).map(Number);
+  assert.ok(media&&media.length===4&&media.every((n,i)=>Math.abs(n-[0,0,960,540][i])<.02),'PDF page dimensions: '+media);
   const a=bytes.indexOf(Buffer.from([255,216,255]));
   const b=bytes.lastIndexOf(Buffer.from([255,217]));
   assert.ok(a>=0&&b>a,'PDF must embed its actual JPEG slide image');
@@ -96,6 +97,7 @@ try{
    assert.ok(metrics.stdDev>12,direction+'/'+format+' looks like a blank slide '+JSON.stringify(metrics));
    assert.ok(metrics.meanDiff<48,direction+'/'+format+' is not faithful to the visible slide '+JSON.stringify(metrics));
    files.push({direction,format,bytes:bytes.length,metrics});
+   console.log('EXPORT '+direction+'/'+format+' '+bytes.length+' bytes; meanDiff='+metrics.meanDiff.toFixed(1)+' stdDev='+metrics.stdDev.toFixed(1));
   }
   // Fullscreen must export the same selected direction, not a stale/detail default.
   await page.locator('[data-slide-preview-open="'+fileId+'"]').click();
