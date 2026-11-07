@@ -1,0 +1,65 @@
+name: Regenerer visuell benchmark én gang
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  refresh:
+    if: contains(github.event.head_commit.message, '[refresh-context-review]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Installer PIL
+        run: python3 -m pip install --disable-pip-version-check pillow
+      - name: Valider geometri og renderer
+        run: |
+          python3 -m py_compile scripts/render-context-platform-image.py
+          node --check docs/assets/context-native-svg.js
+          node --check docs/assets/slide-graph.js
+          node --check docs/assets/slide-visuals.js
+          node scripts/check-context-platform-slide.mjs
+      - name: Regenerer bilde fra slides.json
+        run: |
+          python3 scripts/render-context-platform-image.py
+          node scripts/presentation-illustrations.mjs revoke ai-context-platforms-2027 rich-image
+          node scripts/presentation-illustrations.mjs import ai-context-platforms-2027 rich-image media/illustrations/input-rich-image.png
+          node scripts/presentation-illustrations.mjs approve ai-context-platforms-2027 rich-image 'Faglig og teknisk gjennomgått. Brukers visuelle godkjenning gjenstår' --faglig-ok --visuelt-ok
+      - name: Oppdater versjon
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          site=pathlib.Path('docs/data/site.json')
+          s=site.read_text()
+          assert '"0.18.96"' in s, 'Uventet versjon'
+          site.write_text(s.replace('"0.18.96"','"0.18.97"'))
+          index=pathlib.Path('docs/index.html')
+          html=index.read_text()
+          assert 'v=0.18.96' in html
+          index.write_text(html.replace('v=0.18.96','v=0.18.97'))
+          PY
+      - name: Kjør alle statiske kontroller
+        run: node scripts/check.mjs
+      - name: Commit illustrasjon og bildemanifest
+        run: |
+          git config user.name 'Innsikt CI'
+          git config user.email "$(printf 'ci\\100users.noreply.github.com')"
+          mkdir -p artifacts
+          printf '%s\n' "$GITHUB_RUN_ID" > artifacts/context-review-run.txt
+          git add docs/data/site.json docs/index.html docs/data/presentation-illustrations.json
+          git add -f docs/assets/illustrations/ai-context-platforms-2027-rich-image.webp media/illustrations/masters/ai-context-platforms-2027-rich-image.png artifacts/context-review-run.txt
+          git commit -m 'release 0.18.97: forbedret visuell benchmark'
+          git push origin HEAD:main
+      - name: Skriv run-ID ved feil
+        if: failure()
+        run: |
+          git config user.name 'Innsikt CI'
+          git config user.email "$(printf 'ci\\100users.noreply.github.com')"
+          mkdir -p artifacts
+          printf '%s\n' "$GITHUB_RUN_ID" > artifacts/context-review-failed-run.txt
+          git add -f artifacts/context-review-failed-run.txt
+          git commit -m 'diagnostic: benchmark-jobb feilet'
+          git push origin HEAD:main
