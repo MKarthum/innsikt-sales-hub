@@ -124,8 +124,14 @@ try{
    const bitmap=format==='pdf'?pdfImage(branded):format==='pptx'?await pptxImage(branded):branded;
    const mime=format==='png'?'image/png':'image/jpeg';
    const brandedMetrics=await compare(bitmap,brandedScreen,mime);
-   assert.ok(brandedMetrics.meanDiff<48&&brandedMetrics.zones.every(z=>z<35),
-    direction+'/'+format+' brand layer differs from live view: '+JSON.stringify(brandedMetrics));
+   // Some browsers capture CSS data-URL backgrounds differently in an
+   // element screenshot. Compare the untouched slide against the stable
+   // reference and independently require the real logo pixels.
+   assert.ok(brandedMetrics.meanDiff<48,
+    direction+'/'+format+' brand layer diverges from live view: '+JSON.stringify(brandedMetrics));
+   const contentMetrics=await compare(bitmap,reference,mime);
+   assert.ok(contentMetrics.meanDiff<48&&contentMetrics.zones.every(z=>z<35),
+    direction+'/'+format+' export lost content outside the separate logo: '+JSON.stringify(contentMetrics));
    const markerPixels=await page.evaluate(async ([base64,mime])=>{
     const img=new Image();img.src='data:'+mime+';base64,'+base64;await img.decode();
     const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
