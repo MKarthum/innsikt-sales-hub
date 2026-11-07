@@ -47,6 +47,7 @@ jobs:
           git add scripts/presentation-illustrations.mjs docs/data/presentation-illustrations.json docs/assets/illustrations/ai-context-platforms-2027-rich-image.webp
           git diff --cached --stat
           git commit -m "design: publish reviewed context-rich information architecture"
+          git reset --hard HEAD
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
