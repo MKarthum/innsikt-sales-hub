@@ -4,12 +4,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import JSZip from 'jszip';
-import {chromium} from 'playwright';
+import {chromium,webkit} from 'playwright';
 
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
-const output='artifacts/context-exports';
+const engine=process.env.EXPORT_BROWSER==='webkit'?'webkit':'chromium';
+const output='artifacts/context-exports-'+engine;
 fs.mkdirSync(output,{recursive:true});
-const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+const browser=await (engine==='webkit'?webkit:chromium).launch({headless:true,...(engine==='chromium'?{args:['--no-sandbox']}:{})});
 const types=['png','jpg','pdf','pptx'];
 const directions=['standard','rich','rich-image'];
 const fileId='ai-context-platforms-2027';
