@@ -72,10 +72,12 @@ function graphEdges(v,esc){
  }
  for(let i=0;i<v.sources.length;i++){
   const x=[270,607,944][i];
-  // Facet cards occupy the lower face of the ellipse. The line arrives
-  // at its visible lower boundary rather than floating below the context.
-  const bottom=Math.max(566,rimY(x,false));
-  a+=pathFor('sources:'+i,'context','M'+x+' 621V'+bottom,[x,bottom],[x,621],'cpn-arrow cpn-arrow--supply');
+  // The three source edges converge into ONE inlet on the shared context.
+  // Straight per-column arrows would falsely link each source to one facet.
+  const d=i===1?'M607 621V583':i===0
+   ?'M270 621V613Q270 607 277 607H600Q607 607 607 600V583'
+   :'M944 621V613Q944 607 937 607H614Q607 607 607 600V583';
+  a+=pathFor('sources:'+i,'context',d,[607,583],[607,601],'cpn-arrow cpn-arrow--supply');
  }
  a+=pathFor('context','cycle:0','M105 519C35 550 30 715 95 765Q140 800 204 800',[204,800],[140,800],'cpn-arrow cpn-arrow--loop');
  // The return path stays in the narrow corridor LEFT of the outcomes panel
