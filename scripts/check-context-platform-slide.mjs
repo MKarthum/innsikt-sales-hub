@@ -86,10 +86,30 @@ assert.ok(html.includes('class="cpn-consumer-rail-panel"'),'Consumer group share
 assert.equal((html.match(/class="cpn-rail-divider"/g)||[]).length,1,'Consumers are separated without duplicate boxes');
 assert.ok(html.includes('data-photo-role="landscape"'),'The mountain background must remain a replaceable SVG image');
 const native=html.match(/<svg class="cp-native-svg"[\s\S]*?<\/svg>/)?.[0]||'';
-for(const [node,kind] of [['sources:0','database'],['sources:1','system'],['sources:2','cloud'],['cycle:0','decision'],['cycle:1','action'],['cycle:2','refresh']]){
+for(const [node,kind] of [
+ ['consumers:0','people'],['consumers:1','application'],['consumers:2','agent'],
+ ['facets:0','meaning'],['facets:1','timeline'],['facets:2','shield'],
+ ['sources:0','database'],['sources:1','system'],['sources:2','external'],
+ ['cycle:0','choice'],['cycle:1','guarded-action'],['cycle:2','state-update'],
+ ['outcomes:0','decision'],['outcomes:1','guarded-action'],['outcomes:2','evidence']
+]){
  const pattern=new RegExp('data-node-id="'+node+'"[^>]*>[\\s\\S]*?data-icon-role="'+kind+'"');
  assert.ok(pattern.test(native),'The native '+node+' icon does not match its semantic role '+kind);
 }
+const semanticAssets=['context-people','context-timeline','context-choice','context-guarded-action',
+ 'context-state-update','context-evidence','context-external'];
+for(const id of semanticAssets){
+ const asset=assets.items.find(x=>x.id===id);
+ assert.ok(asset&&asset.path.endsWith('/'+id+'.svg'),'Missing stable icon in the public asset catalog: '+id);
+ assert.ok(html.includes(id+'.svg'),'The standard view must use the same semantic icon: '+id);
+ assert.ok(recipe.includes('"'+id+'":'),'The rendered image must map the same semantic role: '+id);
+}
+const unrecognized=JSON.parse(JSON.stringify(slide.visual));
+unrecognized.facets[1].assetId='unknown-icon';
+assert.throws(()=>sandbox.window.InnsiktContextNative.render(slide,unrecognized,assets,escape),
+ 'Unmapped canonical icons must not silently render an unrelated pictogram');
+assert.ok(recipe.includes('ICON_BY_ASSET')&&recipe.includes('semantic_icon('),
+ 'The bitmap must choose pictograms by canonical assetId rather than fixed row index');
 assert.ok(!html.includes('class="cpn-core-shine"')&&!html.includes('class="cpn-core-wave"'),
  'Atmospheric waves must not compete with the semantic context cards');
 assert.equal((html.match(/class="cpn-arrow cpn-arrow--/g)||[]).length,10,'The native SVG stage uses exactly the same ten canonical relations');
