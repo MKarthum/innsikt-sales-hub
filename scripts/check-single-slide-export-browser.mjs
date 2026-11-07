@@ -60,61 +60,44 @@ try{
  const custom=await download('png');
  assert.notDeepEqual(custom,png,'Custom skin and tone affect exported PNG');
  assert.equal(await page.locator('.slide-single-download [data-slide-download-id="ai-thousand-analysts"]').count(),4);
- // Regression: decorative WebP must survive conversion to a downloadable PNG.
+ // The fully rendered illustration is one approved WebP, not a CSS approximation.
  await page.evaluate(()=>location.hash='#lysbilder/ai-context-platforms-2027');
  const photoScene=page.locator('.slide-library-detail-stage .story-scene');
  await photoScene.waitFor();
- await page.locator('#library-tone-mode').selectOption('strong');
- await page.locator('#library-art-mode').selectOption('cinematic');
- assert.equal(await photoScene.getAttribute('data-art-direction'),'cinematic');
- await photoScene.locator('[data-scene-object="rich-mountain-background"] img').evaluate(img=>img.decode());
+ await page.locator('#library-art-mode').selectOption('rich-image');
+ assert.equal(await photoScene.getAttribute('data-art-direction'),'rich-image');
+ const image=photoScene.locator('img.cp-approved-image');
+ await image.evaluate(img=>img.decode());
+ assert.equal(await image.evaluate(img=>img.naturalWidth),1600);
+ assert.equal(await image.evaluate(img=>img.naturalHeight),900);
  const embedded=await page.evaluate(async()=>{
   const {prepareSlideMarkupForExport}=await import('./assets/slide-export-prep.js');
   return prepareSlideMarkupForExport(document.querySelector('.slide-library-detail-stage .present-frame').innerHTML);
  });
- assert.ok(embedded.includes('data:image/png;base64,'),'Photographic source converted into an inline PNG');
- assert.match(embedded,/data-native-slide-scene="context-platforms"/,'Native semantic scene is exportable');
- const nativePhotoIsEmbedded=await page.evaluate(markup=>{
-  const doc=new DOMParser().parseFromString(markup,'text/html');
-  return doc.querySelector('svg[data-native-slide-scene] image[data-photo-role="landscape"]')
-   ?.getAttribute('href')?.startsWith('data:image/png;base64,')===true;
- },embedded);
- assert.ok(nativePhotoIsEmbedded,'Native SVG background image must be embedded before capture');
- const nativeProof=await page.evaluate(async encoded=>{
-  const {flattenNativeScene}=await import('./assets/context-native-export.js');
-  const html=await flattenNativeScene(encoded,'strong');
-  const extracted=html.match(/src="(data:image\/png;base64,[^"]+)"/);
-  if(!extracted)return {embedded:false};
-  const img=new Image();img.src=extracted[1];await img.decode();
-  return {embedded:true,width:img.naturalWidth,height:img.naturalHeight};
- },embedded);
- assert.deepEqual(nativeProof,{embedded:true,width:1920,height:1080},
-  'Native scene must rasterize completely at 1920x1080');
- assert.equal((embedded.match(/data-scene-mode="cinematic"/g)||[]).length,4,'Independent cinematic accents remain present');
+ assert.match(embedded,/class="cp-approved-image"/,'The approved bitmap is in the export scene');
+ assert.ok(embedded.includes('src="data:image/png;base64,'),'WebP is inlined as a portable PNG');
  const sceneScreenshot=await photoScene.screenshot();
  const photoPng=await download('png');
- fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
- fs.writeFileSync('artifacts/visual-pilot/context-platforms-native-export.png',photoPng);
  assert.equal(photoPng.readUInt32BE(16),1920);
  assert.equal(photoPng.readUInt32BE(20),1080);
- const photoComparison=await page.evaluate(async encoded=>{
-  const imageData=async source=>{
-   const img=new Image();img.src='data:image/png;base64,'+source;await img.decode();
-   const canvas=document.createElement('canvas');canvas.width=960;canvas.height=540;
-   const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,960,540);
-   return ctx.getImageData(0,0,960,540).data;
+ fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
+ fs.writeFileSync('artifacts/visual-pilot/context-platforms-bitmap-export.png',photoPng);
+ const mismatch=await page.evaluate(async pair=>{
+  const decode=async base64=>{
+   const img=new Image();img.src='data:image/png;base64,'+base64;await img.decode();
+   const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
+   const c=canvas.getContext('2d');c.drawImage(img,0,0,160,90);
+   return c.getImageData(0,0,160,90).data;
   };
-  const [live,exported]=await Promise.all(encoded.map(imageData));
-  let difference=0,count=0;
-  // Unobstructed sky: a missing photographic image becomes a flat backdrop.
-  for(let y=18;y<80;y+=3)for(let x=785;x<925;x+=3){
-   const at=(y*960+x)*4;
-   for(let channel=0;channel<3;channel++)difference+=Math.abs(live[at+channel]-exported[at+channel]);
-   count+=3;
+  const [a,b]=await Promise.all(pair.map(decode));
+  let d=0,n=0;
+  for(let y=6;y<85;y++)for(let x=6;x<155;x++){
+   const i=(y*160+x)*4;
+   for(let z=0;z<3;z++){d+=Math.abs(a[i+z]-b[i+z]);n++;}
   }
-  return difference/count;
+  return d/n;
  },[sceneScreenshot.toString('base64'),photoPng.toString('base64')]);
- assert.ok(photoComparison<42,'Export omits or significantly changes the photographic background (MAE '+photoComparison.toFixed(1)+')');
+ assert.ok(mismatch<40,'Downloaded bitmap must closely match visible bitmap: '+mismatch);
  // Presenter offers the currently selected slide, not the entire deck.
  await page.locator('#present-button').click();
  assert.equal(await page.locator('#present-modal .slide-single-download [data-slide-download]').count(),4);

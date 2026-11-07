@@ -3,3 +3,10 @@ playwright-report/
 test-results/
 
 dist/
+
+artifacts/
+.fontconfig-cache/
+.playwright-tmp/
+media/illustrations/drafts/
+
+media/illustrations/input-*.png

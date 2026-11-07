@@ -21,29 +21,24 @@ try{
  assert.equal(await page.locator('.slide-library-card').count(),library.length,'Alle selvstendige lysbilder');
  await page.screenshot({path:output+'/library-desktop.png',fullPage:false});
 
- // Capture the opt-in art direction early, independently of the later full-browser checks.
+ // Three public choices must be materially different, not aliases.
  await page.evaluate(()=>{location.hash='#lysbilder/ai-context-platforms-2027'});
  const contextSlide=page.locator('.slide-library-detail-stage .story-scene');
  await contextSlide.waitFor();
- await page.locator('#library-tone-mode').selectOption('strong');
- await page.locator('#library-art-mode').selectOption('auto');
- assert.equal(await contextSlide.getAttribute('data-art-direction'),'cinematic','Recommended scene is cinematic');
- await contextSlide.screenshot({path:output+'/context-auto-cinematic.png'});
- await page.locator('#library-art-mode').selectOption('illustrated');
- assert.equal(await contextSlide.getAttribute('data-art-direction'),'illustrated');
- await contextSlide.screenshot({path:output+'/context-illustrated.png'});
- await page.locator('#library-art-mode').selectOption('rich');
- assert.equal(await contextSlide.getAttribute('data-art-direction'),'rich');
- await contextSlide.locator('[data-scene-object="rich-mountain-background"] img').evaluate(img=>img.decode());
- assert.equal(await contextSlide.locator('svg.cp-cycle-arrow').count(),2);
- assert.equal(await contextSlide.locator('svg.cp-feedback-return').count(),1);
- await contextSlide.screenshot({path:output+'/context-rich.png'});
- await page.locator('#library-art-mode').selectOption('cinematic');
- assert.equal(await contextSlide.getAttribute('data-art-direction'),'cinematic');
- await contextSlide.screenshot({path:output+'/context-cinematic.png'});
- await page.locator('#library-art-mode').selectOption('standard');
- assert.equal(await contextSlide.getAttribute('data-art-direction'),'standard');
- await contextSlide.screenshot({path:output+'/context-standard.png'});
+ const selector=page.locator('#library-art-mode');
+ assert.deepEqual(await selector.locator('option').evaluateAll(xs=>xs.map(x=>x.value)),['standard','rich','rich-image']);
+ for(const [style,file] of [['standard','context-standard.png'],['rich','context-photo.png'],['rich-image','context-final-image.png']]){
+  await selector.selectOption(style);
+  assert.equal(await contextSlide.getAttribute('data-art-direction'),style);
+  if(style==='rich')await contextSlide.locator('[data-scene-object="rich-mountain-background"] img').evaluate(img=>img.decode());
+  if(style==='rich-image'){
+   const picture=contextSlide.locator('img.cp-approved-image');
+   await picture.evaluate(img=>img.decode());
+   assert.equal(await picture.evaluate(img=>img.naturalWidth),1600);
+  }
+  await contextSlide.screenshot({path:output+'/'+file});
+ }
+ await selector.selectOption('standard');
  await page.evaluate(()=>{location.hash='#lysbilder'});
  await page.locator('.slide-library-card').first().waitFor();
 

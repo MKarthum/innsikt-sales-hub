@@ -11,7 +11,7 @@ try{
  await page.locator('#present-button').click();
  await page.locator('#present-tone-mode').waitFor();
  assert.equal(await page.locator('#present-tone-mode').inputValue(),'story','Default palette follows story design');
- assert.equal(await page.locator('#present-art-mode').inputValue(),'auto','Art direction has independent automatic default');
+ assert.equal(await page.locator('#present-art-mode').inputValue(),'rich-image','Default art direction is the approved finished image for the benchmark');
  assert.equal(await page.locator('#slide-body').getAttribute('data-tone'),'strong','First narrative slide uses strong palette');
  assert.equal(await page.locator('#slide-number-toggle').isChecked(),true,'Presentation numbers on by default');
  assert.equal(await page.locator('#slide-body .scene-id,#slide-body .slide-placement-number').count(),1,'Placement number is visible in selected story');

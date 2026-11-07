@@ -1838,10 +1838,7 @@
           "Sporbarhet"
         ],
         "artDirections": [
-          "illustrated",
           "rich",
-          "cinematic",
-          "restrained",
           "rich-image"
         ],
         "artwork": {
@@ -2022,7 +2019,7 @@
             "assetId": "support-observe"
           }
         ],
-        "preferredArtDirection": "cinematic",
+        "preferredArtDirection": "rich-image",
         "graph": {
           "version": 2,
           "source": "# Fra/til og relasjonsrolle. Alle visningsstiler bruker samme graf.\ncontext --> consumers:0 : provides [context-people]\ncontext --> consumers:1 : provides [context-applications]\ncontext --> consumers:2 : provides [context-agents]\nsources:0 --> context : informs [data-context]\nsources:1 --> context : informs [systems-context]\nsources:2 --> context : informs [external-context]\ncontext --> cycle:0 : supports [context-decision]\ncycle:0 --> cycle:1 : advances [decision-action]\ncycle:1 --> cycle:2 : advances [action-update]\ncycle:2 --> context : updates [updated-context]"

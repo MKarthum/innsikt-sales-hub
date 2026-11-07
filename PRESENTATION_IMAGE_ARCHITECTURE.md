@@ -16,25 +16,27 @@ Statusene er awaiting-asset, in-review, approved og rejected. Bare approved med 
 
 ## Lage og godkjenne en illustrasjon
 
-Legg kildebildet på en autorisert maskin med repoet. Bildet må vise riktig antall kilder, kontekstfacetter, konsumenter og verdipunkter. Kontroller pilretninger og de logiske sammenhengene.
+De tre alternativene er nå eksakt: Enkel diagramvisning (native HTML/CSS/SVG), Nøktern illustrasjon (native diagram og et eksisterende, separat landskapsbilde), og Rik illustrasjon (ett godkjent, ferdigrendret WebP-bilde). De gamle modusene er ikke valg i brukergrensesnittet.
 
-For nøktern illustrasjon:
+En ferdigrendret bildevariant er allerede publisert fra den kanoniske modellen. Originalen er beholdt under media/illustrations/masters. Kilden til landskapsbakgrunnen er den tidligere godkjente bakgrunnsressursen. Eksisterende eldre renderer kan beholdes som teknisk overgang, men skal ikke eksponeres som et konkurrerende valg i menyen.
 
-    node scripts/presentation-illustrations.mjs import ai-context-platforms-2027 restrained /sti/til/bilde.png
+Ved en senere faglig endring eller nytt bilde: Legg kildebildet på en autorisert maskin med repoet. Bildet må vise riktig antall kilder, kontekstfacetter, konsumenter og verdipunkter. Kontroller pilretninger og de logiske sammenhengene.
 
-For rik illustrasjon byttes restrained til rich-image.
+For rik illustrasjon:
+
+    node scripts/presentation-illustrations.mjs import ai-context-platforms-2027 rich-image /sti/til/bilde.png
 
 Import lagrer kildeoriginalen i media/illustrations/masters, og et optimalisert WebP-utkast i media/illustrations/drafts. Utkast blir ikke distribuert. ImageMagick eller kompleks runtime-rendering er ikke nødvendig. Pillow optimaliserer til maks 1600 piksler bredde, normalt 250 KB, og oppskalerer aldri et lite bilde.
 
 Etter manuell visuell og faglig kontroll:
 
-    node scripts/presentation-illustrations.mjs approve ai-context-platforms-2027 restrained GODKJENNER --faglig-ok --visuelt-ok
+    node scripts/presentation-illustrations.mjs approve ai-context-platforms-2027 rich-image GODKJENNER --faglig-ok --visuelt-ok
 
 Godkjenner skal være en reell, dokumenterbar reviewer. Kommandoen publiserer den godkjente derivatfilen i docs/assets/illustrations, og registrerer hash og godkjenningsdato.
 
 For å trekke en variant tilbake:
 
-    node scripts/presentation-illustrations.mjs revoke ai-context-platforms-2027 restrained
+    node scripts/presentation-illustrations.mjs revoke ai-context-platforms-2027 rich-image
 
 Kontroller med:
 
@@ -53,3 +55,11 @@ Native diagram er CSS-skinbart. Et bilde er et selvstendig verk som kan gjenbruk
 Sikt mot 100 til 150 KB per bilde og bruk 250 KB som normal maksgrense. Vurder alltid skarphet og lesbarhet visuelt. Faglig godkjenning kan ikke erstattes av hash, størrelse eller en vellykket PNG-eksport.
 
 Claude Artifacts' faktiske begrensninger er ikke verifisert gjennom en import i målplattformen her. En slik ende-til-ende-test må gjennomføres før portabiliteten kan regnes som dokumentert. 20 MB skal ikke brukes som antatt universell grense.
+
+## Stilinndeling og kvalitetsstatus
+
+* Enkel diagramvisning følger skinet og er fullt dataeid. Korrekt faglig graf valideres automatisk.
+* Nøktern illustrasjon gjenbruker den eksisterende fotoillustrasjonen, men all faglig tekst og alle relasjoner er fortsatt native. Den må derfor ikke tillegges uavhengig semantikk.
+* Rik illustrasjon er et faktisk 1600 × 900-bilde, komprimert til omtrent 123 KB. Import og godkjenning er registrert med kildehash, filhash og tidspunkt i manifestet. Godkjenningen er gjennomført som assistentens faglige/visuelle kontroll, ikke som brukerens endelige designgodkjenning.
+
+Det er ikke lenger en automatisk anbefaling eller flere gamle alternativer i menyen. Lagrede eldre valg migreres til en av tre gyldige varianter. Nye valgmuligheter skal kreve en faktisk visuell variant og en relevant faglig begrunnelse.
