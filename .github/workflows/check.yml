@@ -81,6 +81,8 @@ jobs:
         run: npm run build:artifact
       - name: Kontroller eksport av enkeltlysbilder
         run: node scripts/check-single-slide-export-browser.mjs
+      - name: Kontroller alle benchmark-eksporter mot faktiske skjermbilder
+        run: node scripts/check-context-platform-exports-browser.mjs
       - name: Kontroller verdi-slide og organisasjonskins
         run: node scripts/check-value-system-browser.mjs
       - name: Kontroller redaksjonelt designsystem for alle lysbilder
@@ -104,6 +106,7 @@ jobs:
         with:
           name: innsikt-visual-pilot
           path: |
+            artifacts/context-exports/**
             artifacts/visual-pilot/*.png
             artifacts/library-v1/*.png
             artifacts/architecture/*.png
