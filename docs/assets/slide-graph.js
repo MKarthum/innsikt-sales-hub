@@ -75,10 +75,11 @@ function renderCanvas(input,slide,esc){
  for(let i=0;i<slide.sources.length;i++){
   const x=coord(i);add(edge(graph,'sources:'+i,'context'),[[x,560],[x,520]],'up');
  }
- // The left outside corridor connects context to the decision, avoiding source tiles.
- add(edge(graph,'context','cycle:0'),[[28,300],[96,845]],'right','M28 300 C-8 300 -16 324 -16 360 L-16 759 C-16 826 25 845 96 845');
- // The right outside corridor closes the learning loop into the shared context.
- add(edge(graph,'cycle:2','context'),[[880,844],[970,300]],'left','M880 844 C964 844 992 800 992 720 L992 344 C992 314 986 300 970 300');
+ // The left lane starts at the context boundary and ends at the decision rail.
+ // It must not terminate on top of the first decision icon.
+ add(edge(graph,'context','cycle:0'),[[0,350],[0,843]],'right','M0 350 C-23 350 -28 382 -28 420 L-28 758 C-28 808 -21 843 0 843');
+ // The right lane starts at the updated-context rail and closes at the context edge.
+ add(edge(graph,'cycle:2','context'),[[1000,843],[1000,350]],'left','M1000 843 C1026 843 1032 812 1032 762 L1032 417 C1032 374 1024 350 1000 350');
  return '<svg class="cp-graph-overlay cp-feedback-return" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
   +paths.join('')+'</svg>';
 }
