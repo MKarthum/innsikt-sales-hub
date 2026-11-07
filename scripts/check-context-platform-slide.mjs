@@ -112,6 +112,7 @@ const nativeCss=fs.readFileSync('docs/assets/context-native-svg.css','utf8');
 assert.ok(nativeCss.includes('.cpn-photo{opacity:.13}'),'Native technical illustration must visually subordinate the mountain photograph');
 const css=fs.readFileSync('docs/assets/slide-visual-narratives.css','utf8');
 assert.ok(css.includes('.scene-context-platforms')&&css.includes('var(--pres-accent)'),'Scene should follow theme roles');
+assert.ok(css.includes('text-wrap:balance'),'Short, balanced technical captions must avoid dangling hyphen fragments');
 assert.ok(css.includes('[data-art-direction="illustrated"]'),'Illustrated art direction should follow semantic roles');
 assert.ok(!/url\(\s*['"]?https?:/.test(css),'No external image/network dependencies');
 console.log('PASS – context-platforms native scene, source-owned content and theme roles');
