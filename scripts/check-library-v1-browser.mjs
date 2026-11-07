@@ -88,8 +88,9 @@ try{
  await p.locator('.slide-fullscreen-close').click();await full.waitFor({state:'detached'});
  await opener.click();
  await full.waitFor();
- await p.evaluate(()=>history.back());
+ await p.goBack({waitUntil:'domcontentloaded'});
  await full.waitFor({state:'detached'});
+ await p.locator('.slide-library-info').waitFor();
  assert.equal(await p.evaluate(()=>location.hash),'#lysbilder/'+slideId,'Browser Back closes fullscreen');
  await p.setViewportSize({width:1536,height:1040});
  // Touch the controls in a portrait-phone viewport and test surrounding

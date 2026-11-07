@@ -103,12 +103,12 @@ try{
    assert.equal(metrics.w,1920,direction+'/'+format+' width '+JSON.stringify(metrics));
    assert.equal(metrics.h,1080,direction+'/'+format+' height '+JSON.stringify(metrics));
    assert.ok(metrics.stdDev>12,direction+'/'+format+' looks like a blank slide '+JSON.stringify(metrics));
-   assert.ok(metrics.meanDiff<48,direction+'/'+format+' is not faithful to the visible slide '+JSON.stringify(metrics));
+   assert.ok(metrics.meanDiff<48&&metrics.zones.every(z=>z<35),direction+'/'+format+' has missing content in a visual region '+JSON.stringify(metrics));
    files.push({direction,format,bytes:bytes.length,metrics});
    console.log('EXPORT '+direction+'/'+format+' '+bytes.length+' bytes; meanDiff='+metrics.meanDiff.toFixed(1)+' stdDev='+metrics.stdDev.toFixed(1));
   }
-  // Brand is an independent overlay in all three modes. Turn it on in the
-  // real browser and inspect bright marker pixels in the *downloaded* PNG.
+  // Independent logo overlay: verify actual decoded pixels in all FOUR formats,
+  // not just a visual PNG saved by a successful download handler.
   await page.evaluate(()=>{
    const marker=document.createElement('canvas');
    marker.width=120;marker.height=48;
@@ -118,31 +118,42 @@ try{
    document.documentElement.style.setProperty('--slide-brand-logo','url("'+marker.toDataURL('image/png')+'")');
   });
   const brandedScreen=await frame.screenshot();
-  const brandedExport=await read(page.locator('.slide-single-download [data-slide-download="png"]'),'png');
-  fs.writeFileSync(path.join(output,direction+'-with-brand.png'),brandedExport);
-  const brandedMetrics=await compare(brandedExport,brandedScreen,'image/png');
-  assert.ok(brandedMetrics.meanDiff<48,direction+' independent brand is not exported faithfully '+JSON.stringify(brandedMetrics));
-  const markerPixels=await page.evaluate(async png=>{
-   const img=new Image();img.src='data:image/png;base64,'+png;await img.decode();
-   const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
-   const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,160,90);
-   const pixels=ctx.getImageData(0,0,160,90).data;let count=0;
-   for(let y=1;y<17;y++)for(let x=132;x<160;x++){
-    const i=(y*160+x)*4;
-    if(pixels[i]>220&&pixels[i+1]>160&&pixels[i+2]<65)count++;
-   }
-   return count;
-  },brandedExport.toString('base64'));
-  assert.ok(markerPixels>=9,direction+' separate logo is absent from downloaded PNG: '+markerPixels);
+  for(const format of types){
+   const branded=await read(page.locator('.slide-single-download [data-slide-download="'+format+'"]'),format);
+   fs.writeFileSync(path.join(output,direction+'-with-brand.'+format),branded);
+   const bitmap=format==='pdf'?pdfImage(branded):format==='pptx'?await pptxImage(branded):branded;
+   const mime=format==='png'?'image/png':'image/jpeg';
+   const brandedMetrics=await compare(bitmap,brandedScreen,mime);
+   assert.ok(brandedMetrics.meanDiff<48&&brandedMetrics.zones.every(z=>z<35),
+    direction+'/'+format+' brand layer differs from live view: '+JSON.stringify(brandedMetrics));
+   const markerPixels=await page.evaluate(async ([base64,mime])=>{
+    const img=new Image();img.src='data:'+mime+';base64,'+base64;await img.decode();
+    const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
+    const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,160,90);
+    const pixels=ctx.getImageData(0,0,160,90).data;let count=0;
+    for(let y=1;y<17;y++)for(let x=132;x<160;x++){
+     const i=(y*160+x)*4;
+     if(pixels[i]>220&&pixels[i+1]>160&&pixels[i+2]<65)count++;
+    }
+    return count;
+   },[bitmap.toString('base64'),mime]);
+   assert.ok(markerPixels>=9,direction+'/'+format+' separate logo missing: '+markerPixels);
+  }
   await page.evaluate(()=>document.documentElement.style.removeProperty('--slide-brand-logo'));
   // Fullscreen must export the same selected direction, not a stale/detail default.
   await page.locator('[data-slide-preview-open="'+fileId+'"]').click();
   await page.locator('#slide-library-fullscreen-page .story-scene').waitFor();
   await page.locator('#slide-library-fullscreen-page .slide-fullscreen-download summary').click();
-  const full=await read(page.locator('#slide-library-fullscreen-page [data-slide-download="png"]'),'png');
-  fs.writeFileSync(path.join(output,direction+'-fullscreen.png'),full);
-  const fullMetrics=await compare(full,reference,'image/png');
-  assert.ok(fullMetrics.meanDiff<48,'Fullscreen direction mismatch '+direction+' '+JSON.stringify(fullMetrics));
+  for(const format of types){
+   const full=await read(page.locator('#slide-library-fullscreen-page [data-slide-download="'+format+'"]'),format);
+   fs.writeFileSync(path.join(output,direction+'-fullscreen.'+format),full);
+   const bitmap=format==='pdf'?pdfImage(full):format==='pptx'?await pptxImage(full):full;
+   const metrics=await compare(bitmap,reference,format==='png'?'image/png':'image/jpeg');
+   assert.equal(metrics.w,1920);
+   assert.equal(metrics.h,1080);
+   assert.ok(metrics.meanDiff<48&&metrics.zones.every(z=>z<35),
+    direction+'/'+format+' fullscreen differs from the chosen direction: '+JSON.stringify(metrics));
+  }
   await page.locator('.slide-fullscreen-close').click();
   await page.locator('#slide-library-fullscreen-page').waitFor({state:'detached'});
  }
@@ -155,18 +166,21 @@ try{
  await page.waitForTimeout(800); // let the existing entrance blur finish before comparing
  const presenterScreen=await presenterFrame.screenshot();
  fs.writeFileSync(path.join(output,'presenter-screen.png'),presenterScreen);
- const presenter=await read(page.locator('#present-modal [data-slide-download="png"]'),'png');
- fs.writeFileSync(path.join(output,'presenter.png'),presenter);
- const presenterMetrics=await compare(presenter,presenterScreen,'image/png');
- assert.equal(presenterMetrics.w,1920);
- assert.equal(presenterMetrics.h,1080);
- assert.ok(presenterMetrics.stdDev>12&&presenterMetrics.meanDiff<48,
-  'Presenter must match its own currently visible slide '+JSON.stringify(presenterMetrics));
+ for(const format of types){
+  const presenter=await read(page.locator('#present-modal [data-slide-download="'+format+'"]'),format);
+  fs.writeFileSync(path.join(output,'presenter.'+format),presenter);
+  const bitmap=format==='pdf'?pdfImage(presenter):format==='pptx'?await pptxImage(presenter):presenter;
+  const metrics=await compare(bitmap,presenterScreen,format==='png'?'image/png':'image/jpeg');
+  assert.equal(metrics.w,1920);
+  assert.equal(metrics.h,1080);
+  assert.ok(metrics.stdDev>12&&metrics.meanDiff<48&&metrics.zones.every(z=>z<35),
+   'Presenter '+format+' must match its currently visible slide '+JSON.stringify(metrics));
+ }
  await page.locator('#present-modal .modal-close').click();
  await page.locator('#present-modal').waitFor({state:'detached'});
  assert.equal(files.length,4*directions.length);
  assert.ok(!errors.length,'JavaScript errors: '+errors.join(' | '));
  fs.writeFileSync(path.join(output,'metrics.json'),JSON.stringify(files,null,2));
- console.log('PASS 12 real exported files + 3 fullscreen + 1 actual Presenter PNG download, pixel-checked against live screenshots.');
+ console.log('PASS 12 benchmark files + 12 branded + 12 fullscreen + 4 Presenter formats, pixels compared to rendered slide screenshots.');
  console.log(files.map(f=>f.direction+'/'+f.format+': '+f.bytes+' bytes, difference '+f.metrics.meanDiff.toFixed(1)+', deviation '+f.metrics.stdDev.toFixed(1)).join('\n'));
 }finally{await browser.close()}
