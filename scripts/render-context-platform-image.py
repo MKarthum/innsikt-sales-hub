@@ -237,11 +237,13 @@ def icon(draw,name,x,y,color=(230,248,255)):
         draw.ellipse((x+30,y+27,x+34,y+31),fill=C)
         draw.arc((x+14,y+27,x+34,y+39),0,180,fill=C,width=2)
     elif name=="meaning":
-        for dx,dy in [(4,32),(20,8),(42,35)]:
-            draw.ellipse((x+dx,y+dy,x+dx+8,y+dy+8),outline=C,width=3)
-        draw.line((x+10,y+33,x+23,y+14),fill=C,width=3)
-        draw.line((x+28,y+14,x+44,y+36),fill=C,width=3)
-        draw.line((x+13,y+39,x+42,y+39),fill=C,width=3)
+        # Same four interconnected concepts as the source-owned semantic icon.
+        for dx,dy in [(20,2),(2,20),(38,20),(20,38)]:
+            draw.ellipse((x+dx,y+dy,x+dx+9,y+dy+9),outline=C,width=3)
+        draw.line((x+24,y+11,x+11,y+24),fill=C,width=3)
+        draw.line((x+29,y+11,x+42,y+24),fill=C,width=3)
+        draw.line((x+11,y+29,x+24,y+42),fill=C,width=3)
+        draw.line((x+42,y+29,x+29,y+42),fill=C,width=3)
     elif name=="situation":
         draw.line((x+2,y+25,x+11,y+25,x+17,y+12,x+25,y+40,x+31,y+18,x+37,y+25,x+48,y+25),fill=C,width=3)
     elif name=="shield":
@@ -276,6 +278,57 @@ def icon(draw,name,x,y,color=(230,248,255)):
     elif name=="star":
         draw.line((x+23,y+1,x+23,y+43),fill=C,width=3)
         draw.line((x+2,y+22,x+44,y+22),fill=C,width=3)
+    elif name=="timeline":
+        draw.line((x+3,y+24,x+47,y+24),fill=C,width=3)
+        for cx,cy in ((11,10),(25,38),(39,10)):
+            draw.line((x+cx,y+24,x+cx,y+cy),fill=C,width=3)
+            draw.ellipse((x+cx-5,y+cy-5,x+cx+5,y+cy+5),outline=C,width=3)
+    elif name=="choice":
+        draw.line((x+24,y+2,x+24,y+10),fill=C,width=3)
+        draw.line((x+24,y+10,x+10,y+24,x+10,y+32),fill=C,width=3)
+        draw.line((x+24,y+10,x+40,y+24,x+40,y+30),fill=C,width=3)
+        draw.rounded_rectangle((x+4,y+32,x+16,y+44),radius=3,outline=C,width=3)
+        draw.line((x+32,y+39,x+39,y+45,x+49,y+31),fill=C,width=3)
+    elif name=="guarded-action":
+        draw.rounded_rectangle((x+19,y+4,x+46,y+45),radius=7,outline=C,width=3)
+        draw.line((x+3,y+25,x+27,y+25),fill=C,width=3)
+        draw.line((x+19,y+17,x+27,y+25,x+19,y+33),fill=C,width=3)
+        draw.line((x+31,y+34,x+36,y+39,x+43,y+27),fill=C,width=3)
+    elif name=="state-update":
+        draw.ellipse((x+4,y+5,x+32,y+17),outline=C,width=3)
+        draw.line((x+4,y+11,x+4,y+39),fill=C,width=3)
+        draw.line((x+32,y+11,x+32,y+39),fill=C,width=3)
+        draw.arc((x+4,y+22,x+32,y+34),0,180,fill=C,width=3)
+        draw.line((x+41,y+22,x+41,y+46),fill=C,width=3)
+        draw.line((x+32,y+34,x+49,y+34),fill=C,width=3)
+    elif name=="evidence":
+        draw.rounded_rectangle((x+7,y+3,x+43,y+46),radius=5,outline=C,width=3)
+        draw.line((x+13,y+16,x+27,y+16),fill=C,width=3)
+        draw.line((x+13,y+38,x+20,y+30,x+28,y+35,x+36,y+22),fill=C,width=3)
+    elif name=="external":
+        draw.ellipse((x+3,y+4,x+42,y+44),outline=C,width=3)
+        draw.line((x+3,y+24,x+42,y+24),fill=C,width=3)
+        draw.arc((x+14,y+4,x+31,y+44),65,295,fill=C,width=3)
+        draw.arc((x+14,y+4,x+31,y+44),245,115,fill=C,width=3)
+        draw.line((x+37,y+13,x+48,y+3),fill=C,width=3)
+        draw.line((x+43,y+3,x+48,y+3,x+48,y+9),fill=C,width=3)
+
+# Every pictogram is chosen by the canonical slide assetId, not by row index.
+ICON_BY_ASSET={
+    "context-people":"people","consume-app":"apps","ai-agent":"agent",
+    "data-semantic":"meaning","context-timeline":"timeline",
+    "governance-shield":"shield","tabler-database":"database",
+    "source-erp":"systems","context-external":"external",
+    "context-choice":"choice","context-guarded-action":"guarded-action",
+    "context-state-update":"state-update","verified-analysis":"target",
+    "context-evidence":"evidence"
+}
+for group in ("consumers","facets","sources","cycle","outcomes"):
+    for item in v[group]:
+        assert item["assetId"] in ICON_BY_ASSET, ("Ukjent semantisk bildeikon", group,item["assetId"])
+def semantic_icon(draw,item,x,y,color=LIGHT):
+    icon(draw,ICON_BY_ASSET[item["assetId"]],x,y,color)
+
 # Typography, restrained in content, art direction in atmosphere
 head=layer();d=ImageDraw.Draw(head)
 d.rounded_rectangle((65,49,111,56),radius=4,fill=rgba(LAV,255))
@@ -288,9 +341,9 @@ image.alpha_composite(head)
 rounded(112,192,1130,286,outline=(214,182,250),fill=(24,43,79),opacity=206,r=27,glow=LAV)
 for k in (454,790):
     n=layer();d=ImageDraw.Draw(n);d.line((k,210,k,269),fill=(188,205,244,138),width=2);image.alpha_composite(n)
-cons=[("people",170),("apps",510),("agent",846)]
-for i,(ic,x) in enumerate(cons):
-    n=layer();d=ImageDraw.Draw(n);icon(d,ic,x,209)
+cons=[170,510,846]
+for i,x in enumerate(cons):
+    n=layer();d=ImageDraw.Draw(n);semantic_icon(d,v["consumers"][i],x,209)
     txt(d,x+68,209,v["consumers"][i]["label"],22,True)
     wrapped(d,x+68,239,v["consumers"][i]["detail"],238,15,(220,227,251))
     image.alpha_composite(n)
@@ -322,10 +375,10 @@ txt(d,609,362,v["contextLabel"],37,True,anchor="mt")
 txt(d,609,412,v["contextLead"],20,False,anchor="mt",color=(224,220,247))
 image.alpha_composite(n)
 # Semantic facets
-for i,ic in enumerate(("meaning","situation","shield")):
+for i in range(3):
     x=146+i*328
     rounded(x,455,x+303,539,outline=(171,182,255),fill=(18,41,86),opacity=231,r=18,width=2)
-    n=layer();d=ImageDraw.Draw(n);icon(d,ic,x+15,469,LAV)
+    n=layer();d=ImageDraw.Draw(n);semantic_icon(d,v["facets"][i],x+15,469,LAV)
     txt(d,x+71,468,v["facets"][i]["label"],22,True)
     wrapped(d,x+71,497,v["facets"][i]["detail"],218,15,(230,230,247))
     image.alpha_composite(n)
@@ -336,10 +389,10 @@ SOURCE_JOIN=611
 connector([(273,SOURCE_TOP),(273,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
 connector([(947,SOURCE_TOP),(947,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
 arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))],CYAN,5)
-for i,ic in enumerate(("database","systems","cloud")):
+for i in range(3):
     x=113+i*337
     rounded(x,SOURCE_TOP,x+320,SOURCE_TOP+82,outline=(129,219,237),fill=(13,55,77),opacity=225,r=18,glow=(56,153,193))
-    n=layer();d=ImageDraw.Draw(n);icon(d,ic,x+19,SOURCE_TOP+19,CYAN)
+    n=layer();d=ImageDraw.Draw(n);semantic_icon(d,v["sources"][i],x+19,SOURCE_TOP+19,CYAN)
     txt(d,x+80,SOURCE_TOP+13,v["sources"][i]["label"],20,True)
     wrapped(d,x+80,SOURCE_TOP+44,v["sources"][i]["detail"],229,15,(229,240,247))
     image.alpha_composite(n)
@@ -349,9 +402,9 @@ arrow(p,CYAN,5)
 p=bezier((1120,779),(1166,755),(1160,552),(1141,482))
 arrow(p,CYAN,5)
 rounded(171,735,1120,822,outline=(204,176,248),fill=(24,43,80),opacity=236,r=26,glow=LAV)
-for i,ic in enumerate(("target","action","refresh")):
+for i in range(3):
     x=204+i*309
-    n=layer();d=ImageDraw.Draw(n);icon(d,ic,x,757)
+    n=layer();d=ImageDraw.Draw(n);semantic_icon(d,v["cycle"][i],x,757)
     txt(d,x+66,758,v["cycle"][i]["label"],17,True)
     wrapped(d,x+66,785,v["cycle"][i]["detail"],222,14,(227,230,250))
     image.alpha_composite(n)
@@ -361,10 +414,10 @@ rounded(1186,334,1548,777,outline=(218,204,248),fill=(10,26,56),opacity=221,r=25
 n=layer();d=ImageDraw.Draw(n);txt(d,1218,358,v.get("outcomesTitle","Mulig verdi"),29,True)
 d.line((1218,408,1518,408),fill=(198,212,243,140),width=2)
 image.alpha_composite(n)
-for i,ic in enumerate(("target","action","refresh")):
+for i in range(3):
     y=430+i*111
     n=layer();d=ImageDraw.Draw(n)
-    icon(d,ic,1211,y,CYAN if i<2 else LAV)
+    semantic_icon(d,v["outcomes"][i],1211,y,CYAN if i<2 else LAV)
     txt(d,1277,y+4,v["outcomes"][i]["label"],19,True)
     wrapped(d,1277,y+34,v["outcomes"][i]["detail"],226,15,(226,236,249))
     if i<2:d.line((1218,y+93,1518,y+93),fill=(180,205,237,120),width=1)
