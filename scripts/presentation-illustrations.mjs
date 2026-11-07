@@ -20,7 +20,7 @@ vm.runInNewContext(fs.readFileSync('docs/assets/presentation-illustrations.js','
 const canonicalText=sandbox.window.InnsiktPresentationIllustrations.canonicalText;
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 const fileDigest=p=>digest(fs.readFileSync(p));
-const recipeVersions={'rich-image':'3'};
+const recipeVersions={'rich-image':'4'};
 const maxBytes=250000;
 const currentHash=s=>digest(canonicalText(s));
 const byId=new Map(slides.map(s=>[s.id,s]));
