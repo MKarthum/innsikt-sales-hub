@@ -55,6 +55,8 @@ const path=(id,from,to,relation,d,point,prior,esc,cls='cpn-arrow')=>
  +'<path d="'+arrowTip(point,prior)+'" class="cpn-arrow-tip"/></g>';
 function graphEdges(v,esc){
  const graph=window.InnsiktSlideGraph.validate(v.graph,v);
+ // The glass context is an ellipse; connectors attach to its actual outline.
+ const rimY=(x,upper)=>Math.round(474+(upper?-109:109)*Math.sqrt(1-Math.pow((x-609)/553,2)));
  const edges=new Map(graph.edges.map(e=>[e.from+'>'+e.to,e]));
  const pathFor=(from,to,d,tip,tangent,cls)=>{
   const e=edges.get(from+'>'+to);
@@ -65,14 +67,20 @@ function graphEdges(v,esc){
  // Anchor lines are intentionally behind panels. Rounded turns are outside nodes.
  for(let i=0;i<v.consumers.length;i++){
   const x=[270,607,944][i];
-  a+=pathFor('context','consumers:'+i,'M'+x+' 360V316',[x,316],[x,337],'cpn-arrow cpn-arrow--supply');
+  const top=rimY(x,true);
+  a+=pathFor('context','consumers:'+i,'M'+x+' '+top+'V311',[x,311],[x,top],'cpn-arrow cpn-arrow--supply');
  }
  for(let i=0;i<v.sources.length;i++){
   const x=[270,607,944][i];
-  a+=pathFor('sources:'+i,'context','M'+x+' 621V586',[x,586],[x,608],'cpn-arrow cpn-arrow--supply');
+  // Facet cards occupy the lower face of the ellipse. The line arrives
+  // at its visible lower boundary rather than floating below the context.
+  const bottom=Math.max(566,rimY(x,false));
+  a+=pathFor('sources:'+i,'context','M'+x+' 621V'+bottom,[x,bottom],[x,621],'cpn-arrow cpn-arrow--supply');
  }
- a+=pathFor('context','cycle:0','M128 566C64 597 66 711 126 766Q153 797 204 800',[204,800],[153,797],'cpn-arrow cpn-arrow--loop');
- a+=pathFor('cycle:2','context','M1080 800C1209 779 1213 652 1150 563',[1150,563],[1213,652],'cpn-arrow cpn-arrow--loop');
+ a+=pathFor('context','cycle:0','M105 519C35 550 30 715 95 765Q140 800 204 800',[204,800],[140,800],'cpn-arrow cpn-arrow--loop');
+ // The return path stays in the narrow corridor LEFT of the outcomes panel
+ // and terminates on the right-hand context rim, not in empty background.
+ a+=pathFor('cycle:2','context','M1118 800C1170 787 1196 734 1193 680C1190 603 1161 541 1114 519',[1114,519],[1161,541],'cpn-arrow cpn-arrow--loop');
  a+=pathFor('cycle:0','cycle:1','M430 800H495',[495,800],[470,800],'cpn-arrow cpn-arrow--cycle');
  a+=pathFor('cycle:1','cycle:2','M767 800H833',[833,800],[808,800],'cpn-arrow cpn-arrow--cycle');
  return a;
