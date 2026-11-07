@@ -59,7 +59,7 @@ const supportRule=html.match(/data-edge-id="context-decision"[^>]*><path class="
 assert.ok(supportRule&&supportRule[1].startsWith('M0 350')&&supportRule[1].endsWith('0 843'),'The decision route must attach to the left cycle boundary, not overlap its icon');
 assert.ok(html.includes('M1118 800C1181 792')&&html.includes('1180 540 1170 519'),'Native feedback must touch the context rim while avoiding the outcomes');
 const recipe=fs.readFileSync('scripts/render-context-platform-image.py','utf8');
-assert.ok(recipe.includes('arrow([(cx,rim),(cx,301)]')&&recipe.includes('arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))]'),'Bitmap arrows must terminate on the exact superellipse and share one source inlet');
+assert.ok(recipe.includes('arrow([(cx,rim),(cx,286)]')&&recipe.includes('arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))]'),'Bitmap arrows must terminate on the exact superellipse and share one source inlet');
 assert.ok(html.includes('M167 560V545')&&html.includes('M833 560V545'),'Standard diagram must NOT imply a source-to-facet one-to-one mapping');
 const standardArrows=html.match(/data-edge-id="(?:data-context|systems-context|external-context)"[^>]*><path class="cp-graph-track"[^>]+>(?:<path class="cp-graph-arrowhead")?/g)||[];
 assert.equal(standardArrows.length,3,'Source connectors must keep three canonical semantic IDs');
@@ -82,7 +82,14 @@ for(const [x0,y0,x1,y1] of [[146,455,449,539],[474,455,777,539],[802,455,1105,53
   assert.ok(contains(609.5,457,532.5,140,4,x,y,10),'Bitmap facet protrudes beyond 10px inset');
 assert.ok(html.includes('class="cpn-consumer-rail-panel"'),'Consumer group shares one visual glass panel');
 assert.equal((html.match(/class="cpn-rail-divider"/g)||[]).length,1,'Consumers are separated without duplicate boxes');
-assert.ok(html.includes('data-photo-role="landscape"'),'The mountain background must be a first-class SVG image');
+assert.ok(html.includes('data-photo-role="landscape"'),'The mountain background must remain a replaceable SVG image');
+const native=html.match(/<svg class="cp-native-svg"[\s\S]*?<\/svg>/)?.[0]||'';
+for(const [node,kind] of [['sources:0','database'],['sources:1','system'],['sources:2','cloud'],['cycle:0','decision'],['cycle:1','action'],['cycle:2','refresh']]){
+ const pattern=new RegExp('data-node-id="'+node+'"[^>]*>[\\s\\S]*?data-icon-role="'+kind+'"');
+ assert.ok(pattern.test(native),'The native '+node+' icon does not match its semantic role '+kind);
+}
+assert.ok(!html.includes('class="cpn-core-shine"')&&!html.includes('class="cpn-core-wave"'),
+ 'Atmospheric waves must not compete with the semantic context cards');
 assert.equal((html.match(/class="cpn-arrow cpn-arrow--/g)||[]).length,10,'The native SVG stage uses exactly the same ten canonical relations');
 assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'The return arrow comes from the same semantic graph');
 const wrongDirection=JSON.parse(JSON.stringify(slide.visual.graph));
@@ -99,6 +106,8 @@ assert.equal((html.match(/class="cp-outcome"/g)||[]).length,3);
 assert.ok(html.includes('data-scene-object="flag"'),'Focal object is independently addressable');
 assert.ok(!html.includes('cp-landscape-svg'),'Legacy monolithic artwork must be removed');
 assert.ok(!html.includes('#fff')&&!html.includes('#000'),'Renderer must not hardcode palette');
+const nativeCss=fs.readFileSync('docs/assets/context-native-svg.css','utf8');
+assert.ok(nativeCss.includes('.cpn-photo{opacity:.13}'),'Native technical illustration must visually subordinate the mountain photograph');
 const css=fs.readFileSync('docs/assets/slide-visual-narratives.css','utf8');
 assert.ok(css.includes('.scene-context-platforms')&&css.includes('var(--pres-accent)'),'Scene should follow theme roles');
 assert.ok(css.includes('[data-art-direction="illustrated"]'),'Illustrated art direction should follow semantic roles');
