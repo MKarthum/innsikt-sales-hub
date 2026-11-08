@@ -76,7 +76,7 @@ const CORE={cx:609,cy:467,rx:565,ry:119,p:4};
 const coreContains=(x,y,pad=0)=>
  Math.pow(Math.abs((x-CORE.cx)/(CORE.rx-pad)),CORE.p)+
  Math.pow(Math.abs((y-CORE.cy)/(CORE.ry-pad)),CORE.p)<=1;
-const corePath=(inset=0,steps=180)=>{
+const corePath=(inset=0,steps=360)=>{
  const pts=[];
  for(let i=0;i<steps;i++){
   const a=2*Math.PI*i/steps,c=Math.cos(a),sn=Math.sin(a);
