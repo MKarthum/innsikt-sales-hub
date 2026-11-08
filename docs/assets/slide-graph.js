@@ -49,50 +49,7 @@ function validate(input,slide){
  }
  return graph;
 }
-const edge=(graph,from,to)=>{
- const result=graph.edges.filter(e=>e.from===from&&e.to===to);
- if(result.length!==1)throw Error('Mangler entydig faglig relasjon: '+from+' > '+to);
- return result[0];
-};
-const arrow=(x,y,side)=>{
- if(side==='up')return 'M'+(x-6)+' '+(y+8)+'L'+x+' '+y+'L'+(x+6)+' '+(y+8);
- if(side==='left')return 'M'+(x+8)+' '+(y-6)+'L'+x+' '+y+'L'+(x+8)+' '+(y+6);
- return 'M'+(x-8)+' '+(y-6)+'L'+x+' '+y+'L'+(x-8)+' '+(y+6);
-};
-function renderCanvas(input,slide,esc){
- const graph=validate(input,slide);
- const paths=[];
- const add=(record,points,side,curve,showHead=true)=>{
-  // Geometry and arrowhead have a single source of truth: the final route point.
-  const d=curve||points.map(([x,y],i)=>(i?'L':'M')+x+' '+y).join('');
-  const [headX,headY]=points.at(-1);
-  paths.push('<g data-edge-id="'+esc(record.id)+'" data-from="'+esc(record.from)+'" data-to="'+esc(record.to)+'" data-relation="'+esc(record.relation)+'">'
-   +'<path class="cp-graph-track" d="'+d+'"/>'+(showHead?'<path class="cp-graph-arrowhead" d="'+arrow(headX,headY,side)+'"/>':'')+'</g>');
- };
- for(let i=0;i<slide.consumers.length;i++){
-  const x=coord(i);add(edge(graph,'context','consumers:'+i),[[x,210],[x,170]],'up');
- }
- // Sources join a shared feed into the context. Parallel vertical arrows
- // would misleadingly pair data platforms with "meaning", systems with
- // "situation", and external sources with "rules".
- for(let i=0;i<slide.sources.length;i++){
-  const x=coord(i);
-  const d=i===1?'M500 560V520':i===0
-   ?'M167 560V545Q167 539 174 539H500'
-   :'M833 560V545Q833 539 826 539H500';
-  add(edge(graph,'sources:'+i,'context'),[[x,560],i===1?[500,520]:[500,539]],'up',d,i===1);
- }
- // The left lane starts at the context boundary and ends at the decision rail.
- // It must not terminate on top of the first decision icon.
- add(edge(graph,'context','cycle:0'),[[0,350],[0,843]],'right','M0 350 C-23 350 -28 382 -28 420 L-28 758 C-28 808 -21 843 0 843');
- // The right lane starts at the updated-context rail and closes at the context edge.
- add(edge(graph,'cycle:2','context'),[[1000,843],[1000,350]],'left','M1000 843 C1026 843 1032 812 1032 762 L1032 417 C1032 374 1024 350 1000 350');
- return '<svg class="cp-graph-overlay cp-feedback-return" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
-  +paths.join('')+'</svg>';
-}
-function processArrow(input,from,to,esc){
- const e=edge(parse(input),'cycle:'+from,'cycle:'+to);
- return '<svg class="cp-cycle-arrow" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 16H27M18 7L27 16L18 25"/></svg>';
-}
-window.InnsiktSlideGraph={parse,validate,renderCanvas,processArrow};
+// Only the canonical semantic graph is owned here. All coordinates, paths
+// and arrowheads live in unified-slide-scene.js, once for every art direction.
+window.InnsiktSlideGraph={parse,validate};
 })();
