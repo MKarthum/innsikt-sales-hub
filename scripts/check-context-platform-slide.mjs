@@ -35,8 +35,10 @@ for(const slide of scenes){
  assert.equal((rendered.match(/data-node-id="/g)||[]).length,plan.nodes.length+(plan.kind==='context'?1:0));
  assert.ok(rendered.includes(slide.title));
  for(const item of plan.nodes){
-  assert.ok(rendered.includes(item.item.title||item.item.label),
-   'Missing canonical node label '+item.id);
+  for(const part of api.textLines(item.item.title||item.item.label,
+    item.kind==='stage'?23:item.kind==='cycle'?24:26,2))
+   assert.ok(rendered.includes(escape(part)),
+    'Missing canonical node label segment '+part+' in '+item.id);
   for(const part of api.textLines(item.item.detail,item.kind==='source'?30:26,2))
    assert.ok(rendered.includes(escape(part)),'Missing canonical detail segment '+part+' in '+item.id);
   assert.ok(rendered.includes('data-icon-id="'+item.item.assetId+'"'),
