@@ -33,6 +33,7 @@ function render(data){
  vm.runInContext(file('docs/assets/slide-graph.js'),x,{filename:'slide-graph.js',timeout:3000});
  
   vm.runInContext(file('docs/assets/unified-slide-scene.js'),x,{filename:'unified-slide-scene.js',timeout:3000});
+ vm.runInContext(file('docs/assets/visual-composition.js'),x,{filename:'visual-composition.js',timeout:3000});
  vm.runInContext(file('docs/assets/slide-visuals.js'),x,{filename:'slide-visuals.js',timeout:3000});
 vm.runInContext(injected,x,{filename:'site.js',timeout:3000});
  return vm.runInContext('__views()',x,{timeout:3000});
