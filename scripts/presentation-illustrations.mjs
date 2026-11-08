@@ -36,6 +36,11 @@ const currentHash=s=>digest(canonicalText(s));
 const byId=new Map(slides.map(s=>[s.id,s]));
 const publicPath=item=>'docs/assets/illustrations/'+item.sourceSlideId+'-'+item.styleId+'.webp';
 const draftPath=item=>'media/illustrations/drafts/'+item.sourceSlideId+'-'+item.styleId+'.webp';
+const recipeHash=recipe=>digest(Buffer.concat([
+ fs.readFileSync(recipe.generator),
+ fs.readFileSync('scripts/illustration_kit.py'),
+ fs.readFileSync('scripts/optimize-presentation-image.py')
+]));
 const get=(id,style)=>{
  const entry=manifest.variants.find(v=>v.sourceSlideId===id&&v.styleId===style);
  if(!entry)throw Error('Ukjent illustrasjonsvariant: '+id+' / '+style);
@@ -62,6 +67,7 @@ function validate(){
   assert.equal(item.assetId,'presentation-'+key.replace(':','-'));
   if(item.approvalStatus==='approved'){
    assert.equal(item.contentHash,currentHash(byId.get(item.sourceSlideId)),'Utdatert godkjent illustrasjon: '+key);
+   assert.equal(item.recipeSourceHash,recipeHash(recipe),'Tegnemotor eller bildeoppskrift er endret. Regenerer: '+key);
    assert.equal(item.publicPath,'./assets/illustrations/'+path.basename(publicPath(item)));
    assert.match(item.approvedAt||'',/^\d{4}-\d\d-\d\dT/);
    assert.ok(item.reviewedBy,'Mangler manuell godkjenner: '+key);
@@ -115,6 +121,7 @@ function prepare(id,style,source){
  item.draftPath=draft;
  item.fileSha256=fileDigest(draft);
  item.contentHash=currentHash(byId.get(id));
+ item.recipeSourceHash=recipeHash(recipeIndex.get(id+':'+style));
  item.approvalStatus='in-review';
  item.publicPath=null;item.approvedAt=null;item.reviewedBy=null;
  persist();status();
@@ -126,6 +133,8 @@ function approve(id,style,reviewer,flags){
  const item=get(id,style);
  if(item.approvalStatus!=='in-review')throw Error('Bare ferdige gjennomgåtte utkast kan godkjennes');
  if(item.contentHash!==currentHash(byId.get(id)))throw Error('Faglig innhold er endret, regenerer bildet');
+ if(item.recipeSourceHash!==recipeHash(recipeIndex.get(id+':'+style)))
+  throw Error('Tegneoppskriften er endret, regenerer bildet');
  if(!item.draftPath||!fs.existsSync(item.draftPath)||item.fileSha256!==fileDigest(item.draftPath))
   throw Error('Bildefil stemmer ikke med kontrollert utkast');
  fs.mkdirSync('docs/assets/illustrations',{recursive:true});
