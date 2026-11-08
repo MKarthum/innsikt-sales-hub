@@ -175,7 +175,7 @@ api.registerObject('context-period',{version:1,render:({node,box:b,esc})=>nodeRo
  rect(b,'acp-period-panel',18)+txt(node.content.title,b.x+b.w/2,b.y+25,'acp-period-text',esc,'middle'),esc)});
 api.registerObject('context-governance',{version:1,render:({node,box:b,esc})=>{
  const labels=node.content.items||[];
- const xs=[b.x+280,b.x+545,b.x+830,b.x+1135];
+ const xs=[b.x+430,b.x+650,b.x+880,b.x+1150];
  return nodeRoot(node,'acp-governance',rect(b,'acp-governance-panel',16)
   +txt(node.content.title,b.x+22,b.y+27,'acp-governance-title',esc)
   +labels.map((label,i)=>`<circle class="acp-guard-dot" cx="${N(xs[i])}" cy="${N(b.y+22)}" r="4"/>`+txt(label,xs[i]+13,b.y+27,'acp-governance-item',esc)).join(''),esc);

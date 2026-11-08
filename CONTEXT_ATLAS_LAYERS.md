@@ -15,3 +15,5 @@ The original portrait and agent fragments are still the weakest assets. They are
 Verification: `scripts/check-context-atlas.mjs` checks geometry-linked lights and semantic graph; `scripts/check-visual-pilot.mjs` captures three style screenshots plus advanced light/dark; export checks run in Chromium and WebKit via GitHub Actions.
 
 The outdated, pre-rendered whole-slide image was withdrawn from the approved illustration manifest after the editorial change. Its old digest remains as provenance, while the live modular SVG remains the rendered and export-tested source.
+
+Visual review rejected repeated oval floor shadows and ornamental hub rings because they resembled extra visual relationships. The advanced treatment now uses only diffuse node lighting, while real edges remain the only directional strokes. A browser bounding-box check verifies the outcome titles and the bottom governance marker clearance.

@@ -48,6 +48,18 @@ try{
    'All connector effects share canonical paths');
   assert.equal(await contextSlide.locator('svg image.mc-layer-image').count(),0,
    'No absolute, slide-wide atmosphere image may shadow the semantic scene');
+  const labelClearance=await contextSlide.evaluate(scene=>{
+   const outcomes=[...scene.querySelectorAll('.acp-outcome')].map(node=>{
+    const title=node.querySelector('.acp-card-title')?.getBoundingClientRect();
+    const panel=node.querySelector('.acp-card-panel')?.getBoundingClientRect();
+    return title&&panel?Math.round(panel.right-title.right):0;
+   });
+   const bottom=scene.querySelector('.acp-governance-title')?.getBoundingClientRect();
+   const dot=scene.querySelector('.acp-guard-dot')?.getBoundingClientRect();
+   return {outcomes,footer:bottom&&dot?Math.round(dot.left-bottom.right):0};
+  });
+  assert.ok(labelClearance.outcomes.every(x=>x>=2)&&labelClearance.footer>=5,
+    'Semantic text must stay inside panels and clear governance markers in '+style+': '+JSON.stringify(labelClearance));
   positions.push(await contextSlide.locator('.acp-card-panel').evaluateAll(rects=>rects.map(r=>
    ['x','y','width','height'].map(key=>r.getAttribute(key)).join(':')).join('|')));
   advancedArtwork.push(await contextSlide.locator('.acp-illustration').first().evaluate(
