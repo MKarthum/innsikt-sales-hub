@@ -92,10 +92,13 @@ try{
   const scene=frame.locator('.story-scene');
   await scene.waitFor();
   assert.equal(await scene.getAttribute('data-art-direction'),direction);
-  if(direction==='rich-image'){
-   assert.equal(await scene.locator('img.cp-approved-image').count(),1,
-    fileId+': rich-image must use an approved bitmap, not a standard fallback');
-  }
+  assert.equal(await scene.locator('svg.di-svg[data-layout-contract="1"]').count(),1,
+   fileId+'/'+direction+': every style must render exactly the same live scene');
+  assert.equal(await scene.locator('img.cp-approved-image').count(),0,
+   fileId+'/'+direction+': no separately maintained diagram bitmap is allowed');
+  assert.equal(await scene.locator('[data-node-id]').count(),
+   fileId==='ai-context-platforms-2027'?16:4,
+   fileId+'/'+direction+': node count must not depend on art direction');
   await scene.locator('img').evaluateAll(async imgs=>Promise.all(imgs.filter(x=>getComputedStyle(x).display!=='none').map(img=>img.decode())));
   const reference=await frame.screenshot();
   fs.writeFileSync(path.join(output,direction+'-screen.png'),reference);
