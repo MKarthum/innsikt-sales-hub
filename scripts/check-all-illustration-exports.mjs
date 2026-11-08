@@ -17,9 +17,8 @@ for(const recipe of config.recipes){
  }
  const slide=byId.get(recipe.sourceSlideId);
  if(!slide)throw Error('Lysbildet finnes ikke: '+recipe.sourceSlideId);
- const directions=recipe.sourceSlideId==='ai-context-platforms-2027'
-  ?'standard,rich,rich-image' // historical native SVG benchmark
-  :'rich-image';             // test newly introduced published image
+ // Every unified scene must expose the same three real presentation styles.
+ const directions=['standard','rich','rich-image'].join(',');
  const args=['scripts/check-context-platform-exports-browser.mjs'];
  const env={...process.env,EXPORT_SLIDE_ID:recipe.sourceSlideId,EXPORT_DIRECTIONS:directions};
  const result=spawnSync(process.execPath,args,{env,stdio:'inherit'});
