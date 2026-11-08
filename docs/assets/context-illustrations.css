@@ -114,7 +114,7 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration{filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-ambient{
  opacity:.2;stroke-width:12;filter:drop-shadow(0 0 4px var(--acp-glow))}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-outcome .acp-card-title{font-size:18px}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-outcome .acp-card-title{font-size:16px}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-card-panel{
  fill:color-mix(in srgb,var(--pres-bg) 55%,var(--pres-accent));stroke:var(--pres-accent);stroke-width:2}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-facet .acp-card-panel{

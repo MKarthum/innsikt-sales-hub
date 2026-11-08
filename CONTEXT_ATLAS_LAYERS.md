@@ -19,3 +19,5 @@ The outdated, pre-rendered whole-slide image was withdrawn from the approved ill
 Visual review rejected repeated oval floor shadows and ornamental hub rings because they resembled extra visual relationships. The advanced treatment now uses only diffuse node lighting, while real edges remain the only directional strokes. A browser bounding-box check verifies the outcome titles and the bottom governance marker clearance.
 
 The Chromium browser check reported a six-pixel overflow on the long second value headline in advanced mode. Its typography is now fitted to the existing card without shifting the factual geometry or violating the image/title clearance contract.
+
+The headline font size is now set on the last-loaded context illustration stylesheet; an earlier stylesheet override was masked by the downstream, more recent declaration. This avoids a competing advanced-typography rule.
