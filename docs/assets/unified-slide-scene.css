@@ -1,0 +1,144 @@
+/* One geometry, three skins. These selectors may change color, line weight,
+   atmosphere and surface depth, but never node/edge positions or text.
+   Every SVG node, label and arrow is shared between directions. */
+.story-scene.scene-unified-diagram{
+ position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;
+ overflow:hidden;isolation:isolate;display:block;background:var(--pres-bg);
+ --di-bg:var(--pres-bg);--di-fg:var(--pres-fg);--di-muted:var(--pres-muted);
+ --di-accent:var(--pres-accent);
+ --di-rule:color-mix(in srgb,var(--pres-fg) 47%,var(--pres-accent));
+ --di-fill:color-mix(in srgb,var(--pres-bg) 82%,var(--pres-accent));
+ --di-fill-soft:color-mix(in srgb,var(--pres-bg) 91%,var(--pres-fg));
+ --di-core:color-mix(in srgb,var(--pres-bg) 80%,var(--pres-accent));
+}
+.scene-unified-diagram .di-svg{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:hidden}
+.scene-unified-diagram .di-background-base{fill:var(--di-bg)}
+.scene-unified-diagram .di-background-photo{opacity:0;pointer-events:none}
+.scene-unified-diagram .di-background-halo{fill:var(--di-accent);opacity:.04}
+.scene-unified-diagram .di-orbit,.scene-unified-diagram .di-orbit-track,
+.scene-unified-diagram .di-mesh{fill:none;stroke:var(--di-accent);opacity:0;stroke-width:1.5}
+.scene-unified-diagram .di-kicker-rule{fill:none;stroke:var(--di-accent);stroke-width:5;stroke-linecap:round}
+.scene-unified-diagram .di-kicker{fill:var(--di-accent);font:770 21px var(--font-body);letter-spacing:2.8px}
+.scene-unified-diagram .di-main-title{fill:var(--di-fg);font:820 55px var(--font-display);letter-spacing:-1.6px}
+.scene-unified-diagram .di-main-title--long{font-size:43px;letter-spacing:-1.9px}
+.scene-unified-diagram .di-period{fill:var(--di-accent);font:730 29px var(--font-display)}
+.scene-unified-diagram .di-subtitle{fill:var(--di-muted);font:500 20px var(--font-body)}
+.scene-unified-diagram .di-consumer-band,.scene-unified-diagram .di-outcome-band,
+.scene-unified-diagram .di-process-band,.scene-unified-diagram .di-endpoint-band,
+.scene-unified-diagram .di-foundation-band{
+ fill:var(--di-fill-soft);stroke:var(--di-rule);stroke-width:1.55;
+}
+.scene-unified-diagram .di-context-panel{
+ fill:var(--di-core);stroke:var(--di-rule);stroke-width:1.75;
+}
+.scene-unified-diagram .di-division,.scene-unified-diagram .di-divider,
+.scene-unified-diagram .di-governance-rule{
+ fill:none;stroke:var(--di-rule);stroke-width:1.15;opacity:.75
+}
+.scene-unified-diagram .di-context-title{
+ fill:var(--di-fg);font:830 38px var(--font-display);letter-spacing:-1.15px
+}
+.scene-unified-diagram .di-context-lead{fill:var(--di-fg);font:550 21px var(--font-body)}
+.scene-unified-diagram .di-node-panel{
+ fill:var(--di-fill);stroke:var(--di-rule);stroke-width:1.35;
+}
+.scene-unified-diagram .di-node--consumer .di-node-panel{fill:none;stroke:none}
+.scene-unified-diagram .di-node--outcome .di-node-panel{fill:none;stroke:none}
+.scene-unified-diagram .di-node--cycle .di-node-panel{fill:none;stroke:none}
+.scene-unified-diagram .di-node-title{
+ fill:var(--di-fg);font:750 20px var(--font-display);letter-spacing:-.25px
+}
+.scene-unified-diagram .di-node-detail{
+ fill:var(--di-muted);font:530 15px var(--font-body)
+}
+.scene-unified-diagram .di-icon{opacity:.94}
+.scene-unified-diagram .di-edge-track{
+ fill:none;stroke:var(--di-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round
+}
+.scene-unified-diagram .di-edge-head{fill:var(--di-accent);stroke:none}
+.scene-unified-diagram .di-edge--feedback .di-edge-track{stroke-width:2.8}
+.scene-unified-diagram .di-governance-name{
+ fill:var(--di-fg);font:780 17px var(--font-body)
+}
+.scene-unified-diagram .di-governance-detail{
+ fill:var(--di-muted);font:520 16px var(--font-body)
+}
+.scene-unified-diagram .di-outcome-heading{
+ fill:var(--di-fg);font:790 29px var(--font-display)
+}
+.scene-unified-diagram .di-endpoint-kicker,.scene-unified-diagram .di-foundation-heading{
+ fill:var(--di-accent);font:750 16px var(--font-body);letter-spacing:.6px
+}
+.scene-unified-diagram .di-endpoint-value{
+ fill:var(--di-fg);font:730 23px var(--font-display)
+}
+.scene-unified-diagram .di-stage-number{
+ fill:var(--di-accent);font:850 25px var(--font-body)
+}
+.scene-unified-diagram .di-stage-title{
+ fill:var(--di-fg);font:790 25px var(--font-display)
+}
+.scene-unified-diagram .di-stage-detail{
+ fill:var(--di-muted);font:520 19px var(--font-body)
+}
+.scene-unified-diagram .di-foundation-label{
+ fill:var(--di-fg);font:730 20px var(--font-body)
+}
+.scene-unified-diagram .di-conclusion{
+ fill:var(--di-muted);font:590 18px var(--font-body)
+}
+.scene-unified-diagram .cp-brand-overlay{
+ display:block;position:absolute;z-index:12;pointer-events:none;
+ top:var(--slide-brand-top,2.7%);right:var(--slide-brand-right,2.5%);
+ width:var(--slide-brand-width,9cqw);height:var(--slide-brand-height,3.4cqw);
+ background-image:var(--slide-brand-logo,none);background-size:contain;
+ background-repeat:no-repeat;background-position:center
+}
+/* Mid-level: glass + subdued replaceable photo, entirely cosmetic. */
+.scene-unified-diagram[data-art-direction="rich"]{
+ --di-rule:color-mix(in srgb,var(--pres-fg) 65%,var(--pres-accent));
+ --di-fill:color-mix(in srgb,var(--pres-bg) 75%,var(--pres-accent));
+ --di-fill-soft:color-mix(in srgb,var(--pres-bg) 80%,var(--pres-fg));
+ --di-core:color-mix(in srgb,var(--pres-bg) 68%,var(--pres-accent));
+}
+.scene-unified-diagram[data-art-direction="rich"] .di-background-photo{opacity:.085}
+.scene-unified-diagram[data-art-direction="rich"] .di-background-halo{opacity:.12}
+.scene-unified-diagram[data-art-direction="rich"] .di-context-panel{
+ stroke-width:1.5;filter:drop-shadow(0 7px 15px color-mix(in srgb,var(--pres-accent) 13%,transparent))
+}
+.scene-unified-diagram[data-art-direction="rich"] .di-node-panel,
+.scene-unified-diagram[data-art-direction="rich"] .di-consumer-band,
+.scene-unified-diagram[data-art-direction="rich"] .di-process-band,
+.scene-unified-diagram[data-art-direction="rich"] .di-outcome-band{
+ filter:drop-shadow(0 5px 10px color-mix(in srgb,var(--pres-bg) 33%,transparent));
+}
+.scene-unified-diagram[data-art-direction="rich"] .di-edge-track{stroke-width:2.55}
+.scene-unified-diagram[data-art-direction="rich"] .di-edge--feedback .di-edge-track{stroke-width:2.45}
+/* Advanced: more atmosphere, same geometry and text; no baked-in diagram. */
+.scene-unified-diagram[data-art-direction="rich-image"]{
+ --di-rule:color-mix(in srgb,var(--pres-fg) 36%,var(--pres-accent));
+ --di-fill:color-mix(in srgb,var(--pres-bg) 66%,var(--pres-accent));
+ --di-fill-soft:color-mix(in srgb,var(--pres-bg) 78%,var(--pres-accent));
+ --di-core:color-mix(in srgb,var(--pres-bg) 54%,var(--pres-accent));
+}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-background-photo{opacity:.18}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-background-halo{opacity:.19}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-orbit{opacity:.17}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-orbit--small{opacity:.12}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-orbit-track{opacity:.23}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-mesh{opacity:.075}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-context-panel{
+ stroke-width:1.8;filter:drop-shadow(0 0 13px color-mix(in srgb,var(--pres-accent) 27%,transparent))
+}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-consumer-band,
+.scene-unified-diagram[data-art-direction="rich-image"] .di-outcome-band,
+.scene-unified-diagram[data-art-direction="rich-image"] .di-process-band,
+.scene-unified-diagram[data-art-direction="rich-image"] .di-node--stage .di-node-panel{
+ filter:drop-shadow(0 7px 14px color-mix(in srgb,var(--pres-accent) 16%,transparent))
+}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-edge-track{stroke-width:3.1}
+.scene-unified-diagram[data-art-direction="rich-image"] .di-edge--feedback .di-edge-track{stroke-width:2.7}
+@media(prefers-reduced-motion:reduce){
+ .scene-unified-diagram *{animation:none!important;transition:none!important}
+}
+@media print{.scene-unified-diagram *{animation:none!important}}
