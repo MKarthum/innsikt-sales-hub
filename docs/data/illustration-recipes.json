@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "description": "Genereringsoppskrifter uten fagtekst. slides.json eier innholdet; hver recipe er en selvstendig layout, men deler illustrasjon_kit.",
+  "recipes": [
+    {
+      "sourceSlideId": "ai-context-platforms-2027",
+      "styleId": "rich-image",
+      "version": "7",
+      "generator": "scripts/render-context-platform-image.py",
+      "composition": "contained-system"
+    },
+    {
+      "sourceSlideId": "insight-value-chain",
+      "styleId": "rich-image",
+      "version": "1",
+      "generator": "scripts/render-insight-value-chain-image.py",
+      "composition": "four-stage-value-flow"
+    }
+  ]
+}
