@@ -45,3 +45,6 @@
 .scene-modular-v1[data-composition-level="rich-image"] .mc-card-glint{opacity:1;stroke-width:4}
 @media(prefers-reduced-motion:reduce){.scene-modular-v1 *{animation:none!important;transition:none!important}}
 @media print{.scene-modular-v1 *{animation:none!important}}
+
+/* Optional semantic-edge atmosphere is opt-in; never add default SVG fill. */
+.scene-modular-v1 .mc-edge-ambient{fill:none;stroke:none}

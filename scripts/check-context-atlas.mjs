@@ -9,7 +9,7 @@ for(const file of ['visual-assets','slide-graph','visual-composition','context-a
  vm.runInNewContext(fs.readFileSync('docs/assets/'+file+'.js','utf8'),ctx,{filename:file+'.js'});
 const api=ctx.window.InnsiktVisualComposition,esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const graph=ctx.window.InnsiktSlideGraph.validate(slide.visual.graph,slide.visual);
-const compositions=['context-architecture','context-glass','context-atmosphere'];
+const compositions=['context-architecture','context-architecture','context-architecture'];
 const rendered=['standard','rich','rich-image'].map((style,i)=>{
  const plan=api.compile(slide,style);
  assert.equal(plan.composition,compositions[i]);
@@ -28,8 +28,16 @@ const rendered=['standard','rich','rich-image'].map((style,i)=>{
   }
  return {html,geometry:Array.from(plan.geometry.values())};
 });
-assert.notDeepEqual(rendered[0].geometry,rendered[1].geometry);
-assert.notDeepEqual(rendered[1].geometry,rendered[2].geometry);
+assert.deepEqual(rendered[0].geometry,rendered[1].geometry);
+assert.deepEqual(rendered[1].geometry,rendered[2].geometry);
+for(const {html} of rendered){
+ assert.equal((html.match(/data-concept-role="/g)||[]).length,15,'One concept illustration is anchored to each factual card');
+ assert.ok(html.includes('class="acp-core-art"'),'Core graph artwork must be owned by the context object');
+ assert.equal((html.match(/class="mc-edge-ambient"/g)||[]).length,10,'Ambient edges must reuse exactly the ten canonical paths');
+}
+assert.equal(rendered[0].html.match(/<svg class="mc-svg"[\\s\\S]*?<\\/svg>/)?.[0],
+ rendered[2].html.match(/<svg class="mc-svg"[\\s\\S]*?<\\/svg>/)?.[0],
+ 'All styles keep the same SVG scene and geometry; differences are visual layers only');
 const changed=structuredClone(slide);changed.visual.facets[1].detail='Ny dokumentert situasjon';
 for(const mode of ['standard','rich','rich-image'])assert.ok(api.renderSlide(changed,assets,esc,mode).includes('Ny dokumentert situasjon'));
 const reversed=structuredClone(slide);reversed.visual.graph.source=reversed.visual.graph.source.replace('sources:1 --> context','context --> sources:1');
@@ -40,4 +48,4 @@ assert.notEqual(api.compile(moved,'rich-image').edges[0].path,api.compile(slide,
 const css=fs.readFileSync('docs/assets/context-atlas.css','utf8');
 assert.ok(css.includes('var(--pres-accent)')&&css.includes('data-composition-level="rich-image"'));
 assert.ok(!/#[0-9a-f]{3,8}\\b/i.test(css));
-console.log('PASS – AI Context Platforms: 22 objekter, 10 kanoniske relasjoner, 3 komposisjoner, dataendring, ankerflytting, temastøtte');
+console.log('PASS – AI Context Platforms: 22 objekter, 10 kanoniske relasjoner, én stabil komposisjon, objektillustrasjoner, dataendring, ankerflytting, temastøtte');

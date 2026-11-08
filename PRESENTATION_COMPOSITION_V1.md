@@ -57,8 +57,21 @@ Dagens to store figurer bruker fortsatt `unified-slide-scene.js`, som er en **le
 Det eksisterende lysbildet `ai-context-platforms-2027` er nå en **faglig adapter** til den modulære motoren. Semantikken eies fortsatt av `slides.json` og den validerte grafen i `slide-graph.js`. Ingen tekst eller faglige relasjonsretninger er kopiert inn i CSS, generatorer eller særskilte renderingstrær.
 
 - `docs/assets/context-atlas.js`: registrerer en adapter, tre selvstendige komposisjoner, objekttyper, en relasjonsruter og et dekorasjonslag. Endringer i objekttyper er isolert fra komposisjonens koordinater.
-- `docs/assets/context-atlas.css`: definerer enkel, illustrert og avansert visuell fremstilling. Komposisjonene har ulik geometri og styling. Diagram- og tekstelementer er fortsatt SVG. Atmosfærebilde er et byttbart lag fra ressursregisteret.
-- `scripts/check-context-atlas.mjs`: tester 22 stabile objektidentiteter, alle ti kanoniske relasjoner, omplassering, tre layoutstrategier og innholdspropagering.
-- `scripts/check-context-platform-exports-browser.mjs`: sammenligner reelle skjermbilder med PNG/JPG/PDF/PPTX i Chromium og WebKit. Pilotens geometri skal nå **kunne være forskjellig** per stil, i motsetning til den historiske SVG-motoren for verdikjeden.
+- `docs/assets/context-atlas.css`: definerer enkel, illustrert og avansert visuell fremstilling. Illustrasjonsvariantene har nå felles geometri. Objektene tilfører illustrasjoner innenfor egne ankere; diagram, tekst og relasjoner er fortsatt SVG. Atmosfærebilde er et byttbart lag fra ressursregisteret.
+- `scripts/check-context-atlas.mjs`: tester 22 stabile objektidentiteter, alle ti kanoniske relasjoner, omplassering, invariant geometri mellom visuelle stiler, 15 motivforankrede illustrasjoner og innholdspropagering.
+- `scripts/check-context-platform-exports-browser.mjs`: sammenligner reelle skjermbilder med PNG/JPG/PDF/PPTX i Chromium og WebKit. Pilotens faglige geometri skal nå være **helt lik** på tvers av stilene. Illustrasjonslaget er knyttet til objekter og kanoniske relasjoner.
 
 Gjenstående visuell forbedring bør skje i objektstiler og dekorlag, ikke ved å bake fagtekst eller piler inn i et ferdig foto. Den historiske `unified-slide-scene.js` brukes fortsatt av verdikjeden og som regresjonsreferanse, men ikke av denne piloten i appen.
+
+## Visuell grammatikk v2 (0.18.122)
+
+Brukerutprøvingen avdekket to problemer: objektene flyttet seg uten faglig grunn, og den avanserte stilen tilføyde hovedsakelig et absolutt, frikoblet landskapsbilde. Dette er endret i piloten.
+
+- **Fast faglig geometri:** Alle tre visningsstiler bruker `context-architecture`. Et objekt eller en relasjon flytter seg bare ved en eksplisitt komposisjonsendring. Justering av stil skal ikke endre leserekkefølgen eller ankerpunktene.
+- **Objektforankret motivregister:** Hver av de 15 faglige kortnodene får et `visual.motif` fra en gjenbrukbar grammatikk for mennesker, applikasjoner, agenter, semantikk, tid, rammer, systemer, beslutning, handling og verdi. Motivet er geometrisk relativt til kortets egen boks, ikke til lysbildets globale koordinater. Motiver kan overstyres med `visual.composition.motifs[nodeId]` uten å endre fagtekst.
+- **Lagvis progresjon:** `standard` er et rent diagram; `rich` viser struktur og kunnskapsnettverk; `rich-image` tilfører lokale volumer, linseeffekter og relasjonslys. De tre er samme SVG-scene; CSS bestemmer hvilket nivå som synes. Den avanserte stilen krever ikke et rasterbilde.
+- **Relasjonsforankret lys:** `mc-edge-ambient` bruker eksakt samme beregnede kurve som den kanoniske pilen. Den har ingen egen rute eller faglig betydning. Andre slidefamilier har standard `stroke:none`.
+- **Kontekstobjektet eier kunnskapsnettverket:** Nettverket er lokalisert relativt til hovedobjektets dimensjoner. Det er konseptuell illustrasjon, ikke en påstand om nye autoritative faglige relasjoner.
+- **Regresjonskrav:** 22 identiteter, 10 kanoniske piler og identisk SVG-markup på tvers av stiler. Kontroll av lys og mørk palett og faktisk eksport beholdes.
+
+Læringen er generell, men er foreløpig implementert på ett lysbilde. En eventuelt ny komposisjon er et eget faglig/redaksjonelt valg, ikke en automatisk effekt av å velge en illustrasjonsstil.

@@ -104,8 +104,8 @@ try{
    fileId+'/'+direction+': all semantic relations are present');
   const svgMarkup=await scene.locator(isModular?'svg.mc-svg':'svg.di-svg').evaluate(svg=>svg.outerHTML);
   if(sharedMarkup!==null){
-   if(isModular)assert.notEqual(svgMarkup,sharedMarkup,
-    'Different modular compositions must not be forced into identical geometry');
+   if(isModular)assert.equal(svgMarkup,sharedMarkup,
+    'Different visual treatments must share the same semantic SVG and anchored geometry');
    else assert.equal(svgMarkup,sharedMarkup,'The unchanged chain renderer must be stable across styles');
   }
   sharedMarkup=svgMarkup;

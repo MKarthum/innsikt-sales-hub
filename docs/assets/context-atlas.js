@@ -1,4 +1,4 @@
-/* Context-platform pilot: one source graph, independent compositions, registered objects.
+/* Context-platform pilot: one source graph, stable composition and object-bound illustrations.
    All factual copy and all edge directions come from slides.json. */
 (()=>{
 'use strict';
@@ -26,7 +26,7 @@ function contextAdapter(slide){
  const graph=window.InnsiktSlideGraph.validate(v.graph,v);
  const nodes=[{id:'context',type:'context-hub',content:{title:v.contextLabel,detail:v.contextLead}}];
  for(const [group,type] of [['consumers','context-person'],['facets','context-facet'],['sources','context-source'],['cycle','context-step'],['outcomes','context-outcome']]){
-  v[group].forEach((item,index)=>nodes.push({id:group+':'+index,type,content:contentFrom(item),index}));
+  v[group].forEach((item,index)=>nodes.push({id:group+':'+index,type,content:contentFrom(item),index,visual:{motif:(config.motifs||{})[group+':'+index]||({consumers:['collaboration','applications','agents'],facets:['meaning','timeline','boundaries'],sources:['storage','operations','external'],cycle:['decision','action','feedback'],outcomes:['value','delivery','learning']}[group]||[])[index]}}));
  }
  nodes.push({id:'governance',type:'context-governance',content:{title:v.governanceLabel,items:v.governance}});
  nodes.push({id:'heading-consumers',type:'context-section',content:{title:config.labels.consumers}});
@@ -41,11 +41,7 @@ function contextAdapter(slide){
 api.registerAdapter('context-platforms',contextAdapter);
 const presets={
  'context-architecture':{core:[92,360,1010,192],consumers:[224,224,224],sources:602,cycle:743,facets:463,
-   outcomeX:1191,outcomeY:408,outcomeGap:118},
- 'context-glass':{core:[83,356,1034,201],consumers:[223,214,223],sources:600,cycle:744,facets:463,
-   outcomeX:1191,outcomeY:404,outcomeGap:122},
- 'context-atmosphere':{core:[76,350,1051,220],consumers:[223,211,223],sources:616,cycle:750,facets:472,
-   outcomeX:1191,outcomeY:398,outcomeGap:122}
+   outcomeX:1191,outcomeY:408,outcomeGap:118}
 };
 for(const [id,plan] of Object.entries(presets)){
  api.registerComposition(id,nodes=>{
@@ -99,12 +95,49 @@ function contextRouter(edge,geom){
  throw Error('Ingen kontekstrelasjonsrute: '+edge.id);
 }
 api.registerRouter('context-atlas',contextRouter);
+function conceptArt(node,b,esc){
+ const motif=node.visual?.motif||node.type;
+ const shapes={
+  collaboration:'<circle cx="-10" cy="-12" r="8"/><circle cx="12" cy="-10" r="7"/><path d="M-28 17Q-26 1-11 1Q4 1 5 19M-2 22Q0 7 14 7Q27 7 29 22"/>',
+  applications:'<rect x="-25" y="-20" width="35" height="32" rx="5"/><rect x="-6" y="-7" width="34" height="30" rx="5"/><path d="M-19 -11H1M-1 2H21"/>',
+  agents:'<path d="M0-26L23-13V13L0 26L-23 13V-13Z"/><circle r="9"/><path d="M0-26V-34M23 13L30 18M-23 13L-30 18M-9 0H9"/>',
+  meaning:'<circle cx="0" cy="-18" r="8"/><circle cx="-21" cy="16" r="8"/><circle cx="21" cy="16" r="8"/><path d="M-5-11L-17 8M5-11L17 8M-12 16H12"/>',
+  timeline:'<path d="M-31 0H31M-27-11V11M0-15V15M27-11V11"/><circle cx="-27" cy="0" r="5"/><circle cy="0" r="7"/><circle cx="27" cy="0" r="5"/>',
+  boundaries:'<path d="M0-27L25-17V3Q23 23 0 30Q-23 23-25 3V-17Z"/><path d="M-12 1L-2 11L15-9"/>',
+  storage:'<ellipse cx="0" cy="-20" rx="25" ry="9"/><path d="M-25-20V18Q0 34 25 18V-20M-25-1Q0 16 25-1"/>',
+  operations:'<rect x="-31" y="-22" width="27" height="22" rx="4"/><rect x="5" y="1" width="27" height="22" rx="4"/><path d="M-4-11H9V-6M5 12H-9V17"/>',
+  external:'<circle r="27"/><path d="M-27 0H27M0-27Q-19 0 0 27Q19 0 0-27M-19-16H19M-19 16H19"/>',
+  decision:'<path d="M0-26L26 0L0 26L-26 0Z"/><path d="M-2-15V0H15M-2 0L-15 13"/>',
+  action:'<rect x="-27" y="-21" width="54" height="42" rx="7"/><path d="M-16 0H12M5-10L15 0L5 10"/>',
+  feedback:'<path d="M14-20A25 25 0 1 0 25 6M14-20L26-20L23-7"/><circle cx="0" cy="4" r="8"/>',
+  value:'<path d="M-28 23H28M-23 14V-2H-11V14M-5 14V-16H7V14M13 14V-25H25V14"/>',
+  delivery:'<path d="M-29 15L-8-6L6 5L28-20M12-20H28V-4"/><circle cx="-29" cy="15" r="4"/>',
+  learning:'<circle r="8"/><path d="M0-30A30 30 0 0 1 26 15M0 30A30 30 0 0 1-26-15M25 5L26 15L15 14M-25-5L-26-15L-15-14"/>'
+ };
+ const drawing=shapes[motif]||shapes.meaning;
+ const cx=b.x+39,cy=b.y+b.h/2;
+ return `<g class="acp-concept" data-concept-role="${esc(motif)}" aria-hidden="true" transform="translate(${N(cx)} ${N(cy)}) scale(.72)">
+   <g class="acp-concept-volume"><circle class="acp-concept-disc" r="43"/><circle class="acp-concept-disc acp-concept-disc--inner" cx="-7" cy="-8" r="26"/><path class="acp-concept-shine" d="M-34 14Q-40-25-1-42"/></g>
+   <g class="acp-concept-structure">${drawing}</g>
+   <g class="acp-concept-points"><circle cx="-37" cy="33" r="3.3"/><circle cx="32" cy="-33" r="2.7"/></g>
+  </g>`;
+}
+function coreArt(b){
+ const x=b.x+b.w-205,y=b.y+61;
+ const points=[[-102,-4],[-68,-37],[-48,23],[-6,-19],[25,14],[64,-32],[98,2]];
+ const lines=[[0,1],[0,2],[1,3],[2,3],[2,4],[3,4],[3,5],[4,5],[4,6],[5,6]];
+ return `<g class="acp-core-art" aria-hidden="true" transform="translate(${N(x)} ${N(y)})">
+ <g class="acp-core-art-volume"><ellipse rx="141" ry="72"/><ellipse rx="106" ry="47"/></g>
+ <g class="acp-core-art-network">${lines.map(([a,c])=>`<path d="M${points[a].join(' ')}L${points[c].join(' ')}"/>`).join('')}${points.map(([a,c],i)=>`<circle cx="${a}" cy="${c}" r="${i===3?8:5}"/>`).join('')}</g>
+ </g>`;
+}
 function coreNode({node,box:b,esc}){
  const c=node.content;
  return nodeRoot(node,'acp-core',
   rect({x:b.x+16,y:b.y+18,w:b.w-8,h:b.h},'acp-core-depth',33)
   +rect({x:b.x+8,y:b.y+8,w:b.w-5,h:b.h},'acp-core-stack',32)
   +rect(b,'acp-core-glass',32)
+  +coreArt(b)
   +`<path class="acp-core-lightline" d="M${N(b.x+34)} ${N(b.y+3)} H${N(b.x+b.w-34)}"/>`
   +`<rect class="acp-core-marker" x="${N(b.x+23)}" y="${N(b.y+29)}" width="5" height="35" rx="2.5"/>`
   +txt(c.title,b.x+47,b.y+50,'acp-core-title',esc)
@@ -123,6 +156,7 @@ function contextCard({node,box:b,esc,assets}){
   rect({x:b.x+4,y:b.y+8,w:b.w,h:b.h},'acp-card-depth',20)
   +rect(b,'acp-card-panel',20)
   +rect({x:b.x+12,y:b.y+12,w:49,h:b.h-24},'acp-icon-plate',14)
+  +conceptArt(node,b,esc)
   +pictogram(c.assetId,{x:ix+6,y:iy+4},assets,esc,35)
   +txt(c.title,tx,titleY,'acp-card-title',esc)
   +subtext(c.detail,tx,detailY,'acp-card-detail',esc,t==='context-source'?29:t==='context-facet'?24:33,17)
@@ -142,23 +176,10 @@ api.registerObject('context-governance',{version:1,render:({node,box:b,esc})=>{
   +txt(node.content.title,b.x+22,b.y+27,'acp-governance-title',esc)
   +labels.map((label,i)=>`<circle class="acp-guard-dot" cx="${N(xs[i])}" cy="${N(b.y+22)}" r="4"/>`+txt(label,xs[i]+13,b.y+27,'acp-governance-item',esc)).join(''),esc);
 }});
-api.registerDecoration('context-atlas',({scene,geometry,direction,esc})=>{
- const b=geometry.get('context'),cx=b.x+b.w/2,cy=b.y+b.h/2;
- const seed=scene.id.replace(/[^a-z0-9-]/g,'');
- let specks='';for(let i=0;i<32;i++){
-  const x=80+(i*157)%1440,y=198+(i*97)%590,r=i%7===0?2.2:1.05;
-  specks+=`<circle class="acp-particle" cx="${x}" cy="${y}" r="${r}"/>`;
- }
- return `<defs>
-  <radialGradient id="${seed}-aura"><stop offset="0" class="acp-aura-center"/><stop offset=".62" class="acp-aura-middle"/><stop offset="1" class="acp-aura-end"/></radialGradient>
-  <linearGradient id="${seed}-floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="acp-floor-start"/><stop offset="1" class="acp-floor-end"/></linearGradient>
- </defs>
- <ellipse class="acp-aura" cx="${N(cx)}" cy="${N(cy+38)}" rx="720" ry="370" fill="url(#${seed}-aura)"/>
- <path class="acp-floor" d="M0 665 Q800 475 1600 665 V900H0Z" fill="url(#${seed}-floor)"/>
- <g class="acp-world-grid"><path d="M0 860L800 534L1600 860M0 780L800 515L1600 780M0 700L800 490L1600 700M0 620L800 460L1600 620M300 900L675 510M540 900L737 510M800 900V510M1060 900L860 510M1320 900L920 510"/></g>
- <ellipse class="acp-orbit-ring" cx="${N(cx)}" cy="${N(cy+18)}" rx="545" ry="167"/>
- <ellipse class="acp-orbit-ring acp-orbit-ring--outer" cx="${N(cx)}" cy="${N(cy+18)}" rx="630" ry="224"/>
- <path class="acp-ribbon" d="M${N(cx-580)} ${N(cy+26)} C${N(cx-280)} ${N(cy-240)} ${N(cx+250)} ${N(cy+285)} ${N(cx+610)} ${N(cy-32)}"/>
- ${specks}`;
+api.registerDecoration('context-atlas',({geometry,scene})=>{
+ const b=geometry.get('context');
+ const id='acp-'+scene.id.replace(/[^a-z0-9-]/g,'');
+ return `<defs><radialGradient id="${id}-halo"><stop offset="0" class="acp-aura-center"/><stop offset=".65" class="acp-aura-middle"/><stop offset="1" class="acp-aura-end"/></radialGradient></defs>
+ <ellipse class="acp-aura" cx="${N(b.x+b.w/2)}" cy="${N(b.y+b.h/2)}" rx="${N(b.w*.66)}" ry="${N(b.h*1.65)}" fill="url(#${id}-halo)"/>`;
 });
 })();

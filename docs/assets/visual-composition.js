@@ -184,7 +184,7 @@ function renderScene(input,assets,esc,direction='standard'){
  const decoration=scene.decoration?decorators.get(scene.decoration):null;
  if(scene.decoration&&!decoration)throw Error('Ukjent dekorasjonslag: '+scene.decoration);
  const decorativeSvg=decoration?decoration({scene,geometry,direction,esc,assets}):'<ellipse cx="805" cy="535" rx="495" ry="230"/><ellipse cx="805" cy="535" rx="390" ry="165"/>';
- const edges=plan.edges.map(e=>'<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-track" d="'+e.path+'"'+(e.head===false?'':' marker-end="url(#'+marker+')"')+'/></g>').join('');
+ const edges=plan.edges.map(e=>'<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-ambient" d="'+e.path+'"/><path class="mc-edge-track" d="'+e.path+'"'+(e.head===false?'':' marker-end="url(#'+marker+')"')+'/></g>').join('');
  const objects=scene.nodes.map(o=>objectTypes.get(o.type).render({node:o,box:geometry.get(o.id),esc,assets,level:direction})).join('');
  return '<div class="story-scene scene-modular-v1" data-scene-contract="2" data-composition-level="'+esc(direction)+'" data-composition="'+esc(plan.composition)+'" data-scene-id="'+esc(scene.id)+'" data-scene-family="'+esc(scene.family||'general')+'">'
   +'<svg class="mc-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="'+esc(scene.title)+'">'

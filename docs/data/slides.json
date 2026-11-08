@@ -2055,8 +2055,8 @@
           "engine": "modular-v1",
           "variants": {
             "standard": "context-architecture",
-            "rich": "context-glass",
-            "rich-image": "context-atmosphere"
+            "rich": "context-architecture",
+            "rich-image": "context-architecture"
           },
           "labels": {
             "consumers": "BRUKES AV",
@@ -2071,11 +2071,6 @@
             {
               "id": "blueprint",
               "type": "grid"
-            },
-            {
-              "id": "landscape",
-              "type": "image",
-              "assetId": "context-rich-background"
             }
           ]
         }
