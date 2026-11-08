@@ -65,11 +65,11 @@ image.alpha_composite(stars)
 draw=ImageDraw.Draw(image)
 def label(x,y,value,size=22,bold=False,color=WHITE,anchor=None):
     draw.text((x,y),str(value),font=font(size,bold),fill=rgba(color),anchor=anchor)
-def paragraph(x,y,value,width,size=18,color=MUTED,limit=2,leading=1.38):
-    f=font(size)
+def paragraph(x,y,value,width,size=18,color=MUTED,limit=2,leading=1.38,bold=False):
+    f=font(size,bold)
     parts=wrap(draw,value,f,width,limit)
     for j,line in enumerate(parts):
-        label(x,y+int(j*size*leading),line,size,color=color)
+        label(x,y+int(j*size*leading),line,size,bold=bold,color=color)
 def icon(asset_id,x,y,color):
     # Meaningful glyphs are selected by registered assetId, never index.
     ink=rgba(color,240)
@@ -104,7 +104,7 @@ def icon(asset_id,x,y,color):
 # Header
 draw.rounded_rectangle((70,51,124,58),radius=3,fill=rgba(CYAN))
 label(144,42,slide["cue"].upper(),19,True,(172,237,233))
-label(70,87,slide["title"],49,True)
+label(70,87,slide["title"],45,True)
 paragraph(73,160,v["subtitle"],1410,21,(208,227,240),limit=1)
 
 # Start -> outcome; the main directional relationship is unambiguous.
@@ -131,8 +131,8 @@ for i,stage in enumerate(v["stages"]):
     label(x+22,445,str(i+1).zfill(2),23,True,accent)
     icon(stage["assetId"],x+254,442,accent)
     # Meaningful title and detail are not duplicated outside canonical JSON.
-    label(x+22,527,stage["title"],21,True)
-    paragraph(x+22,574,stage["detail"],290,17,(209,225,240),limit=2)
+    paragraph(x+22,522,stage["title"],287,19,WHITE,limit=2,leading=1.28,bold=True)
+    paragraph(x+22,591,stage["detail"],287,17,(209,225,240),limit=2)
     draw.ellipse((x+162-8,cy-8,x+162+8,cy+8),fill=rgba(accent))
     stroke(image,[(x+162,cy+9),(x+162,415)],accent,2.3,alpha=216)
     if i<3:
