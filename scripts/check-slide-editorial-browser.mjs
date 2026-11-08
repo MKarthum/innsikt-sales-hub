@@ -20,10 +20,16 @@ try{
   assert.equal(role,s.design.archetype,'Editorial archetype propagated: '+s.id);
   assert.equal(focus,s.design.focus,'Focal role propagated: '+s.id);
   const sharedScene=await scene.locator('svg.di-svg[data-layout-contract="1"]').count()===1;
+  const modularScene=await scene.locator('svg.mc-svg').count()===1;
   if(sharedScene){
    assert.ok(['ai-context-platforms-2027','insight-value-chain'].includes(s.id));
    assert.equal(await scene.locator('.di-kicker').count(),1,
     'Canonical cue belongs in the shared vector scene: '+s.id);
+  }else if(modularScene){
+   assert.equal(await scene.locator('.mc-eyebrow').count(),1,
+    'Modulær scene skal ha kanonisk cue i sin vektorheading: '+s.id);
+   assert.equal(await scene.locator('[data-node-id]').count(),s.visual.items.length,
+    'Alle modulære objektidentiteter skal overleve: '+s.id);
   }else{
    assert.equal(await scene.locator('.scene-eyebrow').count(),1,'Slide eyebrow is present: '+s.id);
   }
@@ -35,7 +41,7 @@ try{
   });
   assert.ok(Math.abs(geometry.w/geometry.h-16/9)<.03,'16:9 slide geometry: '+s.id);
   assert.ok(geometry.shadow.includes('inset'),'Design accent rail should be visible: '+s.id);
-  if(!sharedScene)assert.ok(parseFloat(geometry.marker)>=12,'Native design signature should be visible: '+s.id);
+  if(!sharedScene&&!modularScene)assert.ok(parseFloat(geometry.marker)>=12,'Native design signature should be visible: '+s.id);
   assert.ok(geometry.excessW<=3&&geometry.excessH<=3,'No slide clipping: '+s.id);
   tested.add(role);
   if(idx%11===0||s.type==='architecture'&&s.id==='architecture-fabric') {
