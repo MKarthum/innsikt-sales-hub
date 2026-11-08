@@ -127,18 +127,15 @@ jobs:
         run: |
           python3 -m http.server 8769 --bind 127.0.0.1 > /tmp/innsikt-export-http.log 2>&1 &
           sleep 2
-      - name: Kontroller alle 12 benchmark-eksporter, fullskjerm og Presenter
-        run: node scripts/check-context-platform-exports-browser.mjs
-      - name: Kontroller ny verdikjedeillustrasjon i alle fire filformater
-        run: EXPORT_SLIDE_ID=insight-value-chain EXPORT_DIRECTIONS=rich-image node scripts/check-context-platform-exports-browser.mjs
+      - name: Kontroller alle godkjente bildeoppskrifter automatisk i Chromium
+        run: node scripts/check-all-illustration-exports.mjs
       - name: Last opp faktiske eksportfiler og skjermbilder
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: innsikt-context-exports
           path: |
-            artifacts/context-exports-chromium/**
-            artifacts/insight-value-chain-exports-chromium/**
+            artifacts/*-exports-chromium/**
           retention-days: 5
           if-no-files-found: warn
 
@@ -158,17 +155,14 @@ jobs:
         run: |
           python3 -m http.server 8769 --bind 127.0.0.1 > /tmp/innsikt-webkit-http.log 2>&1 &
           sleep 2
-      - name: Kontroller benchmark-eksporter i WebKit
-        run: EXPORT_BROWSER=webkit node scripts/check-context-platform-exports-browser.mjs
-      - name: Kontroller verdikjedeprototypen i WebKit
-        run: EXPORT_BROWSER=webkit EXPORT_SLIDE_ID=insight-value-chain EXPORT_DIRECTIONS=rich-image node scripts/check-context-platform-exports-browser.mjs
+      - name: Kontroller alle godkjente bildeoppskrifter automatisk i WebKit
+        run: EXPORT_BROWSER=webkit node scripts/check-all-illustration-exports.mjs
       - name: Last opp WebKit-baserte eksportfiler og skjermbilder
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: innsikt-context-exports-webkit
           path: |
-            artifacts/context-exports-webkit/**
-            artifacts/insight-value-chain-exports-webkit/**
+            artifacts/*-exports-webkit/**
           retention-days: 5
           if-no-files-found: warn
