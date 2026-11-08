@@ -1,6 +1,29 @@
 # Presentasjonsarkitektur: strukturert innhold og illustrasjoner
 
-Oppdatert 7. november 2026. Gjelder benchmarken `ai-context-platforms-2027`. Dette er en teknisk kontrakt og status for implementasjonen på `main`, ikke en generell omlegging av alle lysbilder.
+Oppdatert 8. november 2026. Gjelder benchmarken `ai-context-platforms-2027` og den separate verdikjedeprototypen `insight-value-chain`. Dokumentet beskriver teknisk kontrakt og status på `main`, ikke en generell omlegging av alle lysbilder.
+
+## Gjenbrukstest: to ulike komposisjoner fra samme produksjonsgrunnlag
+
+**Status:** Vi har en gjenbrukbar teknisk *produksjonsbane* for nye rike bilder, men ikke en universell automatisk illustratør. To faglig forskjellige bilder er nå definert fra eksisterende `slides.json`:
+
+| Slide-ID | Struktur | Komposisjonsoppskrift |
+| --- | --- | --- |
+| `ai-context-platforms-2027` | Kilder, kontekst, konsumenter og lukket beslutningssløyfe | `render-context-platform-image.py` |
+| `insight-value-chain` | Spørsmål, fire kompetansetrinn, resultat og tverrgående forutsetninger | `render-insight-value-chain-image.py` |
+
+Begge bruker `scripts/illustration_kit.py` til paneler, supersamplede streker, kurver, pilspisser, innramming og tekstbryting. Hvert lysbilde kan ha en *egen layoutoppskrift*, uten å kopiere tegneteknikk, godkjenning, bildemanifest, eksportkode eller visningsvelger. En ny faglig struktur krever fremdeles en bevisst figurkomposisjon og vurdering av lesbarhet. Å tvinge alle fortellinger inn i én «generisk graf» ville svekket figurene.
+
+**Enkel opprettelse av et nytt bilde:**
+1. Definer eller gjenbruk ett lysbilde i `docs/data/slides.json`. Ingen duplisert fagtekst.
+2. Registrer en oppskrift i `docs/data/illustration-recipes.json` med `sourceSlideId`, `styleId`, `version` og generator.
+3. Legg til én manifestoppføring i `docs/data/presentation-illustrations.json` med `approvalStatus: awaiting-asset`, og aktiver ønsket stil i lysbildets `visual.artDirections`.
+4. Bygg utkast: `node scripts/build-illustration.mjs SLIDE_ID --preview`. Se fulloppløst PNG og optimalisert WebP under `media/illustrations/previews/`.
+5. Kontroller visuell kvalitet. Publiser ved eksplisitt valg gjennom `node scripts/build-illustration.mjs SLIDE_ID --publish` eller den dedikerte GitHub Actions-jobben med publiseringsmarkør `[publish-illustrations]`. Oppskriftsversjon, kildekodehash, innholdshash, bildefilhash og filstørrelse verifiseres automatisk.
+6. Én release øker `site.json.version` og cache-versjonene i `docs/index.html`; kjør `scripts/check.mjs` og reelle nedlastingstester i Chromium og WebKit for det nye lysbildet.
+
+**Hva som faktisk kan gjenbrukes:** innholds- og kildekontrakten, tegnemotoren, felles filformater, bildekomprimering, rendring i app, logooverlegg, hashbasert ugyldiggjøring og testløpet. **Hva som fremdeles er spesialtilpasning:** komposisjon, meningsbærende illustrasjonssymboler, tekstplassering og fargevalg i hver bildereseppt. En rasterillustrasjon kan ikke bli like fritt skinnbar som native SVG bare ved CSS. En kopi til et annet designsystem kan gjenbruke diagramvisningen direkte, men rich-image må godkjennes eller regenereres med tilpasset billedprofil. Dette er en bevisst grense, ikke ferdig løst portabilitet.
+
+**Godkjenningsstatus:** `approved` betyr publiserbar etter faglig/teknisk kontroll i repoet, ikke at brukeren har godkjent den kunstneriske utførelsen. Virkelig visuell aksept krever egen vurdering av utkastet. Prototypen legges på en allerede eksisterende, kildebelagt slide med samme ID; den oppretter ingen ny historie eller påstand.
 
 ## Prinsipp og autoritet
 
@@ -30,7 +53,7 @@ Gjennomgang av de tre benchmark-visningene viste en tydelig arbeidsdeling: `stan
 
 Følgende feil er rettet med geometri- og kodekontroller: Den nøkterne visningen benyttet generiske ikoner som ikke samsvarte med dataplattform, system, eksterne kilder eller beslutningsløkken. Den har nå semantisk riktige ikoner som kan spores med `data-icon-role`. De dekorative bølgelinjene gjennom kontekstflaten er fjernet, og fjellfotografiet er tonet kraftig ned for ikke å konkurrere med faginformasjonen. Den rike bildeoppskriften gir lengre forbindelser fra kontekst til mottakere og holder returforbindelsen unna sidepanelet for mulig verdi. Felles kildeinntak beholdes uten tre overlappende pilspisser.
 
-Bildeoppskriften er versjonert til `4`; enhver endring må genereres, undersøkes og registreres med ny filhash før publisering. Vurder fortsatt de reelle skjermbildene i alle tre stiler og eksportene i Chromium og WebKit, ikke bare om JS-/Python-testene er grønne.
+Bildeoppskriften er versjonert i `illustration-recipes.json`; enhver endring må genereres, undersøkes og registreres med ny filhash før publisering. Vurder fortsatt de reelle skjermbildene i alle tre stiler og eksportene i Chromium og WebKit, ikke bare om JS-/Python-testene er grønne.
 
 ## Piktogrammer med entydig betydning
 
@@ -60,8 +83,8 @@ Arbeidsflyt i en autorisert repo-klone:
 
 ```sh
 python3 scripts/render-context-platform-image.py
-node scripts/presentation-illustrations.mjs revoke ai-context-platforms-2027 rich-image
-node scripts/presentation-illustrations.mjs import ai-context-platforms-2027 rich-image media/illustrations/input-rich-image.png
+node scripts/build-illustration.mjs ai-context-platforms-2027 --preview
+node scripts/build-illustration.mjs ai-context-platforms-2027 --publish
 # Gjennomfør reell faglig og visuell kontroll før denne kommandoen:
 node scripts/presentation-illustrations.mjs approve ai-context-platforms-2027 rich-image GODKJENNER --faglig-ok --visuelt-ok
 node scripts/presentation-illustrations.mjs check
