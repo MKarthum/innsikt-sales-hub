@@ -11,7 +11,7 @@ from illustration_kit import (panel as paint_panel, stroke as paint_stroke, bezi
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs/data/slides.json"
-OUT = ROOT / "media/illustrations/input-rich-image.png"
+OUT = pathlib.Path(os.environ.get("PRESENTATION_IMAGE_OUTPUT",str(ROOT / "media/illustrations/input-rich-image.png")))
 slide = next(s for s in json.loads(SOURCE.read_text())["items"] if s["id"] == "ai-context-platforms-2027")
 v = slide["visual"]
 # A changed canonical graph must not silently produce a beautiful but incorrect image.
