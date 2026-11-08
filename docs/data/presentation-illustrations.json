@@ -11,26 +11,28 @@
       "contentHash": "5fe4a5aec64bd660151a3fe361dbe3b78a573e931a46a783c9ee85ce20b69733",
       "publicPath": "./assets/illustrations/ai-context-platforms-2027-rich-image.webp",
       "masterPath": "media/illustrations/masters/ai-context-platforms-2027-rich-image.png",
-      "masterSha256": "54deb69fe3dc0a2a13731cf904b7f3931ded485b7f1c55deafa6f44ad3eb1b51",
+      "masterSha256": "cbe422d9667b2a3c66cc1d818a71845a43cc7e25ae2ddb6fb1c6b397fbfd3301",
       "draftPath": "media/illustrations/drafts/ai-context-platforms-2027-rich-image.webp",
-      "fileSha256": "d99c72789c1de242e4ed7f1e3768fb9b601c351fa1cc164321a317667dda3480",
-      "approvedAt": "2026-11-08T04:48:50.272Z",
-      "reviewedBy": "Teknisk og faglig vurdert av assistenten. Brukergodkjenning gjenstår"
+      "fileSha256": "e93b8f267631386cd499f9446c881aebd21d7cdab126114fa050bf6fb38ac53d",
+      "approvedAt": "2026-11-08T05:19:34.635Z",
+      "reviewedBy": "Teknisk og faglig kontroll. Visuell brukergodkjenning gjenstår",
+      "recipeSourceHash": "8daf8bd8fc9b1b529380e852367e639704381a67d9bbd3987f2e3392dca25e17"
     },
     {
       "sourceSlideId": "insight-value-chain",
       "styleId": "rich-image",
       "renderRecipeVersion": "1",
       "assetId": "presentation-insight-value-chain-rich-image",
-      "approvalStatus": "awaiting-asset",
-      "contentHash": null,
-      "publicPath": null,
-      "masterPath": null,
-      "masterSha256": null,
-      "draftPath": null,
-      "fileSha256": null,
-      "approvedAt": null,
-      "reviewedBy": null
+      "approvalStatus": "approved",
+      "contentHash": "ad7d005ff2fea5ad4f5dab29bad6809297f5dc65d7f551f01d2af10648a973d5",
+      "publicPath": "./assets/illustrations/insight-value-chain-rich-image.webp",
+      "masterPath": "media/illustrations/masters/insight-value-chain-rich-image.png",
+      "masterSha256": "d8e3386660a93e5e0da675dcd0b074760714db36e66ad2e9acba00ea7bf5a8e6",
+      "draftPath": "media/illustrations/drafts/insight-value-chain-rich-image.webp",
+      "fileSha256": "0be52ee3852c563757c3193610bf737c30f1956abdd376a5a5eed22d258e2429",
+      "approvedAt": "2026-11-08T05:19:35.839Z",
+      "reviewedBy": "Teknisk og faglig kontroll. Visuell brukergodkjenning gjenstår",
+      "recipeSourceHash": "1baef87a7d50d71f45aaaf37e6819c10fac010aac8ff25ae63b738296aa78e8e"
     }
   ]
 }
