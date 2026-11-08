@@ -59,7 +59,7 @@ assert.ok(endRule[1].startsWith('M1000 843')&&endRule[1].endsWith('1000 350')&&e
 assert.ok(endRule[2].includes('L1000 350L'),'Arrowhead tip must coincide with the right context boundary');
 const supportRule=html.match(/data-edge-id="context-decision"[^>]*><path class="cp-graph-track" d="([^"]+)"\/><path class="cp-graph-arrowhead" d="([^"]+)"/);
 assert.ok(supportRule&&supportRule[1].startsWith('M0 350')&&supportRule[1].endsWith('0 843'),'The decision route must attach to the left cycle boundary, not overlap its icon');
-assert.ok(html.includes('M1118 800C1181 792')&&html.includes('1180 540 1170 519'),'Native feedback must touch the context rim while avoiding the outcomes');
+assert.ok(html.includes('M1118 800C1181 792')&&html.includes('1180 538 1171 510'),'Native feedback must touch the context rim while avoiding the outcomes');
 const recipe=fs.readFileSync('scripts/render-context-platform-image.py','utf8');
 assert.ok(recipe.includes('arrow([(cx,rim),(cx,286)]')&&recipe.includes('arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))]'),'Bitmap arrows must terminate on the exact superellipse and share one source inlet');
 assert.ok(html.includes('M167 560V545')&&html.includes('M833 560V545'),'Standard diagram must NOT imply a source-to-facet one-to-one mapping');
@@ -67,7 +67,7 @@ const standardArrows=html.match(/data-edge-id="(?:data-context|systems-context|e
 assert.equal(standardArrows.length,3,'Source connectors must keep three canonical semantic IDs');
 assert.equal(standardArrows.filter(x=>x.includes('cp-graph-arrowhead')).length,1,'There must be one and only one arrowhead at the common source inlet');
 assert.ok(html.includes('M270 631V620')&&html.includes('M944 631V620'),'Native illustration must share the same source convergence');
-assert.ok(recipe.includes('bezier((78,483)')&&recipe.includes('bezier((1120,779)'),'Bitmap feedback must attach at the new core boundary');
+assert.ok(recipe.includes('bezier((90,483)')&&recipe.includes('bezier((1120,779)'),'Bitmap feedback must attach at the new core boundary');
 assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
 assert.ok(html.includes('data-native-slide-scene="context-platforms"'),'Composite view needs one native SVG stage');
 assert.ok(html.includes('data-core-shape="superellipse"'),'Native context must be a containing superellipse, not a clipping ellipse');
@@ -77,11 +77,16 @@ const contains=(cx,cy,rx,ry,p,x,y,pad=0)=>
 for(const [x0,y0,x1,y1] of facets)
  for(const x of [x0,x1])for(const y of [y0,y1])
   assert.ok(contains(core.cx,core.cy,core.rx,core.ry,core.p,x,y,10),'Native context facet protrudes beyond 10px inset');
-assert.ok(recipe.includes('CONTEXT=(609.5,457.0,532.5,140.0,4)'),'Bitmap needs a measured superellipse');
+assert.ok(recipe.includes('CONTEXT=(609.5,452.0,520.0,124.0,4)'),'Bitmap needs a measured superellipse');
 assert.ok(recipe.includes('assert all(within_context(x,y,10)'),'Bitmap must enforce geometric containment at authoring time');
-for(const [x0,y0,x1,y1] of [[146,455,449,539],[474,455,777,539],[802,455,1105,539]])
+assert.ok(recipe.includes('AA_SCALE=4')&&recipe.includes('Image.Resampling.LANCZOS')&&recipe.includes('draw_aa_connector('),
+ 'Raster connectors must be antialiased before 1600x900 export');
+assert.ok(recipe.includes('context_outline(steps=720)')&&recipe.includes('d.line(p+[p[0]]')&&recipe.includes('width=2*S'),
+ 'The context border must be sampled at high resolution with a fine line');
+assert.ok(recipe.includes('dl=12;wing=5'),'Raster arrowheads must be visibly lighter than the previous 18x8 form');
+for(const [x0,y0,x1,y1] of [[160,455,448,539],[466,455,754,539],[772,455,1060,539]])
  for(const x of [x0,x1])for(const y of [y0,y1])
-  assert.ok(contains(609.5,457,532.5,140,4,x,y,10),'Bitmap facet protrudes beyond 10px inset');
+  assert.ok(contains(609.5,452,520,124,4,x,y,10),'Bitmap facet protrudes beyond 10px inset');
 assert.ok(html.includes('class="cpn-consumer-rail-panel"'),'Consumer group shares one visual glass panel');
 assert.equal((html.match(/class="cpn-rail-divider"/g)||[]).length,1,'Consumers are separated without duplicate boxes');
 assert.ok(html.includes('data-photo-role="landscape"'),'The mountain background must remain a replaceable SVG image');
