@@ -69,6 +69,12 @@
       "keywords": [],
       "visual": {
         "scene": "list",
+        "artDirections": ["rich", "rich-image"],
+        "composition": {
+          "engine": "modular-v1",
+          "variants": {"standard": "columns", "rich": "stagger", "rich-image": "orbit"},
+          "layers": [{"id": "ambient", "type": "glow"}, {"id": "guide", "type": "grid"}]
+        },
         "items": [
           "Jeg skal i kundemøte",
           "Jeg har fanget opp et behov",

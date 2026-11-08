@@ -57,6 +57,7 @@ function render(slide,esc,position={}){
   return '<img class="'+cls+'" src="'+esc(window.InnsiktAssets.src(position.assets,id))+'" alt="" aria-hidden="true" decoding="async" loading="eager">';
  };
 
+ if(v.composition?.engine==='modular-v1')return window.InnsiktVisualComposition.renderSlide(slide,position.assets,esc,position.artDirection||'standard');
  const label='<div class="scene-eyebrow">'+esc(slide.cue||'')+'</div>';
  // All visible geometry, text and semantic routes are owned by ONE scene engine.
  if(kind==='context-platforms'||kind==='insight-ecosystem')

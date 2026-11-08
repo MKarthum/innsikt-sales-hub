@@ -1,0 +1,47 @@
+/* Visual scene v1. Geometry is supplied by compositions, palettes by design tokens. */
+.story-scene.scene-modular-v1{position:absolute;inset:0;width:100%;height:100%;display:block;padding:0;margin:0;overflow:hidden;isolation:isolate;background:var(--pres-bg);
+ --mc-fg:var(--pres-fg);--mc-muted:var(--pres-muted);--mc-accent:var(--pres-accent);
+ --mc-surface:color-mix(in srgb,var(--pres-bg) 90%,var(--pres-fg));
+ --mc-border:color-mix(in srgb,var(--pres-fg) 25%,var(--pres-accent));
+ --mc-shadow:color-mix(in srgb,var(--pres-bg) 55%,transparent);
+}
+.scene-modular-v1 .mc-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene-modular-v1 .mc-backdrop{fill:var(--pres-bg)}
+.scene-modular-v1 .mc-eyebrow{fill:var(--mc-accent);font:750 22px var(--font-body);letter-spacing:3px}
+.scene-modular-v1 .mc-title{fill:var(--mc-fg);font:800 52px var(--font-display);letter-spacing:-1.35px}
+.scene-modular-v1 .mc-subtitle{fill:var(--mc-muted);font:500 21px var(--font-body)}
+.scene-modular-v1 .mc-card-surface{fill:var(--mc-surface);stroke:var(--mc-border);stroke-width:1.5}
+.scene-modular-v1 .mc-card-shadow{fill:var(--mc-shadow);opacity:.3}
+.scene-modular-v1 .mc-card-glint{stroke:var(--mc-accent);stroke-width:3;stroke-linecap:round;opacity:.4}
+.scene-modular-v1 .mc-card-title{fill:var(--mc-fg);font:750 29px var(--font-display);letter-spacing:-.6px}
+.scene-modular-v1 .mc-card-detail{fill:var(--mc-muted);font:540 21px var(--font-body)}
+.scene-modular-v1 .mc-edge-track{fill:none;stroke:var(--mc-accent);stroke-width:3.5;stroke-linecap:round}
+.scene-modular-v1 .mc-arrow-head{fill:var(--mc-accent)}
+.scene-modular-v1 .mc-layer-image{opacity:.12}
+.scene-modular-v1 .mc-layer-glow{fill:var(--mc-accent);opacity:.08}
+.scene-modular-v1 .mc-layer-grid{fill:none;stroke:var(--mc-accent);stroke-width:1;opacity:.07}
+.scene-modular-v1 .mc-decor{fill:none;stroke:var(--mc-accent);opacity:0}
+.scene-modular-v1 .mc-icon{opacity:.93}
+.present-frame[data-tone="strong"] .scene-modular-v1 .mc-icon{filter:grayscale(1) brightness(0) invert(1)}
+.scene-modular-v1 [data-layer-tone="light"],.scene-modular-v1 [data-layer-tone="strong"]{display:none}
+.present-frame[data-tone="light"] .scene-modular-v1 [data-layer-tone="light"]{display:block}
+.present-frame[data-tone="strong"] .scene-modular-v1 [data-layer-tone="strong"]{display:block}
+.scene-modular-v1 .cp-brand-overlay{position:absolute;z-index:12;pointer-events:none;top:var(--slide-brand-top,2.7%);right:var(--slide-brand-right,2.5%);width:var(--slide-brand-width,9cqw);height:var(--slide-brand-height,3.4cqw);background:var(--slide-brand-logo,none) center/contain no-repeat}
+.scene-modular-v1[data-composition-level="rich"]{
+ --mc-surface:color-mix(in srgb,var(--pres-bg) 72%,var(--pres-accent));
+ --mc-border:color-mix(in srgb,var(--pres-fg) 30%,var(--pres-accent));
+}
+.scene-modular-v1[data-composition-level="rich"] .mc-layer-glow{opacity:.18}
+.scene-modular-v1[data-composition-level="rich"] .mc-card-surface{filter:drop-shadow(0 12px 22px color-mix(in srgb,var(--pres-accent) 17%,transparent))}
+.scene-modular-v1[data-composition-level="rich"] .mc-card-glint{opacity:.75}
+.scene-modular-v1[data-composition-level="rich-image"]{
+ --mc-surface:color-mix(in srgb,var(--pres-bg) 58%,var(--pres-accent));
+ --mc-border:color-mix(in srgb,var(--pres-fg) 46%,var(--pres-accent));
+}
+.scene-modular-v1[data-composition-level="rich-image"] .mc-decor{opacity:.17;stroke-width:2.5;stroke-dasharray:5 13}
+.scene-modular-v1[data-composition-level="rich-image"] .mc-layer-glow{opacity:.26}
+.scene-modular-v1[data-composition-level="rich-image"] .mc-layer-image{opacity:.37}
+.scene-modular-v1[data-composition-level="rich-image"] .mc-card-surface{filter:drop-shadow(0 17px 25px color-mix(in srgb,var(--pres-accent) 26%,transparent));stroke-width:2}
+.scene-modular-v1[data-composition-level="rich-image"] .mc-card-glint{opacity:1;stroke-width:4}
+@media(prefers-reduced-motion:reduce){.scene-modular-v1 *{animation:none!important;transition:none!important}}
+@media print{.scene-modular-v1 *{animation:none!important}}

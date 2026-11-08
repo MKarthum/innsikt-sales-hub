@@ -715,7 +715,7 @@ function slideMarkup(s,index,deckId,notes=false,showNumbers=false){
   return slideWithDesign(s,window.InnsiktArchitectureScenes.render(s,esc,p,D.visualAssets,position));
  }
  if(s.type==='visual'){
-  let html=window.InnsiktSlideVisuals.render(s,esc,{...position,businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams});
+  let html=window.InnsiktSlideVisuals.render(s,esc,{...position,artDirection:artDirection(s),businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams});
   if(!sharedScene&&artDirection(s)==='rich-image'&&s.visual?.artDirections?.includes('rich-image')){
    html=html.slice(0,-6)+'<span class="cp-image-review-status" role="status">'+esc(D.pages.slideLibraryUi.imagePending)+'</span></div>';
   }
