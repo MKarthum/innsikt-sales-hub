@@ -30,11 +30,12 @@ try{
  for(const [style,file] of [['standard','context-standard.png'],['rich','context-photo.png'],['rich-image','context-final-image.png']]){
   await selector.selectOption(style);
   assert.equal(await contextSlide.getAttribute('data-art-direction'),style);
-  if(style==='rich')await contextSlide.locator('[data-scene-object="rich-mountain-background"] img').evaluate(img=>img.decode());
-  if(style==='rich-image'){
-   const picture=contextSlide.locator('img.cp-approved-image');
-   await picture.evaluate(img=>img.decode());
-   assert.equal(await picture.evaluate(img=>img.naturalWidth),1600);
+  assert.equal(await contextSlide.locator('svg.di-svg[data-layout-contract="1"]').count(),1);
+  assert.equal(await contextSlide.locator('[data-edge-id]').count(),10);
+  assert.equal(await contextSlide.locator('[data-node-id]').count(),16);
+  if(style==='rich'||style==='rich-image'){
+   const photo=contextSlide.locator('svg image.di-background-photo');
+   assert.equal(await photo.count(),1,'Photography is a separate replaceable atmosphere layer');
   }
   await contextSlide.screenshot({path:output+'/'+file});
  }
