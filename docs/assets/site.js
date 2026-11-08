@@ -451,10 +451,8 @@ function libraryTone(s,deckId){
 // Slide-level editorial intent is visible in automatic mode; explicit tone choices win.
 // Palette and art direction are independent: choosing Dark no longer hides scenery.
 function artDirection(slide){
- // Only this benchmark has three published representations. Other slides
- // retain their native scene instead of showing misleading duplicate modes.
- if(slide?.visual?.scene!=='context-platforms')return 'standard';
- return ['rich','rich-image'].includes(presentationArtMode)?presentationArtMode:'standard';
+ const alternatives=slide?.visual?.artDirections||[];
+ return alternatives.includes(presentationArtMode)?presentationArtMode:'standard';
 }
 function toneSelect(id){
  const t=D.pages.slideLibraryUi;
@@ -464,12 +462,14 @@ function toneSelect(id){
    '<option value="'+id+'"'+(presentationThemeMode===id?' selected':'')+'>'+esc(text)+'</option>').join('')
   +'</select></label>';
 }
-function artSelect(id,visible=false){
- const t=D.pages.slideLibraryUi;
- return '<label class="library-tone-field" data-art-picker="true"'+(visible?'':' hidden')+' for="'+esc(id)+'">'+esc(t.artLabel)
+function artSelect(id,slide=null){
+ const t=D.pages.slideLibraryUi,alternatives=slide?.visual?.artDirections||[];
+ const choices=[['standard',t.artStandard],['rich',t.toneIllustratedRich],['rich-image',t.artRichImage]];
+ return '<label class="library-tone-field" data-art-picker="true"'+(alternatives.length?'':' hidden')+' for="'+esc(id)+'">'+esc(t.artLabel)
   +'<select id="'+esc(id)+'" aria-label="'+esc(t.artLabel)+'">'
-  +[['standard',t.artStandard],['rich',t.toneIllustratedRich],['rich-image',t.artRichImage]].map(([value,label])=>
-    '<option value="'+value+'"'+(presentationArtMode===value?' selected':'')+'>'+esc(label)+'</option>').join('')
+  +choices.map(([value,label])=>'<option value="'+value+'"'
+   +(value!=='standard'&&!alternatives.includes(value)?' disabled':'')
+   +(artDirection(slide)===value?' selected':'')+'>'+esc(label)+'</option>').join('')
   +'</select></label>';
 }
 function motionSelect(){
@@ -498,7 +498,7 @@ function updatePreviewTones(){
   const deck=D.pages.presentationDecks[el.dataset.libraryDeckId];
   if(s&&deck){
    el.setAttribute('data-tone',window.InnsiktSlides.tone(s,deck,presentationThemeMode));
-   if(s.visual?.scene==='context-platforms')el.innerHTML=slideMarkup(s,0,el.dataset.libraryDeckId);
+   if(s.visual?.artDirections?.length)el.innerHTML=slideMarkup(s,0,el.dataset.libraryDeckId);
    else el.querySelector('.story-scene')?.setAttribute('data-art-direction',artDirection(s));
   }
  });
@@ -692,7 +692,7 @@ function slideLibraryPage(id){
    +'<p>'+esc(u.note)+'</p><button class="btn subtle" type="button" data-slide-open="'+esc(s.id)+'" data-deck-open="'+esc(u.deckId)+'">'+esc(ui.openLabel)+' '+ico('arrow-right')+'</button></section>').join('');
  return libraryTabs('slides')+'<a class="text-link" href="#lysbilder">'+ico('arrow-left')+' '+esc(ui.returnLabel)+'</a>'
    +hdr(ui.eyebrow,s.title,(s.classification==='internal'?'INTERNT · ':'')+s.id+' · '+(s.topic||''))
-   +toneSelect('library-tone-mode')+artSelect('library-art-mode',s.visual?.scene==='context-platforms')+(s.visual?.scene==='context-platforms'?'<p class="slide-library-tone-note">'+esc(ui.toneInfo)+'</p>':'')+'<div class="slide-library-detail-stage slide-library-detail-open" data-slide-preview data-slide-preview-open="'+esc(s.id)+'" role="button" tabindex="0" aria-label="Vis '+esc(s.title)+' i fullskjerm"><div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(previewDeck)+'" data-tone="'+esc(libraryTone(s,previewDeck))+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
+   +toneSelect('library-tone-mode')+artSelect('library-art-mode',s)+(s.visual?.artDirections?.length?'<p class="slide-library-tone-note">'+esc(ui.toneInfo)+'</p>':'')+'<div class="slide-library-detail-stage slide-library-detail-open" data-slide-preview data-slide-preview-open="'+esc(s.id)+'" role="button" tabindex="0" aria-label="Vis '+esc(s.title)+' i fullskjerm"><div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(previewDeck)+'" data-tone="'+esc(libraryTone(s,previewDeck))+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
    +singleSlideDownloadMarkup(s.id)
    +'<p class="slide-library-fullscreen-hint" aria-hidden="true">Trykk på lysbildet for fullskjerm</p>'
    +'<div class="slide-library-info"><section><h2>'+esc(ui.speakerLabel)+'</h2>'+(note||'<p class="fineprint">Se notatene i historiene nedenfor.</p>')
@@ -709,7 +709,7 @@ function slideWithDesign(slide,html){
 }
 function slideMarkup(s,index,deckId,notes=false,showNumbers=false){
  const position={index,total:D.pages.presentationDecks[deckId].slides.length,showNumbers};
- if(s.visual?.scene==='context-platforms'&&artDirection(s)==='rich-image'){
+ if(artDirection(s)==='rich-image'&&s.visual?.artDirections?.includes('rich-image')){
   const image=window.InnsiktPresentationIllustrations?.render(s,artDirection(s),presentationIllustrationState,esc);
   if(image)return slideWithDesign(s,image);
  }
@@ -719,7 +719,7 @@ function slideMarkup(s,index,deckId,notes=false,showNumbers=false){
  }
  if(s.type==='visual'){
   let html=window.InnsiktSlideVisuals.render(s,esc,{...position,businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams});
-  if(s.visual?.scene==='context-platforms'&&artDirection(s)==='rich-image'){
+  if(artDirection(s)==='rich-image'&&s.visual?.artDirections?.includes('rich-image')){
    html=html.slice(0,-6)+'<span class="cp-image-review-status" role="status">'+esc(D.pages.slideLibraryUi.imagePending)+'</span></div>';
   }
   return slideWithDesign(s,html);
@@ -859,7 +859,12 @@ function showSlide(){
  if(note)note.innerHTML=showSpeakerNotes&&s.note?'<strong>Presentatørnotat</strong><p>'+esc(s.note)+'</p>':'';
  if(note)note.hidden=!showSpeakerNotes||!s.note;
  const themeSelector=document.getElementById('present-tone-mode');if(themeSelector)themeSelector.value=presentationThemeMode;
- const artSelector=document.getElementById('present-art-mode');if(artSelector){artSelector.value=presentationArtMode;const picker=artSelector.closest?.('[data-art-picker]');if(picker)picker.hidden=s.visual?.scene!=='context-platforms';}
+ const artSelector=document.getElementById('present-art-mode');if(artSelector){
+  const alternatives=s.visual?.artDirections||[];
+  for(const option of artSelector.options)option.disabled=option.value!=='standard'&&!alternatives.includes(option.value);
+  artSelector.value=artDirection(s);
+  const picker=artSelector.closest?.('[data-art-picker]');if(picker)picker.hidden=!alternatives.length;
+ }
  const motionSelector=document.getElementById('present-motion-mode');if(motionSelector)motionSelector.value=presentationMotionMode;
  const numberSelector=document.getElementById('slide-number-toggle');if(numberSelector)numberSelector.checked=showSlideNumbers;
  document.querySelectorAll('[data-deck]').forEach(b=>{
@@ -893,7 +898,7 @@ function presentation(deckId='innsikt',initialSlide=0){
   '<button class="deck-option '+(id===selectedDeck?'active':'')+'" type="button" data-deck="'+esc(id)+'" aria-pressed="'+(id===selectedDeck)+'">'+(d.classification==='internal'?'Internt · ':'')+esc(d.label)+'</button>'
  ).join('');
  const markup='<div class="deck-controls" role="group" aria-label="Velg presentasjonsløp">'+choices+'</div>'
-  +'<div class="present-display-options">'+toneSelect('present-tone-mode')+artSelect('present-art-mode',presentationSlides()[slide]?.visual?.scene==='context-platforms')+motionSelect()+'<span>'+esc(D.pages.slideLibraryUi.motionHelp)+'</span></div>'
+  +'<div class="present-display-options">'+toneSelect('present-tone-mode')+artSelect('present-art-mode',presentationSlides()[slide])+motionSelect()+'<span>'+esc(D.pages.slideLibraryUi.motionHelp)+'</span></div>'
   +'<p id="deck-context" class="deck-context"></p>'
   +'<div class="present-stage" id="present-stage"><div class="present-frame present-rich" id="slide-body" aria-live="polite"></div></div>'
   +'<div class="present-controls"><button class="btn subtle" type="button" id="slide-prev" aria-label="Forrige lysbilde">'+ico('arrow-left')+' <span>Forrige</span></button><span class="pager" id="slide-counter"></span><button class="btn dark" type="button" id="slide-next" aria-label="Neste lysbilde"><span>Neste</span> '+ico('arrow-right')+'</button><button class="btn subtle" type="button" id="present-fullscreen-toggle" aria-label="Vis i fullskjerm" aria-pressed="false" title="Vis i fullskjerm">'+ico('maximize')+' <span>Fullskjerm</span></button></div>'
