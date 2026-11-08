@@ -21,9 +21,18 @@
  object-fit:fill;
 }
 .story-scene.scene-context-image .cp-brand-overlay{
+ display:block;
  position:absolute;
- z-index:2;
+ z-index:12;
  pointer-events:none;
+ top:var(--slide-brand-top,2.7%);
+ right:var(--slide-brand-right,2.5%);
+ width:var(--slide-brand-width,9cqw);
+ height:var(--slide-brand-height,3.4cqw);
+ background-image:var(--slide-brand-logo,none);
+ background-size:contain;
+ background-repeat:no-repeat;
+ background-position:center;
 }
 .story-scene.scene-context-image .cp-image-review-status,\n.story-scene[data-art-direction=\"rich-image\"] .cp-image-review-status{
  position:absolute;
