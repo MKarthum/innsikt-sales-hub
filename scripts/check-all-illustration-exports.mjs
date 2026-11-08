@@ -11,10 +11,12 @@ let count=0;
 for(const recipe of config.recipes){
  const entry=manifest.variants.find(v=>v.sourceSlideId===recipe.sourceSlideId&&v.styleId===recipe.styleId);
  if(!entry)throw Error('Mangler illustrasjonsmanifest: '+recipe.sourceSlideId+'/'+recipe.styleId);
- if(entry.approvalStatus!=='approved'){
+ if(entry.approvalStatus!=='approved'&&recipe.sourceSlideId!=='ai-context-platforms-2027'){
   console.log('SKIP (not published): '+recipe.sourceSlideId+'/'+recipe.styleId);
   continue;
  }
+ // The live modular scene is independently exportable even when its legacy
+ // whole-slide bitmap has been withdrawn after an editorial revision.
  const slide=byId.get(recipe.sourceSlideId);
  if(!slide)throw Error('Lysbildet finnes ikke: '+recipe.sourceSlideId);
  // Every unified scene must expose the same three real presentation styles.

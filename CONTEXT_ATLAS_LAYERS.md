@@ -13,3 +13,5 @@ Scope: one slide, `ai-context-platforms-2027`. All 22 semantic objects and ten d
 The original portrait and agent fragments are still the weakest assets. They are blended with their vector motifs and their rectangular edges are feathered, but genuine asset replacement remains a separate art-direction task. No whole-slide generated image is used.
 
 Verification: `scripts/check-context-atlas.mjs` checks geometry-linked lights and semantic graph; `scripts/check-visual-pilot.mjs` captures three style screenshots plus advanced light/dark; export checks run in Chromium and WebKit via GitHub Actions.
+
+The outdated, pre-rendered whole-slide image was withdrawn from the approved illustration manifest after the editorial change. Its old digest remains as provenance, while the live modular SVG remains the rendered and export-tested source.
