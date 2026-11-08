@@ -65,8 +65,11 @@ const site=fs.readFileSync('docs/assets/site.js','utf8');
 assert.ok(site.includes('slide?.visual?.artDirections||[]'),'Ingen enkeltslide skal være kodet som eneste gyldige illustrasjon');
 assert.ok(!site.includes("if(slide?.visual?.scene!=='context-platforms')return 'standard'"),
  'Stilvalg skal ikke være bundet til én benchmark');
-assert.ok(site.includes("if(artDirection(s)==='rich-image'&&s.visual?.artDirections?.includes('rich-image'))"),
- 'Flere bilder må følge samme publiseringsvei');
+assert.ok(site.includes("const sharedScene=['context-platforms','insight-ecosystem']")&&
+ site.includes("if(!sharedScene&&artDirection(s)==='rich-image'"),
+ 'De to aktive prototypene må bruke samme scene i alle tre stiler, ikke to rasterkopier');
+assert.ok(site.includes("slide?.visual?.artDirections||[]"),
+ 'Stilvalg må avledes fra det enkelte lysbildet');
 const driver=fs.readFileSync('scripts/build-illustration.mjs','utf8');
 assert.ok(driver.includes("arg==='all'?cfg.recipes")&&driver.includes('--preview')&&driver.includes('--publish'),
  'En ny figur skal genereres med samme kommando, uten spesialkode i appen');
