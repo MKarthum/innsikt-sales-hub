@@ -25,6 +25,12 @@ Begge bruker `scripts/illustration_kit.py` til paneler, supersamplede streker, k
 
 **Godkjenningsstatus:** `approved` betyr publiserbar etter faglig/teknisk kontroll i repoet, ikke at brukeren har godkjent den kunstneriske utførelsen. Virkelig visuell aksept krever egen vurdering av utkastet. Prototypen legges på en allerede eksisterende, kildebelagt slide med samme ID; den oppretter ingen ny historie eller påstand.
 
+## Kvalitetsgrenser som fortsatt er reelle
+
+Generering av en ny figur er enklere, men ikke helautomatisk: Figuren trenger en egen komposisjon som passer budskapet. Felles motor fjerner repetert teknisk tegnearbeid, ikke redaksjonelt arbeid eller kvalitetssikring. For nye rich-image-bilder testes automatisk de faktiske PNG-, JPG-, PDF- og PowerPoint-eksportene i Chromium og WebKit. Registeret er autoritativt, og testkjøreren `scripts/check-all-illustration-exports.mjs` finner godkjente illustrasjoner uten nye CI-linjer per lysbilde.
+
+Det finnes også en selvstendig svakhet i den eldre HTML-baserte `insight-ecosystem`-visningen: utskriftsrenderingen gir delvis annen tekstrekkefølge og kortstørrelse enn bibliotekets 960 × 540-forhåndsvisning. Dette er observert i sammenlikning av ekte eksport og skjermbilde. Det gjelder den eksisterende HTML/CSS-visningen, ikke den nye godkjente rich-image-illustrasjonen. **Ikke løs dette ved å øke tillatte pikselforskjeller eller kreve lik rastervisning i alle designsystemer.** Det bør undersøkes samlet for de øvrige HTML-lysbilder, uten å gjøre en urelatert totalombygging av eksportøren her. Bildevarianten kjøres separat gjennom streng eksportsammenligning; ordinær HTML er fortsatt testet gjennom hele biblioteket.
+
 ## Prinsipp og autoritet
 
 `docs/data/slides.json` eier all faglig tekst, kontekstbegreper, kilder, prosessbeskrivelser og relasjoner. `visual.graph.source` beskriver ti eksplisitte, retningsbestemte relasjoner mellom datakilder, virksomhetskontekst, konsumenter og løkken beslutning, kontrollert handling og oppdatert kontekst. `docs/assets/slide-graph.js` validerer at ingen relasjoner eller pilretninger tilføyes, forsvinner eller snus. Visningsmoduser er **ikke** parallelle faglige datakilder.
