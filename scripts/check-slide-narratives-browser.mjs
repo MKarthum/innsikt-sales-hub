@@ -26,7 +26,9 @@ try{
   await page.goto(BASE+'#lysbilder/'+id,{waitUntil:'networkidle'});
   const scene=page.locator('.slide-library-detail-stage .story-scene');
   await scene.waitFor();
-  assert.equal(await page.locator('.slide-library-detail-stage '+selector).count(),1,id+' has substantive visual structure');
+  const modular=id==='portal-three-ways';
+  const expectedSelector=modular?'.mc-nodes':selector;
+  assert.equal(await page.locator('.slide-library-detail-stage '+expectedSelector).count(),1,id+' has substantive visual structure');
   assert.equal(await scene.locator(old).count(),0,id+' has removed the old card structure');
   const slide=items.find(s=>s.id===id);
   if(id==='ai-two-directions'){
@@ -37,7 +39,10 @@ try{
     assert.ok((await scene.innerText()).includes(slide.visual[side]),'All narrative copy must come from JSON: '+side);
    }
   }
-  if(id==='portal-three-ways')assert.equal(await scene.locator('.v15-choices-options li').count(),count);
+  if(id==='portal-three-ways'){
+   assert.equal(await scene.locator('.mc-card').count(),count);
+   assert.equal(await scene.locator('svg.mc-svg').count(),1,'Modulær fagscene erstatter eldre kortlayout');
+  }
   if(id==='portal-customer-signal')assert.equal(await scene.locator('.v15-journey-step').count(),count);
   if(variant==='editorial-relation')assert.equal(await scene.locator('.v15-relation-idea').count(),count);
   for(const tone of ['strong','light']){
@@ -45,7 +50,9 @@ try{
    const g=await scene.evaluate(el=>{
     const r=el.getBoundingClientRect();
     return {ratio:r.width/r.height,excessX:el.scrollWidth-el.clientWidth,excessY:el.scrollHeight-el.clientHeight,
-      accent:getComputedStyle(el.querySelector('.scene-eyebrow'),'::before').backgroundColor};
+      accent:el.querySelector('.scene-eyebrow')
+       ?getComputedStyle(el.querySelector('.scene-eyebrow'),'::before').backgroundColor
+       :getComputedStyle(el.querySelector('.mc-eyebrow')).fill};
    });
    assert.ok(Math.abs(g.ratio-16/9)<.03,id+'/'+tone+': incorrect aspect ratio');
    assert.ok(g.excessX<=3&&g.excessY<=3,id+'/'+tone+': scene overflows');
