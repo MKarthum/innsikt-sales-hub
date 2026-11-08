@@ -937,6 +937,10 @@
       ],
       "visual": {
         "scene": "insight-ecosystem",
+      "artDirections": [
+        "rich-image"
+      ],
+      "preferredArtDirection": "rich-image",
         "subtitle": "En faglig sammenheng – ikke en obligatorisk teknisk arkitektur.",
         "inputLabel": "STARTPUNKT",
         "input": "Et spørsmål i virksomheten",
