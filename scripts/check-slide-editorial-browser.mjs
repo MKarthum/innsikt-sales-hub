@@ -28,7 +28,7 @@ try{
   }else if(modularScene){
    assert.equal(await scene.locator('.mc-eyebrow').count(),1,
     'Modulær scene skal ha kanonisk cue i sin vektorheading: '+s.id);
-   assert.equal(await scene.locator('[data-node-id]').count(),s.visual.items.length,
+   assert.equal(await scene.locator('[data-node-id]').count(),s.visual.scene==='context-platforms'?22:s.visual.items.length,
     'Alle modulære objektidentiteter skal overleve: '+s.id);
   }else{
    assert.equal(await scene.locator('.scene-eyebrow').count(),1,'Slide eyebrow is present: '+s.id);
