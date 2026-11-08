@@ -938,6 +938,7 @@
       "visual": {
         "scene": "insight-ecosystem",
       "artDirections": [
+        "rich",
         "rich-image"
       ],
       "preferredArtDirection": "rich-image",
