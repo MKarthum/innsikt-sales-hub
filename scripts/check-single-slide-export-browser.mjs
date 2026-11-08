@@ -60,28 +60,29 @@ try{
  const custom=await download('png');
  assert.notDeepEqual(custom,png,'Custom skin and tone affect exported PNG');
  assert.equal(await page.locator('.slide-single-download [data-slide-download-id="ai-thousand-analysts"]').count(),4);
- // The fully rendered illustration is one approved WebP, not a CSS approximation.
+ // All styles export one canonical SVG, with the photograph as a separate layer.
  await page.evaluate(()=>location.hash='#lysbilder/ai-context-platforms-2027');
  const photoScene=page.locator('.slide-library-detail-stage .story-scene');
  await photoScene.waitFor();
  await page.locator('#library-art-mode').selectOption('rich-image');
  assert.equal(await photoScene.getAttribute('data-art-direction'),'rich-image');
- const image=photoScene.locator('img.cp-approved-image');
- await image.evaluate(img=>img.decode());
- assert.equal(await image.evaluate(img=>img.naturalWidth),1600);
- assert.equal(await image.evaluate(img=>img.naturalHeight),900);
+ assert.equal(await photoScene.locator('svg.di-svg[data-layout-contract="1"]').count(),1);
+ assert.equal(await photoScene.locator('[data-edge-id]').count(),10);
+ assert.equal(await photoScene.locator('img.cp-approved-image').count(),0,
+  'The third direction must not maintain a separate raster diagram');
  const embedded=await page.evaluate(async()=>{
   const {prepareSlideMarkupForExport}=await import('./assets/slide-export-prep.js');
   return prepareSlideMarkupForExport(document.querySelector('.slide-library-detail-stage .present-frame').innerHTML);
  });
- assert.match(embedded,/class="cp-approved-image"/,'The approved bitmap is in the export scene');
- assert.ok(embedded.includes('src="data:image/png;base64,'),'WebP is inlined as a portable PNG');
+ assert.match(embedded,/data-unified-scene="context-platforms"/,'The live scene must be exported');
+ assert.ok(embedded.includes('href="data:image/')&&embedded.includes('data-icon-id='),
+  'Semantic icons and atmosphere must be inlined for portable exports');
  const sceneScreenshot=await photoScene.screenshot();
  const photoPng=await download('png');
  assert.equal(photoPng.readUInt32BE(16),1920);
  assert.equal(photoPng.readUInt32BE(20),1080);
  fs.mkdirSync('artifacts/visual-pilot',{recursive:true});
- fs.writeFileSync('artifacts/visual-pilot/context-platforms-bitmap-export.png',photoPng);
+ fs.writeFileSync('artifacts/visual-pilot/context-platforms-unified-export.png',photoPng);
  const mismatch=await page.evaluate(async pair=>{
   const decode=async base64=>{
    const img=new Image();img.src='data:image/png;base64,'+base64;await img.decode();
@@ -97,7 +98,7 @@ try{
   }
   return d/n;
  },[sceneScreenshot.toString('base64'),photoPng.toString('base64')]);
- assert.ok(mismatch<40,'Downloaded bitmap must closely match visible bitmap: '+mismatch);
+ assert.ok(mismatch<40,'Downloaded unified SVG must closely match visible slide: '+mismatch);
  // Presenter offers the currently selected slide, not the entire deck.
  await page.locator('#present-button').click();
  assert.equal(await page.locator('#present-modal .slide-single-download [data-slide-download]').count(),4);
