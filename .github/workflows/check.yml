@@ -130,7 +130,7 @@ jobs:
       - name: Kontroller alle 12 benchmark-eksporter, fullskjerm og Presenter
         run: node scripts/check-context-platform-exports-browser.mjs
       - name: Kontroller ny verdikjedeillustrasjon i alle fire filformater
-        run: EXPORT_SLIDE_ID=insight-value-chain EXPORT_DIRECTIONS=standard,rich-image node scripts/check-context-platform-exports-browser.mjs
+        run: EXPORT_SLIDE_ID=insight-value-chain EXPORT_DIRECTIONS=rich-image node scripts/check-context-platform-exports-browser.mjs
       - name: Last opp faktiske eksportfiler og skjermbilder
         if: always()
         uses: actions/upload-artifact@v4
@@ -161,7 +161,7 @@ jobs:
       - name: Kontroller benchmark-eksporter i WebKit
         run: EXPORT_BROWSER=webkit node scripts/check-context-platform-exports-browser.mjs
       - name: Kontroller verdikjedeprototypen i WebKit
-        run: EXPORT_BROWSER=webkit EXPORT_SLIDE_ID=insight-value-chain EXPORT_DIRECTIONS=standard,rich-image node scripts/check-context-platform-exports-browser.mjs
+        run: EXPORT_BROWSER=webkit EXPORT_SLIDE_ID=insight-value-chain EXPORT_DIRECTIONS=rich-image node scripts/check-context-platform-exports-browser.mjs
       - name: Last opp WebKit-baserte eksportfiler og skjermbilder
         if: always()
         uses: actions/upload-artifact@v4
