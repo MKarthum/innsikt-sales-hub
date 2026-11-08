@@ -24,7 +24,7 @@ try{
  await page.locator('.slide-library-detail-stage .story-scene').waitFor();
  await page.locator('#library-tone-mode').selectOption('strong');
  const files=[];
- let sharedMarkup=null;
+ let sharedMarkup=null,sharedStructure=null;
  const read=async (button,format)=>{
   let download;
   try{
@@ -103,12 +103,18 @@ try{
   assert.equal(await scene.locator('[data-edge-id]').count(),isModular?10:5,
    fileId+'/'+direction+': all semantic relations are present');
   const svgMarkup=await scene.locator(isModular?'svg.mc-svg':'svg.di-svg').evaluate(svg=>svg.outerHTML);
+  const semanticGeometry=isModular?await scene.locator('svg.mc-svg').evaluate(svg=>JSON.stringify({
+   cards:[...svg.querySelectorAll('.acp-card-panel')].map(r=>['x','y','width','height'].map(k=>r.getAttribute(k))),
+   edges:[...svg.querySelectorAll('.mc-edge-track')].map(p=>p.getAttribute('d')),
+   core:[...svg.querySelectorAll('.acp-core-glass')].map(r=>['x','y','width','height'].map(k=>r.getAttribute(k)))
+  })):null;
   if(sharedMarkup!==null){
-   if(isModular)assert.equal(svgMarkup,sharedMarkup,
-    'Different visual treatments must share the same semantic SVG and anchored geometry');
+   if(isModular)assert.equal(semanticGeometry,sharedStructure,
+    'Semantic boxes and edge routes must not move when internal illustration style changes');
    else assert.equal(svgMarkup,sharedMarkup,'The unchanged chain renderer must be stable across styles');
   }
   sharedMarkup=svgMarkup;
+  sharedStructure=semanticGeometry;
   await scene.locator('img').evaluateAll(async imgs=>Promise.all(imgs.filter(x=>getComputedStyle(x).display!=='none').map(img=>img.decode())));
   const reference=await frame.screenshot();
   fs.writeFileSync(path.join(output,direction+'-screen.png'),reference);

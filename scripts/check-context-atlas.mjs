@@ -41,10 +41,16 @@ for(const {html} of rendered){
  assert.ok(html.includes('class="acp-board-art"'),'Ambient board grid must follow the context object');
  assert.equal((html.match(/class="mc-edge-ambient"/g)||[]).length,10,'Ambient edges must reuse exactly the ten canonical paths');
 }
-const sceneSvg=html=>html.slice(html.indexOf('<svg class="mc-svg"'),html.indexOf('</svg>')+6);
-assert.equal(sceneSvg(rendered[0].html),sceneSvg(rendered[1].html));
-assert.equal(sceneSvg(rendered[1].html),sceneSvg(rendered[2].html),
- 'All styles share the same SVG scene and geometry; visual differences are CSS layers only');
+const nodeTracks=html=>[...html.matchAll(/class="mc-edge-track" d="([^"]+)"/g)].map(x=>x[1]);
+assert.deepEqual(nodeTracks(rendered[0].html),nodeTracks(rendered[1].html));
+assert.deepEqual(nodeTracks(rendered[1].html),nodeTracks(rendered[2].html),
+ 'All directions must keep the same ten canonical edge routes');
+const headings=html=>[...html.matchAll(/class="acp-card-title" x="([^"]+)"/g)].map(x=>Number(x[1]));
+const plainTitles=headings(rendered[0].html),advancedTitles=headings(rendered[2].html);
+assert.equal(plainTitles.length,15);
+assert.equal(advancedTitles.length,15);
+assert.ok(advancedTitles.every((x,i)=>Math.abs(x-plainTitles[i]-40)<.01),
+ 'Advanced illustration must reserve forty native SVG units for image before copy');
 const changed=structuredClone(slide);changed.visual.facets[1].detail='Ny dokumentert situasjon';
 for(const mode of ['standard','rich','rich-image'])assert.ok(api.renderSlide(changed,assets,esc,mode).includes('Ny dokumentert situasjon'));
 const reversed=structuredClone(slide);reversed.visual.graph.source=reversed.visual.graph.source.replace('sources:1 --> context','context --> sources:1');

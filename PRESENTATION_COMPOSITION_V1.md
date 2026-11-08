@@ -95,3 +95,7 @@ Pilotens avanserte stil kombinerer nå vektorfigurer med **16 individuelle, opti
 Illustrasjonen velges via det eksisterende `node.visual.motif` og slås opp i ressursregisteret (`context-motif-${motif}`). Hvert motiv tegnes i kortets lokale koordinater, med SVG-grafikk som fallback. Et utskiftet motiv påvirker verken semantisk graf, kortets posisjon eller tekst. Hovednettverket har eget bildeobjekt og følger kontekstrammen. Dette er **ikke** en rasterisert helside eller et bilde som flyter uavhengig av scenen.
 
 Ved videre bearbeiding: erstatt bildets WebP-fil, oppdater sjekksummen i `visual-assets.json`, og kontroller lys/mørk palett og faktisk eksport. Konseptkilden er generert i arbeidet med piloten; kuttede bilder er produksjonsfiler, ikke originale foto eller en endelig illustrasjonsmaster. Unngå å bruke tekst i slike motiver ved senere regenerering.
+
+## Objektintern plassering i avansert illustrasjonsstil (0.18.129)
+
+En visuell kontroll ved faktisk eksport viste at CSS-baserte SVG-teksttransformasjoner ikke ble gjengitt konsekvent. Den avanserte varianten reserverer nå 40 SVG-enheter ekstra for tekst på hvert kort gjennom objektets tegnefunksjon, ikke gjennom en CSS-transformasjon. Kortboksene, relasjonsrutene, faglige identiteter og kildedata er uendret. Testene sammenligner nå disse **invariante faglige egenskapene** mellom stilene, fremfor å kreve byte-identisk SVG når et objekt legitimt endrer intern layout. Test i nettleser kontrollerer klaring mellom faktisk gjengitt bilde og faktisk gjengitt tittel.

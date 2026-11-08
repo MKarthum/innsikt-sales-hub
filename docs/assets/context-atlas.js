@@ -146,11 +146,11 @@ function coreNode({node,box:b,esc,assets}){
   +`<circle class="acp-core-pulse" cx="${N(b.x+b.w-45)}" cy="${N(b.y+46)}" r="6"/>`,esc);
 }
 api.registerObject('context-hub',{version:1,render:coreNode});
-function contextCard({node,box:b,esc,assets}){
+function contextCard({node,box:b,esc,assets,level}){
  const c=node.content,t=node.type;
  const visual=t==='context-facet'?'acp-facet':t==='context-person'?'acp-person':t==='context-source'?'acp-source':t==='context-step'?'acp-step':'acp-outcome';
  const ix=t==='context-outcome'?b.x+22:b.x+17,iy=b.y+(b.h-42)/2;
- const tx=t==='context-outcome'?b.x+84:b.x+78;
+ const tx=(t==='context-outcome'?b.x+84:b.x+78)+(level==='rich-image'?40:0);
  const titleY=b.y+(t==='context-facet'?30:b.h>96?43:35),detailY=titleY+(t==='context-facet'?24:b.h>96?29:27);
  const pill=t==='context-step'?`<circle class="acp-step-index-ring" cx="${N(b.x+b.w-20)}" cy="${N(b.y+20)}" r="11"/>`:'';
  return nodeRoot(node,visual,

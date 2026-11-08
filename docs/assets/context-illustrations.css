@@ -127,3 +127,7 @@
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster,
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-raster{
  opacity:.83;filter:contrast(1.08) saturate(.92)}
+
+/* The copy offset is now a native SVG coordinate computed per node, not an export-sensitive CSS transform. */
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-title,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-detail{transform:none}
