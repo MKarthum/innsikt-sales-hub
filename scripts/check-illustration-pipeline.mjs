@@ -57,6 +57,10 @@ const ready={variants:[{sourceSlideId:bridge.id,styleId:'rich-image',
 const html=api.render(bridge,'rich-image',ready,x=>String(x).replaceAll('&','&amp;').replaceAll('"','&quot;'));
 assert.ok(html.includes('scene-insight-ecosystem')&&html.includes('class="cp-approved-image"'));
 assert.ok(html.includes(bridge.title),'Opphavstittel må være tilgjengelig også for rasterbilde');
+const imageCss=fs.readFileSync('docs/assets/presentation-illustrations.css','utf8');
+assert.ok(imageCss.includes('.story-scene.scene-context-image .cp-brand-overlay')&&
+ imageCss.includes('background-image:var(--slide-brand-logo,none)'),
+ 'Alle bilder må ha separat logooverlegg som kan styles av et annet designsystem');
 const site=fs.readFileSync('docs/assets/site.js','utf8');
 assert.ok(site.includes('slide?.visual?.artDirections||[]'),'Ingen enkeltslide skal være kodet som eneste gyldige illustrasjon');
 assert.ok(!site.includes("if(slide?.visual?.scene!=='context-platforms')return 'standard'"),
