@@ -8,12 +8,12 @@ import {chromium,webkit} from 'playwright';
 
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const engine=process.env.EXPORT_BROWSER==='webkit'?'webkit':'chromium';
-const output='artifacts/context-exports-'+engine;
+const fileId=process.env.EXPORT_SLIDE_ID||'ai-context-platforms-2027';
+const output='artifacts/'+(fileId==='ai-context-platforms-2027'?'context-exports':fileId+'-exports')+'-'+engine;
 fs.mkdirSync(output,{recursive:true});
 const browser=await (engine==='webkit'?webkit:chromium).launch({headless:true,...(engine==='chromium'?{args:['--no-sandbox']}:{})});
 const types=['png','jpg','pdf','pptx'];
 const directions=(process.env.EXPORT_DIRECTIONS||'standard,rich,rich-image').split(',');
-const fileId='ai-context-platforms-2027';
 const errors=[];
 try{
  const page=await browser.newPage({viewport:{width:1440,height:960},acceptDownloads:true});
@@ -187,6 +187,6 @@ try{
  assert.equal(files.length,4*directions.length);
  assert.ok(!errors.length,'JavaScript errors: '+errors.join(' | '));
  fs.writeFileSync(path.join(output,'metrics.json'),JSON.stringify(files,null,2));
- console.log('PASS 12 benchmark files + 12 branded + 12 fullscreen + 4 Presenter formats, pixels compared to rendered slide screenshots.');
+ console.log('PASS '+fileId+': '+files.length+' exports + '+files.length+' branded + '+files.length+' fullscreen + 4 Presenter formats, pixels compared to real screenshots.');
  console.log(files.map(f=>f.direction+'/'+f.format+': '+f.bytes+' bytes, difference '+f.metrics.meanDiff.toFixed(1)+', deviation '+f.metrics.stdDev.toFixed(1)).join('\n'));
 }finally{await browser.close()}
