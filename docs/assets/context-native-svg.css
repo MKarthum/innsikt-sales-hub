@@ -50,16 +50,16 @@
 .scene-context-platforms .cp-native-svg .cpn-panel{
  fill:color-mix(in srgb,var(--pres-bg) 85%,transparent);
  stroke:color-mix(in srgb,var(--pres-fg) 30%,var(--pres-accent));
- stroke-width:1.7;filter:url(#cpn-soft-shadow);
+ stroke-width:1.4;filter:url(#cpn-soft-shadow);
 }
 .scene-context-platforms .cp-native-svg .cpn-consumer-rail-panel{
  fill:url(#cpn-sheen);
  stroke:color-mix(in srgb,var(--pres-fg) 55%,var(--pres-accent));
- stroke-width:1.8;filter:url(#cpn-soft-shadow);
+ stroke-width:1.5;filter:url(#cpn-soft-shadow);
 }
 .scene-context-platforms .cp-native-svg .cpn-rail-divider{
- fill:none;stroke:color-mix(in srgb,var(--pres-fg) 34%,var(--pres-accent));
- stroke-width:1.4;
+ fill:none;stroke:color-mix(in srgb,var(--pres-fg) 30%,var(--pres-accent));
+ stroke-width:1.15;
 }
 .scene-context-platforms .cp-native-svg .cpn-card .cpn-icon{
  color:var(--pres-fg);opacity:.86;
@@ -77,14 +77,14 @@
  font-size:17px;
 }
 .scene-context-platforms .cp-native-svg .cpn-core-halo{
- fill:var(--pres-accent);opacity:.24;filter:url(#cpn-halo);
+ fill:var(--pres-accent);opacity:.13;filter:url(#cpn-halo);
 }
 .scene-context-platforms .cp-native-svg .cpn-core-glass{
  fill:url(#cpn-glass);stroke:none;filter:url(#cpn-soft-shadow);
 }
 .scene-context-platforms .cp-native-svg .cpn-core-edge{
  fill:none;stroke:color-mix(in srgb,var(--pres-fg) 35%,var(--pres-accent));
- stroke-width:2.1;filter:drop-shadow(0 0 10px color-mix(in srgb,var(--pres-accent) 36%,transparent));
+ stroke-width:1.65;filter:drop-shadow(0 0 4px color-mix(in srgb,var(--pres-accent) 22%,transparent));
 }
 .scene-context-platforms .cp-native-svg .cpn-core-shine{
  fill:none;stroke:var(--pres-accent);stroke-width:2.8;opacity:.65;
@@ -102,8 +102,8 @@
 }
 .scene-context-platforms .cp-native-svg .cpn-facet-panel{
  fill:color-mix(in srgb,var(--pres-bg) 69%,var(--pres-accent));
- stroke:color-mix(in srgb,var(--pres-fg) 40%,var(--pres-accent));
- stroke-width:1.5;
+ stroke:color-mix(in srgb,var(--pres-fg) 35%,var(--pres-accent));
+ stroke-width:1.2;
 }
 .scene-context-platforms .cp-native-svg .cpn-facet .cpn-icon{
  color:var(--pres-fg);opacity:.93;
@@ -116,16 +116,16 @@
 }
 .scene-context-platforms .cp-native-svg .cpn-arrow{
  fill:none;stroke:color-mix(in srgb,var(--pres-accent) 74%,var(--pres-fg));
- stroke-width:4.4;stroke-linejoin:round;stroke-linecap:round;
- filter:drop-shadow(0 0 4px color-mix(in srgb,var(--pres-accent) 36%,transparent));
+ stroke-width:3.25;stroke-linejoin:round;stroke-linecap:round;
+ filter:drop-shadow(0 0 2px color-mix(in srgb,var(--pres-accent) 20%,transparent));
 }
 .scene-context-platforms .cp-native-svg .cpn-arrow--loop{
- stroke-width:3;stroke:color-mix(in srgb,var(--pres-accent) 66%,var(--pres-fg));opacity:.83;
+ stroke-width:2.35;stroke:color-mix(in srgb,var(--pres-accent) 66%,var(--pres-fg));opacity:.82;
 }
-.scene-context-platforms .cp-native-svg .cpn-arrow--cycle{stroke-width:4.2}
+.scene-context-platforms .cp-native-svg .cpn-arrow--cycle{stroke-width:3}
 .scene-context-platforms .cp-native-svg .cpn-arrow-tip{
  fill:color-mix(in srgb,var(--pres-accent) 74%,var(--pres-fg));
- stroke:none;opacity:.98;
+ stroke:none;opacity:.92;
 }
 .scene-context-platforms .cp-native-svg .cpn-cycle-panel{
  fill:color-mix(in srgb,var(--pres-bg) 83%,var(--pres-accent));
