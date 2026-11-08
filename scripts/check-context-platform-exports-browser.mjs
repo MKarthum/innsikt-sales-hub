@@ -24,6 +24,7 @@ try{
  await page.locator('.slide-library-detail-stage .story-scene').waitFor();
  await page.locator('#library-tone-mode').selectOption('strong');
  const files=[];
+ let sharedMarkup=null;
  const read=async (button,format)=>{
   let download;
   try{
@@ -99,6 +100,12 @@ try{
   assert.equal(await scene.locator('[data-node-id]').count(),
    fileId==='ai-context-platforms-2027'?16:4,
    fileId+'/'+direction+': node count must not depend on art direction');
+  // Changing art direction must not regenerate positions, text, node identities
+  // or a second set of connections. Compare the actual SVG element bytes.
+  const svgMarkup=await scene.locator('svg.di-svg').evaluate(svg=>svg.outerHTML);
+  if(sharedMarkup===null)sharedMarkup=svgMarkup;
+  else assert.equal(svgMarkup,sharedMarkup,
+    fileId+'/'+direction+': a different visual style changed the underlying scene');
   await scene.locator('img').evaluateAll(async imgs=>Promise.all(imgs.filter(x=>getComputedStyle(x).display!=='none').map(img=>img.decode())));
   const reference=await frame.screenshot();
   fs.writeFileSync(path.join(output,direction+'-screen.png'),reference);
