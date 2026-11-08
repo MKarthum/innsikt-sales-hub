@@ -703,7 +703,7 @@ function presentationSlides(){return window.InnsiktSlides.resolve(D.slides,D.pag
 function slideWithDesign(slide,html){
  const design=slide.design;
  if(!design)return html;
- if(!/^<div class="story-scene [^"]+">/.test(html))throw Error('Editorial slide needs one scene root: '+slide.id);
+ if(!/^<div class="story-scene [^"]+"(?: [^>]*)?>/.test(html))throw Error('Editorial slide needs one scene root: '+slide.id);
  return html.replace('<div class="story-scene ',
   '<div data-art-direction="'+artDirection(slide)+'" data-editorial="'+esc(design.archetype)+'" data-design-focus="'+esc(design.focus)+'" class="story-scene ');
 }
