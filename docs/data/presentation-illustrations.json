@@ -5,7 +5,7 @@
     {
       "sourceSlideId": "ai-context-platforms-2027",
       "styleId": "rich-image",
-      "renderRecipeVersion": "6",
+      "renderRecipeVersion": "7",
       "assetId": "presentation-ai-context-platforms-2027-rich-image",
       "approvalStatus": "approved",
       "contentHash": "5fe4a5aec64bd660151a3fe361dbe3b78a573e931a46a783c9ee85ce20b69733",
@@ -16,6 +16,21 @@
       "fileSha256": "d99c72789c1de242e4ed7f1e3768fb9b601c351fa1cc164321a317667dda3480",
       "approvedAt": "2026-11-08T04:48:50.272Z",
       "reviewedBy": "Teknisk og faglig vurdert av assistenten. Brukergodkjenning gjenstår"
+    },
+    {
+      "sourceSlideId": "insight-value-chain",
+      "styleId": "rich-image",
+      "renderRecipeVersion": "1",
+      "assetId": "presentation-insight-value-chain-rich-image",
+      "approvalStatus": "awaiting-asset",
+      "contentHash": null,
+      "publicPath": null,
+      "masterPath": null,
+      "masterSha256": null,
+      "draftPath": null,
+      "fileSha256": null,
+      "approvedAt": null,
+      "reviewedBy": null
     }
   ]
 }
