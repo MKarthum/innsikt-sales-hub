@@ -17,3 +17,5 @@ Verification: `scripts/check-context-atlas.mjs` checks geometry-linked lights an
 The outdated, pre-rendered whole-slide image was withdrawn from the approved illustration manifest after the editorial change. Its old digest remains as provenance, while the live modular SVG remains the rendered and export-tested source.
 
 Visual review rejected repeated oval floor shadows and ornamental hub rings because they resembled extra visual relationships. The advanced treatment now uses only diffuse node lighting, while real edges remain the only directional strokes. A browser bounding-box check verifies the outcome titles and the bottom governance marker clearance.
+
+The Chromium browser check reported a six-pixel overflow on the long second value headline in advanced mode. Its typography is now fitted to the existing card without shifting the factual geometry or violating the image/title clearance contract.

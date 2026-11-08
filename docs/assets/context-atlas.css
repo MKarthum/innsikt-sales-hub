@@ -210,7 +210,7 @@
 /* Visual-review corrections: no oval landing pads or ring paths masquerading as relationships.
    Keep semantic surfaces and typography above all atmospheric light. */
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-outcome .acp-card-title{font-size:19px}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-outcome .acp-card-title{font-size:16px}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-outcome .acp-card-title{font-size:14.8px}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-node-shadow{opacity:0}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hub-horizon{opacity:0}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-ambient-waves{opacity:.1}
