@@ -168,33 +168,48 @@ def soft_glow(visual,blur=20,opacity=1):
 def rounded(x0,y0,x1,y1,outline=(174,227,249),fill=(16,45,70),opacity=210,r=24,width=2,glow=None):
     if glow:
         glowlayer=layer();g=ImageDraw.Draw(glowlayer)
-        g.rounded_rectangle((x0,y0,x1,y1),radius=r,outline=rgba(glow,95),width=5)
-        image.alpha_composite(glowlayer.filter(ImageFilter.GaussianBlur(14)))
+        g.rounded_rectangle((x0,y0,x1,y1),radius=r,outline=rgba(glow,54),width=3)
+        image.alpha_composite(glowlayer.filter(ImageFilter.GaussianBlur(11)))
     n=layer();d=ImageDraw.Draw(n)
-    d.rounded_rectangle((x0,y0,x1,y1),radius=r,fill=rgba(fill,opacity),outline=rgba(outline,195),width=width)
+    d.rounded_rectangle((x0,y0,x1,y1),radius=r,fill=rgba(fill,opacity),outline=rgba(outline,183),width=width)
     image.alpha_composite(n)
-def connector(points,color=CYAN,width=6,glow=True,alpha=235):
+
+# Pillow draws at whole pixels by default. Supersampling the vector strokes
+# locally prevents stair-step curves and chunky arrowheads at slide magnification.
+AA_SCALE=4
+def draw_aa_connector(points,color,width,alpha,triangle=None):
+    vertices=points+(triangle or [])
+    pad=math.ceil(width*2+5)
+    left=max(0,math.floor(min(x for x,y in vertices)-pad))
+    top=max(0,math.floor(min(y for x,y in vertices)-pad))
+    right=min(W,math.ceil(max(x for x,y in vertices)+pad+1))
+    bottom=min(H,math.ceil(max(y for x,y in vertices)+pad+1))
+    if right<=left or bottom<=top:return
+    high=Image.new("RGBA",((right-left)*AA_SCALE,(bottom-top)*AA_SCALE),(0,0,0,0))
+    d=ImageDraw.Draw(high)
+    tr=lambda p:[((x-left)*AA_SCALE,(y-top)*AA_SCALE) for x,y in p]
+    d.line(tr(points),fill=rgba(color,alpha),width=max(1,round(width*AA_SCALE)),joint="curve")
+    if triangle:
+        d.polygon(tr(triangle),fill=rgba(color,alpha))
+    image.alpha_composite(high.resize((right-left,bottom-top),Image.Resampling.LANCZOS),(left,top))
+
+def connector(points,color=CYAN,width=4,glow=True,alpha=228,triangle=None):
     p=[(float(x),float(y)) for x,y in points]
     if glow:
         n=layer();d=ImageDraw.Draw(n)
-        d.line(p,fill=rgba(color,110),width=width+8,joint="curve")
-        image.alpha_composite(n.filter(ImageFilter.GaussianBlur(13)))
-    n=layer();d=ImageDraw.Draw(n)
-    d.line(p,fill=rgba(color,alpha),width=width,joint="curve")
-    image.alpha_composite(n)
+        d.line(p,fill=rgba(color,57),width=max(3,round(width+4)),joint="curve")
+        image.alpha_composite(n.filter(ImageFilter.GaussianBlur(9)))
+    draw_aa_connector(p,color,width,alpha,triangle)
 
-def arrow(points,color=CYAN,width=6,glow=True,alpha=235):
+def arrow(points,color=CYAN,width=4,glow=True,alpha=228):
     p=[(float(x),float(y)) for x,y in points]
-    connector(p,color,width,glow,alpha)
-    n=layer();d=ImageDraw.Draw(n)
     x,y=p[-1];px,py=p[-2]
     theta=math.atan2(y-py,x-px)
-    dl=18;wing=8
+    dl=12;wing=5
     u=(math.cos(theta),math.sin(theta));side=(-u[1],u[0])
     left=(x-u[0]*dl+side[0]*wing,y-u[1]*dl+side[1]*wing)
     right=(x-u[0]*dl-side[0]*wing,y-u[1]*dl-side[1]*wing)
-    d.polygon([left,(x,y),right],fill=rgba(color,alpha))
-    image.alpha_composite(n)
+    connector(p,color,width,glow,alpha,triangle=[left,(x,y),right])
 def bezier(a,b,c,d,n=35):
     return [((1-t)**3*a[0]+3*(1-t)**2*t*b[0]+3*(1-t)*t*t*c[0]+t**3*d[0],
              (1-t)**3*a[1]+3*(1-t)**2*t*b[1]+3*(1-t)*t*t*c[1]+t**3*d[1]) for t in (i/n for i in range(n+1))]
@@ -349,7 +364,7 @@ for i,x in enumerate(cons):
     image.alpha_composite(n)
     cx=x+90
     rim=context_rim_y(cx,True)
-    arrow([(cx,rim),(cx,286)],LAV,5)
+    arrow([(cx,rim),(cx,286)],LAV,4)
 # The old ellipse clipped the left and right facet cards at their corners.
 # A superellipse keeps the oval concept while giving every card real padding.
 gl=layer();gd=ImageDraw.Draw(gl);gd.polygon(context_outline(),fill=(173,67,238,76))
@@ -393,9 +408,9 @@ for i in range(3):
 # with only one arrowhead at the context boundary (no stacked arrows).
 SOURCE_TOP=619
 SOURCE_JOIN=603
-connector([(273,SOURCE_TOP),(273,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
-connector([(947,SOURCE_TOP),(947,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
-arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))],CYAN,5)
+connector([(273,SOURCE_TOP),(273,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,4)
+connector([(947,SOURCE_TOP),(947,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,4)
+arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))],CYAN,4)
 for i in range(3):
     x=113+i*337
     rounded(x,SOURCE_TOP,x+320,SOURCE_TOP+82,outline=(129,219,237),fill=(13,55,77),opacity=225,r=16,glow=(56,153,193))
@@ -405,9 +420,9 @@ for i in range(3):
     image.alpha_composite(n)
 # Decision/action/results example loop, visibly a separate business flow
 p=bezier((90,483),(12,538),(29,738),(171,778))
-arrow(p,CYAN,5)
+arrow(p,CYAN,4)
 p=bezier((1120,779),(1160,757),(1172,550),(1129,482))
-arrow(p,CYAN,5)
+arrow(p,CYAN,4)
 rounded(171,735,1120,822,outline=(204,176,248),fill=(24,43,80),opacity=236,r=21,glow=LAV)
 for i in range(3):
     x=204+i*309
@@ -415,7 +430,7 @@ for i in range(3):
     txt(d,x+66,758,v["cycle"][i]["label"],17,True)
     wrapped(d,x+66,785,v["cycle"][i]["detail"],222,14,(227,230,250))
     image.alpha_composite(n)
-for x in (460,791):arrow([(x,778),(x+23,778)],LAV,3,glow=False)
+for x in (460,791):arrow([(x,778),(x+23,778)],LAV,2.8,glow=False)
 # Right value column floats over landscape
 rounded(1186,334,1548,777,outline=(218,204,248),fill=(10,26,56),opacity=221,r=21,glow=LAV)
 n=layer();d=ImageDraw.Draw(n);txt(d,1218,358,v.get("outcomesTitle","Mulig verdi"),29,True)
