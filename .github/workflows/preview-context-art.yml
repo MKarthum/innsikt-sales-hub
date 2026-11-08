@@ -3,8 +3,7 @@ on:
   push:
     paths:
       - scripts/illustration_kit.py
-      - scripts/render-context-platform-image.py
-      - scripts/render-insight-value-chain-image.py
+      - 'scripts/render-*.py'
       - scripts/build-illustration.mjs
       - scripts/optimize-presentation-image.py
       - scripts/presentation-illustrations.mjs
@@ -30,7 +29,7 @@ jobs:
         run: python3 -m pip install Pillow==11.3.0
       - name: Kontroller resepter, semantikk og Python-syntaks
         run: |
-          python3 -m py_compile scripts/illustration_kit.py scripts/render-context-platform-image.py scripts/render-insight-value-chain-image.py
+          python3 -m py_compile scripts/illustration_kit.py
           node --check scripts/build-illustration.mjs
           node scripts/check-illustration-pipeline.mjs
       - name: Lag to uavhengige illustrasjonsutkast fra slides.json
