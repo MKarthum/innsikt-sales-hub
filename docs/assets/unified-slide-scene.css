@@ -36,9 +36,9 @@
  fill:none;stroke:var(--di-rule);stroke-width:1.15;opacity:.75
 }
 .scene-unified-diagram .di-context-title{
- fill:var(--di-fg);font:830 38px var(--font-display);letter-spacing:-1.15px
+ fill:var(--di-fg);font:830 41px var(--font-display);letter-spacing:-1.15px
 }
-.scene-unified-diagram .di-context-lead{fill:var(--di-fg);font:550 21px var(--font-body)}
+.scene-unified-diagram .di-context-lead{fill:var(--di-fg);font:550 22px var(--font-body)}
 .scene-unified-diagram .di-node-panel{
  fill:var(--di-fill);stroke:var(--di-rule);stroke-width:1.35;
 }
@@ -46,12 +46,18 @@
 .scene-unified-diagram .di-node--outcome .di-node-panel{fill:none;stroke:none}
 .scene-unified-diagram .di-node--cycle .di-node-panel{fill:none;stroke:none}
 .scene-unified-diagram .di-node-title{
- fill:var(--di-fg);font:750 20px var(--font-display);letter-spacing:-.25px
+ fill:var(--di-fg);font:750 22px var(--font-display);letter-spacing:-.25px
 }
 .scene-unified-diagram .di-node-detail{
- fill:var(--di-muted);font:530 15px var(--font-body)
+ fill:var(--di-muted);font:530 17px var(--font-body)
 }
-.scene-unified-diagram .di-icon{opacity:.94}
+.scene-unified-diagram .di-icon{opacity:.95}
+.present-frame[data-tone="strong"] .scene-unified-diagram .di-icon{
+ filter:grayscale(1) brightness(0) invert(1);opacity:.91
+}
+.present-frame[data-tone="light"] .scene-unified-diagram .di-icon{
+ filter:none;opacity:1
+}
 .scene-unified-diagram .di-edge-track{
  fill:none;stroke:var(--di-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round
 }
@@ -64,7 +70,7 @@
  fill:var(--di-muted);font:520 16px var(--font-body)
 }
 .scene-unified-diagram .di-outcome-heading{
- fill:var(--di-fg);font:790 29px var(--font-display)
+ fill:var(--di-fg);font:790 31px var(--font-display)
 }
 .scene-unified-diagram .di-endpoint-kicker,.scene-unified-diagram .di-foundation-heading{
  fill:var(--di-accent);font:750 16px var(--font-body);letter-spacing:.6px
@@ -79,7 +85,7 @@
  fill:var(--di-fg);font:790 25px var(--font-display)
 }
 .scene-unified-diagram .di-stage-detail{
- fill:var(--di-muted);font:520 19px var(--font-body)
+ fill:var(--di-muted);font:520 20px var(--font-body)
 }
 .scene-unified-diagram .di-foundation-label{
  fill:var(--di-fg);font:730 20px var(--font-body)
