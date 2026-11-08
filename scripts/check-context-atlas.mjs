@@ -35,9 +35,10 @@ for(const {html} of rendered){
  assert.ok(html.includes('class="acp-core-art"'),'Core graph artwork must be owned by the context object');
  assert.equal((html.match(/class="mc-edge-ambient"/g)||[]).length,10,'Ambient edges must reuse exactly the ten canonical paths');
 }
-assert.equal(rendered[0].html.match(/<svg class="mc-svg"[\\s\\S]*?<\\/svg>/)?.[0],
- rendered[2].html.match(/<svg class="mc-svg"[\\s\\S]*?<\\/svg>/)?.[0],
- 'All styles keep the same SVG scene and geometry; differences are visual layers only');
+const sceneSvg=html=>html.slice(html.indexOf('<svg class="mc-svg"'),html.indexOf('</svg>')+6);
+assert.equal(sceneSvg(rendered[0].html),sceneSvg(rendered[1].html));
+assert.equal(sceneSvg(rendered[1].html),sceneSvg(rendered[2].html),
+ 'All styles share the same SVG scene and geometry; visual differences are CSS layers only');
 const changed=structuredClone(slide);changed.visual.facets[1].detail='Ny dokumentert situasjon';
 for(const mode of ['standard','rich','rich-image'])assert.ok(api.renderSlide(changed,assets,esc,mode).includes('Ny dokumentert situasjon'));
 const reversed=structuredClone(slide);reversed.visual.graph.source=reversed.visual.graph.source.replace('sources:1 --> context','context --> sources:1');
