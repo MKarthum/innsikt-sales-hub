@@ -41,7 +41,10 @@ async function assertNeutral(page, label) {
     const v=rgba(raw); if(v[3]===0)continue;
     samples++;
     const chroma=Math.max(v[0],v[1],v[2])-Math.min(v[0],v[1],v[2]);
-    if(chroma>limit&&failures.length<20)failures.push({selector:el.tagName.toLowerCase()+'.'+String(el.className).slice(0,70),property,color:raw,chroma});
+    // Transparent Oklab values can exhibit large unpremultiplied RGB rounding errors.
+    // Judge their visible contribution, not the amplified chroma of a ~4% alpha pixel.
+    const visibleChroma=chroma*(v[3]/255);
+    if(visibleChroma>limit&&failures.length<20)failures.push({selector:el.tagName.toLowerCase()+'.'+String(el.className).slice(0,70),property,color:raw,chroma});
    }
   }
   return {samples,failures};

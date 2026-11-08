@@ -8,7 +8,7 @@ try{
  await page.locator('.slide-library-detail-stage .scene-modular-v1').waitFor();
  const layouts=[],positions=[];
  for(const mode of ['standard','rich','rich-image']){
-  if(mode!=='standard')await page.locator('#library-art-mode').selectOption(mode);
+  await page.locator('#library-art-mode').selectOption(mode);
   const scene=page.locator('.slide-library-detail-stage .scene-modular-v1');
   layouts.push(await scene.getAttribute('data-composition'));
   positions.push(await scene.locator('.mc-nodes [data-node-id]').evaluateAll(nodes=>nodes.map(n=>n.querySelector('rect.mc-card-surface')?.getAttribute('x')+':'+n.querySelector('rect.mc-card-surface')?.getAttribute('y'))));
