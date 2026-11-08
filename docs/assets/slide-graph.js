@@ -55,9 +55,9 @@ const edge=(graph,from,to)=>{
  return result[0];
 };
 const arrow=(x,y,side)=>{
- if(side==='up')return 'M'+(x-8)+' '+(y+10)+'L'+x+' '+y+'L'+(x+8)+' '+(y+10);
- if(side==='left')return 'M'+(x+10)+' '+(y-8)+'L'+x+' '+y+'L'+(x+10)+' '+(y+8);
- return 'M'+(x-10)+' '+(y-8)+'L'+x+' '+y+'L'+(x-10)+' '+(y+8);
+ if(side==='up')return 'M'+(x-6)+' '+(y+8)+'L'+x+' '+y+'L'+(x+6)+' '+(y+8);
+ if(side==='left')return 'M'+(x+8)+' '+(y-6)+'L'+x+' '+y+'L'+(x+8)+' '+(y+6);
+ return 'M'+(x-8)+' '+(y-6)+'L'+x+' '+y+'L'+(x-8)+' '+(y+6);
 };
 function renderCanvas(input,slide,esc){
  const graph=validate(input,slide);
