@@ -4,6 +4,14 @@
 'use strict';
 function semanticModel(slide){
  const v=slide?.visual||{};
+ // Historical context-platform snapshot retains its exact canonical digest.
+ // Every other scene uses the same generic rules: all slide-owned text and
+ // semantic visual content, excluding only display/approval metadata.
+ if(v.scene!=='context-platforms'){
+  const {artDirections,preferredArtDirection,artwork,...semantic}=v;
+  return {slideId:slide.id,cue:slide.cue,title:slide.title,
+   body:slide.body||'',semantic};
+ }
  const parts=items=>(items||[]).map(x=>({label:x.label,detail:x.detail}));
  const edges=String(v.graph?.source||'').split(/\r?\n/).map(x=>x.trim()).filter(x=>x&&!x.startsWith('#'));
  return {
@@ -49,8 +57,11 @@ function select(slide,style,manifest){
 function render(slide,style,manifest,escape){
  const variant=select(slide,style,manifest);
  if(!variant)return null;
- const alt=slide.title+'. '+slide.visual.contextLabel+'. '+slide.body;
- return '<div class="story-scene scene-context-platforms scene-context-image">'
+ const alt=[slide.title,slide.body,slide.visual?.contextLead||slide.visual?.subtitle]
+  .filter(Boolean).join('. ');
+ const scene=String(slide.visual?.scene||'').replace(/[^a-z0-9-]/g,'');
+ if(!scene)throw Error('Illustrasjonen mangler scene-id: '+slide.id);
+ return '<div class="story-scene scene-illustration scene-'+scene+' scene-context-image">'
   +'<img data-image-style="'+escape(style)+'" data-image-sha="'+escape(variant.fileSha256)+'" class="cp-approved-image" src="'+escape(variant.publicPath)+'" alt="'+escape(alt)+'" decoding="async" loading="eager">'
   +'<div class="cp-brand-overlay" data-brand-overlay="true" aria-hidden="true"></div></div>';
 }
