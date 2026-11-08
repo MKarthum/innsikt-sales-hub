@@ -72,7 +72,7 @@ const iconForAsset=(assetId,x,y)=>{
 const panel=(x,y,w,h,cls='cpn-panel',radius=20)=>
  '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+radius+'" class="'+cls+'"/>';
 // An oval superellipse, with an explicit 10px safety margin around all facets.
-const CORE={cx:609,cy:474,rx:565,ry:128,p:4};
+const CORE={cx:609,cy:467,rx:565,ry:119,p:4};
 const coreContains=(x,y,pad=0)=>
  Math.pow(Math.abs((x-CORE.cx)/(CORE.rx-pad)),CORE.p)+
  Math.pow(Math.abs((y-CORE.cy)/(CORE.ry-pad)),CORE.p)<=1;
@@ -91,7 +91,7 @@ const coreRimY=(x,upper)=>{
  const span=CORE.ry*Math.pow(1-Math.pow(ratio,CORE.p),1/CORE.p);
  return Math.round(CORE.cy+(upper?-span:span));
 };
-const facetRects=[129,455,781].map(x=>[x,477,x+310,565]);
+const facetRects=[149,460,771].map(x=>[x,468,x+299,551]);
 if(!facetRects.every(([x0,y0,x1,y1])=>
  [x0,x1].every(x=>[y0,y1].every(y=>coreContains(x,y,10)))))
  throw Error('Context platform facet cards exceed the enclosing glass shape');
@@ -101,8 +101,8 @@ const arrowTip=(point,prior)=>{
  const [x,y]=point,[px,py]=prior,dx=x-px,dy=y-py;
  const len=Math.hypot(dx,dy);
  if(len<1)throw Error('Undefined diagram arrow direction');
- const ux=dx/len,uy=dy/len,back=[x-ux*13,y-uy*13];
- const a=[back[0]-uy*5.5,back[1]+ux*5.5],b=[back[0]+uy*5.5,back[1]-ux*5.5];
+ const ux=dx/len,uy=dy/len,back=[x-ux*10,y-uy*10];
+ const a=[back[0]-uy*4,back[1]+ux*4],b=[back[0]+uy*4,back[1]-ux*4];
  const fmt=n=>Number(n.toFixed(2));
  return 'M'+fmt(x)+' '+fmt(y)+'L'+fmt(a[0])+' '+fmt(a[1])+'L'+fmt(b[0])+' '+fmt(b[1])+'Z';
 };
@@ -129,17 +129,17 @@ function graphEdges(v,esc){
  // Three semantic source relations converge in one shared inlet.
  const sourceRoutes=[
   ['M270 631V620Q270 615 277 615H607',null,null],
-  ['M607 631V602',[607,602],[607,631]],
+  ['M607 631V586',[607,586],[607,631]],
   ['M944 631V620Q944 615 937 615H607',null,null]
  ];
  for(let i=0;i<v.sources.length;i++){
   const [d,point,tangent]=sourceRoutes[i];
   a+=pathFor('sources:'+i,'context',d,point,tangent,'cpn-arrow cpn-arrow--supply');
  }
- a+=pathFor('context','cycle:0','M48 519C16 554 18 709 96 766Q142 800 204 800',[204,800],[142,800],'cpn-arrow cpn-arrow--loop');
+ a+=pathFor('context','cycle:0','M47 510C15 550 18 709 96 766Q142 800 204 800',[204,800],[142,800],'cpn-arrow cpn-arrow--loop');
  // The return path stays in the narrow corridor LEFT of the outcomes panel
  // and terminates on the right-hand context rim, not in empty background.
- a+=pathFor('cycle:2','context','M1118 800C1181 792 1193 717 1193 657C1193 586 1180 540 1170 519',[1170,519],[1180,540],'cpn-arrow cpn-arrow--loop');
+ a+=pathFor('cycle:2','context','M1118 800C1181 792 1193 717 1193 657C1193 586 1180 538 1171 510',[1171,510],[1180,538],'cpn-arrow cpn-arrow--loop');
  a+=pathFor('cycle:0','cycle:1','M430 800H495',[495,800],[470,800],'cpn-arrow cpn-arrow--cycle');
  a+=pathFor('cycle:1','cycle:2','M767 800H833',[833,800],[808,800],'cpn-arrow cpn-arrow--cycle');
  return a;
@@ -181,15 +181,15 @@ function nativeSvg(slide,v,assets,esc){
  +'<path d="'+corePath(-8)+'" class="cpn-core-halo"/>'
  +'<path d="'+corePath(4)+'" class="cpn-core-glass"/>'
  +'<path d="'+corePath()+'" class="cpn-core-edge" data-core-shape="superellipse"/>'
- +txt(606,432,v.contextLabel,'cpn-core-title',esc,'text-anchor="middle"')
- +txt(606,466,v.contextLead,'cpn-core-lead',esc,'text-anchor="middle"')
+ +txt(606,420,v.contextLabel,'cpn-core-title',esc,'text-anchor="middle"')
+ +txt(606,451,v.contextLead,'cpn-core-lead',esc,'text-anchor="middle"')
  +v.facets.map((n,i)=>{
-   const xs=[129,455,781],x=xs[i];
+   const xs=[149,460,771],x=xs[i];
    return '<g class="cpn-facet" data-node-id="facets:'+i+'">'
-     +panel(x,477,310,88,'cpn-facet-panel',17)
-     +iconForAsset(n.assetId,x+18,497)
-     +txt(x+65,507,n.label,'cpn-facet-title',esc)
-     +detail(x+65,529,n.detail,'cpn-facet-detail',esc,27)
+     +panel(x,468,299,83,'cpn-facet-panel',16)
+     +iconForAsset(n.assetId,x+18,488)
+     +txt(x+65,498,n.label,'cpn-facet-title',esc)
+     +detail(x+65,520,n.detail,'cpn-facet-detail',esc,26)
      +'</g>';
  }).join('')+'</g>';
  const sources=cards(v.sources,631,'sources');
