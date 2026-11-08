@@ -137,6 +137,7 @@ function coreNode({node,box:b,esc,assets}){
   rect({x:b.x+16,y:b.y+18,w:b.w-8,h:b.h},'acp-core-depth',33)
   +rect({x:b.x+8,y:b.y+8,w:b.w-5,h:b.h},'acp-core-stack',32)
   +rect(b,'acp-core-glass',32)
+  +rect({x:b.x+7,y:b.y+6,w:b.w-14,h:b.h*.4},'acp-core-gloss',27)
   +coreArt(b)
   +(window.InnsiktContextArt?.hub(b,assets,esc)||'')
   +`<path class="acp-core-lightline" d="M${N(b.x+34)} ${N(b.y+3)} H${N(b.x+b.w-34)}"/>`
@@ -156,6 +157,7 @@ function contextCard({node,box:b,esc,assets,level}){
  return nodeRoot(node,visual,
   rect({x:b.x+4,y:b.y+8,w:b.w,h:b.h},'acp-card-depth',20)
   +rect(b,'acp-card-panel',20)
+  +rect({x:b.x+4,y:b.y+3,w:b.w-8,h:b.h*.47},'acp-card-gloss',16)
   +rect({x:b.x+12,y:b.y+12,w:49,h:b.h-24},'acp-icon-plate',14)
   +conceptArt(node,b,esc)
   +(window.InnsiktContextArt?.render(node,b,esc,assets)||'')
@@ -178,11 +180,40 @@ api.registerObject('context-governance',{version:1,render:({node,box:b,esc})=>{
   +txt(node.content.title,b.x+22,b.y+27,'acp-governance-title',esc)
   +labels.map((label,i)=>`<circle class="acp-guard-dot" cx="${N(xs[i])}" cy="${N(b.y+22)}" r="4"/>`+txt(label,xs[i]+13,b.y+27,'acp-governance-item',esc)).join(''),esc);
 }});
+/* Layer A is scene-wide and decorative. Layer B derives solely from actual semantic boxes.
+   Never draw an extra relationship: the engine owns the only ten edge paths. */
 api.registerDecoration('context-atlas',({geometry,scene})=>{
- const b=geometry.get('context');
- const id='acp-'+scene.id.replace(/[^a-z0-9-]/g,'');
- return `<defs><radialGradient id="${id}-halo"><stop offset="0" class="acp-aura-center"/><stop offset=".65" class="acp-aura-middle"/><stop offset="1" class="acp-aura-end"/></radialGradient></defs>
- <ellipse class="acp-aura" cx="${N(b.x+b.w/2)}" cy="${N(b.y+b.h/2)}" rx="${N(b.w*.66)}" ry="${N(b.h*1.65)}" fill="url(#${id}-halo)"/>
- ${window.InnsiktContextArt?.decoration(b)||''}`;
+ const core=geometry.get('context'),id='acp-'+scene.id.replace(/[^a-z0-9-]/g,'');
+ const num=v=>N(v);
+ const cx=num(core.x+core.w/2),cy=num(core.y+core.h/2);
+ const dust=Array.from({length:94},(_,i)=>{
+  const x=30+(i*211)%1530,y=192+(i*137)%630,r=i%9===0?2.1:.75+(i%4)*.19;
+  return '<circle class="acp-dust-dot" cx="'+x+'" cy="'+y+'" r="'+r+'"/>';
+ }).join('');
+ const nodes=['context',...Array.from({length:3},(_,i)=>['consumers:','facets:','sources:','cycle:','outcomes:'].map(g=>g+i)).flat()];
+ const lights=nodes.map(nodeId=>{
+  const b=geometry.get(nodeId),focus=nodeId==='context';
+  if(!b)return '';
+  return '<ellipse class="acp-node-light'+(focus?' acp-node-light--core':'')+'" data-node-light="'+nodeId+'" cx="'+num(b.x+b.w/2)+'" cy="'+num(b.y+b.h*.67)+'" rx="'+num(b.w*(focus?.73:.72))+'" ry="'+num(b.h*(focus?1.95:1.48))+'" fill="url(#'+id+'-node)"/>'+
+   '<ellipse class="acp-node-shadow" data-node-shadow="'+nodeId+'" cx="'+num(b.x+b.w/2)+'" cy="'+num(b.y+b.h+10)+'" rx="'+num(b.w*.53)+'" ry="'+num(focus?28:12)+'"/>';
+ }).join('');
+ const definitions='<defs>'+
+  '<radialGradient id="'+id+'-space"><stop offset="0" class="acp-space-inner"/><stop offset=".53" class="acp-space-mid"/><stop offset="1" class="acp-space-outer"/></radialGradient>'+
+  '<radialGradient id="'+id+'-node"><stop offset="0" class="acp-node-inner"/><stop offset=".55" class="acp-node-mid"/><stop offset="1" class="acp-node-outer"/></radialGradient>'+
+  '<linearGradient id="'+id+'-veil" x1="0" y1="0" x2=".8" y2="1"><stop offset="0" class="acp-veil-top"/><stop offset=".55" class="acp-veil-mid"/><stop offset="1" class="acp-veil-end"/></linearGradient>'+
+  '</defs>';
+ const atmosphere=definitions+
+  '<rect class="acp-ambient-veil" width="1600" height="900" fill="url(#'+id+'-veil)"/>'+
+  '<ellipse class="acp-ambient-volume" cx="'+cx+'" cy="'+cy+'" rx="'+num(core.w*.89)+'" ry="'+num(core.h*2.5)+'" fill="url(#'+id+'-space)"/>'+
+  '<g class="acp-ambient-waves">'+
+   '<path d="M-100 686Q390 575 '+cx+' '+num(core.y+core.h*.68)+' T1730 697"/>'+
+   '<path d="M-60 753Q480 632 '+cx+' '+num(core.y+core.h*.9)+' T1660 748"/>'+
+   '<path d="M-30 835Q560 700 '+cx+' '+num(core.y+core.h*1.35)+' T1640 834"/>'+
+  '</g><g class="acp-ambient-particles">'+dust+'</g>';
+ const spatial='<g class="acp-object-light-fields">'+lights+'</g>'+
+  '<ellipse class="acp-hub-horizon" cx="'+cx+'" cy="'+num(core.y+core.h*.79)+'" rx="'+num(core.w*.58)+'" ry="'+num(core.h*.65)+'"/>'+
+  '<ellipse class="acp-hub-horizon acp-hub-horizon--inner" cx="'+cx+'" cy="'+num(core.y+core.h*.8)+'" rx="'+num(core.w*.46)+'" ry="'+num(core.h*.42)+'"/>'+
+  (window.InnsiktContextArt?.decoration(core)||'');
+ return {atmosphere,spatial};
 });
 })();

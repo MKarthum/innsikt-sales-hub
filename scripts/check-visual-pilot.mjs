@@ -42,6 +42,10 @@ try{
   assert.equal(await contextSlide.locator('.acp-hero-illustration').count(),1,'One object-anchored knowledge network');
   assert.equal(await contextSlide.locator('.acp-concept').count(),15,
    'Every semantic card owns a conceptual motif independent of art style');
+  assert.equal(await contextSlide.locator('svg .acp-object-light-fields [data-node-light]').count(),16,
+   'All node lights are calculated from semantic boxes');
+  assert.equal(await contextSlide.locator('svg .mc-edge-lumen').count(),10,
+   'All connector effects share canonical paths');
   assert.equal(await contextSlide.locator('svg image.mc-layer-image').count(),0,
    'No absolute, slide-wide atmosphere image may shadow the semantic scene');
   positions.push(await contextSlide.locator('.acp-card-panel').evaluateAll(rects=>rects.map(r=>
@@ -66,6 +70,13 @@ try{
  assert.equal(positions[1],positions[2],'Advanced objects must not drift from the illustrated scene');
  assert.ok(motifOpacity[0]<.01&&motifOpacity[1]>.1&&motifOpacity[2]>.8,
   'The three directions must visibly progress from plain to object-illustrated to advanced');
+ await selector.selectOption('rich-image');
+ for(const tone of ['strong','light']){
+  await page.locator('#library-tone-mode').selectOption(tone);
+  await contextSlide.screenshot({path:output+'/context-advanced-'+tone+'.png'});
+  assert.equal(await contextSlide.locator('.acp-card-title').count(),15,'All labels remain independent SVG text in '+tone);
+ }
+ await page.locator('#library-tone-mode').selectOption('strong');
  await selector.selectOption('standard');
  await page.evaluate(()=>{location.hash='#lysbilder'});
  await page.locator('.slide-library-card').first().waitFor();

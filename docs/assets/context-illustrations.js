@@ -71,10 +71,12 @@ function render(node,b,esc,assets){
  const s=n(Math.min((b.h-4)/100,1.04)),x=n(b.x+7),y=n(b.y+(b.h-100*s)/2);
  return `<g class="acp-illustration" data-illustration-owner="${esc(node.id)}" data-illustration-motif="${esc(motif)}" aria-hidden="true" transform="translate(${x} ${y}) scale(${s})">
   <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" class="acp-metal-light"/><stop offset=".48" class="acp-metal-mid"/><stop offset="1" class="acp-metal-dark"/></linearGradient></defs>
+  <stop offset="0" class="acp-metal-light"/><stop offset=".48" class="acp-metal-mid"/><stop offset="1" class="acp-metal-dark"/></linearGradient>
+  <radialGradient id="${id}-feather"><stop offset=".43" stop-color="white"/><stop offset=".78" stop-color="white" stop-opacity=".94"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient>
+  <mask id="${id}-mask" maskUnits="userSpaceOnUse" x="-8" y="-2" width="116" height="104"><rect x="-8" y="-2" width="116" height="104" fill="url(#${id}-feather)"/></mask></defs>
   <g class="acp-art-ambient">${ellipse(60,55,55,40,'acp-art-halo')}${ellipse(60,84,43,10,'acp-art-base')}</g>
   <g class="acp-art-objects" style="--acp-art-metal:url(#${id})">${motifMarkup}</g>
-  <image class="acp-art-raster" data-asset-id="context-motif-${esc(safeMotif)}" href="${esc(src)}" x="-8" y="-2" width="116" height="104" preserveAspectRatio="xMidYMid meet" aria-hidden="true"/>
+  <image class="acp-art-raster" data-asset-id="context-motif-${esc(safeMotif)}" href="${esc(src)}" x="-8" y="-2" width="116" height="104" mask="url(#${id}-mask)" preserveAspectRatio="xMidYMid meet" aria-hidden="true"/>
  </g>`;
 }
 function hub(b,assets,esc){

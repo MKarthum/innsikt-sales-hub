@@ -131,3 +131,10 @@
 /* The copy offset is now a native SVG coordinate computed per node, not an export-sensitive CSS transform. */
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-title,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-detail{transform:none}
+
+/* Framed stock-like raster edges fade into each semantic card without touching SVG copy. */
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration[data-illustration-motif="collaboration"] .acp-art-raster,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration[data-illustration-motif="agents"] .acp-art-raster{opacity:.77}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration[data-illustration-motif="collaboration"] .acp-art-objects,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration[data-illustration-motif="agents"] .acp-art-objects{opacity:.48}
+.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster{opacity:.78}

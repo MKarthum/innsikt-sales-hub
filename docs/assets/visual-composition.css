@@ -48,3 +48,7 @@
 
 /* Optional semantic-edge atmosphere is opt-in; never add default SVG fill. */
 .scene-modular-v1 .mc-edge-ambient{fill:none;stroke:none}
+
+/* Independent layers do not change SVG geometry, pointer events or export scale. */
+.scene-modular-v1 .mc-spatial{pointer-events:none}
+.scene-modular-v1 .mc-edge-lumen{fill:none;stroke:none}

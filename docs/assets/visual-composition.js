@@ -183,15 +183,17 @@ function renderScene(input,assets,esc,direction='standard'){
  const layers=drawLayers(scene.layers||[],assets,esc);
  const decoration=scene.decoration?decorators.get(scene.decoration):null;
  if(scene.decoration&&!decoration)throw Error('Ukjent dekorasjonslag: '+scene.decoration);
- const decorativeSvg=decoration?decoration({scene,geometry,direction,esc,assets}):'<ellipse cx="805" cy="535" rx="495" ry="230"/><ellipse cx="805" cy="535" rx="390" ry="165"/>';
- const edges=plan.edges.map(e=>'<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-ambient" d="'+e.path+'"/><path class="mc-edge-track" d="'+e.path+'"'+(e.head===false?'':' marker-end="url(#'+marker+')"')+'/></g>').join('');
+ const decorativeSvg=decoration?decoration({scene,geometry,edges:plan.edges,direction,esc,assets}):'<ellipse cx="805" cy="535" rx="495" ry="230"/><ellipse cx="805" cy="535" rx="390" ry="165"/>';
+ const decorationLayers=typeof decorativeSvg==='string'?{atmosphere:decorativeSvg}:decorativeSvg;
+ const edges=plan.edges.map(e=>'<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-ambient" d="'+e.path+'"/><path class="mc-edge-track" d="'+e.path+'"'+(e.head===false?'':' marker-end="url(#'+marker+')"')+'/><path class="mc-edge-lumen" d="'+e.path+'"/></g>').join('');
  const objects=scene.nodes.map(o=>objectTypes.get(o.type).render({node:o,box:geometry.get(o.id),esc,assets,level:direction})).join('');
  return '<div class="story-scene scene-modular-v1" data-scene-contract="2" data-composition-level="'+esc(direction)+'" data-composition="'+esc(plan.composition)+'" data-scene-id="'+esc(scene.id)+'" data-scene-family="'+esc(scene.family||'general')+'">'
   +'<svg class="mc-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="'+esc(scene.title)+'">'
   +'<defs><marker id="'+marker+'" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M1 1L9 5L1 9Z" class="mc-arrow-head"/></marker></defs>'
   +'<rect class="mc-backdrop" width="1600" height="900"/>'
   +'<g class="mc-layers" aria-hidden="true">'+layers+'</g>'
-  +'<g class="mc-decor" aria-hidden="true">'+decorativeSvg+'</g>'
+  +'<g class="mc-decor" aria-hidden="true">'+(decorationLayers.atmosphere||'')+'</g>'
+  +'<g class="mc-spatial" aria-hidden="true">'+(decorationLayers.spatial||'')+'</g>'
   +head+'<g class="mc-edges">'+edges+'</g><g class="mc-nodes">'+objects+'</g></svg>'
   +'<div class="cp-brand-overlay" data-brand-overlay="true" aria-hidden="true"></div></div>';
 }

@@ -39,6 +39,9 @@ for(const {html} of rendered){
  assert.ok(html.includes('data-asset-id="context-motif-context"'),'Core image is separately addressable');
  assert.ok(html.includes('class="acp-hero-illustration"'),'Knowledge network must be inside the context object');
  assert.ok(html.includes('class="acp-board-art"'),'Ambient board grid must follow the context object');
+ assert.equal((html.match(/data-node-light="/g)||[]).length,16,'Object light is tied to the 16 semantic objects');
+ assert.equal((html.match(/class="mc-edge-lumen"/g)||[]).length,10,'Edge accents reuse the canonical paths');
+ assert.ok(html.includes('class="mc-spatial"'),'Object effects live behind content, in their own scene layer');
  assert.equal((html.match(/class="mc-edge-ambient"/g)||[]).length,10,'Ambient edges must reuse exactly the ten canonical paths');
 }
 const nodeTracks=html=>[...html.matchAll(/class="mc-edge-track" d="([^"]+)"/g)].map(x=>x[1]);
@@ -58,6 +61,9 @@ assert.throws(()=>api.compile(reversed),/Ukjent|retning|relasjon|endepunkt/);
 const core=api.compile(slide,'rich-image').geometry.get('context');
 const moved=structuredClone(slide);moved.visual.composition.overrides={'rich-image':{positions:{context:{y:core.y+15}}}};
 assert.notEqual(api.compile(moved,'rich-image').edges[0].path,api.compile(slide,'rich-image').edges[0].path);
+const light=(html)=>html.match(/data-node-light="context" cx="[^"]+" cy="([^"]+)"/)?.[1];
+assert.notEqual(light(api.renderSlide(moved,assets,esc,'rich-image')),light(rendered[2].html),
+ 'Main light must follow core geometry rather than use absolute positions');
 const css=fs.readFileSync('docs/assets/context-atlas.css','utf8');
 const conceptCss=fs.readFileSync('docs/assets/context-illustrations.css','utf8');
 assert.ok(conceptCss.includes('data-composition-level="rich-image"'));
