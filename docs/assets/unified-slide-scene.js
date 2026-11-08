@@ -100,21 +100,21 @@ function contextModel(slide){
  }
  // All three sources share one inlet, but retain three canonical edge IDs.
  route('sources:0','context','M278 600V579Q278 573 284 573H600',null,null,false,'inlet');
- route('sources:1','context','M600 600V566',[600,566],[600,600],true,'inlet');
+ route('sources:1','context','M600 600V578',[600,578],[600,600],true,'inlet');
  route('sources:2','context','M922 600V579Q922 573 916 573H600',null,null,false,'inlet');
  route('context','cycle:0','M74 481C23 503 24 717 95 761Q129 784 198 784',
   [198,784],[129,784],true,'feedback');
  route('cycle:0','cycle:1','M464 784H488',[488,784],[464,784],true,'process');
  route('cycle:1','cycle:2','M754 784H778',[778,784],[754,784],true,'process');
- route('cycle:2','context','M1044 784C1155 786 1160 697 1160 618C1160 550 1142 502 1121 482',
-  [1121,482],[1142,502],true,'feedback');
+ route('cycle:2','context','M1044 784C1155 786 1160 697 1160 618C1160 550 1142 502 1140 482',
+  [1140,482],[1142,502],true,'feedback');
  const edges=graph.edges.map(g=>{
   const r=routes.get(g.from+'>'+g.to);
   if(!r)throw Error('Ingen geometrisk rute for '+g.id);
   return {...g,...r};
  });
  return {id:slide.id,scene:v.scene,kind:'context',slide,
-  nodes,edges,context:{cx:600,cy:455,rx:545,ry:113,power:4},
+  nodes,edges,context:{cx:600,cy:455,rx:545,ry:122,power:4},
   backgrounds:['context-rich-background']};
 }
 function chainModel(slide){
