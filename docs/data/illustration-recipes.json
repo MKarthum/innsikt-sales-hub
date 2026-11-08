@@ -16,5 +16,6 @@
       "generator": "scripts/render-insight-value-chain-image.py",
       "composition": "four-stage-value-flow"
     }
-  ]
+  ],
+  "verified": "2026-11-08"
 }
