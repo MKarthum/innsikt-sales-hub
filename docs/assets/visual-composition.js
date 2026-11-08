@@ -2,7 +2,10 @@
    Nothing in this file owns business copy, a brand palette or a particular slide geometry. */
 (()=>{
 'use strict';
-const objectTypes=new Map(),compositions=new Map();
+const objectTypes=new Map(),compositions=new Map(),adapters=new Map(),routers=new Map(),decorators=new Map();
+function registerAdapter(name,fn){if(!idOk(name)||typeof fn!=='function'||adapters.has(name))throw Error('Ugyldig sceneadapter: '+name);adapters.set(name,fn);}
+function registerRouter(name,fn){if(!idOk(name)||typeof fn!=='function'||routers.has(name))throw Error('Ugyldig relasjonsruter: '+name);routers.set(name,fn);}
+function registerDecoration(name,fn){if(!idOk(name)||typeof fn!=='function'||decorators.has(name))throw Error('Ugyldig dekorasjonslag: '+name);decorators.set(name,fn);}
 const idOk=id=>typeof id==='string'&&/^[a-z][a-z0-9-]*(?::[a-z0-9-]+)?$/.test(id);
 const numeric=n=>typeof n==='number'&&Number.isFinite(n);
 const n=n=>Math.round(n*100)/100;
@@ -19,6 +22,8 @@ function registerComposition(name,implementation){
 function fromSlide(slide){
  const v=slide.visual||{},config=v.composition;
  if(config?.engine!=='modular-v1')throw Error('Lysbildet bruker ikke modulær scene: '+slide.id);
+ const adapter=adapters.get(v.scene);
+ if(adapter)return adapter(slide);
  if(v.scene!=='list')throw Error('Mangler semantisk adapter for '+v.scene);
  return {version:1,id:slide.id,title:slide.title,cue:slide.cue,subtitle:slide.body||'',
   nodes:(v.items||[]).map((title,i)=>({id:'item:'+i,type:'card',content:{
@@ -114,8 +119,15 @@ function compile(input,direction='standard'){
   geometry.set(p.id,p);
  }
  for(const node of scene.nodes)if(!geometry.has(node.id))throw Error('Komposisjon mangler objekt: '+node.id);
+ const customRoute=scene.router?routers.get(scene.router):null;
+ if(scene.router&&!customRoute)throw Error('Ukjent relasjonsruter: '+scene.router);
  return {scene,direction,composition,geometry,
-  edges:(scene.edges||[]).map(e=>({...e,path:route(geometry.get(e.from),geometry.get(e.to))}))};
+  edges:(scene.edges||[]).map(e=>{
+   const result=customRoute?customRoute(e,geometry,direction):route(geometry.get(e.from),geometry.get(e.to));
+   const details=typeof result==='string'?{path:result}:result;
+   if(!details?.path||!/^M/.test(details.path))throw Error('Relasjon uten geometrisk bane: '+e.id);
+   return {...e,...details};
+  })};
 }
 function lines(value,max=34,limit=3){
  const chunks=[],words=String(value||'').trim().split(/\s+/).filter(Boolean);let line='';
@@ -164,21 +176,25 @@ function drawLayers(layers,assets,esc){
 function renderScene(input,assets,esc,direction='standard'){
  const plan=compile(input,direction),{scene,geometry}=plan;
  const marker='mc-arrow-'+scene.id;
- const head='<g class="mc-heading">'+text(scene.cue||'',86,80,'mc-eyebrow',esc,{max:90,limit:1})+
-  text(scene.title||'',84,160,'mc-title',esc,{max:62,limit:2,spacing:55})+
-  text(scene.subtitle||'',86,226,'mc-subtitle',esc,{max:112,limit:2,spacing:26})+'</g>';
+ const header=scene.header||{};
+ const head='<g class="mc-heading">'+text(scene.cue||'',86,header.cueY||80,'mc-eyebrow',esc,{max:90,limit:1})+
+  text(scene.title||'',84,header.titleY||160,'mc-title',esc,{max:62,limit:2,spacing:55})+
+  text(scene.subtitle||'',86,header.subtitleY||226,'mc-subtitle',esc,{max:112,limit:2,spacing:26})+'</g>';
  const layers=drawLayers(scene.layers||[],assets,esc);
- const edges=plan.edges.map(e=>'<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-track" d="'+e.path+'" marker-end="url(#'+marker+')"/></g>').join('');
+ const decoration=scene.decoration?decorators.get(scene.decoration):null;
+ if(scene.decoration&&!decoration)throw Error('Ukjent dekorasjonslag: '+scene.decoration);
+ const decorativeSvg=decoration?decoration({scene,geometry,direction,esc,assets}):'<ellipse cx="805" cy="535" rx="495" ry="230"/><ellipse cx="805" cy="535" rx="390" ry="165"/>';
+ const edges=plan.edges.map(e=>'<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-track" d="'+e.path+'"'+(e.head===false?'':' marker-end="url(#'+marker+')"')+'/></g>').join('');
  const objects=scene.nodes.map(o=>objectTypes.get(o.type).render({node:o,box:geometry.get(o.id),esc,assets,level:direction})).join('');
- return '<div class="story-scene scene-modular-v1" data-scene-contract="2" data-composition-level="'+esc(direction)+'" data-composition="'+esc(plan.composition)+'" data-scene-id="'+esc(scene.id)+'">'
+ return '<div class="story-scene scene-modular-v1" data-scene-contract="2" data-composition-level="'+esc(direction)+'" data-composition="'+esc(plan.composition)+'" data-scene-id="'+esc(scene.id)+'" data-scene-family="'+esc(scene.family||'general')+'">'
   +'<svg class="mc-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="'+esc(scene.title)+'">'
   +'<defs><marker id="'+marker+'" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M1 1L9 5L1 9Z" class="mc-arrow-head"/></marker></defs>'
   +'<rect class="mc-backdrop" width="1600" height="900"/>'
   +'<g class="mc-layers" aria-hidden="true">'+layers+'</g>'
-  +'<g class="mc-decor" aria-hidden="true"><ellipse cx="805" cy="535" rx="495" ry="230"/><ellipse cx="805" cy="535" rx="390" ry="165"/></g>'
+  +'<g class="mc-decor" aria-hidden="true">'+decorativeSvg+'</g>'
   +head+'<g class="mc-edges">'+edges+'</g><g class="mc-nodes">'+objects+'</g></svg>'
   +'<div class="cp-brand-overlay" data-brand-overlay="true" aria-hidden="true"></div></div>';
 }
-window.InnsiktVisualComposition={version:1,registerObject,registerComposition,fromSlide,validate,compile,route,renderScene,
+window.InnsiktVisualComposition={version:1,registerObject,registerComposition,registerAdapter,registerRouter,registerDecoration,fromSlide,validate,compile,route,renderScene,
  renderSlide:(slide,assets,esc,direction='standard')=>renderScene(fromSlide(slide),assets,esc,direction)};
 })();

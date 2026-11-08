@@ -66,7 +66,7 @@ try{
  await photoScene.waitFor();
  await page.locator('#library-art-mode').selectOption('rich-image');
  assert.equal(await photoScene.getAttribute('data-art-direction'),'rich-image');
- assert.equal(await photoScene.locator('svg.di-svg[data-layout-contract="1"]').count(),1);
+ assert.equal(await photoScene.locator('svg.mc-svg').count(),1);
  assert.equal(await photoScene.locator('[data-edge-id]').count(),10);
  assert.equal(await photoScene.locator('img.cp-approved-image').count(),0,
   'The third direction must not maintain a separate raster diagram');
@@ -74,7 +74,7 @@ try{
   const {prepareSlideMarkupForExport}=await import('./assets/slide-export-prep.js');
   return prepareSlideMarkupForExport(document.querySelector('.slide-library-detail-stage .present-frame').innerHTML);
  });
- assert.match(embedded,/data-unified-scene="context-platforms"/,'The live scene must be exported');
+ assert.match(embedded,/data-scene-family="context-atlas"/,'The modular vector scene must be exported');
  assert.ok(embedded.includes('href="data:image/')&&embedded.includes('data-icon-id='),
   'Semantic icons and atmosphere must be inlined for portable exports');
  const sceneScreenshot=await photoScene.screenshot();

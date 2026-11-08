@@ -69,11 +69,27 @@
       "keywords": [],
       "visual": {
         "scene": "list",
-        "artDirections": ["rich", "rich-image"],
+        "artDirections": [
+          "rich",
+          "rich-image"
+        ],
         "composition": {
           "engine": "modular-v1",
-          "variants": {"standard": "columns", "rich": "stagger", "rich-image": "orbit"},
-          "layers": [{"id": "ambient", "type": "glow"}, {"id": "guide", "type": "grid"}]
+          "variants": {
+            "standard": "columns",
+            "rich": "stagger",
+            "rich-image": "orbit"
+          },
+          "layers": [
+            {
+              "id": "ambient",
+              "type": "glow"
+            },
+            {
+              "id": "guide",
+              "type": "grid"
+            }
+          ]
         },
         "items": [
           "Jeg skal i kundemøte",
@@ -943,11 +959,11 @@
       ],
       "visual": {
         "scene": "insight-ecosystem",
-      "artDirections": [
-        "rich",
-        "rich-image"
-      ],
-      "preferredArtDirection": "rich-image",
+        "artDirections": [
+          "rich",
+          "rich-image"
+        ],
+        "preferredArtDirection": "rich-image",
         "subtitle": "En faglig sammenheng – ikke en obligatorisk teknisk arkitektur.",
         "inputLabel": "STARTPUNKT",
         "input": "Et spørsmål i virksomheten",
@@ -2034,6 +2050,34 @@
         "graph": {
           "version": 2,
           "source": "# Fra/til og relasjonsrolle. Alle visningsstiler bruker samme graf.\ncontext --> consumers:0 : provides [context-people]\ncontext --> consumers:1 : provides [context-applications]\ncontext --> consumers:2 : provides [context-agents]\nsources:0 --> context : informs [data-context]\nsources:1 --> context : informs [systems-context]\nsources:2 --> context : informs [external-context]\ncontext --> cycle:0 : supports [context-decision]\ncycle:0 --> cycle:1 : advances [decision-action]\ncycle:1 --> cycle:2 : advances [action-update]\ncycle:2 --> context : updates [updated-context]"
+        },
+        "composition": {
+          "engine": "modular-v1",
+          "variants": {
+            "standard": "context-architecture",
+            "rich": "context-glass",
+            "rich-image": "context-atmosphere"
+          },
+          "labels": {
+            "consumers": "BRUKES AV",
+            "sources": "BYGGER PÅ",
+            "cycle": "FRA BESLUTNING TIL OPPDATERT KONTEKST"
+          },
+          "layers": [
+            {
+              "id": "ambient",
+              "type": "glow"
+            },
+            {
+              "id": "blueprint",
+              "type": "grid"
+            },
+            {
+              "id": "landscape",
+              "type": "image",
+              "assetId": "context-rich-background"
+            }
+          ]
         }
       },
       "design": {

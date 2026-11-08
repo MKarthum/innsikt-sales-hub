@@ -93,19 +93,22 @@ try{
   const scene=frame.locator('.story-scene');
   await scene.waitFor();
   assert.equal(await scene.getAttribute('data-art-direction'),direction);
-  assert.equal(await scene.locator('svg.di-svg[data-layout-contract="1"]').count(),1,
-   fileId+'/'+direction+': every style must render exactly the same live scene');
+  const isModular=fileId==='ai-context-platforms-2027';
+  assert.equal(await scene.locator(isModular?'svg.mc-svg':'svg.di-svg[data-layout-contract="1"]').count(),1,
+   fileId+'/'+direction+': the selected style must render one live vector scene');
   assert.equal(await scene.locator('img.cp-approved-image').count(),0,
    fileId+'/'+direction+': no separately maintained diagram bitmap is allowed');
-  assert.equal(await scene.locator('[data-node-id]').count(),
-   fileId==='ai-context-platforms-2027'?16:4,
-   fileId+'/'+direction+': node count must not depend on art direction');
-  // Changing art direction must not regenerate positions, text, node identities
-  // or a second set of connections. Compare the actual SVG element bytes.
-  const svgMarkup=await scene.locator('svg.di-svg').evaluate(svg=>svg.outerHTML);
-  if(sharedMarkup===null)sharedMarkup=svgMarkup;
-  else assert.equal(svgMarkup,sharedMarkup,
-    fileId+'/'+direction+': a different visual style changed the underlying scene');
+  assert.equal(await scene.locator('[data-node-id]').count(),isModular?22:4,
+   fileId+'/'+direction+': all canonical object identities are present');
+  assert.equal(await scene.locator('[data-edge-id]').count(),isModular?10:5,
+   fileId+'/'+direction+': all semantic relations are present');
+  const svgMarkup=await scene.locator(isModular?'svg.mc-svg':'svg.di-svg').evaluate(svg=>svg.outerHTML);
+  if(sharedMarkup!==null){
+   if(isModular)assert.notEqual(svgMarkup,sharedMarkup,
+    'Different modular compositions must not be forced into identical geometry');
+   else assert.equal(svgMarkup,sharedMarkup,'The unchanged chain renderer must be stable across styles');
+  }
+  sharedMarkup=svgMarkup;
   await scene.locator('img').evaluateAll(async imgs=>Promise.all(imgs.filter(x=>getComputedStyle(x).display!=='none').map(img=>img.decode())));
   const reference=await frame.screenshot();
   fs.writeFileSync(path.join(output,direction+'-screen.png'),reference);

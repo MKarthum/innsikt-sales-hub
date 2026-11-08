@@ -77,9 +77,9 @@ try{
   assert.equal(await platform.getAttribute('data-art-direction'),style);
   const screenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-'+style+'.png'});
   shots.push(screenshot.toString('base64'));
-  assert.equal(await platform.locator('svg.di-svg[data-layout-contract="1"]').count(),1);
+  assert.equal(await platform.locator('svg.mc-svg').count(),1);
   assert.equal(await platform.locator('[data-edge-id]').count(),10);
-  assert.equal(await platform.locator('[data-node-id]').count(),16);
+  assert.equal(await platform.locator('[data-node-id]').count(),22);
  }
  const separations=await page.evaluate(async shots=>{
   const load=async encoded=>{
@@ -101,7 +101,7 @@ try{
  },shots);
  assert.ok(separations.every(d=>d>4),'Every selected style must be visibly distinct: '+JSON.stringify(separations));
  await selector.selectOption('standard');
- assert.equal(await platform.locator('.di-context-title').textContent(),'Virksomhetskontekst');
+ assert.equal(await platform.locator('.acp-core-title').textContent(),'Virksomhetskontekst');
  assert.deepEqual(errors,[],'Browser runtime errors');
  console.log('PASS – '+slides.length+' standalone slides with editorial roles, 10 archetypes, mobile-safe 16:9, dark/light and CSS-only company skin');
 }finally{await browser.close()}

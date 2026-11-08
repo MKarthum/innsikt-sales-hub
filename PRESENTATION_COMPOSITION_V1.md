@@ -51,3 +51,14 @@ Ta med `slides.json`, adaptere, komposisjoner og objektkontrakter. Overstyr `--p
 ## Bevisste begrensninger og videre arbeid
 
 Dagens to store figurer bruker fortsatt `unified-slide-scene.js`, som er en **legacy-adapter**, ikke generelt utgangspunkt eller en visuell målestokk. Bildegeneratorene er ennå parallelle historiske verktøy. Flytt dem først når ny motor demonstrerer tilsvarende faglig og visuell kvalitet. Neste trinn bør være en ekte relasjonsdrevet slideadapter, typografisk måling i stedet for tegnbasert linjebryting og sammenligning av eksportbilder for den nye motoren. Ingen av disse er påstått ferdig i v1.
+
+## Pilot: AI Context Platforms (0.18.119)
+
+Det eksisterende lysbildet `ai-context-platforms-2027` er nå en **faglig adapter** til den modulære motoren. Semantikken eies fortsatt av `slides.json` og den validerte grafen i `slide-graph.js`. Ingen tekst eller faglige relasjonsretninger er kopiert inn i CSS, generatorer eller særskilte renderingstrær.
+
+- `docs/assets/context-atlas.js`: registrerer en adapter, tre selvstendige komposisjoner, objekttyper, en relasjonsruter og et dekorasjonslag. Endringer i objekttyper er isolert fra komposisjonens koordinater.
+- `docs/assets/context-atlas.css`: definerer enkel, illustrert og avansert visuell fremstilling. Komposisjonene har ulik geometri og styling. Diagram- og tekstelementer er fortsatt SVG. Atmosfærebilde er et byttbart lag fra ressursregisteret.
+- `scripts/check-context-atlas.mjs`: tester 22 stabile objektidentiteter, alle ti kanoniske relasjoner, omplassering, tre layoutstrategier og innholdspropagering.
+- `scripts/check-context-platform-exports-browser.mjs`: sammenligner reelle skjermbilder med PNG/JPG/PDF/PPTX i Chromium og WebKit. Pilotens geometri skal nå **kunne være forskjellig** per stil, i motsetning til den historiske SVG-motoren for verdikjeden.
+
+Gjenstående visuell forbedring bør skje i objektstiler og dekorlag, ikke ved å bake fagtekst eller piler inn i et ferdig foto. Den historiske `unified-slide-scene.js` brukes fortsatt av verdikjeden og som regresjonsreferanse, men ikke av denne piloten i appen.

@@ -11,6 +11,8 @@ for(const file of [
  'docs/assets/visual-assets.js',
  'docs/assets/slide-graph.js',
  'docs/assets/unified-slide-scene.js',
+ 'docs/assets/visual-composition.js',
+ 'docs/assets/context-atlas.js',
  'docs/assets/slide-visuals.js'
 ])vm.runInNewContext(fs.readFileSync(file,'utf8'),box,{filename:file});
 const api=box.window.InnsiktDiagramScene;
@@ -27,7 +29,11 @@ for(const slide of scenes){
  assert.ok(plan.edges.length>=5,'Connections must be defined once in the model');
  const rendered=api.render(slide,assets,escape);
  const fallback=box.window.InnsiktSlideVisuals.render(slide,escape,{assets});
- assert.equal(fallback,rendered,'The generic slide renderer must delegate without a second copy');
+ if(slide.id===context.id){
+  assert.match(fallback,/data-scene-family="context-atlas"/,'The context slide must now use the modular composer');
+  assert.equal((fallback.match(/data-edge-id="/g)||[]).length,10);
+  assert.equal((fallback.match(/data-node-id="/g)||[]).length,22);
+ }else assert.equal(fallback,rendered,'Legacy chain scene remains unchanged until migrated');
  assert.equal((rendered.match(/data-unified-scene="/g)||[]).length,1,'One SVG scene only');
  assert.equal((rendered.match(/data-layout-contract="/g)||[]).length,1);
  assert.equal((rendered.match(/data-edge-id="/g)||[]).length,plan.edges.length,

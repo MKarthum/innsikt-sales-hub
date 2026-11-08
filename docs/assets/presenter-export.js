@@ -115,8 +115,10 @@ async function exportDeck(data,mode='html'){
   if(!unifiedCss.ok)throw Error('Kunne ikke hente scenens SVG-stiler');
   const modularCss=await fetch('./assets/visual-composition.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
   if(!modularCss.ok)throw Error('Kunne ikke hente modulær scenestil');
+  const contextCss=await fetch('./assets/context-atlas.css?v='+encodeURIComponent(data.version),{cache:'no-store'});
+  if(!contextCss.ok)throw Error('Kunne ikke hente stilark for kontekstscenen');
   const skin=await organizationSkinCss();
-  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())+'\n'+(await editorial.text())+'\n'+(await narrative.text())+'\n'+(await art.text())+'\n'+(await unifiedCss.text())+'\n'+(await modularCss.text())+'\n'+(await illustrationCss.text())+'\n'+skin));
+  const html=await inlineLibraryImages(build(data,(await response.text())+'\n'+(await visuals.text())+'\n'+(await storyScenes.text())+'\n'+(await architectureCss.text())+'\n'+(await vendorCss.text())+'\n'+(await editorial.text())+'\n'+(await narrative.text())+'\n'+(await art.text())+'\n'+(await unifiedCss.text())+'\n'+(await modularCss.text())+'\n'+(await contextCss.text())+'\n'+(await illustrationCss.text())+'\n'+skin));
   if(mode==='print'){win.document.open();win.document.write(html);win.document.close();win.focus();return;}
   const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
   const link=document.createElement('a');link.href=url;link.download='innsikt-'+data.id+'-v'+data.version+'.html';

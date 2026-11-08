@@ -1,0 +1,105 @@
+/* AI Context Platforms pilot. Only visual treatment is here; semantic nodes, geometry and
+   connection direction are supplied by the modular engine and the context adapter. */
+.scene-modular-v1[data-scene-family="context-atlas"]{
+ --acp-ink:var(--pres-fg);
+ --acp-quiet:var(--pres-muted);
+ --acp-accent:var(--pres-accent);
+ --acp-line:color-mix(in srgb,var(--pres-accent) 56%,var(--pres-fg));
+ --acp-glass:color-mix(in srgb,var(--pres-bg) 87%,var(--pres-fg));
+ --acp-glass-edge:color-mix(in srgb,var(--pres-fg) 24%,var(--pres-accent));
+ --acp-muted-panel:color-mix(in srgb,var(--pres-bg) 89%,var(--pres-accent));
+ --acp-glow:color-mix(in srgb,var(--pres-accent) 26%,transparent);
+ --acp-shadow:color-mix(in srgb,var(--pres-bg) 35%,transparent);
+}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-decor{opacity:1;stroke:none;fill:none;pointer-events:none}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-track{stroke:var(--acp-line);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-edge[data-relation="updates"] .mc-edge-track,
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-edge[data-relation="supports"] .mc-edge-track{stroke-dasharray:8 9;stroke-width:2.8}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-edge[data-relation="informs"] .mc-edge-track{stroke-width:2.6}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-arrow-head{fill:var(--acp-line)}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-title{font:800 54px var(--font-display);letter-spacing:-1.7px}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-subtitle{font:500 20px var(--font-body)}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-eyebrow{font:750 18px var(--font-body);letter-spacing:3.5px}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-heading{filter:none}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-layer-grid{opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-layer-glow{opacity:.02}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-layer-image{opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-aura-center{stop-color:var(--pres-accent);stop-opacity:.065}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-aura-middle{stop-color:var(--pres-accent);stop-opacity:.02}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-aura-end{stop-color:var(--pres-accent);stop-opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-floor-start{stop-color:var(--pres-accent);stop-opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-floor-end{stop-color:var(--pres-accent);stop-opacity:.015}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-world-grid{stroke:var(--pres-accent);stroke-width:1.2;opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-orbit-ring{stroke:var(--acp-line);stroke-width:1.2;opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-ribbon{stroke:var(--acp-line);stroke-width:2;opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-particle{fill:var(--pres-accent);opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-card-depth{fill:var(--acp-shadow);opacity:.05}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-card-panel{fill:var(--acp-glass);stroke:var(--acp-glass-edge);stroke-width:1.6}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-icon-plate{fill:var(--acp-muted-panel);stroke:var(--acp-glass-edge);stroke-width:1}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-icon{opacity:.87}
+.present-frame[data-tone="strong"] .scene-modular-v1[data-scene-family="context-atlas"] .acp-icon{filter:grayscale(1) brightness(0) invert(1)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-card-title{font:740 23px var(--font-display);fill:var(--acp-ink);letter-spacing:-.35px}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-card-detail{font:520 16px var(--font-body);fill:var(--acp-quiet)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-step .acp-card-title{font-size:20px}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-step-index-ring{fill:none;stroke:var(--acp-accent);stroke-width:1.25;opacity:.33}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-outcome .acp-card-panel{fill:var(--acp-muted-panel)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-outcome .acp-icon-plate{fill:var(--acp-glass)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-depth{fill:var(--pres-accent);opacity:.04}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-stack{fill:var(--acp-muted-panel);stroke:var(--acp-glass-edge);stroke-width:1.4}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-glass{fill:color-mix(in srgb,var(--pres-bg) 79%,var(--pres-accent));stroke:var(--acp-line);stroke-width:2}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-lightline{stroke:var(--pres-accent);stroke-width:2;opacity:.55;fill:none;stroke-linecap:round}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-marker{fill:var(--pres-accent)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-title{font:790 30px var(--font-display);fill:var(--acp-ink);letter-spacing:-.7px}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-lead{font:520 17px var(--font-body);fill:var(--acp-quiet)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-pulse{fill:var(--pres-accent)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-facet .acp-card-panel{fill:color-mix(in srgb,var(--pres-bg) 64%,var(--pres-accent));stroke:color-mix(in srgb,var(--pres-fg) 24%,var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-facet .acp-card-title{font-size:22px}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-section-text{font:730 14px var(--font-body);fill:var(--acp-quiet);letter-spacing:2px}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-section-stroke{fill:var(--pres-accent)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-period-panel{fill:var(--acp-muted-panel);stroke:var(--acp-glass-edge);stroke-width:1.4}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-period-text{font:690 16px var(--font-body);fill:var(--acp-ink)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-governance-panel{fill:var(--acp-muted-panel);stroke:var(--acp-glass-edge);stroke-width:1}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-governance-title{font:740 16px var(--font-body);fill:var(--acp-ink)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-governance-item{font:560 16px var(--font-body);fill:var(--acp-quiet)}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-guard-dot{fill:var(--pres-accent);opacity:.75}
+/* Illustrated: grouped translucent surfaces, richer stroke balance and controlled depth. */
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"]{
+ --acp-glass:color-mix(in srgb,var(--pres-bg) 72%,var(--pres-accent));
+ --acp-glass-edge:color-mix(in srgb,var(--pres-fg) 31%,var(--pres-accent));
+ --acp-muted-panel:color-mix(in srgb,var(--pres-bg) 78%,var(--pres-accent));
+ --acp-line:color-mix(in srgb,var(--pres-fg) 28%,var(--pres-accent));
+}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-card-depth{opacity:.17}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-depth{opacity:.14}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-stack{filter:drop-shadow(0 10px 14px var(--acp-glow))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-glass{filter:drop-shadow(0 6px 12px var(--acp-glow))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-card-panel{stroke-width:1.5}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-orbit-ring{opacity:.1}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-world-grid{opacity:.06}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-aura-center{stop-opacity:.14}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-aura-middle{stop-opacity:.055}
+/* Advanced: atmospheric layered platform. All functional text and graph paths remain SVG. */
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"]{
+ --acp-glass:color-mix(in srgb,var(--pres-bg) 83%,var(--pres-accent));
+ --acp-glass-edge:color-mix(in srgb,var(--pres-fg) 23%,transparent);
+ --acp-muted-panel:color-mix(in srgb,var(--pres-bg) 80%,var(--pres-accent));
+ --acp-line:color-mix(in srgb,var(--pres-fg) 20%,var(--pres-accent));
+}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-layer-image{opacity:.13}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-aura-center{stop-opacity:.18}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-aura-middle{stop-opacity:.055}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-floor-end{stop-opacity:.11}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-world-grid{opacity:.16;stroke-width:1.7}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-orbit-ring{opacity:.14;stroke-width:1.7;stroke-dasharray:12 15}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-orbit-ring--outer{opacity:.13;stroke-dasharray:4 15}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-ribbon{opacity:.22;stroke-width:3}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-particle{opacity:.25}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-depth{opacity:.18;filter:drop-shadow(0 24px 19px var(--acp-glow))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-stack{stroke-width:2;filter:drop-shadow(0 14px 18px var(--acp-glow))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-glass{stroke-width:1.8;filter:drop-shadow(0 6px 18px var(--acp-glow))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-depth{opacity:.3}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-panel{stroke-width:1.2;filter:drop-shadow(0 7px 9px var(--acp-glow))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-icon-plate{stroke-width:1.35}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-lightline{stroke-width:3.5;opacity:.85}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-facet .acp-card-panel{fill:color-mix(in srgb,var(--pres-bg) 50%,var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-track{stroke-width:3.5;filter:drop-shadow(0 0 4px var(--acp-glow))}
