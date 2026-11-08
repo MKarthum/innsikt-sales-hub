@@ -61,9 +61,11 @@ const picture={
   ${poly('87,16 100,37 77,36','acp-art-top')}${line('M93 52A35 35 0 0 1 33 73','acp-art-cycle')}
   ${poly('34,85 20,65 44,64','acp-art-top')}${circ(60,52,12,'acp-art-orb')}`
 };
-function render(node,b,esc){
+function render(node,b,esc,assets){
  const motif=node.visual?.motif||'meaning';
- const motifMarkup=Object.prototype.hasOwnProperty.call(picture,motif)?picture[motif]():picture.meaning();
+ const safeMotif=Object.prototype.hasOwnProperty.call(picture,motif)?motif:'meaning';
+ const motifMarkup=picture[safeMotif]();
+ const src=window.InnsiktAssets.src(assets,'context-motif-'+safeMotif);
  const id='acp-vol-'+String(node.id).replace(/[^a-z0-9-]/gi,'-');
  // All dimensions derive from this node's box, so moving/resizing it also moves/resizes the artwork.
  const s=n(Math.min((b.h-4)/100,1.04)),x=n(b.x+7),y=n(b.y+(b.h-100*s)/2);
@@ -72,9 +74,11 @@ function render(node,b,esc){
   <stop offset="0" class="acp-metal-light"/><stop offset=".48" class="acp-metal-mid"/><stop offset="1" class="acp-metal-dark"/></linearGradient></defs>
   <g class="acp-art-ambient">${ellipse(60,55,55,40,'acp-art-halo')}${ellipse(60,84,43,10,'acp-art-base')}</g>
   <g class="acp-art-objects" style="--acp-art-metal:url(#${id})">${motifMarkup}</g>
+  <image class="acp-art-raster" data-asset-id="context-motif-${esc(safeMotif)}" href="${esc(src)}" x="-8" y="-4" width="136" height="110" preserveAspectRatio="xMidYMid meet" aria-hidden="true"/>
  </g>`;
 }
-function hub(b){
+function hub(b,assets,esc){
+ const src=window.InnsiktAssets.src(assets,'context-motif-context');
  const cx=n(b.x+b.w-337),cy=n(b.y+19),w=317,h=105;
  const points=[[28,64],[73,28],[107,80],[144,36],[195,63],[236,19],[276,70],[151,85],[211,96]];
  const edges=[[0,1],[0,2],[1,3],[1,4],[2,3],[2,7],[3,4],[3,5],[3,7],[4,5],[4,6],[4,7],[5,6],[6,8],[7,8]];
@@ -83,6 +87,7 @@ function hub(b){
   <g class="acp-hero-mesh">${edges.map(([a,b])=>line(`M${points[a][0]} ${points[a][1]}L${points[b][0]} ${points[b][1]}`,'acp-hero-link')).join('')}</g>
   <g class="acp-hero-points">${points.map(([x,y],i)=>circ(x,y,i===3?9:i%2===0?5:7,'acp-hero-point')).join('')}</g>
   ${ellipse(151,77,130,15,'acp-hero-ring')}${ellipse(151,77,105,9,'acp-hero-ring acp-hero-ring-inner')}
+  <image class="acp-hero-raster" data-asset-id="context-motif-context" href="${esc(src)}" x="0" y="-6" width="310" height="112" preserveAspectRatio="xMidYMid meet" aria-hidden="true"/>
  </g>`;
 }
 function decoration(b){

@@ -37,6 +37,8 @@ try{
   assert.equal(await contextSlide.locator('[data-edge-id]').count(),10);
   assert.equal(await contextSlide.locator('[data-node-id]').count(),22);
   assert.equal(await contextSlide.locator('.acp-illustration').count(),15,'Fifteen volumetric motif objects');
+  assert.equal(await contextSlide.locator('svg image.acp-art-raster').count(),15,'Fifteen independently replaceable image assets');
+  assert.equal(await contextSlide.locator('svg image.acp-hero-raster').count(),1,'Core knowledge network image');
   assert.equal(await contextSlide.locator('.acp-hero-illustration').count(),1,'One object-anchored knowledge network');
   assert.equal(await contextSlide.locator('.acp-concept').count(),15,
    'Every semantic card owns a conceptual motif independent of art style');

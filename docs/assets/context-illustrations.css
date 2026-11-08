@@ -100,3 +100,30 @@
  fill:color-mix(in srgb,var(--pres-bg) 84%,var(--pres-accent));stroke:color-mix(in srgb,var(--pres-accent) 69%,var(--pres-fg))}
 @media(prefers-reduced-motion:reduce){.scene-modular-v1[data-scene-family="context-atlas"] .acp-illustration *{animation:none!important}}
 
+
+/* Independent, generated image fragments use each node's local SVG coordinate system.
+   Nothing here contains canonical text, arrows or whole-slide pixel geometry. */
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-raster,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-raster{opacity:0;pointer-events:none}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-raster{
+ opacity:.98;filter:drop-shadow(0 1px 6px color-mix(in srgb,var(--pres-accent) 32%,transparent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-objects{opacity:.18;filter:none}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-mesh{opacity:.3}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-points{opacity:.25;filter:none}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration{filter:none}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-ambient{
+ opacity:.2;stroke-width:12;filter:drop-shadow(0 0 4px var(--acp-glow))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-outcome .acp-card-title{font-size:18px}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-card-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 55%,var(--pres-accent));stroke:var(--pres-accent);stroke-width:2}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-facet .acp-card-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 44%,var(--pres-accent));stroke:var(--pres-fg);stroke-width:1.8}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-glass{
+ fill:color-mix(in srgb,var(--pres-bg) 66%,var(--pres-accent));stroke-width:2.4}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-icon{opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-structure{
+ opacity:1;stroke-width:3.6}
+.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster,
+.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-raster{
+ opacity:.83;filter:contrast(1.08) saturate(.92)}

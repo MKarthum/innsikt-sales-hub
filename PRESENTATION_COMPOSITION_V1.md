@@ -87,3 +87,11 @@ De tre stilene har fortsatt identisk semantisk scene og graf. Denne piloten er b
 Hvert motiv velges via `node.visual.motif` og beregnes fra objektets `box`; både illustrasjonen og det faglige objektet følger komposisjonen. Den avanserte stilen bytter intern materialitet og disponering av kortets innhold, men **ikke** kortenes eller pilenes plassering. Motivet kan byttes uten at data, relasjoner eller layout endres. Hver SVG-illustrasjon får `data-illustration-owner` og `data-illustration-motif` for inspeksjon og testing. CSS bruker bare temaroller, slik at skin fortsatt kan byttes.
 
 Dette er tegnet som SVG-komponenter, ikke fotografiske KI-bilder. Det kan gi vesentlig større visuell forskjell og holde redigerbarhet og eksport samlet. Full evaluering av uttrykket bør skje på skjermbilder i både lys og mørk visning.
+
+## Avansert bildegrafikk knyttet til objekter (0.18.126)
+
+Pilotens avanserte stil kombinerer nå vektorfigurer med **16 individuelle, optimaliserte WebP-illustrasjoner**. De er generert som konseptkunst for dette arbeidet og beskåret til gjenbrukbare motiver uten autoritativ tekst. Alle ligger i `docs/assets/library/original/context-motif-*.webp` og er registrert med ID, opphavstype og SHA-256 i `docs/data/visual-assets.json`.
+
+Illustrasjonen velges via det eksisterende `node.visual.motif` og slås opp i ressursregisteret (`context-motif-${motif}`). Hvert motiv tegnes i kortets lokale koordinater, med SVG-grafikk som fallback. Et utskiftet motiv påvirker verken semantisk graf, kortets posisjon eller tekst. Hovednettverket har eget bildeobjekt og følger kontekstrammen. Dette er **ikke** en rasterisert helside eller et bilde som flyter uavhengig av scenen.
+
+Ved videre bearbeiding: erstatt bildets WebP-fil, oppdater sjekksummen i `visual-assets.json`, og kontroller lys/mørk palett og faktisk eksport. Konseptkilden er generert i arbeidet med piloten; kuttede bilder er produksjonsfiler, ikke originale foto eller en endelig illustrasjonsmaster. Unngå å bruke tekst i slike motiver ved senere regenerering.

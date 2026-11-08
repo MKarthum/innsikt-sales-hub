@@ -131,14 +131,14 @@ function coreArt(b){
  <g class="acp-core-art-network">${lines.map(([a,c])=>`<path d="M${points[a].join(' ')}L${points[c].join(' ')}"/>`).join('')}${points.map(([a,c],i)=>`<circle cx="${a}" cy="${c}" r="${i===3?8:5}"/>`).join('')}</g>
  </g>`;
 }
-function coreNode({node,box:b,esc}){
+function coreNode({node,box:b,esc,assets}){
  const c=node.content;
  return nodeRoot(node,'acp-core',
   rect({x:b.x+16,y:b.y+18,w:b.w-8,h:b.h},'acp-core-depth',33)
   +rect({x:b.x+8,y:b.y+8,w:b.w-5,h:b.h},'acp-core-stack',32)
   +rect(b,'acp-core-glass',32)
   +coreArt(b)
-  +(window.InnsiktContextArt?.hub(b)||'')
+  +(window.InnsiktContextArt?.hub(b,assets,esc)||'')
   +`<path class="acp-core-lightline" d="M${N(b.x+34)} ${N(b.y+3)} H${N(b.x+b.w-34)}"/>`
   +`<rect class="acp-core-marker" x="${N(b.x+23)}" y="${N(b.y+29)}" width="5" height="35" rx="2.5"/>`
   +txt(c.title,b.x+47,b.y+50,'acp-core-title',esc)
@@ -158,10 +158,10 @@ function contextCard({node,box:b,esc,assets}){
   +rect(b,'acp-card-panel',20)
   +rect({x:b.x+12,y:b.y+12,w:49,h:b.h-24},'acp-icon-plate',14)
   +conceptArt(node,b,esc)
-  +(window.InnsiktContextArt?.render(node,b,esc)||'')
+  +(window.InnsiktContextArt?.render(node,b,esc,assets)||'')
   +pictogram(c.assetId,{x:ix+6,y:iy+4},assets,esc,35)
   +txt(c.title,tx,titleY,'acp-card-title',esc)
-  +subtext(c.detail,tx,detailY,'acp-card-detail',esc,t==='context-source'?29:t==='context-facet'?24:33,17)
+  +subtext(c.detail,tx,detailY,'acp-card-detail',esc,t==='context-source'?25:t==='context-facet'?24:25,17)
   +pill,esc);
 }
 for(const kind of ['context-person','context-facet','context-source','context-step','context-outcome'])

@@ -609,6 +609,166 @@
       "notes": "Reusable, semantic 24x24 outline pictogram for context-platform architecture; must depict the concept, not a decorative metaphor.",
       "sha256": "46d4a9648aca88a021a8210e392d7aec23a520388c2cfcd76dd101e5f65ed594",
       "purpose": "icon"
+    },
+    {
+      "id": "context-motif-action",
+      "label": "Kontrollert handling",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-action.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "179e680822fff172499e61ec8af93c883447e0c11d27d27c00eca8fbd9cd1b12",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-agents",
+      "label": "KI-agent",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-agents.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "afded7eadcd52da15813244632632450c89e15d658cfdf8826f3ef0bd7294834",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-applications",
+      "label": "Applikasjonslag",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-applications.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "bdf46e193d5eeda5c9f7b68d3a334813b4a796fb33d24c93be169972046899ea",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-boundaries",
+      "label": "Styringsrammer",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-boundaries.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "a61b48014ba565b47db5183b61740d7c2bc4d3a6ad2ba8d53b28b36a0a0a0d26",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-collaboration",
+      "label": "Mennesker og beslutningssituasjon",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-collaboration.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "02bce63fcb3e71b995625f24f19c4f8c9b6fa677eb601ba69f64fd1690cad086",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-context",
+      "label": "Virksomhetens kunnskapsnettverk",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-context.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "73205c0d23feb2c9b3f9086eb7027ae18bd27202547b1be80512c42acbe54933",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-decision",
+      "label": "Beslutning",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-decision.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "79dac1fa1397d7099a769cf46bdb4e5f78ae6f2884907fd22e89556becc321bb",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-delivery",
+      "label": "Mer målrettet handling",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-delivery.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "bd871653018a69500daa47683948afe8fa912bd472f861dd71fb342a0163580e",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-external",
+      "label": "Eksterne data og API",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-external.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "7ee9abfee89c3a374b9e3a7b6fb2440162b93daf913e5be01425d693cf51abc5",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-feedback",
+      "label": "Oppdatert kontekst",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-feedback.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "5731d111f6f827d480a5db42042311f8a8717c596a8b83278f90e8020b6660fc",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-learning",
+      "label": "Læring underveis",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-learning.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "be17157abeb4c278195384944eff3dc1aee6a42ee45265aea00c4477256ae5eb",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-meaning",
+      "label": "Semantiske relasjoner",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-meaning.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "cb25786001e13fc14cc71f161253000b4e7a44638476a16a2a2c2c5af537ed52",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-operations",
+      "label": "Operative systemer",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-operations.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "4e62c159651cb763329c8d7c32ce54b4b356a4ee789b721df49bf462d4a4cb01",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-storage",
+      "label": "Dataplattformer",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-storage.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "a941a161303b410cbd5bafab3db430284070efe8f8f3df400cacf5b7cef90c25",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-timeline",
+      "label": "Operativ situasjon",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-timeline.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "c3ca96608cbebcfa02eb6ca8e13984ac964c347835235bf4725aefc1fc05f645",
+      "purpose": "illustration"
+    },
+    {
+      "id": "context-motif-value",
+      "label": "Bedre beslutninger",
+      "category": "original-figure",
+      "path": "assets/library/original/context-motif-value.webp",
+      "rights": "KI-generert originalillustrasjon for Innsikt-piloten. Ikke fotografi eller varemerke.",
+      "notes": "Beskåret og optimalisert, objektforankret illustrasjonsutsnitt fra konseptmateriale. Ikke kanonisk fagtekst eller relasjonsgraf.",
+      "sha256": "29c671c38fd271d2110e55b1adb7cc3d3f2ca6745a8039a54b9dab1e73945799",
+      "purpose": "illustration"
     }
   ],
   "presentationGroups": [

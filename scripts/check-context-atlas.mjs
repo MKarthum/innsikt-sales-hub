@@ -35,6 +35,8 @@ for(const {html} of rendered){
  assert.equal((html.match(/data-concept-role="/g)||[]).length,15,'One concept illustration is anchored to each factual card');
  assert.ok(html.includes('class="acp-core-art"'),'Core graph artwork must be owned by the context object');
  assert.equal((html.match(/data-illustration-motif="/g)||[]).length,15,'One volumetric illustration per semantic card');
+ assert.equal((html.match(/class="acp-art-raster"/g)||[]).length,15,'Fifteen independently backed imagery layers');
+ assert.ok(html.includes('data-asset-id="context-motif-context"'),'Core's imagery is separately addressable');
  assert.ok(html.includes('class="acp-hero-illustration"'),'Knowledge network must be inside the context object');
  assert.ok(html.includes('class="acp-board-art"'),'Ambient board grid must follow the context object');
  assert.equal((html.match(/class="mc-edge-ambient"/g)||[]).length,10,'Ambient edges must reuse exactly the ten canonical paths');
