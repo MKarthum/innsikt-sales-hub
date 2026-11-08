@@ -74,7 +74,7 @@ function render(node,b,esc,assets){
   <stop offset="0" class="acp-metal-light"/><stop offset=".48" class="acp-metal-mid"/><stop offset="1" class="acp-metal-dark"/></linearGradient></defs>
   <g class="acp-art-ambient">${ellipse(60,55,55,40,'acp-art-halo')}${ellipse(60,84,43,10,'acp-art-base')}</g>
   <g class="acp-art-objects" style="--acp-art-metal:url(#${id})">${motifMarkup}</g>
-  <image class="acp-art-raster" data-asset-id="context-motif-${esc(safeMotif)}" href="${esc(src)}" x="-8" y="-4" width="136" height="110" preserveAspectRatio="xMidYMid meet" aria-hidden="true"/>
+  <image class="acp-art-raster" data-asset-id="context-motif-${esc(safeMotif)}" href="${esc(src)}" x="-8" y="-2" width="116" height="104" preserveAspectRatio="xMidYMid meet" aria-hidden="true"/>
  </g>`;
 }
 function hub(b,assets,esc){

@@ -50,6 +50,15 @@ try{
    x=>Number.parseFloat(getComputedStyle(x).opacity)));
   motifOpacity.push(await contextSlide.locator('.acp-concept-structure').first().evaluate(
    x=>Number.parseFloat(getComputedStyle(x).opacity)));
+  if(style==='rich-image'){
+   const clearances=await contextSlide.locator('.acp-art-raster').evaluateAll(images=>images.map(image=>{
+    const node=image.closest('.acp-node'),title=node?.querySelector('.acp-card-title');
+    if(!title)return -999;
+    return Math.round(title.getBoundingClientRect().left-image.getBoundingClientRect().right);
+   }));
+   assert.ok(clearances.length===15&&clearances.every(gap=>gap>=3),
+    'Rendered illustrations must not overlap their semantic card titles: '+JSON.stringify(clearances));
+  }
   await contextSlide.screenshot({path:output+'/'+file});
  }
  assert.deepEqual(advancedArtwork,[0,0,1],'Advanced artwork must be structurally and visibly exclusive to the advanced style');
