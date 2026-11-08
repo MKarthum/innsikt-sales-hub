@@ -20,7 +20,17 @@ vm.runInNewContext(fs.readFileSync('docs/assets/presentation-illustrations.js','
 const canonicalText=sandbox.window.InnsiktPresentationIllustrations.canonicalText;
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 const fileDigest=p=>digest(fs.readFileSync(p));
-const recipeVersions={'rich-image':'6'};
+const recipeCatalog=JSON.parse(fs.readFileSync('docs/data/illustration-recipes.json','utf8'));
+assert.equal(recipeCatalog.schemaVersion,1);
+const recipeIndex=new Map();
+for(const recipe of recipeCatalog.recipes){
+ const key=recipe.sourceSlideId+':'+recipe.styleId;
+ assert.ok(!recipeIndex.has(key),'Duplisert illustrasjonsoppskrift: '+key);
+ assert.match(recipe.generator,/^scripts\/render-[a-z0-9-]+\.py$/,'Ugyldig generator');
+ assert.ok(fs.existsSync(recipe.generator),'Illustrasjonsgenerator mangler: '+recipe.generator);
+ assert.match(String(recipe.version),/^[1-9][0-9]*$/);
+ recipeIndex.set(key,recipe);
+}
 const maxBytes=250000;
 const currentHash=s=>digest(canonicalText(s));
 const byId=new Map(slides.map(s=>[s.id,s]));
@@ -40,8 +50,12 @@ function validate(){
  for(const item of manifest.variants){
   assert.match(item.sourceSlideId,/^[a-z][a-z0-9-]+$/);
   assert.ok(byId.has(item.sourceSlideId),'Ukjent kilde: '+item.sourceSlideId);
-  assert.ok(Object.hasOwn(recipeVersions,item.styleId),'Ukjent stil: '+item.styleId);
-  assert.equal(String(item.renderRecipeVersion),recipeVersions[item.styleId],'Endret bilderegnskap, regenerer: '+item.styleId);
+  const recipe=recipeIndex.get(key);
+  assert.ok(recipe,'Ingen registrert illustrasjonsoppskrift: '+key);
+  assert.ok(byId.get(item.sourceSlideId).visual?.artDirections?.includes(item.styleId),
+   'Visningsvalget mangler i slides.json: '+key);
+  assert.equal(String(item.renderRecipeVersion),String(recipe.version),
+   'Endret bildeoppskrift, regenerer: '+key);
   assert.ok(['awaiting-asset','in-review','approved','rejected'].includes(item.approvalStatus));
   const key=item.sourceSlideId+':'+item.styleId;
   assert.ok(!seen.has(key),'Duplisert stil: '+key);seen.add(key);
@@ -61,7 +75,8 @@ function validate(){
    assert.equal(item.approvedAt,null,'Ugodkjent variant har approvedAt: '+key);
   }
  }
- const dir='docs/assets/illustrations';
+ assert.equal(seen.size,recipeIndex.size,'Hver registrerte oppskrift må ha én manifestoppføring');
+  const dir='docs/assets/illustrations';
  if(fs.existsSync(dir)){
   for(const name of fs.readdirSync(dir)){
    const file=path.posix.join(dir,name);
