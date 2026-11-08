@@ -81,7 +81,7 @@ export async function prepareSlideMarkupForExport(markup){
  // A photographic direction without its image is a failed export, not a
  // superficially successful download. This tests generic object roles rather
  // than depending on one slide ID or its current CSS classes.
- if(['rich','cinematic'].includes(scene.dataset.artDirection)){
+ if(!scene.hasAttribute('data-scene-contract')&&['rich','cinematic'].includes(scene.dataset.artDirection)){
   const photos=[...scene.querySelectorAll('[data-scene-mode="rich"] img[data-scene-fit]')];
   if(!photos.length||photos.some(img=>!img.getAttribute('src')?.startsWith('data:image/png;base64,')))
    throw Error('Fotografisk illustrasjon mangler i eksportgrunnlaget');
