@@ -654,7 +654,7 @@ async function downloadSlideButton(button){
  try{
   const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
   let html=await prep.prepareSlideMarkupForExport(rendered);
-  if(item.visual?.scene==='context-platforms'&&/data-art-direction="(?:cinematic|rich)"/.test(html)){
+  if(!html.includes('data-scene-contract="1"')&&item.visual?.scene==='context-platforms'&&/data-art-direction="(?:cinematic|rich)"/.test(html)){
    const native=await import('./context-native-export.js?v='+encodeURIComponent(D.meta.version));
    html=await native.flattenNativeScene(html,tone);
   }
@@ -709,7 +709,8 @@ function slideWithDesign(slide,html){
 }
 function slideMarkup(s,index,deckId,notes=false,showNumbers=false){
  const position={index,total:D.pages.presentationDecks[deckId].slides.length,showNumbers};
- if(artDirection(s)==='rich-image'&&s.visual?.artDirections?.includes('rich-image')){
+ const sharedScene=['context-platforms','insight-ecosystem'].includes(s.visual?.scene);
+ if(!sharedScene&&artDirection(s)==='rich-image'&&s.visual?.artDirections?.includes('rich-image')){
   const image=window.InnsiktPresentationIllustrations?.render(s,artDirection(s),presentationIllustrationState,esc);
   if(image)return slideWithDesign(s,image);
  }
@@ -719,7 +720,7 @@ function slideMarkup(s,index,deckId,notes=false,showNumbers=false){
  }
  if(s.type==='visual'){
   let html=window.InnsiktSlideVisuals.render(s,esc,{...position,businessSignals:D.businessSignals,assets:D.visualAssets,diagrams:D.learning.diagrams});
-  if(artDirection(s)==='rich-image'&&s.visual?.artDirections?.includes('rich-image')){
+  if(!sharedScene&&artDirection(s)==='rich-image'&&s.visual?.artDirections?.includes('rich-image')){
    html=html.slice(0,-6)+'<span class="cp-image-review-status" role="status">'+esc(D.pages.slideLibraryUi.imagePending)+'</span></div>';
   }
   return slideWithDesign(s,html);
