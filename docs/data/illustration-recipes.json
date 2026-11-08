@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Genereringsoppskrifter uten fagtekst. slides.json eier innholdet; hver recipe er en selvstendig layout, men deler illustrasjon_kit.",
+  "description": "Teknisk register for kildestyrte bildeoppskrifter. Fagtekst og figurenes betydning eies utelukkende av slides.json.",
   "recipes": [
     {
       "sourceSlideId": "ai-context-platforms-2027",
