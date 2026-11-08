@@ -55,6 +55,7 @@ function validate(){
  for(const item of manifest.variants){
   assert.match(item.sourceSlideId,/^[a-z][a-z0-9-]+$/);
   assert.ok(byId.has(item.sourceSlideId),'Ukjent kilde: '+item.sourceSlideId);
+  const key=item.sourceSlideId+':'+item.styleId;
   const recipe=recipeIndex.get(key);
   assert.ok(recipe,'Ingen registrert illustrasjonsoppskrift: '+key);
   assert.ok(byId.get(item.sourceSlideId).visual?.artDirections?.includes(item.styleId),
@@ -62,7 +63,6 @@ function validate(){
   assert.equal(String(item.renderRecipeVersion),String(recipe.version),
    'Endret bildeoppskrift, regenerer: '+key);
   assert.ok(['awaiting-asset','in-review','approved','rejected'].includes(item.approvalStatus));
-  const key=item.sourceSlideId+':'+item.styleId;
   assert.ok(!seen.has(key),'Duplisert stil: '+key);seen.add(key);
   assert.equal(item.assetId,'presentation-'+key.replace(':','-'));
   if(item.approvalStatus==='approved'){
