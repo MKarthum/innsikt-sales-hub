@@ -24,7 +24,7 @@ const rendered=['standard','rich','rich-image'].map((style,i)=>{
  for(const [group] of [['consumers'],['facets'],['sources'],['cycle'],['outcomes']])
   for(const item of slide.visual[group]){
    assert.ok(html.includes(esc(item.label)),style+' missed '+item.label);
-   for(const part of item.detail.split(/\\s+/).filter(Boolean))assert.ok(html.includes(esc(part).replace('&amp;','&amp;'))||html.includes(esc(item.detail)),style+' missing detail '+part);
+   for(const part of item.detail.split(/\s+/).filter(Boolean))assert.ok(html.includes(esc(part).replace('&amp;','&amp;'))||html.includes(esc(item.detail)),style+' missing detail '+part);
   }
  return {html,geometry:Array.from(plan.geometry.values())};
 });
