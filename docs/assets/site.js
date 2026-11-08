@@ -861,7 +861,7 @@ function showSlide(){
  const themeSelector=document.getElementById('present-tone-mode');if(themeSelector)themeSelector.value=presentationThemeMode;
  const artSelector=document.getElementById('present-art-mode');if(artSelector){
   const alternatives=s.visual?.artDirections||[];
-  for(const option of artSelector.options)option.disabled=option.value!=='standard'&&!alternatives.includes(option.value);
+  for(const option of Array.from(artSelector.options||[]))option.disabled=option.value!=='standard'&&!alternatives.includes(option.value);
   artSelector.value=artDirection(s);
   const picker=artSelector.closest?.('[data-art-picker]');if(picker)picker.hidden=!alternatives.length;
  }
