@@ -66,15 +66,19 @@ jobs:
           python3 - <<'PY'
           import json
           import pathlib
+          from datetime import date
           p=pathlib.Path('docs/data/site.json')
           site=json.loads(p.read_text())
-          assert site['version']=='0.18.105', 'Versjonen må oppdateres før ny publisering'
-          site.update(version='0.18.106',released='2026-11-08',reviewed='2026-11-08')
+          old=site['version']
+          segments=old.split('.')
+          assert len(segments)==3 and all(x.isdecimal() for x in segments)
+          next_version='.'.join(segments[:2]+[str(int(segments[2])+1)])
+          site.update(version=next_version,released=date.today().isoformat(),reviewed=date.today().isoformat())
           p.write_text(json.dumps(site,indent=2,ensure_ascii=False)+'\n')
           p=pathlib.Path('docs/index.html')
           html=p.read_text()
-          assert html.count('v=0.18.105')>=10, 'Uventet cache-versjon'
-          p.write_text(html.replace('v=0.18.105','v=0.18.106'))
+          assert html.count('v='+old)>=10, 'Uventet cache-versjon'
+          p.write_text(html.replace('v='+old,'v='+next_version))
           PY
       - name: Komplett statisk kvalitetskontroll
         run: node scripts/check.mjs
@@ -85,7 +89,8 @@ jobs:
           git add docs/data/site.json docs/index.html docs/data/presentation-illustrations.json
           git add -f docs/assets/illustrations/ai-context-platforms-2027-rich-image.webp media/illustrations/masters/ai-context-platforms-2027-rich-image.png
           git diff --cached --quiet && exit 0
-          git commit -m 'release 0.18.106: slankere figurer og antialiasing'
+          CURRENT_VERSION=$(python3 -c "import json;print(json.load(open('docs/data/site.json'))['version'])")
+          git commit -m "release ${CURRENT_VERSION}: generert og validert kontekstfigur"
           git push origin HEAD:main
       - name: Spor feilet bilderegenerering
         if: failure()
