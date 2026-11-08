@@ -1,4 +1,4 @@
-name: Figurbibliotek: forhåndsvisning og publisering
+name: 'Figurbibliotek: forhåndsvisning og publisering'
 on:
   push:
     paths:
