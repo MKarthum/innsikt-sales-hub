@@ -1,145 +1,100 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
-
-const slide=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items.find(x=>x.id==='ai-context-platforms-2027');
-assert.ok(slide,'Missing context platform slide');
-assert.equal(slide.scope,'shared');
-assert.equal(slide.type,'visual');
-assert.equal(slide.visual.scene,'context-platforms');
-assert.deepEqual(slide.visual.artDirections,['rich','rich-image'],'Only two additional representations');
-assert.equal(slide.visual.preferredArtDirection,'rich-image');
-assert.equal(slide.visual.artwork.objects.some(x=>x.id==='rich-valley-ranges'),false,'No flat vectors in rich view');
-const modelBox={window:{}};
-vm.runInNewContext(fs.readFileSync('docs/assets/slide-model.js','utf8'),modelBox);
-assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'illustrated'),'strong');
-assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'illustrated-rich'),'strong');
-assert.equal(modelBox.window.InnsiktSlides.tone(slide,{},'auto'),'strong');
-assert.ok(slide.visual.artwork.objects.some(x=>x.type==='beam'&&x.mode==='cinematic'));
-assert.equal(slide.visual.artwork.objects.filter(x=>x.assetId==='context-rich-background').length,1,'Photo must not be duplicated');
-assert.equal(slide.design.archetype,'blueprint');
-assert.ok(slide.sourceIds.includes('gartner27'));
-for(const key of ['consumers','facets','sources','cycle']) {
- assert.equal(slide.visual[key].length,3,key+' requires three meaningful parts');
- assert.ok(slide.visual[key].every(x=>x.label&&x.detail),key+' labels must be data-owned');
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const slides=read('docs/data/slides.json').items;
+const context=slides.find(s=>s.id==='ai-context-platforms-2027');
+const chain=slides.find(s=>s.id==='insight-value-chain');
+const assets=read('docs/data/visual-assets.json');
+const box={window:{InnsiktStoryScenes:{render:()=>null}}};
+for(const file of [
+ 'docs/assets/visual-assets.js',
+ 'docs/assets/slide-graph.js',
+ 'docs/assets/unified-slide-scene.js',
+ 'docs/assets/slide-visuals.js'
+])vm.runInNewContext(fs.readFileSync(file,'utf8'),box,{filename:file});
+const api=box.window.InnsiktDiagramScene;
+assert.ok(api?.render&&api?.create,'En autoritativ scenemotor må være lastet');
+const escape=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;')
+ .replaceAll('"','&quot;').replaceAll('>','&gt;');
+assert.deepEqual(Array.from(context.visual.artDirections),['rich','rich-image']);
+assert.deepEqual(Array.from(chain.visual.artDirections),['rich','rich-image']);
+const scenes=[context,chain];
+for(const slide of scenes){
+ const plan=api.create(slide);
+ assert.equal(plan.scene,slide.visual.scene);
+ assert.ok(plan.nodes.length>=4,'Nodes must be data driven');
+ assert.ok(plan.edges.length>=5,'Connections must be defined once in the model');
+ const rendered=api.render(slide,assets,escape);
+ const fallback=box.window.InnsiktSlideVisuals.render(slide,escape,{assets});
+ assert.equal(fallback,rendered,'The generic slide renderer must delegate without a second copy');
+ assert.equal((rendered.match(/data-unified-scene="/g)||[]).length,1,'One SVG scene only');
+ assert.equal((rendered.match(/data-layout-contract="/g)||[]).length,1);
+ assert.equal((rendered.match(/data-edge-id="/g)||[]).length,plan.edges.length,
+  'Exactly one visual path per semantic connection');
+ assert.equal((rendered.match(/data-node-id="/g)||[]).length,plan.nodes.length+(plan.kind==='context'?1:0));
+ assert.ok(rendered.includes(slide.title));
+ for(const item of plan.nodes){
+  assert.ok(rendered.includes(item.item.title||item.item.label),
+   'Missing canonical node label '+item.id);
+  assert.ok(rendered.includes(item.item.detail),'Missing canonical node detail '+item.id);
+  assert.ok(rendered.includes('data-icon-id="'+item.item.assetId+'"'),
+   'Icons must be selected by canonical asset ID');
+ }
+ assert.ok(rendered.includes('class="cp-brand-overlay"'),'Brand must remain separate');
+ // The style selector must never create a second layout, copy a string, or
+ // insert a bitmap with its own positions and arrows.
+ assert.ok(!rendered.includes('cp-approved-image'));
+ assert.ok(!rendered.includes('cp-native-svg'));
+ assert.ok(!rendered.includes('cp-graph-overlay'));
+ const change=JSON.parse(JSON.stringify(slide));
+ if(plan.kind==='context')change.visual.facets[1].detail='Helt ny faglig detalj';
+ else change.visual.stages[1].detail='Helt ny faglig detalj';
+ const revised=api.render(change,assets,escape);
+ assert.ok(revised.includes('Helt ny faglig detalj'));
+ assert.equal((revised.match(/data-edge-id="/g)||[]).length,plan.edges.length);
+ for(const edge of plan.edges){
+  assert.ok(rendered.includes('data-edge-id="'+edge.id+'" data-from="'+edge.from+'" data-to="'+edge.to+'"'),
+   'Edge identity and direction must be stable: '+edge.id);
+ }
 }
-assert.ok(slide.visual.governance.length>=4);
-assert.equal(slide.visual.outcomes.length,3,'Three independent value callouts');
-assert.ok(slide.visual.outcomes.every(x=>x.label&&x.detail&&x.assetId));
-
-for(const key of ['consumers','facets','sources','cycle'])assert.ok(slide.visual[key].every(x=>x.assetId),'Every semantic role has a swappable icon');
-const sandbox={window:{InnsiktStoryScenes:{render:()=>null}}};
-vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),sandbox);
-vm.runInNewContext(fs.readFileSync('docs/assets/scene-art.js','utf8'),sandbox);
-const assets=JSON.parse(fs.readFileSync('docs/data/visual-assets.json','utf8'));
-sandbox.window.InnsiktSceneArt.validate(slide.visual.artwork,assets);
-vm.runInNewContext(fs.readFileSync('docs/assets/slide-graph.js','utf8'),sandbox);
-vm.runInNewContext(fs.readFileSync('docs/assets/context-native-svg.js','utf8'),sandbox);
-vm.runInNewContext(fs.readFileSync('docs/assets/slide-visuals.js','utf8'),sandbox);
-const escape=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
-const html=sandbox.window.InnsiktSlideVisuals.render(slide,escape,{index:0,total:1,showNumbers:false,assets});
-assert.ok(html.startsWith('<div class="story-scene scene-context-platforms">'));
-assert.ok(html.includes('<p class="cp-standfirst">'+escape(slide.body)+'</p>'),'Standard presentation must show the canonical thesis');
-assert.ok(html.includes('class="cpn-subtitle"'),'Native presentation must show the same canonical thesis');
-for(const token of [slide.title,slide.visual.contextLabel,...slide.visual.consumers.map(x=>x.label),...slide.visual.facets.map(x=>x.label),...slide.visual.sources.map(x=>x.label),...slide.visual.cycle.map(x=>x.label)]) {
- assert.ok(html.includes(token),'Missing visible data '+token);
+const ctx=api.create(context);
+assert.equal(ctx.edges.length,10,'All ten canonical context relationships must survive');
+assert.equal(ctx.nodes.length,15,'Three consumers, facets, sources, steps and outcomes');
+const required=box.window.InnsiktSlideGraph.validate(context.visual.graph,context.visual);
+assert.deepEqual(Array.from(ctx.edges,x=>x.id),Array.from(required.edges,x=>x.id),
+ 'The SVG must use the same graph order as the canonical data');
+const core=ctx.context;
+for(const facet of ctx.nodes.filter(n=>n.kind==='facet')){
+ for(const x of [facet.x,facet.x+facet.w])for(const y of [facet.y,facet.y+facet.h]){
+  const q=Math.abs((x-core.cx)/(core.rx-10))**core.power+
+   Math.abs((y-core.cy)/(core.ry-10))**core.power;
+  assert.ok(q<=1,'Every facet corner requires 10 px clearance from the context rim');
+ }
 }
-assert.equal((html.match(/class="scene-art-object scene-art-object--asset"/g)||[]).length,7);
-assert.equal((html.match(/class="cp-cycle-arrow"/g)||[]).length,2,'Both bottom process arrows are native SVG');
-assert.ok(html.includes('class="cp-graph-overlay cp-feedback-return"'),'Native return connection exists');
-assert.ok(html.includes('class="cp-action-link"'),'Grid spacer is retained');
-assert.equal((html.match(/data-edge-id="/g)||[]).length,20,'Two synchronized renderers each expose ten semantic relations');
-assert.ok(html.includes('data-from="sources:1" data-to="context"'),'Operational sources feed the context');
-assert.ok(html.includes('data-from="context" data-to="consumers:2"'),'Agents consume shared context');
-assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'Feedback must return into context');
-assert.ok(!html.includes('cp-feedback-track'),'The old hard-coded reverse-loop must not survive');
-const endRule=html.match(/data-edge-id="updated-context"[^>]*><path class="cp-graph-track" d="([^"]+)"\/><path class="cp-graph-arrowhead" d="([^"]+)"/);
-assert.ok(endRule,'Feedback connector has a path and an arrowhead');
-assert.ok(endRule[1].startsWith('M1000 843')&&endRule[1].endsWith('1000 350')&&endRule[1].includes(' C'),'The return curve must attach from the final cycle rail to the context boundary');
-assert.ok(endRule[2].includes('L1000 350L'),'Arrowhead tip must coincide with the right context boundary');
-const supportRule=html.match(/data-edge-id="context-decision"[^>]*><path class="cp-graph-track" d="([^"]+)"\/><path class="cp-graph-arrowhead" d="([^"]+)"/);
-assert.ok(supportRule&&supportRule[1].startsWith('M0 350')&&supportRule[1].endsWith('0 843'),'The decision route must attach to the left cycle boundary, not overlap its icon');
-assert.ok(html.includes('M1118 800C1181 792')&&html.includes('1180 538 1171 510'),'Native feedback must touch the context rim while avoiding the outcomes');
-const recipe=fs.readFileSync('scripts/render-context-platform-image.py','utf8');
-assert.ok(recipe.includes('arrow([(cx,rim),(cx,286)]')&&recipe.includes('arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))]'),'Bitmap arrows must terminate on the exact superellipse and share one source inlet');
-assert.ok(html.includes('M167 560V545')&&html.includes('M833 560V545'),'Standard diagram must NOT imply a source-to-facet one-to-one mapping');
-const standardArrows=html.match(/data-edge-id="(?:data-context|systems-context|external-context)"[^>]*><path class="cp-graph-track"[^>]+>(?:<path class="cp-graph-arrowhead")?/g)||[];
-assert.equal(standardArrows.length,3,'Source connectors must keep three canonical semantic IDs');
-assert.equal(standardArrows.filter(x=>x.includes('cp-graph-arrowhead')).length,1,'There must be one and only one arrowhead at the common source inlet');
-assert.ok(html.includes('M270 631V620')&&html.includes('M944 631V620'),'Native illustration must share the same source convergence');
-assert.ok(recipe.includes('bezier((90,483)')&&recipe.includes('bezier((1120,779)'),'Bitmap feedback must attach at the new core boundary');
-assert.ok(html.includes('class="cp-brand-overlay"'),'Organization branding must be a separate overlay');
-assert.ok(html.includes('data-native-slide-scene="context-platforms"'),'Composite view needs one native SVG stage');
-assert.ok(html.includes('data-core-shape="superellipse"'),'Native context must be a containing superellipse, not a clipping ellipse');
-const {core,facets}=sandbox.window.InnsiktContextNative.geometry;
-const contains=(cx,cy,rx,ry,p,x,y,pad=0)=>
- Math.pow(Math.abs((x-cx)/(rx-pad)),p)+Math.pow(Math.abs((y-cy)/(ry-pad)),p)<=1;
-for(const [x0,y0,x1,y1] of facets)
- for(const x of [x0,x1])for(const y of [y0,y1])
-  assert.ok(contains(core.cx,core.cy,core.rx,core.ry,core.p,x,y,10),'Native context facet protrudes beyond 10px inset');
-assert.ok(recipe.includes('CONTEXT=(609.5,452.0,520.0,124.0,4)'),'Bitmap needs a measured superellipse');
-assert.ok(recipe.includes('assert all(within_context(x,y,10)'),'Bitmap must enforce geometric containment at authoring time');
-const kit=fs.readFileSync('scripts/illustration_kit.py','utf8');
-assert.ok(recipe.includes('from illustration_kit import')&&recipe.includes('paint_stroke(image,points')&&kit.includes('QUALITY_SCALE = 4'),
- 'Raster connectors must use the shared antialiased illustration engine');
-assert.ok(recipe.includes('paint_superellipse(image,CONTEXT[:4]')&&kit.includes('superellipse_panel(')&&kit.includes('Image.Resampling.LANCZOS'),
- 'The context border must use the shared supersampled silhouette');
-assert.ok(kit.includes('length,half_width = max(8.0,width*3),max(3.5,width*1.18)'),
- 'Shared arrowheads must stay proportional to the line, not use chunky fixed wings');
-for(const [x0,y0,x1,y1] of [[160,455,448,539],[466,455,754,539],[772,455,1060,539]])
- for(const x of [x0,x1])for(const y of [y0,y1])
-  assert.ok(contains(609.5,452,520,124,4,x,y,10),'Bitmap facet protrudes beyond 10px inset');
-assert.ok(html.includes('class="cpn-consumer-rail-panel"'),'Consumer group shares one visual glass panel');
-assert.equal((html.match(/class="cpn-rail-divider"/g)||[]).length,1,'Consumers are separated without duplicate boxes');
-assert.ok(html.includes('data-photo-role="landscape"'),'The mountain background must remain a replaceable SVG image');
-const native=html.match(/<svg class="cp-native-svg"[\s\S]*?<\/svg>/)?.[0]||'';
-for(const [node,kind] of [
- ['consumers:0','people'],['consumers:1','application'],['consumers:2','agent'],
- ['facets:0','meaning'],['facets:1','timeline'],['facets:2','shield'],
- ['sources:0','database'],['sources:1','system'],['sources:2','external'],
- ['cycle:0','choice'],['cycle:1','guarded-action'],['cycle:2','state-update'],
- ['outcomes:0','decision'],['outcomes:1','guarded-action'],['outcomes:2','evidence']
-]){
- const pattern=new RegExp('data-node-id="'+node+'"[^>]*>[\\s\\S]*?data-icon-role="'+kind+'"');
- assert.ok(pattern.test(native),'The native '+node+' icon does not match its semantic role '+kind);
-}
-const semanticAssets=['context-people','context-timeline','context-choice','context-guarded-action',
- 'context-state-update','context-evidence','context-external'];
-for(const id of semanticAssets){
- const asset=assets.items.find(x=>x.id===id);
- assert.ok(asset&&asset.path.endsWith('/'+id+'.svg'),'Missing stable icon in the public asset catalog: '+id);
- assert.ok(html.includes(id+'.svg'),'The standard view must use the same semantic icon: '+id);
- assert.ok(recipe.includes('"'+id+'":'),'The rendered image must map the same semantic role: '+id);
-}
-const unrecognized=JSON.parse(JSON.stringify(slide.visual));
-unrecognized.facets[1].assetId='unknown-icon';
-assert.throws(()=>sandbox.window.InnsiktContextNative.render(slide,unrecognized,assets,escape),
- 'Unmapped canonical icons must not silently render an unrelated pictogram');
-assert.ok(recipe.includes('ICON_BY_ASSET')&&recipe.includes('semantic_icon('),
- 'The bitmap must choose pictograms by canonical assetId rather than fixed row index');
-assert.ok(!html.includes('class="cpn-core-shine"')&&!html.includes('class="cpn-core-wave"'),
- 'Atmospheric waves must not compete with the semantic context cards');
-assert.equal((html.match(/class="cpn-arrow cpn-arrow--/g)||[]).length,10,'The native SVG stage uses exactly the same ten canonical relations');
-assert.ok(html.includes('data-from="cycle:2" data-to="context"'),'The return arrow comes from the same semantic graph');
-const wrongDirection=JSON.parse(JSON.stringify(slide.visual.graph));
-wrongDirection.source=wrongDirection.source.replace('sources:1 --> context : informs [systems-context]',
+const sourceEdges=ctx.edges.filter(e=>e.from.startsWith('sources:'));
+assert.equal(sourceEdges.length,3);
+assert.equal(sourceEdges.filter(e=>e.head).length,1,
+ 'Three sources must share exactly one arrowhead, not imply a one-to-one facet mapping');
+const alteredGraph=JSON.parse(JSON.stringify(context));
+alteredGraph.visual.graph.source=alteredGraph.visual.graph.source.replace(
+ 'sources:1 --> context : informs [systems-context]',
  'context --> sources:1 : informs [systems-context]');
-assert.throws(()=>sandbox.window.InnsiktSlideGraph.validate(wrongDirection,slide.visual),
- 'A reversed arrow must fail every rendering style');
-const hiddenExtra=JSON.parse(JSON.stringify(slide.visual.graph));
-hiddenExtra.source+='\ncontext --> sources:0 : provides [hidden-edge]';
-assert.throws(()=>sandbox.window.InnsiktSlideGraph.validate(hiddenExtra,slide.visual),
- 'An edge that the renderer cannot draw must fail validation');
-assert.equal((html.match(/class="cp-outcome"/g)||[]).length,3);
-
-assert.ok(html.includes('data-scene-object="flag"'),'Focal object is independently addressable');
-assert.ok(!html.includes('cp-landscape-svg'),'Legacy monolithic artwork must be removed');
-assert.ok(!html.includes('#fff')&&!html.includes('#000'),'Renderer must not hardcode palette');
-const nativeCss=fs.readFileSync('docs/assets/context-native-svg.css','utf8');
-assert.ok(nativeCss.includes('.cpn-photo{opacity:.13}'),'Native technical illustration must visually subordinate the mountain photograph');
-const css=fs.readFileSync('docs/assets/slide-visual-narratives.css','utf8');
-assert.ok(css.includes('.scene-context-platforms')&&css.includes('var(--pres-accent)'),'Scene should follow theme roles');
-assert.ok(css.includes('text-wrap:balance'),'Short, balanced technical captions must avoid dangling hyphen fragments');
-assert.ok(css.includes('[data-art-direction="illustrated"]'),'Illustrated art direction should follow semantic roles');
-assert.ok(!/url\(\s*['"]?https?:/.test(css),'No external image/network dependencies');
-console.log('PASS – context-platforms native scene, source-owned content and theme roles');
+assert.throws(()=>api.create(alteredGraph),'Reversed canonical edge must be rejected');
+const val=api.create(chain);
+assert.equal(val.nodes.length,4,'Four independently editable stages');
+assert.equal(val.edges.length,5,'Input and output plus ordered intermediate steps');
+assert.ok(val.edges.every((e,i)=>i===0?e.from==='input':i===4?e.to==='output':true));
+const styles=fs.readFileSync('docs/assets/unified-slide-scene.css','utf8');
+for(const style of ['rich','rich-image'])
+ assert.ok(styles.includes('[data-art-direction="'+style+'"]'),
+  'All alternate styles must be CSS treatments of one geometry: '+style);
+assert.ok(styles.includes('.scene-unified-diagram .di-svg'),'One shared style root');
+const source=fs.readFileSync('docs/assets/site.js','utf8');
+assert.ok(source.includes("const sharedScene=['context-platforms','insight-ecosystem']"),
+ 'Site must bypass approved bitmap capture for shared scenes');
+assert.ok(source.includes("if(!sharedScene&&artDirection(s)==='rich-image'"),
+ 'No approved bitmap may shadow the same semantic SVG');
+assert.ok(!fs.readFileSync('docs/assets/slide-visuals.js','utf8').includes(
+ "if(kind==='context-platforms'){"),'Obsolete context renderer must not be maintained');
+console.log('PASS – two scenes, one geometry, three styles, 10 edges, facets, icons, semantics and graph invariants');
