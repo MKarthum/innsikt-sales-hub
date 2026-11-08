@@ -19,12 +19,13 @@ try{
   const role=await scene.getAttribute('data-editorial'),focus=await scene.getAttribute('data-design-focus');
   assert.equal(role,s.design.archetype,'Editorial archetype propagated: '+s.id);
   assert.equal(focus,s.design.focus,'Focal role propagated: '+s.id);
-  const approvedRaster=await scene.locator('img.cp-approved-image').count()===1;
-  if(!approvedRaster&&s.id!=='ai-context-platforms-2027')
+  const sharedScene=await scene.locator('svg.di-svg[data-layout-contract="1"]').count()===1;
+  if(sharedScene){
+   assert.ok(['ai-context-platforms-2027','insight-value-chain'].includes(s.id));
+   assert.equal(await scene.locator('.di-kicker').count(),1,
+    'Canonical cue belongs in the shared vector scene: '+s.id);
+  }else{
    assert.equal(await scene.locator('.scene-eyebrow').count(),1,'Slide eyebrow is present: '+s.id);
-  if(approvedRaster){
-   assert.ok(await scene.locator('img.cp-approved-image').getAttribute('data-image-sha'),
-    'Approved bitmap must have verified provenance: '+s.id);
   }
   const geometry=await scene.evaluate(el=>{
    const r=el.getBoundingClientRect();
@@ -34,7 +35,7 @@ try{
   });
   assert.ok(Math.abs(geometry.w/geometry.h-16/9)<.03,'16:9 slide geometry: '+s.id);
   assert.ok(geometry.shadow.includes('inset'),'Design accent rail should be visible: '+s.id);
-  if(!approvedRaster&&s.id!=='ai-context-platforms-2027')assert.ok(parseFloat(geometry.marker)>=12,'Native design signature should be visible: '+s.id);
+  if(!sharedScene)assert.ok(parseFloat(geometry.marker)>=12,'Native design signature should be visible: '+s.id);
   assert.ok(geometry.excessW<=3&&geometry.excessH<=3,'No slide clipping: '+s.id);
   tested.add(role);
   if(idx%11===0||s.type==='architecture'&&s.id==='architecture-fabric') {
@@ -70,16 +71,9 @@ try{
   assert.equal(await platform.getAttribute('data-art-direction'),style);
   const screenshot=await platform.screenshot({path:'artifacts/visual-pilot/context-platforms-'+style+'.png'});
   shots.push(screenshot.toString('base64'));
-  if(style==='rich'){
-   const asset=platform.locator('[data-scene-object="rich-mountain-background"] img');
-   await asset.evaluate(img=>img.decode());
-   assert.ok(await asset.evaluate(img=>img.naturalWidth>0));
-  }
-  if(style==='rich-image'){
-   const art=platform.locator('img.cp-approved-image');
-   await art.evaluate(img=>img.decode());
-   assert.equal(await art.evaluate(img=>img.naturalWidth),1600);
-  }
+  assert.equal(await platform.locator('svg.di-svg[data-layout-contract="1"]').count(),1);
+  assert.equal(await platform.locator('[data-edge-id]').count(),10);
+  assert.equal(await platform.locator('[data-node-id]').count(),16);
  }
  const separations=await page.evaluate(async shots=>{
   const load=async encoded=>{
@@ -101,7 +95,7 @@ try{
  },shots);
  assert.ok(separations.every(d=>d>4),'Every selected style must be visibly distinct: '+JSON.stringify(separations));
  await selector.selectOption('standard');
- assert.equal(await platform.locator('.cp-core-head h3').textContent(),'Virksomhetskontekst');
+ assert.equal(await platform.locator('.di-context-title').textContent(),'Virksomhetskontekst');
  assert.deepEqual(errors,[],'Browser runtime errors');
  console.log('PASS – '+slides.length+' standalone slides with editorial roles, 10 archetypes, mobile-safe 16:9, dark/light and CSS-only company skin');
 }finally{await browser.close()}
