@@ -1,0 +1,102 @@
+/* Progressive semantic illustrations. Only the advanced treatment shows 3D motifs.
+   Basic and illustrated keep the same graph, object coordinates and factual copy. */
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-illustration,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-illustration,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-board-art{opacity:0;pointer-events:none}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-wire,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-gleam{stroke:var(--pres-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-gleam{stroke:var(--pres-fg);stroke-width:3}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-floor-glow,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-robot-glow{fill:var(--pres-accent);filter:drop-shadow(0 0 9px var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-floor-glow{opacity:.36}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-ambient .acp-art-halo{fill:var(--pres-accent);opacity:.16}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-ambient .acp-art-base{fill:var(--pres-bg);stroke:var(--pres-accent);stroke-width:2;opacity:.83}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-ring{stroke:var(--pres-accent);stroke-width:2;fill:none;opacity:.66}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-orb{fill:var(--pres-accent);stroke:var(--pres-fg);stroke-width:1.4;filter:drop-shadow(0 0 3px var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-solid,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-top,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-portrait-face,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-diamond,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-shield,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-bar{fill:color-mix(in srgb,var(--pres-accent) 55%,var(--pres-fg));stroke:var(--pres-accent);stroke-width:1.6}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-face,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-portrait-body,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-robot-head,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-robot-ear,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-storage,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-screen,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-glass{fill:color-mix(in srgb,var(--pres-bg) 32%,var(--pres-accent));stroke:var(--pres-accent);stroke-width:2}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-side,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-diamond-left,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-shield-inner,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-robot-neck,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-robot-visor,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-terminal{fill:color-mix(in srgb,var(--pres-bg) 72%,var(--pres-accent));stroke:var(--pres-fg);stroke-width:1.5}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-tile,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-chip,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-robot-eye{fill:var(--pres-fg);stroke:var(--pres-accent);stroke-width:1.3}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-portrait-back,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-portrait-shadow{fill:color-mix(in srgb,var(--pres-bg) 45%,var(--pres-accent));stroke:var(--pres-fg);stroke-width:1.4}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-portrait-outline,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-wire-ring,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-orb-ring,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-meridian,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-check,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-cycle,
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-trajectory{stroke:var(--pres-fg);fill:none;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-world{fill:color-mix(in srgb,var(--pres-accent) 34%,var(--pres-bg));stroke:var(--pres-fg);stroke-width:2}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-metal-light{stop-color:var(--pres-fg);stop-opacity:.95}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-metal-mid{stop-color:var(--pres-accent);stop-opacity:.45}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-metal-dark{stop-color:var(--pres-bg);stop-opacity:.88}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-aura{fill:var(--pres-accent);opacity:.12}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-disk{fill:none;stroke:var(--pres-accent);stroke-width:2;opacity:.62}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-link{fill:none;stroke:var(--pres-accent);stroke-width:2.8;opacity:.9}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-point{fill:var(--pres-fg);stroke:var(--pres-accent);stroke-width:4}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-ring{stroke:var(--pres-accent);stroke-width:2;fill:none;opacity:.62}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-board-grid{stroke:var(--pres-accent);stroke-width:1.3;opacity:.16;fill:none}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-board-led{stroke:var(--pres-accent);stroke-width:3;opacity:.7}
+/* Illustrated is a strong vector/diagram language, not a faint icon atop the same card. */
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-card-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 66%,var(--pres-accent));stroke:var(--pres-accent);stroke-width:1.8}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept{
+ filter:drop-shadow(0 0 8px var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-structure{
+ opacity:.85;stroke-width:3.6}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-volume{opacity:.55}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-art-volume{opacity:.6}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-art-network{opacity:.88}
+/* Advanced uses a different *internal* presentation of the same node, not a new node layout. */
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-illustration,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-board-art{opacity:1}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration{
+ filter:drop-shadow(0 0 13px color-mix(in srgb,var(--pres-accent) 64%,transparent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-concept,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-icon,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-icon-plate,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-art{opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-title,
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-detail{transform:translateX(40px)}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-title{font-size:19px;font-weight:800}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-detail{font-size:15px;font-weight:520}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-glass{
+ stroke:var(--pres-accent);stroke-width:3;fill:color-mix(in srgb,var(--pres-bg) 77%,var(--pres-accent));
+ filter:drop-shadow(0 0 18px color-mix(in srgb,var(--pres-accent) 43%,transparent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-facet .acp-card-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 49%,var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 66%,var(--pres-accent));stroke:var(--pres-accent);stroke-width:1.6;
+ filter:drop-shadow(0 0 10px color-mix(in srgb,var(--pres-accent) 22%,transparent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-objects{
+ filter:drop-shadow(0 0 5px var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-points{
+ filter:drop-shadow(0 0 9px var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-track{
+ stroke-width:3.8;filter:drop-shadow(0 0 5px var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-ambient{
+ stroke-width:15;opacity:.38;filter:drop-shadow(0 0 8px var(--pres-accent))}
+/* Keep factual labels readable in both palette families. */
+.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-panel{
+ fill:color-mix(in srgb,var(--pres-bg) 84%,var(--pres-accent));stroke:color-mix(in srgb,var(--pres-accent) 69%,var(--pres-fg))}
+@media(prefers-reduced-motion:reduce){.scene-modular-v1[data-scene-family="context-atlas"] .acp-illustration *{animation:none!important}}
+

@@ -29,22 +29,28 @@ try{
  assert.deepEqual(await selector.locator('option').evaluateAll(xs=>xs.map(x=>x.value)),['standard','rich','rich-image']);
  const positions=[];
  const motifOpacity=[];
+ const advancedArtwork=[];
  for(const [style,file] of [['standard','context-standard.png'],['rich','context-photo.png'],['rich-image','context-final-image.png']]){
   await selector.selectOption(style);
   assert.equal(await contextSlide.getAttribute('data-art-direction'),style);
   assert.equal(await contextSlide.locator('svg.mc-svg').count(),1);
   assert.equal(await contextSlide.locator('[data-edge-id]').count(),10);
   assert.equal(await contextSlide.locator('[data-node-id]').count(),22);
+  assert.equal(await contextSlide.locator('.acp-illustration').count(),15,'Fifteen volumetric motif objects');
+  assert.equal(await contextSlide.locator('.acp-hero-illustration').count(),1,'One object-anchored knowledge network');
   assert.equal(await contextSlide.locator('.acp-concept').count(),15,
    'Every semantic card owns a conceptual motif independent of art style');
   assert.equal(await contextSlide.locator('svg image.mc-layer-image').count(),0,
    'No absolute, slide-wide atmosphere image may shadow the semantic scene');
   positions.push(await contextSlide.locator('.acp-card-panel').evaluateAll(rects=>rects.map(r=>
    ['x','y','width','height'].map(key=>r.getAttribute(key)).join(':')).join('|')));
+  advancedArtwork.push(await contextSlide.locator('.acp-illustration').first().evaluate(
+   x=>Number.parseFloat(getComputedStyle(x).opacity)));
   motifOpacity.push(await contextSlide.locator('.acp-concept-structure').first().evaluate(
    x=>Number.parseFloat(getComputedStyle(x).opacity)));
   await contextSlide.screenshot({path:output+'/'+file});
  }
+ assert.deepEqual(advancedArtwork,[0,0,1],'Advanced artwork must be structurally and visibly exclusive to the advanced style');
  assert.equal(positions[0],positions[1],'Illustrated objects must not drift from the plain scene');
  assert.equal(positions[1],positions[2],'Advanced objects must not drift from the illustrated scene');
  assert.ok(motifOpacity[0]<.01&&motifOpacity[1]>.1&&motifOpacity[2]>.8,

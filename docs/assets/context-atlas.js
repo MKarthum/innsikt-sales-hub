@@ -138,6 +138,7 @@ function coreNode({node,box:b,esc}){
   +rect({x:b.x+8,y:b.y+8,w:b.w-5,h:b.h},'acp-core-stack',32)
   +rect(b,'acp-core-glass',32)
   +coreArt(b)
+  +(window.InnsiktContextArt?.hub(b)||'')
   +`<path class="acp-core-lightline" d="M${N(b.x+34)} ${N(b.y+3)} H${N(b.x+b.w-34)}"/>`
   +`<rect class="acp-core-marker" x="${N(b.x+23)}" y="${N(b.y+29)}" width="5" height="35" rx="2.5"/>`
   +txt(c.title,b.x+47,b.y+50,'acp-core-title',esc)
@@ -157,6 +158,7 @@ function contextCard({node,box:b,esc,assets}){
   +rect(b,'acp-card-panel',20)
   +rect({x:b.x+12,y:b.y+12,w:49,h:b.h-24},'acp-icon-plate',14)
   +conceptArt(node,b,esc)
+  +(window.InnsiktContextArt?.render(node,b,esc)||'')
   +pictogram(c.assetId,{x:ix+6,y:iy+4},assets,esc,35)
   +txt(c.title,tx,titleY,'acp-card-title',esc)
   +subtext(c.detail,tx,detailY,'acp-card-detail',esc,t==='context-source'?29:t==='context-facet'?24:33,17)
@@ -180,6 +182,7 @@ api.registerDecoration('context-atlas',({geometry,scene})=>{
  const b=geometry.get('context');
  const id='acp-'+scene.id.replace(/[^a-z0-9-]/g,'');
  return `<defs><radialGradient id="${id}-halo"><stop offset="0" class="acp-aura-center"/><stop offset=".65" class="acp-aura-middle"/><stop offset="1" class="acp-aura-end"/></radialGradient></defs>
- <ellipse class="acp-aura" cx="${N(b.x+b.w/2)}" cy="${N(b.y+b.h/2)}" rx="${N(b.w*.66)}" ry="${N(b.h*1.65)}" fill="url(#${id}-halo)"/>`;
+ <ellipse class="acp-aura" cx="${N(b.x+b.w/2)}" cy="${N(b.y+b.h/2)}" rx="${N(b.w*.66)}" ry="${N(b.h*1.65)}" fill="url(#${id}-halo)"/>
+ ${window.InnsiktContextArt?.decoration(b)||''}`;
 });
 })();

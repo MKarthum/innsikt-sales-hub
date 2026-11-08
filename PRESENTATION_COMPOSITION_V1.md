@@ -75,3 +75,15 @@ Brukerutprøvingen avdekket to problemer: objektene flyttet seg uten faglig grun
 - **Regresjonskrav:** 22 identiteter, 10 kanoniske piler og identisk SVG-markup på tvers av stiler. Kontroll av lys og mørk palett og faktisk eksport beholdes.
 
 Læringen er generell, men er foreløpig implementert på ett lysbilde. En eventuelt ny komposisjon er et eget faglig/redaksjonelt valg, ikke en automatisk effekt av å velge en illustrasjonsstil.
+
+## Avansert illustrasjonsnivå i repo (0.18.125)
+
+De tre stilene har fortsatt identisk semantisk scene og graf. Denne piloten er begrenset til AI Context Platforms, men det avanserte nivået har nå **en separat, utvidbar illustrasjonsmotor** (`docs/assets/context-illustrations.js`) og stilark (`context-illustrations.css`). Det er ikke et ferdig, statisk lysbildebilde.
+
+- **Enkel:** Diagram, ikonografi og kanoniske piler uten dekorative objektillustrasjoner.
+- **Illustrert:** Kraftigere farger, vektormotiver, relasjonslys og tydeligere kunnskapsnettverk.
+- **Avansert:** 15 ulike semantiske 2,5D-illustrasjoner, blant annet mennesker, applikasjonsstabler, KI-agent, semantisk nettverk, tidslinje, regelverk, dataplattformer, operative systemer, API-kilder, beslutning, kontrollert handling og mulige gevinster. Et større kunnskapsnettverk og lokale banelinjer eies av hovedobjektet.
+
+Hvert motiv velges via `node.visual.motif` og beregnes fra objektets `box`; både illustrasjonen og det faglige objektet følger komposisjonen. Den avanserte stilen bytter intern materialitet og disponering av kortets innhold, men **ikke** kortenes eller pilenes plassering. Motivet kan byttes uten at data, relasjoner eller layout endres. Hver SVG-illustrasjon får `data-illustration-owner` og `data-illustration-motif` for inspeksjon og testing. CSS bruker bare temaroller, slik at skin fortsatt kan byttes.
+
+Dette er tegnet som SVG-komponenter, ikke fotografiske KI-bilder. Det kan gi vesentlig større visuell forskjell og holde redigerbarhet og eksport samlet. Full evaluering av uttrykket bør skje på skjermbilder i både lys og mørk visning.

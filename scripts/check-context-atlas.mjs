@@ -5,10 +5,11 @@ const slides=JSON.parse(fs.readFileSync('docs/data/slides.json','utf8')).items;
 const slide=slides.find(x=>x.id==='ai-context-platforms-2027');
 const assets=JSON.parse(fs.readFileSync('docs/data/visual-assets.json','utf8'));
 const ctx={window:{}};
-for(const file of ['visual-assets','slide-graph','visual-composition','context-atlas'])
+for(const file of ['visual-assets','slide-graph','visual-composition','context-illustrations','context-atlas'])
  vm.runInNewContext(fs.readFileSync('docs/assets/'+file+'.js','utf8'),ctx,{filename:file+'.js'});
 const api=ctx.window.InnsiktVisualComposition,esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const graph=ctx.window.InnsiktSlideGraph.validate(slide.visual.graph,slide.visual);
+assert.equal(ctx.window.InnsiktContextArt.motifs.length,15,'Fifteen distinct semantic motifs');
 const compositions=['context-architecture','context-architecture','context-architecture'];
 const rendered=['standard','rich','rich-image'].map((style,i)=>{
  const plan=api.compile(slide,style);
@@ -33,6 +34,9 @@ assert.deepEqual(rendered[1].geometry,rendered[2].geometry);
 for(const {html} of rendered){
  assert.equal((html.match(/data-concept-role="/g)||[]).length,15,'One concept illustration is anchored to each factual card');
  assert.ok(html.includes('class="acp-core-art"'),'Core graph artwork must be owned by the context object');
+ assert.equal((html.match(/data-illustration-motif="/g)||[]).length,15,'One volumetric illustration per semantic card');
+ assert.ok(html.includes('class="acp-hero-illustration"'),'Knowledge network must be inside the context object');
+ assert.ok(html.includes('class="acp-board-art"'),'Ambient board grid must follow the context object');
  assert.equal((html.match(/class="mc-edge-ambient"/g)||[]).length,10,'Ambient edges must reuse exactly the ten canonical paths');
 }
 const sceneSvg=html=>html.slice(html.indexOf('<svg class="mc-svg"'),html.indexOf('</svg>')+6);
@@ -47,6 +51,9 @@ const core=api.compile(slide,'rich-image').geometry.get('context');
 const moved=structuredClone(slide);moved.visual.composition.overrides={'rich-image':{positions:{context:{y:core.y+15}}}};
 assert.notEqual(api.compile(moved,'rich-image').edges[0].path,api.compile(slide,'rich-image').edges[0].path);
 const css=fs.readFileSync('docs/assets/context-atlas.css','utf8');
+const conceptCss=fs.readFileSync('docs/assets/context-illustrations.css','utf8');
+assert.ok(conceptCss.includes('data-composition-level="rich-image"'));
+assert.ok(!/#[0-9a-f]{3,8}\\b/i.test(conceptCss),'Concept palette must use theme tokens');
 assert.ok(css.includes('var(--pres-accent)')&&css.includes('data-composition-level="rich-image"'));
 assert.ok(!/#[0-9a-f]{3,8}\\b/i.test(css));
 console.log('PASS – AI Context Platforms: 22 objekter, 10 kanoniske relasjoner, én stabil komposisjon, objektillustrasjoner, dataendring, ankerflytting, temastøtte');
