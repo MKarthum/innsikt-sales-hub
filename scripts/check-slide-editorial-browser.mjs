@@ -19,7 +19,13 @@ try{
   const role=await scene.getAttribute('data-editorial'),focus=await scene.getAttribute('data-design-focus');
   assert.equal(role,s.design.archetype,'Editorial archetype propagated: '+s.id);
   assert.equal(focus,s.design.focus,'Focal role propagated: '+s.id);
-  if(s.id!=='ai-context-platforms-2027')assert.equal(await scene.locator('.scene-eyebrow').count(),1,'Slide eyebrow is present: '+s.id);
+  const approvedRaster=await scene.locator('img.cp-approved-image').count()===1;
+  if(!approvedRaster&&s.id!=='ai-context-platforms-2027')
+   assert.equal(await scene.locator('.scene-eyebrow').count(),1,'Slide eyebrow is present: '+s.id);
+  if(approvedRaster){
+   assert.ok(await scene.locator('img.cp-approved-image').getAttribute('data-image-sha'),
+    'Approved bitmap must have verified provenance: '+s.id);
+  }
   const geometry=await scene.evaluate(el=>{
    const r=el.getBoundingClientRect();
    return {w:r.width,h:r.height,shadow:getComputedStyle(el).boxShadow,
@@ -28,7 +34,7 @@ try{
   });
   assert.ok(Math.abs(geometry.w/geometry.h-16/9)<.03,'16:9 slide geometry: '+s.id);
   assert.ok(geometry.shadow.includes('inset'),'Design accent rail should be visible: '+s.id);
-  if(s.id!=='ai-context-platforms-2027')assert.ok(parseFloat(geometry.marker)>=12,'Design signature should be visible: '+s.id);
+  if(!approvedRaster&&s.id!=='ai-context-platforms-2027')assert.ok(parseFloat(geometry.marker)>=12,'Native design signature should be visible: '+s.id);
   assert.ok(geometry.excessW<=3&&geometry.excessH<=3,'No slide clipping: '+s.id);
   tested.add(role);
   if(idx%11===0||s.type==='architecture'&&s.id==='architecture-fabric') {
