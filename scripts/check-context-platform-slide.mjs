@@ -79,11 +79,13 @@ for(const [x0,y0,x1,y1] of facets)
   assert.ok(contains(core.cx,core.cy,core.rx,core.ry,core.p,x,y,10),'Native context facet protrudes beyond 10px inset');
 assert.ok(recipe.includes('CONTEXT=(609.5,452.0,520.0,124.0,4)'),'Bitmap needs a measured superellipse');
 assert.ok(recipe.includes('assert all(within_context(x,y,10)'),'Bitmap must enforce geometric containment at authoring time');
-assert.ok(recipe.includes('AA_SCALE=4')&&recipe.includes('Image.Resampling.LANCZOS')&&recipe.includes('draw_aa_connector('),
- 'Raster connectors must be antialiased before 1600x900 export');
-assert.ok(recipe.includes('context_outline(steps=720)')&&recipe.includes('d.line(p+[p[0]]')&&recipe.includes('width=2*S'),
- 'The context border must be sampled at high resolution with a fine line');
-assert.ok(recipe.includes('dl=12;wing=5'),'Raster arrowheads must be visibly lighter than the previous 18x8 form');
+const kit=fs.readFileSync('scripts/illustration_kit.py','utf8');
+assert.ok(recipe.includes('from illustration_kit import')&&recipe.includes('paint_stroke(image,points')&&kit.includes('QUALITY_SCALE = 4'),
+ 'Raster connectors must use the shared antialiased illustration engine');
+assert.ok(recipe.includes('paint_superellipse(image,CONTEXT[:4]')&&kit.includes('superellipse_panel(')&&kit.includes('Image.Resampling.LANCZOS'),
+ 'The context border must use the shared supersampled silhouette');
+assert.ok(kit.includes('length,half_width = max(8.0,width*3),max(3.5,width*1.18)'),
+ 'Shared arrowheads must stay proportional to the line, not use chunky fixed wings');
 for(const [x0,y0,x1,y1] of [[160,455,448,539],[466,455,754,539],[772,455,1060,539]])
  for(const x of [x0,x1])for(const y of [y0,y1])
   assert.ok(contains(609.5,452,520,124,4,x,y,10),'Bitmap facet protrudes beyond 10px inset');
