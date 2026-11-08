@@ -27,18 +27,28 @@ try{
  await contextSlide.waitFor();
  const selector=page.locator('#library-art-mode');
  assert.deepEqual(await selector.locator('option').evaluateAll(xs=>xs.map(x=>x.value)),['standard','rich','rich-image']);
+ const positions=[];
+ const motifOpacity=[];
  for(const [style,file] of [['standard','context-standard.png'],['rich','context-photo.png'],['rich-image','context-final-image.png']]){
   await selector.selectOption(style);
   assert.equal(await contextSlide.getAttribute('data-art-direction'),style);
   assert.equal(await contextSlide.locator('svg.mc-svg').count(),1);
   assert.equal(await contextSlide.locator('[data-edge-id]').count(),10);
   assert.equal(await contextSlide.locator('[data-node-id]').count(),22);
-  if(style==='rich'||style==='rich-image'){
-   const photo=contextSlide.locator('svg image.mc-layer-image');
-   assert.equal(await photo.count(),1,'Atmosphere is a separate replaceable image layer');
-  }
+  assert.equal(await contextSlide.locator('.acp-concept').count(),15,
+   'Every semantic card owns a conceptual motif independent of art style');
+  assert.equal(await contextSlide.locator('svg image.mc-layer-image').count(),0,
+   'No absolute, slide-wide atmosphere image may shadow the semantic scene');
+  positions.push(await contextSlide.locator('.acp-card-panel').evaluateAll(rects=>rects.map(r=>
+   ['x','y','width','height'].map(key=>r.getAttribute(key)).join(':')).join('|')));
+  motifOpacity.push(await contextSlide.locator('.acp-concept-structure').first().evaluate(
+   x=>Number.parseFloat(getComputedStyle(x).opacity)));
   await contextSlide.screenshot({path:output+'/'+file});
  }
+ assert.equal(positions[0],positions[1],'Illustrated objects must not drift from the plain scene');
+ assert.equal(positions[1],positions[2],'Advanced objects must not drift from the illustrated scene');
+ assert.ok(motifOpacity[0]<.01&&motifOpacity[1]>.1&&motifOpacity[2]>.8,
+  'The three directions must visibly progress from plain to object-illustrated to advanced');
  await selector.selectOption('standard');
  await page.evaluate(()=>{location.hash='#lysbilder'});
  await page.locator('.slide-library-card').first().waitFor();
