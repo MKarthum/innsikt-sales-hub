@@ -40,6 +40,16 @@ Vi har derfor innført sju egne, gjenbrukbare SVG-ikoner: `context-people`, `con
 
 `slides.json` eier hvert `assetId`. `standard` bruker de registrerte SVG-filene direkte. `rich` velger tilsvarende native SVG-piktogram via `assetId`, og `rich-image` velger et tilsvarende Pillow-piktogram via samme ID. Ingen av disse to rendererene skal velge faglige ikoner ut fra radposisjon, og en ukjent ID skal gi feil i stedet for et tilfeldig symbol. Bildeoppskrift v5 krever ny godkjent filhash. Linjetykkelse og farger følger hvert uttrykk, mens betydningen er felles.
 
+## Presis form- og strekgeometri, 8. november 2026
+
+Utgangspunktet for denne revisjonen er *kildekoden på `main`*, ikke en tidligere eksportert Artifact-pakke. I forrige arbeidsrunde ble en gammel portabel pakke feilaktig behandlet som om den var autoritativ. Endringene ble aldri skrevet til repoet, og en ny ZIP kan ikke erstatte en reell kildekodeendring. Kun de versjonerte kildefilene i repoet, og den publiserte bildevarianten som genereres fra dem, kan være leveransegrunnlag for senere kopiering til andre designsystemer.
+
+Den nøkterne `rich`-varianten fungerer som referanse for strekhierarki og komposisjon, mens det ikke er et krav at alle tre visninger har identiske bildepunkter eller farger. Felles kontrakt er grafens ti relasjoner, innfesting på faktiske objekter, synlige underbokser med målbar klaring, og et visuelt skille mellom primær struktur, sekundære forbindelser og dekor.
+
+I `rich` er superellipsen strammet inn uten at underboksene går utenfor 10 px sikkerhetsmargin; pilspissene, rammer og glød er mindre dominerende. I `standard` er rammer, prosesslinjer og pilspisser gjort lettere uten å endre den semantiske grafen. I `rich-image` er superellipsens høyde redusert fra 280 til 248 piksler, og de tre begrepsboksene plassert tilsvarende smalere. Hovedkonturen og hver meningsbærende pil tegnes med 4× antialiasing og skaleres til 1600 × 900 før WebP-publisering; sekundær glød og dekor er tonet ned. Dette retter pikseltrapper ved normal presentasjonsstørrelse og moderat zoom, men et ferdigrendret bilde forblir raster og kan ikke forventes å være uendelig skalerbart. Den native SVG-varianten er fortsatt riktig grunnlag når reell vektoruavhengighet er viktig.
+
+Bildeoppskriften må regenereres og registreres sammen med manifestets hash. Kjøretester kontrollerer både geometri og teknisk eksport i Chromium og WebKit. Ikke vurder dette som visuell brukergodkjenning.
+
 ## Sporbarhet og godkjenning
 
 `docs/assets/presentation-illustrations.js` bygger en normalisert fagmodell med tekster og grafens kanoniske relasjonslinjer, og beregner SHA-256. `docs/data/presentation-illustrations.json` registrerer stil-ID, oppskriftsversjon, `contentHash`, `fileSha256`, masterhash, `approvalStatus`, `approvedAt` og `reviewedBy`. En faglig endring gjør godkjent snapshot utdatert. Endring av logo eller CSS-skin gjør **ikke** det.
