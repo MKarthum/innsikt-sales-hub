@@ -5,6 +5,9 @@ through the normal import/approval pipeline without changing the slide model.
 """
 import json, math, os, pathlib, random, re, sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
+from illustration_kit import (panel as paint_panel, stroke as paint_stroke, bezier as curve_points,
+                              superellipse as ellipse_points, superellipse_panel as paint_superellipse,
+                              contains_superellipse)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs/data/slides.json"
@@ -165,54 +168,20 @@ def soft_glow(visual,blur=20,opacity=1):
         halo.putalpha(halo.getchannel("A").point(lambda n:int(n*opacity)))
     image.alpha_composite(halo)
     image.alpha_composite(visual)
+# Shared drawing API. The context recipe now describes *what* to draw,
+# while illustration_kit owns high-quality drawing and arrowhead geometry.
 def rounded(x0,y0,x1,y1,outline=(174,227,249),fill=(16,45,70),opacity=210,r=24,width=2,glow=None):
-    if glow:
-        glowlayer=layer();g=ImageDraw.Draw(glowlayer)
-        g.rounded_rectangle((x0,y0,x1,y1),radius=r,outline=rgba(glow,54),width=3)
-        image.alpha_composite(glowlayer.filter(ImageFilter.GaussianBlur(11)))
-    n=layer();d=ImageDraw.Draw(n)
-    d.rounded_rectangle((x0,y0,x1,y1),radius=r,fill=rgba(fill,opacity),outline=rgba(outline,183),width=width)
-    image.alpha_composite(n)
+    paint_panel(image,(x0,y0,x1,y1),fill=fill,outline=outline,alpha=opacity,
+                radius=r,stroke_width=width,shadow=glow)
 
-# Pillow draws at whole pixels by default. Supersampling the vector strokes
-# locally prevents stair-step curves and chunky arrowheads at slide magnification.
-AA_SCALE=4
-def draw_aa_connector(points,color,width,alpha,triangle=None):
-    vertices=points+(triangle or [])
-    pad=math.ceil(width*2+5)
-    left=max(0,math.floor(min(x for x,y in vertices)-pad))
-    top=max(0,math.floor(min(y for x,y in vertices)-pad))
-    right=min(W,math.ceil(max(x for x,y in vertices)+pad+1))
-    bottom=min(H,math.ceil(max(y for x,y in vertices)+pad+1))
-    if right<=left or bottom<=top:return
-    high=Image.new("RGBA",((right-left)*AA_SCALE,(bottom-top)*AA_SCALE),(0,0,0,0))
-    d=ImageDraw.Draw(high)
-    tr=lambda p:[((x-left)*AA_SCALE,(y-top)*AA_SCALE) for x,y in p]
-    d.line(tr(points),fill=rgba(color,alpha),width=max(1,round(width*AA_SCALE)),joint="curve")
-    if triangle:
-        d.polygon(tr(triangle),fill=rgba(color,alpha))
-    image.alpha_composite(high.resize((right-left,bottom-top),Image.Resampling.LANCZOS),(left,top))
-
-def connector(points,color=CYAN,width=4,glow=True,alpha=228,triangle=None):
-    p=[(float(x),float(y)) for x,y in points]
-    if glow:
-        n=layer();d=ImageDraw.Draw(n)
-        d.line(p,fill=rgba(color,57),width=max(3,round(width+4)),joint="curve")
-        image.alpha_composite(n.filter(ImageFilter.GaussianBlur(9)))
-    draw_aa_connector(p,color,width,alpha,triangle)
+def connector(points,color=CYAN,width=4,glow=True,alpha=228):
+    paint_stroke(image,points,color,width=width,alpha=alpha,glow=glow)
 
 def arrow(points,color=CYAN,width=4,glow=True,alpha=228):
-    p=[(float(x),float(y)) for x,y in points]
-    x,y=p[-1];px,py=p[-2]
-    theta=math.atan2(y-py,x-px)
-    dl=12;wing=5
-    u=(math.cos(theta),math.sin(theta));side=(-u[1],u[0])
-    left=(x-u[0]*dl+side[0]*wing,y-u[1]*dl+side[1]*wing)
-    right=(x-u[0]*dl-side[0]*wing,y-u[1]*dl-side[1]*wing)
-    connector(p,color,width,glow,alpha,triangle=[left,(x,y),right])
+    paint_stroke(image,points,color,width=width,alpha=alpha,glow=glow,arrow=True)
+
 def bezier(a,b,c,d,n=35):
-    return [((1-t)**3*a[0]+3*(1-t)**2*t*b[0]+3*(1-t)*t*t*c[0]+t**3*d[0],
-             (1-t)**3*a[1]+3*(1-t)**2*t*b[1]+3*(1-t)*t*t*c[1]+t**3*d[1]) for t in (i/n for i in range(n+1))]
+    return curve_points(a,b,c,d,steps=n)
 
 # Superellipse: a compact, measured form with softly squared sides.
 # Validate the 10px inner safety margin at every facet corner.
@@ -220,15 +189,12 @@ CONTEXT=(609.5,452.0,520.0,124.0,4)
 FACET_BOXES=[(160+i*306,455,448+i*306,539) for i in range(3)]
 def within_context(x,y,margin=0):
     cx,cy,rx,ry,n=CONTEXT
-    return (abs((x-cx)/(rx-margin))**n+abs((y-cy)/(ry-margin))**n)<=1
+    return contains_superellipse(cx,cy,rx,ry,n,x,y,margin)
 assert all(within_context(x,y,10) for x0,y0,x1,y1 in FACET_BOXES
            for x in (x0,x1) for y in (y0,y1)), "Kontekstbokser ligger utenfor glassflaten"
 def context_outline(inset=0,steps=360):
     cx,cy,rx,ry,p=CONTEXT
-    rx-=inset;ry-=inset
-    return [(cx+rx*math.copysign(abs(math.cos(t))**(2/p),math.cos(t)),
-             cy+ry*math.copysign(abs(math.sin(t))**(2/p),math.sin(t)))
-            for t in (2*math.pi*i/steps for i in range(steps)) ]
+    return ellipse_points(cx,cy,rx,ry,power=p,inset=inset,steps=steps)
 def context_rim_y(x,top):
     cx,cy,rx,ry,p=CONTEXT
     f=(1-abs((x-cx)/rx)**p)**(1/p)
@@ -367,22 +333,9 @@ for i,x in enumerate(cons):
     arrow([(cx,rim),(cx,286)],LAV,4)
 # The old ellipse clipped the left and right facet cards at their corners.
 # A superellipse keeps the oval concept while giving every card real padding.
-gl=layer();gd=ImageDraw.Draw(gl);gd.polygon(context_outline(),fill=(173,67,238,76))
-image.alpha_composite(gl.filter(ImageFilter.GaussianBlur(17)))
-# Supersample only the context silhouette. Drawing a 4px outline on the final
-# 1600x900 bitmap produced staircase edges when the slide was zoomed.
-S=4
-bounds=(82,320,1137,584)
-bx0,by0,bx1,by1=bounds
-hi=Image.new("RGBA",((bx1-bx0)*S,(by1-by0)*S),(0,0,0,0))
-d=ImageDraw.Draw(hi)
-scale_points=lambda points:[((x-bx0)*S,(y-by0)*S) for x,y in points]
-p=scale_points(context_outline(steps=720))
-d.polygon(p,fill=(44,29,102,225))
-d.line(p+[p[0]],fill=(206,144,255,236),width=2*S,joint="curve")
-inner=scale_points(context_outline(5,steps=720))
-d.line(inner+[inner[0]],fill=(117,189,248,70),width=S,joint="curve")
-image.alpha_composite(hi.resize((bx1-bx0,by1-by0),Image.Resampling.LANCZOS),(bx0,by0))
+paint_superellipse(image,CONTEXT[:4],fill=(44,29,102),outline=(206,144,255),
+                   alpha=225,power=CONTEXT[4],line_width=2,halo=(173,67,238),
+                   second_line=(117,189,248))
 # A meaningful dotted information surface rather than expensive SVG geometry.
 n=layer();d=ImageDraw.Draw(n);rng=random.Random(6)
 for i in range(170):
