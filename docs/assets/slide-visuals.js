@@ -58,6 +58,10 @@ function render(slide,esc,position={}){
  };
 
  const label='<div class="scene-eyebrow">'+esc(slide.cue||'')+'</div>';
+ // All visible geometry, text and semantic routes are owned by ONE scene engine.
+ if(kind==='context-platforms'||kind==='insight-ecosystem')
+  return window.InnsiktDiagramScene.render(slide,position.assets,esc);
+
  if(kind==='analyst-grid')return '<div class="story-scene scene-analysts">'
   +'<div class="scene-topline">'+label+counter+'</div>'
   +'<div class="scene-analysts-layout"><div class="scene-analysts-copy">'
@@ -153,39 +157,6 @@ function render(slide,esc,position={}){
  // Original, portable data+AI scenes. All meaningful text comes from slides.json.
 
  // Reusable context ecosystem: all visible words are owned by slides.json.
- if(kind==='context-platforms'){
-  const tiles=(list,cls)=>list.map((item,i)=>'<div class="cp-tile '+cls+'">'+(item.assetId?'<span class="cp-icon">'+assetImage(item.assetId,'cp-icon-image')+'</span>':'')+'<div class="cp-tile-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></div></div>').join('');
-  const links=()=>'<div class="cp-links" aria-hidden="true"></div>';
-  const actionLink='<div class="cp-action-link" aria-hidden="true"></div>';
-  const outcomes=(v.outcomes||[]).map(item=>'<div class="cp-outcome">'+(item.assetId?assetImage(item.assetId,'cp-outcome-icon'):'')+'<span><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>').join('');
-
-  const graph=window.InnsiktSlideGraph;
-  graph.validate(v.graph,v);
-  const cycle=v.cycle.map((item,i)=>'<div class="cp-cycle-step">'+(item.assetId?assetImage(item.assetId,'cp-cycle-icon'):'')+'<span class="cp-cycle-copy"><strong>'+escs(item.label)+'</strong><small>'+escs(item.detail)+'</small></span></div>'+(i===v.cycle.length-1?'':graph.processArrow(v.graph,i,i+1,escs))).join('');
-  const feedback=graph.renderCanvas(v.graph,v,escs);
-  const scenery=window.InnsiktSceneArt.render(v.artwork,position.assets,escs);
-  const nativeScene=window.InnsiktContextNative.render(slide,v,position.assets,escs);
-  return '<div class="story-scene scene-context-platforms">'
-   +'<div class="cp-landscape" aria-hidden="true">'+scenery+'</div>'
-   +nativeScene
-   +'<header class="cp-heading"><div class="scene-topline">'+label+counter+'</div><div class="cp-title"><h2>'+escs(slide.title)+'</h2><span>'+escs(v.period)+'</span></div><p class="cp-standfirst">'+escs(slide.body)+'</p></header>'
-   +'<div class="cp-diagram" role="group" aria-label="'+escs(v.contextLabel)+'">'
-   +'<section class="cp-consumers" aria-label="Konsumenter">'+tiles(v.consumers,'cp-consumer')+'</section>'
-   +links()
-   +'<section class="cp-context"><div class="cp-core-head"><h3>'+escs(v.contextLabel)+'</h3><p>'+escs(v.contextLead)+'</p></div>'
-   +'<div class="cp-facets">'+tiles(v.facets,'cp-facet')+'</div></section>'
-   +links()
-   +'<section class="cp-sources" aria-label="Kilder og systemer">'+tiles(v.sources,'cp-source')+'</section>'
-   +actionLink
-   +'<section class="cp-cycle" aria-label="Beslutning, kontrollert handling og oppdatert kontekst">'+cycle+'</section>'
-   +'<footer class="cp-governance"><strong>'+escs(v.governanceLabel)+'</strong><span>'+v.governance.map(escs).join(' · ')+'</span></footer>'
-   +feedback
-   +'</div>'
-   +(outcomes?'<aside class="cp-outcomes" aria-label="'+escs(v.outcomesTitle||'Mulig verdi')+'"><small class="cp-outcomes-title">'+escs(v.outcomesTitle||'Mulig verdi')+'</small>'+outcomes+'</aside>':'')
-   +'<div class="cp-brand-overlay" aria-hidden="true"></div>'
-   +'</div>';
- }
-
  if(kind==='context-bridge'){
   const data=v.dataRows.map(x=>'<span>'+escs(x)+'</span>').join('');
   const factors=v.factors.map(x=>'<div class="ai-context-factor"><strong>'+escs(x.name)+'</strong><span>'+escs(x.detail)+'</span></div>').join('');
@@ -216,12 +187,6 @@ function render(slide,esc,position={}){
 
  const special=window.InnsiktStoryScenes.render(slide,{v,top,title,escs,assetImage,block,diagram:position.diagrams?.find(d=>d.id===v.diagramId)});
  if(special)return special;
- if(kind==='insight-ecosystem')return block('ecosystem',top
-  +'<div class="eco-head">'+title+'<p>'+escs(v.subtitle)+'</p></div>'
-  +'<div class="eco-context"><div><small>'+escs(v.inputLabel)+'</small><strong>'+escs(v.input)+'</strong></div><span aria-hidden="true">→</span><div><small>'+escs(v.outputLabel)+'</small><strong>'+escs(v.output)+'</strong></div></div>'
-  +'<div class="eco-flow">'+v.stages.map((x,i)=>'<section class="eco-stage"><div class="eco-stage-top"><span>'+String(i+1).padStart(2,'0')+'</span>'+assetImage(x.assetId,'eco-stage-icon')+'</div><h3>'+escs(x.title)+'</h3><p>'+escs(x.detail)+'</p></section>').join('<span class="eco-link" aria-hidden="true">→</span>')+'</div>'
-  +'<div class="eco-foundation"><small>'+escs(v.foundationLabel)+'</small><div>'+v.guardrails.map(x=>'<span>'+escs(x)+'</span>').join('')+'</div></div>'
-  +'<p class="eco-conclusion">'+escs(v.conclusion)+'</p>');
  if(kind==='impact'){
   if(v.layout==='bridge')return block('impact v4-bridge',top
     +'<div class="v4-bridge-main"><div class="v4-bridge-copy">'+(v.kicker&&v.kicker!==slide.cue?'<span class="v2-impact-kicker">'+escs(v.kicker)+'</span>':'')
