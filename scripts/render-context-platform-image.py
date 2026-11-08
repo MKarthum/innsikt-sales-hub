@@ -199,10 +199,10 @@ def bezier(a,b,c,d,n=35):
     return [((1-t)**3*a[0]+3*(1-t)**2*t*b[0]+3*(1-t)*t*t*c[0]+t**3*d[0],
              (1-t)**3*a[1]+3*(1-t)**2*t*b[1]+3*(1-t)*t*t*c[1]+t**3*d[1]) for t in (i/n for i in range(n+1))]
 
-# Superellipse: an elliptical silhouette with gently squared sides.
-# All three facet cards must fit fully inside, including their outer corners.
-CONTEXT=(609.5,457.0,532.5,140.0,4)
-FACET_BOXES=[(146+i*328,455,449+i*328,539) for i in range(3)]
+# Superellipse: a compact, measured form with softly squared sides.
+# Validate the 10px inner safety margin at every facet corner.
+CONTEXT=(609.5,452.0,520.0,124.0,4)
+FACET_BOXES=[(160+i*306,455,448+i*306,539) for i in range(3)]
 def within_context(x,y,margin=0):
     cx,cy,rx,ry,n=CONTEXT
     return (abs((x-cx)/(rx-margin))**n+abs((y-cy)/(ry-margin))**n)<=1
@@ -338,7 +338,7 @@ txt(d,846,105,v["period"],33,True,LAV)
 txt(d,66,155,slide["body"],21,False,(225,227,244))
 image.alpha_composite(head)
 # Shared consumers rail
-rounded(112,192,1130,286,outline=(214,182,250),fill=(24,43,79),opacity=206,r=27,glow=LAV)
+rounded(112,192,1130,286,outline=(214,182,250),fill=(24,43,79),opacity=206,r=22,glow=LAV)
 for k in (454,790):
     n=layer();d=ImageDraw.Draw(n);d.line((k,210,k,269),fill=(188,205,244,138),width=2);image.alpha_composite(n)
 cons=[170,510,846]
@@ -352,56 +352,63 @@ for i,x in enumerate(cons):
     arrow([(cx,rim),(cx,286)],LAV,5)
 # The old ellipse clipped the left and right facet cards at their corners.
 # A superellipse keeps the oval concept while giving every card real padding.
-gl=layer();gd=ImageDraw.Draw(gl);gd.polygon(context_outline(),fill=(173,67,238,130))
-image.alpha_composite(gl.filter(ImageFilter.GaussianBlur(26)))
-n=layer();d=ImageDraw.Draw(n)
-p=context_outline()
+gl=layer();gd=ImageDraw.Draw(gl);gd.polygon(context_outline(),fill=(173,67,238,76))
+image.alpha_composite(gl.filter(ImageFilter.GaussianBlur(17)))
+# Supersample only the context silhouette. Drawing a 4px outline on the final
+# 1600x900 bitmap produced staircase edges when the slide was zoomed.
+S=4
+bounds=(82,320,1137,584)
+bx0,by0,bx1,by1=bounds
+hi=Image.new("RGBA",((bx1-bx0)*S,(by1-by0)*S),(0,0,0,0))
+d=ImageDraw.Draw(hi)
+scale_points=lambda points:[((x-bx0)*S,(y-by0)*S) for x,y in points]
+p=scale_points(context_outline(steps=720))
 d.polygon(p,fill=(44,29,102,225))
-d.line(p+[p[0]],fill=(206,144,255,248),width=4,joint="curve")
-inner=context_outline(8)
-d.line(inner+[inner[0]],fill=(117,189,248,120),width=2,joint="curve")
-image.alpha_composite(n)
+d.line(p+[p[0]],fill=(206,144,255,236),width=2*S,joint="curve")
+inner=scale_points(context_outline(5,steps=720))
+d.line(inner+[inner[0]],fill=(117,189,248,70),width=S,joint="curve")
+image.alpha_composite(hi.resize((bx1-bx0,by1-by0),Image.Resampling.LANCZOS),(bx0,by0))
 # A meaningful dotted information surface rather than expensive SVG geometry.
 n=layer();d=ImageDraw.Draw(n);rng=random.Random(6)
-for i in range(780):
+for i in range(170):
     xx=rng.uniform(115,1095); yy=rng.uniform(463,550)
     t=(xx-610)/535
     cap=531+20*(1-t*t)+8*math.sin(xx*.032)
     if yy<cap and within_context(xx,yy,15):
-        d.ellipse((xx,yy,xx+1.2,yy+1.2),fill=(155,184,252,rng.randint(25,95)))
+        d.ellipse((xx,yy,xx+1.2,yy+1.2),fill=(155,184,252,rng.randint(18,46)))
 image.alpha_composite(n)
 n=layer();d=ImageDraw.Draw(n)
-txt(d,609,362,v["contextLabel"],37,True,anchor="mt")
-txt(d,609,412,v["contextLead"],20,False,anchor="mt",color=(224,220,247))
+txt(d,609,357,v["contextLabel"],37,True,anchor="mt")
+txt(d,609,406,v["contextLead"],20,False,anchor="mt",color=(224,220,247))
 image.alpha_composite(n)
 # Semantic facets
 for i in range(3):
-    x=146+i*328
-    rounded(x,455,x+303,539,outline=(171,182,255),fill=(18,41,86),opacity=231,r=18,width=2)
+    x=160+i*306
+    rounded(x,455,x+288,539,outline=(171,182,255),fill=(18,41,86),opacity=231,r=16,width=2)
     n=layer();d=ImageDraw.Draw(n);semantic_icon(d,v["facets"][i],x+15,469,LAV)
     txt(d,x+71,468,v["facets"][i]["label"],22,True)
-    wrapped(d,x+71,497,v["facets"][i]["detail"],218,15,(230,230,247))
+    wrapped(d,x+71,497,v["facets"][i]["detail"],203,15,(230,230,247))
     image.alpha_composite(n)
 # All three sources connect to ONE inlet. The joint is visually shared,
 # with only one arrowhead at the context boundary (no stacked arrows).
-SOURCE_TOP=626
-SOURCE_JOIN=611
+SOURCE_TOP=619
+SOURCE_JOIN=603
 connector([(273,SOURCE_TOP),(273,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
 connector([(947,SOURCE_TOP),(947,SOURCE_JOIN),(610,SOURCE_JOIN)],CYAN,5)
 arrow([(610,SOURCE_TOP),(610,context_rim_y(610,False))],CYAN,5)
 for i in range(3):
     x=113+i*337
-    rounded(x,SOURCE_TOP,x+320,SOURCE_TOP+82,outline=(129,219,237),fill=(13,55,77),opacity=225,r=18,glow=(56,153,193))
+    rounded(x,SOURCE_TOP,x+320,SOURCE_TOP+82,outline=(129,219,237),fill=(13,55,77),opacity=225,r=16,glow=(56,153,193))
     n=layer();d=ImageDraw.Draw(n);semantic_icon(d,v["sources"][i],x+19,SOURCE_TOP+19,CYAN)
     txt(d,x+80,SOURCE_TOP+13,v["sources"][i]["label"],20,True)
     wrapped(d,x+80,SOURCE_TOP+44,v["sources"][i]["detail"],229,15,(229,240,247))
     image.alpha_composite(n)
 # Decision/action/results example loop, visibly a separate business flow
-p=bezier((78,483),(10,542),(29,738),(171,778))
+p=bezier((90,483),(12,538),(29,738),(171,778))
 arrow(p,CYAN,5)
-p=bezier((1120,779),(1166,755),(1160,552),(1141,482))
+p=bezier((1120,779),(1160,757),(1172,550),(1129,482))
 arrow(p,CYAN,5)
-rounded(171,735,1120,822,outline=(204,176,248),fill=(24,43,80),opacity=236,r=26,glow=LAV)
+rounded(171,735,1120,822,outline=(204,176,248),fill=(24,43,80),opacity=236,r=21,glow=LAV)
 for i in range(3):
     x=204+i*309
     n=layer();d=ImageDraw.Draw(n);semantic_icon(d,v["cycle"][i],x,757)
@@ -410,7 +417,7 @@ for i in range(3):
     image.alpha_composite(n)
 for x in (460,791):arrow([(x,778),(x+23,778)],LAV,3,glow=False)
 # Right value column floats over landscape
-rounded(1186,334,1548,777,outline=(218,204,248),fill=(10,26,56),opacity=221,r=25,glow=LAV)
+rounded(1186,334,1548,777,outline=(218,204,248),fill=(10,26,56),opacity=221,r=21,glow=LAV)
 n=layer();d=ImageDraw.Draw(n);txt(d,1218,358,v.get("outcomesTitle","Mulig verdi"),29,True)
 d.line((1218,408,1518,408),fill=(198,212,243,140),width=2)
 image.alpha_composite(n)
