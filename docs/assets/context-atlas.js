@@ -134,8 +134,7 @@ function coreNode({node,box:b,esc,assets}){
   +`<path class="acp-core-lightline" d="M${N(b.x+34)} ${N(b.y+3)} H${N(b.x+b.w-34)}"/>`
   +`<rect class="acp-core-marker" x="${N(b.x+23)}" y="${N(b.y+29)}" width="5" height="35" rx="2.5"/>`
   +txt(c.title,b.x+47,b.y+50,'acp-core-title',esc)
-  +txt(c.detail,b.x+47,b.y+75,'acp-core-lead',esc)
-  +`<circle class="acp-core-pulse" cx="${N(b.x+b.w-45)}" cy="${N(b.y+46)}" r="6"/>`,esc);
+  +txt(c.detail,b.x+47,b.y+75,'acp-core-lead',esc),esc);
 }
 api.registerObject('context-hub',{version:1,render:coreNode});
 function contextCard({node,box:b,esc,assets,level}){
