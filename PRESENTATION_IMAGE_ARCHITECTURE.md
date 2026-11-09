@@ -21,7 +21,7 @@ Dette er ikke lenger tre separate diagramrenderere. For disse lysbildene lages d
 
 ## To uavhengige komposisjoner
 
-- `context-platforms`: Kilder, felles virksomhetskontekst, mottakere, beslutningssløyfe og mulige effekter. Den kanoniske grafen i `visual.graph.source` validerer ti retninger og relasjonstyper. Tre kilder har én felles synlig innpil.
+- `context-platforms`: Kilder, felles virksomhetskontekst, mottakere, beslutningssløyfe og mulige effekter. Den kanoniske grafen i `visual.graph.source` validerer ti retninger og relasjonstyper. Tre rettlinjede kildepiler peker til den samme kontekstsonen. De innebærer ingen én-til-én-kobling til fasettene over.
 - `insight-ecosystem`: Et startspørsmål, fire prosesstrinn, mål og tverrgående forutsetninger. Ordningen bestemmes av `visual.stages` i `slides.json`.
 
 Den faglige strukturen er forskjellig, men begge bruker den samme motoren for node-ID-er, SVG, ikoner, tekst, forbindelser, stilvalg og eksport.
@@ -35,6 +35,12 @@ Den faglige strukturen er forskjellig, men begge bruker den samme motoren for no
 5. Valider semantikk, tekstplassering og eksport i Chromium og WebKit.
 
 En ny layout kan kreve noe informasjonsdesign. Å velge en passende komposisjon er fortsatt ikke automatisert. Målet er at ny *teknisk* tegnekode og manuell eksporttilpasning ikke må gjentas for hvert lysbilde.
+
+## Faglig prioritering og visuell retning (9. november 2026)
+
+Kontekstbildet skal forklare **hva kontekst er**, **hva den bygger på**, **hvem som bruker den**, og **hvordan beslutninger og handlinger oppdaterer tilstanden**. Nederste prosessrekke viser mekanisme (beslutning, kontrollert utførelse, ny tilstand). Høyre kolonne skal bare vise *mulige virkninger* (felles forståelse, tryggere KI-bruk, bedre tilpasning), og ikke repetere prosessens steg. Ingen effekt er garantert; utdypingen eies av lysbildets `speakerBase`.
+
+De seks vertikale forbindelsene beregnes fra midten av kilde- og mottakerkortene og er rette. Dette er et bevisst layoutvalg, ikke en begrensning i rutemotoren. De to store Bézier-kurvene på sidene beholdes. Pilhodene for disse og de to korte nederste overgangene plasseres direkte på den kanoniske banen der de er synlige foran objektene. Markøranimasjonen gjenbruker den samme banen. Ekstra, løsrevet nettverksillustrasjon over «Rammer» er fjernet. Den semantiske grafen og komposisjonens øvrige objektplasseringer er uendret.
 
 ## Bevegelse og nedlasting
 
