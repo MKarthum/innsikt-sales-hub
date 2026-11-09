@@ -36,6 +36,12 @@ Den faglige strukturen er forskjellig, men begge bruker den samme motoren for no
 
 En ny layout kan kreve noe informasjonsdesign. Å velge en passende komposisjon er fortsatt ikke automatisert. Målet er at ny *teknisk* tegnekode og manuell eksporttilpasning ikke må gjentas for hvert lysbilde.
 
+## Bevegelse og nedlasting
+
+Kontekstscenen kan vise dekorative signalmarkører som følger de **samme validerte relasjonene** som de statiske pilene. En markør er ikke en ekstra kant i kunnskapsgrafen. I rik stil kombineres markørene med bevegelse i tåkefelt og lysstrømmer, og i de interne illustrasjonene. Verken tekst, kortplassering, relasjonsretning eller pilgeometri animeres.
+
+Bevegelsen styres av `data-motion="on"` på presentasjonsflaten, og respekterer `prefers-reduced-motion`. Offlinelesing av et enkelt lysbilde tilbys som **Animert HTML**, ved å gjenbruke den portable presentasjonseksporten med ett lysbilde. Stilark, bilder og tilstand bygges inn i filen. PNG, JPG, PDF og PowerPoint forblir tilsiktet statiske; bildeeksporten fjerner de dekorative SVG-animasjonene fra en midlertidig eksportkopi. Det levende SVG-diagrammet i portalen endres ikke.
+
 ## Kontroller
 
 `scripts/check-context-platform-slide.mjs` verifiserer kanonisk innhold, node-ID-er, geometri, alle relasjoner, endringer i data og at både komposisjonene bruker én motor.
