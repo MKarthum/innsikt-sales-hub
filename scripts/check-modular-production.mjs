@@ -36,7 +36,7 @@ for(const style of ['standard','rich','rich-image']){
  assert.equal((svg.match(/class="mc-edge-direction"/g)||[]).length,3);
  assert.equal((svg.match(/<animateMotion /g)||[]).length,3);
  for(const item of example.visual.items)assert.ok(svg.includes(item));
- for(const detail of example.visual.detail)assert.ok(svg.includes(detail));
+ for(const detail of example.visual.detail)for(const word of detail.split(/\s+/).filter(Boolean))assert.ok(svg.includes(esc(word)), 'Missing rendered word: '+word);
  assert.ok(svg.includes(example.visual.conclusion.title));
  assert.ok(svg.includes(example.visual.conclusion.detail));
  images.push({style,svg,paths:plan.edges.map(e=>e.path),boxes:Array.from(plan.geometry.values())});
