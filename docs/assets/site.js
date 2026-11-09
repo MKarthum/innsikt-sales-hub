@@ -624,7 +624,7 @@ function singleSlideDownloadMarkup(id=''){
  const ui=D.pages.slideLibraryUi;
  return '<div class="slide-single-download" role="group" aria-label="'+esc(ui.singleExportLabel)+'">'
   +'<strong>'+esc(ui.singleExportLabel)+'</strong>'
-  +[['png','PNG'],['jpg','JPG'],['pdf','PDF'],['pptx','PowerPoint']].map(([format,label])=>
+  +[['png','PNG'],['jpg','JPG'],['pdf','PDF'],['pptx','PowerPoint'],['html',ui.singleAnimatedHtmlLabel]].map(([format,label])=>
     '<button type="button" data-slide-download="'+esc(format)+'"'+(id?' data-slide-download-id="'+esc(id)+'"':'')+' aria-label="Last ned som '+esc(label)+'">'+esc(label)+'</button>'
   ).join('')+'<small>'+esc(ui.singleExportInfo)+'</small></div>';
 }
@@ -655,8 +655,20 @@ async function downloadSlideButton(button){
  try{
   const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
   let html=await prep.prepareSlideMarkupForExport(rendered);
-  const module=await import('./slide-download.js?v='+encodeURIComponent(D.meta.version));
-  await module.downloadSingleSlide({id:item.id,title:item.title,html,tone,format,version:D.meta.version});
+  if(format==='html'){
+   // Reuse the already portable deck exporter for a single animated scene.
+   // The requested animation is explicit even when the preview is paused.
+   await window.InnsiktPresenterExport.exportDeck({
+    id:item.id,label:item.title,notice:'',version:D.meta.version,
+    slides:[html],tones:[tone],transitions:['fade'],motion:'on',
+    motionUi:{label:D.pages.slideLibraryUi.motionLabel,
+     on:D.pages.slideLibraryUi.motionOn,off:D.pages.slideLibraryUi.motionOff},
+    classification:item.classification==='internal'?'internal':'public'
+   },'html');
+  }else{
+   const module=await import('./slide-download.js?v='+encodeURIComponent(D.meta.version));
+   await module.downloadSingleSlide({id:item.id,title:item.title,html,tone,format,version:D.meta.version});
+  }
   toast('Lysbildet er lastet ned.');
  }catch(err){
   toast(D.pages.slideLibraryUi.singleExportError+' '+(err?.message||''));
