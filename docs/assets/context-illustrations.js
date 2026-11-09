@@ -72,6 +72,9 @@ function editorialMotif(motif){
   <path class="acp-editorial-face-back" d="M24 29Q27 15 41 16Q55 18 56 34L52 49Q43 56 31 48Z"/>
   <path class="acp-editorial-person-front" d="M43 89Q43 64 60 57L81 59Q97 64 101 88Z"/>
   <path class="acp-editorial-face-front" d="M55 30Q61 14 77 17Q92 21 92 38L83 55Q67 63 58 49Z"/>
+  <path class="acp-editorial-face-shade" d="M73 19Q87 24 89 38L80 51Q73 54 68 54Q80 43 76 28Z"/>
+  <path class="acp-editorial-face-shade" d="M41 18Q52 20 53 36L48 47Q43 49 40 49Q48 35 41 18Z"/>
+  <path class="acp-editorial-person-seam" d="M55 82Q68 62 80 63M25 76Q35 58 44 60"/>
   <path class="acp-editorial-highlight" d="M63 24Q75 18 84 29M25 34Q29 25 38 25M63 64Q81 64 90 76"/>
   <path class="acp-editorial-glimmer" d="M5 66L14 61M96 22L105 17M95 51L108 48"/>
  </g>`;
@@ -82,7 +85,9 @@ function editorialMotif(motif){
   <path class="acp-editorial-agent-facet" d="M61 13L91 32L61 48L30 32Z"/>
   <path class="acp-editorial-agent-facet acp-editorial-agent-facet--side" d="M61 48L91 32V68L61 88Z"/>
   <path class="acp-editorial-agent-core" d="M61 32L75 42V59L61 70L47 59V42Z"/>
+  <circle class="acp-editorial-agent-light-ring" cx="61" cy="51" r="14"/>
   <circle class="acp-editorial-agent-light" cx="61" cy="51" r="8"/>
+  <circle class="acp-editorial-agent-light-dot" cx="61" cy="51" r="3"/>
   <path class="acp-editorial-highlight" d="M37 36V63L55 74M75 23L83 29M40 25L61 13"/>
   <path class="acp-editorial-glimmer" d="M11 48H23M96 49H108M61 5V12"/>
  </g>`;

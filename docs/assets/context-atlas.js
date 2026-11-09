@@ -206,6 +206,8 @@ api.registerDecoration('context-atlas',({geometry,scene})=>{
   '<radialGradient id="'+id+'-node"><stop offset="0" class="acp-node-inner"/><stop offset=".55" class="acp-node-mid"/><stop offset="1" class="acp-node-outer"/></radialGradient>'+
   '<linearGradient id="'+id+'-veil" x1="0" y1="0" x2=".8" y2="1"><stop offset="0" class="acp-veil-top"/><stop offset=".55" class="acp-veil-mid"/><stop offset="1" class="acp-veil-end"/></linearGradient>'+
   '<radialGradient id="'+id+'-cinema" cx=".45" cy=".52" r=".88"><stop offset="0" class="acp-cinema-core"/><stop offset=".52" class="acp-cinema-middle"/><stop offset="1" class="acp-cinema-edge"/></radialGradient>'+
+  '<linearGradient id="acp-context-card-paint" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0" class="acp-card-paint-top"/><stop offset=".53" class="acp-card-paint-mid"/><stop offset="1" class="acp-card-paint-bottom"/></linearGradient>'+
+  '<linearGradient id="acp-context-core-paint" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0" class="acp-core-paint-top"/><stop offset=".6" class="acp-core-paint-mid"/><stop offset="1" class="acp-core-paint-bottom"/></linearGradient>'+
   '</defs>';
  const atmosphere=definitions+
   '<rect class="acp-ambient-veil" width="1600" height="900" fill="url(#'+id+'-veil)"/>'+
@@ -231,7 +233,7 @@ api.registerDecoration('context-atlas',({geometry,scene})=>{
    '<path d="M-30 835Q560 700 '+cx+' '+num(core.y+core.h*1.35)+' T1640 834"/>'+
   '</g><g class="acp-ambient-particles">'+dust+'</g>';
  const values=Array.from({length:3},(_,i)=>geometry.get('outcomes:'+i));
- const vx=Math.min(...values.map(b=>b.x))-19,vy=Math.min(...values.map(b=>b.y))-45;
+ const vx=Math.min(...values.map(b=>b.x))-19,vy=Math.min(...values.map(b=>b.y))-14;
  const vw=Math.max(...values.map(b=>b.x+b.w))-vx+23,vh=Math.max(...values.map(b=>b.y+b.h))-vy+23;
  const floor='<g class="acp-scene-stage" data-stage-owner="context">'+
    '<path class="acp-scene-stage-shadow" d="M'+num(core.x-45)+' '+num(core.y+core.h+11)+
