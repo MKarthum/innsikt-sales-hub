@@ -387,6 +387,16 @@
 .scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-lumen{stroke:none;opacity:0;filter:none;pointer-events:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-lumen{stroke:none;opacity:0;filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"] .mc-arrow-head{fill:var(--pres-accent);stroke:none}
+/* Direction remains legible in still images and when reduced motion is enabled.
+   The arrowheads are sampled from the very same paths as the moving markers. */
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-direction{
+ fill:color-mix(in srgb,var(--pres-accent) 72%,var(--pres-fg));
+ stroke:none;pointer-events:none;
+}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-direction{
+ fill:color-mix(in srgb,var(--pres-accent) 56%,var(--pres-fg));
+ filter:drop-shadow(0 0 2px color-mix(in srgb,var(--pres-accent) 40%,transparent));
+}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .mc-edge-track{stroke-width:2.8;filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-track{
  stroke-width:3.1;filter:none;stroke:color-mix(in srgb,var(--pres-fg) 36%,var(--pres-accent))}
