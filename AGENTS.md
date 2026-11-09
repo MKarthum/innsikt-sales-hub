@@ -13,7 +13,7 @@ Start alltid med `START_HERE.md`. Les siste `main`, og bruk repoet – aldri gam
 7. **Design én gang.** Bruk delte CSS-komponenter. Ikke dupliser HTML-kort, legg på CSS-overstyringer eller innfør nytt rammeverk uten behov.
 8. **Portabel løsning.** Statisk GitHub Pages, relative ressursstier, ingen ekstern backend eller skjult tracking. Skal kunne overtas av Claude Code/Gemini og flyttes til Webstep.
 9. **Tilgjengelighet.** Kontroller mobil, skjermbredder, tastatur, ikoner, kontrast og lenker. Brandlogoer må ha kilde/bruksvilkår.
-10. **Releasekontrakt.** Øk `site.json.version`, samsvarende CSS/JS-assetversjon, én atomisk flerfilrelease og alle kontroller grønne før publisering.
+10. **Releasekontrakt.** Øk `site.json.version` og samsvarende CSS/JS-assetversjoner. Publiser en konsistent tilstand på `main`, med testresultater og eksplisitte utestede områder. Bruk atomisk flerfilcommit der verktøyet støtter det; oppgi ellers at endringer er fordelt på flere commits. Ikke erklær grønne tester uten at de faktisk er kjørt.
 11. **Faglig vedlikehold.** Vis gjeldende status, ikke implementasjonslogg i brukerrettet tekst. Registrer forbedringer i backlog og dokumenter kontrolltid ved volatile forhold.
 
 ## Vedlikeholdsporter for navigasjon, historier og lysbilder
