@@ -111,8 +111,14 @@ const motionCss=fs.readFileSync('docs/assets/context-illustrations.css','utf8');
 const siteJs=fs.readFileSync('docs/assets/site.js','utf8');
 assert.ok(sceneRenderer.includes('markerUnits="userSpaceOnUse"'),
  'Arrowheads should not multiply the line width');
-assert.ok(motionCss.includes('animation:acp-context-flow 5.6s linear infinite'),
+assert.ok(motionCss.includes('animation:acp-context-flow 4.5s linear infinite'),
  'Motion should visibly follow existing semantic paths');
+assert.ok(sceneRenderer.includes('edgePacket(e,i,scene,esc)')&&sceneRenderer.includes('<animateMotion'),
+ 'Every animated packet must travel along its canonical SVG edge');
+assert.ok(motionCss.includes('acp-art-float')&&motionCss.includes('acp-organic-current-drift'),
+ 'Advanced art direction needs independently moving foreground and background');
+assert.ok(motionCss.includes('.present-frame[data-motion="on"]'),
+ 'All foreground and background movement must be opt-in');
 assert.ok(motionCss.includes('.present-frame[data-motion="on"]'),
  'Motion must only run with the user setting enabled');
 assert.ok(motionCss.includes('opacity:0!important;stroke:none!important'),
@@ -121,4 +127,9 @@ assert.ok(siteJs.includes("motionSelect('library-motion-mode')"),
  'Motion must be available on a slide library detail');
 assert.ok(siteJs.includes("e.target.id==='library-motion-mode'"),
  'The library motion control must be actionable');
+assert.ok(siteJs.includes("['html',ui.singleAnimatedHtmlLabel]")&&siteJs.includes("motion:'on'"),
+ 'A single slide must offer a deliberately animated portable HTML export');
+const prep=fs.readFileSync('docs/assets/slide-export-prep.js','utf8');
+assert.ok(prep.includes('{animated=false}')&&prep.includes("querySelectorAll('.mc-edge-packet')"),
+ 'Static rasterization must strip native animation without touching the live slide');
 console.log('PASS – two scenes, stable graph, clear arrows and opt-in animation');
