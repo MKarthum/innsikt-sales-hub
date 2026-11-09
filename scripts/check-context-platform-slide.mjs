@@ -132,4 +132,31 @@ assert.ok(siteJs.includes("['html',ui.singleAnimatedHtmlLabel]")&&siteJs.include
 const prep=fs.readFileSync('docs/assets/slide-export-prep.js','utf8');
 assert.ok(prep.includes('{animated=false}')&&prep.includes("querySelectorAll('.mc-edge-packet')"),
  'Static rasterization must strip native animation without touching the live slide');
+// Editorial and geometric regression for the ACTIVE modular context scene.
+// This protects the semantic distinction, straight links and readable directions.
+const modular=box.window.InnsiktVisualComposition;
+const graphRoutes=modular.compile(context,'rich-image').edges;
+const vertical=graphRoutes.filter(e=>e.relation==='provides'||e.relation==='informs');
+assert.equal(vertical.length,6);
+assert.ok(vertical.every(e=>e.path.startsWith('M')&&e.path.includes('V')&&!e.path.includes('C')),
+ 'All six vertical links must be straight; the graph has no diagonal requirement');
+const curved=graphRoutes.filter(e=>e.relation==='supports'||e.relation==='updates');
+assert.equal(curved.length,2);
+assert.ok(curved.every(e=>e.path.includes(' C')),'The two established side arcs must remain');
+const renderedModular=modular.renderSlide(context,assets,escape,'rich-image');
+assert.equal((renderedModular.match(/data-edge-id="/g)||[]).length,10);
+assert.equal((renderedModular.match(/data-node-id="/g)||[]).length,22);
+assert.equal((renderedModular.match(/class="mc-edge-direction"/g)||[]).length,4,
+ 'Curved feedback and bottom process links need visible direction even without motion');
+assert.equal((renderedModular.match(/<animateMotion /g)||[]).length,10,
+ 'One moving indicator per canonical relationship');
+assert.ok(!renderedModular.includes('acp-hero-illustration')&&
+ !renderedModular.includes('acp-core-art'),'No unanchored hero network above the framework facet');
+assert.equal(context.visual.cycle[2].label,'Ny tilstand');
+assert.deepEqual(context.visual.outcomes.map(x=>x.label),
+ ['Felles forståelse','Tryggere KI-bruk','Bedre tilpasning'],
+ 'The right-hand value proposition must not repeat decisions/actions/update stages');
+assert.ok(motionCss.includes('.mc-edge-direction'),
+ 'Static directional arrows must have an explicit visual style');
+console.log('PASS – content, straight verticals, original side curves and visible arrowheads');
 console.log('PASS – two scenes, stable graph, clear arrows and opt-in animation');
