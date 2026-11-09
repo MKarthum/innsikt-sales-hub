@@ -45,7 +45,6 @@
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-core-marker{fill:var(--pres-accent)}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-core-title{font:790 30px var(--font-display);fill:var(--acp-ink);letter-spacing:-.7px}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-core-lead{font:520 17px var(--font-body);fill:var(--acp-quiet)}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-pulse{fill:var(--pres-accent)}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-facet .acp-card-panel{fill:color-mix(in srgb,var(--pres-bg) 64%,var(--pres-accent));stroke:color-mix(in srgb,var(--pres-fg) 24%,var(--pres-accent))}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-facet .acp-card-title{font-size:22px}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-section-text{font:730 14px var(--font-body);fill:var(--acp-quiet);letter-spacing:2px}
@@ -95,8 +94,7 @@
 .scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-ambient{
  fill:none;stroke:var(--pres-accent);stroke-width:9;stroke-linecap:round;opacity:0;
 }
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-concept,
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-art{pointer-events:none}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-concept{pointer-events:none}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-concept-structure{
  fill:none;stroke:var(--pres-accent);stroke-width:2.3;stroke-linecap:round;
  stroke-linejoin:round;opacity:0}
@@ -109,15 +107,8 @@
  fill:color-mix(in srgb,var(--pres-accent) 38%,transparent);stroke-width:.7}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-concept-shine{fill:none;stroke:var(--pres-fg);stroke-width:2.5;opacity:.4}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-concept-points{fill:var(--pres-accent)}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-art-network{
- fill:color-mix(in srgb,var(--pres-bg) 47%,var(--pres-accent));stroke:var(--pres-accent);
- stroke-width:2.2;opacity:0}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-art-network path{fill:none}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-art-network circle{stroke:var(--pres-fg);stroke-width:1.4}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-core-art-volume{opacity:0;fill:none;stroke:var(--pres-accent);stroke-width:2.6}
 /* Illustration: meaningful line art anchored to people, systems, capabilities and effects. */
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-structure{opacity:.62}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-art-network{opacity:.68}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .mc-edge-ambient{opacity:.12}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-points{opacity:.38}
 /* Advanced: the same local concepts acquire volume, lensing and directional light. */
@@ -125,9 +116,6 @@
  opacity:.94;stroke-width:2.8;filter:drop-shadow(0 0 4px var(--acp-glow))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-concept-volume{opacity:.72;filter:drop-shadow(0 5px 9px var(--acp-glow))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-concept-points{opacity:.94}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-art-network{
- opacity:.97;stroke-width:3;filter:drop-shadow(0 0 6px var(--acp-glow))}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-art-volume{opacity:.38;filter:drop-shadow(0 0 8px var(--acp-glow))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-ambient{opacity:.36;stroke-width:11;filter:drop-shadow(0 0 7px var(--acp-glow))}
 
 /* The conceptual glyph occupies the original icon port, never the copy area. */
@@ -191,7 +179,6 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-depth{opacity:.4}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-glass{
  fill:color-mix(in srgb,var(--pres-bg) 74%,var(--pres-accent));stroke:color-mix(in srgb,var(--pres-fg) 35%,var(--pres-accent))}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-illustration{filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster{
  opacity:.91;filter:drop-shadow(0 3px 7px color-mix(in srgb,var(--pres-accent) 16%,transparent))}
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-node-light{opacity:.31}
