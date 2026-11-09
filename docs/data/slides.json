@@ -2031,19 +2031,19 @@
         "outcomesTitle": "Mulig verdi",
         "outcomes": [
           {
-            "label": "Felles situasjonsforståelse",
+            "label": "Felles forståelse",
             "detail": "Relevant kunnskap på tvers",
-            "assetId": "verified-analysis"
+            "assetId": "data-semantic"
           },
           {
-            "label": "Tryggere automatisering",
+            "label": "Tryggere KI-bruk",
             "detail": "Regler og ansvar i bruk",
-            "assetId": "context-guarded-action"
+            "assetId": "governance-shield"
           },
           {
             "label": "Bedre tilpasning",
             "detail": "Ved nye behov og hendelser",
-            "assetId": "context-evidence"
+            "assetId": "context-timeline"
           }
         ],
         "preferredArtDirection": "rich-image",
@@ -2072,7 +2072,12 @@
               "id": "blueprint",
               "type": "grid"
             }
-          ]
+          ],
+          "motifs": {
+            "outcomes:0": "meaning",
+            "outcomes:1": "boundaries",
+            "outcomes:2": "timeline"
+          }
         }
       },
       "design": {
