@@ -27,7 +27,7 @@ function fromSlide(slide){
  if(v.scene!=='list')throw Error('Mangler semantisk adapter for '+v.scene);
  const family=config.family||'general';
  if(!idOk(family))throw Error('Ugyldig scenefamilie');
- const nodes=(v.items||[]).map((title,i)=>({id:'item:'+i,type:'card',index:i,content:{
+ const nodes=(v.items||[]).map((title,i)=>({id:'item:'+i,type:'card',index:family==='story-flow'?i:undefined,content:{
   title,detail:v.detail?.[i]||'',assetId:v.itemAssetIds?.[i]||null}}));
  if(v.conclusion)nodes.push({id:'outcome',type:'focus',content:v.conclusion});
  return {version:1,id:slide.id,family,title:slide.title,cue:slide.cue,subtitle:slide.body||'',
