@@ -190,9 +190,15 @@ api.registerDecoration('context-atlas',({geometry,scene})=>{
  const core=geometry.get('context'),id='acp-'+scene.id.replace(/[^a-z0-9-]/g,'');
  const num=v=>N(v);
  const cx=num(core.x+core.w/2),cy=num(core.y+core.h/2);
- const dust=Array.from({length:94},(_,i)=>{
-  const x=30+(i*211)%1530,y=192+(i*137)%630,r=i%9===0?2.1:.75+(i%4)*.19;
-  return '<circle class="acp-dust-dot" cx="'+x+'" cy="'+y+'" r="'+r+'"/>';
+ const random=n=>{const q=Math.sin(n*78.233+11.71)*43758.5453;return q-Math.floor(q);};
+ const dust=Array.from({length:118},(_,i)=>{
+  const anchors=[[cx-360,cy-125],[cx+205,cy-30],[cx+575,cy+85],[cx-80,cy+285],[cx+245,cy-260]];
+  const [ax,ay]=anchors[i%anchors.length],theta=random(i*4.87)*Math.PI*2;
+  const distance=Math.sqrt(random(i*8.41+3))*(110+(i%5)*39);
+  const x=N(Math.max(16,Math.min(1584,ax+Math.cos(theta)*distance)));
+  const y=N(Math.max(205,Math.min(843,ay+Math.sin(theta)*distance*.8)));
+  const radius=N(.4+1.5*random(i*6.89+5));
+  return '<circle class="acp-dust-dot" cx="'+x+'" cy="'+y+'" r="'+radius+'" opacity="'+N(.25+random(i*7.22+2)*.65)+'"/>';
  }).join('');
  const nodes=['context',...Array.from({length:3},(_,i)=>['consumers:','facets:','sources:','cycle:','outcomes:'].map(g=>g+i)).flat()];
  const lights=nodes.map(nodeId=>{
@@ -206,26 +212,35 @@ api.registerDecoration('context-atlas',({geometry,scene})=>{
   '<radialGradient id="'+id+'-node"><stop offset="0" class="acp-node-inner"/><stop offset=".55" class="acp-node-mid"/><stop offset="1" class="acp-node-outer"/></radialGradient>'+
   '<linearGradient id="'+id+'-veil" x1="0" y1="0" x2=".8" y2="1"><stop offset="0" class="acp-veil-top"/><stop offset=".55" class="acp-veil-mid"/><stop offset="1" class="acp-veil-end"/></linearGradient>'+
   '<radialGradient id="'+id+'-cinema" cx=".45" cy=".52" r=".88"><stop offset="0" class="acp-cinema-core"/><stop offset=".52" class="acp-cinema-middle"/><stop offset="1" class="acp-cinema-edge"/></radialGradient>'+
+  '<radialGradient id="'+id+'-mist"><stop offset="0" class="acp-organic-mist-core"/><stop offset=".48" class="acp-organic-mist-middle"/><stop offset="1" class="acp-organic-mist-edge"/></radialGradient>'+
+  '<linearGradient id="'+id+'-stream" x1="0%" y1="45%" x2="100%" y2="62%"><stop offset="0" class="acp-organic-stream-start"/><stop offset=".47" class="acp-organic-stream-peak"/><stop offset="1" class="acp-organic-stream-end"/></linearGradient>'+
+  '<filter id="'+id+'-soften" x="-35%" y="-80%" width="170%" height="260%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="30"/></filter>'+
   '<linearGradient id="acp-context-card-paint" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0" class="acp-card-paint-top"/><stop offset=".53" class="acp-card-paint-mid"/><stop offset="1" class="acp-card-paint-bottom"/></linearGradient>'+
   '<linearGradient id="acp-context-core-paint" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0" class="acp-core-paint-top"/><stop offset=".6" class="acp-core-paint-mid"/><stop offset="1" class="acp-core-paint-bottom"/></linearGradient>'+
   '</defs>';
  const atmosphere=definitions+
   '<rect class="acp-ambient-veil" width="1600" height="900" fill="url(#'+id+'-veil)"/>'+
   '<rect class="acp-cinematic-backdrop" x="0" y="178" width="1600" height="722" fill="url(#'+id+'-cinema)"/>'+
-  '<g class="acp-cinematic-rays">'+
-    '<path d="M210 200 L438 200 L805 900 L550 900Z"/>'+
-    '<path d="M575 182 L740 182 L990 900 L720 900Z"/>'+
-    '<path d="M1065 170 L1180 170 L1535 900 L1235 900Z"/>'+
+
+  // Diffuse currents and irregular mist belong to the backdrop, not the semantic graph.
+  '<g class="acp-organic-atmosphere" data-atmosphere="organic">'+
+   '<g class="acp-organic-mist" filter="url(#'+id+'-soften)">'+
+    '<path d="M-100 478C62 304 207 322 353 382C539 462 676 282 860 335C1101 403 1055 507 852 527C660 549 507 482 325 568C144 644 -16 591 -100 478Z" fill="url(#'+id+'-mist)"/>'+
+    '<path d="M662 697C815 554 946 554 1081 591C1260 639 1361 428 1640 484L1640 753C1496 848 1306 777 1145 740C958 693 825 830 662 697Z" fill="url(#'+id+'-mist)"/>'+
+    '<path d="M-82 753C169 659 308 800 520 733C689 681 817 752 942 807C1107 877 1258 792 1644 774L1644 923H-82Z" fill="url(#'+id+'-mist)"/>'+
+    '<ellipse cx="'+num(cx-265)+'" cy="'+num(cy-204)+'" rx="268" ry="148" fill="url(#'+id+'-mist)"/>'+
+    '<ellipse cx="'+num(cx+525)+'" cy="'+num(cy-75)+'" rx="258" ry="237" fill="url(#'+id+'-mist)"/>'+
    '</g>'+
-  '<g class="acp-cinematic-clouds">'+
-    '<ellipse cx="'+num(cx*.61)+'" cy="'+num(cy*.7)+'" rx="490" ry="325"/>'+
-    '<ellipse cx="'+num(cx+core.w*.62)+'" cy="'+num(cy+165)+'" rx="560" ry="315"/>'+
-    '<ellipse cx="800" cy="876" rx="1050" ry="220"/>'+
+   '<g class="acp-organic-streams" filter="url(#'+id+'-soften)">'+
+    '<path d="M-110 508C170 364 312 632 563 467C786 319 903 449 1101 425C1280 404 1405 292 1710 347" stroke="url(#'+id+'-stream)" stroke-width="93"/>'+
+    '<path d="M-100 665C160 500 318 694 516 579C699 475 854 652 1048 526C1209 422 1446 572 1680 459" stroke="url(#'+id+'-stream)" stroke-width="68"/>'+
+    '<path d="M-80 785C150 673 321 820 526 729C760 625 905 792 1108 714C1285 650 1437 697 1690 633" stroke="url(#'+id+'-stream)" stroke-width="121"/>'+
    '</g>'+
-  '<g class="acp-cinematic-landscape">'+
-    '<path d="M0 878C230 777 465 814 720 828S1230 754 1600 829V900H0Z"/>'+
-    '<path d="M0 870C365 835 485 884 795 860S1300 794 1600 864V900H0Z"/>'+
+   '<g class="acp-organic-twilight">'+
+    '<ellipse cx="'+num(cx-170)+'" cy="'+num(cy-90)+'" rx="430" ry="239" fill="url(#'+id+'-mist)"/>'+
+    '<ellipse cx="'+num(cx+650)+'" cy="'+num(cy+155)+'" rx="480" ry="270" fill="url(#'+id+'-mist)"/>'+
    '</g>'+
+  '</g>'+
   '<ellipse class="acp-ambient-volume" cx="'+cx+'" cy="'+cy+'" rx="'+num(core.w*.89)+'" ry="'+num(core.h*2.5)+'" fill="url(#'+id+'-space)"/>'+
   '<g class="acp-ambient-waves">'+
    '<path d="M-100 686Q390 575 '+cx+' '+num(core.y+core.h*.68)+' T1730 697"/>'+
