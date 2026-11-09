@@ -21,6 +21,9 @@ Lysbildene skal oppleves som en serie bevisste, redaksjonelle komposisjoner, ikk
 11. **Tilgjengelighet og relevans.** Kontrast for normal/stor tekst, tydelig fokus, bokmål og korrekt fortelling står over effekter. Ingen flimmer eller påtvunget animasjon. Leverandørpåstander må fortsatt være kildebelagt og skilt fra vår tolkning.
 12. **Revisjon av faktisk resultat.** Sammenlign skjermbilder før/etter for hele biblioteket. Kjør syntetisk og nøytralt skin, lys/mørk, begge mobilretninger, kontroller av kilde/tekst, offline-presentasjon, PNG/JPG/PDF/PPTX og alle historier. Visualisering må vurderes redaksjonelt; grønn CI er nødvendig, ikke tilstrekkelig. Før publisering: \`node scripts/check.mjs\`, \`node scripts/check-slide-editorial-browser.mjs\`, øvrige nettlesertester samt en gjennomgang av 40 skjermbilder.
 
+
+**Delingsformater:** GIF og videofil er valgfri, kort bevegelseseksport av kanoniske SVG-relasjoner og er ikke et argument for å legge til ekstra dekor. LinkedIn-formatene gjengir markører over et statisk SVG-grunnlag; de er ikke en pikselperfekt erstatning for HTML-presentasjonen. Feil ved opptak skal rapporteres som feil, ikke levere en statisk fil med animert filtype.
+
 ## Sammenhengen mellom data og visning
 
 | Nivå | Eier | Ansvar |
@@ -64,7 +67,7 @@ En illustrert slide kan bestå av tre logiske lag: (1) frittstående dekorative 
 
 ## Enkel og rik illustrasjon (0.18.59)
 
-Valg av «Enkel illustrasjon» eller «Rik illustrasjon» skal kun påvirke dekorativ scenografi og presentasjonsuttrykk, aldri fagtekst eller forbindelser. Enkel er rendret med individuelle vektorobjekter som følger organisasjonens semantiske fargevariabler; rik bruker et selvstendig foto-/bildeobjekt som kan byttes uten å gjenskape slide. Bokser, tekst, ikoner og alle piler er native og forvaltes i scene og JSON. Kvalitetssikres mot samme tekst- og layoutkontrakt, 16:9 og eksport.
+Valg av «Enkel illustrasjon» eller «Rik illustrasjon» skal kun påvirke dekorativ scenografi og presentasjonsuttrykk, aldri fagtekst eller forbindelser. Enkel visning prioriterer presis SVG-geometri. Nøktern og rik visning bruker de samme objektene og pilene med mer meningsbærende volum, lys og eventuelt egne, godkjente illustrasjonsressurser. Et fotografi er et valg, ikke et krav. Bokser, tekst, ikoner og alle piler er native og forvaltes i scene og JSON. Kvalitetssikres mot samme tekst- og layoutkontrakt, 16:9 og eksport.
 
 
 ## Eksportsamsvar og semantisk pilføring (oppdatert 9. november 2026)
