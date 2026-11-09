@@ -189,7 +189,7 @@ function renderScene(input,assets,esc,direction='standard'){
  const objects=scene.nodes.map(o=>objectTypes.get(o.type).render({node:o,box:geometry.get(o.id),esc,assets,level:direction})).join('');
  return '<div class="story-scene scene-modular-v1" data-scene-contract="2" data-composition-level="'+esc(direction)+'" data-composition="'+esc(plan.composition)+'" data-scene-id="'+esc(scene.id)+'" data-scene-family="'+esc(scene.family||'general')+'">'
   +'<svg class="mc-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="'+esc(scene.title)+'">'
-  +'<defs><marker id="'+marker+'" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M1 1L9 5L1 9Z" class="mc-arrow-head"/></marker></defs>'
+  +'<defs><marker id="'+marker+'" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1L8 4.5L1 8Z" class="mc-arrow-head"/></marker></defs>'
   +'<rect class="mc-backdrop" width="1600" height="900"/>'
   +'<g class="mc-layers" aria-hidden="true">'+layers+'</g>'
   +'<g class="mc-decor" aria-hidden="true">'+(decorationLayers.atmosphere||'')+'</g>'
