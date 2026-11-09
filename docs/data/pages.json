@@ -973,7 +973,7 @@
     "motionOff": "Av",
     "motionHelp": "Animasjoner og overganger kan slås av uten å endre lysbildene.",
     "singleExportLabel": "Last ned enkeltlysbilde",
-    "singleExportInfo": "PNG, JPG, PDF og PowerPoint er stillbilder. Animert HTML bevarer bevegelsen og kan åpnes i nettleser uten nettilgang.",
+    "singleExportInfo": "PNG, JPG, PDF og PowerPoint er stillbilder. Animert HTML bevarer full bevegelse. GIF og video tar opp bevegelige markører fra modulære SVG-scener. MP4 brukes når nettleseren støtter det, ellers WebM.",
     "singleAnimatedHtmlLabel": "Animert HTML",
     "singleExportError": "Kunne ikke laste ned lysbildet.",
     "fullscreenExportLabel": "Last ned",
@@ -982,7 +982,9 @@
     "artLabel": "Illustrasjonsstil",
     "artStandard": "Enkel diagramvisning",
     "artRichImage": "Rik illustrasjon",
-    "imagePending": "Bildevarianten er ikke godkjent. Viser diagramvisning."
+    "imagePending": "Bildevarianten er ikke godkjent. Viser diagramvisning.",
+    "singleAnimatedGifLabel": "Animert GIF",
+    "singleAnimatedVideoLabel": "Video (MP4/WebM)"
   },
   "resourceLibraryUi": {
     "eyebrow": "Bibliotek",
