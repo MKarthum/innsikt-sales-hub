@@ -1,65 +1,55 @@
-# Presentasjonsarkitektur: én scene og tre skinn
+# Presentasjonssystemet: kanonisk innhold, modulær rendering og eksport
 
-Oppdatert 8. november 2026. Gjelder `ai-context-platforms-2027` og `insight-value-chain` på `main`.
+Oppdatert 9. november 2026. Denne filen beskriver gjeldende implementasjon, ikke tidligere prototyper.
 
-## Prinsipp
+## Autoritet og produksjonslinje
 
-Vi bygger **ett lysbilde**, og velger etterpå visuell stil. Tekst, objekter, koordinater, ikoner og faglige forbindelser må ikke kopieres til tre forskjellige implementasjoner.
+1. `docs/data/slides.json` eier budskap, faglige objekter, referanser, notater og relasjoner. `docs/data/visual-assets.json` eier ressursene. Bildepiksler og CSS må ikke bli en skjult ekstra faglig sannhet.
+2. `docs/assets/slide-visuals.js` ruter et lysbilde til riktig aktiv scene. `visual.composition.engine: "modular-v1"` bruker `visual-composition.js`. Adaptere, komposisjoner, objektroller og semantiske rutere er registrerbare og kan gjenbrukes mellom flere lysbilder.
+3. `context-atlas.js` beskriver **én bestemt fagmodell** med 22 sceneobjekter og ti kanoniske relasjoner. Den skal ikke være standardmal for andre faglige problemstillinger.
+4. `visual.scene: "list"`, `composition.family: "story-flow"` og `flow-with-outcome` demonstrerer en **generell** firetrinnsflyt med en konklusjon. Den brukes av `delivery-time-context-flow` og har ingen bransjetekst eller organisasjonsfarger kodet i motoren.
+5. `insight-value-chain` bruker fortsatt den aktive, eldre `unified-slide-scene.js`. Ikke fjern denne motoren før siste bruker er migrert og hele biblioteket er verifisert. Eldre, ikke aktive alternativer er ikke normative.
 
-- **Kilde:** `docs/data/slides.json` eier alt faglig innhold. `docs/data/visual-assets.json` eier ikon- og bildekilder.
-- **Modell og rendering:** `docs/assets/unified-slide-scene.js` lager én sceneplan (`InnsiktDiagramScene.create`) og ett SVG (`render`). Alle tre stiler bruker nøyaktig samme SVG-geometri, tekst og piler.
-- **Uttrykk:** `docs/assets/unified-slide-scene.css` har `standard`, `rich` og `rich-image`. Bare farger, streker, overflater, lys og dekorative bakgrunnslag kan variere. Et fotografi kan legges bak, men får ikke eie tekst, piler eller faglige objekter.
-- **Bruk:** `slide-visuals.js` delegerer begge komposisjoner til fellesmotoren. Samme scene benyttes i bibliotek, fullskjerm, Presenter og eksport.
+De tre stilene er `standard`, `rich` og `rich-image`. De bygger på identiske fagobjekter, tekster, koordinater og grafrelasjoner. Stiler eies av `visual-composition.css`, `context-atlas.css`, `context-illustrations.css` og eventuelt et organisasjonsskin. Ikke opprett tre forskjellige renderere eller tre JSON-kopier av samme lysbilde.
 
-| Stil | Virkning | Oppbygning |
+## To konkrete lysbilder som produksjonskontroll
+
+| Lysbilde | Budskap | Struktur |
 | --- | --- | --- |
-| Standard | Nøytral og presis forklaring | Kanonisk SVG-scene |
-| Nøktern (`rich`) | Lettere glass, skygger og svak bakgrunn | Samme SVG-scene |
-| Rik (`rich-image`) | Mer atmosfære og eventuell illustrasjon i bakgrunnen | Samme SVG-scene |
+| `ai-context-platforms-2027` | Kontekst, kilder, brukere, kontrollert beslutningssløyfe og potensielle gevinster | `context-atlas`, 22 sceneobjekter, 10 relasjoner |
+| `delivery-time-context-flow` | Økt leveringstid kan ikke tolkes uten definisjon og situasjon | `story-flow`, 4 steg, 1 konklusjon, 3 relasjoner |
 
-Dette er ikke lenger tre separate diagramrenderere. For disse lysbildene lages det heller ikke en ekstra rasterkopi med fast tekst og pilgeometri. SVG er skalérbar.
+Det siste er eksplisitt et **illustrativt eksempel**, ikke en dokumentert kundehistorie. Nye lysbilder skal starte med spørsmålet og de nødvendige sammenhengene, ikke med en ønsket mengde bokser, ikoner eller bakgrunnsbilder.
 
-## To uavhengige komposisjoner
+## Visuell kvalitet og oppdatering
 
-- `context-platforms`: Kilder, felles virksomhetskontekst, mottakere, beslutningssløyfe og mulige effekter. Den kanoniske grafen i `visual.graph.source` validerer ti retninger og relasjonstyper. Tre rettlinjede kildepiler peker til den samme kontekstsonen. De innebærer ingen én-til-én-kobling til fasettene over.
-- `insight-ecosystem`: Et startspørsmål, fire prosesstrinn, mål og tverrgående forutsetninger. Ordningen bestemmes av `visual.stages` i `slides.json`.
+- Eksempel og budskap først: hvert objekt må ha en funksjon; konsekvens er noe annet enn mekanisme.
+- Piler er **kanonisk SVG-geometri**, uavhengig av illustrasjonsnivå. Marker hvilken vei forbindelsen går også uten animasjon.
+- Animerte datapunkter er dekorative. De gjenbruker de semantiske pilbanene og skaper ingen ekstra relasjoner.
+- Vær særlig varsom med selvstendige glødende prikker, doble rammer, løse rutenett og absolutte dekorobjekter. Tidligere, ubrukte bildeoppskrifter og hub-nettverk er fjernet fra kontekstscenen.
+- `prefers-reduced-motion`, valget «Bevegelse av» og utskrift må fortsatt gi et meningsfullt stillbilde.
+- Oppdater presentatørnotater når faglig betydning, avgrensninger eller forholdet mellom mekanisme og mulig verdi endres.
 
-Den faglige strukturen er forskjellig, men begge bruker den samme motoren for node-ID-er, SVG, ikoner, tekst, forbindelser, stilvalg og eksport.
+## Nedlasting og deling
 
-## Produksjonsregel for neste lysbilde
+| Format | Formål | Bevegelse |
+| --- | --- | --- |
+| PNG og JPG | Stillbilder, dokumenter og innlegg | Nei |
+| PDF og PowerPoint | Statisk deling og videre bruk | Nei |
+| Animert HTML | Full SVG- og CSS-animasjon, også offline | Ja |
+| Animert GIF | Kort, enkel animasjon til sosiale medier | Ja, bevegelige markører over SVG-basert stillbilde |
+| Video | Videopost, helst MP4; WebM ved manglende MP4-støtte | Ja, bevegelige markører over SVG-basert stillbilde |
 
-1. Skriv eller gjenbruk alt faglig innhold i `slides.json`.
-2. Velg eksisterende scenekomposisjon hvis den passer. Da kommer alle tre stiler automatisk.
-3. Ved ny topologi: Implementer **én** ny layoutmodell i `unified-slide-scene.js`, ikke en renderer for hver stil.
-4. Legg estetiske forskjeller i CSS-skinnet, eller registrer et uavhengig dekorativt bilde.
-5. Valider semantikk, tekstplassering og eksport i Chromium og WebKit.
+GIF og video lages på klienten av den **samme** modulære SVG-scenen, ikke en separat bildefil med innbakt tekst. GIF har 640 × 360 piksler, 8 bilder per sekund i 6 sekunder. Video har 1280 × 720 piksler, 12 bilder per sekund i 6 sekunder. Disse to eksportene prioriterer markører langs sammenhengene fremfor full gjengivelse av alle CSS-effektene i livevisningen. Animert HTML er valget for full bevegelse og høyeste visuelle trofasthet.
 
-En ny layout kan kreve noe informasjonsdesign. Å velge en passende komposisjon er fortsatt ikke automatisert. Målet er at ny *teknisk* tegnekode og manuell eksporttilpasning ikke må gjentas for hvert lysbilde.
+For GIF/video brukes nettleserens egen SVG-rasterisering, og videoformatet avgjøres med `MediaRecorder.isTypeSupported`. Oppstår det feil, skal eksporten stoppe tydelig og aldri gi en mislabeled eller stillestående fil. GIF-komprimeringen er enkel og prioriterer portabilitet; GIF kan bli betydelig større enn video og har begrenset fargedybde.
 
-## Faglig prioritering og visuell retning (9. november 2026)
+## Vedlikehold og testport
 
-Kontekstbildet skal forklare **hva kontekst er**, **hva den bygger på**, **hvem som bruker den**, og **hvordan beslutninger og handlinger oppdaterer tilstanden**. Nederste prosessrekke viser mekanisme (beslutning, kontrollert utførelse, ny tilstand). Høyre kolonne skal bare vise *mulige virkninger* (felles forståelse, tryggere KI-bruk, bedre tilpasning), og ikke repetere prosessens steg. Ingen effekt er garantert; utdypingen eies av lysbildets `speakerBase`.
+Ved en ny `story-flow`-slide bør det bare kreves et nytt JSON-objekt og eventuelle registrerte bilde-ID-er. Ved en virkelig ny faglig topologi: lag én gjenbrukbar komposisjon og dens relasjoner i den modulære motoren, ikke en ny renderer for hvert nivå. Det er tillatt å lage nye objektroller når det er faglig begrunnet.
 
-De seks vertikale forbindelsene beregnes fra midten av kilde- og mottakerkortene og er rette. Dette er et bevisst layoutvalg, ikke en begrensning i rutemotoren. De to store Bézier-kurvene på sidene beholdes. Pilhodene for disse og de to korte nederste overgangene plasseres direkte på den kanoniske banen der de er synlige foran objektene. Markøranimasjonen gjenbruker den samme banen. Ekstra, løsrevet nettverksillustrasjon over «Rammer» er fjernet. Den semantiske grafen og komposisjonens øvrige objektplasseringer er uendret.
+Kjør `node scripts/check.mjs`, og spesielt `scripts/check-context-atlas.mjs`, `scripts/check-context-platform-slide.mjs`, `scripts/check-modular-production.mjs` og nettlesertestene for eksport. Test kildebytte, dataendring, lys/mørk, layout, tilpasset skin, animasjon av/på og reell nedlasting. En syntaktisk grønn kontroll alene er ikke tilstrekkelig for godkjenning av visuell kvalitet.
 
-## Bevegelse og nedlasting
+## Oppryddingsprinsipp
 
-Kontekstscenen kan vise dekorative signalmarkører som følger de **samme validerte relasjonene** som de statiske pilene. En markør er ikke en ekstra kant i kunnskapsgrafen. I rik stil kombineres markørene med bevegelse i tåkefelt og lysstrømmer, og i de interne illustrasjonene. Verken tekst, kortplassering, relasjonsretning eller pilgeometri animeres.
-
-Bevegelsen styres av `data-motion="on"` på presentasjonsflaten, og respekterer `prefers-reduced-motion`. Offlinelesing av et enkelt lysbilde tilbys som **Animert HTML**, ved å gjenbruke den portable presentasjonseksporten med ett lysbilde. Stilark, bilder og tilstand bygges inn i filen. PNG, JPG, PDF og PowerPoint forblir tilsiktet statiske; bildeeksporten fjerner de dekorative SVG-animasjonene fra en midlertidig eksportkopi. Det levende SVG-diagrammet i portalen endres ikke.
-
-## Kontroller
-
-`scripts/check-context-platform-slide.mjs` verifiserer kanonisk innhold, node-ID-er, geometri, alle relasjoner, endringer i data og at både komposisjonene bruker én motor.
-
-`scripts/check-context-platform-exports-browser.mjs` kontrollerer at nøyaktig samme SVG-markup brukes i alle tre stiler, og sammenligner reelle skjermbilder med nedlastede PNG-, JPG-, PDF- og PowerPoint-filer. Nettleserkjøringen omfatter Chromium og WebKit. Logooverlegget skal være separat og kan endres gjennom CSS.
-
-Skinnet leser `--pres-bg`, `--pres-fg`, `--pres-muted` og `--pres-accent`. Disse skal kunne byttes når løsningen kopieres til et annet designsystem, uten å endre JSON eller tegnekoordinater.
-
-## Avviklet og beholdt
-
-Den gamle selvstendige `context-native-svg.js`-rendereren, eget stilark og separat SVG-eksportbane er fjernet. Den andre HTML/CSS-komposisjonen for de to scenene er også fjernet fra aktiv rendering. `slide-graph.js` validerer nå relasjoner, men tegner ikke et parallelt pilsett.
-
-De eldre Python-oppskriftene og bildemanifestet er beholdt som referanser og som mulig verktøy for separat godkjent illustrasjonsgrafikk. De er **ikke** nødvendige for de tre aktive scenestilene. Ikke opprett nye bildekopier med innbakt tekst og piler når det finnes en kanonisk SVG-scene.
-
-Dette er en gjenbrukbar scenemotor, ikke en automatisk illustratør for enhver tenkelig faglig figur.
+Ikke behold en parallell, inaktiv versjon av et lysbilde som sikkerhet når den ikke er koblet til aktiv rendering. Slett bare kode som kan dokumenteres ubrukt. Ikke slett en eldre motor eller publiserte ressurs-ID-er som fortsatt brukes av andre lysbilder, gamle lenker eller kontrollskript. Når gamle tester påbyr et fjernet dekorelement, skal testen oppdateres til faktisk gjeldende faglig kontrakt.
