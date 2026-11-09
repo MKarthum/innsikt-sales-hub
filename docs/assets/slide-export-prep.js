@@ -40,10 +40,17 @@ async function toDataUrl(url){
   return png;
  }finally{URL.revokeObjectURL(objectUrl);}
 }
-export async function prepareSlideMarkupForExport(markup){
+export async function prepareSlideMarkupForExport(markup,{animated=false}={}){
  const parsed=new DOMParser().parseFromString(markup,'text/html');
  const scene=parsed.body.querySelector('.story-scene');
  if(!scene)throw Error('Mangler lysbildescene i eksporten');
+ // Static snapshots should not carry a running SVG animation through the
+ // foreignObject serializer. Portable HTML deliberately preserves the exact
+ // same native motion nodes from the canonical scene.
+ if(!animated){
+  scene.querySelectorAll('.mc-edge-packet').forEach(node=>node.remove());
+  scene.querySelectorAll('animateMotion').forEach(node=>node.remove());
+ }
  // The native 1600x900 SVG is a dormant alternate renderer for ordinary
  // diagram/illustration directions. Leaving it in html-to-image's foreignObject
  // clone causes very expensive SVG serialization in WebKit, despite display:none.
