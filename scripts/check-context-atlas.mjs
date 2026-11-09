@@ -17,7 +17,11 @@ const rendered=['standard','rich','rich-image'].map((style,i)=>{
  assert.equal(plan.geometry.size,22);
  assert.equal(plan.edges.length,graph.edges.length);
  assert.deepEqual(Array.from(plan.edges,e=>e.id),Array.from(graph.edges,e=>e.id));
- for(const edge of plan.edges)assert.ok(edge.path.startsWith('M')&&edge.path.includes('C'),edge.id);
+ for(const edge of plan.edges)assert.ok(edge.path.startsWith('M')&&(edge.path.includes('C')||edge.path.includes('V')),edge.id);
+ const upwards=plan.edges.filter(edge=>['provides','informs'].includes(edge.relation));
+ assert.equal(upwards.length,6);
+ assert.ok(upwards.every(edge=>/^M[\d.]+ [\d.]+V[\d.]+$/.test(edge.path)),
+  'Six upward edges must be straight and intentional');
  const html=api.renderSlide(slide,assets,esc,style);
  assert.equal((html.match(/data-edge-id="/g)||[]).length,10);
  assert.equal((html.match(/data-node-id="/g)||[]).length,22);
@@ -33,12 +37,15 @@ assert.deepEqual(rendered[0].geometry,rendered[1].geometry);
 assert.deepEqual(rendered[1].geometry,rendered[2].geometry);
 for(const {html} of rendered){
  assert.equal((html.match(/data-concept-role="/g)||[]).length,15,'One concept illustration is anchored to each factual card');
- assert.ok(html.includes('class="acp-core-art"'),'Core graph artwork must be owned by the context object');
+ assert.ok(!html.includes('acp-core-art')&&!html.includes('acp-core-pulse'),
+  'Obsolete network graphic and orphan pulse must not be rendered');
  assert.equal((html.match(/data-illustration-motif="/g)||[]).length,15,'One volumetric illustration per semantic card');
  assert.equal((html.match(/class="acp-art-raster"/g)||[]).length,15,'Fifteen independently backed imagery layers');
- assert.ok(html.includes('data-asset-id="context-motif-context"'),'Core image is separately addressable');
- assert.ok(html.includes('class="acp-hero-illustration"'),'Knowledge network must be inside the context object');
- assert.ok(html.includes('class="acp-board-art"'),'Ambient board grid must follow the context object');
+ assert.ok(!html.includes('data-asset-id="context-motif-context"'),
+  'Old stand-alone context raster must not leak into the live scene');
+ assert.ok(!html.includes('class="acp-hero-illustration"'),
+  'The unrelated mesh above Rammer must remain removed');
+ assert.ok(html.includes('class="acp-board-art"'),'Subtle, object-bound board detail is still supported');
  assert.equal((html.match(/data-node-light="/g)||[]).length,16,'Object light is tied to the 16 semantic objects');
  assert.equal((html.match(/class="mc-edge-lumen"/g)||[]).length,10,'Edge accents reuse the canonical paths');
  assert.ok(html.includes('class="mc-spatial"'),'Object effects live behind content, in their own scene layer');
