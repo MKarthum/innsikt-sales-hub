@@ -35,3 +35,7 @@ Review of real screenshots found three weaknesses in the first cinematic version
 ## Organisk atmosfære (v0.18.138)
 
 Den avanserte stilen har fått flere ujevne tåkefelt, brede kurvede lysstrømmer og små partikler i deterministiske, naturlige klynger, i stedet for store diagonale lysflater og landskapspolygoner. De nye lysformene ligger utelukkende i bakgrunnslaget og bruker temavariabler. Et svært svakt, langsomt pust i bakgrunnen respekterer redusert bevegelse. De 22 fagobjektene, ti relasjonene, tekstene og den felles geometrien forblir uendret. Den samme SVG-scenen brukes til skjermvisning og eksport.
+
+## Subtil bevegelse (v0.18.139)
+
+Tåkefelt og lysspor får to uavhengige, langsomme forskyvninger (43 og 56 sekunder), mens et tredje lyslag varierer svakt i intensitet. Bevegelsen er begrenset til dekorative grupper; fagobjekter, tekst og relasjoner beveger seg ikke. Animasjonene er deaktivert når nettleseren ber om redusert bevegelse, og eksport bruker fortsatt den samme underliggende SVG-scenen.
