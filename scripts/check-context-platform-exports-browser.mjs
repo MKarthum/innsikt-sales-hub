@@ -189,6 +189,26 @@ try{
   await page.locator('.slide-fullscreen-close').click();
   await page.locator('#slide-library-fullscreen-page').waitFor({state:'detached'});
  }
+ // Animated HTML must carry native scene packets, embedded media and
+ // enabled motion rather than serializing a still image as another format.
+ if(fileId==='ai-context-platforms-2027'){
+  await page.locator('#library-art-mode').selectOption('rich-image');
+  await page.locator('#library-motion-mode').selectOption('on');
+  const [animatedDownload]=await Promise.all([
+   page.waitForEvent('download',{timeout:60000}),
+   page.locator('.slide-library-detail-stage + .slide-single-download [data-slide-download="html"]').click()
+  ]);
+  assert.match(animatedDownload.suggestedFilename(),/\.html$/);
+  const animated=fs.readFileSync(await animatedDownload.path(),'utf8');
+  assert.match(animated,/data-motion="on"/);
+  assert.match(animated,/<animateMotion\s/);
+  assert.match(animated,/class="mc-edge-packet"/);
+  assert.match(animated,/acp-art-float/);
+  assert.match(animated,/acp-organic-mist-drift/);
+  assert.ok(!/<image[^>]+href="\.\/assets\//.test(animated),
+   'Portable HTML still points to a local image file');
+  fs.writeFileSync(path.join(output,'advanced-animated.html'),animated);
+ }
  // Benchmark is not part of the curated Presenter decks. Compare Presenter
  // against the slide it actually shows, not against a different library slide.
  await page.locator('#present-button').click();
