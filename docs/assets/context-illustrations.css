@@ -385,6 +385,7 @@
 .scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-ambient{opacity:0!important;stroke:none!important;filter:none!important}
 .scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-track{stroke-width:2.8;filter:none;stroke-linecap:round;stroke-linejoin:round}
 .scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-lumen{stroke:none;opacity:0;filter:none;pointer-events:none}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-lumen{stroke:none;opacity:0;filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"] .mc-arrow-head{fill:var(--pres-accent);stroke:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .mc-edge-track{stroke-width:2.8;filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-track{
