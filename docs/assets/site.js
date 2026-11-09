@@ -622,9 +622,16 @@ function resourceLibraryPage(){
 }
 function singleSlideDownloadMarkup(id=''){
  const ui=D.pages.slideLibraryUi;
+ const item=id?D.slides.items.find(s=>s.id===id):presentationSlides()[slide];
+ const canRecord=item?.visual?.composition?.engine==='modular-v1'
+  &&['context-atlas','story-flow'].includes(item.visual?.composition?.family
+   ||(item.visual.scene==='context-platforms'?'context-atlas':''));
+ const formats=[['png','PNG'],['jpg','JPG'],['pdf','PDF'],['pptx','PowerPoint'],
+  ['html',ui.singleAnimatedHtmlLabel],
+  ...(canRecord?[['gif',ui.singleAnimatedGifLabel],['video',ui.singleAnimatedVideoLabel]]:[])];
  return '<div class="slide-single-download" role="group" aria-label="'+esc(ui.singleExportLabel)+'">'
   +'<strong>'+esc(ui.singleExportLabel)+'</strong>'
-  +[['png','PNG'],['jpg','JPG'],['pdf','PDF'],['pptx','PowerPoint'],['html',ui.singleAnimatedHtmlLabel]].map(([format,label])=>
+  +formats.map(([format,label])=>
     '<button type="button" data-slide-download="'+esc(format)+'"'+(id?' data-slide-download-id="'+esc(id)+'"':'')+' aria-label="Last ned som '+esc(label)+'">'+esc(label)+'</button>'
   ).join('')+'<small>'+esc(ui.singleExportInfo)+'</small></div>';
 }
@@ -653,6 +660,15 @@ async function downloadSlideButton(button){
  const tone=visible?.dataset.tone||window.InnsiktSlides.tone(item,deck,presentationThemeMode);
  button.disabled=true;button.setAttribute('aria-busy','true');
  try{
+  if(format==='gif'||format==='video'){
+   if(!visible?.querySelector('svg.mc-svg'))throw Error('Ingen aktiv, modulær scene å ta opp');
+   const module=await import('./animated-slide-export.js?v='+encodeURIComponent(D.meta.version));
+   const extension=await module.downloadAnimatedSlide({
+    scene:visible.querySelector('.story-scene'),format,id:item.id,version:D.meta.version
+   });
+   toast('Lysbildet er lastet ned som '+extension.toUpperCase()+'.');
+   return;
+  }
   const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
   let html=await prep.prepareSlideMarkupForExport(rendered,{animated:format==='html'});
   if(format==='html'){
