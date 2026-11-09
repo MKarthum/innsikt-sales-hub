@@ -52,3 +52,73 @@
 /* Independent layers do not change SVG geometry, pointer events or export scale. */
 .scene-modular-v1 .mc-spatial{pointer-events:none}
 .scene-modular-v1 .mc-edge-lumen{fill:none;stroke:none}
+
+/* Reusable story-flow skin: four steps and a clearly distinct conclusion.
+   Objects, edges, headlines and palette all come from scene data or design tokens. */
+.scene-modular-v1[data-scene-family="story-flow"] .mc-title{font-size:45px;letter-spacing:-.9px}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-subtitle{font-size:21px}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 89%,var(--pres-accent));
+ stroke:color-mix(in srgb,var(--pres-fg) 27%,var(--pres-accent));
+}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-card-title{font-size:32px}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-card-detail{font-size:19px}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-card-sequence{
+ fill:var(--pres-accent);font:800 47px var(--font-display);
+ opacity:.23;letter-spacing:-1px;
+}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-card-focus .mc-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 77%,var(--pres-accent));
+ stroke:color-mix(in srgb,var(--pres-fg) 43%,var(--pres-accent));stroke-width:2;
+}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-card-focus .mc-card-title{font-size:30px}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-card-focus .mc-card-detail{font-size:19px}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-card-focus .mc-icon{opacity:.85}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-edge-track{stroke:var(--pres-accent);stroke-width:3}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-edge-direction{fill:var(--pres-accent)}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-edge-packet{
+ opacity:0;pointer-events:none;
+}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-edge-packet-halo{
+ fill:var(--pres-accent);opacity:.24;
+}
+.scene-modular-v1[data-scene-family="story-flow"] .mc-edge-packet-point{
+ fill:var(--pres-fg);stroke:var(--pres-accent);stroke-width:2;
+}
+.scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich"] .mc-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 77%,var(--pres-accent));
+}
+.scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich"] .mc-card-shadow{opacity:.23}
+.scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich-image"] .mc-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 61%,var(--pres-accent));
+ stroke:color-mix(in srgb,var(--pres-fg) 49%,var(--pres-accent));
+ filter:drop-shadow(0 12px 23px color-mix(in srgb,var(--pres-accent) 28%,transparent));
+}
+.scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich-image"] .mc-card-sequence{opacity:.48}
+.scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich-image"] .mc-card-focus .mc-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 52%,var(--pres-accent));
+ stroke-width:2.4;
+}
+.scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich-image"] .mc-layer-glow{
+ opacity:.36;filter:blur(44px);
+}
+.scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich-image"] .mc-edge-track{
+ stroke-width:3.8;filter:drop-shadow(0 0 5px color-mix(in srgb,var(--pres-accent) 40%,transparent));
+}
+@media(prefers-reduced-motion:no-preference){
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich"] .mc-edge-packet,
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich-image"] .mc-edge-packet{
+  opacity:1;
+ }
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich-image"] .mc-layer-glow{
+  animation:mc-story-breathe 6s ease-in-out infinite alternate;
+ }
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="story-flow"][data-composition-level="rich-image"] .mc-card-glint{
+  animation:mc-story-glint 3.4s ease-in-out infinite alternate;
+ }
+}
+@keyframes mc-story-breathe{from{opacity:.18;transform:translateX(-12px)}to{opacity:.43;transform:translateX(18px)}}
+@keyframes mc-story-glint{from{opacity:.28}to{opacity:.92}}
+@media print{
+ .scene-modular-v1[data-scene-family="story-flow"] .mc-edge-packet{display:none!important}
+}
