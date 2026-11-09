@@ -71,14 +71,15 @@ function contextRouter(edge,geom){
  const hmid=b=>b.y+b.h/2;
  const path=(parts)=>parts.join(' ');
  if(edge.from==='context'&&edge.to.startsWith('consumers:')){
-  const index=Number(edge.to.split(':')[1]);
-  const sx=core.x+core.w*[.17,.5,.83][index],sy=core.y-3,tx=mid(to),ty=to.y+to.h+4;
-  return {path:`M${N(sx)} ${N(sy)} C${N(sx)} ${N(sy-27)} ${N(tx)} ${N(ty+24)} ${N(tx)} ${N(ty)}`};
+  // The logical link has no reason to bend: align it with the consumer.
+  const x=mid(to),start=core.y-3,end=to.y+to.h+4;
+  return {path:`M${N(x)} ${N(start)}V${N(end)}`};
  }
  if(edge.from.startsWith('sources:')&&edge.to==='context'){
-  const sx=mid(from),sy=from.y-4,ty=core.y+core.h+2;
-  const tx=core.x+core.w*[.17,.5,.83][Number(edge.from.split(':')[1])];
-  return {path:`M${N(sx)} ${N(sy)} C${N(sx)} ${N(sy-17)} ${N(tx)} ${N(ty+16)} ${N(tx)} ${N(ty)}`};
+  // Sources feed the shared context, not the facet directly above them.
+  // Straight vertical routes avoid suggesting an unintended one-to-one mapping.
+  const x=mid(from),start=from.y-4,end=core.y+core.h+2;
+  return {path:`M${N(x)} ${N(start)}V${N(end)}`};
  }
  if(edge.from==='context'&&edge.to==='cycle:0'){
   const x=core.x-5,y=core.y+core.h*.58,tx=to.x,ty=hmid(to);
@@ -122,15 +123,6 @@ function conceptArt(node,b,esc){
    <g class="acp-concept-points"><circle cx="-37" cy="33" r="3.3"/><circle cx="32" cy="-33" r="2.7"/></g>
   </g>`;
 }
-function coreArt(b){
- const x=b.x+b.w-205,y=b.y+61;
- const points=[[-102,-4],[-68,-37],[-48,23],[-6,-19],[25,14],[64,-32],[98,2]];
- const lines=[[0,1],[0,2],[1,3],[2,3],[2,4],[3,4],[3,5],[4,5],[4,6],[5,6]];
- return `<g class="acp-core-art" aria-hidden="true" transform="translate(${N(x)} ${N(y)})">
- <g class="acp-core-art-volume"><ellipse rx="141" ry="72"/><ellipse rx="106" ry="47"/></g>
- <g class="acp-core-art-network">${lines.map(([a,c])=>`<path d="M${points[a].join(' ')}L${points[c].join(' ')}"/>`).join('')}${points.map(([a,c],i)=>`<circle cx="${a}" cy="${c}" r="${i===3?8:5}"/>`).join('')}</g>
- </g>`;
-}
 function coreNode({node,box:b,esc,assets}){
  const c=node.content;
  return nodeRoot(node,'acp-core',
@@ -139,8 +131,6 @@ function coreNode({node,box:b,esc,assets}){
   +rect({x:b.x+8,y:b.y+8,w:b.w-5,h:b.h},'acp-core-stack',32)
   +rect(b,'acp-core-glass',32)
   +rect({x:b.x+7,y:b.y+6,w:b.w-14,h:b.h*.4},'acp-core-gloss',27)
-  +coreArt(b)
-  +(window.InnsiktContextArt?.hub(b,assets,esc)||'')
   +`<path class="acp-core-lightline" d="M${N(b.x+34)} ${N(b.y+3)} H${N(b.x+b.w-34)}"/>`
   +`<rect class="acp-core-marker" x="${N(b.x+23)}" y="${N(b.y+29)}" width="5" height="35" rx="2.5"/>`
   +txt(c.title,b.x+47,b.y+50,'acp-core-title',esc)
