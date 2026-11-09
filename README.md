@@ -4,6 +4,17 @@ Responsiv, statisk salgs- og kunnskapsportal for Innsikt, basert på åpent doku
 
 [Åpne nettsiden](https://mkarthum.github.io/innsikt-sales-hub/)
 
+## Gjeldende produksjonslinje for lysbilder
+
+Presentasjonsbiblioteket har én autoritativ datakilde i `docs/data/slides.json`. De modulære SVG-scenene bruker gjenbrukbare objektroller, komposisjoner og tre visuelle stiler. Se [gjeldende arkitektur og vedlikeholdsregler](PRESENTATION_IMAGE_ARCHITECTURE.md). Historiske versjonsnotater lenger ned i README beskriver eldre forsøk og er ikke en alternativ kontrakt.
+
+To eksempler kan åpnes direkte:
+
+- [AI Context Platforms](https://mkarthum.github.io/innsikt-sales-hub/#lysbilder/ai-context-platforms-2027): et større kontekstkart med tilbakekobling.
+- [Når leveringstiden øker](https://mkarthum.github.io/innsikt-sales-hub/#lysbilder/delivery-time-context-flow): fire forklarende trinn og en konklusjon. Illustrativt, ikke en kundereferanse.
+
+For modulære scener tilbys animert HTML, en kort GIF og nettlesergenerert video (MP4 når støttet, ellers WebM) i tillegg til statiske formater. GIF/video gjengir markørenes bevegelse langs kanoniske relasjoner over en statisk SVG-base. Full atmosfære og CSS-animasjon bevares i HTML-eksport. Kjør `node scripts/check.mjs` og `npm run check:motion-browser` ved endringer i produksjonslinjen.
+
 ## Lisens og viderebruk
 
 Innsikt er et **personlig initiert hobby- og utviklingsprosjekt**, ikke en offisiell Webstep-publikasjon. Den åpne, originale kjernen er tilgjengelig under **[MIT-lisensen](LICENSE)** i den utstrekning rettighetshaverne kan lisensiere materialet. Også virksomheter kan bruke, kopiere og videreutvikle publiserte versjoner. Lisensen gir ikke krav på fremtidige oppdateringer, support, driftskontinuitet eller fortsatt tilgjengelighet. Allerede mottatte MIT-rettigheter består.
