@@ -381,25 +381,46 @@
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-mist{opacity:.56}
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-streams{opacity:.42}
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-twilight{opacity:.16}
-/* Only diffuse scenery breathes, never live text, objects or canonical arrows. */
-@media (prefers-reduced-motion:no-preference){
- .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-mist{
-  animation:acp-organic-mist-drift 43s ease-in-out infinite alternate;
- }
- .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-streams{
-  animation:acp-organic-current-drift 56s ease-in-out infinite alternate-reverse;
- }
- .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-twilight{
-  animation:acp-organic-breathe 28s ease-in-out infinite alternate;
- }
+/* Refined edge language: one clear arrow per canonical relation, no tubes. */
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-ambient{opacity:0!important;stroke:none!important;filter:none!important}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-track{stroke-width:2.8;filter:none;stroke-linecap:round;stroke-linejoin:round}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-lumen{stroke:none;opacity:0;filter:none;pointer-events:none}
+.scene-modular-v1[data-scene-family="context-atlas"] .mc-arrow-head{fill:var(--pres-accent);stroke:none}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .mc-edge-track{stroke-width:2.8;filter:none}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-track{
+ stroke-width:3.1;filter:none;stroke:color-mix(in srgb,var(--pres-fg) 36%,var(--pres-accent))}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-architectural-base{opacity:.14;stroke-width:.7}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-architectural-base{opacity:.17;stroke-width:.8}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-detail{
+ fill:color-mix(in srgb,var(--pres-fg) 73%,var(--pres-muted));font-size:16.5px}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-outcome .acp-card-title{font-size:18px}
+
+/* Motion stays on existing graph paths, is opt-in and never moves factual objects. */
+@media(prefers-reduced-motion:no-preference){
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .mc-edge-lumen,
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-lumen{
+  stroke:color-mix(in srgb,var(--pres-bg) 35%,var(--pres-accent));
+  stroke-width:3.6;stroke-linecap:round;stroke-dasharray:14 142;
+  opacity:.88;animation:acp-context-flow 5.6s linear infinite}
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .mc-edge-lumen{
+  stroke-width:2.6;opacity:.6}
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"] .mc-edge[data-relation="updates"] .mc-edge-lumen{
+  animation-duration:7.4s}
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-mist{
+  animation:acp-organic-mist-drift 12s ease-in-out infinite alternate}
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-streams{
+  animation:acp-organic-current-drift 14s ease-in-out infinite alternate-reverse}
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-twilight{
+  animation:acp-organic-breathe 8s ease-in-out infinite alternate}
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-pulse{
+  animation:acp-core-breathe 3.4s ease-in-out infinite}
 }
-@keyframes acp-organic-mist-drift{
- from{transform:translate(-6px,4px)}
- to{transform:translate(11px,-8px)}
+@keyframes acp-context-flow{from{stroke-dashoffset:0}to{stroke-dashoffset:-156}}
+@keyframes acp-organic-mist-drift{from{transform:translate(-24px,9px)}to{transform:translate(30px,-19px)}}
+@keyframes acp-organic-current-drift{from{transform:translate(-27px,-12px)}to{transform:translate(34px,16px)}}
+@keyframes acp-organic-breathe{from{opacity:.22}to{opacity:.54}}
+@keyframes acp-core-breathe{0%,100%{opacity:.54}50%{opacity:1}}
+@media(forced-colors:active){
+ .scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-atmosphere{display:none}
+ .scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-lumen{display:none}
 }
-@keyframes acp-organic-current-drift{
- from{transform:translate(-12px,-5px)}
- to{transform:translate(15px,7px)}
-}
-@keyframes acp-organic-breathe{0%{opacity:.26}100%{opacity:.4}}
-@media(forced-colors:active){.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-atmosphere{display:none}}
