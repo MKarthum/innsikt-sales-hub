@@ -1927,6 +1927,102 @@
       }
     },
     {
+      "id": "delivery-time-context-flow",
+      "scope": "shared",
+      "tone": "light",
+      "type": "visual",
+      "cue": "EKSEMPEL · FRA SIGNAL TIL TILTAK",
+      "title": "Når leveringstiden øker, trenger vi mer enn et tall",
+      "body": "Før vi velger tiltak, må vi forstå hva som måles, hva som skjer og hvem som kan handle.",
+      "topic": "Dataarkitektur",
+      "keywords": [
+        "datakontekst",
+        "leveringstid",
+        "semantikk",
+        "analyse",
+        "operativ situasjon",
+        "tiltak"
+      ],
+      "sourceIds": [],
+      "speakerBase": "Dette er et fiktivt, generelt eksempel og ikke et dokumentert kundeprosjekt. En rapport viser økt leveringstid. Først må vi avklare om målet starter ved bestilling, plukk eller utsending. Deretter må vi se faktisk ordrekø, kapasitet, hendelser og tilgjengelig ansvar. Først da kan ansvarlig person prioritere tiltak og følge opp virkningene. Dette demonstrerer hvorfor datakontekst kombinerer betydning og situasjon, men verken krever én bestemt plattform eller innebærer at KI selv tar beslutninger. Denne sliden bruker de samme modulære sceneobjektene, tre CSS-stiler og eksportbanene som resten av produksjonslinjen.",
+      "visual": {
+        "scene": "list",
+        "items": [
+          "Signal",
+          "Betydning",
+          "Situasjon",
+          "Tiltak"
+        ],
+        "detail": [
+          "Rapporten viser lengre leveringstid",
+          "Når starter og slutter målingen?",
+          "Ordrekø, kapasitet og hendelser",
+          "Ansvarlig vurderer og følger opp"
+        ],
+        "itemAssetIds": [
+          "consume-report",
+          "data-semantic",
+          "context-timeline",
+          "business-decision"
+        ],
+        "conclusion": {
+          "title": "Et riktig tiltak krever riktig kontekst",
+          "detail": "Samme tall kan gi ulike valg når definisjon og situasjon er forskjellig.",
+          "assetId": "governance-shield"
+        },
+        "artDirections": [
+          "rich",
+          "rich-image"
+        ],
+        "preferredArtDirection": "rich-image",
+        "composition": {
+          "engine": "modular-v1",
+          "family": "story-flow",
+          "motion": "packets",
+          "variants": {
+            "standard": "flow-with-outcome",
+            "rich": "flow-with-outcome",
+            "rich-image": "flow-with-outcome"
+          },
+          "edges": [
+            {
+              "id": "signal-meaning",
+              "from": "item:0",
+              "to": "item:1",
+              "relation": "advances"
+            },
+            {
+              "id": "meaning-context",
+              "from": "item:1",
+              "to": "item:2",
+              "relation": "advances"
+            },
+            {
+              "id": "context-action",
+              "from": "item:2",
+              "to": "item:3",
+              "relation": "advances"
+            }
+          ],
+          "layers": [
+            {
+              "id": "ambient",
+              "type": "glow"
+            },
+            {
+              "id": "structure",
+              "type": "grid"
+            }
+          ]
+        }
+      },
+      "design": {
+        "archetype": "journey",
+        "focus": "flow",
+        "version": 2
+      }
+    },
+    {
       "id": "ai-development-workflow",
       "scope": "shared",
       "tone": "light",
