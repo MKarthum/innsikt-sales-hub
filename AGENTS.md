@@ -99,9 +99,9 @@ Gjenbruk `docs/assets/glossary.js` både i oversikt, detaljvisninger og dynamisk
 Ikke endre lenker, knapper, redigerbare prompter eller kopierbare felt til interaktive begreper. Popupen skal fungere på mobil og desktop, kunne brukes med tastatur, lukkes via Escape og uteklikk, føre fokus hensiktsmessig og holdes innenfor skjermen. Oppdater eksisterende innholds- og nettlesertester ved endringer.
 
 
-## Bildearkitektur for presentasjoner
+## Gjeldende produksjonslinje for lysbilder
 
-Ferdigrendrede, faglige illustrasjoner er tillatt når de fortsatt bygger på slides.json, har semantisk innholdshash og gjennomgår manuell faglig og visuell godkjenning før publisering. De trenger ikke være CSS-redigerbare. Se PRESENTATION_IMAGE_ARCHITECTURE.md. Legacy-renderere er midlertidige fallback-løsninger. Ikke massekonverter andre slides før benchmarken er godkjent.
+Les `PRESENTATION_IMAGE_ARCHITECTURE.md` før nye eller endrede modulariserte scener. `slides.json` er eneste faglige dataeier. Bruk `visual-composition.js` med en registrert, gjenbrukbar komposisjon og CSS-skinn for nye SVG-scener. `context-atlas` er et spesifikt faglig eksempel, mens `story-flow` er en generell firetrinnsmodell. Unngå kopier av gamle bilder, absolutt plassert dekor og uforankrede SVG-elementer. Eksporter stillbilder som PNG/JPG/PDF/PPTX, full bevegelse som HTML og enkle, markerbaserte løkker som GIF/video. Den gamle `unified-slide-scene.js` er fortsatt aktiv for andre lysbilder, og må ikke slettes før deres avhengigheter er migrert og testet. Bekreft eksport og visning i nettleser før full kvalitetsgodkjenning.
 
 ## Presenter- og Artifact-prinsipper
 
