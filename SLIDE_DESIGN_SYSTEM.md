@@ -59,7 +59,7 @@ Nye dataeide scenevarianter må teste eksplisitt at den nye HTML/SVG-strukturen 
 
 ## Scenekomposisjon med uavhengige illustrasjonsobjekter (v0.18.58)
 
-En illustrert slide kan bestå av tre logiske lag: (1) frittstående dekorative ressurser, (2) kontrollerte overlegg og stemning, og (3) native diagram, tekst, piler og begreper. Dekorative ressurser skal være registrert med rettigheter og sjekksum i `visual-assets.json`, og sammensetningen skal ligge i `visual.artwork` i `slides.json` – aldri som et ferdig skjermbilde med tekst. Velg illustrasjoner fordi de understøtter budskapet. Bruk endringsvennlige, adskilte SVG-/rasterobjekter fremfor å gjenta all illustrasjonsgeometri som en stor JS-streng. I lys/mørk prioriteres selskapets skin, mens illustrert fremstilling tåler en mer selvstendig kunstnerisk palett. Bevar alltid lesbarhet, kildegrunnlag og eksport.
+En illustrert slide kan bestå av tre logiske lag: (1) frittstående dekorative ressurser, (2) kontrollerte overlegg og stemning, og (3) native diagram, tekst, piler og begreper. Dekorative ressurser skal være registrert med rettigheter og sjekksum i `visual-assets.json`. Nye modulære SVG-scener eier dekor gjennom objektkomponenter og CSS eller et eksplisitt `visual.artwork` når dette faktisk brukes, aldri et foreldet bildeoppsett i JSON eller et ferdig skjermbilde med tekst. Velg illustrasjoner fordi de understøtter budskapet. Bruk endringsvennlige, adskilte SVG-/rasterobjekter fremfor å gjenta all illustrasjonsgeometri som en stor JS-streng. I lys/mørk prioriteres selskapets skin, mens illustrert fremstilling tåler en mer selvstendig kunstnerisk palett. Bevar alltid lesbarhet, kildegrunnlag og eksport.
 
 
 ## Enkel og rik illustrasjon (0.18.59)
@@ -67,6 +67,6 @@ En illustrert slide kan bestå av tre logiske lag: (1) frittstående dekorative 
 Valg av «Enkel illustrasjon» eller «Rik illustrasjon» skal kun påvirke dekorativ scenografi og presentasjonsuttrykk, aldri fagtekst eller forbindelser. Enkel er rendret med individuelle vektorobjekter som følger organisasjonens semantiske fargevariabler; rik bruker et selvstendig foto-/bildeobjekt som kan byttes uten å gjenskape slide. Bokser, tekst, ikoner og alle piler er native og forvaltes i scene og JSON. Kvalitetssikres mot samme tekst- og layoutkontrakt, 16:9 og eksport.
 
 
-## 0.18.60 – helhet og eksportsamsvar
+## Eksportsamsvar og semantisk pilføring (oppdatert 9. november 2026)
 
-Tre native verdi-kort til høyre (dataeide `visual.outcomes`) løfter mulig forretningsverdi uten å bli et statisk bilde. Kilde-, kontekst- og handlingslag skal ha synlige, logisk korrekte forbindelser. Bruk en enkelt pil fra kilde-/systemlaget til beslutningsløkken, ikke tre piler som impliserer én-til-én-mapping av kilder mot prosessledd. Verifiser alltid faktisk nedlastet PNG/JPG med samme art direction og visuelle ressurser, i tillegg til nettleserens skjermbilde.
+Tre native verdi-kort til høyre (dataeide `visual.outcomes`) løfter mulig forretningsverdi uten å bli et statisk bilde. Kilde-, kontekst- og handlingslag skal ha synlige, logisk korrekte forbindelser. Bruk én eller flere eksplisitte, semantisk begrunnede piler. I gjeldende kontekstscene peker tre rette kildepiler mot samme kontekstområde uten å antyde én-til-én-mapping mot fasettene. Beslutningssløyfen har en separat sammenheng. Verifiser alltid faktisk nedlastet PNG/JPG med samme art direction og visuelle ressurser, i tillegg til nettleserens skjermbilde.
