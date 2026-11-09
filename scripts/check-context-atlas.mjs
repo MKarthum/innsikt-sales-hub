@@ -44,7 +44,9 @@ for(const {html} of rendered){
  assert.ok(html.includes('class="mc-spatial"'),'Object effects live behind content, in their own scene layer');
  assert.ok(html.includes('class="acp-scene-stage" data-stage-owner="context"'),'Advanced stage derives from the core object');
  assert.ok(html.includes('class="acp-value-region"'),'Possible-value space is independent from factual cards');
- assert.ok(html.includes('class="acp-cinematic-rays"'),'Atmosphere has a distinct cinematic visual language');
+ assert.ok(html.includes('class="acp-organic-atmosphere" data-atmosphere="organic"'),'The advanced backdrop uses an organic visual layer');
+ assert.ok(html.includes('class="acp-organic-mist"')&&html.includes('class="acp-organic-streams"'),'Mist and light currents are separate decorative layers');
+ assert.ok(!html.includes('class="acp-cinematic-rays"')&&!html.includes('class="acp-cinematic-landscape"'),'Large sharp background polygons must not return');
  assert.ok(html.includes('class="acp-editorial-motif acp-editorial-people"'),'People are not represented by the old uncanny portrait alone');
  assert.ok(html.includes('class="acp-editorial-motif acp-editorial-agent"'),'AI is represented by abstract intentional geometry');
  assert.equal((html.match(/class="mc-edge-ambient"/g)||[]).length,10,'Ambient edges must reuse exactly the ten canonical paths');

@@ -359,3 +359,33 @@
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"] .acp-core-paint-top{stop-color:color-mix(in srgb,var(--pres-bg) 77%,var(--pres-accent))}
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"] .acp-core-paint-mid{stop-color:color-mix(in srgb,var(--pres-bg) 86%,var(--pres-accent))}
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"] .acp-core-paint-bottom{stop-color:var(--pres-bg)}
+
+/* Organic atmosphere: diffuse mist and light flow replace the sharp background
+   polygons. These layers never define semantic nodes or relationships. */
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-atmosphere{opacity:0;pointer-events:none}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-mist-core{stop-color:var(--pres-accent);stop-opacity:.33}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-mist-middle{stop-color:var(--pres-accent);stop-opacity:.17}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-mist-edge{stop-color:var(--pres-accent);stop-opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-stream-start{stop-color:var(--pres-accent);stop-opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-stream-peak{stop-color:var(--pres-fg);stop-opacity:.19}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-stream-end{stop-color:var(--pres-accent);stop-opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-streams path{fill:none;stroke-linecap:round}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-atmosphere{opacity:1}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-mist{opacity:.95}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-streams{opacity:.83}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-twilight{opacity:.39}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-twilight ellipse{filter:blur(72px)}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-ambient-particles{opacity:.31}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-ambient-waves{opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-ambient-volume{opacity:.44}
+.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-mist{opacity:.56}
+.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-streams{opacity:.42}
+.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-twilight{opacity:.16}
+/* Only diffuse scenery breathes, never live text, objects or canonical arrows. */
+@media (prefers-reduced-motion:no-preference){
+ .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-organic-twilight{
+  animation:acp-organic-breathe 28s ease-in-out infinite alternate;
+ }
+}
+@keyframes acp-organic-breathe{0%{opacity:.26}100%{opacity:.4}}
+@media(forced-colors:active){.scene-modular-v1[data-scene-family="context-atlas"] .acp-organic-atmosphere{display:none}}

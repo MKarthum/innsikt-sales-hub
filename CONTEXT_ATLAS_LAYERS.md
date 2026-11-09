@@ -31,3 +31,7 @@ Visual inspection must assess immediate visual identity between variants, cohere
 ## Visual review refinement
 
 Review of real screenshots found three weaknesses in the first cinematic version: oversized hard-edged light shafts, repeated bright backplane borders, and the value-region edge too close to its heading. The background rays now blur into atmospheric light rather than resembling structural edges, material gradients replace flat glass rectangles, the elevated surfaces are restrained, and the separate value pavilion begins below its heading. The vector people and abstract agent gained additional faceted shading. Export smoke tests recognize the intentionally lower contrast of the blueprint without using bitmap variation as an aesthetic gate.
+
+## Organisk atmosfære (v0.18.138)
+
+Den avanserte stilen har fått flere ujevne tåkefelt, brede kurvede lysstrømmer og små partikler i deterministiske, naturlige klynger, i stedet for store diagonale lysflater og landskapspolygoner. De nye lysformene ligger utelukkende i bakgrunnslaget og bruker temavariabler. Et svært svakt, langsomt pust i bakgrunnen respekterer redusert bevegelse. De 22 fagobjektene, ti relasjonene, tekstene og den felles geometrien forblir uendret. Den samme SVG-scenen brukes til skjermvisning og eksport.
