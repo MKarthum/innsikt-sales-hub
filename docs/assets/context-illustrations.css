@@ -1,7 +1,6 @@
 /* Progressive semantic illustrations. Only the advanced treatment shows 3D motifs.
    Basic and illustrated keep the same graph, object coordinates and factual copy. */
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-illustration,
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-illustration,
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-board-art{opacity:0;pointer-events:none}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-art-wire,
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-art-gleam{stroke:var(--pres-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
@@ -48,11 +47,6 @@
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-metal-light{stop-color:var(--pres-fg);stop-opacity:.95}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-metal-mid{stop-color:var(--pres-accent);stop-opacity:.45}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-metal-dark{stop-color:var(--pres-bg);stop-opacity:.88}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-aura{fill:var(--pres-accent);opacity:.12}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-disk{fill:none;stroke:var(--pres-accent);stroke-width:2;opacity:.62}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-link{fill:none;stroke:var(--pres-accent);stroke-width:2.8;opacity:.9}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-point{fill:var(--pres-fg);stroke:var(--pres-accent);stroke-width:4}
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-ring{stroke:var(--pres-accent);stroke-width:2;fill:none;opacity:.62}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-board-grid{stroke:var(--pres-accent);stroke-width:1.3;opacity:.16;fill:none}
 .scene-modular-v1[data-scene-family="context-atlas"] .acp-board-led{stroke:var(--pres-accent);stroke-width:3;opacity:.7}
 /* Illustrated is a strong vector/diagram language, not a faint icon atop the same card. */
@@ -63,18 +57,14 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-structure{
  opacity:.85;stroke-width:3.6}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-volume{opacity:.55}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-art-volume{opacity:.6}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-art-network{opacity:.88}
 /* Advanced uses a different *internal* presentation of the same node, not a new node layout. */
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration,
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-illustration,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-board-art{opacity:1}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration{
  filter:drop-shadow(0 0 13px color-mix(in srgb,var(--pres-accent) 64%,transparent))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-concept,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-icon,
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-icon-plate,
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-art{opacity:0}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-icon-plate{opacity:0}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-title,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-detail{transform:translateX(40px)}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-title{font-size:19px;font-weight:800}
@@ -89,8 +79,6 @@
  filter:drop-shadow(0 0 10px color-mix(in srgb,var(--pres-accent) 22%,transparent))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-objects{
  filter:drop-shadow(0 0 5px var(--pres-accent))}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-points{
- filter:drop-shadow(0 0 9px var(--pres-accent))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-track{
  stroke-width:3.8;filter:drop-shadow(0 0 5px var(--pres-accent))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-ambient{
@@ -103,14 +91,10 @@
 
 /* Independent, generated image fragments use each node's local SVG coordinate system.
    Nothing here contains canonical text, arrows or whole-slide pixel geometry. */
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-raster,
-.scene-modular-v1[data-scene-family="context-atlas"] .acp-hero-raster{opacity:0;pointer-events:none}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster,
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-raster{
+.scene-modular-v1[data-scene-family="context-atlas"] .acp-art-raster{opacity:0;pointer-events:none}
+.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster{
  opacity:.98;filter:drop-shadow(0 1px 6px color-mix(in srgb,var(--pres-accent) 32%,transparent))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-objects{opacity:.18;filter:none}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-mesh{opacity:.3}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-points{opacity:.25;filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration{filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-ambient{
  opacity:.2;stroke-width:12;filter:drop-shadow(0 0 4px var(--acp-glow))}
@@ -124,8 +108,7 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-icon{opacity:0}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-structure{
  opacity:1;stroke-width:3.6}
-.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster,
-.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-raster{
+.present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-art-raster{
  opacity:.83;filter:contrast(1.08) saturate(.92)}
 
 /* The copy offset is now a native SVG coordinate computed per node, not an export-sensitive CSS transform. */
@@ -173,7 +156,6 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="standard"] .acp-card-depth,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="standard"] .acp-card-gloss,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="standard"] .acp-core-gloss,
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="standard"] .acp-core-art,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="standard"] .acp-icon-plate,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="standard"] .acp-aura,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="standard"] .acp-ambient-volume,
@@ -192,7 +174,6 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-glass{
  fill:color-mix(in srgb,var(--pres-bg) 76%,var(--pres-accent));filter:none;stroke-width:1.6}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-stack{filter:none;stroke-width:1.5}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-core-art-volume{opacity:.18;filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept{filter:none}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-concept-structure{
  opacity:.98;filter:none;stroke-width:3}
@@ -202,7 +183,6 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .mc-edge-track{filter:none;stroke-width:3.1}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-aura-center{stop-opacity:.035}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-node-light{opacity:0}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-hero-illustration,
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich"] .acp-illustration{opacity:0}
 /* Advanced: premium environmental identity. Keep global light behind all labels. */
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-cinematic-backdrop{opacity:.95}
@@ -252,9 +232,6 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-light-rim{
  opacity:.9;fill:none;stroke:var(--pres-fg);stroke-width:2.4;stroke-linecap:round}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-icon-plate{opacity:0}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-raster{opacity:1}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-art-volume{opacity:.68}
-.scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-mesh{opacity:.75}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-ambient{
  opacity:.62;stroke-width:17;filter:drop-shadow(0 0 10px var(--pres-accent))}
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .mc-edge-track{
@@ -484,13 +461,6 @@
  .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-light-rim{
   animation:acp-light-shimmer 3.5s ease-in-out infinite alternate;
  }
- .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-core-pulse{
-  transform-box:fill-box;transform-origin:center;
-  animation:acp-core-breathe 2.7s ease-in-out infinite;
- }
- .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-hero-points{
-  animation:acp-light-shimmer 3.8s ease-in-out infinite alternate-reverse;
- }
 }
 @keyframes acp-context-flow{from{stroke-dashoffset:0}to{stroke-dashoffset:-156}}
 @keyframes acp-organic-mist-drift{
@@ -504,7 +474,6 @@
 @keyframes acp-art-float{from{transform:translate(0,3px)}to{transform:translate(0,-5px)}}
 @keyframes acp-light-wander{from{transform:translateX(-10px);opacity:.27}to{transform:translateX(11px);opacity:.55}}
 @keyframes acp-light-shimmer{from{opacity:.36}to{opacity:1}}
-@keyframes acp-core-breathe{0%,100%{opacity:.45;transform:scale(.88)}50%{opacity:1;transform:scale(1.25)}}
 @media print{
  .scene-modular-v1[data-scene-family="context-atlas"] .mc-edge-packet{display:none!important}
 }
