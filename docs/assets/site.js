@@ -472,10 +472,10 @@ function artSelect(id,slide=null){
    +(artDirection(slide)===value?' selected':'')+'>'+esc(label)+'</option>').join('')
   +'</select></label>';
 }
-function motionSelect(){
+function motionSelect(id='present-motion-mode'){
  const ui=D.pages.slideLibraryUi;
- return '<label class="library-tone-field" for="present-motion-mode">'+esc(ui.motionLabel)
-  +'<select id="present-motion-mode" aria-label="'+esc(ui.motionLabel)+'">'
+ return '<label class="library-tone-field" for="'+esc(id)+'">'+esc(ui.motionLabel)
+  +'<select id="'+esc(id)+'" aria-label="'+esc(ui.motionLabel)+'">'
   +[['on',ui.motionOn],['off',ui.motionOff]].map(([id,label])=>'<option value="'+id+'"'+(presentationMotionMode===id?' selected':'')+'>'+esc(label)+'</option>').join('')
   +'</select></label>';
 }
@@ -483,8 +483,9 @@ function setPresentationMotion(value){
  if(!['on','off'].includes(value))return;
  presentationMotionMode=value;
  try{localStorage.setItem('innsikt-presentation-motion',value)}catch{}
- const selector=document.getElementById('present-motion-mode');
- if(selector)selector.value=value;
+ document.querySelectorAll('#present-motion-mode,#library-motion-mode').forEach(el=>el.value=value);
+ document.querySelectorAll('.slide-library-detail-stage .present-frame,.slide-library-fullscreen-stage .present-frame')
+  .forEach(frame=>frame.setAttribute('data-motion',value));
  const frame=document.getElementById('slide-body');
  if(frame){
   frame.setAttribute?.('data-motion',value);
@@ -577,7 +578,7 @@ function slideLibraryFullscreenPage(id){
  return '<section id="slide-library-fullscreen-page" class="slide-fullscreen-page" aria-label="Fullskjerm: '+esc(item.title)+'">'
   +outside('Lukk fullskjerm ved å trykke over lysbildet')
   +'<div class="slide-fullscreen-body">'+outside('Lukk fullskjerm til venstre')
-  +'<div class="slide-library-fullscreen-stage" data-slide-preview><div class="present-frame present-rich" data-library-slide-id="'+esc(item.id)+'" data-library-deck-id="'+esc(deckId)+'" data-tone="'+esc(libraryTone(item,deckId))+'">'
+  +'<div class="slide-library-fullscreen-stage" data-slide-preview><div class="present-frame present-rich" data-library-slide-id="'+esc(item.id)+'" data-library-deck-id="'+esc(deckId)+'" data-tone="'+esc(libraryTone(item,deckId))+'" data-motion="'+esc(presentationMotionMode)+'">'
   +slideMarkup(item,index,deckId)+'</div></div>'+outside('Lukk fullskjerm til høyre')+'</div>'
   +'<nav class="slide-fullscreen-toolbar" aria-label="Lysbildekontroller">'
   +'<details class="slide-fullscreen-download"><summary>'+esc(D.pages.slideLibraryUi.fullscreenExportLabel)+'</summary>'
@@ -688,7 +689,7 @@ function slideLibraryPage(id){
    +'<p>'+esc(u.note)+'</p><button class="btn subtle" type="button" data-slide-open="'+esc(s.id)+'" data-deck-open="'+esc(u.deckId)+'">'+esc(ui.openLabel)+' '+ico('arrow-right')+'</button></section>').join('');
  return libraryTabs('slides')+'<a class="text-link" href="#lysbilder">'+ico('arrow-left')+' '+esc(ui.returnLabel)+'</a>'
    +hdr(ui.eyebrow,s.title,(s.classification==='internal'?'INTERNT · ':'')+s.id+' · '+(s.topic||''))
-   +toneSelect('library-tone-mode')+artSelect('library-art-mode',s)+(s.visual?.artDirections?.length?'<p class="slide-library-tone-note">'+esc(ui.toneInfo)+'</p>':'')+'<div class="slide-library-detail-stage slide-library-detail-open" data-slide-preview data-slide-preview-open="'+esc(s.id)+'" role="button" tabindex="0" aria-label="Vis '+esc(s.title)+' i fullskjerm"><div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(previewDeck)+'" data-tone="'+esc(libraryTone(s,previewDeck))+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
+   +toneSelect('library-tone-mode')+artSelect('library-art-mode',s)+motionSelect('library-motion-mode')+(s.visual?.artDirections?.length?'<p class="slide-library-tone-note">'+esc(ui.toneInfo)+'</p>':'')+'<div class="slide-library-detail-stage slide-library-detail-open" data-slide-preview data-slide-preview-open="'+esc(s.id)+'" role="button" tabindex="0" aria-label="Vis '+esc(s.title)+' i fullskjerm"><div class="present-frame present-rich" data-library-slide-id="'+esc(s.id)+'" data-library-deck-id="'+esc(previewDeck)+'" data-tone="'+esc(libraryTone(s,previewDeck))+'" data-motion="'+esc(presentationMotionMode)+'">'+slideMarkup(s,used[0]?.index||0,previewDeck)+'</div></div>'
    +singleSlideDownloadMarkup(s.id)
    +'<p class="slide-library-fullscreen-hint" aria-hidden="true">Trykk på lysbildet for fullskjerm</p>'
    +'<div class="slide-library-info"><section><h2>'+esc(ui.speakerLabel)+'</h2>'+(note||'<p class="fineprint">Se notatene i historiene nedenfor.</p>')
@@ -1022,7 +1023,7 @@ function initPromptContextEvents(){
  document.addEventListener('change',e=>{
   if(e.target.id==='present-tone-mode'||e.target.id==='library-tone-mode'){setPresentationTone(e.target.value);return;}
   if(e.target.id==='present-art-mode'||e.target.id==='library-art-mode'){setPresentationArtMode(e.target.value);return;}
-  if(e.target.id==='present-motion-mode'){setPresentationMotion(e.target.value);return;}
+  if(e.target.id==='present-motion-mode'||e.target.id==='library-motion-mode'){setPresentationMotion(e.target.value);return;}
   const select=e.target.closest?.('[data-slide-filter]');
   if(select){libraryFilters[select.dataset.slideFilter]=select.value;updateSlideLibrary();}
  });
