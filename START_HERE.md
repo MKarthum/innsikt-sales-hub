@@ -21,7 +21,7 @@ Les [PROMPT_VARIABLES.md](PROMPT_VARIABLES.md) og [PROMPT_WORKFLOW.md](PROMPT_WO
 - `site.json`: versjon, publiseringsdato og siste faglige gjennomgang.
 - `pages.json`: sidetitler, overskrifter, generelt sidebudskap, kvalifiseringsspørsmål og historier/rekkefølge.
 - `slides.json`: selvstendige lysbilder med stabil ID, scope, presentasjonsinnhold, grunnnotater og egne kildehenvisninger. Se `PRESENTATION_ARCHITECTURE.md`. **Visuelt bindende regler:** `SLIDE_DESIGN_SYSTEM.md`. Se også individuell status i `SLIDE_REDESIGN_AUDIT_2026-11-03.md`. CSS-dekor alene gir ikke ny komposisjon. Et skin bytter bare CSS-roller, ikke figurer eller fakta.
-- Lysbilder med `type: visual` består av innhold i `slides.json`, rendering i `docs/assets/slide-visuals.js` og semantisk styling i `docs/assets/slide-visuals.css`. Ikke kopier tekst og merkefarger inn i SVG-koden.
+- Lysbilder med `type: visual` eies av `slides.json` og rutes gjennom `docs/assets/slide-visuals.js`. For `visual.composition.engine: modular-v1` brukes `visual-composition.js`, relevante sceneadaptere og temastyrt `visual-composition.css`. Eldre, aktive visningstyper kan fortsatt bruke `slide-visuals.css`. For nye semantiske SVG-lysbildemaler, se `PRESENTATION_IMAGE_ARCHITECTURE.md`. Ingen fagtekst eller merkefarger skal hardkodes i SVG-koden.
 - `sources.json`: felles kilderegister. ID-er refereres av alle domenefiler.
 - `market.json`: SSB-statistikk, trender, oppkjøp og markedssignaler.
 - `sales.json`: salgsinnganger, forretningsbehov, scenarioer, målgrupper og kompetanseområder.
