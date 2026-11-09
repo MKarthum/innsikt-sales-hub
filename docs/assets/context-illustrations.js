@@ -112,19 +112,6 @@ function render(node,b,esc,assets){
   ${editorialMotif(safeMotif)}
  </g>`;
 }
-function hub(b,assets,esc){
- const src=window.InnsiktAssets.src(assets,'context-motif-context');
- const cx=n(b.x+b.w-337),cy=n(b.y+19),w=317,h=105;
- const points=[[28,64],[73,28],[107,80],[144,36],[195,63],[236,19],[276,70],[151,85],[211,96]];
- const edges=[[0,1],[0,2],[1,3],[1,4],[2,3],[2,7],[3,4],[3,5],[3,7],[4,5],[4,6],[4,7],[5,6],[6,8],[7,8]];
- return `<g class="acp-hero-illustration" data-illustration-owner="context" aria-hidden="true" transform="translate(${cx} ${cy})">
-  ${ellipse(151,56,151,50,'acp-hero-aura')}${ellipse(151,81,137,20,'acp-hero-disk')}
-  <g class="acp-hero-mesh">${edges.map(([a,b])=>line(`M${points[a][0]} ${points[a][1]}L${points[b][0]} ${points[b][1]}`,'acp-hero-link')).join('')}</g>
-  <g class="acp-hero-points">${points.map(([x,y],i)=>circ(x,y,i===3?9:i%2===0?5:7,'acp-hero-point')).join('')}</g>
-  ${ellipse(151,77,130,15,'acp-hero-ring')}${ellipse(151,77,105,9,'acp-hero-ring acp-hero-ring-inner')}
-  <image class="acp-hero-raster" data-asset-id="context-motif-context" href="${esc(src)}" x="0" y="-6" width="310" height="112" preserveAspectRatio="xMidYMid meet" aria-hidden="true"/>
- </g>`;
-}
 function decoration(b){
  const x=n(b.x+17),y=n(b.y+13),w=n(b.w-35),h=n(b.h-23);
  // A local board pattern is attached to the context container, never the global scene.
@@ -133,6 +120,6 @@ function decoration(b){
   <path class="acp-board-led" d="M${x} ${n(y+h*.99)}H${n(x+w)}"/>
  </g>`;
 }
-window.InnsiktContextArt={version:1,render,hub,decoration,motifs:Object.freeze(Object.keys(picture))};
+window.InnsiktContextArt={version:1,render,decoration,motifs:Object.freeze(Object.keys(picture))};
 })();
 
