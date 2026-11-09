@@ -458,14 +458,14 @@
   animation:acp-ambient-drift 13s ease-in-out infinite alternate;
  }
  /* Foreground motion: illustration and optical light, never boxes or text. */
- .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration{
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-illustration :is(.acp-art-raster,.acp-art-objects){
   transform-box:fill-box;transform-origin:center;
   animation:acp-art-float 5.1s ease-in-out infinite alternate;
  }
- .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-node:nth-child(3n) .acp-illustration{
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-node:nth-child(3n) .acp-illustration :is(.acp-art-raster,.acp-art-objects){
   animation-delay:-2.3s;animation-duration:6.3s;
  }
- .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-node:nth-child(3n+1) .acp-illustration{
+ .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-node:nth-child(3n+1) .acp-illustration :is(.acp-art-raster,.acp-art-objects){
   animation-delay:-3.1s;animation-duration:4.6s;
  }
  .present-frame[data-motion="on"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-card-lens{
