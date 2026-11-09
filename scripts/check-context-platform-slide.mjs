@@ -106,4 +106,19 @@ assert.ok(source.includes("if(!sharedScene&&artDirection(s)==='rich-image'"),
  'No approved bitmap may shadow the same semantic SVG');
 assert.ok(!fs.readFileSync('docs/assets/slide-visuals.js','utf8').includes(
  "if(kind==='context-platforms'){"),'Obsolete context renderer must not be maintained');
-console.log('PASS – two scenes, one geometry, three styles, 10 edges, facets, icons, semantics and graph invariants');
+const sceneRenderer=fs.readFileSync('docs/assets/visual-composition.js','utf8');
+const motionCss=fs.readFileSync('docs/assets/context-illustrations.css','utf8');
+const siteJs=fs.readFileSync('docs/assets/site.js','utf8');
+assert.ok(sceneRenderer.includes('markerUnits="userSpaceOnUse"'),
+ 'Arrowheads should not multiply the line width');
+assert.ok(motionCss.includes('animation:acp-context-flow 5.6s linear infinite'),
+ 'Motion should visibly follow existing semantic paths');
+assert.ok(motionCss.includes('.present-frame[data-motion="on"]'),
+ 'Motion must only run with the user setting enabled');
+assert.ok(motionCss.includes('opacity:0!important;stroke:none!important'),
+ 'Semantic edges should not render as broad framed tubes');
+assert.ok(siteJs.includes("motionSelect('library-motion-mode')"),
+ 'Motion must be available on a slide library detail');
+assert.ok(siteJs.includes("e.target.id==='library-motion-mode'"),
+ 'The library motion control must be actionable');
+console.log('PASS – two scenes, stable graph, clear arrows and opt-in animation');
