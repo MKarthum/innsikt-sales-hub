@@ -25,10 +25,13 @@ function fromSlide(slide){
  const adapter=adapters.get(v.scene);
  if(adapter)return adapter(slide);
  if(v.scene!=='list')throw Error('Mangler semantisk adapter for '+v.scene);
- return {version:1,id:slide.id,title:slide.title,cue:slide.cue,subtitle:slide.body||'',
-  nodes:(v.items||[]).map((title,i)=>({id:'item:'+i,type:'card',content:{
-   title,detail:v.detail?.[i]||'',assetId:v.itemAssetIds?.[i]||null}})),
-  edges:config.edges||[],layers:config.layers||[],
+ const family=config.family||'general';
+ if(!idOk(family))throw Error('Ugyldig scenefamilie');
+ const nodes=(v.items||[]).map((title,i)=>({id:'item:'+i,type:'card',index:i,content:{
+  title,detail:v.detail?.[i]||'',assetId:v.itemAssetIds?.[i]||null}}));
+ if(v.conclusion)nodes.push({id:'outcome',type:'focus',content:v.conclusion});
+ return {version:1,id:slide.id,family,title:slide.title,cue:slide.cue,subtitle:slide.body||'',
+  nodes,edges:config.edges||[],layers:config.layers||[],
   variants:config.variants||{standard:'columns'},overrides:config.overrides||{}};
 }
 function validate(scene){
@@ -88,6 +91,13 @@ registerComposition('network',nodes=>{
   y:n(cy+270*Math.sin(2*Math.PI*(i-1)/(nodes.length-1)-Math.PI/2)-110),w:340,h:220});
 });
 registerComposition('flow',nodes=>band(nodes,{y:340,h:250}));
+/* Reusable four-stage explanation plus one takeaway. No copy or slide IDs here. */
+registerComposition('flow-with-outcome',nodes=>{
+ if(nodes.length!==5||nodes[4].type!=='focus')
+  throw Error('Flow med konklusjon krever fire steg og ett utfall');
+ const base=band(nodes.slice(0,4),{x:84,y:320,width:1432,gap:35,h:282});
+ return [...base,{id:nodes[4].id,x:300,y:681,w:1000,h:124}];
+});
 function anchors(box){
  return {left:[box.x,box.y+box.h/2],right:[box.x+box.w,box.y+box.h/2],
   top:[box.x+box.w/2,box.y],bottom:[box.x+box.w/2,box.y+box.h]};
@@ -147,10 +157,20 @@ function text(value,x,y,cls,esc,{max=40,limit=3,spacing=24}={}){
 function basicCard({node,box:b,esc,assets,level}){
  const c=node.content,compact=b.h<230,max=Math.max(18,Math.floor((b.w-56)/12.5));
  const src=c.assetId?window.InnsiktAssets.src(assets,c.assetId):null;
+ if(node.type==='focus'){
+  return '<g class="mc-card mc-card-focus" data-node-id="'+esc(node.id)+'" data-node-kind="focus">'
+   +'<rect class="mc-card-shadow" x="'+n(b.x+6)+'" y="'+n(b.y+7)+'" width="'+n(b.w)+'" height="'+n(b.h)+'" rx="25"/>'
+   +'<rect class="mc-card-surface" x="'+n(b.x)+'" y="'+n(b.y)+'" width="'+n(b.w)+'" height="'+n(b.h)+'" rx="25"/>'
+   +(src?'<image class="mc-icon" href="'+esc(src)+'" x="'+n(b.x+27)+'" y="'+n(b.y+24)+'" width="72" height="72" preserveAspectRatio="xMidYMid meet"/>':'')
+   +text(c.title,b.x+(src?125:36),b.y+52,'mc-card-title',esc,{max:72,limit:2,spacing:31})
+   +(c.detail?text(c.detail,b.x+(src?125:36),b.y+85,'mc-card-detail',esc,{max:76,limit:2,spacing:22}):'')
+   +'</g>';
+ }
  return '<g class="mc-card" data-node-id="'+esc(node.id)+'" data-node-kind="'+esc(node.type)+'">'
   +'<rect class="mc-card-shadow" x="'+n(b.x+6)+'" y="'+n(b.y+12)+'" width="'+n(b.w)+'" height="'+n(b.h)+'" rx="27"/>'
   +'<rect class="mc-card-surface" x="'+n(b.x)+'" y="'+n(b.y)+'" width="'+n(b.w)+'" height="'+n(b.h)+'" rx="27"/>'
   +'<path class="mc-card-glint" d="M'+n(b.x+26)+' '+n(b.y+12)+' H'+n(b.x+b.w-26)+'"/>'
+  +(Number.isInteger(node.index)?'<text class="mc-card-sequence" x="'+n(b.x+b.w-39)+'" y="'+n(b.y+56)+'" text-anchor="end">'+String(node.index+1).padStart(2,'0')+'</text>':'')
   +(src?'<image class="mc-icon" href="'+esc(src)+'" x="'+n(b.x+28)+'" y="'+n(b.y+27)+'" width="52" height="52" preserveAspectRatio="xMidYMid meet" aria-hidden="true"/>':'')
   +text(c.title,b.x+30,b.y+(compact?118:139),'mc-card-title',esc,{max,limit:3,spacing:31})
   +(c.detail?text(c.detail,b.x+30,b.y+(compact?177:213),'mc-card-detail',esc,{max:max+4,limit:3,spacing:22}):'')
@@ -177,9 +197,10 @@ function drawLayers(layers,assets,esc){
    It is decorative, uses no extra graph relationship, and is styled only by
    the opt-in context skin. Negative beginnings distribute simultaneous signals. */
 function edgePacket(edge,index,scene,esc){
- if(scene.family!=='context-atlas')return '';
+ if(!['context-atlas','story-flow'].includes(scene.family))return '';
  const cycle=edge.from.startsWith('cycle:')&&edge.to.startsWith('cycle:');
- const duration=cycle?1.95:edge.relation==='updates'?6.4:
+ const shortFlow=scene.family==='story-flow';
+ const duration=shortFlow?2.9:cycle?1.95:edge.relation==='updates'?6.4:
   edge.from.startsWith('sources:')?3.15:edge.to.startsWith('consumers:')?3.45:4.85;
  const delay=-((index*1.37)%duration).toFixed(2);
  return '<g class="mc-edge-packet" aria-hidden="true">'
@@ -192,7 +213,7 @@ function edgePacket(edge,index,scene,esc){
    hardcoded drawing. Draw it inside the available corridor so the destination
    card does not cover it. The same edge also carries the animated packet. */
 function inlineEdgeArrow(edge,scene){
- if(scene.family!=='context-atlas'||!['supports','advances','updates'].includes(edge.relation))
+ if(!['context-atlas','story-flow'].includes(scene.family)||!['supports','advances','updates'].includes(edge.relation))
   return '';
  const values=(edge.path.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
  if(values.length!==8||!values.every(Number.isFinite))
