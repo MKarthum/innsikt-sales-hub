@@ -65,7 +65,7 @@ const picture={
 /* Editorial vector replacements for the two formerly uncanny portrait crops.
    These are object-local silhouettes, not independent factual objects or connections. */
 function editorialMotif(motif){
- if(motif==='collaboration')return \`<g class="acp-editorial-motif acp-editorial-people">
+ if(motif==='collaboration')return `<g class="acp-editorial-motif acp-editorial-people">
   <ellipse class="acp-editorial-floor" cx="60" cy="90" rx="47" ry="9"/>
   <path class="acp-editorial-frame" d="M11 69L18 17L47 8L60 45V80Z"/>
   <path class="acp-editorial-person-back" d="M17 76Q17 57 31 53L48 51Q61 55 65 76L61 85H18Z"/>
@@ -74,8 +74,8 @@ function editorialMotif(motif){
   <path class="acp-editorial-face-front" d="M55 30Q61 14 77 17Q92 21 92 38L83 55Q67 63 58 49Z"/>
   <path class="acp-editorial-highlight" d="M63 24Q75 18 84 29M25 34Q29 25 38 25M63 64Q81 64 90 76"/>
   <path class="acp-editorial-glimmer" d="M5 66L14 61M96 22L105 17M95 51L108 48"/>
- </g>\`;
- if(motif==='agents')return \`<g class="acp-editorial-motif acp-editorial-agent">
+ </g>`;
+ if(motif==='agents')return `<g class="acp-editorial-motif acp-editorial-agent">
   <ellipse class="acp-editorial-floor" cx="61" cy="91" rx="41" ry="9"/>
   <path class="acp-editorial-agent-shadow" d="M61 7L99 30V71L61 94L22 71V30Z"/>
   <path class="acp-editorial-agent-body" d="M61 13L91 32V68L61 88L30 68V32Z"/>
@@ -85,7 +85,7 @@ function editorialMotif(motif){
   <circle class="acp-editorial-agent-light" cx="61" cy="51" r="8"/>
   <path class="acp-editorial-highlight" d="M37 36V63L55 74M75 23L83 29M40 25L61 13"/>
   <path class="acp-editorial-glimmer" d="M11 48H23M96 49H108M61 5V12"/>
- </g>\`;
+ </g>`;
  return '';
 }
 function render(node,b,esc,assets){
