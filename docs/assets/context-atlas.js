@@ -135,6 +135,7 @@ function coreNode({node,box:b,esc,assets}){
  const c=node.content;
  return nodeRoot(node,'acp-core',
   rect({x:b.x+16,y:b.y+18,w:b.w-8,h:b.h},'acp-core-depth',33)
+  +`<path class="acp-core-architectural-base" d="M${N(b.x+31)} ${N(b.y+9)}H${N(b.x+b.w-12)}L${N(b.x+b.w+11)} ${N(b.y+27)}V${N(b.y+b.h+15)}L${N(b.x+31)} ${N(b.y+b.h+15)}Z"/>`
   +rect({x:b.x+8,y:b.y+8,w:b.w-5,h:b.h},'acp-core-stack',32)
   +rect(b,'acp-core-glass',32)
   +rect({x:b.x+7,y:b.y+6,w:b.w-14,h:b.h*.4},'acp-core-gloss',27)
@@ -156,8 +157,11 @@ function contextCard({node,box:b,esc,assets,level}){
  const pill=t==='context-step'?`<circle class="acp-step-index-ring" cx="${N(b.x+b.w-20)}" cy="${N(b.y+20)}" r="11"/>`:'';
  return nodeRoot(node,visual,
   rect({x:b.x+4,y:b.y+8,w:b.w,h:b.h},'acp-card-depth',20)
+  +`<path class="acp-card-architectural-base" d="M${N(b.x+15)} ${N(b.y+3)}H${N(b.x+b.w-8)}L${N(b.x+b.w+9)} ${N(b.y+17)}V${N(b.y+b.h+8)}H${N(b.x+15)}Z"/>`
   +rect(b,'acp-card-panel',20)
   +rect({x:b.x+4,y:b.y+3,w:b.w-8,h:b.h*.47},'acp-card-gloss',16)
+  +`<ellipse class="acp-card-lens" cx="${N(b.x+55)}" cy="${N(b.y+b.h/2)}" rx="54" ry="${N(b.h*.61)}"/>
+  <path class="acp-card-light-rim" d="M${N(b.x+24)} ${N(b.y+4)}H${N(b.x+b.w-29)}"/>`
   +rect({x:b.x+12,y:b.y+12,w:49,h:b.h-24},'acp-icon-plate',14)
   +conceptArt(node,b,esc)
   +(window.InnsiktContextArt?.render(node,b,esc,assets)||'')
@@ -201,16 +205,47 @@ api.registerDecoration('context-atlas',({geometry,scene})=>{
   '<radialGradient id="'+id+'-space"><stop offset="0" class="acp-space-inner"/><stop offset=".53" class="acp-space-mid"/><stop offset="1" class="acp-space-outer"/></radialGradient>'+
   '<radialGradient id="'+id+'-node"><stop offset="0" class="acp-node-inner"/><stop offset=".55" class="acp-node-mid"/><stop offset="1" class="acp-node-outer"/></radialGradient>'+
   '<linearGradient id="'+id+'-veil" x1="0" y1="0" x2=".8" y2="1"><stop offset="0" class="acp-veil-top"/><stop offset=".55" class="acp-veil-mid"/><stop offset="1" class="acp-veil-end"/></linearGradient>'+
+  '<radialGradient id="'+id+'-cinema" cx=".45" cy=".52" r=".88"><stop offset="0" class="acp-cinema-core"/><stop offset=".52" class="acp-cinema-middle"/><stop offset="1" class="acp-cinema-edge"/></radialGradient>'+
   '</defs>';
  const atmosphere=definitions+
   '<rect class="acp-ambient-veil" width="1600" height="900" fill="url(#'+id+'-veil)"/>'+
+  '<rect class="acp-cinematic-backdrop" x="0" y="178" width="1600" height="722" fill="url(#'+id+'-cinema)"/>'+
+  '<g class="acp-cinematic-rays">'+
+    '<path d="M210 200 L438 200 L805 900 L550 900Z"/>'+
+    '<path d="M575 182 L740 182 L990 900 L720 900Z"/>'+
+    '<path d="M1065 170 L1180 170 L1535 900 L1235 900Z"/>'+
+   '</g>'+
+  '<g class="acp-cinematic-clouds">'+
+    '<ellipse cx="'+num(cx*.61)+'" cy="'+num(cy*.7)+'" rx="490" ry="325"/>'+
+    '<ellipse cx="'+num(cx+core.w*.62)+'" cy="'+num(cy+165)+'" rx="560" ry="315"/>'+
+    '<ellipse cx="800" cy="876" rx="1050" ry="220"/>'+
+   '</g>'+
+  '<g class="acp-cinematic-landscape">'+
+    '<path d="M0 878C230 777 465 814 720 828S1230 754 1600 829V900H0Z"/>'+
+    '<path d="M0 870C365 835 485 884 795 860S1300 794 1600 864V900H0Z"/>'+
+   '</g>'+
   '<ellipse class="acp-ambient-volume" cx="'+cx+'" cy="'+cy+'" rx="'+num(core.w*.89)+'" ry="'+num(core.h*2.5)+'" fill="url(#'+id+'-space)"/>'+
   '<g class="acp-ambient-waves">'+
    '<path d="M-100 686Q390 575 '+cx+' '+num(core.y+core.h*.68)+' T1730 697"/>'+
    '<path d="M-60 753Q480 632 '+cx+' '+num(core.y+core.h*.9)+' T1660 748"/>'+
    '<path d="M-30 835Q560 700 '+cx+' '+num(core.y+core.h*1.35)+' T1640 834"/>'+
   '</g><g class="acp-ambient-particles">'+dust+'</g>';
- const spatial='<g class="acp-object-light-fields">'+lights+'</g>'+
+ const values=Array.from({length:3},(_,i)=>geometry.get('outcomes:'+i));
+ const vx=Math.min(...values.map(b=>b.x))-19,vy=Math.min(...values.map(b=>b.y))-45;
+ const vw=Math.max(...values.map(b=>b.x+b.w))-vx+23,vh=Math.max(...values.map(b=>b.y+b.h))-vy+23;
+ const floor='<g class="acp-scene-stage" data-stage-owner="context">'+
+   '<path class="acp-scene-stage-shadow" d="M'+num(core.x-45)+' '+num(core.y+core.h+11)+
+    'L'+num(core.x+core.w+29)+' '+num(core.y+core.h+11)+
+    'L'+num(core.x+core.w+65)+' '+num(core.y+core.h+42)+
+    'L'+num(core.x-20)+' '+num(core.y+core.h+42)+'Z"/>'+
+   '<path class="acp-scene-stage-top" d="M'+num(core.x-20)+' '+num(core.y+core.h-15)+
+    'L'+num(core.x+core.w+11)+' '+num(core.y+core.h-15)+
+    'L'+num(core.x+core.w+31)+' '+num(core.y+core.h+8)+
+    'L'+num(core.x+7)+' '+num(core.y+core.h+8)+'Z"/>'+
+   '</g>';
+ const spatial=floor+
+  '<rect class="acp-value-region" x="'+num(vx)+'" y="'+num(vy)+'" width="'+num(vw)+'" height="'+num(vh)+'" rx="35"/>'+
+  '<g class="acp-object-light-fields">'+lights+'</g>'+
   '<ellipse class="acp-hub-horizon" cx="'+cx+'" cy="'+num(core.y+core.h*.79)+'" rx="'+num(core.w*.58)+'" ry="'+num(core.h*.65)+'"/>'+
   '<ellipse class="acp-hub-horizon acp-hub-horizon--inner" cx="'+cx+'" cy="'+num(core.y+core.h*.8)+'" rx="'+num(core.w*.46)+'" ry="'+num(core.h*.42)+'"/>'+
   (window.InnsiktContextArt?.decoration(core)||'');

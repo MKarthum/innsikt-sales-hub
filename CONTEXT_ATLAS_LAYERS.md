@@ -21,3 +21,9 @@ Visual review rejected repeated oval floor shadows and ornamental hub rings beca
 The Chromium browser check reported a six-pixel overflow on the long second value headline in advanced mode. Its typography is now fitted to the existing card without shifting the factual geometry or violating the image/title clearance contract.
 
 The headline font size is now set on the last-loaded context illustration stylesheet; an earlier stylesheet override was masked by the downstream, more recent declaration. This avoids a competing advanced-typography rule.
+
+## Distinct visual art direction (v0.18.135)
+
+The three styles are intentionally different visual products sharing the same graph and object boxes. Standard is a flat, unlit architectural blueprint with reduced card chrome. Rich is a calm vector editorial explanation without volumetric lighting. Rich-image is a cinematic scene with spatial stage, background shafts and cloud banks, an independent value-side pavilion, high-depth glass instruments and pronounced glows on the ten existing canonical edge paths. The advanced stage, value pavilion and light layers are generated from existing semantic node geometry (not copied coordinates). The unconvincing photoreal portraits for collaboration and agent are replaced by intentionally faceless editorial vector artwork that can be restyled independently of the node's live text. No complete-slide background image or extra semantic relations were introduced.
+
+Visual inspection must assess immediate visual identity between variants, coherence of the two replacement motifs, text sharpness, composition legibility and both tones. Pixel difference is not a quality gate.

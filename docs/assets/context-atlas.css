@@ -215,3 +215,5 @@
 .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-ambient-waves{opacity:.1}
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-ambient-waves{opacity:0}
 .present-frame[data-tone="light"] .scene-modular-v1[data-scene-family="context-atlas"][data-composition-level="rich-image"] .acp-node-light{opacity:.18}
+
+/* The cinematic surfaces and portrait treatments are scoped to the context slide in context-illustrations.css. */

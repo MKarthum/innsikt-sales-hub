@@ -42,6 +42,11 @@ for(const {html} of rendered){
  assert.equal((html.match(/data-node-light="/g)||[]).length,16,'Object light is tied to the 16 semantic objects');
  assert.equal((html.match(/class="mc-edge-lumen"/g)||[]).length,10,'Edge accents reuse the canonical paths');
  assert.ok(html.includes('class="mc-spatial"'),'Object effects live behind content, in their own scene layer');
+ assert.ok(html.includes('class="acp-scene-stage" data-stage-owner="context"'),'Advanced stage derives from the core object');
+ assert.ok(html.includes('class="acp-value-region"'),'Possible-value space is independent from factual cards');
+ assert.ok(html.includes('class="acp-cinematic-rays"'),'Atmosphere has a distinct cinematic visual language');
+ assert.ok(html.includes('class="acp-editorial-motif acp-editorial-people"'),'People are not represented by the old uncanny portrait alone');
+ assert.ok(html.includes('class="acp-editorial-motif acp-editorial-agent"'),'AI is represented by abstract intentional geometry');
  assert.equal((html.match(/class="mc-edge-ambient"/g)||[]).length,10,'Ambient edges must reuse exactly the ten canonical paths');
 }
 const nodeTracks=html=>[...html.matchAll(/class="mc-edge-track" d="([^"]+)"/g)].map(x=>x[1]);
