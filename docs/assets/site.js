@@ -654,7 +654,7 @@ async function downloadSlideButton(button){
  button.disabled=true;button.setAttribute('aria-busy','true');
  try{
   const prep=await import('./slide-export-prep.js?v='+encodeURIComponent(D.meta.version));
-  let html=await prep.prepareSlideMarkupForExport(rendered);
+  let html=await prep.prepareSlideMarkupForExport(rendered,{animated:format==='html'});
   if(format==='html'){
    // Reuse the already portable deck exporter for a single animated scene.
    // The requested animation is explicit even when the preview is paused.
