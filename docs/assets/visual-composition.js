@@ -188,6 +188,29 @@ function edgePacket(edge,index,scene,esc){
   +'<animateMotion dur="'+duration+'s" begin="'+delay+'s" repeatCount="indefinite" rotate="auto" path="'+esc(edge.path)+'"/>'
   +'</g>';
 }
+/* A visible direction cue belongs to the canonical path, never to a second
+   hardcoded drawing. Draw it inside the available corridor so the destination
+   card does not cover it. The same edge also carries the animated packet. */
+function inlineEdgeArrow(edge,scene){
+ if(scene.family!=='context-atlas'||!['supports','advances','updates'].includes(edge.relation))
+  return '';
+ const values=(edge.path.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
+ if(values.length!==8||!values.every(Number.isFinite))
+  throw Error('Kontekstsløyfen har ugyldig kurve: '+edge.id);
+ const [x0,y0,x1,y1,x2,y2,x3,y3]=values;
+ const point=t=>{
+  const u=1-t;
+  return [u*u*u*x0+3*u*u*t*x1+3*u*t*t*x2+t*t*t*x3,
+   u*u*u*y0+3*u*u*t*y1+3*u*t*t*y2+t*t*t*y3];
+ };
+ const t=edge.relation==='advances'?.72:.83;
+ const [x,y]=point(t),[px,py]=point(t-.055);
+ const distance=Math.hypot(x-px,y-py)||1,ux=(x-px)/distance,uy=(y-py)/distance;
+ const bx=x-ux*10.5,by=y-uy*10.5,w=4.75,round=v=>Math.round(v*100)/100;
+ return '<path class="mc-edge-direction" aria-hidden="true" d="M'
+  +round(x)+' '+round(y)+'L'+round(bx-uy*w)+' '+round(by+ux*w)
+  +'L'+round(bx+uy*w)+' '+round(by-ux*w)+'Z"/>';
+}
 function renderScene(input,assets,esc,direction='standard'){
  const plan=compile(input,direction),{scene,geometry}=plan;
  const marker='mc-arrow-'+scene.id;
@@ -200,7 +223,10 @@ function renderScene(input,assets,esc,direction='standard'){
  if(scene.decoration&&!decoration)throw Error('Ukjent dekorasjonslag: '+scene.decoration);
  const decorativeSvg=decoration?decoration({scene,geometry,edges:plan.edges,direction,esc,assets}):'<ellipse cx="805" cy="535" rx="495" ry="230"/><ellipse cx="805" cy="535" rx="390" ry="165"/>';
  const decorationLayers=typeof decorativeSvg==='string'?{atmosphere:decorativeSvg}:decorativeSvg;
- const edges=plan.edges.map((e,i)=>'<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-ambient" d="'+e.path+'"/><path class="mc-edge-track" d="'+e.path+'"'+(e.head===false?'':' marker-end="url(#'+marker+')"')+'/><path class="mc-edge-lumen" d="'+e.path+'"/>'+edgePacket(e,i,scene,esc)+'</g>').join('');
+ const edges=plan.edges.map((e,i)=>{
+  const fixedHead=inlineEdgeArrow(e,scene);
+  return '<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-ambient" d="'+e.path+'"/><path class="mc-edge-track" d="'+e.path+'"'+(e.head===false||fixedHead?'':' marker-end="url(#'+marker+')"')+'/><path class="mc-edge-lumen" d="'+e.path+'"/>'+fixedHead+edgePacket(e,i,scene,esc)+'</g>';
+ }).join('');
  const objects=scene.nodes.map(o=>objectTypes.get(o.type).render({node:o,box:geometry.get(o.id),esc,assets,level:direction})).join('');
  return '<div class="story-scene scene-modular-v1" data-scene-contract="2" data-composition-level="'+esc(direction)+'" data-composition="'+esc(plan.composition)+'" data-scene-id="'+esc(scene.id)+'" data-scene-family="'+esc(scene.family||'general')+'">'
   +'<svg class="mc-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="'+esc(scene.title)+'">'
