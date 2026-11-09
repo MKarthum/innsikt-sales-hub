@@ -973,7 +973,7 @@
     "motionOff": "Av",
     "motionHelp": "Animasjoner og overganger kan slås av uten å endre lysbildene.",
     "singleExportLabel": "Last ned enkeltlysbilde",
-    "singleExportInfo": "PNG, JPG, PDF og PowerPoint er stillbilder. Animert HTML bevarer full bevegelse. GIF og video tar opp bevegelige markører fra modulære SVG-scener. MP4 brukes når nettleseren støtter det, ellers WebM.",
+    "singleExportInfo": "PNG, JPG, PDF og PowerPoint er stillbilder. GIF og video viser bevegelige markører. HTML bevarer full animasjon. Video bruker MP4 der nettleseren støtter det.",
     "singleAnimatedHtmlLabel": "Animert HTML",
     "singleExportError": "Kunne ikke laste ned lysbildet.",
     "fullscreenExportLabel": "Last ned",
