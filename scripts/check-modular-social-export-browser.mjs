@@ -2,6 +2,7 @@
    downloads. Run with a local web server serving the repository root. */
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import {chromium,webkit} from 'playwright';
 const base=process.env.INNSIKT_BASE_URL||'http://127.0.0.1:8769/docs/';
 const kind=process.env.EXPORT_BROWSER==='webkit'?'webkit':'chromium';
@@ -31,7 +32,7 @@ function inspectGif(buffer){
    position+=size;
    assert.ok(position<=buffer.length,'Invalid GIF frame length');
   }
-  parts.push(buffer.subarray(start,position).subarray(0,64).toString('hex'));
+  parts.push(createHash('sha256').update(buffer.subarray(start,position)).digest('hex'));
   count++;
  }
  assert.equal(count,48,'GIF must contain 48 moving frames');
