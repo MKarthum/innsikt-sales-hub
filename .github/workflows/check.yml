@@ -165,6 +165,8 @@ jobs:
           sleep 2
       - name: Kontroller alle godkjente bildeoppskrifter automatisk i WebKit
         run: EXPORT_BROWSER=webkit node scripts/check-all-illustration-exports.mjs
+      - name: Kontroller felles avansert illustrasjon og animerte nedlastinger i WebKit
+        run: EXPORT_BROWSER=webkit node scripts/check-modular-social-export-browser.mjs
       - name: Last opp WebKit-baserte eksportfiler og skjermbilder
         if: always()
         uses: actions/upload-artifact@v4
@@ -172,5 +174,6 @@ jobs:
           name: innsikt-context-exports-webkit
           path: |
             artifacts/*-exports-webkit/**
+            artifacts/modular-motion-webkit/*
           retention-days: 5
           if-no-files-found: warn
