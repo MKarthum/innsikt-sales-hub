@@ -1,0 +1,246 @@
+/* Reusable visual grammar for scene objects. All sizes are SVG coordinates,
+   all colors derive from host palette tokens. No slide IDs or absolute positions. */
+.scene-modular-v1[data-visual-system="holographic-v1"]{
+ --mv-ink:var(--pres-fg);
+ --mv-soft:var(--pres-muted);
+ --mv-light:color-mix(in srgb,var(--pres-fg) 60%,var(--pres-accent));
+ --mv-border:color-mix(in srgb,var(--pres-fg) 31%,var(--pres-accent));
+ --mv-panel:color-mix(in srgb,var(--pres-bg) 83%,var(--pres-accent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-decor{opacity:1;stroke:none;fill:none}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-title{
+ fill:var(--pres-fg);font:800 53px var(--font-display);letter-spacing:-1.9px;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-eyebrow{
+ font:720 18px var(--font-body);letter-spacing:2.3px;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-subtitle{
+ font:530 23px var(--font-body);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-shadow{
+ fill:color-mix(in srgb,var(--pres-bg) 58%,var(--pres-fg));opacity:.24;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-backplate{
+ fill:var(--pres-bg);stroke:var(--mv-border);stroke-width:1;opacity:.14;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-surface{
+ fill:var(--mv-panel);stroke:var(--mv-border);stroke-width:1.65;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-gloss{
+ fill:var(--pres-fg);opacity:.045;pointer-events:none;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-topline{
+ fill:color-mix(in srgb,var(--pres-accent) 75%,var(--pres-fg));opacity:.53;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-midline{
+ stroke:color-mix(in srgb,var(--pres-fg) 10%,var(--pres-accent));stroke-width:1;opacity:.3;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-index{
+ font:790 39px var(--font-display);fill:var(--pres-accent);opacity:.48;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-title{
+ fill:var(--mv-ink);font:780 34px var(--font-display);letter-spacing:-.6px;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-card-detail{
+ fill:var(--mv-soft);font:525 22px var(--font-body);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-conclusion-title{
+ fill:var(--mv-ink);font:790 33px var(--font-display);letter-spacing:-.7px;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-conclusion-detail{
+ fill:var(--mv-soft);font:540 22px var(--font-body);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-conclusion-rule{
+ fill:none;stroke:var(--pres-accent);stroke-width:2;opacity:.42;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-artwork{
+ pointer-events:none;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-artwork-halo{
+ fill:var(--pres-accent);opacity:.055;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-artwork-disc{
+ fill:none;stroke:var(--pres-accent);stroke-width:2.8;opacity:.23;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-artwork-orbit{
+ fill:var(--pres-bg);stroke:var(--pres-fg);stroke-width:1.1;opacity:.18;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-artwork-icon{
+ opacity:.85;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-artwork-raster{
+ opacity:0;
+}
+.present-frame[data-tone="strong"] .scene-modular-v1[data-visual-system="holographic-v1"] .mv-artwork-icon{
+ filter:grayscale(1) brightness(1.9);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-atmosphere-field{
+ opacity:0;pointer-events:none;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-stop-core{
+ stop-color:var(--pres-accent);stop-opacity:.38;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-stop-mid{
+ stop-color:var(--pres-accent);stop-opacity:.09;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-stop-edge{
+ stop-color:var(--pres-bg);stop-opacity:0;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-shell-light{
+ stop-color:color-mix(in srgb,var(--pres-bg) 77%,var(--pres-accent));stop-opacity:.31;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-shell-dark{
+ stop-color:var(--pres-accent);stop-opacity:.015;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-current{
+ fill:none;stroke:var(--pres-accent);stroke-width:1.8;
+ stroke-dasharray:2.3 15;stroke-linecap:round;opacity:0;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-spark{
+ fill:var(--pres-accent);opacity:0;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-platform{
+ pointer-events:none;opacity:0;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-platform-shell{opacity:.4}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-platform-orbit{
+ fill:none;stroke:var(--pres-accent);stroke-width:1.4;opacity:.28;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mv-stage-platform-inset{
+ fill:none;stroke:var(--pres-fg);stroke-width:1;stroke-dasharray:4 13;opacity:.18;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-edge-track{
+ fill:none;stroke:color-mix(in srgb,var(--pres-accent) 74%,var(--pres-fg));
+ stroke-width:3.2;stroke-linecap:round;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-edge-direction{
+ fill:color-mix(in srgb,var(--pres-accent) 72%,var(--pres-fg));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-edge-packet{
+ opacity:0;pointer-events:none;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-edge-packet-halo{
+ fill:var(--pres-accent);opacity:.24;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"] .mc-edge-packet-point{
+ fill:var(--pres-fg);stroke:var(--pres-accent);stroke-width:2;
+}
+/* Nøktern illustrasjon adds dimensional volume without depending on a raster. */
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 68%,var(--pres-accent));
+ stroke:color-mix(in srgb,var(--pres-fg) 49%,var(--pres-accent));stroke-width:2;
+ filter:drop-shadow(0 7px 14px color-mix(in srgb,var(--pres-accent) 19%,transparent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-card-backplate{opacity:.38}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-card-gloss{opacity:.09}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-card-topline{opacity:.84}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-artwork-halo{
+ opacity:.13;filter:blur(11px);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-artwork-disc{
+ opacity:.7;filter:drop-shadow(0 0 6px var(--pres-accent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-stage-platform{opacity:.28}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-atmosphere-field{opacity:.28}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-stage-current{opacity:.28}
+/* Avansert illustrasjon: local holographic artwork, light and a shaped stage.
+   No node positions, semantic relations or written claims change. */
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"]{
+ --mv-panel:color-mix(in srgb,var(--pres-bg) 61%,var(--pres-accent));
+ --mv-border:color-mix(in srgb,var(--pres-fg) 70%,var(--pres-accent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-shadow{
+ fill:color-mix(in srgb,var(--pres-accent) 28%,var(--pres-bg));opacity:.72;
+ filter:blur(8px);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-backplate{
+ fill:color-mix(in srgb,var(--pres-bg) 38%,var(--pres-accent));
+ stroke:var(--pres-accent);stroke-width:1.5;opacity:.7;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-surface{
+ stroke:var(--mv-border);stroke-width:2.3;
+ filter:drop-shadow(0 12px 20px color-mix(in srgb,var(--pres-accent) 38%,transparent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-gloss{
+ opacity:.12;fill:var(--pres-fg);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-topline{
+ fill:color-mix(in srgb,var(--pres-fg) 72%,var(--pres-accent));
+ opacity:.97;filter:drop-shadow(0 0 9px var(--pres-accent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-midline{
+ stroke:var(--pres-fg);opacity:.085;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-index{
+ fill:color-mix(in srgb,var(--pres-fg) 62%,var(--pres-accent));opacity:.91;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-title{
+ font-weight:820;fill:var(--pres-fg);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-detail{
+ fill:color-mix(in srgb,var(--pres-fg) 76%,var(--pres-muted));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card--conclusion .mv-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 52%,var(--pres-accent));
+ stroke:color-mix(in srgb,var(--pres-fg) 80%,var(--pres-accent));stroke-width:2.5;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-artwork-icon{opacity:0}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-artwork-raster{
+ opacity:.98;filter:drop-shadow(0 0 8px color-mix(in srgb,var(--pres-accent) 47%,transparent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-artwork-halo{
+ opacity:.26;filter:blur(13px);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-artwork-disc{
+ opacity:.87;stroke-width:3;filter:drop-shadow(0 0 9px var(--pres-accent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-artwork-orbit{
+ opacity:.57;fill:var(--pres-accent);filter:blur(3px);
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-stage-platform{opacity:.69}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-atmosphere-field{opacity:.73}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-stage-current{
+ opacity:.65;stroke-width:2.3;
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-stage-spark{opacity:.36}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mc-edge-track{
+ stroke:color-mix(in srgb,var(--pres-fg) 48%,var(--pres-accent));
+ stroke-width:3.8;filter:drop-shadow(0 0 4px var(--pres-accent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mc-edge-direction{
+ fill:color-mix(in srgb,var(--pres-fg) 49%,var(--pres-accent));
+}
+.present-frame[data-tone="light"] .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 84%,var(--pres-accent));
+ stroke:color-mix(in srgb,var(--pres-fg) 56%,var(--pres-accent));
+}
+.present-frame[data-tone="light"] .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-card--conclusion .mv-card-surface{
+ fill:color-mix(in srgb,var(--pres-bg) 78%,var(--pres-accent));
+}
+@media(prefers-reduced-motion:no-preference){
+ .present-frame[data-motion="on"] .scene-modular-v1[data-visual-system="holographic-v1"]:is([data-composition-level="rich"],[data-composition-level="rich-image"]) .mc-edge-packet{opacity:1}
+ .present-frame[data-motion="on"] .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-stage-current{
+  animation:mv-current-flow 8s linear infinite;
+ }
+ .present-frame[data-motion="on"] .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-artwork-raster{
+  transform-box:fill-box;transform-origin:center;
+  animation:mv-art-float 5.1s ease-in-out infinite alternate;
+ }
+ .present-frame[data-motion="on"] .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-artwork-disc{
+  animation:mv-disc-pulse 3.6s ease-in-out infinite alternate;
+ }
+ .present-frame[data-motion="on"] .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich-image"] .mv-atmosphere-field{
+  animation:mv-haze-breathe 7.5s ease-in-out infinite alternate;
+ }
+}
+@keyframes mv-current-flow{from{stroke-dashoffset:0}to{stroke-dashoffset:-140}}
+@keyframes mv-art-float{from{transform:translateY(3px)}to{transform:translateY(-7px)}}
+@keyframes mv-disc-pulse{from{opacity:.42}to{opacity:.94}}
+@keyframes mv-haze-breathe{from{opacity:.4}to{opacity:.79}}
+@media print{
+ .scene-modular-v1[data-visual-system="holographic-v1"] .mc-edge-packet{display:none!important}
+}
+@media(forced-colors:active){
+ .scene-modular-v1[data-visual-system="holographic-v1"] :is(.mv-atmosphere,.mv-stage-platform,.mv-artwork-halo,.mv-artwork-raster){display:none!important}
+ .scene-modular-v1[data-visual-system="holographic-v1"] .mv-artwork-icon{opacity:1!important}
+}
