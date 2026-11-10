@@ -42,6 +42,9 @@ function renderCard({node,box:b,esc,assets}){
  const content=Object.assign({},c,{artAssetId:node.visual?.artAssetId||c.artAssetId});
  if(focus){
   const x=b.x+194;
+  const textWidth=b.w-(x-b.x)-38;
+  const titleMax=Math.max(18,Math.floor(textWidth/(33*.55)));
+  const detailMax=Math.max(23,Math.floor(textWidth/(22*.56)));
   return '<g class="mc-card mv-card mv-card--conclusion" data-node-id="'+esc(node.id)+'" data-node-kind="focus">'+
     rect(b.x+6,b.y+12,b.w,b.h,rx,'mv-card-shadow')+
     rect(b.x+9,b.y+7,b.w-5,b.h,rx,'mv-card-backplate')+
@@ -50,11 +53,15 @@ function renderCard({node,box:b,esc,assets}){
     rect(b.x+24,b.y+10,b.w-48,4,2,'mv-card-topline')+
     artwork(content,b,assets,esc,{takeaway:true})+
     '<path class="mv-conclusion-rule" d="M'+n(x-31)+' '+n(b.y+28)+'V'+n(b.y+b.h-29)+'"/>'+
-    label(c.title,x,b.y+60,'mv-conclusion-title',esc,{max:66,limit:1})+
-    (c.detail?label(c.detail,x,b.y+100,'mv-conclusion-detail',esc,{max:89,limit:2,step:23}):'')+
+    label(c.title,x,b.y+60,'mv-conclusion-title',esc,{max:titleMax,limit:1})+
+    (c.detail?label(c.detail,x,b.y+100,'mv-conclusion-detail',esc,{max:detailMax,limit:2,step:23}):'')+
     '</g>';
  }
- const max=Math.max(22,Math.floor((b.w-53)/11.4));
+ const titleMax=Math.max(12,Math.floor((b.w-68)/(34*.54)));
+ const detailMax=Math.max(17,Math.floor((b.w-68)/(22*.54)));
+ const twoTitleLines=words(c.title,titleMax,2).length===2;
+ const titleY=b.y+(twoTitleLines?179:194);
+ const detailY=b.y+(twoTitleLines?250:239);
  return '<g class="mc-card mv-card mv-card--step" data-node-id="'+esc(node.id)+'" data-node-kind="'+esc(node.type)+'">'+
    rect(b.x+6,b.y+13,b.w,b.h,rx,'mv-card-shadow')+
    rect(b.x+9,b.y+6,b.w-4,b.h,rx,'mv-card-backplate')+
@@ -64,8 +71,8 @@ function renderCard({node,box:b,esc,assets}){
    '<path class="mv-card-midline" d="M'+n(b.x+27)+' '+n(b.y+160)+'H'+n(b.x+b.w-27)+'"/>'+
    artwork(content,b,assets,esc)+
    (Number.isInteger(node.index)?'<text class="mv-card-index" text-anchor="end" x="'+n(b.x+b.w-31)+'" y="'+n(b.y+57)+'">'+String(node.index+1).padStart(2,'0')+'</text>':'')+
-   label(c.title,b.x+34,b.y+194,'mv-card-title',esc,{max,limit:2,step:34})+
-   (c.detail?label(c.detail,b.x+34,b.y+239,'mv-card-detail',esc,{max:max+1,limit:2,step:24}):'')+
+   label(c.title,b.x+34,titleY,'mv-card-title',esc,{max:titleMax,limit:2,step:34})+
+   (c.detail?label(c.detail,b.x+34,detailY,'mv-card-detail',esc,{max:detailMax,limit:2,step:24}):'')+
    '</g>';
 }
 function renderStage({scene,geometry}){
