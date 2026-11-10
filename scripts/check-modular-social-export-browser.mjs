@@ -91,7 +91,9 @@ try{
      const href=await candidate.locator('.mv-artwork-raster').first().getAttribute('href');
      assert.ok((await page.request.get(new URL(href,page.url()).href)).ok(),
       'Canonical artwork resource is unavailable');
-    }else assert.ok(visuals.opacity<.01,'Raster artwork should not hide the quieter vector styles');
+    }else if(style==='rich'){
+     assert.ok(visuals.opacity>.25&&visuals.opacity<.8,'Intermediate level needs visible, restrained artwork');
+    }else assert.ok(visuals.opacity<.01,'The schematic level must retain clean vector illustrations');
    }
    await candidate.screenshot({path:folder+'/'+id+'-'+style+'.png'});
   }
