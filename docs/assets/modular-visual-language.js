@@ -29,11 +29,18 @@ function artwork(content,b,assets,esc,{takeaway=false}={}){
  const w=takeaway?126:151,h=takeaway?107:130;
  const art=artId?window.InnsiktAssets.src(assets,artId):'';
  const icon=iconId?window.InnsiktAssets.src(assets,iconId):'';
- return '<g class="mv-artwork" data-art-owner="'+esc(b.id)+'" aria-hidden="true">'+
+ const imageId='mv-art-'+String(b.id).replace(/[^a-z0-9-]/gi,'-');
+ const feather=art?'<defs><radialGradient id="'+imageId+'-fade" cx="50%" cy="50%" r="70%">'+
+  '<stop offset=".32" stop-color="white"/><stop offset=".68" stop-color="white" stop-opacity=".96"/>'+
+  '<stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient>'+
+  '<mask id="'+imageId+'-mask" maskUnits="userSpaceOnUse" x="'+n(x)+'" y="'+n(y)+
+  '" width="'+n(w)+'" height="'+n(h)+'"><rect x="'+n(x)+'" y="'+n(y)+'" width="'+n(w)+
+  '" height="'+n(h)+'" fill="url(#'+imageId+'-fade)"/></mask></defs>':'';
+ return '<g class="mv-artwork" data-art-owner="'+esc(b.id)+'" aria-hidden="true">'+feather+
   '<ellipse class="mv-artwork-halo" cx="'+n(x+w*.49)+'" cy="'+n(y+h*.65)+'" rx="'+n(w*.53)+'" ry="'+n(h*.47)+'"/>'+
   '<ellipse class="mv-artwork-disc" cx="'+n(x+w*.49)+'" cy="'+n(y+h*.87)+'" rx="'+n(w*.44)+'" ry="'+n(h*.095)+'"/>'+
   '<ellipse class="mv-artwork-orbit" cx="'+n(x+w*.49)+'" cy="'+n(y+h*.87)+'" rx="'+n(w*.35)+'" ry="'+n(h*.07)+'"/>'+
-  (art?'<image class="mv-artwork-raster" data-art-asset-id="'+esc(artId)+'" x="'+n(x)+'" y="'+n(y)+'" width="'+n(w)+'" height="'+n(h)+'" href="'+esc(art)+'" preserveAspectRatio="xMidYMid meet"/>':'')+
+  (art?'<image class="mv-artwork-raster" data-art-asset-id="'+esc(artId)+'" x="'+n(x)+'" y="'+n(y)+'" width="'+n(w)+'" height="'+n(h)+'" href="'+esc(art)+'" mask="url(#'+imageId+'-mask)" preserveAspectRatio="xMidYMid meet"/>':'')+
   (icon?'<image class="mv-artwork-icon" data-icon-asset-id="'+esc(iconId)+'" x="'+n(x+w*.3)+'" y="'+n(y+h*.17)+'" width="'+n(w*.4)+'" height="'+n(h*.48)+'" href="'+esc(icon)+'" preserveAspectRatio="xMidYMid meet"/>':'')+
   '</g>';
 }
