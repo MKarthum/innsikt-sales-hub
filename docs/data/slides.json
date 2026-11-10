@@ -1968,7 +1968,8 @@
         "conclusion": {
           "title": "Et riktig tiltak krever riktig kontekst",
           "detail": "Samme tall kan gi ulike valg når definisjon og situasjon er forskjellig.",
-          "assetId": "governance-shield"
+          "assetId": "governance-shield",
+          "artAssetId": "context-motif-boundaries"
         },
         "artDirections": [
           "rich",
@@ -2013,8 +2014,21 @@
               "id": "structure",
               "type": "grid"
             }
-          ]
-        }
+          ],
+          "visualSystem": "holographic-v1",
+          "decoration": "modular-holographic-stage",
+          "header": {
+            "cueY": 79,
+            "titleY": 137,
+            "subtitleY": 193
+          }
+        },
+        "itemArtAssetIds": [
+          "context-motif-value",
+          "context-motif-meaning",
+          "context-motif-timeline",
+          "context-motif-action"
+        ]
       },
       "design": {
         "archetype": "journey",
