@@ -1,16 +1,31 @@
 # Presentasjonssystemet: kanonisk innhold, modulær rendering og eksport
 
-Oppdatert 9. november 2026. Denne filen beskriver gjeldende implementasjon, ikke tidligere prototyper.
+Oppdatert 10. november 2026. Denne filen beskriver gjeldende implementasjon, ikke tidligere prototyper.
 
 ## Autoritet og produksjonslinje
 
 1. `docs/data/slides.json` eier budskap, faglige objekter, referanser, notater og relasjoner. `docs/data/visual-assets.json` eier ressursene. Bildepiksler og CSS må ikke bli en skjult ekstra faglig sannhet.
 2. `docs/assets/slide-visuals.js` ruter et lysbilde til riktig aktiv scene. `visual.composition.engine: "modular-v1"` bruker `visual-composition.js`. Adaptere, komposisjoner, objektroller og semantiske rutere er registrerbare og kan gjenbrukes mellom flere lysbilder.
 3. `context-atlas.js` beskriver **én bestemt fagmodell** med 22 sceneobjekter og ti kanoniske relasjoner. Den skal ikke være standardmal for andre faglige problemstillinger.
-4. `visual.scene: "list"`, `composition.family: "story-flow"` og `flow-with-outcome` demonstrerer en **generell** firetrinnsflyt med en konklusjon. Den brukes av `delivery-time-context-flow` og har ingen bransjetekst eller organisasjonsfarger kodet i motoren.
+4. `visual.scene: "list"`, `composition.family: "story-flow"` og `flow-with-outcome` demonstrerer en **generell** flyt med tre til fem trinn og en egen konklusjon. Den brukes av `delivery-time-context-flow` og har ingen bransjetekst eller organisasjonsfarger kodet i motoren.
 5. `insight-value-chain` bruker fortsatt den aktive, eldre `unified-slide-scene.js`. Ikke fjern denne motoren før siste bruker er migrert og hele biblioteket er verifisert. Eldre, ikke aktive alternativer er ikke normative.
 
 De tre stilene er `standard`, `rich` og `rich-image`. De bygger på identiske fagobjekter, tekster, koordinater og grafrelasjoner. Stiler eies av `visual-composition.css`, `context-atlas.css`, `context-illustrations.css` og eventuelt et organisasjonsskin. Ikke opprett tre forskjellige renderere eller tre JSON-kopier av samme lysbilde.
+
+## Felles produksjonsmotor for avansert visuelt uttrykk
+
+Tidligere manglet generiske scener de visuelle primitive som gjorde kontekstbildet rikt. De fikk bare flate kort, små ikoner og én ellipsemassasje i bakgrunnen. Dette er ikke lenger en akseptabel definisjon av avansert illustrasjon.
+
+Den felles motoren er delt etter ansvar:
+
+- `visual-composition.js` lager **semantisk scene, koordinater, objekttyper og relasjonsbaner**. Den håndterer ulikt antall trinn og felles rendering til SVG.
+- `modular-visual-language.js` eier et **gjenbrukbart visuelt objektbibliotek** med glassmateriale, volum, bakplate, topplinje, ikonplattform, illustrasjonsbilde, lys og konklusjonsobjekt. Den beregner atmosfære og sceneplattform ut fra faktisk objektgeometri, aldri faste koordinater fra ett referanselysbilde.
+- `modular-visual-language.css` eier stilnivåene. `standard` har klar SVG-struktur, `rich` tilfører tredimensjonal materialvirkning og vektorillustrasjon, `rich-image` tilfører objektlokale, registrerte WebP-illustrasjoner, lys og levende bakgrunn. Alle bruker **samme tekst, fem faglige objekter og samme piler** i testlysbildet.
+- `docs/data/slides.json` eier `itemArtAssetIds`, `conclusion.artAssetId`, `composition.visualSystem`, `composition.decoration`, og `composition.motion`. En ny slide skal ikke lage egen HTML, nytt kortsett eller kopiere scene-CSS.
+
+Nøkkelen `visualSystem: "holographic-v1"` aktiverer det delte material- og illustrasjonssystemet. `decoration: "modular-holographic-stage"` legger til en kontekstbasert bakgrunn. `motion: "packets"` lar markører følge de samme pilbanene som de statiske pilene. Materialene bruker `--pres-bg`, `--pres-fg`, `--pres-muted` og `--pres-accent`; de er ikke låst til dagens farger.
+
+Kvalitetskontroll er mer enn lik CSS: Test i browser at illustrasjonene faktisk lastes, at avansert har synlig mer dybde enn enkel, at all korttekst er innenfor kortene, og at skjermbildene fungerer i både lyst og mørkt tema. Den gamle `context-atlas` beholder sin spesialiserte faglige scene og etablerte geometri, men nye komposisjoner skal bruke det delte visuelle systemet i stedet for å kopiere atlasets spesialtilpasninger.
 
 ## To konkrete lysbilder som produksjonskontroll
 
