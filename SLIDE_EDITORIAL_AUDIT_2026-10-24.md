@@ -43,6 +43,7 @@
 | market-priorities | Tre faglige perspektiver med egne figur-symboler; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | market-next-moves | En visuell progresjon med meningsbærende steg; 4 gjenbrukte figur-ID-er | marked-retning | Kontroller semantikk, linjebrudd og begge paletter |
 | ai-context-platforms-2027 | Egen systemscene med datadrevet virksomhetskontekst, tre logiske kilder og kontrollert handling; fjell og flagg er dekor | bibliotek | Må vurderes i 16:9, lyst/mørkt skin, syntetisk palett og eksport før endelig godkjenning |
+| delivery-time-context-flow | Illustrativ leveransetidshistorie med fire faglige steg og konklusjon. Én JSON-eier, delt holografisk scenemotor og objektlokale illustrasjoner; ikke et dokumentert kundecase. | bibliotek | Reell visuell Chromium/WebKit-kontroll, lys/mørk, tekstlesbarhet og eksport før endelig godkjenning |
 | ai-context-for-agents | Ny selvstendig kontekstscene: data, virksomhetsforståelse og agentens svar | bibliotek | Begrepsnyanser, lesbarhet og begge temaer |
 | ai-development-workflow | Ny SQL/kode-diff-komposisjon med illustrativ oppgave og menneskelig kontroll | bibliotek | Monospace-lesbarhet, eksport og tydelig fiktivmerking |
 | ai-natural-language-bi | Ny split-scene med ad hoc-spørsmål og gjenbrukbart, testbart dashboard | bibliotek | Tall, logoopphav, begge temaer og eksport |
