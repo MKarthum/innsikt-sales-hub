@@ -36,8 +36,8 @@ function artwork(content,b,assets,esc,{takeaway=false}={}){
  const artId=content.artAssetId||null;
  const iconId=content.assetId||null;
  if(!artId&&!iconId)return '';
- const x=b.x+(takeaway?24:27),y=b.y+(takeaway?10:21);
- const w=takeaway?126:151,h=takeaway?107:130;
+ const x=b.x+(takeaway?24:19),y=b.y+(takeaway?10:14);
+ const w=takeaway?136:174,h=takeaway?117:150;
  const art=artId?window.InnsiktAssets.src(assets,artId):'';
  const icon=iconId?window.InnsiktAssets.src(assets,iconId):'';
  const imageId='mv-art-'+String(b.id).replace(/[^a-z0-9-]/gi,'-');
