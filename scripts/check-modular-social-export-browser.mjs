@@ -49,6 +49,49 @@ try{
  ]){
   await page.evaluate(value=>{location.hash='#lysbilder/'+value},id);
   await page.locator('.slide-library-detail-stage svg.mc-svg').waitFor();
+  // Capture all visual intensities from the same source and SVG geometry.
+  for(const style of ['standard','rich','rich-image']){
+   await page.locator('#library-art-mode').selectOption(style);
+   const candidate=page.locator('.slide-library-detail-stage .scene-modular-v1');
+   await candidate.waitFor();
+   assert.equal(await candidate.locator('[data-node-id]').count(),nodes);
+   assert.equal(await candidate.locator('.mc-edge-track').count(),edges);
+   if(id==='delivery-time-context-flow'){
+    assert.equal(await candidate.getAttribute('data-visual-system'),'holographic-v1');
+    assert.equal(await candidate.locator('.mv-card-surface').count(),5);
+    assert.equal(await candidate.locator('.mv-artwork-raster').count(),5);
+    const visuals=await candidate.evaluate(root=>{
+     const image=root.querySelector('.mv-artwork-raster');
+     const atmosphere=root.querySelector('.mv-atmosphere-field');
+     const title=root.querySelector('.mc-title');
+     const cards=[...root.querySelectorAll('.mv-card')];
+     const geometries=cards.map(card=>{
+      const rect=card.querySelector('.mv-card-surface').getBBox();
+      return [...card.querySelectorAll('text')].every(text=>{
+       const b=text.getBBox();
+       return b.x>=rect.x-2&&b.x+b.width<=rect.x+rect.width+4
+        &&b.y>=rect.y-7&&b.y+b.height<=rect.y+rect.height+6;
+      });
+     });
+     return {
+      opacity:Number(getComputedStyle(image).opacity),
+      stageOpacity:Number(getComputedStyle(atmosphere).opacity),
+      titleSize:Number.parseFloat(getComputedStyle(title).fontSize),
+      fits:geometries
+     };
+    });
+    assert.ok(visuals.titleSize>=44,'Main headline must be presentation sized');
+    assert.ok(visuals.fits.every(Boolean),'Card content clipped or outside its panel');
+    if(style==='rich-image'){
+     assert.ok(visuals.opacity>.8,'Advanced stage must render holographic assets');
+     assert.ok(visuals.stageOpacity>.5,'Advanced stage atmosphere must be visible');
+     const href=await candidate.locator('.mv-artwork-raster').first().getAttribute('href');
+     assert.ok((await page.request.get(new URL(href,page.url()).href)).ok(),
+      'Canonical artwork resource is unavailable');
+    }else assert.ok(visuals.opacity<.01,'Raster artwork should not hide the quieter vector styles');
+   }
+   await candidate.screenshot({path:folder+'/'+id+'-'+style+'.png'});
+  }
   await page.locator('#library-art-mode').selectOption('rich-image');
   await page.locator('#library-motion-mode').selectOption('on');
   const scene=page.locator('.slide-library-detail-stage .scene-modular-v1');
