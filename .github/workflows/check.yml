@@ -67,8 +67,6 @@ jobs:
 
       - name: Kontroller tre komposisjoner i nettleseren
         run: node scripts/check-visual-composition-browser.mjs
-      - name: Kontroller modulær visuell produksjonslinje og sosial animasjon
-        run: node scripts/check-modular-social-export-browser.mjs
       - name: Kontroller visuell presentasjon og lag skjermbilder
         if: always()
         run: node scripts/check-visual-pilot.mjs
@@ -165,8 +163,6 @@ jobs:
           sleep 2
       - name: Kontroller alle godkjente bildeoppskrifter automatisk i WebKit
         run: EXPORT_BROWSER=webkit node scripts/check-all-illustration-exports.mjs
-      - name: Kontroller felles avansert illustrasjon og animerte nedlastinger i WebKit
-        run: EXPORT_BROWSER=webkit node scripts/check-modular-social-export-browser.mjs
       - name: Last opp WebKit-baserte eksportfiler og skjermbilder
         if: always()
         uses: actions/upload-artifact@v4
@@ -175,5 +171,39 @@ jobs:
           path: |
             artifacts/*-exports-webkit/**
             artifacts/modular-motion-webkit/*
+          retention-days: 5
+          if-no-files-found: warn
+
+  visual-production:
+    name: Visuell produksjonslinje (${{ matrix.browser }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Installer testverktøy og nettleser
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx playwright install --with-deps ${{ matrix.browser }}
+      - name: Start lokal testserver
+        run: |
+          python3 -m http.server 8769 --bind 127.0.0.1 > /tmp/innsikt-visual-server.log 2>&1 &
+          sleep 2
+      - name: Kjør visuell produksjon, animasjon og reell eksport
+        env:
+          EXPORT_BROWSER: ${{ matrix.browser }}
+        run: node scripts/check-modular-social-export-browser.mjs
+      - name: Lagre skjermbilder og animasjoner
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: modular-visual-${{ matrix.browser }}
+          path: artifacts/modular-motion-${{ matrix.browser }}/*
           retention-days: 5
           if-no-files-found: warn
