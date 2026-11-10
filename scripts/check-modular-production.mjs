@@ -63,8 +63,9 @@ assert.deepEqual(images[1].paths,images[2].paths);
 assert.deepEqual(images[0].boxes,images[2].boxes);
 const modified=structuredClone(example);
 modified.visual.items[1]='Ny faglig betydning';
-assert.ok(api.renderSlide(modified,assets,esc,'rich-image').includes('Ny faglig betydning'),
- 'Editing JSON must update the scene without changing renderer code');
+const changedMarkup=api.renderSlide(modified,assets,esc,'rich-image');
+assert.ok(changedMarkup.includes('Ny')&&changedMarkup.includes('faglig')&&changedMarkup.includes('betydning'),
+ 'Editing JSON must update the scene even when the renderer wraps text');
 // A different flow length must use the SAME reusable renderer and object grammar.
 const shorter=structuredClone(example);
 shorter.visual.items=shorter.visual.items.slice(0,3);
