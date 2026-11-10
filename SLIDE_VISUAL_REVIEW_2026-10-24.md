@@ -55,6 +55,7 @@ Brukt som metode: Harvard Catalyst (https://catalyst.harvard.edu/writing-communi
 | market-priorities | Tre faglige prioriteringer som henger sammen | Innsikt bør prioritere data, analyse og KI i samspill | Tre faglige områder står separat med en felles, synlig konklusjon |
 | market-next-moves | Begynn med behovet. Lær. Utvid ved verdi. | Start avgrenset, mål effekt og bygg videre | Viser hvert handlingstrinn og hvorfor det gjøres |
 | ai-context-platforms-2027 | Fremvoksende kontekstarkitektur trenger mer enn semantisk definisjon | Egen flernivåscene med betydning, situasjon og rammer, kilder og kontrollert handlingssløyfe; kilde og forbehold i notes. Visuell QA i nettleser gjenstår. |
+| delivery-time-context-flow | Økt leveringstid som spørsmål om betydning og situasjon, ikke bare som måletall | Fire steg med kanoniske piler og tydelig konklusjon, tre felles stilnivåer via gjenbrukbar motor. Faktisk visuell QA og eksport må verifiseres. |
 | ai-context-for-agents | En selvstendig konseptuell flyt der kontekst beriker data før svar. Ingen konferansebilder eller kopiert produktgrafikk. |
 | ai-development-workflow | Original kodeeditor, kodeforslag og menneskelig godkjenning. Ingen påståtte faktiske testresultater. |
 | ai-natural-language-bi | Skille mellom ad hoc og gjenbrukbar BI, med fiktive eksempeltall og allerede registrerte logoassets. |
