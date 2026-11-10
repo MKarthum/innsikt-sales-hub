@@ -27,10 +27,14 @@ function fromSlide(slide){
  if(v.scene!=='list')throw Error('Mangler semantisk adapter for '+v.scene);
  const family=config.family||'general';
  if(!idOk(family))throw Error('Ugyldig scenefamilie');
- const nodes=(v.items||[]).map((title,i)=>({id:'item:'+i,type:'card',index:family==='story-flow'?i:undefined,content:{
-  title,detail:v.detail?.[i]||'',assetId:v.itemAssetIds?.[i]||null}}));
- if(v.conclusion)nodes.push({id:'outcome',type:'focus',content:v.conclusion});
- return {version:1,id:slide.id,family,title:slide.title,cue:slide.cue,subtitle:slide.body||'',
+ const visualSystem=config.visualSystem||null;
+ const nodes=(v.items||[]).map((title,i)=>({id:'item:'+i,type:'card',index:family==='story-flow'?i:undefined,
+  visual:{system:visualSystem,artAssetId:v.itemArtAssetIds?.[i]||null},
+  content:{title,detail:v.detail?.[i]||'',assetId:v.itemAssetIds?.[i]||null}}));
+ if(v.conclusion)nodes.push({id:'outcome',type:'focus',visual:{
+  system:visualSystem,artAssetId:v.conclusion.artAssetId||null},content:v.conclusion});
+ return {version:1,id:slide.id,family,visualSystem,motion:config.motion||null,decoration:config.decoration||null,
+  title:slide.title,cue:slide.cue,subtitle:slide.body||'',header:config.header||null,
   nodes,edges:config.edges||[],layers:config.layers||[],
   variants:config.variants||{standard:'columns'},overrides:config.overrides||{}};
 }
@@ -93,10 +97,12 @@ registerComposition('network',nodes=>{
 registerComposition('flow',nodes=>band(nodes,{y:340,h:250}));
 /* Reusable four-stage explanation plus one takeaway. No copy or slide IDs here. */
 registerComposition('flow-with-outcome',nodes=>{
- if(nodes.length!==5||nodes[4].type!=='focus')
-  throw Error('Flow med konklusjon krever fire steg og ett utfall');
- const base=band(nodes.slice(0,4),{x:84,y:320,width:1432,gap:35,h:282});
- return [...base,{id:nodes[4].id,x:300,y:681,w:1000,h:124}];
+ const steps=nodes.slice(0,-1),conclusion=nodes[nodes.length-1];
+ if(steps.length<3||steps.length>5||conclusion?.type!=='focus'||
+    steps.some(node=>node.type!=='card'))
+  throw Error('Flow med konklusjon krever tre til fem steg og ett utfall');
+ const base=band(steps,{x:84,y:312,width:1432,gap:36,h:300});
+ return [...base,{id:conclusion.id,x:245,y:685,w:1110,h:140}];
 });
 function anchors(box){
  return {left:[box.x,box.y+box.h/2],right:[box.x+box.w,box.y+box.h/2],
@@ -155,6 +161,11 @@ function text(value,x,y,cls,esc,{max=40,limit=3,spacing=24}={}){
   lines(value,max,limit).map((line,i)=>'<tspan x="'+n(x)+'" dy="'+(i?spacing:0)+'">'+esc(line)+'</tspan>').join('')+'</text>';
 }
 function basicCard({node,box:b,esc,assets,level}){
+ if(node.visual?.system==='holographic-v1'){
+  const language=window.InnsiktModularVisualLanguage;
+  if(!language?.renderCard)throw Error('Den delte illustrasjonsmotoren er ikke lastet');
+  return language.renderCard({node,box:b,esc,assets,level});
+ }
  const c=node.content,compact=b.h<230,max=Math.max(18,Math.floor((b.w-56)/12.5));
  const src=c.assetId?window.InnsiktAssets.src(assets,c.assetId):null;
  if(node.type==='focus'){
@@ -197,7 +208,7 @@ function drawLayers(layers,assets,esc){
    It is decorative, uses no extra graph relationship, and is styled only by
    the opt-in context skin. Negative beginnings distribute simultaneous signals. */
 function edgePacket(edge,index,scene,esc){
- if(!['context-atlas','story-flow'].includes(scene.family))return '';
+ if(scene.motion!=='packets'&&scene.family!=='context-atlas')return '';
  const cycle=edge.from.startsWith('cycle:')&&edge.to.startsWith('cycle:');
  const shortFlow=scene.family==='story-flow';
  const duration=shortFlow?2.9:cycle?1.95:edge.relation==='updates'?6.4:
@@ -213,7 +224,8 @@ function edgePacket(edge,index,scene,esc){
    hardcoded drawing. Draw it inside the available corridor so the destination
    card does not cover it. The same edge also carries the animated packet. */
 function inlineEdgeArrow(edge,scene){
- if(!['context-atlas','story-flow'].includes(scene.family)||!['supports','advances','updates'].includes(edge.relation))
+ if(!(scene.motion==='packets'||scene.family==='context-atlas')||
+    !['supports','advances','updates'].includes(edge.relation))
   return '';
  const values=(edge.path.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
  if(values.length!==8||!values.every(Number.isFinite))
@@ -249,7 +261,7 @@ function renderScene(input,assets,esc,direction='standard'){
   return '<g class="mc-edge" data-edge-id="'+esc(e.id)+'" data-from="'+esc(e.from)+'" data-to="'+esc(e.to)+'" data-relation="'+esc(e.relation)+'"><title>'+esc(e.relation)+'</title><path class="mc-edge-ambient" d="'+e.path+'"/><path class="mc-edge-track" d="'+e.path+'"'+(e.head===false||fixedHead?'':' marker-end="url(#'+marker+')"')+'/><path class="mc-edge-lumen" d="'+e.path+'"/>'+fixedHead+edgePacket(e,i,scene,esc)+'</g>';
  }).join('');
  const objects=scene.nodes.map(o=>objectTypes.get(o.type).render({node:o,box:geometry.get(o.id),esc,assets,level:direction})).join('');
- return '<div class="story-scene scene-modular-v1" data-scene-contract="2" data-composition-level="'+esc(direction)+'" data-composition="'+esc(plan.composition)+'" data-scene-id="'+esc(scene.id)+'" data-scene-family="'+esc(scene.family||'general')+'">'
+ return '<div class="story-scene scene-modular-v1" data-scene-contract="2" data-visual-system="'+esc(scene.visualSystem||'base')+'" data-composition-level="'+esc(direction)+'" data-composition="'+esc(plan.composition)+'" data-scene-id="'+esc(scene.id)+'" data-scene-family="'+esc(scene.family||'general')+'">'
   +'<svg class="mc-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="'+esc(scene.title)+'">'
   +'<defs><marker id="'+marker+'" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1L8 4.5L1 8Z" class="mc-arrow-head"/></marker></defs>'
   +'<rect class="mc-backdrop" width="1600" height="900"/>'
