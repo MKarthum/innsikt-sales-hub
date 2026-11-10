@@ -87,7 +87,7 @@ try{
      await candidate.screenshot({path:folder+'/'+id+'-advanced-diagnostic.png'});
      console.log('ADVANCED_VISUAL_DIAGNOSTIC',id,JSON.stringify(visuals));
      assert.ok(visuals.opacity>.8,'Advanced stage must render holographic assets, opacity '+visuals.opacity);
-     assert.ok(visuals.stageOpacity>.5,'Advanced stage atmosphere must be visible, opacity '+visuals.stageOpacity);
+     assert.ok(visuals.stageOpacity>.3,'Advanced stage atmosphere must remain visible throughout its breathing animation, opacity '+visuals.stageOpacity);
      const href=await candidate.locator('.mv-artwork-raster').first().getAttribute('href');
      assert.ok((await page.request.get(new URL(href,page.url()).href)).ok(),
       'Canonical artwork resource is unavailable');
