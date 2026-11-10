@@ -6,6 +6,17 @@ const api=window.InnsiktVisualComposition;
 if(!api)throw Error('Den modulære scenemotoren må lastes først');
 const n=x=>Math.round(x*100)/100;
 const rect=(x,y,w,h,r,cls)=>'<rect class="'+cls+'" x="'+n(x)+'" y="'+n(y)+'" width="'+n(w)+'" height="'+n(h)+'" rx="'+n(r)+'"/>';
+const paintRect=(x,y,w,h,r,cls,paint)=>'<rect class="'+cls+'" x="'+n(x)+'" y="'+n(y)+'" width="'+n(w)+'" height="'+n(h)+'" rx="'+n(r)+'" fill="url(#'+paint+')"/>';
+function material(b){
+ const id='mv-material-'+String(b.id).replace(/[^a-z0-9-]/gi,'-');
+ const defs='<defs><linearGradient id="'+id+'-surface" x1="0%" y1="0%" x2="92%" y2="100%">'+
+  '<stop offset="0" class="mv-material-top"/><stop offset=".49" class="mv-material-mid"/>'+
+  '<stop offset="1" class="mv-material-bottom"/></linearGradient>'+
+  '<linearGradient id="'+id+'-gloss" x1="0%" y1="0%" x2="0%" y2="100%">'+
+  '<stop offset="0" class="mv-gloss-start"/><stop offset="1" class="mv-gloss-end"/>'+
+  '</linearGradient></defs>';
+ return {defs,base:id+'-surface',gloss:id+'-gloss'};
+}
 const words=(value,max=35,limit=2)=>{
  const result=[];let line='';
  for(const word of String(value||'').split(/\s+/).filter(Boolean)){
@@ -47,16 +58,18 @@ function artwork(content,b,assets,esc,{takeaway=false}={}){
 function renderCard({node,box:b,esc,assets}){
  const c=node.content||{},focus=node.type==='focus',rx=focus?27:26;
  const content=Object.assign({},c,{artAssetId:node.visual?.artAssetId||c.artAssetId});
+ const surface=material(b);
  if(focus){
   const x=b.x+194;
   const textWidth=b.w-(x-b.x)-38;
   const titleMax=Math.max(18,Math.floor(textWidth/(33*.55)));
   const detailMax=Math.max(23,Math.floor(textWidth/(22*.56)));
-  return '<g class="mc-card mv-card mv-card--conclusion" data-node-id="'+esc(node.id)+'" data-node-kind="focus">'+
+  return '<g class="mc-card mv-card mv-card--conclusion" data-node-id="'+esc(node.id)+'" data-node-kind="focus">'+surface.defs+
     rect(b.x+6,b.y+12,b.w,b.h,rx,'mv-card-shadow')+
     rect(b.x+9,b.y+7,b.w-5,b.h,rx,'mv-card-backplate')+
     rect(b.x,b.y,b.w,b.h,rx,'mv-card-surface')+
-    rect(b.x+6,b.y+4,b.w-12,b.h*.49,rx-4,'mv-card-gloss')+
+    paintRect(b.x+2,b.y+2,b.w-4,b.h-4,rx-2,'mv-card-material',surface.base)+
+    paintRect(b.x+6,b.y+4,b.w-12,b.h*.49,rx-4,'mv-card-gloss',surface.gloss)+
     rect(b.x+24,b.y+10,b.w-48,4,2,'mv-card-topline')+
     artwork(content,b,assets,esc,{takeaway:true})+
     '<path class="mv-conclusion-rule" d="M'+n(x-31)+' '+n(b.y+28)+'V'+n(b.y+b.h-29)+'"/>'+
@@ -69,11 +82,12 @@ function renderCard({node,box:b,esc,assets}){
  const twoTitleLines=words(c.title,titleMax,2).length===2;
  const titleY=b.y+(twoTitleLines?179:194);
  const detailY=b.y+(twoTitleLines?250:239);
- return '<g class="mc-card mv-card mv-card--step" data-node-id="'+esc(node.id)+'" data-node-kind="'+esc(node.type)+'">'+
+ return '<g class="mc-card mv-card mv-card--step" data-node-id="'+esc(node.id)+'" data-node-kind="'+esc(node.type)+'">'+surface.defs+
    rect(b.x+6,b.y+13,b.w,b.h,rx,'mv-card-shadow')+
    rect(b.x+9,b.y+6,b.w-4,b.h,rx,'mv-card-backplate')+
    rect(b.x,b.y,b.w,b.h,rx,'mv-card-surface')+
-   rect(b.x+5,b.y+5,b.w-10,b.h*.48,rx-5,'mv-card-gloss')+
+   paintRect(b.x+2,b.y+2,b.w-4,b.h-4,rx-2,'mv-card-material',surface.base)+
+   paintRect(b.x+5,b.y+5,b.w-10,b.h*.48,rx-5,'mv-card-gloss',surface.gloss)+
    rect(b.x+27,b.y+12,b.w-54,5,2.5,'mv-card-topline')+
    '<path class="mv-card-midline" d="M'+n(b.x+27)+' '+n(b.y+160)+'H'+n(b.x+b.w-27)+'"/>'+
    artwork(content,b,assets,esc)+
