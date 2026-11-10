@@ -39,7 +39,12 @@ for(const style of ['standard','rich','rich-image']){
  assert.ok(svg.includes('data-visual-system="holographic-v1"'));
  assert.ok(svg.includes('class="mv-atmosphere"')&&svg.includes('class="mv-stage-platform"'));
  assert.equal((svg.match(/class="mv-card-surface"/g)||[]).length,5);
+ assert.equal((svg.match(/class="mv-card-material"/g)||[]).length,5);
+ assert.equal((svg.match(/class="mv-card-gloss"/g)||[]).length,5);
  assert.equal((svg.match(/class="mv-artwork-raster"/g)||[]).length,5);
+ assert.equal((svg.match(/mask="url\(#mv-art-/g)||[]).length,5,
+  'Object images must have feathered boundaries');
+
  assert.equal((svg.match(/data-art-asset-id="/g)||[]).length,5);
  assert.ok(svg.includes('class="mv-conclusion-title"'));
  assert.equal((svg.match(/data-node-id="/g)||[]).length,5);
