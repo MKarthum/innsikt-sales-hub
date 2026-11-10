@@ -83,8 +83,11 @@ try{
     assert.ok(visuals.titleSize>=44,'Main headline must be presentation sized');
     assert.ok(visuals.fits.every(Boolean),'Card content clipped or outside its panel');
     if(style==='rich-image'){
-     assert.ok(visuals.opacity>.8,'Advanced stage must render holographic assets');
-     assert.ok(visuals.stageOpacity>.5,'Advanced stage atmosphere must be visible');
+     // Retain evidence even when the quality gate fails.
+     await candidate.screenshot({path:folder+'/'+id+'-advanced-diagnostic.png'});
+     console.log('ADVANCED_VISUAL_DIAGNOSTIC',id,JSON.stringify(visuals));
+     assert.ok(visuals.opacity>.8,'Advanced stage must render holographic assets, opacity '+visuals.opacity);
+     assert.ok(visuals.stageOpacity>.5,'Advanced stage atmosphere must be visible, opacity '+visuals.stageOpacity);
      const href=await candidate.locator('.mv-artwork-raster').first().getAttribute('href');
      assert.ok((await page.request.get(new URL(href,page.url()).href)).ok(),
       'Canonical artwork resource is unavailable');
