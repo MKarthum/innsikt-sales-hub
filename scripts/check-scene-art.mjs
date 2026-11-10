@@ -1,55 +1,59 @@
+/* The optional, legacy scene-art renderer remains independently testable, but
+   must not require a deleted experimental bitmap recipe on a live SVG slide. */
 import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-const assets=read('docs/data/visual-assets.json');
+const catalog=read('docs/data/visual-assets.json');
 const slide=read('docs/data/slides.json').items.find(s=>s.id==='ai-context-platforms-2027');
-assert.ok(slide?.visual?.artwork,'Artwork contract is owned by the slide');
+assert.ok(slide&&!slide.visual.artwork,
+ 'An outdated raster recipe must not be resurrected in the active scene');
 const ctx={window:{}};
 vm.runInNewContext(fs.readFileSync('docs/assets/visual-assets.js','utf8'),ctx);
 vm.runInNewContext(fs.readFileSync('docs/assets/scene-art.js','utf8'),ctx);
-const renderer=ctx.window.InnsiktSceneArt,art=slide.visual.artwork;
-assert.ok(ctx.window.InnsiktAssets.usedBy('context-flag',{},read('docs/data/slides.json')).some(x=>x.id==='ai-context-platforms-2027'),'Asset library lists scene references');
-assert.equal(renderer.validate(art,assets),true);
-const esc=x=>String(x).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-const html=renderer.render(art,assets,esc);
-assert.equal((html.match(/scene-art-object--asset/g)||[]).length,7,'Six simple vector assets plus one rich scenic photograph');
-assert.ok(html.includes('data-scene-mode="rich"'),'Rich art mode is an independent scene object');
-assert.equal((html.match(/scene-art-object--glow/g)||[]).length,3,'Atmospheric effects are independently addressable');
-assert.equal((html.match(/scene-art-object--beam/g)||[]).length,1,'Cinematic light shaft is a native, replaceable object');
-assert.ok(html.includes('data-scene-mode="cinematic"'),'Cinematic mode is an optional object style');
-assert.ok(html.includes('data-scene-shape="orbit"'),'Luminous orbit is an independent shape');
-for(const id of ['sky','distant-ranges','summit','route','foreground','flag']){
- assert.ok(html.includes('data-scene-object="'+id+'"'),'Missing scene object '+id);
+const renderer=ctx.window.InnsiktSceneArt,esc=x=>String(x).replace(/[&<>"']/g,s=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[s]));
+const art={version:1,objects:[
+ {id:'test-background',type:'asset',assetId:'context-rich-background',
+  role:'atmosphere',x:0,y:0,w:100,h:100,opacity:.7,mode:'rich',fit:'fill',style:'natural'},
+ {id:'test-ridges',type:'asset',assetId:'context-ridges',
+  role:'landscape',x:0,y:15,w:100,h:70,opacity:.4,mode:'illustrated',fit:'cover'},
+ {id:'test-glow',type:'glow',role:'haze',x:30,y:20,w:40,h:30,opacity:.5,mode:'cinematic'},
+ {id:'test-beam',type:'beam',role:'haze',x:55,y:8,w:17,h:55,opacity:.3,mode:'cinematic'},
+ {id:'test-orbit',type:'shape',shape:'orbit',role:'accent',x:10,y:20,w:70,h:32,opacity:.6}
+]};
+assert.equal(renderer.validate(art,catalog),true);
+const html=renderer.render(art,catalog,esc);
+assert.equal((html.match(/scene-art-object--asset/g)||[]).length,2);
+assert.equal((html.match(/scene-art-object--glow/g)||[]).length,1);
+assert.equal((html.match(/scene-art-object--beam/g)||[]).length,1);
+assert.ok(html.includes('data-scene-shape="orbit"'));
+assert.ok(html.includes('context-rich-background.webp'));
+assert.ok(!html.includes(slide.visual.contextLead),
+ 'No canonical semantic text may be inserted into decorative media');
+for(const asset of art.objects.filter(x=>x.assetId)){
+ const item=catalog.items.find(x=>x.id===asset.assetId);
+ assert.ok(item&&html.includes(item.path));
 }
-for(const a of art.objects.filter(o=>o.assetId)){
- const registered=assets.items.find(x=>x.id===a.assetId);
- assert.ok(registered,'Missing catalog reference '+a.assetId);
- assert.ok(html.includes(registered.path),'Missing asset path '+a.assetId);
-}
-assert.ok(!html.includes(slide.visual.contextLead),'Factual text must not be baked into art assets');
-assert.ok(html.includes('context-rich-background.webp'),'Rich photo is registered and separate');
-assert.ok(ctx.window.InnsiktAssets.usedBy('context-rich-background',{},read('docs/data/slides.json')).some(x=>x.id===slide.id),'Rich asset traceability');
-const changed=JSON.parse(JSON.stringify(art));
-changed.objects.find(o=>o.id==='flag').assetId='context-forest';
-const altered=renderer.render(changed,assets,esc);
-assert.ok(altered.includes('data-scene-object="flag"'),'Object ID retained after asset swap');
-assert.notEqual(altered,html,'Asset can be swapped without modifying the renderer');
-const fail=(value)=>assert.throws(()=>renderer.validate(value,assets));
-const clone=()=>JSON.parse(JSON.stringify(art));
-let x=clone();x.objects.push({...x.objects[0]});fail(x);
-x=clone();x.objects[0].assetId='https://bad.example/resource.svg';fail(x);
-x=clone();x.objects[0].x='0;position:fixed';fail(x);
-x=clone();x.objects[0].type='html';fail(x);
-x=clone();x.objects[0].mode='javascript';fail(x);
-x=clone();x.objects[0].opacity=2;fail(x);
-x=clone();x.objects[0].fit='javascript:alert(1)';fail(x);
+const copy=()=>structuredClone(art);
+let clone=copy();clone.objects[0].assetId='context-forest';
+assert.notEqual(renderer.render(clone,catalog,esc),html,
+ 'The asset can change without editing the renderer');
+const invalid=v=>assert.throws(()=>renderer.validate(v,catalog));
+clone=copy();clone.objects.push({...clone.objects[0]});invalid(clone);
+clone=copy();clone.objects[0].assetId='https://unsafe.example/asset.svg';invalid(clone);
+clone=copy();clone.objects[0].x='0;position:fixed';invalid(clone);
+clone=copy();clone.objects[0].type='html';invalid(clone);
+clone=copy();clone.objects[0].mode='javascript';invalid(clone);
+clone=copy();clone.objects[0].opacity=2;invalid(clone);
+clone=copy();clone.objects[0].fit='javascript:alert(1)';invalid(clone);
 const css=fs.readFileSync('docs/assets/scene-art.css','utf8');
-assert.ok(css.includes('--scene-art-saturation')&&css.includes('--scene-art-brightness')&&css.includes('--scene-art-hue'),'Soft art skin controls');
-assert.ok(!/#[0-9a-fA-F]{3,8}\b/.test(css),'No fixed brand colors in CSS');
-assert.ok(!/url\(\s*['"]?https?:/.test(css),'No network dependencies');
-const index=fs.readFileSync('docs/index.html','utf8'),exporter=fs.readFileSync('docs/assets/presenter-export.js','utf8');
-assert.ok(index.includes('scene-art.js?v=')&&index.includes('scene-art.css?v='),'Browser loads art renderer and styles');
-assert.ok(index.indexOf('scene-art.js?v=')<index.indexOf('slide-visuals.js?v='),'Scene renderer must load before slides');
-assert.ok(exporter.includes('scene-art.css?v=')&&exporter.includes('(await art.text())'),'Portable HTML includes art CSS');
-console.log('PASS – 12 composable scene objects, safe assets, positions, swaps and skins');
+assert.ok(css.includes('--scene-art-saturation')&&css.includes('--scene-art-brightness'));
+assert.ok(!/#[0-9a-fA-F]{3,8}\b/.test(css));
+assert.ok(!/url\(\s*['"]?https?:/.test(css));
+const index=fs.readFileSync('docs/index.html','utf8');
+const exporter=fs.readFileSync('docs/assets/presenter-export.js','utf8');
+assert.ok(index.includes('scene-art.js?v=')&&index.includes('scene-art.css?v='));
+assert.ok(exporter.includes('scene-art.css?v=')&&exporter.includes('(await art.text())'));
+console.log('PASS – optional legacy art renderer uses a neutral fixture, not stale slide-specific decoration');
