@@ -135,8 +135,12 @@
 .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-card-gloss{opacity:.09}
 .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-card-topline{opacity:.84}
 .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-artwork-halo{
- opacity:.13;filter:blur(11px);
+ opacity:.19;filter:blur(11px);
 }
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-artwork-raster{
+ opacity:.48;filter:drop-shadow(0 0 4px color-mix(in srgb,var(--pres-accent) 26%,transparent));
+}
+.scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-artwork-icon{opacity:.18}
 .scene-modular-v1[data-visual-system="holographic-v1"][data-composition-level="rich"] .mv-artwork-disc{
  opacity:.7;filter:drop-shadow(0 0 6px var(--pres-accent));
 }
